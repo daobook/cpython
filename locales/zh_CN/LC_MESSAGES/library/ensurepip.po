@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../library/ensurepip.rst:2
 msgid ":mod:`ensurepip` --- Bootstrapping the ``pip`` installer"
-msgstr ""
+msgstr ":mod:`ensurepip` --- 引导 ``pip`` 安装程序"
 
 #: ../../library/ensurepip.rst:12
 msgid ""
@@ -34,6 +34,9 @@ msgid ""
 "is bundled with maintenance and feature releases of the CPython reference "
 "interpreter."
 msgstr ""
+":mod:`ensurepip` 包提供了对引导 ``pip`` 安装程序到现有 Python 安装或虚拟环境的支持。"
+"这种引导方法反映了这样一个事实：``pip`` 是一个独立的项目，有自己的发布周期，"
+"最新的可用稳定版本与 CPython 参考解释器的维护和功能版本捆绑在一起。"
 
 #: ../../library/ensurepip.rst:19
 msgid ""
@@ -42,12 +45,16 @@ msgid ""
 "needed if installing ``pip`` was skipped when installing Python (or when "
 "creating a virtual environment) or after explicitly uninstalling ``pip``."
 msgstr ""
+"在大多数情况下，Python 的最终用户应该不需要直接调用这个模块"
+"（因为 ``pip`` 默认应该被引导），但如果在安装 Python（或创建虚拟环境）时跳过了"
+"安装 ``pip`` 或在明确卸载 ``pip`` 之后，可能就需要了。"
 
 #: ../../library/ensurepip.rst:27
 msgid ""
 "This module *does not* access the internet. All of the components needed to "
 "bootstrap ``pip`` are included as internal parts of the package."
 msgstr ""
+"这个模块 *不* 访问互联网。所有启动 ``pip`` 所需的组件都作为软件包的内部部分。"
 
 #: ../../library/ensurepip.rst:34
 msgid ":ref:`installing-index`"
@@ -55,28 +62,29 @@ msgstr ":ref:`installing-index`"
 
 #: ../../library/ensurepip.rst:34
 msgid "The end user guide for installing Python packages"
-msgstr ""
+msgstr "安装 Python 软件包的终端用户指南"
 
 #: ../../library/ensurepip.rst:36
 msgid ":pep:`453`: Explicit bootstrapping of pip in Python installations"
-msgstr ""
+msgstr ":pep:`453`：在 Python 安装中明确地引导 pip"
 
 #: ../../library/ensurepip.rst:37
 msgid "The original rationale and specification for this module."
-msgstr ""
+msgstr "本模块的原始原理和规范。"
 
 #: ../../library/ensurepip.rst:41
 msgid "Command line interface"
-msgstr ""
+msgstr "命令行界面"
 
 #: ../../library/ensurepip.rst:43
 msgid ""
 "The command line interface is invoked using the interpreter's ``-m`` switch."
 msgstr ""
+"命令行界面使用解释器的 ``-m`` 开关来调用。"
 
 #: ../../library/ensurepip.rst:45
 msgid "The simplest possible invocation is::"
-msgstr ""
+msgstr "最简单的可能调用是 ::"
 
 #: ../../library/ensurepip.rst:49
 msgid ""
@@ -85,6 +93,8 @@ msgid ""
 "least as recent as the one available in ``ensurepip``, pass the "
 "``--upgrade`` option::"
 msgstr ""
+"如果 ``pip`` 还没有安装，这个调用将安装 ``pip``，否则不做任何事情。"
+"为了确保安装的 ``pip`` 版本至少与 ``ensurepip`` 中的版本一样新，请通过 ``--upgrade`` 选项 ::"
 
 #: ../../library/ensurepip.rst:56
 msgid ""
@@ -93,6 +103,9 @@ msgid ""
 "virtual environment). The installation location can be controlled through "
 "two additional command line options:"
 msgstr ""
+"默认情况下，``pip`` 被安装到当前的虚拟环境中（如果有活动的虚拟环境）"
+"或系统站点包中（如果没有活动的虚拟环境）。"
+"安装位置可以通过两个额外的命令行选项控制："
 
 #: ../../library/ensurepip.rst:61
 msgid ""
@@ -100,6 +113,8 @@ msgid ""
 "rather than the root of the currently active virtual environment (if any) or"
 " the default root for the current Python installation."
 msgstr ""
+"``--root <dir>``: 相对于给定的根目录，"
+"而不是当前活动的虚拟环境的根(如果有的话)或当前 Python 安装的默认根，安装 ``pip``。"
 
 #: ../../library/ensurepip.rst:64
 msgid ""
@@ -107,6 +122,8 @@ msgid ""
 "than globally for the current Python installation (this option is not "
 "permitted inside an active virtual environment)."
 msgstr ""
+"``--user``：将 ``pip`` 安装到用户站点的软件包目录中，"
+"而不是为当前的 Python 安装全局安装（这个选项在活动的虚拟环境中不允许）。"
 
 #: ../../library/ensurepip.rst:68
 msgid ""
@@ -114,41 +131,48 @@ msgid ""
 " stands for the version of Python used to invoke ``ensurepip``). The scripts"
 " installed can be controlled through two additional command line options:"
 msgstr ""
+"默认情况下，脚本 ``pipX`` 和 ``pipX.Y`` 将被安装"
+"（其中 X.Y 代表用于调用 ``ensurepip`` 的 Python 版本）。"
+"安装的脚本可以通过两个额外的命令行选项控制："
 
 #: ../../library/ensurepip.rst:73
 msgid ""
 "``--altinstall``: if an alternate installation is requested, the ``pipX`` "
 "script will *not* be installed."
 msgstr ""
+"``--altinstall``：如果要求替代安装，``pipX`` 脚本将不会被安装。"
 
 #: ../../library/ensurepip.rst:76
 msgid ""
 "``--default-pip``: if a \"default pip\" installation is requested, the "
 "``pip`` script will be installed in addition to the two regular scripts."
 msgstr ""
+"``--default-pip``：如果要求安装 \"default pip\"，除了两个常规脚本外，还将安装 ``pip`` 脚本。"
 
 #: ../../library/ensurepip.rst:79
 msgid ""
 "Providing both of the script selection options will trigger an exception."
 msgstr ""
+"提供两个脚本选择选项将触发一个异常。"
 
 #: ../../library/ensurepip.rst:83
 msgid "Module API"
-msgstr ""
+msgstr "模块 API"
 
 #: ../../library/ensurepip.rst:85
 msgid ":mod:`ensurepip` exposes two functions for programmatic use:"
-msgstr ""
+msgstr ":mod:`ensurepip` 暴露了两个函数供程序化使用："
 
 #: ../../library/ensurepip.rst:89
 msgid ""
 "Returns a string specifying the available version of pip that will be "
 "installed when bootstrapping an environment."
 msgstr ""
+"返回一个字符串，指定启动环境时将安装的 pip 的可用版本。"
 
 #: ../../library/ensurepip.rst:96
 msgid "Bootstraps ``pip`` into the current or designated environment."
-msgstr ""
+msgstr "引导 ``pip`` 进入当前或指定环境。"
 
 #: ../../library/ensurepip.rst:98
 msgid ""
@@ -156,51 +180,60 @@ msgid ""
 "*root* is ``None``, then installation uses the default install location for "
 "the current environment."
 msgstr ""
+"*root* 指定了另一个相对于安装的根目录。如果 *root* 是 ``None``，"
+"那么安装时就使用当前环境的默认安装位置。"
 
 #: ../../library/ensurepip.rst:102
 msgid ""
 "*upgrade* indicates whether or not to upgrade an existing installation of an"
 " earlier version of ``pip`` to the available version."
 msgstr ""
+"*upgrade* 表示是否将现有的 ``pip`` 早期版本的安装升级到可用版本。"
 
 #: ../../library/ensurepip.rst:105
 msgid ""
 "*user* indicates whether to use the user scheme rather than installing "
 "globally."
 msgstr ""
+"*user* 表示是否使用用户方案而不是全局安装。"
 
 #: ../../library/ensurepip.rst:108
 msgid ""
 "By default, the scripts ``pipX`` and ``pipX.Y`` will be installed (where X.Y"
 " stands for the current version of Python)."
 msgstr ""
+"默认情况下，脚本 ``pipX`` 和 ``pipX.Y`` 将被安装（其中 X.Y 代表 Python 的当前版本）。"
 
 #: ../../library/ensurepip.rst:111
 msgid "If *altinstall* is set, then ``pipX`` will *not* be installed."
-msgstr ""
+msgstr "如果设置了 *altinstall*，那么 ``pipX`` 将不被安装。"
 
 #: ../../library/ensurepip.rst:113
 msgid ""
 "If *default_pip* is set, then ``pip`` will be installed in addition to the "
 "two regular scripts."
 msgstr ""
+"如果 *default_pip* 被设置，那么 ``pip`` 将在两个常规脚本之外被安装。"
 
 #: ../../library/ensurepip.rst:116
 msgid ""
 "Setting both *altinstall* and *default_pip* will trigger :exc:`ValueError`."
 msgstr ""
+"同时设置 *altinstall* 和 *default_pip* 将触发 :ex:`ValueError`。"
 
 #: ../../library/ensurepip.rst:119
 msgid ""
 "*verbosity* controls the level of output to :data:`sys.stdout` from the "
 "bootstrapping operation."
 msgstr ""
+"*verbosity* 控制从引导操作输出到 :data:`sys.stdout` 的程度。"
 
 #: ../../library/ensurepip.rst:122
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``ensurepip.bootstrap`` with "
 "argument ``root``."
 msgstr ""
+"引发一个 :ref:`auditing 事件 <auditing>` ``ensurepip.bootstrap``，参数为 ``root``。"
 
 #: ../../library/ensurepip.rst:126
 msgid ""
@@ -208,6 +241,8 @@ msgid ""
 "``os.environ``. Invoking the command line interface in a subprocess instead "
 "allows these side effects to be avoided."
 msgstr ""
+"引导过程对 ``sys.path`` 和 ``os.environ``都会产生副作用。"
+"在一个子进程中调用命令行接口可以避免这些副作用。"
 
 #: ../../library/ensurepip.rst:132
 msgid ""
@@ -216,3 +251,6 @@ msgid ""
 " be present by default (as the dependencies may be removed in a future "
 "version of ``pip``)."
 msgstr ""
+"引导过程可能会安装 ``pip`` 所需的额外模块，"
+"但其他软件不应假定这些依赖关系在默认情况下总是存在"
+"（因为依赖关系可能在 ``pip`` 的未来版本中被删除）。"
