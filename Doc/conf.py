@@ -240,3 +240,8 @@ c_allow_pre_v3 = True
 c_warn_on_allowed_pre_v3 = False
 
 strip_signature_backslash = True
+
+# sphinx-intl & zh_CN
+language = 'zh_CN'
+locale_dirs = ['../locales/']
+gettext_compact = False
