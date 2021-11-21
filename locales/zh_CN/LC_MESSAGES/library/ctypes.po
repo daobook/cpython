@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-10 20:55+0800\n"
+"POT-Creation-Date: 2021-11-21 12:20+0800\n"
 "PO-Revision-Date: 2021-06-28 01:03+0000\n"
 "Last-Translator: ppcfish <ppcfish@gmail.com>, 2021\n"
 "Language: zh_CN\n"
@@ -1707,17 +1707,40 @@ msgid ""
 "argument ``name``."
 msgstr "引发一个 :ref:`审计事件 <auditing>` ``ctypes.dlopen``，附带参数 ``name``。"
 
+#: ../../library/ctypes.rst:1527
+#, fuzzy
+msgid ""
+"Loading a library through any of these objects raises an :ref:`auditing "
+"event <auditing>` ``ctypes.dlopen`` with string argument ``name``, the "
+"name used to load the library."
+msgstr "引发一个 :ref:`审计事件 <auditing>` ``ctypes.dlopen``，附带参数 ``name``。"
+
 #: ../../library/ctypes.rst:1531
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``ctypes.dlsym`` with "
 "arguments ``library``, ``name``."
 msgstr "引发一个审计事件 ``ctypes.dlsym``，附带参数 ``library``, ``name``。"
 
+#: ../../library/ctypes.rst:1533
+msgid ""
+"Accessing a function on a loaded library raises an auditing event "
+"``ctypes.dlsym`` with arguments ``library`` (the library object) and "
+"``name`` (the symbol's name as a string or integer)."
+msgstr ""
+
 #: ../../library/ctypes.rst:1537
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``ctypes.dlsym/handle`` with "
 "arguments ``handle``, ``name``."
 msgstr "引发一个审计事件 ``ctypes.dlsym/handle``，附带参数 ``handle``, ``name``。"
+
+#: ../../library/ctypes.rst:1539
+msgid ""
+"In cases when only the library handle is available rather than the "
+"object, accessing a function raises an auditing event "
+"``ctypes.dlsym/handle`` with arguments ``handle`` (the raw library "
+"handle) and ``name``."
+msgstr ""
 
 #: ../../library/ctypes.rst:1546
 msgid "Foreign functions"
@@ -1850,10 +1873,27 @@ msgid ""
 "argument ``code``."
 msgstr "引发一个审计事件 ``ctypes.seh_exception`` 并附带参数 ``code``。"
 
+#: ../../library/ctypes.rst:1630
+msgid ""
+"On Windows, when a foreign function call raises a system exception (for "
+"example, due to an access violation), it will be captured and replaced "
+"with a suitable Python exception. Further, an auditing event "
+"``ctypes.seh_exception`` with argument ``code`` will be raised, allowing "
+"an audit hook to replace the exception with its own."
+msgstr ""
+
 #: ../../library/ctypes.rst:1636
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``ctypes.call_function`` with "
 "arguments ``func_pointer``, ``arguments``."
+msgstr "引发一个审计事件 ``ctypes.call_function``，附带参数 ``func_pointer``, ``arguments``。"
+
+#: ../../library/ctypes.rst:1638
+#, fuzzy
+msgid ""
+"Some ways to invoke foreign function calls may raise an auditing event "
+"``ctypes.call_function`` with arguments ``function pointer`` and "
+"``arguments``."
 msgstr "引发一个审计事件 ``ctypes.call_function``，附带参数 ``func_pointer``, ``arguments``。"
 
 #: ../../library/ctypes.rst:1644
@@ -2464,6 +2504,14 @@ msgstr "此方法会使用 *address* 所指定的内存返回一个 ctypes 类�
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``ctypes.cdata`` with argument"
 " ``address``."
+msgstr "引发一个 :ref:`审计事件 <auditing>` ``ctypes.cdata``，附带参数 ``address``。"
+
+#: ../../library/ctypes.rst:2097
+#, fuzzy
+msgid ""
+"This method, and others that indirectly call this method, raises an "
+":ref:`auditing event <auditing>` ``ctypes.cdata`` with argument "
+"``address``."
 msgstr "引发一个 :ref:`审计事件 <auditing>` ``ctypes.cdata``，附带参数 ``address``。"
 
 #: ../../library/ctypes.rst:2103
