@@ -159,14 +159,15 @@ msgstr ""
 
 #: ../../library/ast.rst:96
 msgid "The constructor of a class :class:`ast.T` parses its arguments as follows:"
-msgstr "一个类的构造器 :class:`ast.T` 像下面这样parse它的参数。"
+msgstr "类的构造器 :class:`ast.T` 像下面这样解析它的参数："
 
 #: ../../library/ast.rst:98
 msgid ""
 "If there are positional arguments, there must be as many as there are "
 "items in :attr:`T._fields`; they will be assigned as attributes of these "
 "names."
-msgstr "如果有位置参数，它们必须和 :attr:`T._fields` 中的元素一样多；他们会像这些名字的属性一样被赋值。"
+msgstr ""
+"如果有位置参数，它们必须和 :attr:`T._fields` 中的元素一样多；他们会像这些名字的属性一样被赋值。"
 
 #: ../../library/ast.rst:100
 msgid ""
@@ -186,13 +187,14 @@ msgstr "或者更紧凑点 ::"
 
 #: ../../library/ast.rst:122
 msgid "Class :class:`ast.Constant` is now used for all constants."
-msgstr ""
+msgstr "类 :class:`ast.Constant` 现用于所有常量。"
 
 #: ../../library/ast.rst:126
 msgid ""
 "Simple indices are represented by their value, extended slices are "
 "represented as tuples."
 msgstr ""
+"简单的索引用其值表示，扩展的切片用元组表示。"
 
 #: ../../library/ast.rst:131
 msgid ""
@@ -201,6 +203,10 @@ msgid ""
 "but they will be removed in future Python releases.  In the meantime, "
 "instantiating them will return an instance of a different class."
 msgstr ""
+"旧的类 "
+":class:`ast.Num`、:class:`ast.Str`、:class:`ast.Bytes`、:class:`ast.NameConstant` "
+"和 :class:`ast.Ellipsis` 仍然可用，但它们将在未来的 Python 版本中被删除。"
+"在此期间，实例化它们将返回一个不同类的实例。"
 
 #: ../../library/ast.rst:138
 msgid ""
@@ -209,6 +215,8 @@ msgid ""
 "meantime, instantiating them will return an instance of a different "
 "class."
 msgstr ""
+"旧的类 :class:`ast.Index` 和 :class:`ast.ExtSlice` 仍然可用，"
+"但它们将在未来的 Python 版本中被移除。在此期间，实例化它们将返回一个不同类的实例。"
 
 #: ../../library/ast.rst:144
 msgid ""
@@ -217,6 +225,9 @@ msgid ""
 "<https://greentreesnakes.readthedocs.io/en/latest/>`__ project and all "
 "its contributors."
 msgstr ""
+"这里显示的具体节点类的描述最初是从神奇的 "
+"`绿色树蛇 <https://greentreesnakes.readthedocs.io/en/latest/>`__ "
+"项目及其所有贡献者那里改编的。"
 
 #: ../../library/ast.rst:150
 msgid "Literals"
@@ -230,6 +241,10 @@ msgid ""
 "container types (tuples and frozensets) if all of their elements are "
 "constant."
 msgstr ""
+"一个常量值。"
+"``Constant`` 字面的 ``value`` 属性包含它所代表的 Python 对象。"
+"所代表的值可以是简单的类型，如数字、字符串或 ``None``，"
+"也可以是不可变的容器类型（tuple 和 frozenset），如果它们的所有元素都是常数的话。"
 
 #: ../../library/ast.rst:168
 msgid ""
@@ -237,32 +252,36 @@ msgid ""
 " contains a single formatting field and nothing else the node can be "
 "isolated otherwise it appears in :class:`JoinedStr`."
 msgstr ""
+"代表 f-string 中单一格式化字段的节点。"
+"如果字符串包含一个单一的格式化字段，而没有其他内容，那么该节点可以被隔离，"
+"否则它将出现在 :class:`JoinedStr` 中。"
 
 #: ../../library/ast.rst:172
 msgid ""
 "``value`` is any expression node (such as a literal, a variable, or a "
 "function call)."
 msgstr ""
+"``value`` 是任何表达式节点（如字面值、变量或函数调用）。"
 
 #: ../../library/ast.rst:174
 msgid "``conversion`` is an integer:"
-msgstr ""
+msgstr "``conversion`` 是整数："
 
 #: ../../library/ast.rst:176
 msgid "-1: no formatting"
-msgstr ""
+msgstr "-1：没有格式化"
 
 #: ../../library/ast.rst:177
 msgid "115: ``!s`` string formatting"
-msgstr ""
+msgstr "115：``!s`` 字符串格式化"
 
 #: ../../library/ast.rst:178
 msgid "114: ``!r`` repr formatting"
-msgstr ""
+msgstr "114：``!r`` repr 格式化"
 
 #: ../../library/ast.rst:179
 msgid "97: ``!a`` ascii formatting"
-msgstr ""
+msgstr "97：``!a`` ascii 格式化"
 
 #: ../../library/ast.rst:181
 msgid ""
@@ -270,12 +289,15 @@ msgid ""
 "of the value, or ``None`` if no format was specified. Both ``conversion``"
 " and ``format_spec`` can be set at the same time."
 msgstr ""
+"``format_spec`` 是一个 :class:`JoinedStr` 节点，代表值的格式化，"
+"如果没有指定格式，则为 ``None``。``conversion`` 和 ``format_spec`` 都可以同时设置。"
 
 #: ../../library/ast.rst:188
 msgid ""
 "An f-string, comprising a series of :class:`FormattedValue` and "
 ":class:`Constant` nodes."
 msgstr ""
+"f-string，包括一系列的 :class:`FormattedValue` 和 :class:`Constant` 节点。"
 
 #: ../../library/ast.rst:217
 msgid ""
@@ -283,10 +305,12 @@ msgid ""
 "elements. ``ctx`` is :class:`Store` if the container is an assignment "
 "target (i.e. ``(x,y)=something``), and :class:`Load` otherwise."
 msgstr ""
+"一个列表或元组。``elts`` 持有代表其元素的节点列表。"
+"如果容器是一个赋值目标（即 ``(x,y)=something``），``ctx`` 是 :class:`Store`，否则 :class:`Load`。"
 
 #: ../../library/ast.rst:243
 msgid "A set. ``elts`` holds a list of nodes representing the set's elements."
-msgstr ""
+msgstr "集合。``elts`` 持有代表该集合元素的节点列表。"
 
 #: ../../library/ast.rst:258
 msgid ""
@@ -295,6 +319,8 @@ msgid ""
 "returned when calling :code:`dictionary.keys()` and "
 ":code:`dictionary.values()`)."
 msgstr ""
+"字典。``keys`` 和 ``values`` 分别持有代表其键和值的节点列表，"
+"顺序匹配（当调用 :code:`dictionary.keys()` 和 :code:`dictionary.values()` 时将会返回）。"
 
 #: ../../library/ast.rst:262
 msgid ""
@@ -302,16 +328,18 @@ msgid ""
 "to be expanded goes in the ``values`` list, with a ``None`` at the "
 "corresponding position in ``keys``."
 msgstr ""
+"当使用字典字元进行字典解包时，要展开的表达式在 ``values`` 列表中，在 ``keys`` 的相应位置有一个  ``None`` 。"
 
 #: ../../library/ast.rst:280
 msgid "Variables"
-msgstr ""
+msgstr "变量"
 
 #: ../../library/ast.rst:284
 msgid ""
 "A variable name. ``id`` holds the name as a string, and ``ctx`` is one of"
 " the following types."
 msgstr ""
+"变量名称。``id`` 持有作为字符串的名称，``ctx`` 是以下类型之一。"
 
 #: ../../library/ast.rst:292
 msgid ""
@@ -319,6 +347,7 @@ msgid ""
 "assign a new value to it, or to delete it. Variable references are given "
 "a context to distinguish these cases."
 msgstr ""
+"变量引用可以用来加载变量的值、给它分配新的值或者删除它。变量引用被赋予一个上下文以区分这些情况。"
 
 #: ../../library/ast.rst:325
 msgid ""
@@ -326,6 +355,9 @@ msgid ""
 ":class:`Name` node. This type must be used when building a :class:`Call` "
 "node with ``*args``."
 msgstr ""
+"``*var`` 的变量引用。"
+"``value`` 持有变量，通常是一个 :class:`Name` 节点。"
+"当建立一个带有 ``*args`` 的 :class:`Call` 节点时，必须使用这种类型。"
 
 #: ../../library/ast.rst:348
 msgid "Expressions"
@@ -339,28 +371,34 @@ msgid ""
 ":class:`Constant`, a :class:`Name`, a :class:`Lambda`, a :class:`Yield` "
 "or :class:`YieldFrom` node."
 msgstr ""
+"当一个表达式，比如一个函数调用，本身作为一个语句出现，其返回值没有被使用或存储，"
+"它被包裹在这个容器中。``value`` 容纳本节中的一个其他节点，"
+":class:`Constant`、:class:`Name`、:class:`Lambda`、:class:`Yield` 或 :class:`YieldFrom` 节点。"
 
 #: ../../library/ast.rst:371
 msgid ""
 "A unary operation. ``op`` is the operator, and ``operand`` any expression"
 " node."
 msgstr ""
+"一元运算。``op`` 是运算符，``operand`` 是任何表达式节点。"
 
 #: ../../library/ast.rst:380
 msgid ""
 "Unary operator tokens. :class:`Not` is the ``not`` keyword, "
 ":class:`Invert` is the ``~`` operator."
 msgstr ""
+"一元运算形符。:class:`Not` 是 ``not`` 关键字、:class:`Invert` 是 ``~`` 运算符。"
 
 #: ../../library/ast.rst:394
 msgid ""
 "A binary operation (like addition or division). ``op`` is the operator, "
 "and ``left`` and ``right`` are any expression nodes."
 msgstr ""
+"二元运算（如加法或除法）。``op`` 是运算符，``left`` 和 ``right`` 是任何表达式节点。"
 
 #: ../../library/ast.rst:421
 msgid "Binary operator tokens."
-msgstr ""
+msgstr "二元运算符的形符。"
 
 #: ../../library/ast.rst:426
 msgid ""
@@ -369,14 +407,17 @@ msgid ""
 "with the same operator, such as ``a or b or c``, are collapsed into one "
 "node with several values."
 msgstr ""
+"一个布尔运算，'or' 或 'and'。``op`` 是 :class:`Or` 或 :class:`And`。"
+"``values`` 是所涉及的值。"
+"具有相同操作符的连续操作，如 ``a or b or c``，会被折叠成一个具有几个值的节点。"
 
 #: ../../library/ast.rst:431
 msgid "This doesn't include ``not``, which is a :class:`UnaryOp`."
-msgstr ""
+msgstr "这不包括 ``not``，它是一个 :class:`UnaryOp`。"
 
 #: ../../library/ast.rst:447
 msgid "Boolean operator tokens."
-msgstr ""
+msgstr "布尔运算形符。"
 
 #: ../../library/ast.rst:452
 msgid ""
@@ -384,44 +425,53 @@ msgid ""
 "comparison, ``ops`` the list of operators, and ``comparators`` the list "
 "of values after the first element in the comparison."
 msgstr ""
+"两个或多个值的比较。``left`` 是比较中的第一个值，``ops`` 是运算符的列表，"
+"``comparators`` 是比较中第一个元素之后的值列表。"
 
 #: ../../library/ast.rst:481
 msgid "Comparison operator tokens."
-msgstr ""
+msgstr "比较运算形符。"
 
 #: ../../library/ast.rst:486
 msgid ""
 "A function call. ``func`` is the function, which will often be a "
 ":class:`Name` or :class:`Attribute` object. Of the arguments:"
 msgstr ""
+"一个函数调用。``func`` 是函数，通常是一个 :class:`Name` 或 :class:`Attribute` 对象。参数："
 
 #: ../../library/ast.rst:489
 msgid "``args`` holds a list of the arguments passed by position."
-msgstr ""
+msgstr "``args`` 持有一个由位置传递的参数列表。"
 
 #: ../../library/ast.rst:490
 msgid ""
 "``keywords`` holds a list of :class:`keyword` objects representing "
 "arguments passed by keyword."
 msgstr ""
+"``keywords`` 持有一个 :class:`keyword` 对象的列表，代表由 keyword 传递的参数。"
 
 #: ../../library/ast.rst:493
 msgid ""
 "When creating a ``Call`` node, ``args`` and ``keywords`` are required, "
 "but they can be empty lists. ``starargs`` and ``kwargs`` are optional."
 msgstr ""
+"当创建一个 ``Call`` 节点时，``args`` 和 ``keywords`` 是必须的，但它们可以是空列表。"
+"``starargs`` 和 ``kwargs`` 是可选的。"
 
 #: ../../library/ast.rst:517
 msgid ""
 "A keyword argument to a function call or class definition. ``arg`` is a "
 "raw string of the parameter name, ``value`` is a node to pass in."
 msgstr ""
+"一个函数调用或类定义的关键字参数。``arg`` 是参数名称的原始字符串，``value`` 是要传入的节点。"
 
 #: ../../library/ast.rst:523
 msgid ""
 "An expression such as ``a if b else c``. Each field holds a single node, "
 "so in the following example, all three are :class:`Name` nodes."
 msgstr ""
+"一个表达式，如 ``a if b else c``。"
+"每个字段持有一个节点，所以在下面的例子中，三个都是 :class:`Name` 节点"。
 
 #: ../../library/ast.rst:538
 msgid ""
@@ -430,6 +480,9 @@ msgid ""
 "attribute, and ``ctx`` is :class:`Load`, :class:`Store` or :class:`Del` "
 "according to how the attribute is acted on."
 msgstr ""
+"属性访问，例如：``d.keys``。``value`` 是一个节点，通常是 :class:`Name`。"
+"``attr`` 是一个裸字符串，给出属性的名称，"
+"``ctx`` 是 :class:`Load`、:class:`Store` 或 :class:`Del`，根据属性的操作方式。"
 
 #: ../../library/ast.rst:555
 msgid ""
@@ -438,10 +491,13 @@ msgid ""
 "the :class:`Assign` node in which the first argument can be multiple "
 "nodes, in this case both ``target`` and ``value`` must be single nodes."
 msgstr ""
+"一个命名的表达式。这个 AST 节点是由赋值表达式运算符（也被称为海象运算符）产生的。"
+"相对于 :class:`Assign` 节点，其中第一个参数可以是多个节点，在这种情况下，"
+"``target`` 和 ``value`` 都必须是单个节点。"
 
 #: ../../library/ast.rst:570
 msgid "Subscripting"
-msgstr ""
+msgstr "下标"
 
 #: ../../library/ast.rst:574
 msgid ""
@@ -451,6 +507,11 @@ msgid ""
 ":class:`Load`, :class:`Store` or :class:`Del` according to the action "
 "performed with the subscript."
 msgstr ""
+"一个下标，例如 ``l[1]``。"
+"``value`` 是下标的对象（通常是序列或映射）。"
+"``slice`` 是一个索引、切片或键。"
+"它可以是一个 :class:`Tuple` 并包含一个 :class:`Slice`。"
+"``ctx`` 是 :class:`Load`、:class:`Store` 或 :class:`Del`，根据对下标执行的操作。"
 
 #: ../../library/ast.rst:598
 msgid ""
@@ -458,10 +519,12 @@ msgid ""
 "Can occur only inside the *slice* field of :class:`Subscript`, either "
 "directly or as an element of :class:`Tuple`."
 msgstr ""
+"常规切片（形式为 ``lower:upper`` 或 ``lower:upper:step``）。"
+"只能出现在 :class:`subscript` 的 *slice* 字段内，可以直接出现，也可以作为 :class:`Tuple` 的一个元素出现。"
 
 #: ../../library/ast.rst:615
 msgid "Comprehensions"
-msgstr ""
+msgstr "解析式"
 
 #: ../../library/ast.rst:622
 msgid ""
@@ -469,10 +532,12 @@ msgid ""
 "comprehensions. ``elt`` (or ``key`` and ``value``) is a single node "
 "representing the part that will be evaluated for each item."
 msgstr ""
+"列表和集合的解析式，生成器表达式和字典的解析式。"
+"``elt``（或 ``key`` 和 ``value``）是一个单一的节点，代表每个项将被评估的部分。"
 
 #: ../../library/ast.rst:626
 msgid "``generators`` is a list of :class:`comprehension` nodes."
-msgstr ""
+msgstr "``generators`` 是一个 :class:`comprehension` 节点的列表。"
 
 #: ../../library/ast.rst:668
 msgid ""
@@ -481,22 +546,28 @@ msgid ""
 "``iter`` is the object to iterate over. ``ifs`` is a list of test "
 "expressions: each ``for`` clause can have multiple ``ifs``."
 msgstr ""
+"在一个解析式中的一个 ``for`` 子句。"
+"``target`` 是每个元素的引用 - 通常是一个 :class:`Name` 或 :class:`Tuple` 节点。"
+"``iter`` 是要迭代的对象。``ifs`` 是测试表达式的列表：每个 ``for`` 子句可以有多个 ``ifs``。"
 
 #: ../../library/ast.rst:673
 msgid ""
 "``is_async`` indicates a comprehension is asynchronous (using an ``async "
 "for`` instead of ``for``). The value is an integer (0 or 1)."
 msgstr ""
+"``is_async`` 表示一个解析式是异步的（使用 ``async for`` 而不是 ``for``）。"
+"其值是一个整数（0 或 1）。"
 
 #: ../../library/ast.rst:739
 msgid "Statements"
-msgstr ""
+msgstr "语句"
 
 #: ../../library/ast.rst:743
 msgid ""
 "An assignment. ``targets`` is a list of nodes, and ``value`` is a single "
 "node."
 msgstr ""
+"赋值。``targets`` 是一个节点列表，``value`` 是一个单一节点。"
 
 #: ../../library/ast.rst:745
 msgid ""
@@ -504,6 +575,8 @@ msgid ""
 "each. Unpacking is represented by putting a :class:`Tuple` or "
 ":class:`List` within ``targets``."
 msgstr ""
+"``targets`` 中的多个节点代表给每个节点分配相同的值。"
+"解包是通过在 ``targets`` 内放置一个 :class:`Tuple` 或 :class:`List` 来表示。"
 
 #: ../../library/ast.rst:751 ../../library/ast.rst:1038
 #: ../../library/ast.rst:1211 ../../library/ast.rst:1632
@@ -511,6 +584,7 @@ msgid ""
 "``type_comment`` is an optional string with the type annotation as a "
 "comment."
 msgstr ""
+"``type_comment`` 是一个可选的字符串，其中的类型注释是一个注释。"
 
 #: ../../library/ast.rst:781
 msgid ""
@@ -522,6 +596,11 @@ msgid ""
 "do not appear in between parenthesis and are hence pure names and not "
 "expressions."
 msgstr ""
+"一个带有类型注释的赋值。"
+"``target`` 是一个单一的节点，可以是 :class:`Name`、:class:`Attribute` 或一个 :class:`Subscript`。"
+"``annotation`` 是注释，例如 :class:`Constant` 或 :class:`Name` 节点。"
+"``value`` 是一个单一的可选节点。``simple`` 是一个布尔整数，"
+"对于 ``target`` 中的 :class:`Name` 节点，设置为 True，不出现在括号之间，因此是纯名称，不是表达式。"
 
 #: ../../library/ast.rst:836
 msgid ""
@@ -530,12 +609,16 @@ msgid ""
 "context), ``op`` is :class:`Add`, and ``value`` is a :class:`Constant` "
 "with value for 1."
 msgstr ""
+"增强的赋值，如 ``a += 1``。"
+"在下面的例子中，``target`` 是 ``x`` 的一个 :class:`Name` 节点"
+"（有 :class:`Store` 上下文），``op`` 是 :class:`Add`，``value`` 是一个 :class:`Constant`，值为 1。"
 
 #: ../../library/ast.rst:841
 msgid ""
 "The ``target`` attribute cannot be of class :class:`Tuple` or "
 ":class:`List`, unlike the targets of :class:`Assign`."
 msgstr ""
+"``target`` 属性不能是 :class:`Tuple` 或 :class:`List` 类 与 :class:`Assign` 的目标不同。"
 
 #: ../../library/ast.rst:858
 msgid ""
@@ -958,19 +1041,21 @@ msgstr ""
 
 #: ../../library/ast.rst:1889
 msgid ":mod:`ast` Helpers"
-msgstr ":mod:`ast` 中的辅助函数"
+msgstr ":mod:`ast` 中的辅助工具"
 
 #: ../../library/ast.rst:1891
 msgid ""
 "Apart from the node classes, the :mod:`ast` module defines these utility "
 "functions and classes for traversing abstract syntax trees:"
-msgstr "除了节点类， :mod:`ast` 模块里为遍历抽象语法树定义了这些工具函数和类:"
+msgstr "除了节点类， :mod:`ast` 模块里为遍历抽象语法树定义了这些工具函数和类："
 
 #: ../../library/ast.rst:1896
 msgid ""
 "Parse the source into an AST node.  Equivalent to ``compile(source, "
 "filename, mode, ast.PyCF_ONLY_AST)``."
-msgstr "把源码解析为AST节点。和 ``compile(source, filename, mode,ast.PyCF_ONLY_AST)`` 等价。"
+msgstr ""
+"把 source 解析为 AST 节点。"
+"和 ``compile(source, filename, mode,ast.PyCF_ONLY_AST)`` 等价。"
 
 #: ../../library/ast.rst:1899
 msgid ""
@@ -984,6 +1069,12 @@ msgid ""
 "as the ``type_ignores`` attribute of :class:`Module` (otherwise it is "
 "always an empty list)."
 msgstr ""
+"如果给定 ``type_comments=True``，解析器会被修改，"
+"以检查并返回 :pep:`484` 和 :pep:`526` 所指定的类型注释。"
+"这相当于将 :data:`ast.PyCF_TYPE_COMMENTS` 添加到传递给 :func:`compile()` 的标志中。"
+"这将报告错误的类型注释的语法错误。"
+"如果没有这个标志，类型注释将被忽略，选定的 AST 节点上的 ``type_comment`` 字段将一直是 ``None``。"
+"此外，``# type: ignore`` 注释的位置将作为 :class:`Module` 的 ``type_ignores`` 属性返回（否则它总是一个空列表）。"
 
 #: ../../library/ast.rst:1909
 msgid ""
@@ -991,6 +1082,8 @@ msgid ""
 " to correspond to :pep:`484` \"signature type comments\", e.g. ``(str, "
 "int) -> List[str]``."
 msgstr ""
+"此外，如果 ``mode`` 是 ``'func_type'``，输入语法将被修改为对应于 :pep:`484` 签名类型注释，"
+"例如 ``(str, int) -> List[str]``。"
 
 #: ../../library/ast.rst:1913
 msgid ""
@@ -1001,10 +1094,15 @@ msgid ""
 "lowest supported version is ``(3, 4)``; the highest is "
 "``sys.version_info[0:2]``."
 msgstr ""
+"另外，将 ``feature_version`` 设置为一个元组 ``(major, minor)`` "
+"将尝试使用该 Python 版本的语法进行解析。"
+"目前 ``major`` 必须等于 ``3``。"
+"例如，设置 ``feature_version=(3, 4)`` 将允许使用 ``async`` 和 ``await`` 作为变量名。"
+"支持的最低版本是 ``(3, 4)``；最高版本是 ``sys.version_info[0:2]``。"
 
 #: ../../library/ast.rst:1920
 msgid "If source contains a null character ('\\0'), :exc:`ValueError` is raised."
-msgstr ""
+msgstr "如果 source 包含一个空字符（'\\0'），:exc:`ValueError` 将被触发。"
 
 #: ../../library/ast.rst:1923
 msgid ""
@@ -1015,23 +1113,28 @@ msgid ""
 "node for a return statement, but it cannot be compiled alone (it needs to"
 " be inside a function node)."
 msgstr ""
+"注意，成功地将源代码解析成 AST 对象并不保证所提供的源代码是可以执行的有效 Python 代码，"
+"因为编译步骤可能会引发进一步的 :exc:`SyntaxError` 异常。"
+"例如，源码 ``return 42`` 为返回语句生成了一个有效的 AST 节点，但它不能被单独编译（它需要在一个函数节点内）。"
 
 #: ../../library/ast.rst:1930
 msgid ""
 "In particular, :func:`ast.parse` won't do any scoping checks, which the "
 "compilation step does."
 msgstr ""
+"特别是，:func:`ast.parse` 不会做任何范围检查，而编译步骤会做。"
 
 #: ../../library/ast.rst:1934 ../../library/ast.rst:1973
 msgid ""
 "It is possible to crash the Python interpreter with a sufficiently "
 "large/complex string due to stack depth limitations in Python's AST "
 "compiler."
-msgstr "足够复杂或是巨大的字符串可能导致Python解释器的崩溃，因为Python的AST编译器是有栈深限制的。"
+msgstr ""
+"足够复杂或是巨大的字符串可能导致 Python 解释器的崩溃，因为 Python 的 AST 编译器是有栈深限制的。"
 
 #: ../../library/ast.rst:1938
 msgid "Added ``type_comments``, ``mode='func_type'`` and ``feature_version``."
-msgstr ""
+msgstr "增加了 ``type_comments``、``mode='func_type'`` 和 ``feature_version`` 。"
 
 #: ../../library/ast.rst:1944
 msgid ""
@@ -1039,6 +1142,8 @@ msgid ""
 "would produce an equivalent :class:`ast.AST` object if parsed back with "
 ":func:`ast.parse`."
 msgstr ""
+"反向解析 :class:`ast.AST` 对象，并生成一个字符串，"
+"如果用 :func:`ast.parse` 解析，将产生一个等价的 :class:`ast.AST` 对象的代码。"
 
 #: ../../library/ast.rst:1949
 msgid ""
@@ -1046,12 +1151,14 @@ msgid ""
 "code that generated the :class:`ast.AST` object (without any compiler "
 "optimizations, such as constant tuples/frozensets)."
 msgstr ""
+"产生的代码字符串不一定等于产生 :class:`ast.AST` 对象的原始代码（没有任何编译器优化，如常数 tuple/frozenset）。"
 
 #: ../../library/ast.rst:1954
 msgid ""
 "Trying to unparse a highly complex expression would result with "
 ":exc:`RecursionError`."
 msgstr ""
+"试图解读一个高度复杂的表达式会导致 :exc:`RecursionError`。"
 
 #: ../../library/ast.rst:1962
 msgid ""
@@ -1060,6 +1167,9 @@ msgid ""
 "consist of the following Python literal structures: strings, bytes, "
 "numbers, tuples, lists, dicts, sets, booleans, ``None`` and ``Ellipsis``."
 msgstr ""
+"安全地评估一个表达式节点或一个包含 Python 字面量或容器显示的字符串。"
+"提供的字符串或节点只能由以下 Python 字面量结构组成："
+"字符串、字节串、数字、元组、列表、字典、集合、布尔值、``None`` 和 ``Ellipsis``。"
 
 #: ../../library/ast.rst:1967
 msgid ""
@@ -1068,6 +1178,8 @@ msgid ""
 "is not capable of evaluating arbitrarily complex expressions, for example"
 " involving operators or indexing."
 msgstr ""
+"这可以用来安全地评估来自不受信任的来源的包含 Python 值的字符串，而不需要自己去解析这些值。"
+"它不能够评估任意复杂的表达式，例如涉及运算符或索引的表达式。"
 
 #: ../../library/ast.rst:1977
 msgid ""
@@ -1075,6 +1187,8 @@ msgid ""
 ":exc:`MemoryError` and :exc:`RecursionError` depending on the malformed "
 "input."
 msgstr ""
+"它可能引发 :exc:`ValueError`, :exc:`TypeError`, :exc:`SyntaxError`, "
+":exc:`MemoryError` 和 :exc:`RecursionError` ，取决于错误的输入。"
 
 #: ../../library/ast.rst:1981
 msgid "Now allows bytes and set literals."
@@ -1082,11 +1196,11 @@ msgstr "目前支持字节和集合。"
 
 #: ../../library/ast.rst:1984
 msgid "Now supports creating empty sets with ``'set()'``."
-msgstr ""
+msgstr "现在支持用 ``'set()'`` 创建空集合。"
 
 #: ../../library/ast.rst:1987
 msgid "For string inputs, leading spaces and tabs are now stripped."
-msgstr ""
+msgstr "对于字符串输入，前面的空格和制表符现在被剥离了。"
 
 #: ../../library/ast.rst:1993
 msgid ""
@@ -1095,10 +1209,13 @@ msgid ""
 ":class:`Module` node), or ``None`` if it has no docstring. If *clean* is "
 "true, clean up the docstring's indentation with :func:`inspect.cleandoc`."
 msgstr ""
+"返回给定 *node* 的文档字符串"
+"（必须是 :class:`FunctionDef`、:class:`AsyncFunctionDef`、:class:`ClassDef` 或 :class:`Module` 节点），"
+"如果没有文档字符串，则返回 ``None``。如果 *clean* 为真，则用 :func:`inspect.cleandoc` 清理该文档字符串的缩进。"
 
 #: ../../library/ast.rst:1999
 msgid ":class:`AsyncFunctionDef` is now supported."
-msgstr "目前支持 :class:`AsyncFunctionDef` "
+msgstr "目前支持 :class:`AsyncFunctionDef` 。"
 
 #: ../../library/ast.rst:2005
 msgid ""
@@ -1107,12 +1224,16 @@ msgid ""
 ":attr:`col_offset`, or :attr:`end_col_offset`) is missing, return "
 "``None``."
 msgstr ""
+"获取生成 *node* 的 *source* 的源代码段。"
+"如果某些位置信息"
+"（:attr:`lineno`、:attr:`end_lineno`、:attr:`col_offset` 或 :attr:`end_col_offset` ）丢失，返回 ``None``。"
 
 #: ../../library/ast.rst:2009
 msgid ""
 "If *padded* is ``True``, the first line of a multi-line statement will be"
 " padded with spaces to match its original position."
 msgstr ""
+"如果 *padded* 是 ``True``，多行语句的第一行将被填充空格，以符合其原始位置。"
 
 #: ../../library/ast.rst:2017
 msgid ""
@@ -1123,6 +1244,10 @@ msgid ""
 "setting them to the values of the parent node.  It works recursively "
 "starting at *node*."
 msgstr ""
+"当你用 :func:`compile` 编译一个节点树时，"
+"编译器期望 :attr:`lineno` 和 :attr:`col_offset` 的属性对每一个节点均支持。"
+"这对于生成的节点来说是相当繁琐的，所以这个帮助器在没有设置的地方递归地添加这些属性，将它们设置为父节点的值。"
+"它从 *node* 开始递归工作。"
 
 #: ../../library/ast.rst:2026
 msgid ""
@@ -1130,6 +1255,7 @@ msgid ""
 "starting at *node* by *n*. This is useful to \"move code\" to a different"
 " location in a file."
 msgstr ""
+"将树中从 *node* 开始的每个节点的行号和末行号增加 *n*。这对 \"移动代码\" 到文件中的不同位置很有用。"
 
 #: ../../library/ast.rst:2033
 msgid ""
@@ -1137,18 +1263,23 @@ msgid ""
 ":attr:`end_lineno`, and :attr:`end_col_offset`) from *old_node* to "
 "*new_node* if possible, and return *new_node*."
 msgstr ""
+"如果可能的话，从 *old_node* 复制源位置"
+"（ :attr:`lineno`、:attr:`col_offset`、:attr:`end_lineno` 和 :attr:`end_col_offset` ）到 *new_node*，"
+"并返回 *new_node*。"
 
 #: ../../library/ast.rst:2040
 msgid ""
 "Yield a tuple of ``(fieldname, value)`` for each field in "
 "``node._fields`` that is present on *node*."
 msgstr ""
+"为 *node* 上存在的 ``node._fields`` 中的每个字段产生一个 ``(fieldname, value)`` 的元组。"
 
 #: ../../library/ast.rst:2046
 msgid ""
 "Yield all direct child nodes of *node*, that is, all fields that are "
 "nodes and all items of fields that are lists of nodes."
 msgstr ""
+"产生 *node* 的所有直接子节点，即所有属于节点的字段和属于节点列表的字段的所有项目。"
 
 #: ../../library/ast.rst:2052
 msgid ""
@@ -1156,6 +1287,8 @@ msgid ""
 "(including *node* itself), in no specified order.  This is useful if you "
 "only want to modify nodes in place and don't care about the context."
 msgstr ""
+"递归产生树中从 *node* 开始的所有后代节点（包括 *node* 本身），没有指定顺序。"
+"如果你只想就地修改节点，而不关心上下文，这很有用。"
 
 #: ../../library/ast.rst:2059
 msgid ""
@@ -1163,12 +1296,15 @@ msgid ""
 " visitor function for every node found.  This function may return a value"
 " which is forwarded by the :meth:`visit` method."
 msgstr ""
+"一个节点访问者基类，它行走在抽象的语法树上，为每个发现的节点调用一个访问者函数。"
+"这个函数可以返回一个值，由 :meth:`visit` 方法转发。"
 
 #: ../../library/ast.rst:2063
 msgid ""
 "This class is meant to be subclassed, with the subclass adding visitor "
 "methods."
 msgstr ""
+"这个类是要被子类化的，子类会增加访问者方法。"
 
 #: ../../library/ast.rst:2068
 msgid ""
@@ -1176,10 +1312,13 @@ msgid ""
 ":samp:`self.visit_{classname}` where *classname* is the name of the node "
 "class, or :meth:`generic_visit` if that method doesn't exist."
 msgstr ""
+"访问一个节点。"
+"默认实现是调用 :samp:`self.visit_{classname}` 的方法，"
+"其中 *classname* 是节点类的名称，如果该方法不存在，则调用 :meth:`generic_visit`。"
 
 #: ../../library/ast.rst:2074
 msgid "This visitor calls :meth:`visit` on all children of the node."
-msgstr ""
+msgstr "这个访问者在节点的所有子节点上调用 :meth:`visit`。"
 
 #: ../../library/ast.rst:2076
 msgid ""
@@ -1187,6 +1326,7 @@ msgid ""
 " visited unless the visitor calls :meth:`generic_visit` or visits them "
 "itself."
 msgstr ""
+"注意，拥有自定义访客方法的节点的子节点不会被访问，除非访客调用 :meth:`generic_visit` 或自己访问它们。"
 
 #: ../../library/ast.rst:2080
 msgid ""
@@ -1194,6 +1334,8 @@ msgid ""
 "during traversal.  For this a special visitor exists "
 "(:class:`NodeTransformer`) that allows modifications."
 msgstr ""
+"如果你想在遍历过程中对节点进行修改，请不要使用 :class:`NodeVisitor`。"
+"为此，存在一个特殊的访问者（:class:`NodeTransformer`），允许修改。"
 
 #: ../../library/ast.rst:2086
 msgid ""
@@ -1202,6 +1344,9 @@ msgid ""
 "and will not be called in future Python versions.  Add the "
 ":meth:`visit_Constant` method to handle all constant nodes."
 msgstr ""
+"方法 :meth:`visit_Num`、:meth:`visit_Str`、:meth:`visit_Bytes`、:meth:`visit_NameConstant` "
+"和 :meth:`visit_Ellipsis` 现在已经废弃，在未来的 Python 版本中不会被调用。"
+"添加 :meth:`visit_Constant` 方法来处理所有常数节点。"
 
 #: ../../library/ast.rst:2094
 msgid ""
@@ -1248,10 +1393,13 @@ msgid ""
 ":attr:`lineno`), :func:`fix_missing_locations` should be called with the "
 "new sub-tree to recalculate the location information::"
 msgstr ""
+"如果 :class:`NodeTransformer` 引入了新的节点（不是原来树的一部分），"
+"而没有给它们位置信息（比如 :attr:`lineno`），"
+"那么 :func:`fix_missing_locations` 应该与新的子树一起调用，以重新计算位置信息 ::"
 
 #: ../../library/ast.rst:2131
 msgid "Usually you use the transformer like this::"
-msgstr "通常你可以像这样使用转换器:: "
+msgstr "通常你可以像这样使用转换器 :: "
 
 #: ../../library/ast.rst:2138
 msgid ""
@@ -1263,6 +1411,11 @@ msgid ""
 "column offsets are not dumped by default.  If this is wanted, "
 "*include_attributes* can be set to true."
 msgstr ""
+"返回 *node* 中树的格式化转储。这主要是为了调试的目的。"
+"如果 *annotate_fields* 为 true（默认），返回的字符串将显示字段的名称和值。"
+"如果 *annotate_fields* 为 false，结果字符串将通过省略不明确的字段名而变得更加紧凑。"
+"默认情况下，诸如行号和列的偏移量等属性不会被转储。"
+"如果希望这样，可以将 *include_attributes* 设置为 true。"
 
 #: ../../library/ast.rst:2146
 msgid ""
@@ -1273,10 +1426,14 @@ msgid ""
 "that many spaces per level.  If *indent* is a string (such as "
 "``\"\\t\"``), that string is used to indent each level."
 msgstr ""
+"如果 *indent* 是一个非负的整数或字符串，那么树就会以该缩进级别进行漂亮的打印。"
+"缩进级别为 0、负数或 ``\"\"`` 将只插入新行。``None`` （默认）选择单行表示法。"
+"使用正的整数缩进，每一级有那么多的空格。"
+"如果 *indent* 是一个字符串（如 ``\"\\t\"``），该字符串将用于缩进每一级。"
 
 #: ../../library/ast.rst:2153
 msgid "Added the *indent* option."
-msgstr ""
+msgstr "添加 *indent* 选项。"
 
 #: ../../library/ast.rst:2160
 msgid "Compiler Flags"
