@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>http.cookiejar —— HTTP 客户端的 Cookie 处理 &#8212; Python 3.11.0a2 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="在 Python 3.11.0a2 文档 中搜索"
+          href="../_static/opensearch.xml"/>
+    <link rel="author" title="关于这些文档" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="copyright" title="版权所有" href="../copyright.html" />
+    <link rel="next" title="xmlrpc --- XMLRPC 服务端与客户端模块" href="xmlrpc.html" />
+    <link rel="prev" title="http.cookies --- HTTP状态管理" href="http.cookies.html" />
+    <link rel="canonical" href="https://docs.python.org/3/library/http.cookiejar.html" />
+    
+      
+    
+
+    
+    <style>
+      @media only screen {
+        table.full-width-table {
+            width: 100%;
+        }
+      }
+    </style>
+<link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script> 
+
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <label for="menuToggler" class="toggler__label">
+        <span></span>
+    </label>
+    <nav class="nav-content" role="navigation">
+         <a href="https://www.python.org/" class="nav-logo">
+             <img src="../_static/py.svg" alt="Logo"/>
+         </a>
+        <div class="version_switcher_placeholder"></div>
+        <form role="search" class="search" action="../search.html" method="get">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                <path fill-rule="nonzero"
+                        d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#444"></path>
+            </svg>
+            <input type="text" name="q" aria-label="快速搜索"/>
+            <input type="submit" value="转向"/>
+        </form>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+  <h3><a href="../contents.html">目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code> —— HTTP 客户端的 Cookie 处理</a><ul>
+<li><a class="reference internal" href="#cookiejar-and-filecookiejar-objects">CookieJar 和 FileCookieJar 对象</a></li>
+<li><a class="reference internal" href="#filecookiejar-subclasses-and-co-operation-with-web-browsers">FileCookieJar subclasses and co-operation with web browsers</a></li>
+<li><a class="reference internal" href="#cookiepolicy-objects">CookiePolicy 对象</a></li>
+<li><a class="reference internal" href="#defaultcookiepolicy-objects">DefaultCookiePolicy 对象</a></li>
+<li><a class="reference internal" href="#cookie-objects">Cookie 对象</a></li>
+<li><a class="reference internal" href="#examples">例子</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>上一个主题</h4>
+  <p class="topless"><a href="http.cookies.html"
+                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookies</span></code> --- HTTP状态管理</a></p>
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="xmlrpc.html"
+                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc</span></code> --- XMLRPC 服务端与客户端模块</a></p>
+  <div role="note" aria-label="source link">
+    <h3>当前页面</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">提交 Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/http.cookiejar.rst"
+            rel="nofollow">显示源码
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
+
+  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="xmlrpc --- XMLRPC 服务端与客户端模块"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="http.cookies.html" title="http.cookies --- HTTP状态管理"
+             accesskey="P">上一页</a> |</li>
+
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
+    <li id="cpython-language-and-version">
+      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="internet.html" accesskey="U">互联网协议和支持</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code> —— HTTP 客户端的 Cookie 处理</a></li>
+                <li class="right">
+                    
+
+    <div class="inline-search" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="快速搜索" aria-label="快速搜索" type="text" name="q" />
+          <input type="submit" value="转向" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+                     |
+                </li>
+            
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-http.cookiejar">
+<span id="http-cookiejar-cookie-handling-for-http-clients"></span><h1><a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> —— HTTP 客户端的 Cookie 处理<a class="headerlink" href="#module-http.cookiejar" title="永久链接至标题">¶</a></h1>
+<p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/http/cookiejar.py">Lib/http/cookiejar.py</a></p>
+<hr class="docutils" />
+<p><a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> 模块定义了用于自动处理 HTTP cookie 的类。这对访问需要小段数据 —— <em class="dfn">cookies</em> 的网站很有用，这些数据由 Web 服务器的 HTTP 响应在客户端计算机上设置，然后在以后的 HTTP 请求中返回给服务器。</p>
+<p>常规的 Netscape cookie 协议和由 <span class="target" id="index-36"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> 定义的协议都可以被处理。 RFC 2965 的处理默认是关闭的。 <span class="target" id="index-37"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookie 被解析为 Netscape cookie ，随后根据当前使用的 &quot;策略&quot;，被视为 Netscape 或 RFC 2965 cookie。<a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> 试图遵循事实上的 Netscape cookie 协议（它与原始Netscape规范中的协议有很大不同），包括注意到 RFC 2965 中引入的``max-age``和``port``cookie 属性。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在 <em class="mailheader">Set-Cookie</em> 和 <em class="mailheader">Set-Cookie2</em> 头中找到的各种命名参数通常指 <em class="dfn">attributes</em>。为了不与 Python 属性相混淆，模块文档使用 <em class="dfn">cookie-attribute</em> 代替。</p>
+</div>
+<p>此模块定义了以下异常：</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="http.cookiejar.LoadError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">LoadError</span></span><a class="headerlink" href="#http.cookiejar.LoadError" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> 实例在从文件加载 cookies 出错时抛出这个异常。 <a class="reference internal" href="#http.cookiejar.LoadError" title="http.cookiejar.LoadError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LoadError</span></code></a> 是 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的一个子类。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.3 版更改: </span>LoadError 成为 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的子类而不是 <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>。</p>
+</div>
+</dd></dl>
+
+<p>提供了以下类：</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">CookieJar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar" title="永久链接至目标">¶</a></dt>
+<dd><p><em>policy</em> 是实现了 <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> 接口的一个对象。</p>
+<p><a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 类储存 HTTP cookies。它从 HTTP 请求提取 cookies，并在 HTTP 响应中返回它们。 <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 实例在必要时自动处理包含 cookie 的到期情况。子类还负责储存和从文件或数据库中查找 cookies。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">FileCookieJar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delayload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.FileCookieJar" title="永久链接至目标">¶</a></dt>
+<dd><p><em>policy</em> 是实现了 <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> 接口的一个对象。对于其他参数，参考相应属性的文档。</p>
+<p>一个可以从硬盘中文件加载或保存 cookie 的 <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a>。 Cookies <strong>不</strong> 会在 <a class="reference internal" href="#http.cookiejar.FileCookieJar.load" title="http.cookiejar.FileCookieJar.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> 或 <a class="reference internal" href="#http.cookiejar.FileCookieJar.revert" title="http.cookiejar.FileCookieJar.revert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">revert()</span></code></a> 方法调用前从命名的文件中加载。子类的文档位于段落 <a class="reference internal" href="#file-cookie-jar-classes"><span class="std std-ref">FileCookieJar subclasses and co-operation with web browsers</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.8 版更改: </span>文件名形参支持 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">CookiePolicy</span></span><a class="headerlink" href="#http.cookiejar.CookiePolicy" title="永久链接至目标">¶</a></dt>
+<dd><p>此类负责确定是否应从服务器接受每个 cookie 或将其返回给服务器。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">DefaultCookiePolicy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocked_domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allowed_domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">netscape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rfc2965</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rfc2109_as_netscape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hide_cookie2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_rfc2965_unverifiable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ns_unverifiable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ns_domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DefaultCookiePolicy.DomainLiberal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ns_set_initial_dollar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict_ns_set_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secure_protocols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('https',</span> <span class="pre">'wss')</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy" title="永久链接至目标">¶</a></dt>
+<dd><p>构造参数只能以关键字参数传递，<em>blocked_domains</em> 是一个我们既不会接受也不会返回 cookie 的域名序列。<em>allowed_domains</em> 如果不是 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>，则是仅有的我们会接受或返回的域名序列。<em>secure_protocols</em> 是可以添加安全 cookies 的协议序列。默认将 <em>https</em> 和 <em>wss</em> （安全 WebSocket）考虑为安全协议。对于其他参数，参考 <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> 和 <a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> 对象的文档。</p>
+<p><a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> 实现了 Netscape 和 <span class="target" id="index-38"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> cookies 的标准接受 / 拒绝规则。 默认情况下，<span class="target" id="index-39"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookies（即在 <em class="mailheader">Set-Cookie</em> 头中收到的 cookie-attribute 版本为 1 的 cookies ）将按照 RFC 2965 规则处理。 然而，如果 RFC 2965 的处理被关闭，或者  <a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape" title="http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rfc2109_as_netscape</span></code></a> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，<a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> 实例的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">version</span></code> 属性设置将被为 0， RFC 2109 cookies <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 实例将 &quot;降级&quot; 为 Netscape cookies。 <a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> 也提供一些参数以允许一些策略微调。</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">Cookie</span></span><a class="headerlink" href="#http.cookiejar.Cookie" title="永久链接至目标">¶</a></dt>
+<dd><p>这个类代表 Netscape、<span class="target" id="index-40"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> 和 <span class="target" id="index-41"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> 的 cookie 。 我们不希望 <a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> 的用户构建他们自己的 <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> 实例。 如果有必要，请在一个  <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 实例上调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">make_cookies()</span></code> 。</p>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<dl class="simple">
+<dt>模块 <a class="reference internal" href="urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a></dt><dd><p>URL 打开带有自动的 cookie 处理。</p>
+</dd>
+<dt>模块 <a class="reference internal" href="http.cookies.html#module-http.cookies" title="http.cookies: Support for HTTP state management (cookies)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookies</span></code></a></dt><dd><p>HTTP cookie类，主要是对服务端代码有用。  <a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> 和 <a class="reference internal" href="http.cookies.html#module-http.cookies" title="http.cookies: Support for HTTP state management (cookies)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookies</span></code></a> 模块不相互依赖。</p>
+</dd>
+<dt><a class="reference external" href="https://curl.se/rfc/cookie_spec.html">https://curl.se/rfc/cookie_spec.html</a></dt><dd><p>原始 Netscape cookie 协议的规范。 虽然这仍然是主流协议，但所有主要浏览器（以及 <a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> ）实现的 &quot;Netscape cookie协议&quot; 与``cookie_spec.html``中描述的协议仅有几分相似之处。</p>
+</dd>
+<dt><span class="target" id="index-42"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> - HTTP状态管理机制</dt><dd><p>被 <span class="target" id="index-43"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> 所取代。使用 <em class="mailheader">Set-Cookie</em> version=1 。</p>
+</dd>
+<dt><span class="target" id="index-44"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> - HTTP状态管理机制</dt><dd><p>修正了错误的 Netscape 协议。 使用 <em class="mailheader">Set-Cookie2</em> 来代替 <em class="mailheader">Set-Cookie</em> 。 没有广泛被使用。</p>
+</dd>
+<dt><a class="reference external" href="http://kristol.org/cookie/errata.html">http://kristol.org/cookie/errata.html</a></dt><dd><p>未完成的:rfc:<cite>2965</cite> 勘误表。</p>
+</dd>
+</dl>
+<p><span class="target" id="index-45"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2964.html"><strong>RFC 2964</strong></a> - HTTP状态管理使用方法</p>
+</div>
+<section id="cookiejar-and-filecookiejar-objects">
+<span id="cookie-jar-objects"></span><h2>CookieJar 和 FileCookieJar 对象<a class="headerlink" href="#cookiejar-and-filecookiejar-objects" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 对象支持 <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> 协议，用于迭代包含的 <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> 对象。</p>
+<p><a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 有以下方法：</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.add_cookie_header">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">add_cookie_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.add_cookie_header" title="永久链接至目标">¶</a></dt>
+<dd><p>在 <em>request</em> 中添加正确的 <em class="mailheader">Cookie</em> 头。</p>
+<p>如果策略允许（即 <code class="xref py py-attr docutils literal notranslate"><span class="pre">rfc2965</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">hide_cookie2</span></code> 属性在 <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 的 <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> 实例中分别为 True 和 False ）， <em class="mailheader">Cookie2</em> 标头也会在适当时候添加。</p>
+<p>如 <a class="reference internal" href="urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 所记载的， <em>request</em> 对象（通常是一个 <a class="reference internal" href="urllib.request.html#urllib.request.Request" title="urllib.request.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.Request</span></code></a> 实例）必须支持 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_full_url()</span></code> , <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_host()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_type()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">unverifiable()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">has_header()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_header()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">header_items()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_unredirected_header()</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_req_host</span></code> 属性。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.3 版更改: </span><em>request</em> 对象需要 <code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_req_host</span></code> 属性。对已废弃的方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_origin_req_host()</span></code> 的依赖已被移除。</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.extract_cookies">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">extract_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.extract_cookies" title="永久链接至目标">¶</a></dt>
+<dd><p>从HTTP <em>response</em> 中提取 cookie，并在政策允许的情况下，将它们存储在 <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 中。</p>
+<p><a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> 将 在*response* 参数中寻找允许的 <em class="mailheader">Set-Cookie</em> 和 <em class="mailheader">Set-Cookie2</em> 头信息，并适当地存储cookies（须经 <a class="reference internal" href="#http.cookiejar.CookiePolicy.set_ok" title="http.cookiejar.CookiePolicy.set_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CookiePolicy.set_ok()</span></code></a> 方法批准）。</p>
+<p><em>response</em> 对象（通常是调用 <a class="reference internal" href="urllib.request.html#urllib.request.urlopen" title="urllib.request.urlopen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">urllib.request.urlopen()</span></code></a> 或类似方法的结果）应该支持 <code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code> 方法，它返回 <a class="reference internal" href="email.compat32-message.html#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">email.message.Message</span></code></a> 实例。</p>
+<p>如 <a class="reference internal" href="urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 的文档所说，<em>request</em> 对象（通常是一个 <a class="reference internal" href="urllib.request.html#urllib.request.Request" title="urllib.request.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.Request</span></code></a> 实例）必须支持 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_full_url()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_host()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">unverifiable()</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_req_host</span></code> 属性。 该请求用于设置 cookie-attributes 的默认值，以及检查 cookie 是否允许被设置。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.3 版更改: </span><em>request</em> 对象需要 <code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_req_host</span></code> 属性。对已废弃的方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_origin_req_host()</span></code> 的依赖已被移除。</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.set_policy">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">set_policy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">policy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.set_policy" title="永久链接至目标">¶</a></dt>
+<dd><p>设置要使用的 <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> 实例。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.make_cookies">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">make_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.make_cookies" title="永久链接至目标">¶</a></dt>
+<dd><p>返回从 <em>response</em> 对象中提取的 <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> 对象的序列。</p>
+<p>关于 <em>response</em> 和 <em>request</em> 参数所需的接口，请参见 <a class="reference internal" href="#http.cookiejar.CookieJar.extract_cookies" title="http.cookiejar.CookieJar.extract_cookies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extract_cookies()</span></code></a> 的文档。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.set_cookie_if_ok">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">set_cookie_if_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.set_cookie_if_ok" title="永久链接至目标">¶</a></dt>
+<dd><p>如果策略规定可以这样做，就设置一个 <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> 。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.set_cookie">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">set_cookie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.set_cookie" title="永久链接至目标">¶</a></dt>
+<dd><p>设置一个 <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a>，不需要检查策略是否应该被设置。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.clear">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">domain</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">path</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.clear" title="永久链接至目标">¶</a></dt>
+<dd><p>清除一些cookie。</p>
+<p>如果调用时没有参数，则清除所有的cookie。 如果给定一个参数，只有属于该 <em>domain</em> 的cookies将被删除。如果给定两个参数，那么属于指定的 <em>domain</em> 和 URL <em>path</em> 的cookie将被删除。 如果给定三个参数，那么属于指定的 <em>domain</em> 、<em>path</em> 和 <em>name</em> 的cookie将被删除</p>
+<p>如果不存在匹配的 cookie，则会引发 <a class="reference internal" href="exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookieJar.clear_session_cookies">
+<span class="sig-prename descclassname"><span class="pre">CookieJar.</span></span><span class="sig-name descname"><span class="pre">clear_session_cookies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookieJar.clear_session_cookies" title="永久链接至目标">¶</a></dt>
+<dd><p>丢弃所有session cookie。</p>
+<p>Discards all contained cookies that have a true <code class="xref py py-attr docutils literal notranslate"><span class="pre">discard</span></code> attribute
+(usually because they had either no <code class="docutils literal notranslate"><span class="pre">max-age</span></code> or <code class="docutils literal notranslate"><span class="pre">expires</span></code> cookie-attribute,
+or an explicit <code class="docutils literal notranslate"><span class="pre">discard</span></code> cookie-attribute).  For interactive browsers, the end
+of a session usually corresponds to closing the browser window.</p>
+<p>Note that the <code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code> method won't save session cookies anyway, unless you
+ask otherwise by passing a true <em>ignore_discard</em> argument.</p>
+</dd></dl>
+
+<p><a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> implements the following additional methods:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar.save">
+<span class="sig-prename descclassname"><span class="pre">FileCookieJar.</span></span><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_discard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_expires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.FileCookieJar.save" title="永久链接至目标">¶</a></dt>
+<dd><p>Save cookies to a file.</p>
+<p>This base class raises <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>.  Subclasses may leave this
+method unimplemented.</p>
+<p><em>filename</em> is the name of file in which to save cookies.  If <em>filename</em> is not
+specified, <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.filename</span></code> is used (whose default is the value passed to
+the constructor, if any); if <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.filename</span></code> is <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>,
+<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
+<p><em>ignore_discard</em>: save even cookies set to be discarded. <em>ignore_expires</em>: save
+even cookies that have expired</p>
+<p>The file is overwritten if it already exists, thus wiping all the cookies it
+contains.  Saved cookies can be restored later using the <a class="reference internal" href="#http.cookiejar.FileCookieJar.load" title="http.cookiejar.FileCookieJar.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a> or
+<a class="reference internal" href="#http.cookiejar.FileCookieJar.revert" title="http.cookiejar.FileCookieJar.revert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">revert()</span></code></a> methods.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar.load">
+<span class="sig-prename descclassname"><span class="pre">FileCookieJar.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_discard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_expires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.FileCookieJar.load" title="永久链接至目标">¶</a></dt>
+<dd><p>Load cookies from a file.</p>
+<p>Old cookies are kept unless overwritten by newly loaded ones.</p>
+<p>Arguments are as for <a class="reference internal" href="#http.cookiejar.FileCookieJar.save" title="http.cookiejar.FileCookieJar.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save()</span></code></a>.</p>
+<p>The named file must be in the format understood by the class, or
+<a class="reference internal" href="#http.cookiejar.LoadError" title="http.cookiejar.LoadError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">LoadError</span></code></a> will be raised.  Also, <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> may be raised, for
+example if the file does not exist.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.3 版更改: </span>过去触发的 <a class="reference internal" href="exceptions.html#IOError" title="IOError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IOError</span></code></a>，现在是 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的别名。</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar.revert">
+<span class="sig-prename descclassname"><span class="pre">FileCookieJar.</span></span><span class="sig-name descname"><span class="pre">revert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_discard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_expires</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.FileCookieJar.revert" title="永久链接至目标">¶</a></dt>
+<dd><p>Clear all cookies and reload cookies from a saved file.</p>
+<p><a class="reference internal" href="#http.cookiejar.FileCookieJar.revert" title="http.cookiejar.FileCookieJar.revert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">revert()</span></code></a> can raise the same exceptions as <a class="reference internal" href="#http.cookiejar.FileCookieJar.load" title="http.cookiejar.FileCookieJar.load"><code class="xref py py-meth docutils literal notranslate"><span class="pre">load()</span></code></a>. If there is a
+failure, the object's state will not be altered.</p>
+</dd></dl>
+
+<p><a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> instances have the following public attributes:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar.filename">
+<span class="sig-prename descclassname"><span class="pre">FileCookieJar.</span></span><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#http.cookiejar.FileCookieJar.filename" title="永久链接至目标">¶</a></dt>
+<dd><p>Filename of default file in which to keep cookies.  This attribute may be
+assigned to.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.FileCookieJar.delayload">
+<span class="sig-prename descclassname"><span class="pre">FileCookieJar.</span></span><span class="sig-name descname"><span class="pre">delayload</span></span><a class="headerlink" href="#http.cookiejar.FileCookieJar.delayload" title="永久链接至目标">¶</a></dt>
+<dd><p>If true, load cookies lazily from disk.  This attribute should not be assigned
+to.  This is only a hint, since this only affects performance, not behaviour
+(unless the cookies on disk are changing). A <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> object may
+ignore it.  None of the <a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> classes included in the standard
+library lazily loads cookies.</p>
+</dd></dl>
+
+</section>
+<section id="filecookiejar-subclasses-and-co-operation-with-web-browsers">
+<span id="file-cookie-jar-classes"></span><h2>FileCookieJar subclasses and co-operation with web browsers<a class="headerlink" href="#filecookiejar-subclasses-and-co-operation-with-web-browsers" title="永久链接至标题">¶</a></h2>
+<p>The following <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> subclasses are provided for reading and
+writing.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.MozillaCookieJar">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">MozillaCookieJar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delayload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.MozillaCookieJar" title="永久链接至目标">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> that can load from and save cookies to disk in the
+Mozilla <code class="docutils literal notranslate"><span class="pre">cookies.txt</span></code> file format (which is also used by the Lynx and Netscape
+browsers).</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>This loses information about <span class="target" id="index-11"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> cookies, and also about newer or
+non-standard cookie-attributes such as <code class="docutils literal notranslate"><span class="pre">port</span></code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Back up your cookies before saving if you have cookies whose loss / corruption
+would be inconvenient (there are some subtleties which may lead to slight
+changes in the file over a load / save round-trip).</p>
+</div>
+<p>Also note that cookies saved while Mozilla is running will get clobbered by
+Mozilla.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="http.cookiejar.LWPCookieJar">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">http.cookiejar.</span></span><span class="sig-name descname"><span class="pre">LWPCookieJar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delayload</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.LWPCookieJar" title="永久链接至目标">¶</a></dt>
+<dd><p>A <a class="reference internal" href="#http.cookiejar.FileCookieJar" title="http.cookiejar.FileCookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileCookieJar</span></code></a> that can load from and save cookies to disk in format
+compatible with the libwww-perl library's <code class="docutils literal notranslate"><span class="pre">Set-Cookie3</span></code> file format.  This is
+convenient if you want to store cookies in a human-readable file.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.8 版更改: </span>文件名形参支持 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="cookiepolicy-objects">
+<span id="cookie-policy-objects"></span><h2>CookiePolicy 对象<a class="headerlink" href="#cookiepolicy-objects" title="永久链接至标题">¶</a></h2>
+<p>Objects implementing the <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> interface have the following
+methods:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.set_ok">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">set_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookiePolicy.set_ok" title="永久链接至目标">¶</a></dt>
+<dd><p>Return boolean value indicating whether cookie should be accepted from server.</p>
+<p><em>cookie</em> is a <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instance.  <em>request</em> is an object
+implementing the interface defined by the documentation for
+<a class="reference internal" href="#http.cookiejar.CookieJar.extract_cookies" title="http.cookiejar.CookieJar.extract_cookies"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CookieJar.extract_cookies()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.return_ok">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">return_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cookie</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookiePolicy.return_ok" title="永久链接至目标">¶</a></dt>
+<dd><p>Return boolean value indicating whether cookie should be returned to server.</p>
+<p><em>cookie</em> is a <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instance.  <em>request</em> is an object
+implementing the interface defined by the documentation for
+<a class="reference internal" href="#http.cookiejar.CookieJar.add_cookie_header" title="http.cookiejar.CookieJar.add_cookie_header"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CookieJar.add_cookie_header()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.domain_return_ok">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">domain_return_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookiePolicy.domain_return_ok" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">False</span></code> if cookies should not be returned, given cookie domain.</p>
+<p>This method is an optimization.  It removes the need for checking every cookie
+with a particular domain (which might involve reading many files).  Returning
+true from <a class="reference internal" href="#http.cookiejar.CookiePolicy.domain_return_ok" title="http.cookiejar.CookiePolicy.domain_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">domain_return_ok()</span></code></a> and <a class="reference internal" href="#http.cookiejar.CookiePolicy.path_return_ok" title="http.cookiejar.CookiePolicy.path_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_return_ok()</span></code></a> leaves all the
+work to <a class="reference internal" href="#http.cookiejar.CookiePolicy.return_ok" title="http.cookiejar.CookiePolicy.return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">return_ok()</span></code></a>.</p>
+<p>If <a class="reference internal" href="#http.cookiejar.CookiePolicy.domain_return_ok" title="http.cookiejar.CookiePolicy.domain_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">domain_return_ok()</span></code></a> returns true for the cookie domain,
+<a class="reference internal" href="#http.cookiejar.CookiePolicy.path_return_ok" title="http.cookiejar.CookiePolicy.path_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_return_ok()</span></code></a> is called for the cookie path.  Otherwise,
+<a class="reference internal" href="#http.cookiejar.CookiePolicy.path_return_ok" title="http.cookiejar.CookiePolicy.path_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_return_ok()</span></code></a> and <a class="reference internal" href="#http.cookiejar.CookiePolicy.return_ok" title="http.cookiejar.CookiePolicy.return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">return_ok()</span></code></a> are never called for that cookie
+domain.  If <a class="reference internal" href="#http.cookiejar.CookiePolicy.path_return_ok" title="http.cookiejar.CookiePolicy.path_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_return_ok()</span></code></a> returns true, <a class="reference internal" href="#http.cookiejar.CookiePolicy.return_ok" title="http.cookiejar.CookiePolicy.return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">return_ok()</span></code></a> is called
+with the <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> object itself for a full check.  Otherwise,
+<a class="reference internal" href="#http.cookiejar.CookiePolicy.return_ok" title="http.cookiejar.CookiePolicy.return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">return_ok()</span></code></a> is never called for that cookie path.</p>
+<p>Note that <a class="reference internal" href="#http.cookiejar.CookiePolicy.domain_return_ok" title="http.cookiejar.CookiePolicy.domain_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">domain_return_ok()</span></code></a> is called for every <em>cookie</em> domain, not just
+for the <em>request</em> domain.  For example, the function might be called with both
+<code class="docutils literal notranslate"><span class="pre">&quot;.example.com&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;www.example.com&quot;</span></code> if the request domain is
+<code class="docutils literal notranslate"><span class="pre">&quot;www.example.com&quot;</span></code>.  The same goes for <a class="reference internal" href="#http.cookiejar.CookiePolicy.path_return_ok" title="http.cookiejar.CookiePolicy.path_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_return_ok()</span></code></a>.</p>
+<p>The <em>request</em> argument is as documented for <a class="reference internal" href="#http.cookiejar.CookiePolicy.return_ok" title="http.cookiejar.CookiePolicy.return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">return_ok()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.path_return_ok">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">path_return_ok</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.CookiePolicy.path_return_ok" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">False</span></code> if cookies should not be returned, given cookie path.</p>
+<p>See the documentation for <a class="reference internal" href="#http.cookiejar.CookiePolicy.domain_return_ok" title="http.cookiejar.CookiePolicy.domain_return_ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">domain_return_ok()</span></code></a>.</p>
+</dd></dl>
+
+<p>In addition to implementing the methods above, implementations of the
+<a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> interface must also supply the following attributes,
+indicating which protocols should be used, and how.  All of these attributes may
+be assigned to.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.netscape">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">netscape</span></span><a class="headerlink" href="#http.cookiejar.CookiePolicy.netscape" title="永久链接至目标">¶</a></dt>
+<dd><p>Implement Netscape protocol.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.rfc2965">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">rfc2965</span></span><a class="headerlink" href="#http.cookiejar.CookiePolicy.rfc2965" title="永久链接至目标">¶</a></dt>
+<dd><p>Implement <span class="target" id="index-12"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> protocol.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.CookiePolicy.hide_cookie2">
+<span class="sig-prename descclassname"><span class="pre">CookiePolicy.</span></span><span class="sig-name descname"><span class="pre">hide_cookie2</span></span><a class="headerlink" href="#http.cookiejar.CookiePolicy.hide_cookie2" title="永久链接至目标">¶</a></dt>
+<dd><p>Don't add <em class="mailheader">Cookie2</em> header to requests (the presence of this header
+indicates to the server that we understand <span class="target" id="index-13"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> cookies).</p>
+</dd></dl>
+
+<p>The most useful way to define a <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> class is by subclassing
+from <a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> and overriding some or all of the methods
+above.  <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> itself may be used as a 'null policy' to allow
+setting and receiving any and all cookies (this is unlikely to be useful).</p>
+</section>
+<section id="defaultcookiepolicy-objects">
+<span id="default-cookie-policy-objects"></span><h2>DefaultCookiePolicy 对象<a class="headerlink" href="#defaultcookiepolicy-objects" title="永久链接至标题">¶</a></h2>
+<p>Implements the standard rules for accepting and returning cookies.</p>
+<p>Both <span class="target" id="index-14"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> and Netscape cookies are covered.  RFC 2965 handling is switched
+off by default.</p>
+<p>The easiest way to provide your own policy is to override this class and call
+its methods in your overridden implementations before adding your own additional
+checks:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">http.cookiejar</span>
+<span class="k">class</span> <span class="nc">MyCookiePolicy</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">cookiejar</span><span class="o">.</span><span class="n">DefaultCookiePolicy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">http</span><span class="o">.</span><span class="n">cookiejar</span><span class="o">.</span><span class="n">DefaultCookiePolicy</span><span class="o">.</span><span class="n">set_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookie</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">i_dont_want_to_store_this_cookie</span><span class="p">(</span><span class="n">cookie</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>In addition to the features required to implement the <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a>
+interface, this class allows you to block and allow domains from setting and
+receiving cookies.  There are also some strictness switches that allow you to
+tighten up the rather loose Netscape protocol rules a little bit (at the cost of
+blocking some benign cookies).</p>
+<p>A domain blocklist and allowlist is provided (both off by default). Only domains
+not in the blocklist and present in the allowlist (if the allowlist is active)
+participate in cookie setting and returning.  Use the <em>blocked_domains</em>
+constructor argument, and <code class="xref py py-meth docutils literal notranslate"><span class="pre">blocked_domains()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">set_blocked_domains()</span></code> methods (and the corresponding argument and methods
+for <em>allowed_domains</em>).  If you set an allowlist, you can turn it off again by
+setting it to <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<p>Domains in block or allow lists that do not start with a dot must equal the
+cookie domain to be matched.  For example, <code class="docutils literal notranslate"><span class="pre">&quot;example.com&quot;</span></code> matches a blocklist
+entry of <code class="docutils literal notranslate"><span class="pre">&quot;example.com&quot;</span></code>, but <code class="docutils literal notranslate"><span class="pre">&quot;www.example.com&quot;</span></code> does not.  Domains that do
+start with a dot are matched by more specific domains too. For example, both
+<code class="docutils literal notranslate"><span class="pre">&quot;www.example.com&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;www.coyote.example.com&quot;</span></code> match <code class="docutils literal notranslate"><span class="pre">&quot;.example.com&quot;</span></code>
+(but <code class="docutils literal notranslate"><span class="pre">&quot;example.com&quot;</span></code> itself does not).  IP addresses are an exception, and
+must match exactly.  For example, if blocked_domains contains <code class="docutils literal notranslate"><span class="pre">&quot;192.168.1.2&quot;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&quot;.168.1.2&quot;</span></code>, 192.168.1.2 is blocked, but 193.168.1.2 is not.</p>
+<p><a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> implements the following additional methods:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.blocked_domains">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">blocked_domains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.blocked_domains" title="永久链接至目标">¶</a></dt>
+<dd><p>Return the sequence of blocked domains (as a tuple).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.set_blocked_domains">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">set_blocked_domains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blocked_domains</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.set_blocked_domains" title="永久链接至目标">¶</a></dt>
+<dd><p>Set the sequence of blocked domains.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.is_blocked">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">is_blocked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.is_blocked" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>domain</em> is on the blocklist for setting or receiving
+cookies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.allowed_domains">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">allowed_domains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.allowed_domains" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, or the sequence of allowed domains (as a tuple).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.set_allowed_domains">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">set_allowed_domains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allowed_domains</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.set_allowed_domains" title="永久链接至目标">¶</a></dt>
+<dd><p>Set the sequence of allowed domains, or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.is_not_allowed">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">is_not_allowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.is_not_allowed" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if <em>domain</em> is not on the allowlist for setting or receiving
+cookies.</p>
+</dd></dl>
+
+<p><a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a> instances have the following attributes, which are
+all initialised from the constructor arguments of the same name, and which may
+all be assigned to.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">rfc2109_as_netscape</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.rfc2109_as_netscape" title="永久链接至目标">¶</a></dt>
+<dd><p>If true, request that the <a class="reference internal" href="#http.cookiejar.CookieJar" title="http.cookiejar.CookieJar"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookieJar</span></code></a> instance downgrade <span class="target" id="index-15"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookies
+(ie. cookies received in a <em class="mailheader">Set-Cookie</em> header with a version
+cookie-attribute of 1) to Netscape cookies by setting the version attribute of
+the <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instance to 0.  The default value is <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, in which
+case RFC 2109 cookies are downgraded if and only if <span class="target" id="index-16"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> handling is turned
+off.  Therefore, RFC 2109 cookies are downgraded by default.</p>
+</dd></dl>
+
+<p>General strictness switches:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_domain">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_domain</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_domain" title="永久链接至目标">¶</a></dt>
+<dd><p>Don't allow sites to set two-component domains with country-code top-level
+domains like <code class="docutils literal notranslate"><span class="pre">.co.uk</span></code>, <code class="docutils literal notranslate"><span class="pre">.gov.uk</span></code>, <code class="docutils literal notranslate"><span class="pre">.co.nz</span></code>.etc.  This is far from perfect
+and isn't guaranteed to work!</p>
+</dd></dl>
+
+<p><span class="target" id="index-17"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> protocol strictness switches:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_rfc2965_unverifiable">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_rfc2965_unverifiable</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_rfc2965_unverifiable" title="永久链接至目标">¶</a></dt>
+<dd><p>Follow <span class="target" id="index-18"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> rules on unverifiable transactions (usually, an unverifiable
+transaction is one resulting from a redirect or a request for an image hosted on
+another site).  If this is false, cookies are <em>never</em> blocked on the basis of
+verifiability</p>
+</dd></dl>
+
+<p>Netscape protocol strictness switches:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_ns_unverifiable">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_ns_unverifiable</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_ns_unverifiable" title="永久链接至目标">¶</a></dt>
+<dd><p>Apply <span class="target" id="index-19"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> rules on unverifiable transactions even to Netscape cookies.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_ns_domain">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_ns_domain</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_ns_domain" title="永久链接至目标">¶</a></dt>
+<dd><p>Flags indicating how strict to be with domain-matching rules for Netscape
+cookies.  See below for acceptable values.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_ns_set_initial_dollar">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_ns_set_initial_dollar</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_ns_set_initial_dollar" title="永久链接至目标">¶</a></dt>
+<dd><p>Ignore cookies in Set-Cookie: headers that have names starting with <code class="docutils literal notranslate"><span class="pre">'$'</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.strict_ns_set_path">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">strict_ns_set_path</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.strict_ns_set_path" title="永久链接至目标">¶</a></dt>
+<dd><p>Don't allow setting cookies whose path doesn't path-match request URI.</p>
+</dd></dl>
+
+<p><code class="xref py py-attr docutils literal notranslate"><span class="pre">strict_ns_domain</span></code> is a collection of flags.  Its value is constructed by
+or-ing together (for example, <code class="docutils literal notranslate"><span class="pre">DomainStrictNoDots|DomainStrictNonDomain</span></code> means
+both flags are set).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.DomainStrictNoDots">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">DomainStrictNoDots</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.DomainStrictNoDots" title="永久链接至目标">¶</a></dt>
+<dd><p>When setting cookies, the 'host prefix' must not contain a dot (eg.
+<code class="docutils literal notranslate"><span class="pre">www.foo.bar.com</span></code> can't set a cookie for <code class="docutils literal notranslate"><span class="pre">.bar.com</span></code>, because <code class="docutils literal notranslate"><span class="pre">www.foo</span></code>
+contains a dot).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.DomainStrictNonDomain">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">DomainStrictNonDomain</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.DomainStrictNonDomain" title="永久链接至目标">¶</a></dt>
+<dd><p>Cookies that did not explicitly specify a <code class="docutils literal notranslate"><span class="pre">domain</span></code> cookie-attribute can only
+be returned to a domain equal to the domain that set the cookie (eg.
+<code class="docutils literal notranslate"><span class="pre">spam.example.com</span></code> won't be returned cookies from <code class="docutils literal notranslate"><span class="pre">example.com</span></code> that had no
+<code class="docutils literal notranslate"><span class="pre">domain</span></code> cookie-attribute).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.DomainRFC2965Match">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">DomainRFC2965Match</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.DomainRFC2965Match" title="永久链接至目标">¶</a></dt>
+<dd><p>When setting cookies, require a full <span class="target" id="index-20"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> domain-match.</p>
+</dd></dl>
+
+<p>The following attributes are provided for convenience, and are the most useful
+combinations of the above flags:</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.DomainLiberal">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">DomainLiberal</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.DomainLiberal" title="永久链接至目标">¶</a></dt>
+<dd><p>Equivalent to 0 (ie. all of the above Netscape domain strictness flags switched
+off).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.DefaultCookiePolicy.DomainStrict">
+<span class="sig-prename descclassname"><span class="pre">DefaultCookiePolicy.</span></span><span class="sig-name descname"><span class="pre">DomainStrict</span></span><a class="headerlink" href="#http.cookiejar.DefaultCookiePolicy.DomainStrict" title="永久链接至目标">¶</a></dt>
+<dd><p>Equivalent to <code class="docutils literal notranslate"><span class="pre">DomainStrictNoDots|DomainStrictNonDomain</span></code>.</p>
+</dd></dl>
+
+</section>
+<section id="cookie-objects">
+<h2>Cookie 对象<a class="headerlink" href="#cookie-objects" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> instances have Python attributes roughly corresponding to the
+standard cookie-attributes specified in the various cookie standards.  The
+correspondence is not one-to-one, because there are complicated rules for
+assigning default values, because the <code class="docutils literal notranslate"><span class="pre">max-age</span></code> and <code class="docutils literal notranslate"><span class="pre">expires</span></code>
+cookie-attributes contain equivalent information, and because <span class="target" id="index-21"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookies
+may be 'downgraded' by <a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> from version 1 to version 0 (Netscape)
+cookies.</p>
+<p>Assignment to these attributes should not be necessary other than in rare
+circumstances in a <a class="reference internal" href="#http.cookiejar.CookiePolicy" title="http.cookiejar.CookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">CookiePolicy</span></code></a> method.  The class does not enforce
+internal consistency, so you should know what you're doing if you do that.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.version">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#http.cookiejar.Cookie.version" title="永久链接至目标">¶</a></dt>
+<dd><p>Integer or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  Netscape cookies have <a class="reference internal" href="#http.cookiejar.Cookie.version" title="http.cookiejar.Cookie.version"><code class="xref py py-attr docutils literal notranslate"><span class="pre">version</span></code></a> 0. <span class="target" id="index-22"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> and
+<span class="target" id="index-23"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookies have a <code class="docutils literal notranslate"><span class="pre">version</span></code> cookie-attribute of 1.  However, note that
+<a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> may 'downgrade' RFC 2109 cookies to Netscape cookies, in which
+case <a class="reference internal" href="#http.cookiejar.Cookie.version" title="http.cookiejar.Cookie.version"><code class="xref py py-attr docutils literal notranslate"><span class="pre">version</span></code></a> is 0.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.name">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#http.cookiejar.Cookie.name" title="永久链接至目标">¶</a></dt>
+<dd><p>Cookie name (a string).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.value">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#http.cookiejar.Cookie.value" title="永久链接至目标">¶</a></dt>
+<dd><p>Cookie value (a string), or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.port">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">port</span></span><a class="headerlink" href="#http.cookiejar.Cookie.port" title="永久链接至目标">¶</a></dt>
+<dd><p>String representing a port or a set of ports (eg. '80', or '80,8080'), or
+<a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.path">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#http.cookiejar.Cookie.path" title="永久链接至目标">¶</a></dt>
+<dd><p>Cookie path (a string, eg. <code class="docutils literal notranslate"><span class="pre">'/acme/rocket_launchers'</span></code>).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.secure">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">secure</span></span><a class="headerlink" href="#http.cookiejar.Cookie.secure" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if cookie should only be returned over a secure connection.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.expires">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">expires</span></span><a class="headerlink" href="#http.cookiejar.Cookie.expires" title="永久链接至目标">¶</a></dt>
+<dd><p>Integer expiry date in seconds since epoch, or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  See also the
+<a class="reference internal" href="#http.cookiejar.Cookie.is_expired" title="http.cookiejar.Cookie.is_expired"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_expired()</span></code></a> method.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.discard">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">discard</span></span><a class="headerlink" href="#http.cookiejar.Cookie.discard" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if this is a session cookie.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.comment">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#http.cookiejar.Cookie.comment" title="永久链接至目标">¶</a></dt>
+<dd><p>String comment from the server explaining the function of this cookie, or
+<a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.comment_url">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">comment_url</span></span><a class="headerlink" href="#http.cookiejar.Cookie.comment_url" title="永久链接至目标">¶</a></dt>
+<dd><p>URL linking to a comment from the server explaining the function of this cookie,
+or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.rfc2109">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">rfc2109</span></span><a class="headerlink" href="#http.cookiejar.Cookie.rfc2109" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if this cookie was received as an <span class="target" id="index-24"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2109.html"><strong>RFC 2109</strong></a> cookie (ie. the cookie
+arrived in a <em class="mailheader">Set-Cookie</em> header, and the value of the Version
+cookie-attribute in that header was 1).  This attribute is provided because
+<a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a> may 'downgrade' RFC 2109 cookies to Netscape cookies, in
+which case <a class="reference internal" href="#http.cookiejar.Cookie.version" title="http.cookiejar.Cookie.version"><code class="xref py py-attr docutils literal notranslate"><span class="pre">version</span></code></a> is 0.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.port_specified">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">port_specified</span></span><a class="headerlink" href="#http.cookiejar.Cookie.port_specified" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if a port or set of ports was explicitly specified by the server (in the
+<em class="mailheader">Set-Cookie</em> / <em class="mailheader">Set-Cookie2</em> header).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.domain_specified">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">domain_specified</span></span><a class="headerlink" href="#http.cookiejar.Cookie.domain_specified" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if a domain was explicitly specified by the server.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.domain_initial_dot">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">domain_initial_dot</span></span><a class="headerlink" href="#http.cookiejar.Cookie.domain_initial_dot" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the domain explicitly specified by the server began with a dot
+(<code class="docutils literal notranslate"><span class="pre">'.'</span></code>).</p>
+</dd></dl>
+
+<p>Cookies may have additional non-standard cookie-attributes.  These may be
+accessed using the following methods:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.has_nonstandard_attr">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">has_nonstandard_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.Cookie.has_nonstandard_attr" title="永久链接至目标">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code> if cookie has the named cookie-attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.get_nonstandard_attr">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">get_nonstandard_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.Cookie.get_nonstandard_attr" title="永久链接至目标">¶</a></dt>
+<dd><p>If cookie has the named cookie-attribute, return its value. Otherwise, return
+<em>default</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.set_nonstandard_attr">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">set_nonstandard_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.Cookie.set_nonstandard_attr" title="永久链接至目标">¶</a></dt>
+<dd><p>Set the value of the named cookie-attribute.</p>
+</dd></dl>
+
+<p>The <a class="reference internal" href="#http.cookiejar.Cookie" title="http.cookiejar.Cookie"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cookie</span></code></a> class also defines the following method:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="http.cookiejar.Cookie.is_expired">
+<span class="sig-prename descclassname"><span class="pre">Cookie.</span></span><span class="sig-name descname"><span class="pre">is_expired</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">now</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.cookiejar.Cookie.is_expired" title="永久链接至目标">¶</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if cookie has passed the time at which the server requested it should
+expire.  If <em>now</em> is given (in seconds since the epoch), return whether the
+cookie has expired at the specified time.</p>
+</dd></dl>
+
+</section>
+<section id="examples">
+<h2>例子<a class="headerlink" href="#examples" title="永久链接至标题">¶</a></h2>
+<p>The first example shows the most common usage of <a class="reference internal" href="#module-http.cookiejar" title="http.cookiejar: Classes for automatic handling of HTTP cookies."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code></a>:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">http.cookiejar</span><span class="o">,</span> <span class="nn">urllib.request</span>
+<span class="n">cj</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">cookiejar</span><span class="o">.</span><span class="n">CookieJar</span><span class="p">()</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">HTTPCookieProcessor</span><span class="p">(</span><span class="n">cj</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;http://example.com/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example illustrates how to open a URL using your Netscape, Mozilla, or Lynx
+cookies (assumes Unix/Netscape convention for location of the cookies file):</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">http.cookiejar</span><span class="o">,</span> <span class="nn">urllib.request</span>
+<span class="n">cj</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">cookiejar</span><span class="o">.</span><span class="n">MozillaCookieJar</span><span class="p">()</span>
+<span class="n">cj</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">),</span> <span class="s2">&quot;.netscape&quot;</span><span class="p">,</span> <span class="s2">&quot;cookies.txt&quot;</span><span class="p">))</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">HTTPCookieProcessor</span><span class="p">(</span><span class="n">cj</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;http://example.com/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next example illustrates the use of <a class="reference internal" href="#http.cookiejar.DefaultCookiePolicy" title="http.cookiejar.DefaultCookiePolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultCookiePolicy</span></code></a>. Turn on
+<span class="target" id="index-25"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2965.html"><strong>RFC 2965</strong></a> cookies, be more strict about domains when setting and returning
+Netscape cookies, and block some domains from setting cookies or having them
+returned:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">from</span> <span class="nn">http.cookiejar</span> <span class="kn">import</span> <span class="n">CookieJar</span><span class="p">,</span> <span class="n">DefaultCookiePolicy</span>
+<span class="n">policy</span> <span class="o">=</span> <span class="n">DefaultCookiePolicy</span><span class="p">(</span>
+    <span class="n">rfc2965</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strict_ns_domain</span><span class="o">=</span><span class="n">Policy</span><span class="o">.</span><span class="n">DomainStrict</span><span class="p">,</span>
+    <span class="n">blocked_domains</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ads.net&quot;</span><span class="p">,</span> <span class="s2">&quot;.ads.net&quot;</span><span class="p">])</span>
+<span class="n">cj</span> <span class="o">=</span> <span class="n">CookieJar</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">HTTPCookieProcessor</span><span class="p">(</span><span class="n">cj</span><span class="p">))</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;http://example.com/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">目录</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code> —— HTTP 客户端的 Cookie 处理</a><ul>
+<li><a class="reference internal" href="#cookiejar-and-filecookiejar-objects">CookieJar 和 FileCookieJar 对象</a></li>
+<li><a class="reference internal" href="#filecookiejar-subclasses-and-co-operation-with-web-browsers">FileCookieJar subclasses and co-operation with web browsers</a></li>
+<li><a class="reference internal" href="#cookiepolicy-objects">CookiePolicy 对象</a></li>
+<li><a class="reference internal" href="#defaultcookiepolicy-objects">DefaultCookiePolicy 对象</a></li>
+<li><a class="reference internal" href="#cookie-objects">Cookie 对象</a></li>
+<li><a class="reference internal" href="#examples">例子</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>上一个主题</h4>
+  <p class="topless"><a href="http.cookies.html"
+                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookies</span></code> --- HTTP状态管理</a></p>
+  <h4>下一个主题</h4>
+  <p class="topless"><a href="xmlrpc.html"
+                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xmlrpc</span></code> --- XMLRPC 服务端与客户端模块</a></p>
+  <div role="note" aria-label="source link">
+    <h3>当前页面</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">提交 Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/main/Doc/library/http.cookiejar.rst"
+            rel="nofollow">显示源码
+        </a>
+      </li>
+    </ul>
+  </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="xmlrpc.html" title="xmlrpc --- XMLRPC 服务端与客户端模块"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="http.cookies.html" title="http.cookies --- HTTP状态管理"
+             >上一页</a> |</li>
+
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
+    <li id="cpython-language-and-version">
+      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="internet.html" >互联网协议和支持</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.cookiejar</span></code> —— HTTP 客户端的 Cookie 处理</a></li>
+                <li class="right">
+                    
+
+    <div class="inline-search" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="快速搜索" aria-label="快速搜索" type="text" name="q" />
+          <input type="submit" value="转向" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+                     |
+                </li>
+            
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2021, Python Software Foundation.
+    <br />
+    This page is licensed under the Python Software Foundation License Version 2.
+    <br />
+    Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
+    <br />
+    See <a href="">History and License</a> for more information.
+    <br /><br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    最后更新于 11月 21, 2021.
+    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    <br />
+
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    </div>
+
+  </body>
+</html>
