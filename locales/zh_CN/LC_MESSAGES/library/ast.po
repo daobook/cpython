@@ -618,7 +618,7 @@ msgid ""
 "The ``target`` attribute cannot be of class :class:`Tuple` or "
 ":class:`List`, unlike the targets of :class:`Assign`."
 msgstr ""
-"``target`` 属性不能是 :class:`Tuple` 或 :class:`List` 类 与 :class:`Assign` 的目标不同。"
+"与 :class:`Assign` 的 targets 不同，``target`` 属性不能是 :class:`Tuple` 或 :class:`List` 类。"
 
 #: ../../library/ast.rst:858
 msgid ""
@@ -627,28 +627,36 @@ msgid ""
 "``raise``. ``cause`` is the optional part for ``y`` in ``raise x from "
 "y``."
 msgstr ""
+"``raise`` 语句。"
+"``exc`` 是要引发的异常对象，通常是 :class:`Call` 或 :class:`Name`，"
+"或 ``None`` 用于独立的 ``raise``。"
+"``cause`` 是 ``raise x from y`` 中 ``y`` 的可选部分。"
 
 #: ../../library/ast.rst:875
 msgid ""
 "An assertion. ``test`` holds the condition, such as a :class:`Compare` "
 "node. ``msg`` holds the failure message."
 msgstr ""
+"断言。``test`` 持有条件，例如 :class:`Compare` 节点。``msg`` 持有失败信息。"
 
 #: ../../library/ast.rst:891
 msgid ""
 "Represents a ``del`` statement. ``targets`` is a list of nodes, such as "
 ":class:`Name`, :class:`Attribute` or :class:`Subscript` nodes."
 msgstr ""
+"代表一个 ``del`` 语句。"
+"``targets`` 是一个节点列表，例如 :class:`Name`、:class:`Attribute` 或 :class:`Subscript` 的节点。"
 
 #: ../../library/ast.rst:909
 msgid "A ``pass`` statement."
-msgstr ""
+msgstr "``pass`` 语句。"
 
 #: ../../library/ast.rst:920
 msgid ""
 "Other statements which are only applicable inside functions or loops are "
 "described in other sections."
 msgstr ""
+"其他只适用于函数或循环内部的语句在其他章节中描述。"
 
 #: ../../library/ast.rst:924
 msgid "Imports"
@@ -656,7 +664,7 @@ msgstr ""
 
 #: ../../library/ast.rst:928
 msgid "An import statement. ``names`` is a list of :class:`alias` nodes."
-msgstr ""
+msgstr "导入语句。``names`` 是一个 :class:`alias` 节点的列表。"
 
 #: ../../library/ast.rst:945
 msgid ""
@@ -665,28 +673,36 @@ msgid ""
 " . import foo``. ``level`` is an integer holding the level of the "
 "relative import (0 means absolute import)."
 msgstr ""
+"代表 ``from x import y``。"
+"``module`` 是 'from' 名称的原始字符串，没有任何前导点，"
+"或 ``None`` 用于诸如 ``from . foo`` 的语句。"
+"``level`` 是一个整数，表示相对导入的级别（0 表示绝对导入）。"
 
 #: ../../library/ast.rst:967
 msgid ""
 "Both parameters are raw strings of the names. ``asname`` can be ``None`` "
 "if the regular name is to be used."
 msgstr ""
+"两个参数都是名字的原始字符串。如果要使用常规名称，``asname`` 可以是 ``None``。"
 
 #: ../../library/ast.rst:984
 msgid "Control flow"
-msgstr ""
+msgstr "控制流"
 
 #: ../../library/ast.rst:987
 msgid ""
 "Optional clauses such as ``else`` are stored as an empty list if they're "
 "not present."
 msgstr ""
+"像 ``else`` 这样的可选子句，如果不存在，就会被存储为一个空列表。"
 
 #: ../../library/ast.rst:992
 msgid ""
 "An ``if`` statement. ``test`` holds a single node, such as a "
 ":class:`Compare` node. ``body`` and ``orelse`` each hold a list of nodes."
 msgstr ""
+"``if`` 语句。``test`` 持有一个节点，例如 :class:`Compare` 节点。"
+"``body`` 和 ``orelse`` 分别持有一个节点的列表。"
 
 #: ../../library/ast.rst:995
 msgid ""
@@ -694,6 +710,8 @@ msgid ""
 "rather appear as extra :class:`If` nodes within the ``orelse`` section of"
 " the previous one."
 msgstr ""
+"``elif`` 子句在 AST 中没有特殊的表示方法，"
+"而是作为额外的 :class:`If` 节点出现在前一个子句的 ``orelse`` 部分。"
 
 #: ../../library/ast.rst:1030
 msgid ""
@@ -704,22 +722,28 @@ msgid ""
 "executed if the loop finishes normally, rather than via a ``break`` "
 "statement."
 msgstr ""
+"``for`` 循环。"
+"``target`` 持有循环指定的变量，作为一个单独的 :class:`Name`、:class:`Tuple` 或 :class:`List` 节点。"
+"``iter`` 持有要被循环的项目，同样是一个节点。``body`` 和 ``orelse`` 包含要执行的节点列表。"
+"如果循环正常结束，``orelse`` 中的节点将被执行，而不是通过 ``break`` 语句。"
 
 #: ../../library/ast.rst:1064
 msgid ""
 "A ``while`` loop. ``test`` holds the condition, such as a "
 ":class:`Compare` node."
 msgstr ""
+"``while`` 循环。``test`` 持有条件，例如 :class:`Compare` 节点。"
 
 #: ../../library/ast.rst:1091
 msgid "The ``break`` and ``continue`` statements."
-msgstr ""
+msgstr "``break`` 和 ``continue`` 语句。"
 
 #: ../../library/ast.rst:1126
 msgid ""
 "``try`` blocks. All attributes are list of nodes to execute, except for "
 "``handlers``, which is a list of :class:`ExceptHandler` nodes."
 msgstr ""
+"``try`` 块。所有属性都是要执行的节点列表，除了 ``handlers``，它是 :class:`ExceptHandler` 节点的列表。"
 
 #: ../../library/ast.rst:1172
 msgid ""
@@ -729,6 +753,10 @@ msgid ""
 "``None`` if the clause doesn't have ``as foo``. ``body`` is a list of "
 "nodes."
 msgstr ""
+"一个单一的 ``except`` 子句。"
+"``type`` 是它要匹配的异常类型，通常是 :class:`Name` 节点（或者 ``None`` 是一个全面的 ``except:`` 子句）。"
+"``name`` 是一个原始字符串，用于保存异常的名称，如果子句中没有 ``as foo``，则为 ``None``。"
+"``body`` 是一个节点的列表。"
 
 #: ../../library/ast.rst:1206
 msgid ""
@@ -736,6 +764,7 @@ msgid ""
 "representing the context managers, and ``body`` is the indented block "
 "inside the context."
 msgstr ""
+"``with`` 块。``items`` 是一个代表上下文管理者的 :class:`withitem` 节点的列表，``body`` 是上下文中缩进的块。"
 
 #: ../../library/ast.rst:1216
 msgid ""
@@ -744,6 +773,9 @@ msgid ""
 ":class:`Name`, :class:`Tuple` or :class:`List` for the ``as foo`` part, "
 "or ``None`` if that isn't used."
 msgstr ""
+"``with`` 区块中的单个上下文管理器。``context_expr`` 是上下文管理器，通常是一个 :class:`Call` 节点。"
+"``optional_vars`` 是 :class:`Name`、:class:`Tuple` "
+"或 :class:`List` 的 ``as foo`` 部分，如果不使用，则为 ``None``。"
 
 #: ../../library/ast.rst:1249
 msgid "Pattern matching"
