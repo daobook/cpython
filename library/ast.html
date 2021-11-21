@@ -76,13 +76,13 @@
 <li><a class="reference internal" href="#abstract-grammar">抽象文法</a></li>
 <li><a class="reference internal" href="#node-classes">节点类</a><ul>
 <li><a class="reference internal" href="#literals">字面值</a></li>
-<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#variables">变量</a></li>
 <li><a class="reference internal" href="#expressions">表达式</a><ul>
-<li><a class="reference internal" href="#subscripting">Subscripting</a></li>
-<li><a class="reference internal" href="#comprehensions">Comprehensions</a></li>
+<li><a class="reference internal" href="#subscripting">下标</a></li>
+<li><a class="reference internal" href="#comprehensions">解析式</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#statements">Statements</a><ul>
+<li><a class="reference internal" href="#statements">语句</a><ul>
 <li><a class="reference internal" href="#imports">Imports</a></li>
 </ul>
 </li>
@@ -92,7 +92,7 @@
 <li><a class="reference internal" href="#async-and-await">Async and await</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ast-helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code> 中的辅助函数</a></li>
+<li><a class="reference internal" href="#ast-helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code> 中的辅助工具</a></li>
 <li><a class="reference internal" href="#compiler-flags">Compiler Flags</a></li>
 <li><a class="reference internal" href="#command-line-usage">命令行用法</a></li>
 </ul>
@@ -359,7 +359,7 @@
 <p>请注意，编译器不要求结束位置，因此是可选的。末端偏移量是在最后一个符号之后，例如可以用 <code class="docutils literal notranslate"><span class="pre">source_line[node.col_offset</span> <span class="pre">:</span> <span class="pre">node.end_col_offset]</span></code> 得到单行表达式节点的源片段。</p>
 </dd></dl>
 
-<p>一个类的构造器 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.T</span></code> 像下面这样parse它的参数。</p>
+<p>类的构造器 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.T</span></code> 像下面这样解析它的参数：</p>
 <ul class="simple">
 <li><p>如果有位置参数，它们必须和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">T._fields</span></code> 中的元素一样多；他们会像这些名字的属性一样被赋值。</p></li>
 <li><p>如果有关键字参数，它们必须被设为和给定值同名的属性。</p></li>
@@ -383,40 +383,27 @@
 </dd></dl>
 
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>Class <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Constant</span></code></a> is now used for all constants.</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>类 <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Constant</span></code></a> 现用于所有常量。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>Simple indices are represented by their value, extended slices are
-represented as tuples.</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>简单的索引用其值表示，扩展的切片用元组表示。</p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.8 版后已移除: </span>Old classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Num</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Bytes</span></code>,
-<code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NameConstant</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Ellipsis</span></code> are still available,
-but they will be removed in future Python releases.  In the meantime,
-instantiating them will return an instance of a different class.</p>
+<p><span class="versionmodified deprecated">3.8 版后已移除: </span>旧的类 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Num</span></code>、<code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Str</span></code>、<code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Bytes</span></code>、<code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NameConstant</span></code> 和 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Ellipsis</span></code> 仍然可用，但它们将在未来的 Python 版本中被删除。在此期间，实例化它们将返回一个不同类的实例。</p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span>Old classes <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Index</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.ExtSlice</span></code> are still
-available, but they will be removed in future Python releases.
-In the meantime, instantiating them will return an instance of
-a different class.</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span>旧的类 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.Index</span></code> 和 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.ExtSlice</span></code> 仍然可用，但它们将在未来的 Python 版本中被移除。在此期间，实例化它们将返回一个不同类的实例。</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>The descriptions of the specific node classes displayed here
-were initially adapted from the fantastic <a class="reference external" href="https://greentreesnakes.readthedocs.io/en/latest/">Green Tree
-Snakes</a> project and
-all its contributors.</p>
+<p>这里显示的具体节点类的描述最初是从神奇的 <a class="reference external" href="https://greentreesnakes.readthedocs.io/en/latest/">绿色树蛇</a> 项目及其所有贡献者那里改编的。</p>
 </div>
 <section id="literals">
 <h3>字面值<a class="headerlink" href="#literals" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Constant">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Constant" title="永久链接至目标">¶</a></dt>
-<dd><p>A constant value. The <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">Constant</span></code> literal contains the
-Python object it represents. The values represented can be simple types
-such as a number, string or <code class="docutils literal notranslate"><span class="pre">None</span></code>, but also immutable container types
-(tuples and frozensets) if all of their elements are constant.</p>
+<dd><p>一个常量值。<code class="docutils literal notranslate"><span class="pre">Constant</span></code> 字面的 <code class="docutils literal notranslate"><span class="pre">value</span></code> 属性包含它所代表的 Python 对象。所代表的值可以是简单的类型，如数字、字符串或 <code class="docutils literal notranslate"><span class="pre">None</span></code>，也可以是不可变的容器类型（tuple 和 frozenset），如果它们的所有元素都是常数的话。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;123&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Constant(value=123))</span>
@@ -427,31 +414,25 @@ such as a number, string or <code class="docutils literal notranslate"><span cla
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.FormattedValue">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">FormattedValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conversion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format_spec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.FormattedValue" title="永久链接至目标">¶</a></dt>
-<dd><p>Node representing a single formatting field in an f-string. If the string
-contains a single formatting field and nothing else the node can be
-isolated otherwise it appears in <a class="reference internal" href="#ast.JoinedStr" title="ast.JoinedStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">JoinedStr</span></code></a>.</p>
+<dd><p>代表 f-string 中单一格式化字段的节点。如果字符串包含一个单一的格式化字段，而没有其他内容，那么该节点可以被隔离，否则它将出现在 <a class="reference internal" href="#ast.JoinedStr" title="ast.JoinedStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">JoinedStr</span></code></a> 中。</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> is any expression node (such as a literal, a variable, or a
-function call).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">conversion</span></code> is an integer:</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> 是任何表达式节点（如字面值、变量或函数调用）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">conversion</span></code> 是整数：</p>
 <ul>
-<li><p>-1: no formatting</p></li>
-<li><p>115: <code class="docutils literal notranslate"><span class="pre">!s</span></code> string formatting</p></li>
-<li><p>114: <code class="docutils literal notranslate"><span class="pre">!r</span></code> repr formatting</p></li>
-<li><p>97: <code class="docutils literal notranslate"><span class="pre">!a</span></code> ascii formatting</p></li>
+<li><p>-1：没有格式化</p></li>
+<li><p>115：<code class="docutils literal notranslate"><span class="pre">!s</span></code> 字符串格式化</p></li>
+<li><p>114：<code class="docutils literal notranslate"><span class="pre">!r</span></code> repr 格式化</p></li>
+<li><p>97：<code class="docutils literal notranslate"><span class="pre">!a</span></code> ascii 格式化</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">format_spec</span></code> is a <a class="reference internal" href="#ast.JoinedStr" title="ast.JoinedStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">JoinedStr</span></code></a> node representing the formatting
-of the value, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no format was specified. Both
-<code class="docutils literal notranslate"><span class="pre">conversion</span></code> and <code class="docutils literal notranslate"><span class="pre">format_spec</span></code> can be set at the same time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format_spec</span></code> 是一个 <a class="reference internal" href="#ast.JoinedStr" title="ast.JoinedStr"><code class="xref py py-class docutils literal notranslate"><span class="pre">JoinedStr</span></code></a> 节点，代表值的格式化，如果没有指定格式，则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。<code class="docutils literal notranslate"><span class="pre">conversion</span></code> 和 <code class="docutils literal notranslate"><span class="pre">format_spec</span></code> 都可以同时设置。</p></li>
 </ul>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.JoinedStr">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">JoinedStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.JoinedStr" title="永久链接至目标">¶</a></dt>
-<dd><p>An f-string, comprising a series of <a class="reference internal" href="#ast.FormattedValue" title="ast.FormattedValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">FormattedValue</span></code></a> and <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a>
-nodes.</p>
+<dd><p>f-string，包括一系列的 <a class="reference internal" href="#ast.FormattedValue" title="ast.FormattedValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">FormattedValue</span></code></a> 和 <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a> 节点。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;f&quot;sin(</span><span class="si">{a}</span><span class="s1">) is {sin(a):.3}&quot;&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=JoinedStr(</span>
@@ -480,9 +461,7 @@ nodes.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">List</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.List" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.Tuple">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Tuple" title="永久链接至目标">¶</a></dt>
-<dd><p>A list or tuple. <code class="docutils literal notranslate"><span class="pre">elts</span></code> holds a list of nodes representing the elements.
-<code class="docutils literal notranslate"><span class="pre">ctx</span></code> is <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> if the container is an assignment target (i.e.
-<code class="docutils literal notranslate"><span class="pre">(x,y)=something</span></code>), and <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a> otherwise.</p>
+<dd><p>一个列表或元组。<code class="docutils literal notranslate"><span class="pre">elts</span></code> 持有代表其元素的节点列表。如果容器是一个赋值目标（即 <code class="docutils literal notranslate"><span class="pre">(x,y)=something</span></code>），<code class="docutils literal notranslate"><span class="pre">ctx</span></code> 是 <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a>，否则 <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;[1, 2, 3]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=List(</span>
@@ -506,7 +485,7 @@ nodes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Set">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elts</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Set" title="永久链接至目标">¶</a></dt>
-<dd><p>A set. <code class="docutils literal notranslate"><span class="pre">elts</span></code> holds a list of nodes representing the set's elements.</p>
+<dd><p>集合。<code class="docutils literal notranslate"><span class="pre">elts</span></code> 持有代表该集合元素的节点列表。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;{1, 2, 3}&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Set(</span>
@@ -521,12 +500,8 @@ nodes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Dict">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Dict" title="永久链接至目标">¶</a></dt>
-<dd><p>A dictionary. <code class="docutils literal notranslate"><span class="pre">keys</span></code> and <code class="docutils literal notranslate"><span class="pre">values</span></code> hold lists of nodes representing the
-keys and the values respectively, in matching order (what would be returned
-when calling <code class="code docutils literal notranslate"><span class="pre">dictionary.keys()</span></code> and <code class="code docutils literal notranslate"><span class="pre">dictionary.values()</span></code>).</p>
-<p>When doing dictionary unpacking using dictionary literals the expression to be
-expanded goes in the <code class="docutils literal notranslate"><span class="pre">values</span></code> list, with a <code class="docutils literal notranslate"><span class="pre">None</span></code> at the corresponding
-position in <code class="docutils literal notranslate"><span class="pre">keys</span></code>.</p>
+<dd><p>字典。<code class="docutils literal notranslate"><span class="pre">keys</span></code> 和 <code class="docutils literal notranslate"><span class="pre">values</span></code> 分别持有代表其键和值的节点列表，顺序匹配（当调用 <code class="code docutils literal notranslate"><span class="pre">dictionary.keys()</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">dictionary.values()</span></code> 时将会返回）。</p>
+<p>当使用字典字元进行字典解包时，要展开的表达式在 <code class="docutils literal notranslate"><span class="pre">values</span></code> 列表中，在 <code class="docutils literal notranslate"><span class="pre">keys</span></code> 的相应位置有一个  <code class="docutils literal notranslate"><span class="pre">None</span></code> 。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;{&quot;a&quot;:1, **d}&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Dict(</span>
@@ -542,12 +517,11 @@ position in <code class="docutils literal notranslate"><span class="pre">keys</s
 
 </section>
 <section id="variables">
-<h3>Variables<a class="headerlink" href="#variables" title="永久链接至标题">¶</a></h3>
+<h3>变量<a class="headerlink" href="#variables" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Name">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Name" title="永久链接至目标">¶</a></dt>
-<dd><p>A variable name. <code class="docutils literal notranslate"><span class="pre">id</span></code> holds the name as a string, and <code class="docutils literal notranslate"><span class="pre">ctx</span></code> is one of
-the following types.</p>
+<dd><p>变量名称。<code class="docutils literal notranslate"><span class="pre">id</span></code> 持有作为字符串的名称，<code class="docutils literal notranslate"><span class="pre">ctx</span></code> 是以下类型之一。</p>
 </dd></dl>
 
 <dl class="py class">
@@ -557,9 +531,7 @@ the following types.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Store</span></span><a class="headerlink" href="#ast.Store" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.Del">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Del</span></span><a class="headerlink" href="#ast.Del" title="永久链接至目标">¶</a></dt>
-<dd><p>Variable references can be used to load the value of a variable, to assign
-a new value to it, or to delete it. Variable references are given a context
-to distinguish these cases.</p>
+<dd><p>变量引用可以用来加载变量的值、给它分配新的值或者删除它。变量引用被赋予一个上下文以区分这些情况。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
@@ -590,9 +562,7 @@ to distinguish these cases.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Starred">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Starred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Starred" title="永久链接至目标">¶</a></dt>
-<dd><p>A <code class="docutils literal notranslate"><span class="pre">*var</span></code> variable reference. <code class="docutils literal notranslate"><span class="pre">value</span></code> holds the variable, typically a
-<a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> node. This type must be used when building a <a class="reference internal" href="#ast.Call" title="ast.Call"><code class="xref py py-class docutils literal notranslate"><span class="pre">Call</span></code></a>
-node with <code class="docutils literal notranslate"><span class="pre">*args</span></code>.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">*var</span></code> 的变量引用。<code class="docutils literal notranslate"><span class="pre">value</span></code> 持有变量，通常是一个 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 节点。当建立一个带有 <code class="docutils literal notranslate"><span class="pre">*args</span></code> 的 <a class="reference internal" href="#ast.Call" title="ast.Call"><code class="xref py py-class docutils literal notranslate"><span class="pre">Call</span></code></a> 节点时，必须使用这种类型。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a, *b = it&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
@@ -617,10 +587,7 @@ node with <code class="docutils literal notranslate"><span class="pre">*args</sp
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Expr">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Expr" title="永久链接至目标">¶</a></dt>
-<dd><p>When an expression, such as a function call, appears as a statement by itself
-with its return value not used or stored, it is wrapped in this container.
-<code class="docutils literal notranslate"><span class="pre">value</span></code> holds one of the other nodes in this section, a <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a>, a
-<a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>, a <a class="reference internal" href="#ast.Lambda" title="ast.Lambda"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lambda</span></code></a>, a <a class="reference internal" href="#ast.Yield" title="ast.Yield"><code class="xref py py-class docutils literal notranslate"><span class="pre">Yield</span></code></a> or <a class="reference internal" href="#ast.YieldFrom" title="ast.YieldFrom"><code class="xref py py-class docutils literal notranslate"><span class="pre">YieldFrom</span></code></a> node.</p>
+<dd><p>当一个表达式，比如一个函数调用，本身作为一个语句出现，其返回值没有被使用或存储，它被包裹在这个容器中。<code class="docutils literal notranslate"><span class="pre">value</span></code> 容纳本节中的一个其他节点，<a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a>、<a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>、<a class="reference internal" href="#ast.Lambda" title="ast.Lambda"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lambda</span></code></a>、<a class="reference internal" href="#ast.Yield" title="ast.Yield"><code class="xref py py-class docutils literal notranslate"><span class="pre">Yield</span></code></a> 或 <a class="reference internal" href="#ast.YieldFrom" title="ast.YieldFrom"><code class="xref py py-class docutils literal notranslate"><span class="pre">YieldFrom</span></code></a> 节点。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;-a&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
@@ -636,8 +603,7 @@ with its return value not used or stored, it is wrapped in this container.
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.UnaryOp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">UnaryOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operand</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.UnaryOp" title="永久链接至目标">¶</a></dt>
-<dd><p>A unary operation. <code class="docutils literal notranslate"><span class="pre">op</span></code> is the operator, and <code class="docutils literal notranslate"><span class="pre">operand</span></code> any expression
-node.</p>
+<dd><p>一元运算。<code class="docutils literal notranslate"><span class="pre">op</span></code> 是运算符，<code class="docutils literal notranslate"><span class="pre">operand</span></code> 是任何表达式节点。</p>
 </dd></dl>
 
 <dl class="py class">
@@ -649,8 +615,7 @@ node.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Not</span></span><a class="headerlink" href="#ast.Not" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.Invert">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Invert</span></span><a class="headerlink" href="#ast.Invert" title="永久链接至目标">¶</a></dt>
-<dd><p>Unary operator tokens. <a class="reference internal" href="#ast.Not" title="ast.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a> is the <code class="docutils literal notranslate"><span class="pre">not</span></code> keyword, <a class="reference internal" href="#ast.Invert" title="ast.Invert"><code class="xref py py-class docutils literal notranslate"><span class="pre">Invert</span></code></a>
-is the <code class="docutils literal notranslate"><span class="pre">~</span></code> operator.</p>
+<dd><p>一元运算形符。<a class="reference internal" href="#ast.Not" title="ast.Not"><code class="xref py py-class docutils literal notranslate"><span class="pre">Not</span></code></a> 是 <code class="docutils literal notranslate"><span class="pre">not</span></code> 关键字、<a class="reference internal" href="#ast.Invert" title="ast.Invert"><code class="xref py py-class docutils literal notranslate"><span class="pre">Invert</span></code></a> 是 <code class="docutils literal notranslate"><span class="pre">~</span></code> 运算符。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;not x&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=UnaryOp(</span>
@@ -663,8 +628,7 @@ is the <code class="docutils literal notranslate"><span class="pre">~</span></co
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.BinOp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">BinOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.BinOp" title="永久链接至目标">¶</a></dt>
-<dd><p>A binary operation (like addition or division). <code class="docutils literal notranslate"><span class="pre">op</span></code> is the operator, and
-<code class="docutils literal notranslate"><span class="pre">left</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code> are any expression nodes.</p>
+<dd><p>二元运算（如加法或除法）。<code class="docutils literal notranslate"><span class="pre">op</span></code> 是运算符，<code class="docutils literal notranslate"><span class="pre">left</span></code> 和 <code class="docutils literal notranslate"><span class="pre">right</span></code> 是任何表达式节点。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;x + y&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=BinOp(</span>
@@ -702,17 +666,14 @@ is the <code class="docutils literal notranslate"><span class="pre">~</span></co
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">BitAnd</span></span><a class="headerlink" href="#ast.BitAnd" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.MatMult">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">MatMult</span></span><a class="headerlink" href="#ast.MatMult" title="永久链接至目标">¶</a></dt>
-<dd><p>Binary operator tokens.</p>
+<dd><p>二元运算符的形符。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.BoolOp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">BoolOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.BoolOp" title="永久链接至目标">¶</a></dt>
-<dd><p>A boolean operation, 'or' or 'and'. <code class="docutils literal notranslate"><span class="pre">op</span></code> is <a class="reference internal" href="#ast.Or" title="ast.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a> or <a class="reference internal" href="#ast.And" title="ast.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>.
-<code class="docutils literal notranslate"><span class="pre">values</span></code> are the values involved. Consecutive operations with the same
-operator, such as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">or</span> <span class="pre">c</span></code>, are collapsed into one node with several
-values.</p>
-<p>This doesn't include <code class="docutils literal notranslate"><span class="pre">not</span></code>, which is a <a class="reference internal" href="#ast.UnaryOp" title="ast.UnaryOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnaryOp</span></code></a>.</p>
+<dd><p>一个布尔运算，'or' 或 'and'。<code class="docutils literal notranslate"><span class="pre">op</span></code> 是 <a class="reference internal" href="#ast.Or" title="ast.Or"><code class="xref py py-class docutils literal notranslate"><span class="pre">Or</span></code></a> 或 <a class="reference internal" href="#ast.And" title="ast.And"><code class="xref py py-class docutils literal notranslate"><span class="pre">And</span></code></a>。<code class="docutils literal notranslate"><span class="pre">values</span></code> 是所涉及的值。具有相同操作符的连续操作，如 <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">or</span> <span class="pre">c</span></code>，会被折叠成一个具有几个值的节点。</p>
+<p>这不包括 <code class="docutils literal notranslate"><span class="pre">not</span></code>，它是一个 <a class="reference internal" href="#ast.UnaryOp" title="ast.UnaryOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnaryOp</span></code></a>。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;x or y&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=BoolOp(</span>
@@ -729,15 +690,13 @@ values.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">And</span></span><a class="headerlink" href="#ast.And" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.Or">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Or</span></span><a class="headerlink" href="#ast.Or" title="永久链接至目标">¶</a></dt>
-<dd><p>Boolean operator tokens.</p>
+<dd><p>布尔运算形符。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Compare">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Compare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">left</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comparators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Compare" title="永久链接至目标">¶</a></dt>
-<dd><p>A comparison of two or more values. <code class="docutils literal notranslate"><span class="pre">left</span></code> is the first value in the
-comparison, <code class="docutils literal notranslate"><span class="pre">ops</span></code> the list of operators, and <code class="docutils literal notranslate"><span class="pre">comparators</span></code> the list
-of values after the first element in the comparison.</p>
+<dd><p>两个或多个值的比较。<code class="docutils literal notranslate"><span class="pre">left</span></code> 是比较中的第一个值，<code class="docutils literal notranslate"><span class="pre">ops</span></code> 是运算符的列表，<code class="docutils literal notranslate"><span class="pre">comparators</span></code> 是比较中第一个元素之后的值列表。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;1 &lt;= a &lt; 10&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Compare(</span>
@@ -773,21 +732,18 @@ of values after the first element in the comparison.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">In</span></span><a class="headerlink" href="#ast.In" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.NotIn">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">NotIn</span></span><a class="headerlink" href="#ast.NotIn" title="永久链接至目标">¶</a></dt>
-<dd><p>Comparison operator tokens.</p>
+<dd><p>比较运算形符。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Call">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keywords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">starargs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Call" title="永久链接至目标">¶</a></dt>
-<dd><p>A function call. <code class="docutils literal notranslate"><span class="pre">func</span></code> is the function, which will often be a
-<a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> or <a class="reference internal" href="#ast.Attribute" title="ast.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a> object. Of the arguments:</p>
+<dd><p>一个函数调用。<code class="docutils literal notranslate"><span class="pre">func</span></code> 是函数，通常是一个 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 或 <a class="reference internal" href="#ast.Attribute" title="ast.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a> 对象。参数：</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code> holds a list of the arguments passed by position.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">keywords</span></code> holds a list of <a class="reference internal" href="keyword.html#module-keyword" title="keyword: Test whether a string is a keyword in Python."><code class="xref py py-class docutils literal notranslate"><span class="pre">keyword</span></code></a> objects representing
-arguments passed by keyword.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">args</span></code> 持有一个由位置传递的参数列表。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keywords</span></code> 持有一个 <a class="reference internal" href="keyword.html#module-keyword" title="keyword: Test whether a string is a keyword in Python."><code class="xref py py-class docutils literal notranslate"><span class="pre">keyword</span></code></a> 对象的列表，代表由 keyword 传递的参数。</p></li>
 </ul>
-<p>When creating a <code class="docutils literal notranslate"><span class="pre">Call</span></code> node, <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">keywords</span></code> are required, but
-they can be empty lists. <code class="docutils literal notranslate"><span class="pre">starargs</span></code> and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> are optional.</p>
+<p>当创建一个 <code class="docutils literal notranslate"><span class="pre">Call</span></code> 节点时，<code class="docutils literal notranslate"><span class="pre">args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">keywords</span></code> 是必须的，但它们可以是空列表。<code class="docutils literal notranslate"><span class="pre">starargs</span></code> 和 <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> 是可选的。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;func(a, b=c, *d, **e)&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Call(</span>
@@ -810,15 +766,13 @@ they can be empty lists. <code class="docutils literal notranslate"><span class=
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.keyword">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">keyword</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.keyword" title="永久链接至目标">¶</a></dt>
-<dd><p>A keyword argument to a function call or class definition. <code class="docutils literal notranslate"><span class="pre">arg</span></code> is a raw
-string of the parameter name, <code class="docutils literal notranslate"><span class="pre">value</span></code> is a node to pass in.</p>
+<dd><p>一个函数调用或类定义的关键字参数。<code class="docutils literal notranslate"><span class="pre">arg</span></code> 是参数名称的原始字符串，<code class="docutils literal notranslate"><span class="pre">value</span></code> 是要传入的节点。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.IfExp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">IfExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orelse</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.IfExp" title="永久链接至目标">¶</a></dt>
-<dd><p>An expression such as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">if</span> <span class="pre">b</span> <span class="pre">else</span> <span class="pre">c</span></code>. Each field holds a single node, so
-in the following example, all three are <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> nodes.</p>
+<dd><p>一个表达式，如 <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">if</span> <span class="pre">b</span> <span class="pre">else</span> <span class="pre">c</span></code>。每个字段持有一个节点，所以在下面的例子中，三个都是 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 节点&quot;</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a if b else c&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=IfExp(</span>
@@ -832,10 +786,7 @@ in the following example, all three are <a class="reference internal" href="#ast
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Attribute">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Attribute" title="永久链接至目标">¶</a></dt>
-<dd><p>Attribute access, e.g. <code class="docutils literal notranslate"><span class="pre">d.keys</span></code>. <code class="docutils literal notranslate"><span class="pre">value</span></code> is a node, typically a
-<a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>. <code class="docutils literal notranslate"><span class="pre">attr</span></code> is a bare string giving the name of the attribute,
-and <code class="docutils literal notranslate"><span class="pre">ctx</span></code> is <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>, <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> or <a class="reference internal" href="#ast.Del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a> according to how
-the attribute is acted on.</p>
+<dd><p>属性访问，例如：<code class="docutils literal notranslate"><span class="pre">d.keys</span></code>。<code class="docutils literal notranslate"><span class="pre">value</span></code> 是一个节点，通常是 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>。<code class="docutils literal notranslate"><span class="pre">attr</span></code> 是一个裸字符串，给出属性的名称，<code class="docutils literal notranslate"><span class="pre">ctx</span></code> 是 <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>、<a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> 或 <a class="reference internal" href="#ast.Del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a>，根据属性的操作方式。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;snake.colour&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Attribute(</span>
@@ -850,10 +801,7 @@ the attribute is acted on.</p>
 <dt class="sig sig-object py" id="ast.NamedExpr">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">NamedExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.NamedExpr" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
-<div><p>A named expression. This AST node is produced by the assignment expressions
-operator (also known as the walrus operator). As opposed to the <a class="reference internal" href="#ast.Assign" title="ast.Assign"><code class="xref py py-class docutils literal notranslate"><span class="pre">Assign</span></code></a>
-node in which the first argument can be multiple nodes, in this case both
-<code class="docutils literal notranslate"><span class="pre">target</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code> must be single nodes.</p>
+<div><p>一个命名的表达式。这个 AST 节点是由赋值表达式运算符（也被称为海象运算符）产生的。相对于 <a class="reference internal" href="#ast.Assign" title="ast.Assign"><code class="xref py py-class docutils literal notranslate"><span class="pre">Assign</span></code></a> 节点，其中第一个参数可以是多个节点，在这种情况下，<code class="docutils literal notranslate"><span class="pre">target</span></code> 和 <code class="docutils literal notranslate"><span class="pre">value</span></code> 都必须是单个节点。</p>
 </div></blockquote>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;(x := 4)&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
@@ -865,15 +813,11 @@ node in which the first argument can be multiple nodes, in this case both
 </dd></dl>
 
 <section id="subscripting">
-<h4>Subscripting<a class="headerlink" href="#subscripting" title="永久链接至标题">¶</a></h4>
+<h4>下标<a class="headerlink" href="#subscripting" title="永久链接至标题">¶</a></h4>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Subscript">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Subscript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Subscript" title="永久链接至目标">¶</a></dt>
-<dd><p>A subscript, such as <code class="docutils literal notranslate"><span class="pre">l[1]</span></code>. <code class="docutils literal notranslate"><span class="pre">value</span></code> is the subscripted object
-(usually sequence or mapping). <code class="docutils literal notranslate"><span class="pre">slice</span></code> is an index, slice or key.
-It can be a <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> and contain a <a class="reference internal" href="#ast.Slice" title="ast.Slice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slice</span></code></a>.
-<code class="docutils literal notranslate"><span class="pre">ctx</span></code> is <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>, <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> or <a class="reference internal" href="#ast.Del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a>
-according to the action performed with the subscript.</p>
+<dd><p>一个下标，例如 <code class="docutils literal notranslate"><span class="pre">l[1]</span></code>。<code class="docutils literal notranslate"><span class="pre">value</span></code> 是下标的对象（通常是序列或映射）。<code class="docutils literal notranslate"><span class="pre">slice</span></code> 是一个索引、切片或键。它可以是一个 <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 并包含一个 <a class="reference internal" href="#ast.Slice" title="ast.Slice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Slice</span></code></a>。<code class="docutils literal notranslate"><span class="pre">ctx</span></code> 是 <a class="reference internal" href="#ast.Load" title="ast.Load"><code class="xref py py-class docutils literal notranslate"><span class="pre">Load</span></code></a>、<a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> 或 <a class="reference internal" href="#ast.Del" title="ast.Del"><code class="xref py py-class docutils literal notranslate"><span class="pre">Del</span></code></a>，根据对下标执行的操作。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1:2, 3]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Subscript(</span>
@@ -893,9 +837,7 @@ according to the action performed with the subscript.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Slice">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Slice" title="永久链接至目标">¶</a></dt>
-<dd><p>Regular slicing (on the form <code class="docutils literal notranslate"><span class="pre">lower:upper</span></code> or <code class="docutils literal notranslate"><span class="pre">lower:upper:step</span></code>).
-Can occur only inside the <em>slice</em> field of <a class="reference internal" href="#ast.Subscript" title="ast.Subscript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscript</span></code></a>, either
-directly or as an element of <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a>.</p>
+<dd><p>常规切片（形式为 <code class="docutils literal notranslate"><span class="pre">lower:upper</span></code> 或 <code class="docutils literal notranslate"><span class="pre">lower:upper:step</span></code>）。只能出现在 <code class="xref py py-class docutils literal notranslate"><span class="pre">subscript</span></code> 的 <em>slice</em> 字段内，可以直接出现，也可以作为 <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 的一个元素出现。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;l[1:2]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=Subscript(</span>
@@ -910,7 +852,7 @@ directly or as an element of <a class="reference internal" href="#ast.Tuple" tit
 
 </section>
 <section id="comprehensions">
-<h4>Comprehensions<a class="headerlink" href="#comprehensions" title="永久链接至标题">¶</a></h4>
+<h4>解析式<a class="headerlink" href="#comprehensions" title="永久链接至标题">¶</a></h4>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.ListComp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">ListComp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.ListComp" title="永久链接至目标">¶</a></dt>
@@ -920,10 +862,8 @@ directly or as an element of <a class="reference internal" href="#ast.Tuple" tit
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">GeneratorExp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.GeneratorExp" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="ast.DictComp">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">DictComp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generators</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.DictComp" title="永久链接至目标">¶</a></dt>
-<dd><p>List and set comprehensions, generator expressions, and dictionary
-comprehensions. <code class="docutils literal notranslate"><span class="pre">elt</span></code> (or <code class="docutils literal notranslate"><span class="pre">key</span></code> and <code class="docutils literal notranslate"><span class="pre">value</span></code>) is a single node
-representing the part that will be evaluated for each item.</p>
-<p><code class="docutils literal notranslate"><span class="pre">generators</span></code> is a list of <a class="reference internal" href="#ast.comprehension" title="ast.comprehension"><code class="xref py py-class docutils literal notranslate"><span class="pre">comprehension</span></code></a> nodes.</p>
+<dd><p>列表和集合的解析式，生成器表达式和字典的解析式。<code class="docutils literal notranslate"><span class="pre">elt``（或</span> <span class="pre">``key</span></code> 和 <code class="docutils literal notranslate"><span class="pre">value</span></code>）是一个单一的节点，代表每个项将被评估的部分。</p>
+<p><code class="docutils literal notranslate"><span class="pre">generators</span></code> 是一个 <a class="reference internal" href="#ast.comprehension" title="ast.comprehension"><code class="xref py py-class docutils literal notranslate"><span class="pre">comprehension</span></code></a> 节点的列表。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;[x for x in numbers]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Expression(</span>
 <span class="go">    body=ListComp(</span>
@@ -965,12 +905,8 @@ representing the part that will be evaluated for each item.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.comprehension">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">comprehension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ifs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_async</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.comprehension" title="永久链接至目标">¶</a></dt>
-<dd><p>One <code class="docutils literal notranslate"><span class="pre">for</span></code> clause in a comprehension. <code class="docutils literal notranslate"><span class="pre">target</span></code> is the reference to use for
-each element - typically a <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> or <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> node. <code class="docutils literal notranslate"><span class="pre">iter</span></code>
-is the object to iterate over. <code class="docutils literal notranslate"><span class="pre">ifs</span></code> is a list of test expressions: each
-<code class="docutils literal notranslate"><span class="pre">for</span></code> clause can have multiple <code class="docutils literal notranslate"><span class="pre">ifs</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">is_async</span></code> indicates a comprehension is asynchronous (using an
-<code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> instead of <code class="docutils literal notranslate"><span class="pre">for</span></code>). The value is an integer (0 or 1).</p>
+<dd><p>在一个解析式中的一个 <code class="docutils literal notranslate"><span class="pre">for</span></code> 子句。<code class="docutils literal notranslate"><span class="pre">target</span></code> 是每个元素的引用 - 通常是一个 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 或 <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 节点。<code class="docutils literal notranslate"><span class="pre">iter</span></code> 是要迭代的对象。<code class="docutils literal notranslate"><span class="pre">ifs</span></code> 是测试表达式的列表：每个 <code class="docutils literal notranslate"><span class="pre">for</span></code> 子句可以有多个 <code class="docutils literal notranslate"><span class="pre">ifs</span></code>。</p>
+<p><code class="docutils literal notranslate"><span class="pre">is_async</span></code> 表示一个解析式是异步的（使用 <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">for</span></code>）。其值是一个整数（0 或 1）。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;[ord(c) for line in file for c in line]&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">),</span>
 <span class="gp">... </span>               <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># Multiple comprehensions in one.</span>
 <span class="go">Expression(</span>
@@ -1037,18 +973,16 @@ is the object to iterate over. <code class="docutils literal notranslate"><span 
 </section>
 </section>
 <section id="statements">
-<h3>Statements<a class="headerlink" href="#statements" title="永久链接至标题">¶</a></h3>
+<h3>语句<a class="headerlink" href="#statements" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.Assign">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">Assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">targets</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_comment</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.Assign" title="永久链接至目标">¶</a></dt>
-<dd><p>An assignment. <code class="docutils literal notranslate"><span class="pre">targets</span></code> is a list of nodes, and <code class="docutils literal notranslate"><span class="pre">value</span></code> is a single node.</p>
-<p>Multiple nodes in <code class="docutils literal notranslate"><span class="pre">targets</span></code> represents assigning the same value to each.
-Unpacking is represented by putting a <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> or <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>
-within <code class="docutils literal notranslate"><span class="pre">targets</span></code>.</p>
+<dd><p>赋值。<code class="docutils literal notranslate"><span class="pre">targets</span></code> 是一个节点列表，<code class="docutils literal notranslate"><span class="pre">value</span></code> 是一个单一节点。</p>
+<p><code class="docutils literal notranslate"><span class="pre">targets</span></code> 中的多个节点代表给每个节点分配相同的值。解包是通过在 <code class="docutils literal notranslate"><span class="pre">targets</span></code> 内放置一个 <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 或 <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a> 来表示。</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ast.Assign.type_comment">
 <span class="sig-name descname"><span class="pre">type_comment</span></span><a class="headerlink" href="#ast.Assign.type_comment" title="永久链接至目标">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> is an optional string with the type annotation as a comment.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> 是一个可选的字符串，其中的类型注释是一个注释。</p>
 </dd></dl>
 
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a = b = 1&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># Multiple assignment</span>
@@ -1080,12 +1014,7 @@ within <code class="docutils literal notranslate"><span class="pre">targets</spa
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.AnnAssign">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">AnnAssign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.AnnAssign" title="永久链接至目标">¶</a></dt>
-<dd><p>An assignment with a type annotation. <code class="docutils literal notranslate"><span class="pre">target</span></code> is a single node and can
-be a <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>, a <a class="reference internal" href="#ast.Attribute" title="ast.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a> or a <a class="reference internal" href="#ast.Subscript" title="ast.Subscript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscript</span></code></a>.
-<code class="docutils literal notranslate"><span class="pre">annotation</span></code> is the annotation, such as a <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a> or <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>
-node. <code class="docutils literal notranslate"><span class="pre">value</span></code> is a single optional node. <code class="docutils literal notranslate"><span class="pre">simple</span></code> is a boolean integer
-set to True for a <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> node in <code class="docutils literal notranslate"><span class="pre">target</span></code> that do not appear in
-between parenthesis and are hence pure names and not expressions.</p>
+<dd><p>一个带有类型注释的赋值。<code class="docutils literal notranslate"><span class="pre">target</span></code> 是一个单一的节点，可以是 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>、<a class="reference internal" href="#ast.Attribute" title="ast.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a> 或一个 <a class="reference internal" href="#ast.Subscript" title="ast.Subscript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscript</span></code></a>。<code class="docutils literal notranslate"><span class="pre">annotation</span></code> 是注释，例如 <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a> 或 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 节点。<code class="docutils literal notranslate"><span class="pre">value</span></code> 是一个单一的可选节点。<code class="docutils literal notranslate"><span class="pre">simple</span></code> 是一个布尔整数，对于 <code class="docutils literal notranslate"><span class="pre">target</span></code> 中的 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 节点，设置为 True，不出现在括号之间，因此是纯名称，不是表达式。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;c: int&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
@@ -1135,12 +1064,8 @@ between parenthesis and are hence pure names and not expressions.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.AugAssign">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">AugAssign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.AugAssign" title="永久链接至目标">¶</a></dt>
-<dd><p>Augmented assignment, such as <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+=</span> <span class="pre">1</span></code>. In the following example,
-<code class="docutils literal notranslate"><span class="pre">target</span></code> is a <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> node for <code class="docutils literal notranslate"><span class="pre">x</span></code> (with the <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a>
-context), <code class="docutils literal notranslate"><span class="pre">op</span></code> is <a class="reference internal" href="#ast.Add" title="ast.Add"><code class="xref py py-class docutils literal notranslate"><span class="pre">Add</span></code></a>, and <code class="docutils literal notranslate"><span class="pre">value</span></code> is a <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a> with
-value for 1.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">target</span></code> attribute cannot be of class <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> or <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>,
-unlike the targets of <a class="reference internal" href="#ast.Assign" title="ast.Assign"><code class="xref py py-class docutils literal notranslate"><span class="pre">Assign</span></code></a>.</p>
+<dd><p>增强的赋值，如 <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+=</span> <span class="pre">1</span></code>。在下面的例子中，<code class="docutils literal notranslate"><span class="pre">target</span></code> 是 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的一个 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> 节点（有 <a class="reference internal" href="#ast.Store" title="ast.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a> 上下文），<code class="docutils literal notranslate"><span class="pre">op</span></code> 是 <a class="reference internal" href="#ast.Add" title="ast.Add"><code class="xref py py-class docutils literal notranslate"><span class="pre">Add</span></code></a>，<code class="docutils literal notranslate"><span class="pre">value</span></code> 是一个 <a class="reference internal" href="#ast.Constant" title="ast.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a>，值为 1。</p>
+<p><code class="docutils literal notranslate"><span class="pre">target</span></code> 属性不能是 <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 或 <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a> 类 与 <a class="reference internal" href="#ast.Assign" title="ast.Assign"><code class="xref py py-class docutils literal notranslate"><span class="pre">Assign</span></code></a> 的目标不同。</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;x += 2&#39;</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 <span class="go">Module(</span>
 <span class="go">    body=[</span>
@@ -1336,7 +1261,7 @@ loop finishes normally, rather than via a <code class="docutils literal notransl
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ast.For.type_comment">
 <span class="sig-name descname"><span class="pre">type_comment</span></span><a class="headerlink" href="#ast.For.type_comment" title="永久链接至目标">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> is an optional string with the type annotation as a comment.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> 是一个可选的字符串，其中的类型注释是一个注释。</p>
 </dd></dl>
 
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -1512,7 +1437,7 @@ the context managers, and <code class="docutils literal notranslate"><span class
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ast.With.type_comment">
 <span class="sig-name descname"><span class="pre">type_comment</span></span><a class="headerlink" href="#ast.With.type_comment" title="永久链接至目标">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> is an optional string with the type annotation as a comment.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> 是一个可选的字符串，其中的类型注释是一个注释。</p>
 </dd></dl>
 
 </dd></dl>
@@ -1940,7 +1865,7 @@ first (i.e. the first in the list will be applied last).</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ast.FunctionDef.type_comment">
 <span class="sig-name descname"><span class="pre">type_comment</span></span><a class="headerlink" href="#ast.FunctionDef.type_comment" title="永久链接至目标">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> is an optional string with the type annotation as a comment.</p>
+<dd><p><code class="docutils literal notranslate"><span class="pre">type_comment</span></code> 是一个可选的字符串，其中的类型注释是一个注释。</p>
 </dd></dl>
 
 </dd></dl>
@@ -2212,69 +2137,43 @@ occurrences of the same value (e.g. <a class="reference internal" href="#ast.Add
 </section>
 </section>
 <section id="ast-helpers">
-<h2><a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> 中的辅助函数<a class="headerlink" href="#ast-helpers" title="永久链接至标题">¶</a></h2>
-<p>除了节点类， <a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> 模块里为遍历抽象语法树定义了这些工具函数和类:</p>
+<h2><a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> 中的辅助工具<a class="headerlink" href="#ast-helpers" title="永久链接至标题">¶</a></h2>
+<p>除了节点类， <a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> 模块里为遍历抽象语法树定义了这些工具函数和类：</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.parse">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;unknown&gt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'exec'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.parse" title="永久链接至目标">¶</a></dt>
-<dd><p>把源码解析为AST节点。和 <code class="docutils literal notranslate"><span class="pre">compile(source,</span> <span class="pre">filename,</span> <span class="pre">mode,ast.PyCF_ONLY_AST)</span></code> 等价。</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">type_comments=True</span></code> is given, the parser is modified to check
-and return type comments as specified by <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> and <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a>.
-This is equivalent to adding <a class="reference internal" href="#ast.PyCF_TYPE_COMMENTS" title="ast.PyCF_TYPE_COMMENTS"><code class="xref py py-data docutils literal notranslate"><span class="pre">ast.PyCF_TYPE_COMMENTS</span></code></a> to the
-flags passed to <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a>.  This will report syntax errors
-for misplaced type comments.  Without this flag, type comments will
-be ignored, and the <code class="docutils literal notranslate"><span class="pre">type_comment</span></code> field on selected AST nodes
-will always be <code class="docutils literal notranslate"><span class="pre">None</span></code>.  In addition, the locations of <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">type:</span>
-<span class="pre">ignore</span></code> comments will be returned as the <code class="docutils literal notranslate"><span class="pre">type_ignores</span></code>
-attribute of <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> (otherwise it is always an empty list).</p>
-<p>In addition, if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is <code class="docutils literal notranslate"><span class="pre">'func_type'</span></code>, the input syntax is
-modified to correspond to <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> &quot;signature type comments&quot;,
-e.g. <code class="docutils literal notranslate"><span class="pre">(str,</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">List[str]</span></code>.</p>
-<p>Also, setting <code class="docutils literal notranslate"><span class="pre">feature_version</span></code> to a tuple <code class="docutils literal notranslate"><span class="pre">(major,</span> <span class="pre">minor)</span></code>
-will attempt to parse using that Python version's grammar.
-Currently <code class="docutils literal notranslate"><span class="pre">major</span></code> must equal to <code class="docutils literal notranslate"><span class="pre">3</span></code>.  For example, setting
-<code class="docutils literal notranslate"><span class="pre">feature_version=(3,</span> <span class="pre">4)</span></code> will allow the use of <code class="docutils literal notranslate"><span class="pre">async</span></code> and
-<code class="docutils literal notranslate"><span class="pre">await</span></code> as variable names.  The lowest supported version is
-<code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>; the highest is <code class="docutils literal notranslate"><span class="pre">sys.version_info[0:2]</span></code>.</p>
-<p>If source contains a null character ('0'), <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
+<dd><p>把 source 解析为 AST 节点。和 <code class="docutils literal notranslate"><span class="pre">compile(source,</span> <span class="pre">filename,</span> <span class="pre">mode,ast.PyCF_ONLY_AST)</span></code> 等价。</p>
+<p>如果给定 <code class="docutils literal notranslate"><span class="pre">type_comments=True</span></code>，解析器会被修改，以检查并返回 <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> 和 <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a> 所指定的类型注释。这相当于将 <a class="reference internal" href="#ast.PyCF_TYPE_COMMENTS" title="ast.PyCF_TYPE_COMMENTS"><code class="xref py py-data docutils literal notranslate"><span class="pre">ast.PyCF_TYPE_COMMENTS</span></code></a> 添加到传递给 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 的标志中。这将报告错误的类型注释的语法错误。如果没有这个标志，类型注释将被忽略，选定的 AST 节点上的 <code class="docutils literal notranslate"><span class="pre">type_comment</span></code> 字段将一直是 <code class="docutils literal notranslate"><span class="pre">None</span></code>。此外，<code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">type:</span> <span class="pre">ignore</span></code> 注释的位置将作为 <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> 的 <code class="docutils literal notranslate"><span class="pre">type_ignores</span></code> 属性返回（否则它总是一个空列表）。</p>
+<p>此外，如果 <code class="docutils literal notranslate"><span class="pre">mode</span></code> 是 <code class="docutils literal notranslate"><span class="pre">'func_type'</span></code>，输入语法将被修改为对应于 <span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> 签名类型注释，例如 <code class="docutils literal notranslate"><span class="pre">(str,</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">List[str]</span></code>。</p>
+<p>另外，将 <code class="docutils literal notranslate"><span class="pre">feature_version</span></code> 设置为一个元组 <code class="docutils literal notranslate"><span class="pre">(major,</span> <span class="pre">minor)</span></code> 将尝试使用该 Python 版本的语法进行解析。目前 <code class="docutils literal notranslate"><span class="pre">major</span></code> 必须等于 <code class="docutils literal notranslate"><span class="pre">3</span></code>。例如，设置 <code class="docutils literal notranslate"><span class="pre">feature_version=(3,</span> <span class="pre">4)</span></code> 将允许使用 <code class="docutils literal notranslate"><span class="pre">async</span></code> 和 <code class="docutils literal notranslate"><span class="pre">await</span></code> 作为变量名。支持的最低版本是 <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>；最高版本是 <code class="docutils literal notranslate"><span class="pre">sys.version_info[0:2]</span></code>。</p>
+<p>如果 source 包含一个空字符（'0'），<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> 将被触发。</p>
 <blockquote>
 <div><div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>Note that successfully parsing source code into an AST object doesn't
-guarantee that the source code provided is valid Python code that can
-be executed as the compilation step can raise further <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>
-exceptions. For instance, the source <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">42</span></code> generates a valid
-AST node for a return statement, but it cannot be compiled alone (it needs
-to be inside a function node).</p>
-<p>In particular, <a class="reference internal" href="#ast.parse" title="ast.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ast.parse()</span></code></a> won't do any scoping checks, which the
-compilation step does.</p>
+<p>注意，成功地将源代码解析成 AST 对象并不保证所提供的源代码是可以执行的有效 Python 代码，因为编译步骤可能会引发进一步的 <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> 异常。例如，源码 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">42</span></code> 为返回语句生成了一个有效的 AST 节点，但它不能被单独编译（它需要在一个函数节点内）。</p>
+<p>特别是，<a class="reference internal" href="#ast.parse" title="ast.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ast.parse()</span></code></a> 不会做任何范围检查，而编译步骤会做。</p>
 </div>
 </div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>足够复杂或是巨大的字符串可能导致Python解释器的崩溃，因为Python的AST编译器是有栈深限制的。</p>
+<p>足够复杂或是巨大的字符串可能导致 Python 解释器的崩溃，因为 Python 的 AST 编译器是有栈深限制的。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>Added <code class="docutils literal notranslate"><span class="pre">type_comments</span></code>, <code class="docutils literal notranslate"><span class="pre">mode='func_type'</span></code> and <code class="docutils literal notranslate"><span class="pre">feature_version</span></code>.</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>增加了 <code class="docutils literal notranslate"><span class="pre">type_comments</span></code>、<code class="docutils literal notranslate"><span class="pre">mode='func_type'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">feature_version</span></code> 。</p>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.unparse">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">unparse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ast_obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.unparse" title="永久链接至目标">¶</a></dt>
-<dd><p>Unparse an <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> object and generate a string with code
-that would produce an equivalent <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> object if parsed
-back with <a class="reference internal" href="#ast.parse" title="ast.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ast.parse()</span></code></a>.</p>
+<dd><p>反向解析 <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> 对象，并生成一个字符串，如果用 <a class="reference internal" href="#ast.parse" title="ast.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ast.parse()</span></code></a> 解析，将产生一个等价的 <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> 对象的代码。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>The produced code string will not necessarily be equal to the original
-code that generated the <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> object (without any compiler
-optimizations, such as constant tuples/frozensets).</p>
+<p>产生的代码字符串不一定等于产生 <a class="reference internal" href="#ast.AST" title="ast.AST"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.AST</span></code></a> 对象的原始代码（没有任何编译器优化，如常数 tuple/frozenset）。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>Trying to unparse a highly complex expression would result with
-<a class="reference internal" href="exceptions.html#RecursionError" title="RecursionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RecursionError</span></code></a>.</p>
+<p>试图解读一个高度复杂的表达式会导致 <a class="reference internal" href="exceptions.html#RecursionError" title="RecursionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RecursionError</span></code></a>。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
@@ -2284,53 +2183,38 @@ optimizations, such as constant tuples/frozensets).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.literal_eval">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">literal_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_or_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.literal_eval" title="永久链接至目标">¶</a></dt>
-<dd><p>Safely evaluate an expression node or a string containing a Python literal or
-container display.  The string or node provided may only consist of the
-following Python literal structures: strings, bytes, numbers, tuples, lists,
-dicts, sets, booleans, <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">Ellipsis</span></code>.</p>
-<p>This can be used for safely evaluating strings containing Python values from
-untrusted sources without the need to parse the values oneself.  It is not
-capable of evaluating arbitrarily complex expressions, for example involving
-operators or indexing.</p>
+<dd><p>安全地评估一个表达式节点或一个包含 Python 字面量或容器显示的字符串。提供的字符串或节点只能由以下 Python 字面量结构组成：字符串、字节串、数字、元组、列表、字典、集合、布尔值、<code class="docutils literal notranslate"><span class="pre">None</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Ellipsis</span></code>。</p>
+<p>这可以用来安全地评估来自不受信任的来源的包含 Python 值的字符串，而不需要自己去解析这些值。它不能够评估任意复杂的表达式，例如涉及运算符或索引的表达式。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>足够复杂或是巨大的字符串可能导致Python解释器的崩溃，因为Python的AST编译器是有栈深限制的。</p>
-<p>It can raise <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>, <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>,
-<a class="reference internal" href="exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> and <a class="reference internal" href="exceptions.html#RecursionError" title="RecursionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RecursionError</span></code></a> depending on the malformed
-input.</p>
+<p>足够复杂或是巨大的字符串可能导致 Python 解释器的崩溃，因为 Python 的 AST 编译器是有栈深限制的。</p>
+<p>它可能引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>, <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>, <a class="reference internal" href="exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> 和 <a class="reference internal" href="exceptions.html#RecursionError" title="RecursionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RecursionError</span></code></a> ，取决于错误的输入。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>目前支持字节和集合。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>Now supports creating empty sets with <code class="docutils literal notranslate"><span class="pre">'set()'</span></code>.</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>现在支持用 <code class="docutils literal notranslate"><span class="pre">'set()'</span></code> 创建空集合。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.10 版更改: </span>For string inputs, leading spaces and tabs are now stripped.</p>
+<p><span class="versionmodified changed">在 3.10 版更改: </span>对于字符串输入，前面的空格和制表符现在被剥离了。</p>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.get_docstring">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">get_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.get_docstring" title="永久链接至目标">¶</a></dt>
-<dd><p>Return the docstring of the given <em>node</em> (which must be a
-<a class="reference internal" href="#ast.FunctionDef" title="ast.FunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionDef</span></code></a>, <a class="reference internal" href="#ast.AsyncFunctionDef" title="ast.AsyncFunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFunctionDef</span></code></a>, <a class="reference internal" href="#ast.ClassDef" title="ast.ClassDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassDef</span></code></a>,
-or <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> node), or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it has no docstring.
-If <em>clean</em> is true, clean up the docstring's indentation with
-<a class="reference internal" href="inspect.html#inspect.cleandoc" title="inspect.cleandoc"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.cleandoc()</span></code></a>.</p>
+<dd><p>返回给定 <em>node</em> 的文档字符串（必须是 <a class="reference internal" href="#ast.FunctionDef" title="ast.FunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">FunctionDef</span></code></a>、<a class="reference internal" href="#ast.AsyncFunctionDef" title="ast.AsyncFunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFunctionDef</span></code></a>、<a class="reference internal" href="#ast.ClassDef" title="ast.ClassDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassDef</span></code></a> 或 <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> 节点），如果没有文档字符串，则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。如果 <em>clean</em> 为真，则用 <a class="reference internal" href="inspect.html#inspect.cleandoc" title="inspect.cleandoc"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.cleandoc()</span></code></a> 清理该文档字符串的缩进。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.5 版更改: </span>目前支持 <a class="reference internal" href="#ast.AsyncFunctionDef" title="ast.AsyncFunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFunctionDef</span></code></a></p>
+<p><span class="versionmodified changed">在 3.5 版更改: </span>目前支持 <a class="reference internal" href="#ast.AsyncFunctionDef" title="ast.AsyncFunctionDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">AsyncFunctionDef</span></code></a> 。</p>
 </div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.get_source_segment">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">get_source_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padded</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.get_source_segment" title="永久链接至目标">¶</a></dt>
-<dd><p>Get source code segment of the <em>source</em> that generated <em>node</em>.
-If some location information (<code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_lineno</span></code>,
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code>, or <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_col_offset</span></code>) is missing, return <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p>If <em>padded</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the first line of a multi-line statement will
-be padded with spaces to match its original position.</p>
+<dd><p>获取生成 <em>node</em> 的 <em>source</em> 的源代码段。如果某些位置信息（<code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>、<code class="xref py py-attr docutils literal notranslate"><span class="pre">end_lineno</span></code>、<code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code> 或 <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_col_offset</span></code> ）丢失，返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<p>如果 <em>padded</em> 是 <code class="docutils literal notranslate"><span class="pre">True</span></code>，多行语句的第一行将被填充空格，以符合其原始位置。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -2339,84 +2223,60 @@ be padded with spaces to match its original position.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.fix_missing_locations">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">fix_missing_locations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.fix_missing_locations" title="永久链接至目标">¶</a></dt>
-<dd><p>When you compile a node tree with <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a>, the compiler expects
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code> attributes for every node that supports
-them.  This is rather tedious to fill in for generated nodes, so this helper
-adds these attributes recursively where not already set, by setting them to
-the values of the parent node.  It works recursively starting at <em>node</em>.</p>
+<dd><p>当你用 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 编译一个节点树时，编译器期望 <code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code> 的属性对每一个节点均支持。这对于生成的节点来说是相当繁琐的，所以这个帮助器在没有设置的地方递归地添加这些属性，将它们设置为父节点的值。它从 <em>node</em> 开始递归工作。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.increment_lineno">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">increment_lineno</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.increment_lineno" title="永久链接至目标">¶</a></dt>
-<dd><p>Increment the line number and end line number of each node in the tree
-starting at <em>node</em> by <em>n</em>. This is useful to &quot;move code&quot; to a different
-location in a file.</p>
+<dd><p>将树中从 <em>node</em> 开始的每个节点的行号和末行号增加 <em>n</em>。这对 &quot;移动代码&quot; 到文件中的不同位置很有用。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.copy_location">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">copy_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.copy_location" title="永久链接至目标">¶</a></dt>
-<dd><p>Copy source location (<code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_lineno</span></code>,
-and <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_col_offset</span></code>) from <em>old_node</em> to <em>new_node</em> if possible,
-and return <em>new_node</em>.</p>
+<dd><p>如果可能的话，从 <em>old_node</em> 复制源位置（ <code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>、<code class="xref py py-attr docutils literal notranslate"><span class="pre">col_offset</span></code>、<code class="xref py py-attr docutils literal notranslate"><span class="pre">end_lineno</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">end_col_offset</span></code> ）到 <em>new_node</em>，并返回 <em>new_node</em>。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.iter_fields">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">iter_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.iter_fields" title="永久链接至目标">¶</a></dt>
-<dd><p>Yield a tuple of <code class="docutils literal notranslate"><span class="pre">(fieldname,</span> <span class="pre">value)</span></code> for each field in <code class="docutils literal notranslate"><span class="pre">node._fields</span></code>
-that is present on <em>node</em>.</p>
+<dd><p>为 <em>node</em> 上存在的 <code class="docutils literal notranslate"><span class="pre">node._fields</span></code> 中的每个字段产生一个 <code class="docutils literal notranslate"><span class="pre">(fieldname,</span> <span class="pre">value)</span></code> 的元组。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.iter_child_nodes">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">iter_child_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.iter_child_nodes" title="永久链接至目标">¶</a></dt>
-<dd><p>Yield all direct child nodes of <em>node</em>, that is, all fields that are nodes
-and all items of fields that are lists of nodes.</p>
+<dd><p>产生 <em>node</em> 的所有直接子节点，即所有属于节点的字段和属于节点列表的字段的所有项目。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.walk">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">walk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.walk" title="永久链接至目标">¶</a></dt>
-<dd><p>Recursively yield all descendant nodes in the tree starting at <em>node</em>
-(including <em>node</em> itself), in no specified order.  This is useful if you only
-want to modify nodes in place and don't care about the context.</p>
+<dd><p>递归产生树中从 <em>node</em> 开始的所有后代节点（包括 <em>node</em> 本身），没有指定顺序。如果你只想就地修改节点，而不关心上下文，这很有用。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.NodeVisitor">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">NodeVisitor</span></span><a class="headerlink" href="#ast.NodeVisitor" title="永久链接至目标">¶</a></dt>
-<dd><p>A node visitor base class that walks the abstract syntax tree and calls a
-visitor function for every node found.  This function may return a value
-which is forwarded by the <a class="reference internal" href="#ast.NodeVisitor.visit" title="ast.NodeVisitor.visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">visit()</span></code></a> method.</p>
-<p>This class is meant to be subclassed, with the subclass adding visitor
-methods.</p>
+<dd><p>一个节点访问者基类，它行走在抽象的语法树上，为每个发现的节点调用一个访问者函数。这个函数可以返回一个值，由 <a class="reference internal" href="#ast.NodeVisitor.visit" title="ast.NodeVisitor.visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">visit()</span></code></a> 方法转发。</p>
+<p>这个类是要被子类化的，子类会增加访问者方法。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ast.NodeVisitor.visit">
 <span class="sig-name descname"><span class="pre">visit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.NodeVisitor.visit" title="永久链接至目标">¶</a></dt>
-<dd><p>Visit a node.  The default implementation calls the method called
-<code class="samp docutils literal notranslate"><span class="pre">self.visit_</span><em><span class="pre">classname</span></em></code> where <em>classname</em> is the name of the node
-class, or <a class="reference internal" href="#ast.NodeVisitor.generic_visit" title="ast.NodeVisitor.generic_visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generic_visit()</span></code></a> if that method doesn't exist.</p>
+<dd><p>访问一个节点。默认实现是调用 <code class="samp docutils literal notranslate"><span class="pre">self.visit_</span><em><span class="pre">classname</span></em></code> 的方法，其中 <em>classname</em> 是节点类的名称，如果该方法不存在，则调用 <a class="reference internal" href="#ast.NodeVisitor.generic_visit" title="ast.NodeVisitor.generic_visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generic_visit()</span></code></a>。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ast.NodeVisitor.generic_visit">
 <span class="sig-name descname"><span class="pre">generic_visit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.NodeVisitor.generic_visit" title="永久链接至目标">¶</a></dt>
-<dd><p>This visitor calls <a class="reference internal" href="#ast.NodeVisitor.visit" title="ast.NodeVisitor.visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">visit()</span></code></a> on all children of the node.</p>
-<p>Note that child nodes of nodes that have a custom visitor method won't be
-visited unless the visitor calls <a class="reference internal" href="#ast.NodeVisitor.generic_visit" title="ast.NodeVisitor.generic_visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generic_visit()</span></code></a> or visits them
-itself.</p>
+<dd><p>这个访问者在节点的所有子节点上调用 <a class="reference internal" href="#ast.NodeVisitor.visit" title="ast.NodeVisitor.visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">visit()</span></code></a>。</p>
+<p>注意，拥有自定义访客方法的节点的子节点不会被访问，除非访客调用 <a class="reference internal" href="#ast.NodeVisitor.generic_visit" title="ast.NodeVisitor.generic_visit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generic_visit()</span></code></a> 或自己访问它们。</p>
 </dd></dl>
 
-<p>Don't use the <a class="reference internal" href="#ast.NodeVisitor" title="ast.NodeVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeVisitor</span></code></a> if you want to apply changes to nodes
-during traversal.  For this a special visitor exists
-(<a class="reference internal" href="#ast.NodeTransformer" title="ast.NodeTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeTransformer</span></code></a>) that allows modifications.</p>
+<p>如果你想在遍历过程中对节点进行修改，请不要使用 <a class="reference internal" href="#ast.NodeVisitor" title="ast.NodeVisitor"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeVisitor</span></code></a>。为此，存在一个特殊的访问者（<a class="reference internal" href="#ast.NodeTransformer" title="ast.NodeTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeTransformer</span></code></a>），允许修改。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.8 版后已移除: </span>Methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Num()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Str()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Bytes()</span></code>,
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_NameConstant()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Ellipsis()</span></code> are deprecated
-now and will not be called in future Python versions.  Add the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Constant()</span></code> method to handle all constant nodes.</p>
+<p><span class="versionmodified deprecated">3.8 版后已移除: </span>方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Num()</span></code>、<code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Str()</span></code>、<code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Bytes()</span></code>、<code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_NameConstant()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Ellipsis()</span></code> 现在已经废弃，在未来的 Python 版本中不会被调用。添加 <code class="xref py py-meth docutils literal notranslate"><span class="pre">visit_Constant()</span></code> 方法来处理所有常数节点。</p>
 </div>
 </dd></dl>
 
@@ -2438,15 +2298,12 @@ now and will not be called in future Python versions.  Add the
 </div>
 <p>请记住，如果您正在操作的节点具有子节点，则必须先转换其子节点或为该节点调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">generic_visit()</span></code>  方法。</p>
 <p>对于属于语句集合（适用于所有语句节点）的节点，访问者还可以返回节点列表而不仅仅是单个节点。</p>
-<p>If <a class="reference internal" href="#ast.NodeTransformer" title="ast.NodeTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeTransformer</span></code></a> introduces new nodes (that weren't part of
-original tree) without giving them location information (such as
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>), <a class="reference internal" href="#ast.fix_missing_locations" title="ast.fix_missing_locations"><code class="xref py py-func docutils literal notranslate"><span class="pre">fix_missing_locations()</span></code></a> should be called with
-the new sub-tree to recalculate the location information:</p>
+<p>如果 <a class="reference internal" href="#ast.NodeTransformer" title="ast.NodeTransformer"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeTransformer</span></code></a> 引入了新的节点（不是原来树的一部分），而没有给它们位置信息（比如 <code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code>），那么 <a class="reference internal" href="#ast.fix_missing_locations" title="ast.fix_missing_locations"><code class="xref py py-func docutils literal notranslate"><span class="pre">fix_missing_locations()</span></code></a> 应该与新的子树一起调用，以重新计算位置信息</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;eval&#39;</span><span class="p">)</span>
 <span class="n">new_tree</span> <span class="o">=</span> <span class="n">fix_missing_locations</span><span class="p">(</span><span class="n">RewriteName</span><span class="p">()</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>通常你可以像这样使用转换器:</p>
+<p>通常你可以像这样使用转换器</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">YourTransformer</span><span class="p">()</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2455,21 +2312,10 @@ the new sub-tree to recalculate the location information:</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.dump">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotate_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.dump" title="永久链接至目标">¶</a></dt>
-<dd><p>Return a formatted dump of the tree in <em>node</em>.  This is mainly useful for
-debugging purposes.  If <em>annotate_fields</em> is true (by default),
-the returned string will show the names and the values for fields.
-If <em>annotate_fields</em> is false, the result string will be more compact by
-omitting unambiguous field names.  Attributes such as line
-numbers and column offsets are not dumped by default.  If this is wanted,
-<em>include_attributes</em> can be set to true.</p>
-<p>If <em>indent</em> is a non-negative integer or string, then the tree will be
-pretty-printed with that indent level.  An indent level
-of 0, negative, or <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> will only insert newlines.  <code class="docutils literal notranslate"><span class="pre">None</span></code> (the default)
-selects the single line representation. Using a positive integer indent
-indents that many spaces per level.  If <em>indent</em> is a string (such as <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code>),
-that string is used to indent each level.</p>
+<dd><p>返回 <em>node</em> 中树的格式化转储。这主要是为了调试的目的。如果 <em>annotate_fields</em> 为 true（默认），返回的字符串将显示字段的名称和值。如果 <em>annotate_fields</em> 为 false，结果字符串将通过省略不明确的字段名而变得更加紧凑。默认情况下，诸如行号和列的偏移量等属性不会被转储。如果希望这样，可以将 <em>include_attributes</em> 设置为 true。</p>
+<p>如果 <em>indent</em> 是一个非负的整数或字符串，那么树就会以该缩进级别进行漂亮的打印。缩进级别为 0、负数或 <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> 将只插入新行。<code class="docutils literal notranslate"><span class="pre">None</span></code> （默认）选择单行表示法。使用正的整数缩进，每一级有那么多的空格。如果 <em>indent</em> 是一个字符串（如 <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code>），该字符串将用于缩进每一级。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>Added the <em>indent</em> option.</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>添加 <em>indent</em> 选项。</p>
 </div>
 </dd></dl>
 
@@ -2590,13 +2436,13 @@ in your python file.</p>
 <li><a class="reference internal" href="#abstract-grammar">抽象文法</a></li>
 <li><a class="reference internal" href="#node-classes">节点类</a><ul>
 <li><a class="reference internal" href="#literals">字面值</a></li>
-<li><a class="reference internal" href="#variables">Variables</a></li>
+<li><a class="reference internal" href="#variables">变量</a></li>
 <li><a class="reference internal" href="#expressions">表达式</a><ul>
-<li><a class="reference internal" href="#subscripting">Subscripting</a></li>
-<li><a class="reference internal" href="#comprehensions">Comprehensions</a></li>
+<li><a class="reference internal" href="#subscripting">下标</a></li>
+<li><a class="reference internal" href="#comprehensions">解析式</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#statements">Statements</a><ul>
+<li><a class="reference internal" href="#statements">语句</a><ul>
 <li><a class="reference internal" href="#imports">Imports</a></li>
 </ul>
 </li>
@@ -2606,7 +2452,7 @@ in your python file.</p>
 <li><a class="reference internal" href="#async-and-await">Async and await</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ast-helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code> 中的辅助函数</a></li>
+<li><a class="reference internal" href="#ast-helpers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code> 中的辅助工具</a></li>
 <li><a class="reference internal" href="#compiler-flags">Compiler Flags</a></li>
 <li><a class="reference internal" href="#command-line-usage">命令行用法</a></li>
 </ul>
