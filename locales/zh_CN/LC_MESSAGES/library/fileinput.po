@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 14:44+0800\n"
+"POT-Creation-Date: 2021-11-21 18:53+0800\n"
 "PO-Revision-Date: 2021-06-28 01:06+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
@@ -129,7 +129,7 @@ msgstr ""
 ":class:`FileInput` 实例可以在 :keyword:`with` 语句中被用作上下文管理器。 在这个例子中，*input* 在 "
 ":keyword:`!with` 语句结束后将会被关闭，即使发生了异常也是如此::"
 
-#: ../../library/fileinput.rst:74 ../../library/fileinput.rst:171
+#: ../../library/fileinput.rst:74 ../../library/fileinput.rst:170
 msgid "Can be used as a context manager."
 msgstr "可以被用作上下文管理器。"
 
@@ -137,8 +137,8 @@ msgstr "可以被用作上下文管理器。"
 msgid "The keyword parameters *mode* and *openhook* are now keyword-only."
 msgstr "关键字形参 *mode* 和 *openhook* 现在是仅限关键字形参。"
 
-#: ../../library/fileinput.rst:80 ../../library/fileinput.rst:183
-#: ../../library/fileinput.rst:213
+#: ../../library/fileinput.rst:80 ../../library/fileinput.rst:176
+#: ../../library/fileinput.rst:210
 msgid "The keyword-only parameter *encoding* and *errors* are added."
 msgstr "增加了仅限关键字形参 *encoding* 和 *errors*。"
 
@@ -214,15 +214,16 @@ msgid ""
 msgstr "此模块所提供的实现了序列行为的类同样也可用于子类化："
 
 #: ../../library/fileinput.rst:146
+#, fuzzy
 msgid ""
 "Class :class:`FileInput` is the implementation; its methods "
 ":meth:`filename`, :meth:`fileno`, :meth:`lineno`, :meth:`filelineno`, "
 ":meth:`isfirstline`, :meth:`isstdin`, :meth:`nextfile` and :meth:`close` "
 "correspond to the functions of the same name in the module. In addition "
-"it has a :meth:`~io.TextIOBase.readline` method which returns the next "
-"input line, and a :meth:`__getitem__` method which implements the "
-"sequence behavior. The sequence must be accessed in strictly sequential "
-"order; random access and :meth:`~io.TextIOBase.readline` cannot be mixed."
+"it is :term:`iterable` and has a :meth:`~io.TextIOBase.readline` method "
+"which returns the next input line. The sequence must be accessed in "
+"strictly sequential order; random access and "
+":meth:`~io.TextIOBase.readline` cannot be mixed."
 msgstr ""
 "类 :class:`FileInput` 是一个实现；它的方法 :meth:`filename`, :meth:`fileno`, "
 ":meth:`lineno`, :meth:`filelineno`, :meth:`isfirstline`, :meth:`isstdin`,"
@@ -231,15 +232,16 @@ msgstr ""
 "方法，该方法实现了序列行为。 这种序列必须以严格的序列顺序来读写；随机读写和 :meth:`~io.TextIOBase.readline` "
 "不可以被混用。"
 
-#: ../../library/fileinput.rst:155
+#: ../../library/fileinput.rst:154
+#, fuzzy
 msgid ""
 "With *mode* you can specify which file mode will be passed to "
-":func:`open`. It must be one of ``'r'``, ``'rU'``, ``'U'`` and ``'rb'``."
+":func:`open`. It must be one of ``'r'`` and ``'rb'``."
 msgstr ""
 "通过 *mode* 你可以指定要传给 :func:`open` 的文件模式。 它必须为 ``'r'``, ``'rU'``, ``'U'`` 和 "
 "``'rb'`` 中的一个。"
 
-#: ../../library/fileinput.rst:158
+#: ../../library/fileinput.rst:157
 msgid ""
 "The *openhook*, when given, must be a function that takes two arguments, "
 "*filename* and *mode*, and returns an accordingly opened file-like "
@@ -248,13 +250,13 @@ msgstr ""
 "*openhook* 如果给出则必须为一个函数，它接受两个参数 *filename* 和 *mode*，并相应地返回一个打开的文件类对象。 "
 "你不能同时使用 *inplace* 和 *openhook*。"
 
-#: ../../library/fileinput.rst:162
+#: ../../library/fileinput.rst:161
 msgid ""
 "You can specify *encoding* and *errors* that is passed to :func:`open` or"
 " *openhook*."
 msgstr "你可以指定 *encoding* 和 *errors* 来将其传给 :func:`open` 或 *openhook*。"
 
-#: ../../library/fileinput.rst:164
+#: ../../library/fileinput.rst:163
 msgid ""
 "A :class:`FileInput` instance can be used as a context manager in the "
 ":keyword:`with` statement.  In this example, *input* is closed after the "
@@ -263,19 +265,17 @@ msgstr ""
 ":class:`FileInput` 实例可以在 :keyword:`with` 语句中被用作上下文管理器。 在这个例子中，*input* 在 "
 ":keyword:`!with` 语句结束后将会被关闭，即使发生了异常也是如此::"
 
-#: ../../library/fileinput.rst:174
-msgid "The ``'rU'`` and ``'U'`` modes."
-msgstr "``'rU'`` 和 ``'U'`` 模式。"
-
-#: ../../library/fileinput.rst:177
-msgid "Support for :meth:`__getitem__` method is deprecated."
-msgstr "对 :meth:`__getitem__` 方法的支持已弃用。"
-
-#: ../../library/fileinput.rst:180
+#: ../../library/fileinput.rst:173
 msgid "The keyword parameter *mode* and *openhook* are now keyword-only."
 msgstr "关键字形参 *mode* 和 *openhook* 现在是仅限关键字形参。"
 
-#: ../../library/fileinput.rst:187
+#: ../../library/fileinput.rst:179
+msgid ""
+"The ``'rU'`` and ``'U'`` modes and the :meth:`__getitem__` method have "
+"been removed."
+msgstr ""
+
+#: ../../library/fileinput.rst:184
 msgid ""
 "**Optional in-place filtering:** if the keyword argument ``inplace=True``"
 " is passed to :func:`fileinput.input` or to the :class:`FileInput` "
@@ -296,11 +296,11 @@ msgstr ""
 "extension>'``)，它将指定备份文件的扩展名，并且备份文件会被保留；默认情况下扩展名为 ``'.bak'`` "
 "并且它会在输出文件关闭时被删除。 在读取标准输入时原地过滤会被禁用。"
 
-#: ../../library/fileinput.rst:199
+#: ../../library/fileinput.rst:196
 msgid "The two following opening hooks are provided by this module:"
 msgstr "此模块提供了以下两种打开文件钩子："
 
-#: ../../library/fileinput.rst:203
+#: ../../library/fileinput.rst:200
 msgid ""
 "Transparently opens files compressed with gzip and bzip2 (recognized by "
 "the extensions ``'.gz'`` and ``'.bz2'``) using the :mod:`gzip` and "
@@ -312,13 +312,13 @@ msgstr ""
 "``'.bz2'`` 来识别）。 如果文件扩展名不是 ``'.gz'`` 或 ``'.bz2'``，文件会以正常方式打开（即使用 "
 ":func:`open` 并且不带任何解压操作）。"
 
-#: ../../library/fileinput.rst:208
+#: ../../library/fileinput.rst:205
 msgid ""
 "The *encoding* and *errors* values are passed to "
 ":class:`io.TextIOWrapper` for compressed files and open for normal files."
 msgstr "*encoding* 和 *errors* 值会被传给 :class:`io.TextIOWrapper` 用于压缩文件以及打开普通文件。"
 
-#: ../../library/fileinput.rst:211
+#: ../../library/fileinput.rst:208
 msgid ""
 "Usage example:  ``fi = "
 "fileinput.FileInput(openhook=fileinput.hook_compressed, "
@@ -327,13 +327,13 @@ msgstr ""
 "用法示例:  ``fi = fileinput.FileInput(openhook=fileinput.hook_compressed, "
 "encoding=\"utf-8\")``"
 
-#: ../../library/fileinput.rst:219
+#: ../../library/fileinput.rst:216
 msgid ""
 "Returns a hook which opens each file with :func:`open`, using the given "
 "*encoding* and *errors* to read the file."
 msgstr "返回一个通过 :func:`open` 打开每个文件的钩子，使用给定的 *encoding* 和 *errors* 来读取文件。"
 
-#: ../../library/fileinput.rst:222
+#: ../../library/fileinput.rst:219
 msgid ""
 "Usage example: ``fi = "
 "fileinput.FileInput(openhook=fileinput.hook_encoded(\"utf-8\", "
@@ -343,15 +343,21 @@ msgstr ""
 "fileinput.FileInput(openhook=fileinput.hook_encoded(\"utf-8\", "
 "\"surrogateescape\"))``"
 
-#: ../../library/fileinput.rst:226
+#: ../../library/fileinput.rst:223
 msgid "Added the optional *errors* parameter."
 msgstr "添加了可选的 *errors* 形参。"
 
-#: ../../library/fileinput.rst:229
+#: ../../library/fileinput.rst:226
 msgid ""
 "This function is deprecated since :func:`input` and :class:`FileInput` "
 "now have *encoding* and *errors* parameters."
 msgstr ""
 "此函数已被弃用，因为 :func:`input` 和 :class:`FileInput` 现在有了 *encoding* 和 *errors* "
 "形参。"
+
+#~ msgid "The ``'rU'`` and ``'U'`` modes."
+#~ msgstr "``'rU'`` 和 ``'U'`` 模式。"
+
+#~ msgid "Support for :meth:`__getitem__` method is deprecated."
+#~ msgstr "对 :meth:`__getitem__` 方法的支持已弃用。"
 

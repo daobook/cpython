@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 14:44+0800\n"
+"POT-Creation-Date: 2021-11-21 18:53+0800\n"
 "PO-Revision-Date: 2021-06-28 01:09+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
@@ -259,8 +259,8 @@ msgstr ""
 "返回子序列 *sub* 在对象内被找到的最小索引号，使得 *sub* 被包含在 [*start*, *end*] 范围中。 可选参数 "
 "*start* 和 *end* 会被解读为切片表示法。 如果未找到则返回 ``-1``。"
 
-#: ../../library/mmap.rst:186 ../../library/mmap.rst:267
-#: ../../library/mmap.rst:299
+#: ../../library/mmap.rst:186 ../../library/mmap.rst:275
+#: ../../library/mmap.rst:307
 msgid "Writable :term:`bytes-like object` is now accepted."
 msgstr "现在接受可写的 :term:`字节类对象 <bytes-like object>`。"
 
@@ -354,7 +354,21 @@ msgstr ""
 "改变映射以及下层文件的大小，如果存在的话。 如果 mmap 创建时设置了 :const:`ACCESS_READ` 或 "
 ":const:`ACCESS_COPY`，则改变映射大小将引发 :exc:`TypeError` 异常。"
 
-#: ../../library/mmap.rst:262
+#: ../../library/mmap.rst:259
+msgid ""
+"**On Windows**: Resizing the map will raise an :exc:`OSError` if there "
+"are other maps against the same named file. Resizing an anonymous map (ie"
+" against the pagefile) will silently create a new map with the original "
+"data copied over up to the length of the new size."
+msgstr ""
+
+#: ../../library/mmap.rst:264
+msgid ""
+"Correctly fails if attempting to resize when another map is held Allows "
+"resize against an anonymous map on Windows"
+msgstr ""
+
+#: ../../library/mmap.rst:270
 msgid ""
 "Returns the highest index in the object where the subsequence *sub* is "
 "found, such that *sub* is contained in the range [*start*, *end*]. "
@@ -364,7 +378,7 @@ msgstr ""
 "返回子序列 *sub* 在对象内被找到的最大索引号，使得 *sub* 被包含在 [*start*, *end*] 范围中。 可选参数 "
 "*start* 和 *end* 会被解读为切片表示法。 如果未找到则返回 ``-1``。"
 
-#: ../../library/mmap.rst:273
+#: ../../library/mmap.rst:281
 msgid ""
 "Set the file's current position.  *whence* argument is optional and "
 "defaults to ``os.SEEK_SET`` or ``0`` (absolute file positioning); other "
@@ -374,17 +388,17 @@ msgstr ""
 "设置文件的当前位置。 *whence* 参数为可选项并且默认为 ``os.SEEK_SET`` 或 ``0`` (绝对文件定位)；其他值还有 "
 "``os.SEEK_CUR`` 或 ``1`` (相对当前位置查找) 和 ``os.SEEK_END`` 或 ``2`` (相对文件末尾查找)。"
 
-#: ../../library/mmap.rst:281
+#: ../../library/mmap.rst:289
 msgid ""
 "Return the length of the file, which can be larger than the size of the "
 "memory-mapped area."
 msgstr "返回文件的长度，该数值可以大于内存映射区域的大小。"
 
-#: ../../library/mmap.rst:287
+#: ../../library/mmap.rst:295
 msgid "Returns the current position of the file pointer."
 msgstr "返回文件指针的当前位置。"
 
-#: ../../library/mmap.rst:292
+#: ../../library/mmap.rst:300
 msgid ""
 "Write the bytes in *bytes* into memory at the current position of the "
 "file pointer and return the number of bytes written (never less than "
@@ -397,11 +411,11 @@ msgstr ""
 "``len(bytes)``，因为如果写入失败，将会引发 :exc:`ValueError`)。 在字节数据被写入后文件位置将会更新。 如果 "
 "mmap 创建时设置了 :const:`ACCESS_READ`，则向其写入将引发 :exc:`TypeError` 异常。"
 
-#: ../../library/mmap.rst:302
+#: ../../library/mmap.rst:310
 msgid "The number of bytes written is now returned."
 msgstr "现在会返回写入的字节总数。"
 
-#: ../../library/mmap.rst:308
+#: ../../library/mmap.rst:316
 msgid ""
 "Write the integer *byte* into memory at the current position of the file "
 "pointer; the file position is advanced by ``1``. If the mmap was created "
@@ -411,31 +425,31 @@ msgstr ""
 "将整数值 *byte* 写入文件指针当前位置的内存；文件位置前进 ``1``。 如果 mmap 创建时设置了 "
 ":const:`ACCESS_READ`，则向其写入将引发 :exc:`TypeError` 异常。"
 
-#: ../../library/mmap.rst:316
+#: ../../library/mmap.rst:324
 msgid "MADV_* Constants"
 msgstr "MADV_* 常量"
 
-#: ../../library/mmap.rst:343
+#: ../../library/mmap.rst:351
 msgid ""
 "These options can be passed to :meth:`mmap.madvise`.  Not every option "
 "will be present on every system."
 msgstr "这些选项可被传给 :meth:`mmap.madvise`。 不是每个选项都存在于每个系统中。"
 
-#: ../../library/mmap.rst:346
+#: ../../library/mmap.rst:354
 msgid "Availability: Systems with the madvise() system call."
 msgstr "可用性: 具有 madvise() 系统调用的系统。"
 
-#: ../../library/mmap.rst:353
+#: ../../library/mmap.rst:361
 msgid "MAP_* Constants"
 msgstr "MAP_* 常量"
 
-#: ../../library/mmap.rst:363
+#: ../../library/mmap.rst:371
 msgid ""
 "These are the various flags that can be passed to :meth:`mmap.mmap`. Note"
 " that some options might not be present on some systems."
 msgstr "这些是可被传给 :meth:`mmap.mmap` 的各种旗标。 请注意某些选项在某些系统上可能不存在。"
 
-#: ../../library/mmap.rst:365
+#: ../../library/mmap.rst:373
 msgid "Added MAP_POPULATE constant."
 msgstr "增加了 MAP_POPULATE 常量。"
 
