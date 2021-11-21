@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../library/tokenize.rst:2
 msgid ":mod:`tokenize` --- Tokenizer for Python source"
-msgstr ":mod:`tokenize` --- 对 Python 代码使用的标记解析器"
+msgstr ":mod:`tokenize` --- 对 Python 代码的形符化"
 
 #: ../../library/tokenize.rst:10
 msgid "**Source code:** :source:`Lib/tokenize.py`"
@@ -40,8 +40,8 @@ msgid ""
 " tokens as well, making it useful for implementing \"pretty-printers\", "
 "including colorizers for on-screen displays."
 msgstr ""
-":mod:`tokenize` 模块为 Python 源代码提供了一个词法扫描器，用 Python "
-"实现。该模块中的扫描器也将注释作为标记返回，这使得它对于实现“漂亮的输出器”非常有用，包括用于屏幕显示的着色器。"
+":mod:`tokenize` 模块为 Python 源代码提供了一个用 Python 实现的词法扫描器。"
+"该模块中的扫描器也将注释作为形符返回，这使得它对于实现“漂亮的输出器”非常有用，包括用于屏幕显示的着色器。"
 
 #: ../../library/tokenize.rst:19
 msgid ""
@@ -51,14 +51,14 @@ msgid ""
 " by checking the ``exact_type`` property on the :term:`named tuple` returned"
 " from :func:`tokenize.tokenize`."
 msgstr ""
-"为了简化标记流的处理，所有的 :ref:`运算符 <operators>` 和 :ref:`定界符 <delimiters>` 以及 "
-":data:`Ellipsis` 返回时都会打上通用的 :data:`~token.OP` 标记。 可以通过 "
+"为了简化形符流的处理，所有的 :ref:`运算符 <operators>` 和 :ref:`定界符 <delimiters>` 以及 "
+":data:`Ellipsis` 返回时都会打上通用的 :data:`~token.OP` 形符类型。可以通过 "
 ":func:`tokenize.tokenize` 返回的 :term:`named tuple` 对象的 ``exact_type`` "
-"属性来获得确切的标记类型。"
+"属性来获得确切的类型。"
 
 #: ../../library/tokenize.rst:26
 msgid "Tokenizing Input"
-msgstr "对输入进行解析标记"
+msgstr "对输入进行形符化"
 
 #: ../../library/tokenize.rst:28
 msgid "The primary entry point is a :term:`generator`:"
@@ -96,7 +96,7 @@ msgid ""
 "``type`` field."
 msgstr ""
 "返回的 :term:`named tuple` 有一个额外的属性，名为 ``exact_type`` ，包含了 :data:`~token.OP` "
-"标记的确切操作符类型。 对于所有其他标记类型， ``exact_type`` 等于命名元组的 ``type`` 字段。"
+"形符的确切操作符类型。 对于所有其他形符类型， ``exact_type`` 等于命名元组的 ``type`` 字段。"
 
 #: ../../library/tokenize.rst:51
 msgid "Added support for named tuples."
@@ -114,7 +114,7 @@ msgstr "根据:pep:`263` ， :func:`.tokenize` 通过寻找 UTF-8 BOM 或编码 
 
 #: ../../library/tokenize.rst:62
 msgid "Tokenize a source reading unicode strings instead of bytes."
-msgstr "对读取 unicode 字符串而不是字节的源进行标记。"
+msgstr "对读取 unicode 字符串而不是字节的源进行形符。"
 
 #: ../../library/tokenize.rst:64
 msgid ""
@@ -131,7 +131,7 @@ msgid ""
 ":func:`.tokenize`. It does not yield an :data:`~token.ENCODING` token."
 msgstr ""
 "其结果是一个产生具名元组的的迭代器，与 :func:`.tokenize` 完全一样。 它不会产生 :data:`~token.ENCODING` "
-"标记。"
+"形符。"
 
 #: ../../library/tokenize.rst:71
 msgid ""
@@ -144,7 +144,7 @@ msgid ""
 "Another function is provided to reverse the tokenization process. This is "
 "useful for creating tools that tokenize a script, modify the token stream, "
 "and write back the modified script."
-msgstr "提供了另一个函数来逆转标记化过程。这对于创建对脚本进行标记、修改标记流并写回修改后脚本的工具很有用。"
+msgstr "提供了另一个函数来逆转形符化过程。这对于创建对脚本进行形符、修改形符流并写回修改后脚本的工具很有用。"
 
 #: ../../library/tokenize.rst:81
 msgid ""
@@ -162,8 +162,8 @@ msgid ""
 "token type and token string as the spacing between tokens (column positions)"
 " may change."
 msgstr ""
-"重构的脚本以单个字符串的形式返回。 结果被保证为标记回与输入相匹配，因此转换是无损的，并保证来回操作。 "
-"该保证只适用于标记类型和标记字符串，因为标记之间的间距（列位置）可能会改变。"
+"重构的脚本以单个字符串的形式返回。 结果被保证为形符回与输入相匹配，因此转换是无损的，并保证来回操作。 "
+"该保证只适用于形符类型和形符字符串，因为形符之间的间距（列位置）可能会改变。"
 
 #: ../../library/tokenize.rst:91
 msgid ""
@@ -171,14 +171,14 @@ msgid ""
 "the first token sequence output by :func:`.tokenize`. If there is no "
 "encoding token in the input, it returns a str instead."
 msgstr ""
-"它返回字节，使用 :data:`~token.ENCODING` 标记进行编码，这是由 :func:`.tokenize` "
-"输出的第一个标记序列。如果输入中没有编码令牌，它将返回一个字符串。"
+"它返回字节，使用 :data:`~token.ENCODING` 形符进行编码，这是由 :func:`.tokenize` "
+"输出的第一个形符序列。如果输入中没有编码令牌，它将返回一个字符串。"
 
 #: ../../library/tokenize.rst:96
 msgid ""
 ":func:`.tokenize` needs to detect the encoding of source files it tokenizes."
 " The function it uses to do this is available:"
-msgstr ":func:`.tokenize` 需要检测它所标记源文件的编码。它用来做这件事的函数是可用的："
+msgstr ":func:`.tokenize` 需要检测它所形符源文件的编码。它用来做这件事的函数是可用的："
 
 #: ../../library/tokenize.rst:101
 msgid ""
@@ -238,7 +238,7 @@ msgid ""
 "Note that unclosed single-quoted strings do not cause an error to be raised."
 " They are tokenized as :data:`~token.ERRORTOKEN`, followed by the "
 "tokenization of their contents."
-msgstr "注意，未封闭的单引号字符串不会导致错误发生。它们被标记为 :data:`~token.ERRORTOKEN` ，然后是其内容的标记化。"
+msgstr "注意，未封闭的单引号字符串不会导致错误发生。它们被形符为 :data:`~token.ERRORTOKEN` ，然后是其内容的形符化。"
 
 #: ../../library/tokenize.rst:150
 msgid "Command-Line Usage"
@@ -266,7 +266,7 @@ msgstr "使用确切的类型显示令牌名称"
 msgid ""
 "If :file:`filename.py` is specified its contents are tokenized to stdout. "
 "Otherwise, tokenization is performed on stdin."
-msgstr "如果 :file:`filename.py` 被指定，其内容会被标记到 stdout 。否则，标记化将在 stdin 上执行。"
+msgstr "如果 :file:`filename.py` 被指定，其内容会被形符到 stdout 。否则，形符化将在 stdin 上执行。"
 
 #: ../../library/tokenize.rst:177
 msgid "Examples"
@@ -280,7 +280,7 @@ msgstr "脚本改写器的例子，它将 float 文本转换为 Decimal 对象::
 
 #: ../../library/tokenize.rst:221
 msgid "Example of tokenizing from the command line.  The script::"
-msgstr "从命令行进行标记化的例子。 脚本::"
+msgstr "从命令行进行形符化的例子。 脚本::"
 
 #: ../../library/tokenize.rst:228
 msgid ""
@@ -288,18 +288,18 @@ msgid ""
 "range of the line/column coordinates where the token is found, the second "
 "column is the name of the token, and the final column is the value of the "
 "token (if any)"
-msgstr "将被标记为以下输出，其中第一列是发现标记的行 / 列坐标范围，第二列是标记的名称，最后一列是标记的值（如果有）。"
+msgstr "将被形符为以下输出，其中第一列是发现形符的行 / 列坐标范围，第二列是形符的名称，最后一列是形符的值（如果有）。"
 
 #: ../../library/tokenize.rst:256
 msgid ""
 "The exact token type names can be displayed using the :option:`-e` option:"
-msgstr "可以使用 :option:`-e` 选项来显示确切的标记类型名称。"
+msgstr "可以使用 :option:`-e` 选项来显示确切的形符类型名称。"
 
 #: ../../library/tokenize.rst:282
 msgid ""
 "Example of tokenizing a file programmatically, reading unicode strings "
 "instead of bytes with :func:`generate_tokens`::"
-msgstr "以编程方式对文件进行标记的例子，用 :func:`generate_tokens` 读取 unicode 字符串而不是字节::"
+msgstr "以编程方式对文件进行形符的例子，用 :func:`generate_tokens` 读取 unicode 字符串而不是字节::"
 
 #: ../../library/tokenize.rst:292
 msgid "Or reading bytes directly with :func:`.tokenize`::"
