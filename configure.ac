@@ -23,6 +23,32 @@ m4_ifdef(
     [AC_MSG_ERROR([Please install pkgconf's m4 macro package and re-run autoreconf])]
 )dnl
 
+dnl Helpers for saving and restoring environment variables:
+dnl - _SAVE_VAR([VAR])         Helper for SAVE_ENV; stores VAR as save_VAR
+dnl - _RESTORE_VAR([VAR])      Helper for RESTORE_ENV; restores VAR from save_VAR
+dnl - SAVE_ENV                 Saves CFLAGS, LDFLAGS, LIBS, and CPPFLAGS
+dnl - RESTORE_ENV              Restores CFLAGS, LDFLAGS, LIBS, and CPPFLAGS
+dnl - WITH_SAVE_ENV([SCRIPT])  Runs SCRIPT wrapped with SAVE_ENV/RESTORE_ENV
+AC_DEFUN([_SAVE_VAR], [AS_VAR_COPY([save_][$1], [$1])])dnl
+AC_DEFUN([_RESTORE_VAR], [AS_VAR_COPY([$1], [save_][$1])])dnl
+AC_DEFUN([SAVE_ENV],
+[_SAVE_VAR([CFLAGS])]
+[_SAVE_VAR([CPPFLAGS])]
+[_SAVE_VAR([LDFLAGS])]
+[_SAVE_VAR([LIBS])]
+)dnl
+AC_DEFUN([RESTORE_ENV],
+[_RESTORE_VAR([CFLAGS])]
+[_RESTORE_VAR([CPPFLAGS])]
+[_RESTORE_VAR([LDFLAGS])]
+[_RESTORE_VAR([LIBS])]
+)dnl
+AC_DEFUN([WITH_SAVE_ENV],
+[SAVE_ENV]
+[$1]
+[RESTORE_ENV]
+)dnl
+
 AC_SUBST(BASECPPFLAGS)
 if test "$srcdir" != . -a "$srcdir" != "$(pwd)"; then
     # If we're building out-of-tree, we need to make sure the following
@@ -3174,37 +3200,29 @@ PKG_CHECK_MODULES(
 )
 AS_VAR_APPEND([LIBSQLITE3_CFLAGS], [' -I$(srcdir)/Modules/_sqlite'])
 
+WITH_SAVE_ENV(
 dnl bpo-45774/GH-29507: The CPP check in AC_CHECK_HEADER can fail on FreeBSD,
-dnl hence CPPFLAGS instead of CFLAGS. We still need to save CFLAGS, because it
-dnl is touched by AC_CHECK_HEADER.
-AS_VAR_COPY([save_CFLAGS], [CFLAGS])
-AS_VAR_COPY([save_CPPFLAGS], [CPPFLAGS])
-AS_VAR_COPY([save_LDFLAGS], [LDFLAGS])
-AS_VAR_COPY([save_LIBS], [LIBS])
-CPPFLAGS="$LIBSQLITE3_CFLAGS $CFLAGS"
-LDFLAGS="$LIBSQLITE3_LIBS $LDFLAGS"
+dnl hence CPPFLAGS instead of CFLAGS.
+  CPPFLAGS="$LIBSQLITE3_CFLAGS $CFLAGS"
+  LDFLAGS="$LIBSQLITE3_LIBS $LDFLAGS"
 
-AC_CHECK_HEADER([sqlite3.h], [
-  AC_CHECK_LIB([sqlite3], [sqlite3_open_v2], [
-    have_sqlite3=yes
-    AC_COMPILE_IFELSE([
-      AC_LANG_PROGRAM([
-        #include <sqlite3.h>
-        #if SQLITE_VERSION_NUMBER < 3007015
-        #  error "SQLite 3.7.15 or higher required"
-        #endif
-      ], [])
-    ], [have_supported_sqlite3=yes], [have_supported_sqlite3=no])
-  ], [have_sqlite3=no])
-  AC_CHECK_LIB([sqlite3], [sqlite3_load_extension],
-               [have_sqlite3_load_extension=yes],
-               [have_sqlite3_load_extension=no])
-])
-
-AS_VAR_COPY([CFLAGS], [save_CFLAGS])
-AS_VAR_COPY([CPPFLAGS], [save_CPPFLAGS])
-AS_VAR_COPY([LDFLAGS], [save_LDFLAGS])
-AS_VAR_COPY([LIBS], [save_LIBS])
+  AC_CHECK_HEADER([sqlite3.h], [
+    AC_CHECK_LIB([sqlite3], [sqlite3_open_v2], [
+      have_sqlite3=yes
+      AC_COMPILE_IFELSE([
+        AC_LANG_PROGRAM([
+          #include <sqlite3.h>
+          #if SQLITE_VERSION_NUMBER < 3007015
+          #  error "SQLite 3.7.15 or higher required"
+          #endif
+        ], [])
+      ], [have_supported_sqlite3=yes], [have_supported_sqlite3=no])
+    ], [have_sqlite3=no])
+    AC_CHECK_LIB([sqlite3], [sqlite3_load_extension],
+                 [have_sqlite3_load_extension=yes],
+                 [have_sqlite3_load_extension=no])
+  ])
+)
 
 # Check for support for loadable sqlite extensions
 AC_MSG_CHECKING(for --enable-loadable-sqlite-extensions)
@@ -6019,12 +6037,9 @@ AC_DEFUN([PY_STDLIB_MOD], [
   m4_pushdef([modstate], [py_cv_module_$1])dnl
   AS_CASE([$py_stdlib_not_available],
     [*$1*], [modstate=n/a],
-    [
-      AS_IF(m4_ifblank([$2], [true], [$2]),
+    [AS_IF(m4_ifblank([$2], [true], [$2]),
         [AS_IF([m4_ifblank([$3], [true], [$3])], [modstate=yes], [modstate=missing])],
-        [modstate=disabled]
-      )
-    ]
+        [modstate=disabled])]
   )
   _MODULE_BLOCK_ADD(modcond, [$modstate])
   AS_VAR_IF([modstate], [yes], [
@@ -6042,13 +6057,14 @@ dnl PY_STDLIB_MOD_SIMPLE([NAME], [CFLAGS], [LDFLAGS])
 dnl cflags and ldflags are optional
 AC_DEFUN([PY_STDLIB_MOD_SIMPLE], [
   m4_pushdef([modcond], [MODULE_]m4_toupper([$1]))dnl
-  AM_CONDITIONAL(modcond, [true])
+  AM_CONDITIONAL(modcond, [true])dnl
+  _MODULE_BLOCK_ADD(modcond, [yes])dnl
   m4_ifval([$2], [
     _MODULE_BLOCK_ADD([MODULE_]m4_toupper([$1])[_CFLAGS], [$2])
-  ])
+  ])dnl
   m4_ifval([$3], [
     _MODULE_BLOCK_ADD([MODULE_]m4_toupper([$1])[_LDFLAGS], [$3])
-  ])
+  ])dnl
   m4_popdef([modcond])dnl
 ])
 
@@ -6057,6 +6073,26 @@ PY_STDLIB_MOD_SIMPLE([_io], [-I\$(srcdir)/Modules/_io], [])
 PY_STDLIB_MOD_SIMPLE([time], [], [$TIMEMODULE_LIB])
 
 dnl always enabled extension modules
+PY_STDLIB_MOD_SIMPLE([array])
+PY_STDLIB_MOD_SIMPLE([_asyncio])
+PY_STDLIB_MOD_SIMPLE([_bisect])
+PY_STDLIB_MOD_SIMPLE([_contextvars])
+PY_STDLIB_MOD_SIMPLE([_heapq])
+PY_STDLIB_MOD_SIMPLE([_json])
+PY_STDLIB_MOD_SIMPLE([_lsprof])
+PY_STDLIB_MOD_SIMPLE([_opcode])
+PY_STDLIB_MOD_SIMPLE([_pickle])
+PY_STDLIB_MOD_SIMPLE([_queue])
+PY_STDLIB_MOD_SIMPLE([_random])
+PY_STDLIB_MOD_SIMPLE([_typing])
+PY_STDLIB_MOD_SIMPLE([_zoneinfo])
+
+dnl needs libm
+PY_STDLIB_MOD_SIMPLE([_statistics], [], [$LIBM])
+PY_STDLIB_MOD_SIMPLE([cmath], [], [$LIBM])
+PY_STDLIB_MOD_SIMPLE([math], [], [$LIBM])
+
+dnl needs libm and on some platforms librt
 PY_STDLIB_MOD_SIMPLE([_datetime], [], [$TIMEMODULE_LIB $LIBM])
 
 dnl platform specific extensions
