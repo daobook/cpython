@@ -200,7 +200,7 @@
   <section id="expressions">
 <span id="id1"></span><h1><span class="section-number">6. </span>表达式<a class="headerlink" href="#expressions" title="永久链接至标题">¶</a></h1>
 <p id="index-0">本章将解释 Python 中组成表达式的各种元素的的含义。</p>
-<p><strong>语法注释:</strong> 在本章和后续章节中，会使用扩展 BNF 标注来描述语法而不是词法分析。 当（某种替代的）语法规则具有如下形式</p>
+<p><strong>语法注释:</strong> 在本章和后续章节中，会使用扩展 BNF 标注来描述语法而不是词法分析。当（某种替代的）语法规则具有如下形式</p>
 <pre>
 <strong id="grammar-token-python-grammar-name"><span id="grammar-token-name"></span>name</strong> ::=  <code class="xref docutils literal notranslate"><span class="pre">othername</span></code>
 </pre>
@@ -213,11 +213,11 @@
 <li><p>否则，如果任一参数为浮点数，另一参数会被转换为浮点数；</p></li>
 <li><p>否则，两者应该都为整数，不需要进行转换。</p></li>
 </ul>
-<p>某些附加规则会作用于特定运算符（例如，字符串作为 '%' 运算符的左运算参数）。 扩展必须定义它们自己的转换行为。</p>
+<p>某些附加规则会作用于特定运算符（例如，字符串作为 '%' 运算符的左运算参数）。扩展必须定义它们自己的转换行为。</p>
 </section>
 <section id="atoms">
 <span id="id2"></span><h2><span class="section-number">6.2. </span>原子<a class="headerlink" href="#atoms" title="永久链接至标题">¶</a></h2>
-<p id="index-2">“原子”指表达式的最基本构成元素。 最简单的原子是标识符和字面值。 以圆括号、方括号或花括号包括的形式在语法上也被归类为原子。 原子的句法为:</p>
+<p id="index-2">“原子”指表达式的最基本构成元素。最简单的原子是标识符和字面值。以圆括号、方括号或花括号包括的形式在语法上也被归类为原子。原子的句法为：</p>
 <pre>
 <strong id="grammar-token-python-grammar-atom"><span id="grammar-token-atom"></span>atom     </strong> ::=  <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-identifier"><code class="xref docutils literal notranslate"><span class="pre">identifier</span></code></a> | <a class="reference internal" href="#grammar-token-python-grammar-literal"><code class="xref docutils literal notranslate"><span class="pre">literal</span></code></a> | <a class="reference internal" href="#grammar-token-python-grammar-enclosure"><code class="xref docutils literal notranslate"><span class="pre">enclosure</span></code></a>
 <strong id="grammar-token-python-grammar-enclosure"><span id="grammar-token-enclosure"></span>enclosure</strong> ::=  <a class="reference internal" href="#grammar-token-python-grammar-parenth_form"><code class="xref docutils literal notranslate"><span class="pre">parenth_form</span></code></a> | <a class="reference internal" href="#grammar-token-python-grammar-list_display"><code class="xref docutils literal notranslate"><span class="pre">list_display</span></code></a> | <a class="reference internal" href="#grammar-token-python-grammar-dict_display"><code class="xref docutils literal notranslate"><span class="pre">dict_display</span></code></a> | <a class="reference internal" href="#grammar-token-python-grammar-set_display"><code class="xref docutils literal notranslate"><span class="pre">set_display</span></code></a>
@@ -225,18 +225,18 @@
 </pre>
 <section id="atom-identifiers">
 <span id="identifiers-names"></span><h3><span class="section-number">6.2.1. </span>标识符（名称）<a class="headerlink" href="#atom-identifiers" title="永久链接至标题">¶</a></h3>
-<p id="index-3">作为原子出现的标识符叫做名称。 请参看 <a class="reference internal" href="lexical_analysis.html#identifiers"><span class="std std-ref">标识符和关键字</span></a> 一节了解其词法定义，以及 <a class="reference internal" href="executionmodel.html#naming"><span class="std std-ref">命名与绑定</span></a> 获取有关命名与绑定的文档。</p>
-<p id="index-4">当名称被绑定到一个对象时，对该原子求值将返回相应对象。 当名称未被绑定时，尝试对其求值将引发 <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> 异常。</p>
+<p id="index-3">作为原子出现的标识符叫做名称。请参看 <a class="reference internal" href="lexical_analysis.html#identifiers"><span class="std std-ref">标识符和关键字</span></a> 一节了解其词法定义，以及 <a class="reference internal" href="executionmodel.html#naming"><span class="std std-ref">命名与绑定</span></a> 获取有关命名与绑定的文档。</p>
+<p id="index-4">当名称被绑定到一个对象时，对该原子求值将返回相应对象。当名称未被绑定时，尝试对其求值将引发 <a class="reference internal" href="../library/exceptions.html#NameError" title="NameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NameError</span></code></a> 异常。</p>
 <span class="target" id="private-name-mangling"></span><p id="index-5"><strong>私有名称转换:</strong> 当以文本形式出现在类定义中的一个标识符以两个或更多下划线开头并且不以两个或更多下划线结尾，它会被视为该类的 <em class="dfn">私有名称</em>。 私有名称会在为其生成代码之前被转换为一种更长的形式。 转换时会插入类名，移除打头的下划线再在名称前增加一个下划线。 例如，出现在一个名为 <code class="docutils literal notranslate"><span class="pre">Ham</span></code> 的类中的标识符 <code class="docutils literal notranslate"><span class="pre">__spam</span></code> 会被转换为 <code class="docutils literal notranslate"><span class="pre">_Ham__spam</span></code>。 这种转换独立于标识符所使用的相关句法。 如果转换后的名称太长（超过 255 个字符），可能发生由具体实现定义的截断。 如果类名仅由下划线组成，则不会进行转换。</p>
 </section>
 <section id="literals">
 <span id="atom-literals"></span><h3><span class="section-number">6.2.2. </span>字面值<a class="headerlink" href="#literals" title="永久链接至标题">¶</a></h3>
-<p id="index-6">Python 支持字符串和字节串字面值，以及几种数字字面值:</p>
+<p id="index-6">Python 支持字符串和字节串字面值，以及几种数字字面值：</p>
 <pre>
 <strong id="grammar-token-python-grammar-literal"><span id="grammar-token-literal"></span>literal</strong> ::=  <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-stringliteral"><code class="xref docutils literal notranslate"><span class="pre">stringliteral</span></code></a> | <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-bytesliteral"><code class="xref docutils literal notranslate"><span class="pre">bytesliteral</span></code></a>
              | <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-integer"><code class="xref docutils literal notranslate"><span class="pre">integer</span></code></a> | <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-floatnumber"><code class="xref docutils literal notranslate"><span class="pre">floatnumber</span></code></a> | <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-imagnumber"><code class="xref docutils literal notranslate"><span class="pre">imagnumber</span></code></a>
 </pre>
-<p>对字面值求值将返回一个该值所对应类型的对象（字符串、字节串、整数、浮点数、复数）。 对于浮点数和虚数（复数）的情况，该值可能为近似值。 详情参见 <a class="reference internal" href="lexical_analysis.html#literals"><span class="std std-ref">字面值</span></a>。</p>
+<p>对字面值求值将返回一个该值所对应类型的对象（字符串、字节串、整数、浮点数、复数）。对于浮点数和虚数（复数）的情况，该值可能为近似值。详情参见 <a class="reference internal" href="lexical_analysis.html#literals"><span class="std std-ref">字面值</span></a>。</p>
 <p id="index-7">所有字面值都对应与不可变数据类型，因此对象标识的重要性不如其实际值。 多次对具有相同值的字面值求值（不论是发生在程序文本的相同位置还是不同位置）可能得到相同对象或是具有相同值的不同对象。</p>
 </section>
 <section id="parenthesized-forms">
@@ -246,8 +246,8 @@
 <strong id="grammar-token-python-grammar-parenth_form"><span id="grammar-token-parenth-form"></span>parenth_form</strong> ::=  &quot;(&quot; [<a class="reference internal" href="#grammar-token-python-grammar-starred_expression"><code class="xref docutils literal notranslate"><span class="pre">starred_expression</span></code></a>] &quot;)&quot;
 </pre>
 <p>带圆括号的表达式列表将返回该表达式列表所产生的任何东西：如果该列表包含至少一个逗号，它会产生一个元组；否则，它会产生该表达式列表所对应的单一表达式。</p>
-<p id="index-9">一对内容为空的圆括号将产生一个空的元组对象。 由于元组是不可变对象，因此适用与字面值相同的规则（即两次出现的空元组产生的对象可能相同也可能不同）。</p>
-<p id="index-10">请注意元组并不是由圆括号构建，实际起作用的是逗号操作符。 例外情况是空元组，这时圆括号 <em>才是</em> 必须的 --- 允许在表达式中使用不带圆括号的 &quot;空&quot; 会导致歧义，并会造成常见输入错误无法被捕获。</p>
+<p id="index-9">一对内容为空的圆括号将产生一个空的元组对象。由于元组是不可变对象，因此适用与字面值相同的规则（即两次出现的空元组产生的对象可能相同也可能不同）。</p>
+<p id="index-10">请注意元组并不是由圆括号构建，实际起作用的是逗号操作符。例外情况是空元组，这时圆括号 <em>才是</em> 必须的 --- 允许在表达式中使用不带圆括号的 &quot;空&quot; 会导致歧义，并会造成常见输入错误无法被捕获。</p>
 </section>
 <section id="displays-for-lists-sets-and-dictionaries">
 <span id="comprehensions"></span><h3><span class="section-number">6.2.4. </span>列表、集合与字典的显示<a class="headerlink" href="#displays-for-lists-sets-and-dictionaries" title="永久链接至标题">¶</a></h3>
@@ -256,7 +256,7 @@
 <li><p>第一种是显式地列出容器内容</p></li>
 <li><p>第二种是通过一组循环和筛选指令计算出来，称为 <em class="dfn">推导式</em>。</p></li>
 </ul>
-<p id="index-12">推导式的常用句法元素为:</p>
+<p id="index-12">推导式的常用句法元素为：</p>
 <pre>
 <strong id="grammar-token-python-grammar-comprehension"><span id="grammar-token-comprehension"></span>comprehension</strong> ::=  <a class="reference internal" href="#grammar-token-python-grammar-assignment_expression"><code class="xref docutils literal notranslate"><span class="pre">assignment_expression</span></code></a> <a class="reference internal" href="#grammar-token-python-grammar-comp_for"><code class="xref docutils literal notranslate"><span class="pre">comp_for</span></code></a>
 <strong id="grammar-token-python-grammar-comp_for"><span id="grammar-token-comp-for"></span>comp_for     </strong> ::=  [&quot;async&quot;] &quot;for&quot; <a class="reference internal" href="simple_stmts.html#grammar-token-python-grammar-target_list"><code class="xref docutils literal notranslate"><span class="pre">target_list</span></code></a> &quot;in&quot; <a class="reference internal" href="#grammar-token-python-grammar-or_test"><code class="xref docutils literal notranslate"><span class="pre">or_test</span></code></a> [<a class="reference internal" href="#grammar-token-python-grammar-comp_iter"><code class="xref docutils literal notranslate"><span class="pre">comp_iter</span></code></a>]
@@ -1169,7 +1169,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <br />
     <br />
 
-    最后更新于 11月 26, 2021.
+    最后更新于 11月 28, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

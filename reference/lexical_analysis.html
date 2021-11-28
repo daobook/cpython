@@ -346,21 +346,15 @@ async      elif       if         or         yield
 <span id="id-classes"></span><span id="index-15"></span><h3><span class="section-number">2.3.3. </span>保留的标识符类<a class="headerlink" href="#reserved-classes-of-identifiers" title="永久链接至标题">¶</a></h3>
 <p>某些标识符类（除了关键字）具有特殊含义。这些类的命名模式以下划线字符开头，并以下划线结尾：</p>
 <dl>
-<dt><code class="docutils literal notranslate"><span class="pre">_*</span></code></dt><dd><p>Not imported by <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">_*</span></code></dt><dd><p>不能通过 <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">module</span> <span class="pre">import</span> <span class="pre">*</span></code> 语句导入。</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">_</span></code></dt><dd><p>In a <code class="docutils literal notranslate"><span class="pre">case</span></code> pattern within a <a class="reference internal" href="compound_stmts.html#match"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">match</span></code></a> statement, <code class="docutils literal notranslate"><span class="pre">_</span></code> is a
-<a class="reference internal" href="#soft-keywords"><span class="std std-ref">soft keyword</span></a> that denotes a
-<a class="reference internal" href="compound_stmts.html#wildcard-patterns"><span class="std std-ref">wildcard</span></a>.</p>
-<p>Separately, the interactive interpreter makes the result of the last evaluation
-available in the variable <code class="docutils literal notranslate"><span class="pre">_</span></code>.
-(It is stored in the <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a> module, alongside built-in
-functions like <code class="docutils literal notranslate"><span class="pre">print</span></code>.)</p>
-<p>Elsewhere, <code class="docutils literal notranslate"><span class="pre">_</span></code> is a regular identifier. It is often used to name
-&quot;special&quot; items, but it is not special to Python itself.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">_</span></code></dt><dd><p>在一个 <a class="reference internal" href="compound_stmts.html#match"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">match</span></code></a> 语句中的 <code class="docutils literal notranslate"><span class="pre">case</span></code> 模式中，<code class="docutils literal notranslate"><span class="pre">_</span></code> 是一个 <a class="reference internal" href="#soft-keywords"><span class="std std-ref">软关键字</span></a>，表示一个 <a class="reference internal" href="compound_stmts.html#wildcard-patterns"><span class="std std-ref">wildcard</span></a>。</p>
+<p>另外，交互式解释器在变量 <code class="docutils literal notranslate"><span class="pre">_</span></code> 中提供了最后一次评估的结果。（它存储在 <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a> 模块中，与 <code class="docutils literal notranslate"><span class="pre">print</span></code> 等内置函数一起。）</p>
+<p>在其他地方，<code class="docutils literal notranslate"><span class="pre">_</span></code> 是一个常规标识符。它经常被用来命名 &quot;special&quot; 项目，但它对 Python 本身并不特别。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p><code class="docutils literal notranslate"><span class="pre">_</span></code> 常用于连接国际化文本；详见 <a class="reference internal" href="../library/gettext.html#module-gettext" title="gettext: Multilingual internationalization services."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gettext</span></code></a> 模块文档。</p>
-<p>It is also commonly used for unused variables.</p>
+<p>它也常用于未使用的变量。</p>
 </div>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">__*__</span></code></dt><dd><p>系统定义的名称，通常简称为 &quot;dunder&quot; 。这些名称由解释器及其实现（包括标准库）定义。现有系统定义名称相关的论述详见 <a class="reference internal" href="datamodel.html#specialnames"><span class="std std-ref">特殊方法名称</span></a> 等章节。Python 未来版本中还将定义更多此类名称。任何情况下，<em>任何</em> 不显式遵从 <code class="docutils literal notranslate"><span class="pre">__*__</span></code> 名称的文档用法，都可能导致无警告提示的错误。</p>
@@ -399,11 +393,7 @@ functions like <code class="docutils literal notranslate"><span class="pre">prin
 <strong id="grammar-token-python-grammar-longbyteschar"><span id="grammar-token-longbyteschar"></span>longbyteschar </strong> ::=  &lt;any ASCII character except &quot;\&quot;&gt;
 <strong id="grammar-token-python-grammar-bytesescapeseq"><span id="grammar-token-bytesescapeseq"></span>bytesescapeseq</strong> ::=  &quot;\&quot; &lt;any ASCII character&gt;
 </pre>
-<p>One syntactic restriction not indicated by these productions is that whitespace
-is not allowed between the <a class="reference internal" href="#grammar-token-python-grammar-stringprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">stringprefix</span></code></a> or
-<a class="reference internal" href="#grammar-token-python-grammar-bytesprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">bytesprefix</span></code></a> and the rest of the literal. The source
-character set is defined by the encoding declaration; it is UTF-8 if no encoding
-declaration is given in the source file; see section <a class="reference internal" href="#encodings"><span class="std std-ref">编码声明</span></a>.</p>
+<p>上述产生式没有说明以下句法限制，<a class="reference internal" href="#grammar-token-python-grammar-stringprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">stringprefix</span></code></a> 或 <a class="reference internal" href="#grammar-token-python-grammar-bytesprefix"><code class="xref std std-token docutils literal notranslate"><span class="pre">bytesprefix</span></code></a> 与其他字面值之间不允许有空白符。源字符集由编码声明定义；源文件没有编码声明时，默认为 UTF-8；详见 <a class="reference internal" href="#encodings"><span class="std std-ref">编码声明</span></a>。</p>
 <p id="index-18">通俗地说：两种字面值都可以用单引号（<code class="docutils literal notranslate"><span class="pre">'</span></code>）或双引号（<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>） 标注。也可以用三个单引号或双引号标注（俗称 <em>三引号字符串</em>）。反斜杠（<code class="docutils literal notranslate"><span class="pre">\</span></code>）用于转义特殊字符，例如，换行符、反斜杠本身、引号等。</p>
 <p id="index-19">字节串字面值要加前缀 <code class="docutils literal notranslate"><span class="pre">'b'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'B'</span></code>；生成的是类型 <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 的实例，不是类型 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 的实例；字节串只能包含 ASCII 字符；字节串数值大于等于 128 时，必须用转义表示。</p>
 <p id="index-20">字符串和字节串都可以加前缀 <code class="docutils literal notranslate"><span class="pre">'r'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'R'</span></code>，称为 <em class="dfn">原始字符串</em>，原始字符串把反斜杠当作原义字符，不执行转义操作。因此，原始字符串不转义 <code class="docutils literal notranslate"><span class="pre">'\U'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'\u'</span></code>。与 Python 2.x 的原始 unicode 字面值操作不同，Python 3.x 现已不支持 <code class="docutils literal notranslate"><span class="pre">'ur'</span></code> 句法。</p>
@@ -710,7 +700,7 @@ declaration is given in the source file; see section <a class="reference interna
 &amp;=      |=      ^=      &gt;&gt;=     &lt;&lt;=     **=
 </pre></div>
 </div>
-<p>句点也可以用于浮点数和虚数字面值。三个连续句点表示省略符。列表后半部分是增强赋值操作符，用作词法分隔符，但也可以执行运算。</p>
+<p>句点也可以用于浮点数和虚数字面值。三个连续句点表示省略符。清单后半部分是增强赋值操作符，用作词法分隔符，但也可以执行运算。</p>
 <p>以下 ASCII 字符具有特殊含义，对词法分析器有重要意义：</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;       &quot;       #       \
 </pre></div>
@@ -856,7 +846,7 @@ declaration is given in the source file; see section <a class="reference interna
 <br />
     <br />
 
-    最后更新于 11月 26, 2021.
+    最后更新于 11月 28, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
