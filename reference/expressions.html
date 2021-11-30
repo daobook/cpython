@@ -267,17 +267,7 @@
 <p>不过，除了最左边 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 子句中的可迭代表达式，推导式是在另一个隐式嵌套的作用域内执行的。 这能确保赋给目标列表的名称不会“泄露”到外层的作用域。</p>
 <p>最左边的 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 子句中的可迭代对象表达式会直接在外层作用域中被求值，然后作为一个参数被传给隐式嵌套的作用域。 后续的 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 子句以及最左侧 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 子句中的任何筛选条件不能在外层作用域中被求值，因为它们可能依赖于从最左侧可迭代对象中获得的值。 例如: <code class="docutils literal notranslate"><span class="pre">[x*y</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">range(10)</span> <span class="pre">for</span> <span class="pre">y</span> <span class="pre">in</span> <span class="pre">range(x,</span> <span class="pre">x+10)]</span></code>。</p>
 <p>为了确保推导式得出的结果总是一个类型正确的容器，在隐式嵌套作用域内禁止使用 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 和 <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> 表达式。</p>
-<p id="index-13">Since Python 3.6, in an <a class="reference internal" href="compound_stmts.html#async-def"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code></a> function, an <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code>
-clause may be used to iterate over a <a class="reference internal" href="../glossary.html#term-asynchronous-iterator"><span class="xref std std-term">asynchronous iterator</span></a>.
-A comprehension in an <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code> function may consist of either a
-<code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> or <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> clause following the leading
-expression, may contain additional <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> or <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code>
-clauses, and may also use <a class="reference internal" href="#await"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">await</span></code></a> expressions.
-If a comprehension contains either <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> clauses or
-<code class="xref std std-keyword docutils literal notranslate"><span class="pre">await</span></code> expressions or other asynchronous comprehensions it is called
-an <em class="dfn">asynchronous comprehension</em>.  An asynchronous comprehension may
-suspend the execution of the coroutine function in which it appears.
-See also <span class="target" id="index-14"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0530"><strong>PEP 530</strong></a>.</p>
+<p id="index-13">从 Python 3.6 开始，在一个 <a class="reference internal" href="compound_stmts.html#async-def"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code></a> 函数中，一个 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> 子句可以用来迭代一个 <a class="reference internal" href="../glossary.html#term-asynchronous-iterator"><span class="xref std std-term">asynchronous iterator</span></a>。一个 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">def</span></code> 函数中的推导可以由一个 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 或 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> 子句组成，在前导表达式之后，可以包含额外的 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 或 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> 子句，也可以使用 <a class="reference internal" href="#await"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">await</span></code></a> 表达。如果一个推导包含 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code> 子句或 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">await</span></code> 表达式或其他异步推导，它被称为 <em class="dfn">asynchronous comprehension</em>。一个异步推导可能会暂停执行它所出现的协程函数。参见 <span class="target" id="index-110"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0530"><strong>PEP 530</strong></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能: </span>引入了异步推导式。</p>
 </div>
@@ -320,12 +310,12 @@ asynchronous.</p>
 <p>如果给出一个由逗号分隔的键/数据对序列，它们会从左至右被求值以定义字典的条目：每个键对象会被用作在字典中存放相应数据的键。 这意味着你可以在键/数据对序列中多次指定相同的键，最终字典的值将由最后一次给出的键决定。</p>
 <p id="index-18">双星号 <code class="docutils literal notranslate"><span class="pre">**</span></code> 表示 <em class="dfn">字典拆包</em>。 它的操作数必须是一个 <a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a>。 每个映射项被会加入新的字典。 后续的值会替代先前的键/数据对和先前的字典拆包所设置的值。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.5 新版功能: </span>拆包到字典显示，最初由 <span class="target" id="index-109"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 提出。</p>
+<p><span class="versionmodified added">3.5 新版功能: </span>拆包到字典显示，最初由 <span class="target" id="index-111"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 提出。</p>
 </div>
 <p>字典推导式与列表和集合推导式有所不同，它需要以冒号分隔的两个表达式，后面带上标准的 &quot;for&quot; 和 &quot;if&quot; 子句。 当推导式被执行时，作为结果的键和值元素会按它们的产生顺序被加入新的字典。</p>
 <p id="index-20">对键取值类型的限制已列在之前的 <a class="reference internal" href="datamodel.html#types"><span class="std std-ref">标准类型层级结构</span></a> 一节中。 (总的说来，键的类型应该为 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a>，这就把所有可变对象都排除在外。) 重复键之间的冲突不会被检测；指定键所保存的最后一个数据 (即在显示中排最右边的文本) 为最终有效数据。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>在 Python 3.8 之前的字典推导式中，并没有定义好键和值的求值顺序。 在 CPython 中，值会先于键被求值。 根据 <span class="target" id="index-110"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0572"><strong>PEP 572</strong></a> 的提议，从 3.8 开始，键会先于值被求值。</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>在 Python 3.8 之前的字典推导式中，并没有定义好键和值的求值顺序。 在 CPython 中，值会先于键被求值。 根据 <span class="target" id="index-112"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0572"><strong>PEP 572</strong></a> 的提议，从 3.8 开始，键会先于值被求值。</p>
 </div>
 </section>
 <section id="generator-expressions">
@@ -396,14 +386,14 @@ the result will be the value passed in to that method.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-111"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0255"><strong>PEP 255</strong></a> - 简单生成器</dt><dd><p>在 Python 中加入生成器和 <a class="reference internal" href="simple_stmts.html#yield"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">yield</span></code></a> 语句的提议。</p>
+<dt><span class="target" id="index-113"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0255"><strong>PEP 255</strong></a> - 简单生成器</dt><dd><p>在 Python 中加入生成器和 <a class="reference internal" href="simple_stmts.html#yield"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">yield</span></code></a> 语句的提议。</p>
 </dd>
-<dt><span class="target" id="index-112"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> - 通过增强型生成器实现协程</dt><dd><p>增强生成器 API 和语法的提议，使其可以被用作简单的协程。</p>
+<dt><span class="target" id="index-114"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> - 通过增强型生成器实现协程</dt><dd><p>增强生成器 API 和语法的提议，使其可以被用作简单的协程。</p>
 </dd>
-<dt><span class="target" id="index-113"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0380"><strong>PEP 380</strong></a> - 委托给子生成器的语法</dt><dd><p>The proposal to introduce the <code class="xref std std-token docutils literal notranslate"><span class="pre">yield_from</span></code> syntax,
+<dt><span class="target" id="index-115"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0380"><strong>PEP 380</strong></a> - 委托给子生成器的语法</dt><dd><p>The proposal to introduce the <code class="xref std std-token docutils literal notranslate"><span class="pre">yield_from</span></code> syntax,
 making delegation to subgenerators easy.</p>
 </dd>
-<dt><span class="target" id="index-114"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0525"><strong>PEP 525</strong></a> - 异步生成器</dt><dd><p>通过给协程函数加入生成器功能对 <span class="target" id="index-115"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 进行扩展的提议。</p>
+<dt><span class="target" id="index-116"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0525"><strong>PEP 525</strong></a> - 异步生成器</dt><dd><p>通过给协程函数加入生成器功能对 <span class="target" id="index-117"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 进行扩展的提议。</p>
 </dd>
 </dl>
 </div>
@@ -642,7 +632,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <p id="index-50">如果函数调用中出现了 <code class="docutils literal notranslate"><span class="pre">**expression</span></code> 句法，<code class="docutils literal notranslate"><span class="pre">expression</span></code> 必须求值为一个 <a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a>，其内容会被当作是额外的关键字参数。 如果一个关键字已存在（作为显式关键字参数，或来自另一个拆包），则将引发 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> 异常。</p>
 <p>使用 <code class="docutils literal notranslate"><span class="pre">*identifier</span></code> 或 <code class="docutils literal notranslate"><span class="pre">**identifier</span></code> 句法的正式参数不能被用作位置参数空位或关键字参数名称。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.5 版更改: </span>函数调用接受任意数量的 <code class="docutils literal notranslate"><span class="pre">*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**</span></code> 拆包，位置参数可能跟在可迭代对象拆包 (<code class="docutils literal notranslate"><span class="pre">*</span></code>) 之后，而关键字参数可能跟在字典拆包 (<code class="docutils literal notranslate"><span class="pre">**</span></code>) 之后。 由 <span class="target" id="index-116"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 发起最初提议。</p>
+<p><span class="versionmodified changed">在 3.5 版更改: </span>函数调用接受任意数量的 <code class="docutils literal notranslate"><span class="pre">*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**</span></code> 拆包，位置参数可能跟在可迭代对象拆包 (<code class="docutils literal notranslate"><span class="pre">*</span></code>) 之后，而关键字参数可能跟在字典拆包 (<code class="docutils literal notranslate"><span class="pre">**</span></code>) 之后。 由 <span class="target" id="index-118"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 发起最初提议。</p>
 </div>
 <p>除非引发了异常，调用总是会有返回值，返回值也可能为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。 返回值的计算方式取决于可调用对象的类型。</p>
 <p>如果类型为---</p>
@@ -768,7 +758,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <li><p>内置数值类型 (<a class="reference internal" href="../library/stdtypes.html#typesnumeric"><span class="std std-ref">数字类型 --- int, float, complex</span></a>) 以及标准库类型 <a class="reference internal" href="../library/fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a> 和 <a class="reference internal" href="../library/decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> 可进行类型内部和跨类型的比较，例外限制是复数不支持次序比较。 在类型相关的限制以内，它们会按数学（算法）规则正确进行比较且不会有精度损失。</p>
 <p>非数字值 <code class="docutils literal notranslate"><span class="pre">float('NaN')</span></code> 和 <code class="docutils literal notranslate"><span class="pre">decimal.Decimal('NaN')</span></code> 属于特例。 任何数字与非数字值的排序比较均返回假值。 还有一个反直觉的结果是非数字值不等于其自身。 举例来说，如果 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">float('NaN')</span></code> 则 <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">&lt;</span> <span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">3</span></code> 和 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">x</span></code> 均为假值，而 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">!=</span> <span class="pre">x</span></code> 则为真值。 此行为是遵循 IEEE 754 标准的。</p>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> 都是单例对象。 <span class="target" id="index-117"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a> 建议单例对象的比较应当总是通过 <code class="docutils literal notranslate"><span class="pre">is</span></code> 或 <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> 而不是等于运算符来进行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NotImplemented</span></code> 都是单例对象。 <span class="target" id="index-119"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a> 建议单例对象的比较应当总是通过 <code class="docutils literal notranslate"><span class="pre">is</span></code> 或 <code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code> 而不是等于运算符来进行。</p></li>
 <li><p>二进制码序列 (<a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 或 <a class="reference internal" href="../library/stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 的实例) 可进行类型内部和跨类型的比较。 它们使用其元素的数字值按字典顺序进行比较。</p></li>
 <li><p>字符串 (<a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 的实例) 使用其字符的 Unicode 码位数字值 (内置函数 <a class="reference internal" href="../library/functions.html#ord" title="ord"><code class="xref py py-func docutils literal notranslate"><span class="pre">ord()</span></code></a> 的结果) 按字典顺序进行比较。 <a class="footnote-reference brackets" href="#id19" id="id12">3</a></p>
 <p>字符串和二进制码序列不能直接比较。</p>
@@ -870,7 +860,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 </pre></div>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified added">3.8 新版功能: </span>请参阅 <span class="target" id="index-118"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0572"><strong>PEP 572</strong></a> 了解有关赋值表达式的详情。</p>
+<p><span class="versionmodified added">3.8 新版功能: </span>请参阅 <span class="target" id="index-120"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0572"><strong>PEP 572</strong></a> 了解有关赋值表达式的详情。</p>
 </div>
 </section>
 <section id="conditional-expressions">
@@ -881,7 +871,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 </pre>
 <p>条件表达式（有时称为“三元运算符”）在所有 Python 运算中具有最低的优先级。</p>
 <p>表达式 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">if</span> <span class="pre">C</span> <span class="pre">else</span> <span class="pre">y</span></code> 首先是对条件 <em>C</em> 而非 <em>x</em> 求值。 如果 <em>C</em> 为真，<em>x</em> 将被求值并返回其值；否则将对 <em>y</em> 求值并返回其值。</p>
-<p>请参阅 <span class="target" id="index-119"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0308"><strong>PEP 308</strong></a> 了解有关条件表达式的详情。</p>
+<p>请参阅 <span class="target" id="index-121"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0308"><strong>PEP 308</strong></a> 了解有关条件表达式的详情。</p>
 </section>
 <section id="lambda">
 <span id="lambdas"></span><span id="id14"></span><h2><span class="section-number">6.14. </span>lambda 表达式<a class="headerlink" href="#lambda" title="永久链接至标题">¶</a></h2>
@@ -906,7 +896,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <p id="index-91">除了作为列表或集合显示的一部分，包含至少一个逗号的表达式列表将生成一个元组。 元组的长度就是列表中表达式的数量。 表达式将从左至右被求值。</p>
 <p id="index-92">一个星号 <code class="docutils literal notranslate"><span class="pre">*</span></code> 表示 <em class="dfn">可迭代拆包</em>。 其操作数必须为一个 <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a>。 该可迭代对象将被拆解为迭代项的序列，并被包含于在拆包位置上新建的元组、列表或集合之中。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.5 新版功能: </span>表达式列表中的可迭代对象拆包，最初由 <span class="target" id="index-120"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 提出。</p>
+<p><span class="versionmodified added">3.5 新版功能: </span>表达式列表中的可迭代对象拆包，最初由 <span class="target" id="index-122"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0448"><strong>PEP 448</strong></a> 提出。</p>
 </div>
 <p id="index-94">末尾的逗号仅在创建单独元组 (或称 <em>单例</em>) 时需要；在所有其他情况下都是可选项。 没有末尾逗号的单独表达式不会创建一个元组，而是产生该表达式的值。 （要创建一个空元组，应使用一对内容为空的圆括号: <code class="docutils literal notranslate"><span class="pre">()</span></code>。）</p>
 </section>
@@ -1169,7 +1159,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <br />
     <br />
 
-    最后更新于 11月 28, 2021.
+    最后更新于 11月 30, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

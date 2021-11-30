@@ -213,17 +213,17 @@
 <strong id="grammar-token-python-grammar-statement"><span id="grammar-token-statement"></span>statement    </strong> ::=  <a class="reference internal" href="#grammar-token-python-grammar-stmt_list"><code class="xref docutils literal notranslate"><span class="pre">stmt_list</span></code></a> NEWLINE | <a class="reference internal" href="#grammar-token-python-grammar-compound_stmt"><code class="xref docutils literal notranslate"><span class="pre">compound_stmt</span></code></a>
 <strong id="grammar-token-python-grammar-stmt_list"><span id="grammar-token-stmt-list"></span>stmt_list    </strong> ::=  <a class="reference internal" href="simple_stmts.html#grammar-token-python-grammar-simple_stmt"><code class="xref docutils literal notranslate"><span class="pre">simple_stmt</span></code></a> (&quot;;&quot; <a class="reference internal" href="simple_stmts.html#grammar-token-python-grammar-simple_stmt"><code class="xref docutils literal notranslate"><span class="pre">simple_stmt</span></code></a>)* [&quot;;&quot;]
 </pre>
-<p id="index-2">请注意语句总是以 <code class="docutils literal notranslate"><span class="pre">NEWLINE</span></code> 结束，之后可能跟随一个 <code class="docutils literal notranslate"><span class="pre">DEDENT</span></code>。 还要注意可选的后续子句总是以一个不能作为语句开头的关键字作为开头，因此不会产生歧义（‘悬空的 <a class="reference internal" href="#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a>’问题在 Python 中是通过要求嵌套的 <a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句必须缩进来解决的)。</p>
+<p id="index-2">请注意语句总是以 <code class="docutils literal notranslate"><span class="pre">NEWLINE</span></code> 结束，之后可能跟随一个 <code class="docutils literal notranslate"><span class="pre">DEDENT</span></code>。 还要注意可选的后续子句总是以一个不能作为语句开头的关键字作为开头，因此不会产生歧义（‘悬空的 <a class="reference internal" href="#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a>’问题在 Python 中是通过要求嵌套的 <a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句必须缩进来解决的）。</p>
 <p>为了保证清晰，以下各节中语法规则采用将每个子句都放在单独行中的格式。</p>
 <section id="the-if-statement">
 <span id="else"></span><span id="elif"></span><span id="if"></span><h2><span class="section-number">8.1. </span><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code> 语句<a class="headerlink" href="#the-if-statement" title="永久链接至标题">¶</a></h2>
-<p id="index-3"><a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句用于有条件的执行:</p>
+<p id="index-3"><a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句用于条件性执行：</p>
 <pre>
 <strong id="grammar-token-python-grammar-if_stmt"><span id="grammar-token-if-stmt"></span>if_stmt</strong> ::=  &quot;if&quot; <a class="reference internal" href="expressions.html#grammar-token-python-grammar-assignment_expression"><code class="xref docutils literal notranslate"><span class="pre">assignment_expression</span></code></a> &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>
              (&quot;elif&quot; <a class="reference internal" href="expressions.html#grammar-token-python-grammar-assignment_expression"><code class="xref docutils literal notranslate"><span class="pre">assignment_expression</span></code></a> &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>)*
              [&quot;else&quot; &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>]
 </pre>
-<p>它通过对表达式逐个求值直至找到一个真值（请参阅 <a class="reference internal" href="expressions.html#booleans"><span class="std std-ref">布尔运算</span></a> 了解真值与假值的定义）在子句体中选择唯一匹配的一个；然后执行该子句体（而且 <a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句的其他部分不会被执行或求值）。 如果所有表达式均为假值，则如果 <a class="reference internal" href="#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a> 子句体如果存在就会被执行。</p>
+<p>它通过对表达式逐个求值直至找到一个真值（请参阅 <a class="reference internal" href="expressions.html#booleans"><span class="std std-ref">布尔运算</span></a> 了解真值与假值的定义）在子句体中选择唯一匹配的一个；然后执行该子句体（而且 <a class="reference internal" href="#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句的其他部分不会被执行或求值）。 如果所有表达式均为假值，则如果 <a class="reference internal" href="#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a> 子句体存在就会被执行。</p>
 </section>
 <section id="the-while-statement">
 <span id="while"></span><h2><span class="section-number">8.2. </span><code class="xref std std-keyword docutils literal notranslate"><span class="pre">while</span></code> 语句<a class="headerlink" href="#the-while-statement" title="永久链接至标题">¶</a></h2>
@@ -1357,7 +1357,7 @@ are mappings.</p>
 <br />
     <br />
 
-    最后更新于 11月 28, 2021.
+    最后更新于 11月 30, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

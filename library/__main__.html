@@ -74,13 +74,13 @@
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code> --- Top-level code environment</a><ul>
 <li><a class="reference internal" href="#name-main"><code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code></a><ul>
-<li><a class="reference internal" href="#what-is-the-top-level-code-environment">What is the &quot;top-level code environment&quot;?</a></li>
-<li><a class="reference internal" href="#idiomatic-usage">Idiomatic Usage</a></li>
-<li><a class="reference internal" href="#packaging-considerations">Packaging Considerations</a></li>
+<li><a class="reference internal" href="#what-is-the-top-level-code-environment">什么是 &quot;顶层代码环境&quot;？</a></li>
+<li><a class="reference internal" href="#idiomatic-usage">习语用法</a></li>
+<li><a class="reference internal" href="#packaging-considerations">包装方面的考虑</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#main-py-in-python-packages"><code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> in Python Packages</a><ul>
-<li><a class="reference internal" href="#id1">Idiomatic Usage</a></li>
+<li><a class="reference internal" href="#id1">习语用法</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#import-main"><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">__main__</span></code></a></li>
@@ -167,50 +167,39 @@
   <section id="module-__main__">
 <span id="main-top-level-code-environment"></span><h1><a class="reference internal" href="#module-__main__" title="__main__: The environment where top-level code is run. Covers command-line interfaces, import-time behavior, and ``__name__ == '__main__'``."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> --- Top-level code environment<a class="headerlink" href="#module-__main__" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
-<p>In Python, the special name <code class="docutils literal notranslate"><span class="pre">__main__</span></code> is used for two important constructs:</p>
+<p>在 Python 中，特殊名称 <code class="docutils literal notranslate"><span class="pre">__main__</span></code> 用于两个重要的结构：</p>
 <ol class="arabic simple">
-<li><p>the name of the top-level environment of the program, which can be
-checked using the <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> expression; and</p></li>
-<li><p>the <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> file in Python packages.</p></li>
+<li><p>程序顶层环境的名称，可以用 <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> 表达式来检查；以及</p></li>
+<li><p>Python 软件包中的 <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> 文件。</p></li>
 </ol>
-<p>Both of these mechanisms are related to Python modules; how users interact with
-them and how they interact with each other.  They are explained in detail
-below.  If you're new to Python modules, see the tutorial section
-<a class="reference internal" href="../tutorial/modules.html#tut-modules"><span class="std std-ref">模块</span></a> for an introduction.</p>
+<p>这两种机制都与 Python 模块有关；用户如何与它们交互以及它们之间如何交互。下面对此进行了详细的解释。如果你是 Python 模块的新手，请参阅教程部分 <a class="reference internal" href="../tutorial/modules.html#tut-modules"><span class="std std-ref">模块</span></a> 的介绍。</p>
 <section id="name-main">
 <span id="name-equals-main"></span><h2><code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code><a class="headerlink" href="#name-main" title="永久链接至标题">¶</a></h2>
-<p>When a Python module or package is imported, <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is set to the
-module's name.  Usually, this is the name of the Python file itself without the
-<code class="docutils literal notranslate"><span class="pre">.py</span></code> extension:</p>
+<p>当一个 Python 模块或包被导入时，<code class="docutils literal notranslate"><span class="pre">__name__</span></code> 被设置为模块的名称。通常，这是 Python 文件本身的名称，没有 <code class="docutils literal notranslate"><span class="pre">.py</span></code> 扩展名</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">configparser</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">configparser</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="go">&#39;configparser&#39;</span>
 </pre></div>
 </div>
-<p>If the file is part of a package, <code class="docutils literal notranslate"><span class="pre">__name__</span></code> will also include the parent
-package's path:</p>
+<p>如果该文件是一个包的一部分，<code class="docutils literal notranslate"><span class="pre">__name__</span></code> 也将包括父包的路径</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">process</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">process</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="go">&#39;concurrent.futures.process&#39;</span>
 </pre></div>
 </div>
-<p>However, if the module is executed in the top-level code environment,
-its <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is set to the string <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>.</p>
+<p>然而，如果该模块在顶层代码环境中执行，它的 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 被设置为字符串 <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>。</p>
 <section id="what-is-the-top-level-code-environment">
-<h3>What is the &quot;top-level code environment&quot;?<a class="headerlink" href="#what-is-the-top-level-code-environment" title="永久链接至标题">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">__main__</span></code> is the name of the environment where top-level code is run.
-&quot;Top-level code&quot; is the first user-specified Python module that starts running.
-It's &quot;top-level&quot; because it imports all other modules that the program needs.
-Sometimes &quot;top-level code&quot; is called an <em>entry point</em> to the application.</p>
-<p>The top-level code environment can be:</p>
+<h3>什么是 &quot;顶层代码环境&quot;？<a class="headerlink" href="#what-is-the-top-level-code-environment" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">__main__</span></code> 是运行顶层代码的环境名称。&quot;顶层代码&quot; 是第一个开始运行的用户指定的 Python 模块。它是 &quot;顶层代码&quot; 因为它导入了程序需要的所有其它模块。有时，&quot;顶层代码&quot; 被称为应用程序的 <em>入口点</em>。</p>
+<p>顶层的代码环境可以是：</p>
 <ul>
-<li><p>the scope of an interactive prompt:</p>
+<li><p>交互提示的范围</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="vm">__name__</span>
 <span class="go">&#39;__main__&#39;</span>
 </pre></div>
 </div>
 </li>
-<li><p>the Python module passed to the Python interpreter as a file argument:</p>
+<li><p>作为文件参数传递给 Python 解释器的 Python 模块：</p>
 <blockquote>
 <div><div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3 helloworld.py
 <span class="go">Hello, world!</span>
@@ -218,8 +207,7 @@ Sometimes &quot;top-level code&quot; is called an <em>entry point</em> to the ap
 </div>
 </div></blockquote>
 </li>
-<li><p>the Python module or package passed to the Python interpreter with the
-<a class="reference internal" href="../using/cmdline.html#cmdoption-m"><code class="xref std std-option docutils literal notranslate"><span class="pre">-m</span></code></a> argument:</p>
+<li><p>通过 <a class="reference internal" href="../using/cmdline.html#cmdoption-m"><code class="xref std std-option docutils literal notranslate"><span class="pre">-m</span></code></a> 参数传递给 Python 解释器的 Python 模块或包：</p>
 <blockquote>
 <div><div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3 -m tarfile
 <span class="go">usage: tarfile.py [-h] [-v] (...)</span>
@@ -227,7 +215,7 @@ Sometimes &quot;top-level code&quot; is called an <em>entry point</em> to the ap
 </div>
 </div></blockquote>
 </li>
-<li><p>Python code read by the Python interpreter from standard input:</p>
+<li><p>Python 解释器从标准输入读取的 Python 代码：</p>
 <blockquote>
 <div><div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;import this&quot;</span> <span class="p">|</span> python3
 <span class="go">The Zen of Python, by Tim Peters</span>
@@ -239,7 +227,7 @@ Sometimes &quot;top-level code&quot; is called an <em>entry point</em> to the ap
 </div>
 </div></blockquote>
 </li>
-<li><p>Python code passed to the Python interpreter with the <a class="reference internal" href="../using/cmdline.html#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> argument:</p>
+<li><p>用 <a class="reference internal" href="../using/cmdline.html#cmdoption-c"><code class="xref std std-option docutils literal notranslate"><span class="pre">-c</span></code></a> 参数传递给 Python 解释器的 Python 代码：</p>
 <blockquote>
 <div><div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3 -c <span class="s2">&quot;import this&quot;</span>
 <span class="go">The Zen of Python, by Tim Peters</span>
@@ -252,12 +240,8 @@ Sometimes &quot;top-level code&quot; is called an <em>entry point</em> to the ap
 </div></blockquote>
 </li>
 </ul>
-<p>In each of these situations, the top-level module's <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is set to
-<code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>.</p>
-<p>As a result, a module can discover whether or not it is running in the
-top-level environment by checking its own <code class="docutils literal notranslate"><span class="pre">__name__</span></code>, which allows a common
-idiom for conditionally executing code when the module is not initialized from
-an import statement:</p>
+<p>在每一种情况下，顶层模块的 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 被设置为 <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>。</p>
+<p>因此，一个模块可以通过检查它自己的 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 来得知是否在顶层环境中运行，这就允许在模块没有从导入语句中初始化时，有条件地执行代码的常见习语</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1"># Execute when the module is not initialized from an import statement.</span>
     <span class="o">...</span>
@@ -265,22 +249,14 @@ an import statement:</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p>For a more detailed look at how <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is set in all situations, see
-the tutorial section <a class="reference internal" href="../tutorial/modules.html#tut-modules"><span class="std std-ref">模块</span></a>.</p>
+<p>关于在所有情况下如何设置 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 的问题，请看教程部分 <a class="reference internal" href="../tutorial/modules.html#tut-modules"><span class="std std-ref">模块</span></a>。</p>
 </div>
 </section>
 <section id="idiomatic-usage">
-<h3>Idiomatic Usage<a class="headerlink" href="#idiomatic-usage" title="永久链接至标题">¶</a></h3>
-<p>Some modules contain code that is intended for script use only, like parsing
-command-line arguments or fetching data from standard input.  If a module
-like this was imported from a different module, for example to unit test
-it, the script code would unintentionally execute as well.</p>
-<p>This is where using the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> code block comes in
-handy. Code within this block won't run unless the module is executed in the
-top-level environment.</p>
-<p>Putting as few statements as possible in the block below <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name___</span> <span class="pre">==</span>
-<span class="pre">'__main__'</span></code> can improve code clarity and correctness. Most often, a function
-named <code class="docutils literal notranslate"><span class="pre">main</span></code> encapsulates the program's primary behavior:</p>
+<h3>习语用法<a class="headerlink" href="#idiomatic-usage" title="永久链接至标题">¶</a></h3>
+<p>有些模块包含了仅供脚本使用的代码，比如解析命令行参数或从标准输入获取数据。如果像这样的模块被从不同的模块中导入，例如为了单元测试，脚本代码也会无意中执行。</p>
+<p>这就是使用 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> 代码块的用武之地。除非模块在顶层环境中被执行，否则该块中的代码不会运行。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name___</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> 下面的块中放入尽可能少的语句可以提高代码的清晰度和正确性。大多数情况下，一个名为 <code class="docutils literal notranslate"><span class="pre">main</span></code> 的函数封装了程序的主要行为</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># echo.py</span>
 
 <span class="kn">import</span> <span class="nn">shlex</span>
@@ -302,19 +278,11 @@ named <code class="docutils literal notranslate"><span class="pre">main</span></
     <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>  <span class="c1"># next section explains the use of sys.exit</span>
 </pre></div>
 </div>
-<p>Note that if the module didn't encapsulate code inside the <code class="docutils literal notranslate"><span class="pre">main</span></code> function
-but instead put it directly within the <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> block,
-the <code class="docutils literal notranslate"><span class="pre">phrase</span></code> variable would be global to the entire module.  This is
-error-prone as other functions within the module could be unintentionally using
-the global variable instead of a local name.  A <code class="docutils literal notranslate"><span class="pre">main</span></code> function solves this
-problem.</p>
-<p>Using a <code class="docutils literal notranslate"><span class="pre">main</span></code> function has the added benefit of the <code class="docutils literal notranslate"><span class="pre">echo</span></code> function itself
-being isolated and importable elsewhere. When <code class="docutils literal notranslate"><span class="pre">echo.py</span></code> is imported, the
-<code class="docutils literal notranslate"><span class="pre">echo</span></code> and <code class="docutils literal notranslate"><span class="pre">main</span></code> functions will be defined, but neither of them will be
-called, because <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">!=</span> <span class="pre">'__main__'</span></code>.</p>
+<p>注意，如果模块没有在 <code class="docutils literal notranslate"><span class="pre">main</span></code> 函数内封装代码，而是直接放在 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> 块内，<code class="docutils literal notranslate"><span class="pre">phrase</span></code> 变量将对整个模块是全局的。这很容易出错，因为模块中的其他函数可能会无意中使用全局变量而不是局部名称。一个 <code class="docutils literal notranslate"><span class="pre">main</span></code> 函数解决了这个问题。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">main</span></code> 函数有一个额外的好处，就是 <code class="docutils literal notranslate"><span class="pre">echo</span></code> 函数本身是孤立的，可以在其他地方导入。当 <code class="docutils literal notranslate"><span class="pre">echo.py</span></code> 被导入时，<code class="docutils literal notranslate"><span class="pre">echo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">main</span></code> 函数将被定义，但它们都不会被调用，因为 <code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">!=</span> <span class="pre">'__main__'</span></code>。</p>
 </section>
 <section id="packaging-considerations">
-<h3>Packaging Considerations<a class="headerlink" href="#packaging-considerations" title="永久链接至标题">¶</a></h3>
+<h3>包装方面的考虑<a class="headerlink" href="#packaging-considerations" title="永久链接至标题">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">main</span></code> functions are often used to create command-line tools by specifying
 them as entry points for console scripts.  When this is done,
 <a class="reference external" href="https://pip.pypa.io/">pip</a> inserts the function call into a template script,
@@ -379,7 +347,7 @@ import.  This import style can be used when referencing modules within a
 package.  For more details, see <a class="reference internal" href="../tutorial/modules.html#intra-package-references"><span class="std std-ref">子包参考</span></a> in the
 <a class="reference internal" href="../tutorial/modules.html#tut-modules"><span class="std std-ref">模块</span></a> section of the tutorial.</p>
 <section id="id1">
-<h3>Idiomatic Usage<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<h3>习语用法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
 <p>The contents of <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> typically isn't fenced with
 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> blocks.  Instead, those files are kept short,
 functions to execute from other modules.  Those other modules can then be
@@ -509,13 +477,13 @@ attribute as it's interactive.</p>
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code> --- Top-level code environment</a><ul>
 <li><a class="reference internal" href="#name-main"><code class="docutils literal notranslate"><span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code></a><ul>
-<li><a class="reference internal" href="#what-is-the-top-level-code-environment">What is the &quot;top-level code environment&quot;?</a></li>
-<li><a class="reference internal" href="#idiomatic-usage">Idiomatic Usage</a></li>
-<li><a class="reference internal" href="#packaging-considerations">Packaging Considerations</a></li>
+<li><a class="reference internal" href="#what-is-the-top-level-code-environment">什么是 &quot;顶层代码环境&quot;？</a></li>
+<li><a class="reference internal" href="#idiomatic-usage">习语用法</a></li>
+<li><a class="reference internal" href="#packaging-considerations">包装方面的考虑</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#main-py-in-python-packages"><code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> in Python Packages</a><ul>
-<li><a class="reference internal" href="#id1">Idiomatic Usage</a></li>
+<li><a class="reference internal" href="#id1">习语用法</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#import-main"><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">__main__</span></code></a></li>
@@ -607,7 +575,7 @@ attribute as it's interactive.</p>
 <br />
     <br />
 
-    最后更新于 11月 28, 2021.
+    最后更新于 11月 30, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
