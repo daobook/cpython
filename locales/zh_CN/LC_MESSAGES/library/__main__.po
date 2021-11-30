@@ -33,16 +33,18 @@ msgid ""
 "In Python, the special name ``__main__`` is used for two important "
 "constructs:"
 msgstr ""
+"在 Python 中，特殊名称 ``__main__`` 用于两个重要的结构："
 
 #: ../../library/__main__.rst:12
 msgid ""
 "the name of the top-level environment of the program, which can be "
 "checked using the ``__name__ == '__main__'`` expression; and"
 msgstr ""
+"程序顶层环境的名称，可以用 ``__name__ == '__main__'`` 表达式来检查；以及"
 
 #: ../../library/__main__.rst:14
 msgid "the ``__main__.py`` file in Python packages."
-msgstr ""
+msgstr "Python 软件包中的 ``__main__.py`` 文件。"
 
 #: ../../library/__main__.rst:16
 msgid ""
@@ -51,6 +53,8 @@ msgid ""
 "explained in detail below.  If you're new to Python modules, see the "
 "tutorial section :ref:`tut-modules` for an introduction."
 msgstr ""
+"这两种机制都与 Python 模块有关；用户如何与它们交互以及它们之间如何交互。"
+"下面对此进行了详细的解释。如果你是 Python 模块的新手，请参阅教程部分 :ref:`tut-modules` 的介绍。"
 
 #: ../../library/__main__.rst:25
 msgid "``__name__ == '__main__'``"
@@ -62,22 +66,26 @@ msgid ""
 "module's name.  Usually, this is the name of the Python file itself "
 "without the ``.py`` extension::"
 msgstr ""
+"当一个 Python 模块或包被导入时，``__name__`` 被设置为模块的名称。"
+"通常，这是 Python 文件本身的名称，没有 ``.py`` 扩展名 ::"
 
 #: ../../library/__main__.rst:35
 msgid ""
 "If the file is part of a package, ``__name__`` will also include the "
 "parent package's path::"
 msgstr ""
+"如果该文件是一个包的一部分，``__name__`` 也将包括父包的路径 ::"
 
 #: ../../library/__main__.rst:42
 msgid ""
 "However, if the module is executed in the top-level code environment, its"
 " ``__name__`` is set to the string ``'__main__'``."
 msgstr ""
+"然而，如果该模块在顶层代码环境中执行，它的 ``__name__`` 被设置为字符串 ``'__main__'``。"
 
 #: ../../library/__main__.rst:46
 msgid "What is the \"top-level code environment\"?"
-msgstr ""
+msgstr "什么是 \"顶层代码环境\"？"
 
 #: ../../library/__main__.rst:48
 msgid ""
@@ -87,61 +95,68 @@ msgid ""
 " program needs. Sometimes \"top-level code\" is called an *entry point* "
 "to the application."
 msgstr ""
+"``__main__`` 是运行顶层代码的环境名称。"
+"\"顶层代码\" 是第一个开始运行的用户指定的 Python 模块。"
+"它是 \"顶层代码\" 因为它导入了程序需要的所有其它模块。"
+"有时，\"顶层代码\" 被称为应用程序的 *入口点*。"
 
 #: ../../library/__main__.rst:53
 msgid "The top-level code environment can be:"
-msgstr ""
+msgstr "顶层的代码环境可以是："
 
 #: ../../library/__main__.rst:55
 msgid "the scope of an interactive prompt::"
-msgstr ""
+msgstr "交互提示的范围 ::"
 
 #: ../../library/__main__.rst:60
 msgid "the Python module passed to the Python interpreter as a file argument:"
-msgstr ""
+msgstr "作为文件参数传递给 Python 解释器的 Python 模块："
 
 #: ../../library/__main__.rst:67
 msgid ""
 "the Python module or package passed to the Python interpreter with the "
 ":option:`-m` argument:"
 msgstr ""
+"通过 :option:`-m` 参数传递给 Python 解释器的 Python 模块或包："
 
 #: ../../library/__main__.rst:75
 msgid "Python code read by the Python interpreter from standard input:"
-msgstr ""
+msgstr "Python 解释器从标准输入读取的 Python 代码："
 
 #: ../../library/__main__.rst:86
 msgid ""
 "Python code passed to the Python interpreter with the :option:`-c` "
 "argument:"
 msgstr ""
+"用 :option:`-c` 参数传递给 Python 解释器的 Python 代码："
 
 #: ../../library/__main__.rst:97
 msgid ""
 "In each of these situations, the top-level module's ``__name__`` is set "
 "to ``'__main__'``."
 msgstr ""
+"在每一种情况下，顶层模块的 ``__name__`` 被设置为 ``'__main__'``。"
 
 #: ../../library/__main__.rst:100
-#, fuzzy
 msgid ""
 "As a result, a module can discover whether or not it is running in the "
 "top-level environment by checking its own ``__name__``, which allows a "
 "common idiom for conditionally executing code when the module is not "
 "initialized from an import statement::"
 msgstr ""
-"模块可以通过检查自己的 ``__name__`` 来得知是否运行在 main 作用域中，这使得模块可以在作为脚本或是通过 ``python "
-"-m`` 运行时条件性地执行一些代码，而在被 import 时不会执行。"
+"因此，一个模块可以通过检查它自己的 ``__name__`` 来得知是否在顶层环境中运行，"
+"这就允许在模块没有从导入语句中初始化时，有条件地执行代码的常见习语 ::"
 
 #: ../../library/__main__.rst:111
 msgid ""
 "For a more detailed look at how ``__name__`` is set in all situations, "
 "see the tutorial section :ref:`tut-modules`."
 msgstr ""
+"关于在所有情况下如何设置 ``__name__`` 的问题，请看教程部分 :ref:`tut-modules`。"
 
 #: ../../library/__main__.rst:116 ../../library/__main__.rst:239
 msgid "Idiomatic Usage"
-msgstr ""
+msgstr "习语用法"
 
 #: ../../library/__main__.rst:118
 msgid ""
@@ -150,6 +165,8 @@ msgid ""
 "a module like this was imported from a different module, for example to "
 "unit test it, the script code would unintentionally execute as well."
 msgstr ""
+"有些模块包含了仅供脚本使用的代码，比如解析命令行参数或从标准输入获取数据。"
+"如果像这样的模块被从不同的模块中导入，例如为了单元测试，脚本代码也会无意中执行。"
 
 #: ../../library/__main__.rst:123
 msgid ""
@@ -157,6 +174,8 @@ msgid ""
 " handy. Code within this block won't run unless the module is executed in"
 " the top-level environment."
 msgstr ""
+"这就是使用 ``if __name__ == '__main__'`` 代码块的用武之地。"
+"除非模块在顶层环境中被执行，否则该块中的代码不会运行。"
 
 #: ../../library/__main__.rst:127
 msgid ""
@@ -164,6 +183,8 @@ msgid ""
 "== '__main__'`` can improve code clarity and correctness. Most often, a "
 "function named ``main`` encapsulates the program's primary behavior::"
 msgstr ""
+"在 ``if __name___ == '__main__'`` 下面的块中放入尽可能少的语句可以提高代码的清晰度和正确性。"
+"大多数情况下，一个名为 ``main`` 的函数封装了程序的主要行为 ::"
 
 #: ../../library/__main__.rst:151
 msgid ""
@@ -174,6 +195,9 @@ msgid ""
 "be unintentionally using the global variable instead of a local name.  A "
 "``main`` function solves this problem."
 msgstr ""
+"注意，如果模块没有在 ``main`` 函数内封装代码，"
+"而是直接放在 ``if __name__ == '__main__'`` 块内，``phrase`` 变量将对整个模块是全局的。"
+"这很容易出错，因为模块中的其他函数可能会无意中使用全局变量而不是局部名称。一个 ``main`` 函数解决了这个问题。"
 
 #: ../../library/__main__.rst:158
 msgid ""
@@ -182,10 +206,12 @@ msgid ""
 "imported, the ``echo`` and ``main`` functions will be defined, but "
 "neither of them will be called, because ``__name__ != '__main__'``."
 msgstr ""
+"使用 ``main`` 函数有一个额外的好处，就是 ``echo`` 函数本身是孤立的，可以在其他地方导入。"
+"当 ``echo.py`` 被导入时，``echo`` 和 ``main`` 函数将被定义，但它们都不会被调用，因为 ``__name__ != '__main__'``。"
 
 #: ../../library/__main__.rst:165
 msgid "Packaging Considerations"
-msgstr ""
+msgstr "包装方面的考虑"
 
 #: ../../library/__main__.rst:167
 msgid ""
