@@ -845,16 +845,13 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <pre>
 <strong id="grammar-token-python-grammar-assignment_expression"><span id="grammar-token-assignment-expression"></span>assignment_expression</strong> ::=  [<a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-identifier"><code class="xref docutils literal notranslate"><span class="pre">identifier</span></code></a> &quot;:=&quot;] <a class="reference internal" href="#grammar-token-python-grammar-expression"><code class="xref docutils literal notranslate"><span class="pre">expression</span></code></a>
 </pre>
-<p>An assignment expression (sometimes also called a &quot;named expression&quot; or
-&quot;walrus&quot;) assigns an <a class="reference internal" href="#grammar-token-python-grammar-expression"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression</span></code></a> to an
-<a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-identifier"><code class="xref std std-token docutils literal notranslate"><span class="pre">identifier</span></code></a>, while also returning the value of the
-<a class="reference internal" href="#grammar-token-python-grammar-expression"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression</span></code></a>.</p>
-<p>一个常见用例是在处理匹配的正则表达式的时候:</p>
+<p>赋值表达式（有时又被叫做“命名表达式”或“海象表达式”）将一个 <a class="reference internal" href="#grammar-token-python-grammar-expression"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression</span></code></a> 赋值给一个 <a class="reference internal" href="lexical_analysis.html#grammar-token-python-grammar-identifier"><code class="xref std std-token docutils literal notranslate"><span class="pre">identifier</span></code></a>，同时还返回 <a class="reference internal" href="#grammar-token-python-grammar-expression"><code class="xref std std-token docutils literal notranslate"><span class="pre">expression</span></code></a> 的值。</p>
+<p>一个常见用例是在处理匹配的正则表达式的时候：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">matching</span> <span class="o">:=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">do_something</span><span class="p">(</span><span class="n">matching</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>或者是在处理分块的文件流的时候:</p>
+<p>或者是在处理分块的文件流的时候：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">9000</span><span class="p">):</span>
     <span class="n">process</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </pre></div>
@@ -915,7 +912,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 </section>
 <section id="operator-precedence">
 <span id="operator-summary"></span><h2><span class="section-number">6.17. </span>运算符优先级<a class="headerlink" href="#operator-precedence" title="永久链接至标题">¶</a></h2>
-<p id="index-96">下表对The following table summarizes the operator precedence in Python 中运算符的优先顺序进行了总结，从最高优先级（最先绑定）到最低优先级（最后绑定）。 相同单元格内的运算符具有相同优先级。 除非句法显式地给出，否则运算符均指二元运算。 相同单元格内的运算符从左至右分组（除了幂运算是从右至左分组）。</p>
+<p id="index-96">下表总结了 Python 中操作符的优先级，从最高优先级（最先绑定）到最低优先级（最后绑定）。相同单元格内的运算符具有相同优先级。 除非句法显式地给出，否则运算符均指二元运算。同单元格内的运算符从左至右分组（除了幂运算是从右至左分组）。</p>
 <p>请注意比较、成员检测和标识号检测均为相同优先级，并具有如 <a class="reference internal" href="#comparisons"><span class="std std-ref">比较运算</span></a> 一节所描述的从左至右串连特性。</p>
 <table class="docutils align-default">
 <colgroup>
@@ -1159,7 +1156,7 @@ used in the same call, so in practice this confusion does not often arise.</p>
 <br />
     <br />
 
-    最后更新于 11月 30, 2021.
+    最后更新于 12月 09, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

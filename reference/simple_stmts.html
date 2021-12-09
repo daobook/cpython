@@ -195,7 +195,7 @@
 </pre>
 <section id="expression-statements">
 <span id="exprstmts"></span><h2><span class="section-number">7.1. </span>表达式语句<a class="headerlink" href="#expression-statements" title="永久链接至标题">¶</a></h2>
-<span class="target" id="index-1"></span><p id="index-2">表达式语句用于计算和写入值（大多是在交互模式下），或者（通常情况）调用一个过程 (过程就是不返回有意义结果的函数；在 Python 中，过程的返回值为 <code class="docutils literal notranslate"><span class="pre">None</span></code>)。 表达式语句的其他使用方式也是允许且有特定用处的。 表达式语句的句法为:</p>
+<span class="target" id="index-1"></span><p id="index-2">表达式语句用于计算和写入值（大多是在交互模式下），或者（通常情况）调用一个过程（过程就是不返回有意义结果的函数；在 Python 中，过程的返回值为 <code class="docutils literal notranslate"><span class="pre">None</span></code>）。表达式语句的其他使用方式也是允许且有特定用处的。表达式语句的句法为：</p>
 <pre>
 <strong id="grammar-token-python-grammar-expression_stmt"><span id="grammar-token-expression-stmt"></span>expression_stmt</strong> ::=  <a class="reference internal" href="expressions.html#grammar-token-python-grammar-starred_expression"><code class="xref docutils literal notranslate"><span class="pre">starred_expression</span></code></a>
 </pre>
@@ -204,7 +204,7 @@
 </section>
 <section id="assignment-statements">
 <span id="assignment"></span><h2><span class="section-number">7.2. </span>赋值语句<a class="headerlink" href="#assignment-statements" title="永久链接至标题">¶</a></h2>
-<p id="index-4">赋值语句用于将名称（重）绑定到特定值，以及修改属性或可变对象的成员项:</p>
+<p id="index-4">赋值语句用于将名称（重）绑定到特定值，以及修改属性或可变对象的成员项：</p>
 <pre>
 <strong id="grammar-token-python-grammar-assignment_stmt"><span id="grammar-token-assignment-stmt"></span>assignment_stmt</strong> ::=  (<a class="reference internal" href="#grammar-token-python-grammar-target_list"><code class="xref docutils literal notranslate"><span class="pre">target_list</span></code></a> &quot;=&quot;)+ (<a class="reference internal" href="expressions.html#grammar-token-python-grammar-starred_expression"><code class="xref docutils literal notranslate"><span class="pre">starred_expression</span></code></a> | <a class="reference internal" href="expressions.html#grammar-token-python-grammar-yield_expression"><code class="xref docutils literal notranslate"><span class="pre">yield_expression</span></code></a>)
 <strong id="grammar-token-python-grammar-target_list"><span id="grammar-token-target-list"></span>target_list    </strong> ::=  <a class="reference internal" href="#grammar-token-python-grammar-target"><code class="xref docutils literal notranslate"><span class="pre">target</span></code></a> (&quot;,&quot; <a class="reference internal" href="#grammar-token-python-grammar-target"><code class="xref docutils literal notranslate"><span class="pre">target</span></code></a>)* [&quot;,&quot;]
@@ -451,6 +451,12 @@
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能: </span>使用 <code class="docutils literal notranslate"><span class="pre">__suppress_context__</span></code> 属性来抑制异常上下文的自动显示。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>If the traceback of the active exception is modified in an <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a>
+clause, a subsequent <code class="docutils literal notranslate"><span class="pre">raise</span></code> statement re-raises the exception with the
+modified traceback. Previously, the exception was re-raised with the
+traceback it had when it was caught.</p>
 </div>
 </section>
 <section id="the-break-statement">
@@ -710,7 +716,7 @@
 <br />
     <br />
 
-    最后更新于 11月 30, 2021.
+    最后更新于 12月 09, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -90,6 +90,7 @@
 <li><a class="reference internal" href="#operator">operator</a></li>
 <li><a class="reference internal" href="#os">os</a></li>
 <li><a class="reference internal" href="#sqlite3">sqlite3</a></li>
+<li><a class="reference internal" href="#sys">sys</a></li>
 <li><a class="reference internal" href="#threading">threading</a></li>
 <li><a class="reference internal" href="#time">time</a></li>
 <li><a class="reference internal" href="#unicodedata">unicodedata</a></li>
@@ -197,7 +198,7 @@
 <dd class="field-odd"><p>3.11.0a2</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>十一月 30, 2021</p>
+<dd class="field-even"><p>十二月 09, 2021</p>
 </dd>
 </dl>
 <p>This article explains the new features in Python 3.11, compared to 3.10.</p>
@@ -311,6 +312,11 @@ properties as <code class="docutils literal notranslate"><span class="pre">sipha
 and some other types now use it as default algorithm for <code class="docutils literal notranslate"><span class="pre">hash()</span></code>. <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0552"><strong>PEP 552</strong></a>
 hash-based pyc files now use <code class="docutils literal notranslate"><span class="pre">siphash13</span></code>, too.
 (Contributed by Inada Naoki in <a class="reference external" href="https://bugs.python.org/issue29410">bpo-29410</a>.)</p></li>
+<li><p>When an active exception is re-raised by a <a class="reference internal" href="../reference/simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> statement with no parameters,
+the traceback attached to this exception is now always <code class="docutils literal notranslate"><span class="pre">sys.exc_info()[1].__traceback__</span></code>.
+This means that changes made to the traceback in the current <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> clause are
+reflected in the re-raised exception.
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
 </ul>
 </section>
 <section id="new-modules">
@@ -334,6 +340,8 @@ that an <code class="docutils literal notranslate"><span class="pre">isinstance(
 <section id="math">
 <h3>math<a class="headerlink" href="#math" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
+<li><p>Add <a class="reference internal" href="../library/math.html#math.exp2" title="math.exp2"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.exp2()</span></code></a>: return 2 raised to the power of x.
+(Contributed by Gideon Mitchell in <a class="reference external" href="https://bugs.python.org/issue45917">bpo-45917</a>.)</p></li>
 <li><p>Add <a class="reference internal" href="../library/math.html#math.cbrt" title="math.cbrt"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.cbrt()</span></code></a>: return the cube root of x.
 (Contributed by Ajith Ramachandran in <a class="reference external" href="https://bugs.python.org/issue44357">bpo-44357</a>.)</p></li>
 <li><p>The behaviour of two <a class="reference internal" href="../library/math.html#math.pow" title="math.pow"><code class="xref py py-func docutils literal notranslate"><span class="pre">math.pow()</span></code></a> corner cases was changed, for
@@ -381,6 +389,21 @@ setting and getting SQLite limits by connection basis.
 <li><p><a class="reference internal" href="../library/sqlite3.html#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> now sets <a class="reference internal" href="../library/sqlite3.html#sqlite3.threadsafety" title="sqlite3.threadsafety"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sqlite3.threadsafety</span></code></a> based on the default
 threading mode the underlying SQLite library has been compiled with.
 (Contributed by Erlend E. Aasland in <a class="reference external" href="https://bugs.python.org/issue45613">bpo-45613</a>.)</p></li>
+<li><p><a class="reference internal" href="../library/sqlite3.html#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> C callbacks now use unraisable exceptions if callback
+tracebacks are enabled. Users can now register an
+<a class="reference internal" href="../library/sys.html#sys.unraisablehook" title="sys.unraisablehook"><code class="xref py py-func docutils literal notranslate"><span class="pre">unraisable</span> <span class="pre">hook</span> <span class="pre">handler</span></code></a> to improve their debug
+experience.
+(Contributed by Erlend E. Aasland in <a class="reference external" href="https://bugs.python.org/issue45828">bpo-45828</a>.)</p></li>
+</ul>
+</section>
+<section id="sys">
+<h3>sys<a class="headerlink" href="#sys" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../library/sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a> now derives the <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">traceback</span></code> fields
+from the <code class="docutils literal notranslate"><span class="pre">value</span></code> (the exception instance), so when an exception is
+modified while it is being handled, the changes are reflected in
+the results of subsequent calls to <code class="xref py py-func docutils literal notranslate"><span class="pre">exc_info()</span></code>.
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
 </ul>
 </section>
 <section id="threading">
@@ -654,6 +677,14 @@ detected by <strong class="program">configure</strong>.
 <a class="reference internal" href="../c-api/init.html#c.PyThreadState_LeaveTracing" title="PyThreadState_LeaveTracing"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_LeaveTracing()</span></code></a> functions to the limited C API to
 suspend and resume tracing and profiling.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue43760">bpo-43760</a>.)</p></li>
+<li><p><a class="reference internal" href="../c-api/exceptions.html#c.PyErr_SetExcInfo" title="PyErr_SetExcInfo"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetExcInfo()</span></code></a> no longer uses the <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">traceback</span></code>
+arguments, the interpreter now derives those values from the exception
+instance (the <code class="docutils literal notranslate"><span class="pre">value</span></code> argument). The function still steals references
+of all three arguments.
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
+<li><p><a class="reference internal" href="../c-api/exceptions.html#c.PyErr_GetExcInfo" title="PyErr_GetExcInfo"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_GetExcInfo()</span></code></a> now derives the <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">traceback</span></code>
+fields of the result from the exception instance (the <code class="docutils literal notranslate"><span class="pre">value</span></code> field).
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
 </ul>
 </section>
 <section id="id2">
@@ -843,6 +874,7 @@ limited C API.
 <li><a class="reference internal" href="#operator">operator</a></li>
 <li><a class="reference internal" href="#os">os</a></li>
 <li><a class="reference internal" href="#sqlite3">sqlite3</a></li>
+<li><a class="reference internal" href="#sys">sys</a></li>
 <li><a class="reference internal" href="#threading">threading</a></li>
 <li><a class="reference internal" href="#time">time</a></li>
 <li><a class="reference internal" href="#unicodedata">unicodedata</a></li>
@@ -951,7 +983,7 @@ limited C API.
 <br />
     <br />
 
-    最后更新于 11月 30, 2021.
+    最后更新于 12月 09, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

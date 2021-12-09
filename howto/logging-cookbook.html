@@ -79,7 +79,10 @@
 <li><a class="reference internal" href="#logging-to-multiple-destinations">在多个地方记录日志</a></li>
 <li><a class="reference internal" href="#configuration-server-example">日志配置服务器示例</a></li>
 <li><a class="reference internal" href="#dealing-with-handlers-that-block">处理日志 handler 的阻塞</a></li>
-<li><a class="reference internal" href="#sending-and-receiving-logging-events-across-a-network">通过网络收发日志事件</a></li>
+<li><a class="reference internal" href="#sending-and-receiving-logging-events-across-a-network">通过网络收发日志事件</a><ul>
+<li><a class="reference internal" href="#running-a-logging-socket-listener-in-production">Running a logging socket listener in production</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#adding-contextual-information-to-your-logging-output">在自己的输出日志中添加上下文信息</a><ul>
 <li><a class="reference internal" href="#using-loggeradapters-to-impart-contextual-information">利用 LoggerAdapter 传递上下文信息</a><ul>
 <li><a class="reference internal" href="#using-objects-other-than-dicts-to-pass-contextual-information">使用除字典之外的其它对象传递上下文信息</a></li>
@@ -90,6 +93,7 @@
 </li>
 <li><a class="reference internal" href="#logging-to-a-single-file-from-multiple-processes">从多个进程记录至单个文件</a><ul>
 <li><a class="reference internal" href="#using-concurrent-futures-processpoolexecutor">concurrent.futures.ProcessPoolExecutor 的用法</a></li>
+<li><a class="reference internal" href="#deploying-web-applications-using-gunicorn-and-uwsgi">Deploying Web applications using Gunicorn and uWSGI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#using-file-rotation">轮换日志文件</a></li>
@@ -637,6 +641,14 @@ myapp.area2 : ERROR    The five boxing wizards jump quickly.
 </pre></div>
 </div>
 <p>请注意，某些时候 pickle 会存在一些安全问题。若有问题可换用自己的序列化方案，只要覆盖 <code class="xref py py-meth docutils literal notranslate"><span class="pre">makePickle()</span></code> 方法即可，并调整上述脚本以采用自己的序列化方案。</p>
+<section id="running-a-logging-socket-listener-in-production">
+<h3>Running a logging socket listener in production<a class="headerlink" href="#running-a-logging-socket-listener-in-production" title="永久链接至标题">¶</a></h3>
+<p>To run a logging listener in production, you may need to use a process-management tool
+such as <a class="reference external" href="http://supervisord.org/">Supervisor</a>. <a class="reference external" href="https://gist.github.com/vsajip/4b227eeec43817465ca835ca66f75e2b">Here</a> is a Gist which
+provides the bare-bones files to run the above functionality using Supervisor: you
+will need to change the <cite>/path/to/</cite> parts in the Gist to reflect the actual paths you
+want to use.</p>
+</section>
 </section>
 <section id="adding-contextual-information-to-your-logging-output">
 <span id="context-info"></span><h2>在自己的输出日志中添加上下文信息<a class="headerlink" href="#adding-contextual-information-to-your-logging-output" title="永久链接至标题">¶</a></h2>
@@ -968,6 +980,15 @@ myapp.area2 : ERROR    The five boxing wizards jump quickly.
         <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">worker_process</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">worker_configurer</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+<section id="deploying-web-applications-using-gunicorn-and-uwsgi">
+<h3>Deploying Web applications using Gunicorn and uWSGI<a class="headerlink" href="#deploying-web-applications-using-gunicorn-and-uwsgi" title="永久链接至标题">¶</a></h3>
+<p>When deploying Web applications using <a class="reference external" href="https://gunicorn.org/">Gunicorn</a> or <a class="reference external" href="https://uwsgi-docs.readthedocs.io/en/latest/">uWSGI</a> (or similar), multiple worker
+processes are created to handle client requests. In such environments, avoid creating
+file-based handlers directly in your web application. Instead, use a
+<a class="reference internal" href="../library/logging.handlers.html#logging.handlers.SocketHandler" title="logging.handlers.SocketHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SocketHandler</span></code></a> to log from the web application to a listener in a separate
+process. This can be set up using a process management tool such as Supervisor - see
+<a class="reference internal" href="#running-a-logging-socket-listener-in-production">Running a logging socket listener in production</a> for more details.</p>
 </section>
 </section>
 <section id="using-file-rotation">
@@ -2545,7 +2566,10 @@ in place.</p></li>
 <li><a class="reference internal" href="#logging-to-multiple-destinations">在多个地方记录日志</a></li>
 <li><a class="reference internal" href="#configuration-server-example">日志配置服务器示例</a></li>
 <li><a class="reference internal" href="#dealing-with-handlers-that-block">处理日志 handler 的阻塞</a></li>
-<li><a class="reference internal" href="#sending-and-receiving-logging-events-across-a-network">通过网络收发日志事件</a></li>
+<li><a class="reference internal" href="#sending-and-receiving-logging-events-across-a-network">通过网络收发日志事件</a><ul>
+<li><a class="reference internal" href="#running-a-logging-socket-listener-in-production">Running a logging socket listener in production</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#adding-contextual-information-to-your-logging-output">在自己的输出日志中添加上下文信息</a><ul>
 <li><a class="reference internal" href="#using-loggeradapters-to-impart-contextual-information">利用 LoggerAdapter 传递上下文信息</a><ul>
 <li><a class="reference internal" href="#using-objects-other-than-dicts-to-pass-contextual-information">使用除字典之外的其它对象传递上下文信息</a></li>
@@ -2556,6 +2580,7 @@ in place.</p></li>
 </li>
 <li><a class="reference internal" href="#logging-to-a-single-file-from-multiple-processes">从多个进程记录至单个文件</a><ul>
 <li><a class="reference internal" href="#using-concurrent-futures-processpoolexecutor">concurrent.futures.ProcessPoolExecutor 的用法</a></li>
+<li><a class="reference internal" href="#deploying-web-applications-using-gunicorn-and-uwsgi">Deploying Web applications using Gunicorn and uWSGI</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#using-file-rotation">轮换日志文件</a></li>
@@ -2676,7 +2701,7 @@ in place.</p></li>
 <br />
     <br />
 
-    最后更新于 11月 30, 2021.
+    最后更新于 12月 09, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

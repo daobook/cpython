@@ -83,6 +83,7 @@
 <li><a class="reference internal" href="#libraries-options">3.1.7. 库选项</a></li>
 <li><a class="reference internal" href="#security-options">3.1.8. 安全性选项</a></li>
 <li><a class="reference internal" href="#macos-options">3.1.9. macOS 选项</a></li>
+<li><a class="reference internal" href="#cross-compiling-options">3.1.10. Cross Compiling Options</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#python-build-system">3.2. Python 构建系统</a><ul>
@@ -228,7 +229,12 @@
 <dt class="sig sig-object std" id="cmdoption-with-suffix">
 <span class="sig-name descname"><span class="pre">--with-suffix</span></span><span class="sig-prename descclassname"><span class="pre">=SUFFIX</span></span><a class="headerlink" href="#cmdoption-with-suffix" title="永久链接至目标">¶</a></dt>
 <dd><p>将 Python 的可执行文件后缀设置为 <em>SUFFIX</em>。</p>
-<p>在 Windows 和 macOS 上的默认后缀为 <code class="docutils literal notranslate"><span class="pre">.exe``（</span> <span class="pre">``python.exe</span></code> 为可执行文件），在其他平台上为空字符串（ <code class="docutils literal notranslate"><span class="pre">python</span></code> 可执行）。</p>
+<p>The default suffix is <code class="docutils literal notranslate"><span class="pre">.exe</span></code> on Windows and macOS (<code class="docutils literal notranslate"><span class="pre">python.exe</span></code>
+executable), <code class="docutils literal notranslate"><span class="pre">.wasm</span></code> on Emscripten (<code class="docutils literal notranslate"><span class="pre">python.wasm</span></code> executable), and
+an empty string on other platforms (<code class="docutils literal notranslate"><span class="pre">python</span></code> executable).</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The default suffix on Emscripten platform is <code class="docutils literal notranslate"><span class="pre">.wasm</span></code>.</p>
+</div>
 </dd></dl>
 
 <dl class="std cmdoption">
@@ -732,6 +738,65 @@ option). Main runtime checks:</p>
 </dd></dl>
 
 </section>
+<section id="cross-compiling-options">
+<h3><span class="section-number">3.1.10. </span>Cross Compiling Options<a class="headerlink" href="#cross-compiling-options" title="永久链接至标题">¶</a></h3>
+<p>Cross compiling, also known as cross building, can be used to build Python
+for another CPU architecture or platform. Cross compiling requires a Python
+interpreter and the <strong class="program">_freeze_module</strong> binary from another build. The
+version of the build Python and <strong class="program">_freeze_module</strong> command must be
+the same as the cross compiled host Python.</p>
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-build">
+<span class="sig-name descname"><span class="pre">--build</span></span><span class="sig-prename descclassname"><span class="pre">=BUILD</span></span><a class="headerlink" href="#cmdoption-build" title="永久链接至目标">¶</a></dt>
+<dd><p>configure for building on BUILD, usually guessed by <strong class="program">config.guess</strong>.</p>
+</dd></dl>
+
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-host">
+<span class="sig-name descname"><span class="pre">--host</span></span><span class="sig-prename descclassname"><span class="pre">=HOST</span></span><a class="headerlink" href="#cmdoption-host" title="永久链接至目标">¶</a></dt>
+<dd><p>cross-compile to build programs to run on HOST (target platform)</p>
+</dd></dl>
+
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-with-freeze-module">
+<span class="sig-name descname"><span class="pre">--with-freeze-module</span></span><span class="sig-prename descclassname"><span class="pre">=Programs/_freeze_module</span></span><a class="headerlink" href="#cmdoption-with-freeze-module" title="永久链接至目标">¶</a></dt>
+<dd><p>path to <code class="docutils literal notranslate"><span class="pre">_freeze_module</span></code> binary for cross compiling.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-with-build-python">
+<span class="sig-name descname"><span class="pre">--with-build-python</span></span><span class="sig-prename descclassname"><span class="pre">=python3.xx</span></span><a class="headerlink" href="#cmdoption-with-build-python" title="永久链接至目标">¶</a></dt>
+<dd><p>path to build <code class="docutils literal notranslate"><span class="pre">python</span></code> binary for cross compiling</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-arg-CONFIG_SITE">
+<span id="cmdoption-arg-config-site"></span><span class="sig-name descname"><span class="pre">CONFIG_SITE</span></span><span class="sig-prename descclassname"><span class="pre">=file</span></span><a class="headerlink" href="#cmdoption-arg-CONFIG_SITE" title="永久链接至目标">¶</a></dt>
+<dd><p>An environment variable that points to a file with configure overrides.</p>
+<p>Example <em>config.site</em> file:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># config.site-aarch64</span>
+<span class="n">ac_cv_buggy_getaddrinfo</span><span class="o">=</span><span class="n">no</span>
+<span class="n">ac_cv_file__dev_ptmx</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">ac_cv_file__dev_ptc</span><span class="o">=</span><span class="n">no</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<p>Cross compiling example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG_SITE</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">site</span><span class="o">-</span><span class="n">aarch64</span> <span class="o">../</span><span class="n">configure</span> \
+    <span class="o">--</span><span class="n">build</span><span class="o">=</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> \
+    <span class="o">--</span><span class="n">host</span><span class="o">=</span><span class="n">aarch64</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> \
+    <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">freeze</span><span class="o">-</span><span class="n">module</span><span class="o">=../</span><span class="n">x86_64</span><span class="o">/</span><span class="n">Programs</span><span class="o">/</span><span class="n">_freeze_module</span> \
+    <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">python</span><span class="o">=../</span><span class="n">x86_64</span><span class="o">/</span><span class="n">python</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="python-build-system">
 <h2><span class="section-number">3.2. </span>Python 构建系统<a class="headerlink" href="#python-build-system" title="永久链接至标题">¶</a></h2>
@@ -1100,6 +1165,7 @@ Example on Linux x86-64:</p>
 <li><a class="reference internal" href="#libraries-options">3.1.7. 库选项</a></li>
 <li><a class="reference internal" href="#security-options">3.1.8. 安全性选项</a></li>
 <li><a class="reference internal" href="#macos-options">3.1.9. macOS 选项</a></li>
+<li><a class="reference internal" href="#cross-compiling-options">3.1.10. Cross Compiling Options</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#python-build-system">3.2. Python 构建系统</a><ul>
@@ -1202,7 +1268,7 @@ Example on Linux x86-64:</p>
 <br />
     <br />
 
-    最后更新于 11月 30, 2021.
+    最后更新于 12月 09, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
