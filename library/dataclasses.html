@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>dataclasses --- 数据类 &#8212; Python 3.11.0a2 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dataclasses --- 数据类 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a2 文档 中搜索"
+          title="在 Python 3.11.0a3 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -134,7 +134,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -583,18 +583,15 @@ instance.</p>
 </section>
 <section id="default-factory-functions">
 <h2>默认工厂函数<a class="headerlink" href="#default-factory-functions" title="永久链接至标题">¶</a></h2>
-<blockquote>
-<div><p>如果一个 <a class="reference internal" href="#dataclasses.field" title="dataclasses.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> 指定了一个 <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> ，当需要该字段的默认值时，将使用零参数调用它。例如，要创建列表的新实例，请使用:</p>
+<p>如果一个 <a class="reference internal" href="#dataclasses.field" title="dataclasses.field"><code class="xref py py-func docutils literal notranslate"><span class="pre">field()</span></code></a> 指定了一个 <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> ，当需要该字段的默认值时，将使用零参数调用它。例如，要创建列表的新实例，请使用:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">mylist</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>如果一个字段被排除在 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 之外（使用 <code class="docutils literal notranslate"><span class="pre">init=False</span></code> ）并且字段也指定 <code class="docutils literal notranslate"><span class="pre">default_factory</span></code> ，则默认的工厂函数将始终从生成的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 函数调用。发生这种情况是因为没有其他方法可以为字段提供初始值。</p>
-</div></blockquote>
 </section>
 <section id="mutable-default-values">
 <h2>可变的默认值<a class="headerlink" href="#mutable-default-values" title="永久链接至标题">¶</a></h2>
-<blockquote>
-<div><p>Python 在类属性中存储默认成员变量值。思考这个例子，不使用数据类:</p>
+<p>Python 在类属性中存储默认成员变量值。思考这个例子，不使用数据类:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
     <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
@@ -628,7 +625,16 @@ instance.</p>
 <span class="k">assert</span> <span class="n">D</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="n">D</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
-<p>这与使用 <code class="docutils literal notranslate"><span class="pre">C</span></code> 类的原始示例具有相同的问题。 也就是说，当在创建类实例的时候 <code class="docutils literal notranslate"><span class="pre">D</span></code> 类的两个实例没有为 <code class="docutils literal notranslate"><span class="pre">x</span></code> 指定值则将共享同一个 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的副本。 因为数据类只是使用普通的 Python 类创建方式所以它们也会共享此行为。 数据类没有任何通用方式来检测这种情况。 相反地，<a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 装饰器在检测到类型为 <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">dict</span></code> 或 <code class="docutils literal notranslate"><span class="pre">set</span></code> 的默认形参时将会引发 <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>。 这是一个部分解决方案，但它确实能防止许多常见错误。</p>
+<p>This has the same issue as the original example using class <code class="docutils literal notranslate"><span class="pre">C</span></code>.
+That is, two instances of class <code class="docutils literal notranslate"><span class="pre">D</span></code> that do not specify a value
+for <code class="docutils literal notranslate"><span class="pre">x</span></code> when creating a class instance will share the same copy
+of <code class="docutils literal notranslate"><span class="pre">x</span></code>.  Because dataclasses just use normal Python class
+creation they also share this behavior.  There is no general way
+for Data Classes to detect this condition.  Instead, the
+<a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> decorator will raise a <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if it
+detects an unhashable default parameter.  The assumption is that if
+a value is unhashable, it is mutable.  This is a partial solution,
+but it does protect against many common errors.</p>
 <p>使用默认工厂函数是一种创建可变类型新实例的方法，并将其作为字段的默认值:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">D</span><span class="p">:</span>
@@ -637,7 +643,12 @@ instance.</p>
 <span class="k">assert</span> <span class="n">D</span><span class="p">()</span><span class="o">.</span><span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">D</span><span class="p">()</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
-</div></blockquote>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Instead of looking for and disallowing objects of type <code class="docutils literal notranslate"><span class="pre">list</span></code>,
+<code class="docutils literal notranslate"><span class="pre">dict</span></code>, or <code class="docutils literal notranslate"><span class="pre">set</span></code>, unhashable objects are now not allowed as
+default values.  Unhashability is used to approximate
+mutability.</p>
+</div>
 </section>
 </section>
 
@@ -711,7 +722,7 @@ instance.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -748,7 +759,7 @@ instance.</p>
 <br />
     <br />
 
-    最后更新于 12月 09, 2021.
+    最后更新于 12月 13, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>内置类型 &#8212; Python 3.11.0a2 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置类型 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a2 文档 中搜索"
+          title="在 Python 3.11.0a3 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -191,7 +191,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 标准库</a> &#187;</li>
@@ -319,8 +319,14 @@ else <code class="docutils literal notranslate"><span class="pre">False</span></
 </tbody>
 </table>
 <p id="index-8">除不同的数字类型外，不同类型的对象不能进行相等比较。<code class="docutils literal notranslate"><span class="pre">==</span></code> 运算符总有定义，但对于某些对象类型（例如，类对象），它等于 <a class="reference internal" href="../reference/expressions.html#is"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">is</span></code></a> 。其他 <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>、<code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>、<code class="docutils literal notranslate"><span class="pre">&gt;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> 运算符仅在有意义的地方定义。例如，当参与比较的参数之一为复数时，它们会抛出 <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> 异常。</p>
-<p id="index-9">具有不同标识的类的实例比较结果通常为不相等，除非类定义了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code> 方法。</p>
-<p>一个类实例不能与相同类或的其他实例或其他类型的对象进行排序，除非该类定义了足够多的方法，包括 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__le__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__gt__()</span></code> 以及 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__ge__()</span></code> (而如果你想实现常规意义上的比较操作，通常只要有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code> 就可以了)。</p>
+<p id="index-9">Non-identical instances of a class normally compare as non-equal unless the
+class defines the <a class="reference internal" href="../reference/datamodel.html#object.__eq__" title="object.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a> method.</p>
+<p>Instances of a class cannot be ordered with respect to other instances of the
+same class, or other types of object, unless the class defines enough of the
+methods <a class="reference internal" href="../reference/datamodel.html#object.__lt__" title="object.__lt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></a>, <a class="reference internal" href="../reference/datamodel.html#object.__le__" title="object.__le__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__le__()</span></code></a>, <a class="reference internal" href="../reference/datamodel.html#object.__gt__" title="object.__gt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__gt__()</span></code></a>, and
+<a class="reference internal" href="../reference/datamodel.html#object.__ge__" title="object.__ge__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__ge__()</span></code></a> (in general, <a class="reference internal" href="../reference/datamodel.html#object.__lt__" title="object.__lt__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code></a> and
+<a class="reference internal" href="../reference/datamodel.html#object.__eq__" title="object.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a> are sufficient, if you want the conventional meanings of the
+comparison operators).</p>
 <p><a class="reference internal" href="../reference/expressions.html#is"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">is</span></code></a> 和 <a class="reference internal" href="../reference/expressions.html#is-not"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code></a> 运算符无法自定义；并且它们可以被应用于任意两个对象而不会引发异常。</p>
 <p id="index-10">还有两种具有相同语法优先级的运算 <a class="reference internal" href="../reference/expressions.html#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a> 和 <a class="reference internal" href="../reference/expressions.html#not-in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code></a>，它们被 <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> 或实现了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code> 方法的类型所支持。</p>
 </section>
@@ -733,7 +739,18 @@ system, use <a class="reference internal" href="sys.html#sys.byteorder" title="s
 </section>
 <section id="hashing-of-numeric-types">
 <span id="numeric-hash"></span><h3>数字类型的哈希运算<a class="headerlink" href="#hashing-of-numeric-types" title="永久链接至标题">¶</a></h3>
-<p>对于可能为不同类型的数字 <code class="docutils literal notranslate"><span class="pre">x</span></code> 和 <code class="docutils literal notranslate"><span class="pre">y</span></code>，要求 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code> 时必定 <code class="docutils literal notranslate"><span class="pre">hash(x)</span> <span class="pre">==</span> <span class="pre">hash(y)</span></code> (详情参见 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__hash__()</span></code> 方法的文档)。 为了便于在各种数字类型 (包括 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> 和 <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>) 上实现并保证效率，Python 对数字类型的哈希运算是基于为任意有理数定义统一的数学函数，因此该运算对 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> 和 <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a> 的全部实例，以及 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 和 <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> 的全部有限实例均可用。 从本质上说，此函数是通过以一个固定质数 <code class="docutils literal notranslate"><span class="pre">P</span></code> 进行 <code class="docutils literal notranslate"><span class="pre">P</span></code> 降模给出的。 <code class="docutils literal notranslate"><span class="pre">P</span></code> 的值在 Python 中可以 <a class="reference internal" href="sys.html#sys.hash_info" title="sys.hash_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.hash_info</span></code></a> 的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">modulus</span></code> 属性的形式被访问。</p>
+<p>For numbers <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, possibly of different types, it's a requirement
+that <code class="docutils literal notranslate"><span class="pre">hash(x)</span> <span class="pre">==</span> <span class="pre">hash(y)</span></code> whenever <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code> (see the <a class="reference internal" href="../reference/datamodel.html#object.__hash__" title="object.__hash__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__hash__()</span></code></a>
+method documentation for more details).  For ease of implementation and
+efficiency across a variety of numeric types (including <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
+<a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> and <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>)
+Python's hash for numeric types is based on a single mathematical function
+that's defined for any rational number, and hence applies to all instances of
+<a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>, and all finite instances of
+<a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> and <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a>.  Essentially, this function is
+given by reduction modulo <code class="docutils literal notranslate"><span class="pre">P</span></code> for a fixed prime <code class="docutils literal notranslate"><span class="pre">P</span></code>.  The value of <code class="docutils literal notranslate"><span class="pre">P</span></code> is
+made available to Python as the <code class="xref py py-attr docutils literal notranslate"><span class="pre">modulus</span></code> attribute of
+<a class="reference internal" href="sys.html#sys.hash_info" title="sys.hash_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.hash_info</span></code></a>.</p>
 <div class="impl-detail compound">
 <p><strong>CPython implementation detail:</strong> 目前所用的质数设定，在 C long 为 32 位的机器上 <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">2**31</span> <span class="pre">-</span> <span class="pre">1</span></code> 而在 C long 为 64 位的机器上 <code class="docutils literal notranslate"><span class="pre">P</span> <span class="pre">=</span> <span class="pre">2**61</span> <span class="pre">-</span> <span class="pre">1</span></code>。</p>
 </div>
@@ -1114,7 +1131,11 @@ Python objects in the Python/C API.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#range" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">start</span></em>, <em class="sig-param"><span class="pre">stop</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">step</span></em><span class="optional">]</span><span class="sig-paren">)</span></dt>
-<dd><p>range 构造器的参数必须为整数（可以是内置的 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> 或任何实现了 <code class="docutils literal notranslate"><span class="pre">__index__</span></code> 特殊方法的对象）。 如果省略 <em>step</em> 参数，其默认值为 <code class="docutils literal notranslate"><span class="pre">1</span></code>。 如果省略 <em>start</em> 参数，其默认值为 <code class="docutils literal notranslate"><span class="pre">0</span></code>，如果 <em>step</em> 为零则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
+<dd><p>The arguments to the range constructor must be integers (either built-in
+<a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or any object that implements the <a class="reference internal" href="../reference/datamodel.html#object.__index__" title="object.__index__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__index__()</span></code></a> special
+method).  If the <em>step</em> argument is omitted, it defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+If the <em>start</em> argument is omitted, it defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.
+If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
 <p>如果 <em>step</em> 为正值，确定 range <code class="docutils literal notranslate"><span class="pre">r</span></code> 内容的公式为 <code class="docutils literal notranslate"><span class="pre">r[i]</span> <span class="pre">=</span> <span class="pre">start</span> <span class="pre">+</span> <span class="pre">step*i</span></code> 其中 <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> 且 <code class="docutils literal notranslate"><span class="pre">r[i]</span> <span class="pre">&lt;</span> <span class="pre">stop</span></code>。</p>
 <p>如果 <em>step</em> 为负值，确定 range 内容的公式仍然为 <code class="docutils literal notranslate"><span class="pre">r[i]</span> <span class="pre">=</span> <span class="pre">start</span> <span class="pre">+</span> <span class="pre">step*i</span></code>，但限制条件改为 <code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> 且 <code class="docutils literal notranslate"><span class="pre">r[i]</span> <span class="pre">&gt;</span> <span class="pre">stop</span></code>.</p>
 <p>如果 <code class="docutils literal notranslate"><span class="pre">r[0]</span></code> 不符合值的限制条件，则该 range 对象为空。 range 对象确实支持负索引，但是会将其解读为从正索引所确定的序列的末尾开始索引。</p>
@@ -3865,7 +3886,12 @@ Python objects in the Python/C API.</p>
 </dd></dl>
 
 <p>Python 定义了一些上下文管理器来支持简易的线程同步、文件或其他对象的快速关闭，以及更方便地操作活动的十进制算术上下文。 除了实现上下文管理协议以外，不同类型不会被特殊处理。 请参阅 <a class="reference internal" href="contextlib.html#module-contextlib" title="contextlib: Utilities for with-statement contexts."><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code></a> 模块查看相关的示例。</p>
-<p>Python 的 <a class="reference internal" href="../glossary.html#term-generator"><span class="xref std std-term">generator</span></a> 和 <a class="reference internal" href="contextlib.html#contextlib.contextmanager" title="contextlib.contextmanager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.contextmanager</span></code></a> 装饰器提供了实现这些协议的便捷方式。 如果使用 <a class="reference internal" href="contextlib.html#contextlib.contextmanager" title="contextlib.contextmanager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.contextmanager</span></code></a> 装饰器来装饰一个生成器函数，它将返回一个实现了必要的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__enter__()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">__exit__()</span></code> 方法的上下文管理器，而不再是由未经装饰的生成器函数所产生的迭代器。</p>
+<p>Python's <a class="reference internal" href="../glossary.html#term-generator"><span class="xref std std-term">generator</span></a>s and the <a class="reference internal" href="contextlib.html#contextlib.contextmanager" title="contextlib.contextmanager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.contextmanager</span></code></a> decorator
+provide a convenient way to implement these protocols.  If a generator function is
+decorated with the <a class="reference internal" href="contextlib.html#contextlib.contextmanager" title="contextlib.contextmanager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.contextmanager</span></code></a> decorator, it will return a
+context manager implementing the necessary <a class="reference internal" href="#contextmanager.__enter__" title="contextmanager.__enter__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__enter__()</span></code></a> and
+<a class="reference internal" href="#contextmanager.__exit__" title="contextmanager.__exit__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__exit__()</span></code></a> methods, rather than the iterator produced by an
+undecorated generator function.</p>
 <p>请注意，Python/C API 中 Python 对象的类型结构中并没有针对这些方法的专门槽位。 想要定义这些方法的扩展类型必须将它们作为普通的 Python 可访问方法来提供。 与设置运行时上下文的开销相比，单个类字典查找的开销可以忽略不计。</p>
 </section>
 <section id="type-annotation-types-generic-alias-union">
@@ -4425,7 +4451,7 @@ Python objects in the Python/C API.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -4461,7 +4487,7 @@ Python objects in the Python/C API.</p>
 <br />
     <br />
 
-    最后更新于 12月 09, 2021.
+    最后更新于 12月 13, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>What&#39;s New In Python 3.11 &#8212; Python 3.11.0a2 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What&#39;s New In Python 3.11 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a2 文档 中搜索"
+          title="在 Python 3.11.0a3 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -77,6 +77,7 @@
 <li><a class="reference internal" href="#new-features">New Features</a><ul>
 <li><a class="reference internal" href="#enhanced-error-locations-in-tracebacks">Enhanced error locations in tracebacks</a><ul>
 <li><a class="reference internal" href="#column-information-for-code-objects">Column information for code objects</a></li>
+<li><a class="reference internal" href="#exceptions-can-be-enriched-with-a-string-note">Exceptions can be enriched with a string <code class="docutils literal notranslate"><span class="pre">__note__</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -86,6 +87,7 @@
 <li><a class="reference internal" href="#new-modules">New Modules</a></li>
 <li><a class="reference internal" href="#improved-modules">Improved Modules</a><ul>
 <li><a class="reference internal" href="#fractions">fractions</a></li>
+<li><a class="reference internal" href="#inspect">inspect</a></li>
 <li><a class="reference internal" href="#math">math</a></li>
 <li><a class="reference internal" href="#operator">operator</a></li>
 <li><a class="reference internal" href="#os">os</a></li>
@@ -94,6 +96,7 @@
 <li><a class="reference internal" href="#threading">threading</a></li>
 <li><a class="reference internal" href="#time">time</a></li>
 <li><a class="reference internal" href="#unicodedata">unicodedata</a></li>
+<li><a class="reference internal" href="#fcntl">fcntl</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#optimizations">Optimizations</a></li>
@@ -164,7 +167,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python的新变化</a> &#187;</li>
@@ -195,10 +198,10 @@
 <h1>What's New In Python 3.11<a class="headerlink" href="#what-s-new-in-python-3-11" title="永久链接至标题">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Release</dt>
-<dd class="field-odd"><p>3.11.0a2</p>
+<dd class="field-odd"><p>3.11.0a3</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>十二月 09, 2021</p>
+<dd class="field-even"><p>十二月 13, 2021</p>
 </dd>
 </dl>
 <p>This article explains the new features in Python 3.11, compared to 3.10.</p>
@@ -280,6 +283,12 @@ code. This information can be retrieved using:</p>
 <p>See <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0657"><strong>PEP 657</strong></a> for more details. (Contributed by Pablo Galindo, Batuhan Taskaya
 and Ammar Askar in <a class="reference external" href="https://bugs.python.org/issue43950">bpo-43950</a>.)</p>
 </section>
+<section id="exceptions-can-be-enriched-with-a-string-note">
+<h4>Exceptions can be enriched with a string <code class="docutils literal notranslate"><span class="pre">__note__</span></code><a class="headerlink" href="#exceptions-can-be-enriched-with-a-string-note" title="永久链接至标题">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">__note__</span></code> field was added to <a class="reference internal" href="../library/exceptions.html#BaseException" title="BaseException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseException</span></code></a>. It is <code class="docutils literal notranslate"><span class="pre">None</span></code>
+by default but can be set to a string which is added to the exception's
+traceback. (Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45607">bpo-45607</a>.)</p>
+</section>
 </section>
 </section>
 <section id="other-language-changes">
@@ -335,6 +344,14 @@ string.  (Contributed by Sergey B Kirpichev in <a class="reference external" hre
 <li><p><a class="reference internal" href="../library/fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fraction</span></code></a> now implements an <code class="docutils literal notranslate"><span class="pre">__int__</span></code> method, so
 that an <code class="docutils literal notranslate"><span class="pre">isinstance(some_fraction,</span> <span class="pre">typing.SupportsInt)</span></code> check passes.
 (Contributed by Mark Dickinson in <a class="reference external" href="https://bugs.python.org/issue44547">bpo-44547</a>.)</p></li>
+</ul>
+</section>
+<section id="inspect">
+<h3>inspect<a class="headerlink" href="#inspect" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Add <a class="reference internal" href="../library/inspect.html#inspect.getmembers_static" title="inspect.getmembers_static"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.getmembers_static()</span></code></a>: return all members without
+triggering dynamic lookup via the descriptor protocol. (Contributed by
+Weipeng Hong in <a class="reference external" href="https://bugs.python.org/issue30533">bpo-30533</a>.)</p></li>
 </ul>
 </section>
 <section id="math">
@@ -438,6 +455,14 @@ it had a resolution of 1 millisecond (10<sup>-3</sup> seconds).
 <li><p>The Unicode database has been updated to version 14.0.0. (<a class="reference external" href="https://bugs.python.org/issue45190">bpo-45190</a>).</p></li>
 </ul>
 </section>
+<section id="fcntl">
+<h3>fcntl<a class="headerlink" href="#fcntl" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>On FreeBSD, the <code class="xref py py-attr docutils literal notranslate"><span class="pre">F_DUP2FD</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">F_DUP2FD_CLOEXEC</span></code> flags respectively
+are supported, the former equals to <code class="docutils literal notranslate"><span class="pre">dup2</span></code> usage while the latter set
+the <code class="docutils literal notranslate"><span class="pre">FD_CLOEXEC</span></code> flag in addition.</p></li>
+</ul>
+</section>
 </section>
 <section id="optimizations">
 <h2>Optimizations<a class="headerlink" href="#optimizations" title="永久链接至标题">¶</a></h2>
@@ -457,6 +482,10 @@ arguments.
 implemented in PyPy.)</p></li>
 <li><p>Pure ASCII strings are now normalized in constant time by <a class="reference internal" href="../library/unicodedata.html#unicodedata.normalize" title="unicodedata.normalize"><code class="xref py py-func docutils literal notranslate"><span class="pre">unicodedata.normalize()</span></code></a>.
 (Contributed by Dong-hee Na in <a class="reference external" href="https://bugs.python.org/issue44987">bpo-44987</a>.)</p></li>
+<li><p><a class="reference internal" href="../library/math.html#module-math" title="math: Mathematical functions (sin() etc.)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">math</span></code></a> functions <a class="reference internal" href="../library/math.html#math.comb" title="math.comb"><code class="xref py py-func docutils literal notranslate"><span class="pre">comb()</span></code></a> and <a class="reference internal" href="../library/math.html#math.perm" title="math.perm"><code class="xref py py-func docutils literal notranslate"><span class="pre">perm()</span></code></a> are now up
+to 10 times or more faster for large arguments (the speed up is larger for
+larger <em>k</em>).
+(Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue37295">bpo-37295</a>.)</p></li>
 </ul>
 </section>
 <section id="cpython-bytecode-changes">
@@ -598,12 +627,6 @@ instead.</p></li>
 </ul>
 <p>(Contributed by Hugo van Kemenade in <a class="reference external" href="https://bugs.python.org/issue45320">bpo-45320</a>.)</p>
 </li>
-<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">asyncore</span></code> and <code class="docutils literal notranslate"><span class="pre">asynchat</span></code> modules, deprecated in Python 3.6:
-use the <a class="reference internal" href="../library/asyncio.html#module-asyncio" title="asyncio: Asynchronous I/O."><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a> module instead.
-(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue28533">bpo-28533</a>.)</p></li>
-<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">smtpd</span></code> module, deprecated in Python 3.6: the <a class="reference external" href="https://aiosmtpd.readthedocs.io/">aiosmtpd</a> module can be used instead, it is based
-on asyncio.
-(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue28533">bpo-28533</a>.)</p></li>
 </ul>
 </section>
 <section id="porting-to-python-3-11">
@@ -656,12 +679,16 @@ Extension modules can now be built through <code class="docutils literal notrans
 test modules can be linked statically into main binary or library.
 (Contributed by Brett Cannon and Christian Heimes in <a class="reference external" href="https://bugs.python.org/issue45548">bpo-45548</a>,
 <a class="reference external" href="https://bugs.python.org/issue45570">bpo-45570</a>, <a class="reference external" href="https://bugs.python.org/issue45571">bpo-45571</a>, and <a class="reference external" href="https://bugs.python.org/issue43974">bpo-43974</a>.)</p></li>
-<li><p>The build dependencies for <a class="reference internal" href="../library/zlib.html#module-zlib" title="zlib: Low-level interface to compression and decompression routines compatible with gzip."><code class="xref py py-mod docutils literal notranslate"><span class="pre">zlib</span></code></a>, <a class="reference internal" href="../library/bz2.html#module-bz2" title="bz2: Interfaces for bzip2 compression and decompression."><code class="xref py py-mod docutils literal notranslate"><span class="pre">bz2</span></code></a>, and <a class="reference internal" href="../library/lzma.html#module-lzma" title="lzma: A Python wrapper for the liblzma compression library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">lzma</span></code></a> are now
-detected by <strong class="program">configure</strong>.
-(Contributed by Christian Heimes in <a class="reference external" href="https://bugs.python.org/issue45763">bpo-45763</a>.)</p></li>
-<li><p>Build dependencies for <a class="reference internal" href="../library/dbm.html#module-dbm" title="dbm: Interfaces to various Unix &quot;database&quot; formats."><code class="xref py py-mod docutils literal notranslate"><span class="pre">dbm</span></code></a> are now detected by <strong class="program">configure</strong>.
-<code class="docutils literal notranslate"><span class="pre">libdb</span></code> 3.x and 4.x are no longer supported.
-(Contributed by Christian Heimes in <a class="reference external" href="https://bugs.python.org/issue45747">bpo-45747</a>.)</p></li>
+<li><p>Build dependencies, compiler flags, and linker flags for most stdlib
+extension modules are now detected by <strong class="program">configure</strong>. libffi, libnsl,
+libsqlite3, zlib, bzip2, liblzma, libcrypt, and uuid flags are detected by
+<code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> (when available).
+(Contributed by Christian Heimes and Erlend Egeberg Aasland in
+<a class="reference external" href="https://bugs.python.org/issuebpo-45847">bpo-bpo-45847</a>, <a class="reference external" href="https://bugs.python.org/issue45747">bpo-45747</a>, and <a class="reference external" href="https://bugs.python.org/issue45763">bpo-45763</a>.)</p></li>
+<li><p>CPython now has experimental support for cross compiling to WebAssembly
+platform <code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code>. The effort is inspired by previous work
+like Pyodide.
+(Contributed by Christian Heimes and Ethan Smith in <a class="reference external" href="https://bugs.python.org/issue40280">bpo-40280</a>.)</p></li>
 </ul>
 </section>
 <section id="c-api-changes">
@@ -685,6 +712,9 @@ of all three arguments.
 <li><p><a class="reference internal" href="../c-api/exceptions.html#c.PyErr_GetExcInfo" title="PyErr_GetExcInfo"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_GetExcInfo()</span></code></a> now derives the <code class="docutils literal notranslate"><span class="pre">type</span></code> and <code class="docutils literal notranslate"><span class="pre">traceback</span></code>
 fields of the result from the exception instance (the <code class="docutils literal notranslate"><span class="pre">value</span></code> field).
 (Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
+<li><p>Added the <a class="reference internal" href="../c-api/apiabiversion.html#c.Py_Version" title="Py_Version"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_Version</span></code></a> constant which bears the same value as
+<a class="reference internal" href="../c-api/apiabiversion.html#c.PY_VERSION_HEX" title="PY_VERSION_HEX"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PY_VERSION_HEX</span></code></a>.
+(Contributed by  Gabriele N. Tornetta in <a class="reference external" href="https://bugs.python.org/issue43931">bpo-43931</a>.)</p></li>
 </ul>
 </section>
 <section id="id2">
@@ -778,6 +808,10 @@ removed. These files must not be included directly, as they are already
 included in <code class="docutils literal notranslate"><span class="pre">Python.h</span></code>: <a class="reference internal" href="../c-api/intro.html#api-includes"><span class="std std-ref">Include Files</span></a>. If they have
 been included directly, consider including <code class="docutils literal notranslate"><span class="pre">Python.h</span></code> instead.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue35134">bpo-35134</a>.)</p></li>
+<li><p>The <code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_CHECK_INTERNED()</span></code> macro has been excluded from the
+limited C API. It was never usable there, because it used internal structures
+which are not available in the limited C API.
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46007">bpo-46007</a>.)</p></li>
 </ul>
 </section>
 <section id="id3">
@@ -861,6 +895,7 @@ limited C API.
 <li><a class="reference internal" href="#new-features">New Features</a><ul>
 <li><a class="reference internal" href="#enhanced-error-locations-in-tracebacks">Enhanced error locations in tracebacks</a><ul>
 <li><a class="reference internal" href="#column-information-for-code-objects">Column information for code objects</a></li>
+<li><a class="reference internal" href="#exceptions-can-be-enriched-with-a-string-note">Exceptions can be enriched with a string <code class="docutils literal notranslate"><span class="pre">__note__</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -870,6 +905,7 @@ limited C API.
 <li><a class="reference internal" href="#new-modules">New Modules</a></li>
 <li><a class="reference internal" href="#improved-modules">Improved Modules</a><ul>
 <li><a class="reference internal" href="#fractions">fractions</a></li>
+<li><a class="reference internal" href="#inspect">inspect</a></li>
 <li><a class="reference internal" href="#math">math</a></li>
 <li><a class="reference internal" href="#operator">operator</a></li>
 <li><a class="reference internal" href="#os">os</a></li>
@@ -878,6 +914,7 @@ limited C API.
 <li><a class="reference internal" href="#threading">threading</a></li>
 <li><a class="reference internal" href="#time">time</a></li>
 <li><a class="reference internal" href="#unicodedata">unicodedata</a></li>
+<li><a class="reference internal" href="#fcntl">fcntl</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#optimizations">Optimizations</a></li>
@@ -947,7 +984,7 @@ limited C API.
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a2 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python的新变化</a> &#187;</li>
@@ -983,7 +1020,7 @@ limited C API.
 <br />
     <br />
 
-    最后更新于 12月 09, 2021.
+    最后更新于 12月 13, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
