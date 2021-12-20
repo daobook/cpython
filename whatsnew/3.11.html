@@ -201,7 +201,7 @@
 <dd class="field-odd"><p>3.11.0a3</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>十二月 13, 2021</p>
+<dd class="field-even"><p>十二月 20, 2021</p>
 </dd>
 </dl>
 <p>This article explains the new features in Python 3.11, compared to 3.10.</p>
@@ -214,6 +214,8 @@ so it's worth checking back even after reading earlier versions.</p>
 </div>
 <section id="summary-release-highlights">
 <h2>Summary -- Release highlights<a class="headerlink" href="#summary-release-highlights" title="永久链接至标题">¶</a></h2>
+<p>PEP-654: Exception Groups and <code class="docutils literal notranslate"><span class="pre">except*</span></code>.
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45292">bpo-45292</a>.)</p>
 </section>
 <section id="new-features">
 <h2>New Features<a class="headerlink" href="#new-features" title="永久链接至标题">¶</a></h2>
@@ -325,6 +327,10 @@ hash-based pyc files now use <code class="docutils literal notranslate"><span cl
 the traceback attached to this exception is now always <code class="docutils literal notranslate"><span class="pre">sys.exc_info()[1].__traceback__</span></code>.
 This means that changes made to the traceback in the current <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> clause are
 reflected in the re-raised exception.
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
+<li><p>The interpreter state's representation of handled exceptions (a.k.a exc_info, or
+_PyErr_StackItem) now has only the <code class="docutils literal notranslate"><span class="pre">exc_value</span></code> field, <code class="docutils literal notranslate"><span class="pre">exc_type</span></code> and <code class="docutils literal notranslate"><span class="pre">exc_traceback</span></code>
+have been removed as their values can be derived from <code class="docutils literal notranslate"><span class="pre">exc_value</span></code>.
 (Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
 </ul>
 </section>
@@ -493,9 +499,11 @@ larger <em>k</em>).
 <ul class="simple">
 <li><p>Replaced all numeric <code class="docutils literal notranslate"><span class="pre">BINARY_*</span></code> and <code class="docutils literal notranslate"><span class="pre">INPLACE_*</span></code> instructions with a single
 <a class="reference internal" href="../library/dis.html#opcode-BINARY_OP"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">BINARY_OP</span></code></a> implementation.</p></li>
-<li><p>Added a new <a class="reference internal" href="../library/dis.html#opcode-CALL_METHOD_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD_KW</span></code></a> opcode.  Calls a method in a similar
-fashion as <a class="reference internal" href="../library/dis.html#opcode-CALL_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code></a>, but also supports keyword arguments.  Works
-in tandem with <a class="reference internal" href="../library/dis.html#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a>.</p></li>
+<li><p>Replaced the three call instructions: <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_FUNCTION</span></code>,
+<code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_FUNCTION_KW</span></code> and <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code> with
+<a class="reference internal" href="../library/dis.html#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a>, <a class="reference internal" href="../library/dis.html#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a> and <a class="reference internal" href="../library/dis.html#opcode-PRECALL_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">PRECALL_METHOD</span></code></a>.
+This decouples the argument shifting for methods from the handling of
+keyword arguments and allows better specialization of calls.</p></li>
 <li><p>Removed <code class="docutils literal notranslate"><span class="pre">COPY_DICT_WITHOUT_KEYS</span></code>.</p></li>
 <li><p><a class="reference internal" href="../library/dis.html#opcode-MATCH_CLASS"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">MATCH_CLASS</span></code></a> and <a class="reference internal" href="../library/dis.html#opcode-MATCH_KEYS"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">MATCH_KEYS</span></code></a> no longer push an additional
 boolean value indicating whether the match succeeded or failed. Instead, they
@@ -1020,7 +1028,7 @@ limited C API.
 <br />
     <br />
 
-    最后更新于 12月 13, 2021.
+    最后更新于 12月 20, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

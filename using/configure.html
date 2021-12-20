@@ -314,6 +314,18 @@ dependencies.</p>
 </div>
 </dd></dl>
 
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-enable-pystats">
+<span class="sig-name descname"><span class="pre">--enable-pystats</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-enable-pystats" title="永久链接至目标">¶</a></dt>
+<dd><p>Turn on internal statistics gathering.</p>
+<p>The statistics will be dumped to a arbitrary (probably unique) file in
+<code class="docutils literal notranslate"><span class="pre">/tmp/py_stats/</span></code>, or <code class="docutils literal notranslate"><span class="pre">C:\temp\py_stats\</span></code> on Windows.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">Tools//summarize_stats.py</span></code> to read the stats.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
 </section>
 <section id="install-options">
 <h3><span class="section-number">3.1.2. </span>安装时的选项<a class="headerlink" href="#install-options" title="永久链接至标题">¶</a></h3>
@@ -742,9 +754,8 @@ option). Main runtime checks:</p>
 <h3><span class="section-number">3.1.10. </span>Cross Compiling Options<a class="headerlink" href="#cross-compiling-options" title="永久链接至标题">¶</a></h3>
 <p>Cross compiling, also known as cross building, can be used to build Python
 for another CPU architecture or platform. Cross compiling requires a Python
-interpreter and the <strong class="program">_freeze_module</strong> binary from another build. The
-version of the build Python and <strong class="program">_freeze_module</strong> command must be
-the same as the cross compiled host Python.</p>
+interpreter for the build platform. The version of the build Python must match
+the version of the cross compiled host Python.</p>
 <dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-build">
 <span class="sig-name descname"><span class="pre">--build</span></span><span class="sig-prename descclassname"><span class="pre">=BUILD</span></span><a class="headerlink" href="#cmdoption-build" title="永久链接至目标">¶</a></dt>
@@ -758,17 +769,8 @@ the same as the cross compiled host Python.</p>
 </dd></dl>
 
 <dl class="std cmdoption">
-<dt class="sig sig-object std" id="cmdoption-with-freeze-module">
-<span class="sig-name descname"><span class="pre">--with-freeze-module</span></span><span class="sig-prename descclassname"><span class="pre">=Programs/_freeze_module</span></span><a class="headerlink" href="#cmdoption-with-freeze-module" title="永久链接至目标">¶</a></dt>
-<dd><p>path to <code class="docutils literal notranslate"><span class="pre">_freeze_module</span></code> binary for cross compiling.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-with-build-python">
-<span class="sig-name descname"><span class="pre">--with-build-python</span></span><span class="sig-prename descclassname"><span class="pre">=python3.xx</span></span><a class="headerlink" href="#cmdoption-with-build-python" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">--with-build-python</span></span><span class="sig-prename descclassname"><span class="pre">=path/to/python</span></span><a class="headerlink" href="#cmdoption-with-build-python" title="永久链接至目标">¶</a></dt>
 <dd><p>path to build <code class="docutils literal notranslate"><span class="pre">python</span></code> binary for cross compiling</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
@@ -792,7 +794,6 @@ the same as the cross compiled host Python.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">CONFIG_SITE</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">site</span><span class="o">-</span><span class="n">aarch64</span> <span class="o">../</span><span class="n">configure</span> \
     <span class="o">--</span><span class="n">build</span><span class="o">=</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> \
     <span class="o">--</span><span class="n">host</span><span class="o">=</span><span class="n">aarch64</span><span class="o">-</span><span class="n">unknown</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span> \
-    <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">freeze</span><span class="o">-</span><span class="n">module</span><span class="o">=../</span><span class="n">x86_64</span><span class="o">/</span><span class="n">Programs</span><span class="o">/</span><span class="n">_freeze_module</span> \
     <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">python</span><span class="o">=../</span><span class="n">x86_64</span><span class="o">/</span><span class="n">python</span>
 </pre></div>
 </div>
@@ -1268,7 +1269,7 @@ Example on Linux x86-64:</p>
 <br />
     <br />
 
-    最后更新于 12月 13, 2021.
+    最后更新于 12月 20, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

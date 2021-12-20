@@ -177,7 +177,7 @@
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">myfunc</span><span class="p">)</span>
 <span class="go">  2           0 LOAD_GLOBAL              0 (len)</span>
 <span class="go">              2 LOAD_FAST                0 (alist)</span>
-<span class="go">              4 CALL_FUNCTION            1</span>
+<span class="go">              4 CALL_NO_KW               1</span>
 <span class="go">              6 RETURN_VALUE</span>
 </pre></div>
 </div>
@@ -237,7 +237,7 @@
 <span class="gp">...</span>
 <span class="go">LOAD_GLOBAL</span>
 <span class="go">LOAD_FAST</span>
-<span class="go">CALL_FUNCTION</span>
+<span class="go">CALL_NO_KW</span>
 <span class="go">RETURN_VALUE</span>
 </pre></div>
 </div>
@@ -580,9 +580,16 @@ otherwise an empty string.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-END_ASYNC_FOR">
 <span class="sig-name descname"><span class="pre">END_ASYNC_FOR</span></span><a class="headerlink" href="#opcode-END_ASYNC_FOR" title="永久链接至目标">¶</a></dt>
-<dd><p>终止一个 <a class="reference internal" href="../reference/compound_stmts.html#async-for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code></a>  循环。处理等待下一个项目时引发的异常。如果 TOS 是 <a class="reference internal" href="exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a>， 从堆栈弹出7个值，并使用后三个恢复异常状态。否则，使用堆栈中的三个值重新引发异常。从块堆栈中删除异常处理程序块。</p>
+<dd><p>Terminates an <a class="reference internal" href="../reference/compound_stmts.html#async-for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">async</span> <span class="pre">for</span></code></a> loop.  Handles an exception raised
+when awaiting a next item.  If TOS is <a class="reference internal" href="exceptions.html#StopAsyncIteration" title="StopAsyncIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopAsyncIteration</span></code></a> pop 3
+values from the stack and restore the exception state using the second
+of them.  Otherwise re-raise the exception using the value
+from the stack.  An exception handler block is removed from the block stack.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.8 新版功能.</span></p>
+<p><span class="versionmodified added">3.8 新版功能: </span></p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Exception representation on the stack now consist of one, not three, items.</p>
+</div>
 </div>
 </dd></dl>
 
@@ -666,7 +673,12 @@ otherwise an empty string.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-POP_EXCEPT">
 <span class="sig-name descname"><span class="pre">POP_EXCEPT</span></span><a class="headerlink" href="#opcode-POP_EXCEPT" title="永久链接至目标">¶</a></dt>
-<dd><p>Pops three values from the stack, which are used to restore the exception state.</p>
+<dd><p>Pops a value from the stack, which is used to restore the exception state.</p>
+<blockquote>
+<div><div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Exception representation on the stack now consist of one, not three, items.</p>
+</div>
+</div></blockquote>
 </dd></dl>
 
 <dl class="std opcode">
@@ -678,13 +690,16 @@ of the current frame.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Exception representation on the stack now consist of one, not three, items.</p>
+</div>
 </dd></dl>
 
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-PUSH_EXC_INFO">
 <span class="sig-name descname"><span class="pre">PUSH_EXC_INFO</span></span><a class="headerlink" href="#opcode-PUSH_EXC_INFO" title="永久链接至目标">¶</a></dt>
-<dd><p>Pops the three values from the stack. Pushes the current exception to the top of the stack.
-Pushes the three values originally popped back to the stack.
+<dd><p>Pops a value from the stack. Pushes the current exception to the top of the stack.
+Pushes the value originally popped back to the stack.
 Used in exception handlers.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
@@ -694,8 +709,8 @@ Used in exception handlers.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-WITH_EXCEPT_START">
 <span class="sig-name descname"><span class="pre">WITH_EXCEPT_START</span></span><a class="headerlink" href="#opcode-WITH_EXCEPT_START" title="永久链接至目标">¶</a></dt>
-<dd><p>Calls the function in position 8 on the stack with the top three
-items on the stack as arguments.
+<dd><p>Calls the function in position 4 on the stack with arguments (type, val, tb)
+representing the exception at the top of the stack.
 Used to implement the call <code class="docutils literal notranslate"><span class="pre">context_manager.__exit__(*exc_info())</span></code> when an exception
 has occurred in a <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement.</p>
 <div class="versionadded">
@@ -703,6 +718,10 @@ has occurred in a <a class="reference internal" href="../reference/compound_stmt
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">__exit__</span></code> function is in position 8 of the stack rather than 7.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">__exit__</span></code> function is in position 4 of the stack rather than 7.
+Exception representation on the stack now consist of one, not three, items.</p>
 </div>
 </dd></dl>
 
@@ -731,7 +750,8 @@ Used in exception handler cleanup.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-LOAD_BUILD_CLASS">
 <span class="sig-name descname"><span class="pre">LOAD_BUILD_CLASS</span></span><a class="headerlink" href="#opcode-LOAD_BUILD_CLASS" title="永久链接至目标">¶</a></dt>
-<dd><p>将 <code class="xref py py-func docutils literal notranslate"><span class="pre">builtins</span> <span class="pre">.__</span> <span class="pre">build_class__()</span></code> 推到堆栈上。它之后被 <a class="reference internal" href="#opcode-CALL_FUNCTION"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_FUNCTION</span></code></a> 调用来构造一个类。</p>
+<dd><p>Pushes <code class="xref py py-func docutils literal notranslate"><span class="pre">builtins.__build_class__()</span></code> onto the stack.  It is later called
+by <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> to construct a class.</p>
 </dd></dl>
 
 <dl class="std opcode">
@@ -1010,13 +1030,40 @@ success (<code class="docutils literal notranslate"><span class="pre">True</span
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-JUMP_IF_NOT_EXC_MATCH">
 <span class="sig-name descname"><span class="pre">JUMP_IF_NOT_EXC_MATCH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-JUMP_IF_NOT_EXC_MATCH" title="永久链接至目标">¶</a></dt>
-<dd><p>Tests whether the second value on the stack is an exception matching TOS,
+<dd><p>Performs exception matching for <code class="docutils literal notranslate"><span class="pre">except</span></code>.
+Tests whether the second value on the stack is an exception matching TOS,
 and jumps if it is not. Pops one value from the stack.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>This opcode no longer pops the active exception.</p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-JUMP_IF_NOT_EG_MATCH">
+<span class="sig-name descname"><span class="pre">JUMP_IF_NOT_EG_MATCH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-JUMP_IF_NOT_EG_MATCH" title="永久链接至目标">¶</a></dt>
+<dd><p>Performs exception matching for <code class="docutils literal notranslate"><span class="pre">except*</span></code>. Applies <code class="docutils literal notranslate"><span class="pre">split(TOS)</span></code> on
+the exception group representing TOS1. Jumps if no match is found.</p>
+<p>Pops one item from the stack (the match type). If a match was found,
+next item (the exception) and pushes the non-matching part of the
+exception group followed by the matching part.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-PREP_RERAISE_STAR">
+<span class="sig-name descname"><span class="pre">PREP_RERAISE_STAR</span></span><a class="headerlink" href="#opcode-PREP_RERAISE_STAR" title="永久链接至目标">¶</a></dt>
+<dd><p>Combines the raised and reraised exceptions list from TOS, into an exception
+group to propagate from a try-except* block. Uses the original exception
+group from TOS1 to reconstruct the structure of reraised exceptions. Pops
+two items from the stack and pushes 0 (for lasti, which is unused) followed
+by the exception to reraise or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there isn't one.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -1164,20 +1211,36 @@ closures.</p>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_FUNCTION">
-<span class="sig-name descname"><span class="pre">CALL_FUNCTION</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_FUNCTION" title="永久链接至目标">¶</a></dt>
-<dd><p>调用一个可调用对象并传入位置参数。 <em>argc</em> 指明位置参数的数量。 栈顶包含位置参数，其中最右边的参数在最顶端。 在参数之下是一个待调用的可调用对象。 <code class="docutils literal notranslate"><span class="pre">CALL_FUNCTION</span></code> 会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>此操作码仅用于附带位置参数的调用。</p>
+<dt class="sig sig-object std" id="opcode-CALL_NO_KW">
+<span class="sig-name descname"><span class="pre">CALL_NO_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_NO_KW" title="永久链接至目标">¶</a></dt>
+<dd><p>Calls a callable object with positional arguments.
+<em>argc</em> indicates the number of positional arguments.
+The top of the stack contains positional arguments, with the right-most
+argument on top.  Below the arguments is a callable object to call.
+<code class="docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code> pops all arguments and the callable object off the stack,
+calls the callable object with those arguments, and pushes the return value
+returned by the callable object.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_FUNCTION_KW">
-<span class="sig-name descname"><span class="pre">CALL_FUNCTION_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_FUNCTION_KW" title="永久链接至目标">¶</a></dt>
-<dd><p>调用一个可调用对象并传入位置参数（如果有的话）和关键字参数。 <em>argc</em> 指明位置参数和关键字参数的总数量。 栈顶元素包含一个关键字参数名称的元组，名称必须为字符串。 在元组之下是与元组顺序相对应的关键字参数值。 在它之下则是位置参数，其中最右边的参数在最顶端。 在参数之下是要调用的可调用对象。 <code class="docutils literal notranslate"><span class="pre">CALL_FUNCTION_KW</span></code> 会从栈中弹出所有参数及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>关键字参数会被打包为一个元组而非字典，<em>argc</em> 指明参数的总数量。</p>
+<dt class="sig sig-object std" id="opcode-CALL_KW">
+<span class="sig-name descname"><span class="pre">CALL_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_KW" title="永久链接至目标">¶</a></dt>
+<dd><p>Calls a callable object with positional (if any) and keyword arguments.
+<em>argc</em> indicates the total number of positional and keyword arguments.
+The top element on the stack contains a tuple with the names of the
+keyword arguments, which must be strings.
+Below that are the values for the keyword arguments,
+in the order corresponding to the tuple.
+Below that are positional arguments, with the right-most parameter on
+top.  Below the arguments is a callable object to call.
+<code class="docutils literal notranslate"><span class="pre">CALL_KW</span></code> pops all arguments and the callable object off the stack,
+calls the callable object with those arguments, and pushes the return value
+returned by the callable object.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -1193,31 +1256,19 @@ closures.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-LOAD_METHOD">
 <span class="sig-name descname"><span class="pre">LOAD_METHOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">namei</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-LOAD_METHOD" title="永久链接至目标">¶</a></dt>
-<dd><p>从 TOS 对象加载一个名为 <code class="docutils literal notranslate"><span class="pre">co_names[namei]</span></code> 的方法。 TOS 将被弹出。 此字节码可区分两种情况：如果 TOS 有一个名称正确的方法，字节码会将未绑定方法和 TOS 推入栈顶。 TOS 将在调用未绑定方法时被用作 <a class="reference internal" href="#opcode-CALL_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code></a> 的第一个参数 (<code class="docutils literal notranslate"><span class="pre">self</span></code>)。 否则会将 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 和属性查找所返回的对象推入栈顶。</p>
+<dd><p>从 TOS 对象加载一个名为 <code class="docutils literal notranslate"><span class="pre">co_names[namei]</span></code> 的方法。 TOS 将被弹出。 此字节码可区分两种情况：如果 TOS 有一个名称正确的方法，字节码会将未绑定方法和 TOS 推入栈顶。 TOS 将在调用未绑定方法时被用作 <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code> 的第一个参数 (<code class="docutils literal notranslate"><span class="pre">self</span></code>)。 否则会将 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 和属性查找所返回的对象推入栈顶。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_METHOD">
-<span class="sig-name descname"><span class="pre">CALL_METHOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_METHOD" title="永久链接至目标">¶</a></dt>
-<dd><p>调用一个方法。 <em>argc</em> 是位置参数的数量。 关键字参数不受支持。 此操作码被设计用于配合 <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> 使用。 位置参数放在栈顶。 在它们之下放在栈中的是由 <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> 所描述的两个条目（或者是 <code class="docutils literal notranslate"><span class="pre">self</span></code> 和一个未绑定方法对象，或者是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 和一个任意可调用对象）。 它们会被全部弹出并将返回值推入栈顶。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_METHOD_KW">
-<span class="sig-name descname"><span class="pre">CALL_METHOD_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_METHOD_KW" title="永久链接至目标">¶</a></dt>
-<dd><p>Calls a method in a similar fashion as <a class="reference internal" href="#opcode-CALL_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code></a>, but also supports keyword arguments.
-<em>argc</em> is the number of positional and keyword arguments.
-This opcode is designed to be used with <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a>.  TOS is a
-tuple of keyword argument names.  Argument values are below that.
-Below them, the two items described in <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> are on the
-stack (either <code class="docutils literal notranslate"><span class="pre">self</span></code> and an unbound method object or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and an
-arbitrary callable).  All of them are popped from the stack and the return value is pushed.</p>
+<dt class="sig sig-object std" id="opcode-PRECALL_METHOD">
+<span class="sig-name descname"><span class="pre">PRECALL_METHOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-PRECALL_METHOD" title="永久链接至目标">¶</a></dt>
+<dd><p>Prefixes either <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> or <a class="reference internal" href="#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a>.
+This opcode is designed to be used with <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a>.
+Sets internal variables, so that <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> or <a class="reference internal" href="#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a>
+clean up after <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> correctly.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -1495,7 +1546,7 @@ original location.</p>
 <br />
     <br />
 
-    最后更新于 12月 13, 2021.
+    最后更新于 12月 20, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

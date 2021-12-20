@@ -979,7 +979,11 @@ child classes. However, child subclasses will get a <a class="reference internal
 contain names of any <em>additional</em> slots).</p></li>
 <li><p>如果一个类定义的位置在某个基类中也有定义，则由基类位置定义的实例变量将不可访问（除非通过直接从基类获取其描述器的方式）。这会使得程序的含义变成未定义。未来可能会添加一个防止此情况的检查。</p></li>
 <li><p>非空的 <em>__slots__</em> 不适用于派生自“可变长度”内置类型例如 <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>、<a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="../library/stdtypes.html#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 的派生类。</p></li>
-<li><p>任何非字符串可迭代对象都可以被赋值给 <em>__slots__</em>。映射也可以被使用；不过，未来可能会分别赋给每个键具有特殊含义的值。</p></li>
+<li><p>Any non-string <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> may be assigned to <em>__slots__</em>.</p></li>
+<li><p>If a <a class="reference internal" href="../library/stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dictionary</span></code></a> is used to assign <em>__slots__</em>, the dictionary
+keys will be used as the slot names. The values of the dictionary can be used
+to provide per-attribute docstrings that will be recognised by
+<a class="reference internal" href="../library/inspect.html#inspect.getdoc" title="inspect.getdoc"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.getdoc()</span></code></a> and displayed in the output of <a class="reference internal" href="../library/functions.html#help" title="help"><code class="xref py py-func docutils literal notranslate"><span class="pre">help()</span></code></a>.</p></li>
 <li><p><a class="reference internal" href="../library/stdtypes.html#instance.__class__" title="instance.__class__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__class__</span></code></a> assignment works only if both classes have the
 same <em>__slots__</em>.</p></li>
 <li><p><a class="reference internal" href="../tutorial/classes.html#tut-multiple"><span class="std std-ref">Multiple inheritance</span></a> with multiple slotted parent
@@ -2044,7 +2048,7 @@ supported, which is why the reflected method is not called.</p>
 <br />
     <br />
 
-    最后更新于 12月 13, 2021.
+    最后更新于 12月 20, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

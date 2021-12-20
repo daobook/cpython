@@ -342,6 +342,18 @@ mode is 'w', the record will not be emitted (see <a class="reference external" h
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>namer 函数会在轮换期间被多次调用，因此它应当尽可能的简单快速。 它还应当对给定的输入每次都返回相同的输出，否则轮换行为可能无法按预期工作。</p>
+<p>It's also worth noting that care should be taken when using a namer to
+preserve certain attributes in the filename which are used during rotation.
+For example, <a class="reference internal" href="#logging.handlers.RotatingFileHandler" title="logging.handlers.RotatingFileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">RotatingFileHandler</span></code></a> expects to have a set of log files
+whose names contain successive integers, so that rotation works as expected,
+and <a class="reference internal" href="#logging.handlers.TimedRotatingFileHandler" title="logging.handlers.TimedRotatingFileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimedRotatingFileHandler</span></code></a> deletes old log files (based on the
+<code class="docutils literal notranslate"><span class="pre">backupCount</span></code> parameter passed to the handler's initializer) by determining
+the oldest files to delete. For this to happen, the filenames should be
+sortable using the date/time portion of the filename, and a namer needs to
+respect this. (If a namer is wanted that doesn't respect this scheme, it will
+need to be used in a subclass of <a class="reference internal" href="#logging.handlers.TimedRotatingFileHandler" title="logging.handlers.TimedRotatingFileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimedRotatingFileHandler</span></code></a> which
+overrides the <a class="reference internal" href="#logging.handlers.TimedRotatingFileHandler.getFilesToDelete" title="logging.handlers.TimedRotatingFileHandler.getFilesToDelete"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getFilesToDelete()</span></code></a> method to
+fit in with the custom naming scheme.)</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -504,6 +516,13 @@ mode is 'w', the record will not be emitted (see <a class="reference external" h
 <dt class="sig sig-object py" id="logging.handlers.TimedRotatingFileHandler.emit">
 <span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.TimedRotatingFileHandler.emit" title="永久链接至目标">¶</a></dt>
 <dd><p>将记录输出到文件，以适应上文所描述的轮换。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logging.handlers.TimedRotatingFileHandler.getFilesToDelete">
+<span class="sig-name descname"><span class="pre">getFilesToDelete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.TimedRotatingFileHandler.getFilesToDelete" title="永久链接至目标">¶</a></dt>
+<dd><p>Returns a list of filenames which should be deleted as part of rollover. These
+are the absolute paths of the oldest backup log files written by the handler.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1152,7 +1171,7 @@ to <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <br />
     <br />
 
-    最后更新于 12月 13, 2021.
+    最后更新于 12月 20, 2021.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
