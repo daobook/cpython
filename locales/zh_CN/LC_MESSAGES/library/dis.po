@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-13 09:49+0800\n"
+"POT-Creation-Date: 2021-12-21 00:25+0800\n"
 "PO-Revision-Date: 2021-06-28 01:04+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
@@ -542,19 +542,26 @@ msgstr ""
 "``get_awaitable`` 的细节"
 
 #: ../../library/dis.rst:476
+#, fuzzy
 msgid ""
 "Terminates an :keyword:`async for` loop.  Handles an exception raised "
-"when awaiting a next item.  If TOS is :exc:`StopAsyncIteration` pop 7 "
-"values from the stack and restore the exception state using the second "
-"three of them.  Otherwise re-raise the exception using the three values "
-"from the stack.  An exception handler block is removed from the block "
-"stack."
+"when awaiting a next item.  If TOS is :exc:`StopAsyncIteration` pop 3 "
+"values from the stack and restore the exception state using the second of"
+" them.  Otherwise re-raise the exception using the value from the stack."
+"  An exception handler block is removed from the block stack."
 msgstr ""
 "终止一个 :keyword:`async for`  循环。处理等待下一个项目时引发的异常。如果 TOS 是 "
 ":exc:`StopAsyncIteration`， "
 "从堆栈弹出7个值，并使用后三个恢复异常状态。否则，使用堆栈中的三个值重新引发异常。从块堆栈中删除异常处理程序块。"
 
-#: ../../library/dis.rst:487
+#: ../../library/dis.rst:484 ../../library/dis.rst:568
+#: ../../library/dis.rst:579
+msgid ""
+"Exception representation on the stack now consist of one, not three, "
+"items."
+msgstr ""
+
+#: ../../library/dis.rst:489
 msgid ""
 "Resolves ``__aenter__`` and ``__aexit__`` from the object on top of the "
 "stack.  Pushes ``__aexit__`` and result of ``__aenter__()`` to the stack."
@@ -562,38 +569,38 @@ msgstr ""
 "从栈顶对象解析 ``__aenter__`` 和 ``__aexit__`` 。将 ``__aexit__`` 和 "
 "``__aenter__()`` 的结果推入堆栈。"
 
-#: ../../library/dis.rst:494
+#: ../../library/dis.rst:496
 msgid "**Miscellaneous opcodes**"
 msgstr "**其他操作码**"
 
-#: ../../library/dis.rst:498
+#: ../../library/dis.rst:500
 msgid ""
 "Implements the expression statement for the interactive mode.  TOS is "
 "removed from the stack and printed.  In non-interactive mode, an "
 "expression statement is terminated with :opcode:`POP_TOP`."
 msgstr "实现交互模式的表达式语句。TOS从堆栈中被移除并打印。在非交互模式下，表达式语句以 :opcode:`POP_TOP` 终止。"
 
-#: ../../library/dis.rst:505
+#: ../../library/dis.rst:507
 msgid "Calls ``set.add(TOS1[-i], TOS)``.  Used to implement set comprehensions."
 msgstr "调用 ``set.add(TOS1[-i], TOS)`` 。 用于实现集合推导。"
 
-#: ../../library/dis.rst:510
+#: ../../library/dis.rst:512
 msgid ""
 "Calls ``list.append(TOS1[-i], TOS)``.  Used to implement list "
 "comprehensions."
 msgstr "调用 ``list.append(TOS1[-i], TOS)``。 用于实现列表推导式。"
 
-#: ../../library/dis.rst:515
+#: ../../library/dis.rst:517
 msgid ""
 "Calls ``dict.__setitem__(TOS1[-i], TOS1, TOS)``.  Used to implement dict "
 "comprehensions."
 msgstr "调用 ``dict.__setitem__(TOS1[-i], TOS1, TOS)`` 。 用于实现字典推导。"
 
-#: ../../library/dis.rst:519
+#: ../../library/dis.rst:521
 msgid "Map value is TOS and map key is TOS1. Before, those were reversed."
 msgstr "映射值为 TOS ，映射键为 TOS1 。之前，它们被颠倒了。"
 
-#: ../../library/dis.rst:522
+#: ../../library/dis.rst:524
 msgid ""
 "For all of the :opcode:`SET_ADD`, :opcode:`LIST_APPEND` and "
 ":opcode:`MAP_ADD` instructions, while the added value or key/value pair "
@@ -603,19 +610,19 @@ msgstr ""
 "对于所有 :opcode:`SET_ADD` 、 :opcode:`LIST_APPEND` 和 :opcode:`MAP_ADD` "
 "指令，当弹出添加的值或键值对时，容器对象保留在堆栈上，以便它可用于循环的进一步迭代。"
 
-#: ../../library/dis.rst:530
+#: ../../library/dis.rst:532
 msgid "Returns with TOS to the caller of the function."
 msgstr "返回 TOS 到函数的调用者。"
 
-#: ../../library/dis.rst:535
+#: ../../library/dis.rst:537
 msgid "Pops TOS and yields it from a :term:`generator`."
 msgstr "弹出 TOS 并从一个 :term:`generator` 生成它。"
 
-#: ../../library/dis.rst:540
+#: ../../library/dis.rst:542
 msgid "Pops TOS and delegates to it as a subiterator from a :term:`generator`."
 msgstr "弹出 TOS 并将其委托给它作为 :term:`generator` 的子迭代器。"
 
-#: ../../library/dis.rst:547
+#: ../../library/dis.rst:549
 msgid ""
 "Checks whether ``__annotations__`` is defined in ``locals()``, if not it "
 "is set up to an empty ``dict``. This opcode is only emitted if a class or"
@@ -626,7 +633,7 @@ msgstr ""
 "。只有在类或模块体静态地包含 :term:`variable annotations <variable annotation>` "
 "时才会发出此操作码。"
 
-#: ../../library/dis.rst:557
+#: ../../library/dis.rst:559
 msgid ""
 "Loads all symbols not starting with ``'_'`` directly from the module TOS "
 "to the local namespace. The module is popped after loading all names. "
@@ -635,13 +642,11 @@ msgstr ""
 "将所有不以 ``'_'`` 开头的符号直接从模块 TOS 加载到局部命名空间。加载所有名称后弹出该模块。这个操作码实现了 ``from "
 "module import *`` 。"
 
-#: ../../library/dis.rst:564
-msgid ""
-"Pops three values from the stack, which are used to restore the exception"
-" state."
+#: ../../library/dis.rst:566
+msgid "Pops a value from the stack, which is used to restore the exception state."
 msgstr ""
 
-#: ../../library/dis.rst:569
+#: ../../library/dis.rst:573
 #, fuzzy
 msgid ""
 "Re-raises the exception currently on top of the stack. If oparg is non-"
@@ -649,29 +654,36 @@ msgid ""
 "``f_lasti`` of the current frame."
 msgstr "重新引发当前位于栈顶的异常。 如果 oparg 为非零值，则将当前帧的 ``f_lasti`` 恢复为异常被引发时的值。"
 
-#: ../../library/dis.rst:578
+#: ../../library/dis.rst:584
 msgid ""
-"Pops the three values from the stack. Pushes the current exception to the"
-" top of the stack. Pushes the three values originally popped back to the "
-"stack. Used in exception handlers."
+"Pops a value from the stack. Pushes the current exception to the top of "
+"the stack. Pushes the value originally popped back to the stack. Used in "
+"exception handlers."
 msgstr ""
 
-#: ../../library/dis.rst:587
+#: ../../library/dis.rst:593
 #, fuzzy
 msgid ""
-"Calls the function in position 8 on the stack with the top three items on"
-" the stack as arguments. Used to implement the call "
-"``context_manager.__exit__(*exc_info())`` when an exception has occurred "
-"in a :keyword:`with` statement."
+"Calls the function in position 4 on the stack with arguments (type, val, "
+"tb) representing the exception at the top of the stack. Used to implement"
+" the call ``context_manager.__exit__(*exc_info())`` when an exception has"
+" occurred in a :keyword:`with` statement."
 msgstr ""
 "调用堆栈中 7 号位置上的函数并附带栈顶位置的三项作为参数。 用来在 :keyword:`with` 语句内发生异常时实现调用 "
 "``context_manager.__exit__(*exc_info())``。"
 
-#: ../../library/dis.rst:593
+#: ../../library/dis.rst:599
 msgid "The ``__exit__`` function is in position 8 of the stack rather than 7."
 msgstr ""
 
-#: ../../library/dis.rst:599
+#: ../../library/dis.rst:602
+msgid ""
+"The ``__exit__`` function is in position 4 of the stack rather than 7. "
+"Exception representation on the stack now consist of one, not three, "
+"items."
+msgstr ""
+
+#: ../../library/dis.rst:608
 msgid ""
 "Pops the exception currently on top of the stack. Pops the integer value "
 "on top of the stack and sets the ``f_lasti`` attribute of the frame with "
@@ -680,21 +692,22 @@ msgid ""
 " exception. Used in exception handler cleanup."
 msgstr ""
 
-#: ../../library/dis.rst:610
+#: ../../library/dis.rst:619
 msgid ""
 "Pushes :exc:`AssertionError` onto the stack.  Used by the "
 ":keyword:`assert` statement."
 msgstr "将 :exc:`AssertionError` 推入栈顶。 由 :keyword:`assert` 语句使用。"
 
-#: ../../library/dis.rst:618
+#: ../../library/dis.rst:627
+#, fuzzy
 msgid ""
 "Pushes :func:`builtins.__build_class__` onto the stack.  It is later "
-"called by :opcode:`CALL_FUNCTION` to construct a class."
+"called by :opcode:`CALL_NO_KW` to construct a class."
 msgstr ""
 "将 :func:`builtins .__ build_class__` 推到堆栈上。它之后被 :opcode:`CALL_FUNCTION` "
 "调用来构造一个类。"
 
-#: ../../library/dis.rst:624
+#: ../../library/dis.rst:633
 #, fuzzy
 msgid ""
 "This opcode performs several operations before a with block starts.  "
@@ -710,11 +723,11 @@ msgstr ""
 "(:opcode:`STORE_FAST`, :opcode:`STORE_NAME` 或 :opcode:`UNPACK_SEQUENCE`) "
 "中。"
 
-#: ../../library/dis.rst:635
+#: ../../library/dis.rst:644
 msgid "Push ``len(TOS)`` onto the stack."
 msgstr "将 ``len(TOS)`` 推入栈顶。"
 
-#: ../../library/dis.rst:642
+#: ../../library/dis.rst:651
 msgid ""
 "If TOS is an instance of :class:`collections.abc.Mapping` (or, more "
 "technically: if it has the :const:`Py_TPFLAGS_MAPPING` flag set in its "
@@ -725,7 +738,7 @@ msgstr ""
 ":c:member:`~PyTypeObject.tp_flags` 中设置了 :const:`Py_TPFLAGS_MAPPING` "
 "旗标），则将 ``True`` 推入栈顶。 否则，推入 ``False``。"
 
-#: ../../library/dis.rst:652
+#: ../../library/dis.rst:661
 msgid ""
 "If TOS is an instance of :class:`collections.abc.Sequence` and is *not* "
 "an instance of :class:`str`/:class:`bytes`/:class:`bytearray` (or, more "
@@ -738,7 +751,7 @@ msgstr ""
 ":c:member:`~PyTypeObject.tp_flags` 中设置了 :const:`Py_TPFLAGS_SEQUENCE` "
 "旗标），则将 ``True`` 推入栈顶。 否则 ，推入 ``False``。"
 
-#: ../../library/dis.rst:662
+#: ../../library/dis.rst:671
 #, fuzzy
 msgid ""
 "TOS is a tuple of mapping keys, and TOS1 is the match subject.  If TOS1 "
@@ -748,17 +761,17 @@ msgstr ""
 "TOS 是一个映射键的元组，而 TOS1 是匹配目标。 如果 TOS1 包含 TOS 中的所有键，则推入一个包含对应值的 "
 ":class:`tuple`，再推入 ``True``。 否则，推入 ``None``，再推入 ``False``。"
 
-#: ../../library/dis.rst:668 ../../library/dis.rst:1167
+#: ../../library/dis.rst:677 ../../library/dis.rst:1184
 msgid ""
 "Previously, this instruction also pushed a boolean value indicating "
 "success (``True``) or failure (``False``)."
 msgstr ""
 
-#: ../../library/dis.rst:673
+#: ../../library/dis.rst:682
 msgid "All of the following opcodes use their arguments."
 msgstr "以下所有操作码均使用其参数。"
 
-#: ../../library/dis.rst:677
+#: ../../library/dis.rst:686
 msgid ""
 "Implements ``name = TOS``. *namei* is the index of *name* in the "
 "attribute :attr:`co_names` of the code object. The compiler tries to use "
@@ -767,19 +780,19 @@ msgstr ""
 "实现 ``name = TOS``。 *namei* 是 *name* 在代码对象的 :attr:`co_names` 属性中的索引。 "
 "在可能的情况下，编译器会尝试使用 :opcode:`STORE_FAST` 或 :opcode:`STORE_GLOBAL`。"
 
-#: ../../library/dis.rst:684
+#: ../../library/dis.rst:693
 msgid ""
 "Implements ``del name``, where *namei* is the index into :attr:`co_names`"
 " attribute of the code object."
 msgstr "实现 ``del name`` ，其中 *namei* 是代码对象的 :attr:`co_names` 属性的索引。"
 
-#: ../../library/dis.rst:690
+#: ../../library/dis.rst:699
 msgid ""
 "Unpacks TOS into *count* individual values, which are put onto the stack "
 "right-to-left."
 msgstr "将 TOS 解包为 *count* 个单独的值，它们将按从右至左的顺序被放入堆栈。"
 
-#: ../../library/dis.rst:696
+#: ../../library/dis.rst:705
 msgid ""
 "Implements assignment with a starred target: Unpacks an iterable in TOS "
 "into individual values, where the total number of values can be smaller "
@@ -787,54 +800,54 @@ msgid ""
 " list of all leftover items."
 msgstr "实现使用带星号的目标进行赋值：将 TOS 中的可迭代对象解包为单独的值，其中值的总数可以小于可迭代对象中的项数：新值之一将是由所有剩余项构成的列表。"
 
-#: ../../library/dis.rst:701
+#: ../../library/dis.rst:710
 msgid ""
 "The low byte of *counts* is the number of values before the list value, "
 "the high byte of *counts* the number of values after it.  The resulting "
 "values are put onto the stack right-to-left."
 msgstr "*counts* 的低字节是列表值之前的值的数量，*counts* 中的高字节则是之后的值的数量。 结果值会按从右至左的顺序入栈。"
 
-#: ../../library/dis.rst:708
+#: ../../library/dis.rst:717
 msgid ""
 "Implements ``TOS.name = TOS1``, where *namei* is the index of name in "
 ":attr:`co_names`."
 msgstr "实现 ``TOS.name = TOS1``，其中 *namei* 是 name 在 :attr:`co_names` 中的索引号。"
 
-#: ../../library/dis.rst:714
+#: ../../library/dis.rst:723
 msgid "Implements ``del TOS.name``, using *namei* as index into :attr:`co_names`."
 msgstr "实现 ``del TOS.name``，使用 *namei* 作为 :attr:`co_names` 中的索引号。"
 
-#: ../../library/dis.rst:719
+#: ../../library/dis.rst:728
 msgid "Works as :opcode:`STORE_NAME`, but stores the name as a global."
 msgstr "类似于 :opcode:`STORE_NAME` 但会将 name 存储为全局变量。"
 
-#: ../../library/dis.rst:724
+#: ../../library/dis.rst:733
 msgid "Works as :opcode:`DELETE_NAME`, but deletes a global name."
 msgstr "类似于 :opcode:`DELETE_NAME` 但会删除一个全局变量。"
 
-#: ../../library/dis.rst:729
+#: ../../library/dis.rst:738
 msgid "Pushes ``co_consts[consti]`` onto the stack."
 msgstr "将 ``co_consts[consti]`` 推入栈顶。"
 
-#: ../../library/dis.rst:734
+#: ../../library/dis.rst:743
 msgid "Pushes the value associated with ``co_names[namei]`` onto the stack."
 msgstr "将与 ``co_names[namei]`` 相关联的值推入栈顶。"
 
-#: ../../library/dis.rst:739
+#: ../../library/dis.rst:748
 msgid ""
 "Creates a tuple consuming *count* items from the stack, and pushes the "
 "resulting tuple onto the stack."
 msgstr "创建一个使用了来自栈的 *count* 个项的元组，并将结果元组推入栈顶。"
 
-#: ../../library/dis.rst:745
+#: ../../library/dis.rst:754
 msgid "Works as :opcode:`BUILD_TUPLE`, but creates a list."
 msgstr "类似于 :opcode:`BUILD_TUPLE` 但会创建一个列表。"
 
-#: ../../library/dis.rst:750
+#: ../../library/dis.rst:759
 msgid "Works as :opcode:`BUILD_TUPLE`, but creates a set."
 msgstr "类似于 :opcode:`BUILD_TUPLE` 但会创建一个集合。"
 
-#: ../../library/dis.rst:755
+#: ../../library/dis.rst:764
 msgid ""
 "Pushes a new dictionary object onto the stack.  Pops ``2 * count`` items "
 "so that the dictionary holds *count* entries: ``{..., TOS3: TOS2, TOS1: "
@@ -843,13 +856,13 @@ msgstr ""
 "将一个新字典对象推入栈顶。 弹出 ``2 * count`` 项使得字典包含 *count* 个条目: ``{..., TOS3: TOS2, "
 "TOS1: TOS}``。"
 
-#: ../../library/dis.rst:759
+#: ../../library/dis.rst:768
 msgid ""
 "The dictionary is created from stack items instead of creating an empty "
 "dictionary pre-sized to hold *count* items."
 msgstr "字典是根据栈中的项创建而不是创建一个预设大小包含 *count* 项的空字典。"
 
-#: ../../library/dis.rst:766
+#: ../../library/dis.rst:775
 msgid ""
 "The version of :opcode:`BUILD_MAP` specialized for constant keys. Pops "
 "the top element on the stack which contains a tuple of keys, then "
@@ -859,51 +872,51 @@ msgstr ""
 ":opcode:`BUILD_MAP` 版本专用于常量键。 弹出的栈顶元素包含一个由键构成的元组，然后从 ``TOS1`` "
 "开始从构建字典的值中弹出 *count* 个值。"
 
-#: ../../library/dis.rst:775
+#: ../../library/dis.rst:784
 msgid ""
 "Concatenates *count* strings from the stack and pushes the resulting "
 "string onto the stack."
 msgstr "拼接 *count* 个来自栈的字符串并将结果字符串推入栈顶。"
 
-#: ../../library/dis.rst:783
+#: ../../library/dis.rst:792
 msgid "Pops a list from the stack and pushes a tuple containing the same values."
 msgstr "从堆栈中弹出一个列表并推入一个包含相同值的元组。"
 
-#: ../../library/dis.rst:790
+#: ../../library/dis.rst:799
 msgid "Calls ``list.extend(TOS1[-i], TOS)``.  Used to build lists."
 msgstr "调用 ``list.extend(TOS1[-i], TOS)``。 用于构建列表。"
 
-#: ../../library/dis.rst:797
+#: ../../library/dis.rst:806
 msgid "Calls ``set.update(TOS1[-i], TOS)``.  Used to build sets."
 msgstr "调用 ``set.update(TOS1[-i], TOS)``。 用于构建集合。"
 
-#: ../../library/dis.rst:804
+#: ../../library/dis.rst:813
 msgid "Calls ``dict.update(TOS1[-i], TOS)``.  Used to build dicts."
 msgstr "调用 ``dict.update(TOS1[-i], TOS)``。 用于构建字典。"
 
-#: ../../library/dis.rst:811
+#: ../../library/dis.rst:820
 msgid "Like :opcode:`DICT_UPDATE` but raises an exception for duplicate keys."
 msgstr "类似于 :opcode:`DICT_UPDATE` 但对于重复的键会引发异常。"
 
-#: ../../library/dis.rst:818
+#: ../../library/dis.rst:827
 msgid "Replaces TOS with ``getattr(TOS, co_names[namei])``."
 msgstr "将 TOS 替换为 ``getattr(TOS, co_names[namei])``。"
 
-#: ../../library/dis.rst:823
+#: ../../library/dis.rst:832
 msgid ""
 "Performs a Boolean operation.  The operation name can be found in "
 "``cmp_op[opname]``."
 msgstr "执行布尔运算操作。 操作名称可在 ``cmp_op[opname]`` 中找到。"
 
-#: ../../library/dis.rst:829
+#: ../../library/dis.rst:838
 msgid "Performs ``is`` comparison, or ``is not`` if ``invert`` is 1."
 msgstr "执行 ``is`` 比较，或者如果 ``invert`` 为 1 则执行 ``is not``。"
 
-#: ../../library/dis.rst:836
+#: ../../library/dis.rst:845
 msgid "Performs ``in`` comparison, or ``not in`` if ``invert`` is 1."
 msgstr "执行 ``in`` 比较，或者如果 ``invert`` 为 1 则执行 ``not in``。"
 
-#: ../../library/dis.rst:843
+#: ../../library/dis.rst:852
 msgid ""
 "Imports the module ``co_names[namei]``.  TOS and TOS1 are popped and "
 "provide the *fromlist* and *level* arguments of :func:`__import__`.  The "
@@ -915,7 +928,7 @@ msgstr ""
 ":func:`__import__`。 模块对象会被推入栈顶。 当前命名空间不受影响：对于一条标准 import 语句，会执行后续的 "
 ":opcode:`STORE_FAST` 指令来修改命名空间。"
 
-#: ../../library/dis.rst:852
+#: ../../library/dis.rst:861
 msgid ""
 "Loads the attribute ``co_names[namei]`` from the module found in TOS. The"
 " resulting object is pushed onto the stack, to be subsequently stored by "
@@ -924,46 +937,70 @@ msgstr ""
 "从在 TOS 内找到的模块中加载属性 ``co_names[namei]``。 结果对象会被推入栈顶，以便由后续的 "
 ":opcode:`STORE_FAST` 指令来保存。"
 
-#: ../../library/dis.rst:859
+#: ../../library/dis.rst:868
 msgid "Increments bytecode counter by *delta*."
 msgstr "将字节码计数器的值增加 *delta*。"
 
-#: ../../library/dis.rst:864
+#: ../../library/dis.rst:873
 msgid "If TOS is true, sets the bytecode counter to *target*.  TOS is popped."
 msgstr "如果 TOS 为真值，则将字节码计数器的值设为 *target*。 TOS 会被弹出。"
 
-#: ../../library/dis.rst:871
+#: ../../library/dis.rst:880
 msgid "If TOS is false, sets the bytecode counter to *target*.  TOS is popped."
 msgstr "如果 TOS 为假值，则将字节码计数器的值设为 *target*。 TOS 会被弹出。"
 
-#: ../../library/dis.rst:877
+#: ../../library/dis.rst:887
 #, fuzzy
 msgid ""
-"Tests whether the second value on the stack is an exception matching TOS,"
-" and jumps if it is not. Pops one value from the stack."
+"Performs exception matching for ``except``. Tests whether the second "
+"value on the stack is an exception matching TOS, and jumps if it is not. "
+"Pops one value from the stack."
 msgstr "检测堆栈中的第二个值是否为匹配 TOS 的异常，如果不是则会跳转。 从堆栈中弹出两个值。"
 
-#: ../../library/dis.rst:882
+#: ../../library/dis.rst:893
 msgid "This opcode no longer pops the active exception."
 msgstr ""
 
-#: ../../library/dis.rst:888
+#: ../../library/dis.rst:899
+msgid ""
+"Performs exception matching for ``except*``. Applies ``split(TOS)`` on "
+"the exception group representing TOS1. Jumps if no match is found."
+msgstr ""
+
+#: ../../library/dis.rst:902
+msgid ""
+"Pops one item from the stack (the match type). If a match was found, next"
+" item (the exception) and pushes the non-matching part of the exception "
+"group followed by the matching part."
+msgstr ""
+
+#: ../../library/dis.rst:911
+msgid ""
+"Combines the raised and reraised exceptions list from TOS, into an "
+"exception group to propagate from a try-except* block. Uses the original "
+"exception group from TOS1 to reconstruct the structure of reraised "
+"exceptions. Pops two items from the stack and pushes 0 (for lasti, which "
+"is unused) followed by the exception to reraise or ``None`` if there "
+"isn't one."
+msgstr ""
+
+#: ../../library/dis.rst:922
 msgid ""
 "If TOS is true, sets the bytecode counter to *target* and leaves TOS on "
 "the stack.  Otherwise (TOS is false), TOS is popped."
 msgstr "如果 TOS 为真值，则将字节码计数器的值设为 *target* 并将 TOS 留在栈顶。 否则（如 TOS 为假值），TOS 会被弹出。"
 
-#: ../../library/dis.rst:896
+#: ../../library/dis.rst:930
 msgid ""
 "If TOS is false, sets the bytecode counter to *target* and leaves TOS on "
 "the stack.  Otherwise (TOS is true), TOS is popped."
 msgstr "如果 TOS 为假值，则将字节码计数器的值设为 *target* 并将 TOS 留在栈顶。 否则（如 TOS 为真值），TOS 会被弹出。"
 
-#: ../../library/dis.rst:904
+#: ../../library/dis.rst:938
 msgid "Set bytecode counter to *target*."
 msgstr "将字节码计数器的值设为 *target*。"
 
-#: ../../library/dis.rst:909
+#: ../../library/dis.rst:943
 msgid ""
 "TOS is an :term:`iterator`.  Call its :meth:`~iterator.__next__` method."
 "  If this yields a new value, push it on the stack (leaving the iterator "
@@ -973,95 +1010,95 @@ msgstr ""
 "TOS 是一个 :term:`iterator`。 请调用其 :meth:`~iterator.__next__` 方法。 "
 "如果此操作产生了一个新值，则将其推入栈顶（将迭代器留在其下方）。 如果迭代器提示已耗尽，TOS 会被弹出，并且字节码计数器将增加 *delta*。"
 
-#: ../../library/dis.rst:917
+#: ../../library/dis.rst:951
 msgid "Loads the global named ``co_names[namei]`` onto the stack."
 msgstr "加载名称为 ``co_names[namei]`` 的全局对象推入栈顶。"
 
-#: ../../library/dis.rst:922
+#: ../../library/dis.rst:956
 msgid "Pushes a reference to the local ``co_varnames[var_num]`` onto the stack."
 msgstr "将指向局部对象 ``co_varnames[var_num]`` 的引用推入栈顶。"
 
-#: ../../library/dis.rst:927
+#: ../../library/dis.rst:961
 msgid "Stores TOS into the local ``co_varnames[var_num]``."
 msgstr "将 TOS 存放到局部对象 ``co_varnames[var_num]``。"
 
-#: ../../library/dis.rst:932
+#: ../../library/dis.rst:966
 msgid "Deletes local ``co_varnames[var_num]``."
 msgstr "移除局部对象 ``co_varnames[var_num]``。"
 
-#: ../../library/dis.rst:937
+#: ../../library/dis.rst:971
 msgid ""
 "Creates a new cell in slot ``i``.  If that slot is empty then that value "
 "is stored into the new cell."
 msgstr ""
 
-#: ../../library/dis.rst:945
+#: ../../library/dis.rst:979
 msgid ""
 "Pushes a reference to the cell contained in slot ``i`` of the \"fast "
 "locals\" storage.  The name of the variable is ``co_fastlocalnames[i]``."
 msgstr ""
 
-#: ../../library/dis.rst:948
+#: ../../library/dis.rst:982
 msgid ""
 "Note that ``LOAD_CLOSURE`` is effectively an alias for ``LOAD_FAST``. It "
 "exists to keep bytecode a little more readable."
 msgstr ""
 
-#: ../../library/dis.rst:951 ../../library/dis.rst:960
-#: ../../library/dis.rst:972 ../../library/dis.rst:981
-#: ../../library/dis.rst:992
+#: ../../library/dis.rst:985 ../../library/dis.rst:994
+#: ../../library/dis.rst:1006 ../../library/dis.rst:1015
+#: ../../library/dis.rst:1026
 msgid "``i`` is no longer offset by the length of ``co_varnames``."
 msgstr ""
 
-#: ../../library/dis.rst:957
+#: ../../library/dis.rst:991
 #, fuzzy
 msgid ""
 "Loads the cell contained in slot ``i`` of the \"fast locals\" storage. "
 "Pushes a reference to the object the cell contains on the stack."
 msgstr "加载包含在单元的第 *i* 个空位中的单元并释放可用的存储空间。 将一个对单元所包含对象的引用推入栈顶。"
 
-#: ../../library/dis.rst:966
+#: ../../library/dis.rst:1000
 msgid ""
 "Much like :opcode:`LOAD_DEREF` but first checks the locals dictionary "
 "before consulting the cell.  This is used for loading free variables in "
 "class bodies."
 msgstr "类似于 :opcode:`LOAD_DEREF` 但在查询单元之前会首先检查局部对象字典。 这被用于加载类语句体中的自由变量。"
 
-#: ../../library/dis.rst:978
+#: ../../library/dis.rst:1012
 #, fuzzy
 msgid ""
 "Stores TOS into the cell contained in slot ``i`` of the \"fast locals\" "
 "storage."
 msgstr "将 TOS 存放到包含在单元的第 *i* 个空位中的单元内并释放可用存储空间。"
 
-#: ../../library/dis.rst:987
+#: ../../library/dis.rst:1021
 #, fuzzy
 msgid ""
 "Empties the cell contained in slot ``i`` of the \"fast locals\" storage. "
 "Used by the :keyword:`del` statement."
 msgstr "清空包含在单元的第 *i* 个空位中的单元并释放可用存储空间。 被用于 :keyword:`del` 语句。"
 
-#: ../../library/dis.rst:998
+#: ../../library/dis.rst:1032
 msgid ""
 "Copies the ``n`` free variables from the closure into the frame. Removes "
 "the need for special code on the caller's side when calling closures."
 msgstr ""
 
-#: ../../library/dis.rst:1007
+#: ../../library/dis.rst:1041
 msgid ""
 "Raises an exception using one of the 3 forms of the ``raise`` statement, "
 "depending on the value of *argc*:"
 msgstr "使用 ``raise`` 语句的 3 种形式之一引发异常，具体形式取决于 *argc* 的值："
 
-#: ../../library/dis.rst:1010
+#: ../../library/dis.rst:1044
 msgid "0: ``raise`` (re-raise previous exception)"
 msgstr "0: ``raise`` (重新引发之前的异常)"
 
-#: ../../library/dis.rst:1011
+#: ../../library/dis.rst:1045
 msgid "1: ``raise TOS`` (raise exception instance or type at ``TOS``)"
 msgstr "1: ``raise TOS`` (在 ``TOS`` 上引发异常实例或类型)"
 
-#: ../../library/dis.rst:1012
+#: ../../library/dis.rst:1046
 msgid ""
 "2: ``raise TOS1 from TOS`` (raise exception instance or type at ``TOS1`` "
 "with ``__cause__`` set to ``TOS``)"
@@ -1069,12 +1106,13 @@ msgstr ""
 "2: ``raise TOS1 from TOS`` (在 ``TOS1`` 上引发异常实例或类型并将 ``__cause__`` 设为 "
 "``TOS``)"
 
-#: ../../library/dis.rst:1018
+#: ../../library/dis.rst:1052
+#, fuzzy
 msgid ""
 "Calls a callable object with positional arguments. *argc* indicates the "
 "number of positional arguments. The top of the stack contains positional "
 "arguments, with the right-most argument on top.  Below the arguments is a"
-" callable object to call. ``CALL_FUNCTION`` pops all arguments and the "
+" callable object to call. ``CALL_NO_KW`` pops all arguments and the "
 "callable object off the stack, calls the callable object with those "
 "arguments, and pushes the return value returned by the callable object."
 msgstr ""
@@ -1082,11 +1120,8 @@ msgstr ""
 "在参数之下是一个待调用的可调用对象。 ``CALL_FUNCTION`` "
 "会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。"
 
-#: ../../library/dis.rst:1026
-msgid "This opcode is used only for calls with positional arguments."
-msgstr "此操作码仅用于附带位置参数的调用。"
-
-#: ../../library/dis.rst:1032
+#: ../../library/dis.rst:1065
+#, fuzzy
 msgid ""
 "Calls a callable object with positional (if any) and keyword arguments. "
 "*argc* indicates the total number of positional and keyword arguments. "
@@ -1094,23 +1129,17 @@ msgid ""
 "keyword arguments, which must be strings. Below that are the values for "
 "the keyword arguments, in the order corresponding to the tuple. Below "
 "that are positional arguments, with the right-most parameter on top.  "
-"Below the arguments is a callable object to call. ``CALL_FUNCTION_KW`` "
-"pops all arguments and the callable object off the stack, calls the "
-"callable object with those arguments, and pushes the return value "
-"returned by the callable object."
+"Below the arguments is a callable object to call. ``CALL_KW`` pops all "
+"arguments and the callable object off the stack, calls the callable "
+"object with those arguments, and pushes the return value returned by the "
+"callable object."
 msgstr ""
 "调用一个可调用对象并传入位置参数（如果有的话）和关键字参数。 *argc* 指明位置参数和关键字参数的总数量。 "
 "栈顶元素包含一个关键字参数名称的元组，名称必须为字符串。 在元组之下是与元组顺序相对应的关键字参数值。 "
 "在它之下则是位置参数，其中最右边的参数在最顶端。 在参数之下是要调用的可调用对象。 ``CALL_FUNCTION_KW`` "
 "会从栈中弹出所有参数及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。"
 
-#: ../../library/dis.rst:1044
-msgid ""
-"Keyword arguments are packed in a tuple instead of a dictionary, *argc* "
-"indicates the total number of arguments."
-msgstr "关键字参数会被打包为一个元组而非字典，*argc* 指明参数的总数量。"
-
-#: ../../library/dis.rst:1051
+#: ../../library/dis.rst:1082
 msgid ""
 "Calls a callable object with variable set of positional and keyword "
 "arguments.  If the lowest bit of *flags* is set, the top of the stack "
@@ -1125,7 +1154,7 @@ msgstr ""
 "在调用该可调用对象之前，映射对象和可迭代对象会被分别“解包”并将它们的内容分别作为关键字参数和位置参数传入。 "
 "``CALL_FUNCTION_EX`` 会中栈中弹出所有参数及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。"
 
-#: ../../library/dis.rst:1066
+#: ../../library/dis.rst:1097
 msgid ""
 "Loads a method named ``co_names[namei]`` from the TOS object. TOS is "
 "popped. This bytecode distinguishes two cases: if TOS has a method with "
@@ -1138,70 +1167,52 @@ msgstr ""
 "有一个名称正确的方法，字节码会将未绑定方法和 TOS 推入栈顶。 TOS 将在调用未绑定方法时被用作 :opcode:`CALL_METHOD` "
 "的第一个参数 (``self``)。 否则会将 ``NULL`` 和属性查找所返回的对象推入栈顶。"
 
-#: ../../library/dis.rst:1078
+#: ../../library/dis.rst:1109
 msgid ""
-"Calls a method.  *argc* is the number of positional arguments. Keyword "
-"arguments are not supported.  This opcode is designed to be used with "
-":opcode:`LOAD_METHOD`.  Positional arguments are on top of the stack. "
-"Below them, the two items described in :opcode:`LOAD_METHOD` are on the "
-"stack (either ``self`` and an unbound method object or ``NULL`` and an "
-"arbitrary callable). All of them are popped and the return value is "
-"pushed."
-msgstr ""
-"调用一个方法。 *argc* 是位置参数的数量。 关键字参数不受支持。 此操作码被设计用于配合 :opcode:`LOAD_METHOD` 使用。"
-" 位置参数放在栈顶。 在它们之下放在栈中的是由 :opcode:`LOAD_METHOD` 所描述的两个条目（或者是 ``self`` "
-"和一个未绑定方法对象，或者是 ``NULL`` 和一个任意可调用对象）。 它们会被全部弹出并将返回值推入栈顶。"
-
-#: ../../library/dis.rst:1090
-msgid ""
-"Calls a method in a similar fashion as :opcode:`CALL_METHOD`, but also "
-"supports keyword arguments. *argc* is the number of positional and "
-"keyword arguments. This opcode is designed to be used with "
-":opcode:`LOAD_METHOD`.  TOS is a tuple of keyword argument names.  "
-"Argument values are below that. Below them, the two items described in "
-":opcode:`LOAD_METHOD` are on the stack (either ``self`` and an unbound "
-"method object or ``NULL`` and an arbitrary callable).  All of them are "
-"popped from the stack and the return value is pushed."
+"Prefixes either :opcode:`CALL_NO_KW` or :opcode:`CALL_KW`. This opcode is"
+" designed to be used with :opcode:`LOAD_METHOD`. Sets internal variables,"
+" so that :opcode:`CALL_NO_KW` or :opcode:`CALL_KW` clean up after "
+":opcode:`LOAD_METHOD` correctly."
 msgstr ""
 
-#: ../../library/dis.rst:1102
+#: ../../library/dis.rst:1119
 msgid ""
 "Pushes a new function object on the stack.  From bottom to top, the "
 "consumed stack must consist of values if the argument carries a specified"
 " flag value"
 msgstr "将一个新函数对象推入栈顶。 从底端到顶端，如果参数带有指定的旗标值则所使用的栈必须由这些值组成。"
 
-#: ../../library/dis.rst:1105
+#: ../../library/dis.rst:1122
 msgid ""
 "``0x01`` a tuple of default values for positional-only and positional-or-"
 "keyword parameters in positional order"
 msgstr "``0x01`` 一个默认值的元组，用于按位置排序的仅限位置形参以及位置或关键字形参"
 
-#: ../../library/dis.rst:1107
+#: ../../library/dis.rst:1124
 msgid "``0x02`` a dictionary of keyword-only parameters' default values"
 msgstr "``0x02`` 一个仅限关键字形参的默认值的字典"
 
-#: ../../library/dis.rst:1108
+#: ../../library/dis.rst:1125
 msgid "``0x04`` a tuple of strings containing parameters' annotations"
 msgstr "``0x04`` 一个包含形参标注的字符串元组。"
 
-#: ../../library/dis.rst:1109
+#: ../../library/dis.rst:1126
 msgid "``0x08`` a tuple containing cells for free variables, making a closure"
 msgstr "``0x08`` 一个包含用于自由变量的单元的元组，生成一个闭包"
 
-#: ../../library/dis.rst:1110
+#: ../../library/dis.rst:1127
 msgid "the code associated with the function (at TOS1)"
 msgstr "与函数相关联的代码 (在 TOS1)"
 
-#: ../../library/dis.rst:1111
+#: ../../library/dis.rst:1128
 msgid "the :term:`qualified name` of the function (at TOS)"
 msgstr "函数的 :term:`qualified name` (在 TOS)"
 
-#: ../../library/dis.rst:1113
+#: ../../library/dis.rst:1130
 msgid "Flag value ``0x04`` is a tuple of strings instead of dictionary"
 msgstr "旗标值 ``0x04`` 是一个字符串元组而非字典。"
 
-#: ../../library/dis.rst:1120
+#: ../../library/dis.rst:1137
 msgid ""
 "Pushes a slice object on the stack.  *argc* must be 2 or 3.  If it is 2, "
 "``slice(TOS1, TOS)`` is pushed; if it is 3, ``slice(TOS2, TOS1, TOS)`` is"
@@ -1210,7 +1221,7 @@ msgstr ""
 "将一个切片对象推入栈顶。 *argc* 必须为 2 或 3。 如果为 2，则推入 ``slice(TOS1, TOS)``；如果为 3，则推入 "
 "``slice(TOS2, TOS1, TOS)``。 请参阅 :func:`slice` 内置函数了解详细信息。"
 
-#: ../../library/dis.rst:1127
+#: ../../library/dis.rst:1144
 msgid ""
 "Prefixes any opcode which has an argument too big to fit into the default"
 " one byte. *ext* holds an additional byte which act as higher bits in the"
@@ -1220,7 +1231,7 @@ msgstr ""
 "为任意带有大到无法放入默认的单字节的参数的操作码添加前缀。 *ext* 存放一个附加字节作为参数中的高比特位。 对于每个操作码，最多允许三个 "
 "``EXTENDED_ARG`` 前缀，构成两字节到三字节的参数。"
 
-#: ../../library/dis.rst:1135
+#: ../../library/dis.rst:1152
 msgid ""
 "Used for implementing formatted literal strings (f-strings).  Pops an "
 "optional *fmt_spec* from the stack, then a required *value*. *flags* is "
@@ -1229,48 +1240,48 @@ msgstr ""
 "用于实现格式化字面值字符串（f-字符串）。 从栈中弹出一个可选的 *fmt_spec*，然后是一个必须的 *value*。 *flags* "
 "的解读方式如下："
 
-#: ../../library/dis.rst:1139
+#: ../../library/dis.rst:1156
 msgid "``(flags & 0x03) == 0x00``: *value* is formatted as-is."
 msgstr "``(flags & 0x03) == 0x00``: *value* 按原样格式化。"
 
-#: ../../library/dis.rst:1140
+#: ../../library/dis.rst:1157
 msgid ""
 "``(flags & 0x03) == 0x01``: call :func:`str` on *value* before formatting"
 " it."
 msgstr "``(flags & 0x03) == 0x01``: 在格式化 *value* 之前调用其 :func:`str`。"
 
-#: ../../library/dis.rst:1142
+#: ../../library/dis.rst:1159
 msgid ""
 "``(flags & 0x03) == 0x02``: call :func:`repr` on *value* before "
 "formatting it."
 msgstr "``(flags & 0x03) == 0x02``: 在格式化 *value* 之前调用其 :func:`repr`。"
 
-#: ../../library/dis.rst:1144
+#: ../../library/dis.rst:1161
 msgid ""
 "``(flags & 0x03) == 0x03``: call :func:`ascii` on *value* before "
 "formatting it."
 msgstr "``(flags & 0x03) == 0x03``: 在格式化 *value* 之前调用其 :func:`ascii`。"
 
-#: ../../library/dis.rst:1146
+#: ../../library/dis.rst:1163
 msgid ""
 "``(flags & 0x04) == 0x04``: pop *fmt_spec* from the stack and use it, "
 "else use an empty *fmt_spec*."
 msgstr "``(flags & 0x04) == 0x04``: 从栈中弹出 *fmt_spec* 并使用它，否则使用空的 *fmt_spec*。"
 
-#: ../../library/dis.rst:1149
+#: ../../library/dis.rst:1166
 msgid ""
 "Formatting is performed using :c:func:`PyObject_Format`.  The result is "
 "pushed on the stack."
 msgstr "使用 :c:func:`PyObject_Format` 执行格式化。 结果会被推入栈顶。"
 
-#: ../../library/dis.rst:1157
+#: ../../library/dis.rst:1174
 msgid ""
 "TOS is a tuple of keyword attribute names, TOS1 is the class being "
 "matched against, and TOS2 is the match subject.  *count* is the number of"
 " positional sub-patterns."
 msgstr "TOS 是一个包含关键字属性名称的元组，TOS1 是要匹配的类，而 TOS2 是匹配目标。 *count* 是位置子模式的数量。"
 
-#: ../../library/dis.rst:1161
+#: ../../library/dis.rst:1178
 #, fuzzy
 msgid ""
 "Pop TOS, TOS1, and TOS2.  If TOS2 is an instance of TOS1 and has the "
@@ -1280,7 +1291,7 @@ msgstr ""
 "弹出 TOS。 如果 TOS2 是 TOS1 的一个实例且具有 *count* 和 TOS 所要求的位置和关键字属性，则将 TOS 设为 "
 "``True`` 并将 TOS1 设为包含已提取属性的元组。 否则，将 TOS 设为 ``False``。"
 
-#: ../../library/dis.rst:1173
+#: ../../library/dis.rst:1190
 #, fuzzy
 msgid ""
 "Pops TOS. The ``kind`` operand corresponds to the type of generator or "
@@ -1290,19 +1301,19 @@ msgstr ""
 "弹出 TOS。 如果 TOS 不为 ``None``，则引发一个异常。 ``kind`` 操作数与生成器或协程的类型相对应并会决定错误消息。 "
 "合法的类型有 0 代表生成器，1 代表协程，2 代表异步生成器。for async generator."
 
-#: ../../library/dis.rst:1182
+#: ../../library/dis.rst:1199
 msgid ""
 "Lift the top *count* stack items one position up, and move TOS down to "
 "position *count*."
 msgstr "将栈的前 *count* 项向上提升一个位置，并将 TOS 下移至位置 *count*。"
 
-#: ../../library/dis.rst:1190
+#: ../../library/dis.rst:1207
 msgid ""
 "Push the *i*-th item to the top of the stack. The item is not removed "
 "from its original location."
 msgstr ""
 
-#: ../../library/dis.rst:1198
+#: ../../library/dis.rst:1215
 msgid ""
 "This is not really an opcode.  It identifies the dividing line between "
 "opcodes which don't use their argument and those that do (``< "
@@ -1311,7 +1322,7 @@ msgstr ""
 "这不是一个真正的操作码。 它用于标明使用参数和不使用参数的操作码 (分别为 ``< HAVE_ARGUMENT`` 和 ``>= "
 "HAVE_ARGUMENT``) 之间的分隔线。"
 
-#: ../../library/dis.rst:1202
+#: ../../library/dis.rst:1219
 msgid ""
 "Now every instruction has an argument, but opcodes ``< HAVE_ARGUMENT`` "
 "ignore it. Before, only opcodes ``>= HAVE_ARGUMENT`` had an argument."
@@ -1319,33 +1330,33 @@ msgstr ""
 "现在每条指令都带有参数，但操作码 ``< HAVE_ARGUMENT`` 会忽略它。 之前仅限操作码 ``>= HAVE_ARGUMENT`` "
 "带有参数。"
 
-#: ../../library/dis.rst:1210
+#: ../../library/dis.rst:1227
 msgid "Opcode collections"
 msgstr "操作码集合"
 
-#: ../../library/dis.rst:1212
+#: ../../library/dis.rst:1229
 msgid ""
 "These collections are provided for automatic introspection of bytecode "
 "instructions:"
 msgstr "提供这些集合用于字节码指令的自动内省："
 
-#: ../../library/dis.rst:1217
+#: ../../library/dis.rst:1234
 msgid "Sequence of operation names, indexable using the bytecode."
 msgstr "操作名称的序列，可使用字节码来索引。"
 
-#: ../../library/dis.rst:1222
+#: ../../library/dis.rst:1239
 msgid "Dictionary mapping operation names to bytecodes."
 msgstr "映射操作名称到字节码的字典"
 
-#: ../../library/dis.rst:1227
+#: ../../library/dis.rst:1244
 msgid "Sequence of all compare operation names."
 msgstr "所有比较操作名称的序列。"
 
-#: ../../library/dis.rst:1232
+#: ../../library/dis.rst:1249
 msgid "Sequence of bytecodes that access a constant."
 msgstr "访问常量的字节码序列。"
 
-#: ../../library/dis.rst:1237
+#: ../../library/dis.rst:1254
 msgid ""
 "Sequence of bytecodes that access a free variable (note that 'free' in "
 "this context refers to names in the current scope that are referenced by "
@@ -1355,23 +1366,23 @@ msgstr ""
 "访问自由变量的字节码序列（请注意这里所说的‘自由’是指在当前作用域中被内部作用域所引用的名称，或在外部作用域中被此作用域所引用的名称。 它 "
 "*并不* 包括对全局或内置作用域的引用）。"
 
-#: ../../library/dis.rst:1245
+#: ../../library/dis.rst:1262
 msgid "Sequence of bytecodes that access an attribute by name."
 msgstr "按名称访问属性的字节码序列。"
 
-#: ../../library/dis.rst:1250
+#: ../../library/dis.rst:1267
 msgid "Sequence of bytecodes that have a relative jump target."
 msgstr "具有相对跳转目标的字节码序列。"
 
-#: ../../library/dis.rst:1255
+#: ../../library/dis.rst:1272
 msgid "Sequence of bytecodes that have an absolute jump target."
 msgstr "具有绝对跳转目标的字节码序列。"
 
-#: ../../library/dis.rst:1260
+#: ../../library/dis.rst:1277
 msgid "Sequence of bytecodes that access a local variable."
 msgstr "访问局部变量的字节码序列。"
 
-#: ../../library/dis.rst:1265
+#: ../../library/dis.rst:1282
 msgid "Sequence of bytecodes of Boolean operations."
 msgstr "布尔运算的字节码序列。"
 
@@ -1514,4 +1525,67 @@ msgstr "布尔运算的字节码序列。"
 #~ "*i* 小于 *co_cellvars* 的长度则变量的名称为 "
 #~ "``co_cellvars[i]``。 否则为 ``co_freevars[i - "
 #~ "len(co_cellvars)]``。"
+
+#~ msgid ""
+#~ "Pops three values from the stack, "
+#~ "which are used to restore the "
+#~ "exception state."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Pops the three values from the "
+#~ "stack. Pushes the current exception to"
+#~ " the top of the stack. Pushes "
+#~ "the three values originally popped back"
+#~ " to the stack. Used in exception "
+#~ "handlers."
+#~ msgstr ""
+
+#~ msgid "This opcode is used only for calls with positional arguments."
+#~ msgstr "此操作码仅用于附带位置参数的调用。"
+
+#~ msgid ""
+#~ "Keyword arguments are packed in a "
+#~ "tuple instead of a dictionary, *argc*"
+#~ " indicates the total number of "
+#~ "arguments."
+#~ msgstr "关键字参数会被打包为一个元组而非字典，*argc* 指明参数的总数量。"
+
+#~ msgid ""
+#~ "Calls a method.  *argc* is the "
+#~ "number of positional arguments. Keyword "
+#~ "arguments are not supported.  This "
+#~ "opcode is designed to be used with"
+#~ " :opcode:`LOAD_METHOD`.  Positional arguments are"
+#~ " on top of the stack. Below "
+#~ "them, the two items described in "
+#~ ":opcode:`LOAD_METHOD` are on the stack "
+#~ "(either ``self`` and an unbound method"
+#~ " object or ``NULL`` and an arbitrary"
+#~ " callable). All of them are popped"
+#~ " and the return value is pushed."
+#~ msgstr ""
+#~ "调用一个方法。 *argc* 是位置参数的数量。 关键字参数不受支持。 "
+#~ "此操作码被设计用于配合 :opcode:`LOAD_METHOD` 使用。 位置参数放在栈顶。 "
+#~ "在它们之下放在栈中的是由 :opcode:`LOAD_METHOD` 所描述的两个条目（或者是 "
+#~ "``self`` 和一个未绑定方法对象，或者是 ``NULL`` 和一个任意可调用对象）。 "
+#~ "它们会被全部弹出并将返回值推入栈顶。"
+
+#~ msgid ""
+#~ "Calls a method in a similar "
+#~ "fashion as :opcode:`CALL_METHOD`, but also "
+#~ "supports keyword arguments. *argc* is "
+#~ "the number of positional and keyword "
+#~ "arguments. This opcode is designed to"
+#~ " be used with :opcode:`LOAD_METHOD`.  TOS"
+#~ " is a tuple of keyword argument "
+#~ "names.  Argument values are below that."
+#~ " Below them, the two items described"
+#~ " in :opcode:`LOAD_METHOD` are on the "
+#~ "stack (either ``self`` and an unbound"
+#~ " method object or ``NULL`` and an "
+#~ "arbitrary callable).  All of them are"
+#~ " popped from the stack and the "
+#~ "return value is pushed."
+#~ msgstr ""
 
