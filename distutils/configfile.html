@@ -159,9 +159,9 @@
 <li><p>安装者可以使用 <code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> 的命令行选项来覆盖 <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code> 中的一切</p></li>
 </ul>
 <p>配置文件的基本语法很简单:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[command]</span>
-<span class="na">option</span><span class="o">=</span><span class="s">value</span>
-<span class="na">...</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[command]</span><span class="w"></span>
+<span class="na">option</span><span class="o">=</span><span class="s">value</span><span class="w"></span>
+<span class="na">...</span><span class="w"></span>
 </pre></div>
 </div>
 <p>其中 <em>command</em> 是一个 Distutils 命令 (例如 <strong class="command">build_py</strong>, <strong class="command">install</strong>)，而 <em>option</em> 是该命令所支持的某个选项。 可以为每个命令提供任意数量的选项，并且可以在文件中包括任意数量的命令组。 空白行会被忽略，以一个 <code class="docutils literal notranslate"><span class="pre">'#'</span></code> 开始的注释行也是如此。 长选项值可以简单地通过缩进后续行的方式被拆分为多行。</p>
@@ -186,20 +186,20 @@
 </pre></div>
 </div>
 <p>但是这要求你总是显式地指定 <strong class="command">build_ext</strong> 命令，并且记得提供 <code class="xref std std-option docutils literal notranslate"><span class="pre">--inplace</span></code>。 一个更容易的方式是通过将其编码在此发布包的配置文件 <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code> 中，“设置并忘记”该选项。</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[build_ext]</span>
-<span class="na">inplace</span><span class="o">=</span><span class="s">1</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[build_ext]</span><span class="w"></span>
+<span class="na">inplace</span><span class="o">=</span><span class="s">1</span><span class="w"></span>
 </pre></div>
 </div>
 <p>这将影响此模块发布包的所有构建，不论你是否显式指定 <strong class="command">build_ext</strong>。 如果你在你的源发布包中包括了 <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code>，它还将影响最终用户的构建 --- 对此选项来说这可能不是个好主意，因为总是原地构建扩展会破坏模块发布包的安装。 不过在某些特殊情况下，模块是在其安装目录中被构建的，因此这可能会是个有用的功能。 （但是，发布预期在其安装目录中被构建的扩展几乎总是一个坏主意。）</p>
 <p>另一个例子：特定的命令会接受许多在多次运行中都不发生变化的选项；例如，<strong class="command">bdist_rpm</strong> 需要知道为创建 RPM 发布包生成 &quot;spec&quot; 文件所要求的所有信息。 这些信息有的来自安装脚本，有的由 Distutils 自动生成（例如已安装文件列表）。 但有的则必须作为 <strong class="command">bdist_rpm</strong> 的选项提供，每次运行时都在命令行中完成将会非常繁琐。 因此，这里提供 Distutils 本身的 <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code> 中的一段代码:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[bdist_rpm]</span>
-<span class="na">release</span> <span class="o">=</span> <span class="s">1</span>
-<span class="na">packager</span> <span class="o">=</span> <span class="s">Greg Ward &lt;gward@python.net&gt;</span>
-<span class="na">doc_files</span> <span class="o">=</span> <span class="s">CHANGES.txt</span>
-            <span class="na">README.txt</span>
-            <span class="na">USAGE.txt</span>
-            <span class="na">doc/</span>
-            <span class="na">examples/</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[bdist_rpm]</span><span class="w"></span>
+<span class="na">release</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span><span class="w"></span>
+<span class="na">packager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Greg Ward &lt;gward@python.net&gt;</span><span class="w"></span>
+<span class="na">doc_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">CHANGES.txt</span><span class="w"></span>
+<span class="w">            </span><span class="na">README.txt</span><span class="w"></span>
+<span class="w">            </span><span class="na">USAGE.txt</span><span class="w"></span>
+<span class="w">            </span><span class="na">doc/</span><span class="w"></span>
+<span class="w">            </span><span class="na">examples/</span><span class="w"></span>
 </pre></div>
 </div>
 <p>请注意 <code class="docutils literal notranslate"><span class="pre">doc_files</span></code> 选项只是一个空格分隔以提高可读性的多行字符串。</p>
@@ -294,7 +294,7 @@
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">版权所有</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
@@ -308,7 +308,7 @@
 <br />
     <br />
 
-    最后更新于 12月 20, 2021.
+    最后更新于 1月 07, 2022.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

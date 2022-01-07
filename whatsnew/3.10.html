@@ -275,7 +275,7 @@
 <dd class="field-odd"><p>3.11.0a3</p>
 </dd>
 <dt class="field-even">日期</dt>
-<dd class="field-even"><p>十二月 20, 2021</p>
+<dd class="field-even"><p>一月 07, 2022</p>
 </dd>
 <dt class="field-odd">编者</dt>
 <dd class="field-odd"><p>Pablo Galindo Salgado</p>
@@ -578,14 +578,14 @@
 <section id="syntax-and-operations">
 <h4>语法与操作<a class="headerlink" href="#syntax-and-operations" title="永久链接至标题">¶</a></h4>
 <p>模式匹配的通用语法如下:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">match</span> <span class="n">subject</span><span class="p">:</span>
-    <span class="n">case</span> <span class="o">&lt;</span><span class="n">pattern_1</span><span class="o">&gt;</span><span class="p">:</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">subject</span><span class="p">:</span>
+    <span class="k">case</span> <span class="o">&lt;</span><span class="n">pattern_1</span><span class="o">&gt;</span><span class="p">:</span>
         <span class="o">&lt;</span><span class="n">action_1</span><span class="o">&gt;</span>
-    <span class="n">case</span> <span class="o">&lt;</span><span class="n">pattern_2</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="k">case</span> <span class="o">&lt;</span><span class="n">pattern_2</span><span class="o">&gt;</span><span class="p">:</span>
         <span class="o">&lt;</span><span class="n">action_2</span><span class="o">&gt;</span>
-    <span class="n">case</span> <span class="o">&lt;</span><span class="n">pattern_3</span><span class="o">&gt;</span><span class="p">:</span>
+    <span class="k">case</span> <span class="o">&lt;</span><span class="n">pattern_3</span><span class="o">&gt;</span><span class="p">:</span>
         <span class="o">&lt;</span><span class="n">action_3</span><span class="o">&gt;</span>
-    <span class="n">case</span> <span class="n">_</span><span class="p">:</span>
+    <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
         <span class="o">&lt;</span><span class="n">action_wildcard</span><span class="o">&gt;</span>
 </pre></div>
 </div>
@@ -610,20 +610,20 @@
 <h4>简单模式：匹配一个字面值<a class="headerlink" href="#simple-pattern-match-to-a-literal" title="永久链接至标题">¶</a></h4>
 <p>让我们把这个例子看作是模式匹配的最简单形式：一个值，即主词，被匹配到几个字面值，即模式。在下面的例子中，<code class="docutils literal notranslate"><span class="pre">status</span></code> 是匹配语句的主词。模式是每个 case 语句，字面值代表请求状态代码。匹配后，将执行与该 case 相关的动作：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">http_error</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
-    <span class="n">match</span> <span class="n">status</span><span class="p">:</span>
-        <span class="n">case</span> <span class="mi">400</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">status</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">400</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;Bad request&quot;</span>
-        <span class="n">case</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">404</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;Not found&quot;</span>
-        <span class="n">case</span> <span class="mi">418</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">418</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;I&#39;m a teapot&quot;</span>
-        <span class="n">case</span> <span class="n">_</span><span class="p">:</span>
+        <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;Something&#39;s wrong with the internet&quot;</span>
 </pre></div>
 </div>
 <p>如果传给上述函数的 <code class="docutils literal notranslate"><span class="pre">status</span></code> 为 418，则会返回 &quot;I'm a teapot&quot;。 如果传给上述函数的 <code class="docutils literal notranslate"><span class="pre">status</span></code> 为 500，则带有 <code class="docutils literal notranslate"><span class="pre">_</span></code> 的 case 语句将作为通配符匹配，并会返回 &quot;Something's wrong with the internet&quot;。 请注意最后一个代码块：变量名 <code class="docutils literal notranslate"><span class="pre">_</span></code> 将作为 <em>通配符</em> 并确保目标将总是被匹配。 <code class="docutils literal notranslate"><span class="pre">_</span></code> 的使用是可选的。</p>
 <p>你可以使用 <code class="docutils literal notranslate"><span class="pre">|</span></code> （“ or ”）在一个模式中组合几个字面值:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">case</span> <span class="mi">401</span> <span class="o">|</span> <span class="mi">403</span> <span class="o">|</span> <span class="mi">404</span><span class="p">:</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">case</span> <span class="mi">401</span> <span class="o">|</span> <span class="mi">403</span> <span class="o">|</span> <span class="mi">404</span><span class="p">:</span>
     <span class="k">return</span> <span class="s2">&quot;Not allowed&quot;</span>
 </pre></div>
 </div>
@@ -631,12 +631,12 @@
 <h5>无通配符的行为<a class="headerlink" href="#behavior-without-the-wildcard" title="永久链接至标题">¶</a></h5>
 <p>如果我们修改上面的例子，去掉最后一个 case 块，这个例子就变成:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">http_error</span><span class="p">(</span><span class="n">status</span><span class="p">):</span>
-    <span class="n">match</span> <span class="n">status</span><span class="p">:</span>
-        <span class="n">case</span> <span class="mi">400</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">status</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">400</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;Bad request&quot;</span>
-        <span class="n">case</span> <span class="mi">404</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">404</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;Not found&quot;</span>
-        <span class="n">case</span> <span class="mi">418</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">418</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;I&#39;m a teapot&quot;</span>
 </pre></div>
 </div>
@@ -647,16 +647,16 @@
 <h4>带有字面值和变量的模式<a class="headerlink" href="#patterns-with-a-literal-and-variable" title="永久链接至标题">¶</a></h4>
 <p>模式可以看起来像解包形式，而且模式可以用来绑定变量。在这个例子中，一个数据点可以被解包为它的 x 坐标和 y 坐标:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># point is an (x, y) tuple</span>
-<span class="n">match</span> <span class="n">point</span><span class="p">:</span>
-    <span class="n">case</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+<span class="k">match</span> <span class="n">point</span><span class="p">:</span>
+    <span class="k">case</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Origin&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">case</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Y=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">case</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">case</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, Y=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="n">_</span><span class="p">:</span>
+    <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not a point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -670,16 +670,16 @@
     <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
 
 <span class="k">def</span> <span class="nf">location</span><span class="p">(</span><span class="n">point</span><span class="p">):</span>
-    <span class="n">match</span> <span class="n">point</span><span class="p">:</span>
-        <span class="n">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">match</span> <span class="n">point</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Origin is the point&#39;s location.&quot;</span><span class="p">)</span>
-        <span class="n">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">):</span>
+        <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Y=</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> and the point is on the y-axis.&quot;</span><span class="p">)</span>
-        <span class="n">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;X=</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2"> and the point is on the x-axis.&quot;</span><span class="p">)</span>
-        <span class="n">case</span> <span class="n">Point</span><span class="p">():</span>
+        <span class="k">case</span> <span class="n">Point</span><span class="p">():</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The point is located somewhere else on the plane.&quot;</span><span class="p">)</span>
-        <span class="n">case</span> <span class="n">_</span><span class="p">:</span>
+        <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a point&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -697,16 +697,16 @@
 <section id="nested-patterns">
 <h4>嵌套模式<a class="headerlink" href="#nested-patterns" title="永久链接至标题">¶</a></h4>
 <p>模式可以任意地嵌套。 例如，如果我们的数据是由点组成的短列表，则它可以这样被匹配:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">match</span> <span class="n">points</span><span class="p">:</span>
-    <span class="n">case</span> <span class="p">[]:</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">points</span><span class="p">:</span>
+    <span class="k">case</span> <span class="p">[]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No points in the list.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]:</span>
+    <span class="k">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The origin is the only point in the list.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]:</span>
+    <span class="k">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A single point </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2"> is in the list.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">)]:</span>
+    <span class="k">case</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y2</span><span class="p">)]:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Two points on the Y axis at </span><span class="si">{</span><span class="n">y1</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y2</span><span class="si">}</span><span class="s2"> are in the list.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="n">_</span><span class="p">:</span>
+    <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something else is found in the list.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -714,10 +714,10 @@
 <section id="complex-patterns-and-the-wildcard">
 <h4>复杂模式和通配符<a class="headerlink" href="#complex-patterns-and-the-wildcard" title="永久链接至标题">¶</a></h4>
 <p>到目前为止，这些例子仅在最后一个 case 语句中使用了 <code class="docutils literal notranslate"><span class="pre">_</span></code>。 但通配符可以被用在更复杂的模式中，例如 <code class="docutils literal notranslate"><span class="pre">('error',</span> <span class="pre">code,</span> <span class="pre">_)</span></code>。 举例来说:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">match</span> <span class="n">test_variable</span><span class="p">:</span>
-    <span class="n">case</span> <span class="p">(</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">test_variable</span><span class="p">:</span>
+    <span class="k">case</span> <span class="p">(</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="mi">40</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A warning has been received.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+    <span class="k">case</span> <span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="k">_</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;An error </span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2"> occurred.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -726,10 +726,10 @@
 <section id="guard">
 <h4>守护项<a class="headerlink" href="#guard" title="永久链接至标题">¶</a></h4>
 <p>我们可以向一个模式添加 <code class="docutils literal notranslate"><span class="pre">if</span></code> 子句，称为“守护项”。 如果守护项为假值，则 <code class="docutils literal notranslate"><span class="pre">match</span></code> 将继续尝试下一个 case 语句块。 请注意值的捕获发生在守护项被求值之前。:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">match</span> <span class="n">point</span><span class="p">:</span>
-    <span class="n">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">point</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The point is located on the diagonal Y=X at </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point is not on the diagonal.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -742,7 +742,7 @@
 <li><p>序列模式支持通配符: <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">*rest]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">*rest)</span></code> 的作用类似于解包赋值中的通配符。 在 <code class="docutils literal notranslate"><span class="pre">*</span></code> 之后的名称也可以为 <code class="docutils literal notranslate"><span class="pre">_</span></code>，因此 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">*_)</span></code> 可以匹配包含两个条目的序列而不必绑定其余的条目。</p></li>
 <li><p>映射模式: <code class="docutils literal notranslate"><span class="pre">{&quot;bandwidth&quot;:</span> <span class="pre">b,</span> <span class="pre">&quot;latency&quot;:</span> <span class="pre">l}</span></code> 会从一个字典中捕获 <code class="docutils literal notranslate"><span class="pre">&quot;bandwidth&quot;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&quot;latency&quot;</span></code> 值。 与序列模式不同，额外的键会被忽略。  也支持通配符 <code class="docutils literal notranslate"><span class="pre">**rest</span></code>。 （但 <code class="docutils literal notranslate"><span class="pre">**_</span></code> 是冗余的，因而不被允许。）</p></li>
 <li><p>子模式可使用 <code class="docutils literal notranslate"><span class="pre">as</span></code> 关键字来捕获:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">case</span> <span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="k">as</span> <span class="n">p2</span><span class="p">):</span> <span class="o">...</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">case</span> <span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="k">as</span> <span class="n">p2</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
 </div>
 <p>x1, y1, x2, y2 等绑定就如你在没有 <code class="docutils literal notranslate"><span class="pre">as</span></code> 子句的情况下所期望的，而 p2 会绑定目标的整个第二项。</p>
@@ -755,12 +755,12 @@
     <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">BLUE</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">match</span> <span class="n">color</span><span class="p">:</span>
-    <span class="n">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span>
+<span class="k">match</span> <span class="n">color</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">RED</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I see red!&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">GREEN</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">GREEN</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grass is green&quot;</span><span class="p">)</span>
-    <span class="n">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">BLUE</span><span class="p">:</span>
+    <span class="k">case</span> <span class="n">Color</span><span class="o">.</span><span class="n">BLUE</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I&#39;m feeling the blues :(&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1718,7 +1718,7 @@ Python executable.
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">版权所有</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
@@ -1732,7 +1732,7 @@ Python executable.
 <br />
     <br />
 
-    最后更新于 12月 20, 2021.
+    最后更新于 1月 07, 2022.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

@@ -559,33 +559,33 @@ WARNING:And this, too
 </pre></div>
 </div>
 <p>这是 logging.conf 文件：</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[loggers]</span>
-<span class="na">keys</span><span class="o">=</span><span class="s">root,simpleExample</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[loggers]</span><span class="w"></span>
+<span class="na">keys</span><span class="o">=</span><span class="s">root,simpleExample</span><span class="w"></span>
 
-<span class="k">[handlers]</span>
-<span class="na">keys</span><span class="o">=</span><span class="s">consoleHandler</span>
+<span class="k">[handlers]</span><span class="w"></span>
+<span class="na">keys</span><span class="o">=</span><span class="s">consoleHandler</span><span class="w"></span>
 
-<span class="k">[formatters]</span>
-<span class="na">keys</span><span class="o">=</span><span class="s">simpleFormatter</span>
+<span class="k">[formatters]</span><span class="w"></span>
+<span class="na">keys</span><span class="o">=</span><span class="s">simpleFormatter</span><span class="w"></span>
 
-<span class="k">[logger_root]</span>
-<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span>
-<span class="na">handlers</span><span class="o">=</span><span class="s">consoleHandler</span>
+<span class="k">[logger_root]</span><span class="w"></span>
+<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span><span class="w"></span>
+<span class="na">handlers</span><span class="o">=</span><span class="s">consoleHandler</span><span class="w"></span>
 
-<span class="k">[logger_simpleExample]</span>
-<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span>
-<span class="na">handlers</span><span class="o">=</span><span class="s">consoleHandler</span>
-<span class="na">qualname</span><span class="o">=</span><span class="s">simpleExample</span>
-<span class="na">propagate</span><span class="o">=</span><span class="s">0</span>
+<span class="k">[logger_simpleExample]</span><span class="w"></span>
+<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span><span class="w"></span>
+<span class="na">handlers</span><span class="o">=</span><span class="s">consoleHandler</span><span class="w"></span>
+<span class="na">qualname</span><span class="o">=</span><span class="s">simpleExample</span><span class="w"></span>
+<span class="na">propagate</span><span class="o">=</span><span class="s">0</span><span class="w"></span>
 
-<span class="k">[handler_consoleHandler]</span>
-<span class="na">class</span><span class="o">=</span><span class="s">StreamHandler</span>
-<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span>
-<span class="na">formatter</span><span class="o">=</span><span class="s">simpleFormatter</span>
-<span class="na">args</span><span class="o">=</span><span class="s">(sys.stdout,)</span>
+<span class="k">[handler_consoleHandler]</span><span class="w"></span>
+<span class="na">class</span><span class="o">=</span><span class="s">StreamHandler</span><span class="w"></span>
+<span class="na">level</span><span class="o">=</span><span class="s">DEBUG</span><span class="w"></span>
+<span class="na">formatter</span><span class="o">=</span><span class="s">simpleFormatter</span><span class="w"></span>
+<span class="na">args</span><span class="o">=</span><span class="s">(sys.stdout,)</span><span class="w"></span>
 
-<span class="k">[formatter_simpleFormatter]</span>
-<span class="na">format</span><span class="o">=</span><span class="s">%(asctime)s - %(name)s - %(levelname)s - %(message)s</span>
+<span class="k">[formatter_simpleFormatter]</span><span class="w"></span>
+<span class="na">format</span><span class="o">=</span><span class="s">%(asctime)s - %(name)s - %(levelname)s - %(message)s</span><span class="w"></span>
 </pre></div>
 </div>
 <p>其输出与不基于配置文件的示例几乎相同：</p>
@@ -606,24 +606,24 @@ WARNING:And this, too
 <p>请注意，配置文件中引用的类名称需要相对于日志记录模块，或者可以使用常规导入机制解析的绝对值。因此，你可以使用 <a class="reference internal" href="../library/logging.handlers.html#logging.handlers.WatchedFileHandler" title="logging.handlers.WatchedFileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">WatchedFileHandler</span></code></a> （相对于日志记录模块）或 <code class="docutils literal notranslate"><span class="pre">mypackage.mymodule.MyHandler</span></code> （对于在 <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> 包中定义的类和模块 <code class="docutils literal notranslate"><span class="pre">mymodule</span></code> ，其中 <code class="docutils literal notranslate"><span class="pre">mypackage</span></code> 在 Python 导入路径上可用）。</p>
 <p>在 Python 3.2 中，引入了一种新的配置日志记录的方法，使用字典来保存配置信息。 这提供了上述基于配置文件方法的功能的超集，并且是新应用程序和部署的推荐配置方法。 因为 Python 字典用于保存配置信息，并且由于你可以使用不同的方式填充该字典，因此你有更多的配置选项。 例如，你可以使用 JSON 格式的配置文件，或者如果你有权访问 YAML 处理功能，则可以使用 YAML 格式的文件来填充配置字典。当然，你可以在 Python 代码中构造字典，通过套接字以 pickle 形式接收它，或者使用对你的应用程序合理的任何方法。</p>
 <p>以下是与上述相同配置的示例，采用 YAML 格式，用于新的基于字典的方法：</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="nt">formatters</span><span class="p">:</span>
-  <span class="nt">simple</span><span class="p">:</span>
-    <span class="nt">format</span><span class="p">:</span> <span class="s">&#39;%(asctime)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(name)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(levelname)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(message)s&#39;</span>
-<span class="nt">handlers</span><span class="p">:</span>
-  <span class="nt">console</span><span class="p">:</span>
-    <span class="nt">class</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">logging.StreamHandler</span>
-    <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
-    <span class="nt">formatter</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">simple</span>
-    <span class="nt">stream</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ext://sys.stdout</span>
-<span class="nt">loggers</span><span class="p">:</span>
-  <span class="nt">simpleExample</span><span class="p">:</span>
-    <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
-    <span class="nt">handlers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">console</span><span class="p p-Indicator">]</span>
-    <span class="nt">propagate</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">no</span>
-<span class="nt">root</span><span class="p">:</span>
-  <span class="nt">level</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
-  <span class="nt">handlers</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="nv">console</span><span class="p p-Indicator">]</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">formatters</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">simple</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;%(asctime)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(name)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(levelname)s</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">%(message)s&#39;</span><span class="w"></span>
+<span class="nt">handlers</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">console</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">logging.StreamHandler</span><span class="w"></span>
+<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span><span class="w"></span>
+<span class="w">    </span><span class="nt">formatter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">simple</span><span class="w"></span>
+<span class="w">    </span><span class="nt">stream</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ext://sys.stdout</span><span class="w"></span>
+<span class="nt">loggers</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">simpleExample</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span><span class="w"></span>
+<span class="w">    </span><span class="nt">handlers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">console</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="w">    </span><span class="nt">propagate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span><span class="w"></span>
+<span class="nt">root</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span><span class="w"></span>
+<span class="w">  </span><span class="nt">handlers</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">console</span><span class="p p-Indicator">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>有关使用字典进行日志记录的更多信息，请参阅 <a class="reference internal" href="../library/logging.config.html#logging-config-api"><span class="std std-ref">配置函数</span></a>。</p>
@@ -914,7 +914,7 @@ WARNING:And this, too
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">版权所有</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
@@ -928,7 +928,7 @@ WARNING:And this, too
 <br />
     <br />
 
-    最后更新于 12月 20, 2021.
+    最后更新于 1月 07, 2022.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 

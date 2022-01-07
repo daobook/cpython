@@ -185,18 +185,18 @@
 <section id="quick-start">
 <h2>快速起步<a class="headerlink" href="#quick-start" title="永久链接至标题">¶</a></h2>
 <p>让我们准备一个非常基本的配置文件，它看起来是这样的:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[DEFAULT]</span>
-<span class="na">ServerAliveInterval</span> <span class="o">=</span> <span class="s">45</span>
-<span class="na">Compression</span> <span class="o">=</span> <span class="s">yes</span>
-<span class="na">CompressionLevel</span> <span class="o">=</span> <span class="s">9</span>
-<span class="na">ForwardX11</span> <span class="o">=</span> <span class="s">yes</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[DEFAULT]</span><span class="w"></span>
+<span class="na">ServerAliveInterval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">45</span><span class="w"></span>
+<span class="na">Compression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w"></span>
+<span class="na">CompressionLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">9</span><span class="w"></span>
+<span class="na">ForwardX11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">yes</span><span class="w"></span>
 
-<span class="k">[bitbucket.org]</span>
-<span class="na">User</span> <span class="o">=</span> <span class="s">hg</span>
+<span class="k">[bitbucket.org]</span><span class="w"></span>
+<span class="na">User</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">hg</span><span class="w"></span>
 
-<span class="k">[topsecret.server.com]</span>
-<span class="na">Port</span> <span class="o">=</span> <span class="s">50022</span>
-<span class="na">ForwardX11</span> <span class="o">=</span> <span class="s">no</span>
+<span class="k">[topsecret.server.com]</span><span class="w"></span>
+<span class="na">Port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">50022</span><span class="w"></span>
+<span class="na">ForwardX11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">no</span><span class="w"></span>
 </pre></div>
 </div>
 <p>INI 文件的结构描述见 <a class="reference external" href="#supported-ini-file-structure">以下章节</a>。 总的来说，这种文件由多个节组成，每个节包含多个带有值的键。 <a class="reference internal" href="#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> 类可以读取和写入这种文件。 让我们先通过程序方式来创建上述的配置文件。</p>
@@ -336,47 +336,47 @@ than the first line of the value.  Depending on the parser's mode, blank lines
 may be treated as parts of multiline values or ignored.</p>
 <p>配置文件可以包含注释，要带有指定字符前缀 (默认为 <code class="docutils literal notranslate"><span class="pre">#</span></code> 和 <code class="docutils literal notranslate"><span class="pre">;</span></code> <a class="footnote-reference brackets" href="#id15" id="id8">1</a>)。 注释可以单独出现于原本的空白行，并可使用缩进。 <a class="footnote-reference brackets" href="#id15" id="id9">1</a></p>
 <p>例如:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Simple Values]</span>
-<span class="na">key</span><span class="o">=</span><span class="s">value</span>
-<span class="na">spaces in keys</span><span class="o">=</span><span class="s">allowed</span>
-<span class="na">spaces in values</span><span class="o">=</span><span class="s">allowed as well</span>
-<span class="na">spaces around the delimiter</span> <span class="o">=</span> <span class="s">obviously</span>
-<span class="na">you can also use : to delimit keys from values</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Simple Values]</span><span class="w"></span>
+<span class="na">key</span><span class="o">=</span><span class="s">value</span><span class="w"></span>
+<span class="na">spaces in keys</span><span class="o">=</span><span class="s">allowed</span><span class="w"></span>
+<span class="na">spaces in values</span><span class="o">=</span><span class="s">allowed as well</span><span class="w"></span>
+<span class="na">spaces around the delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">obviously</span><span class="w"></span>
+<span class="na">you can also use : to delimit keys from values</span><span class="w"></span>
 
-<span class="k">[All Values Are Strings]</span>
-<span class="na">values like this: 1000000</span>
-<span class="na">or this: 3.14159265359</span>
-<span class="na">are they treated as numbers? : no</span>
-<span class="na">integers, floats and booleans are held as: strings</span>
-<span class="na">can use the API to get converted values directly: true</span>
+<span class="k">[All Values Are Strings]</span><span class="w"></span>
+<span class="na">values like this: 1000000</span><span class="w"></span>
+<span class="na">or this: 3.14159265359</span><span class="w"></span>
+<span class="na">are they treated as numbers? : no</span><span class="w"></span>
+<span class="na">integers, floats and booleans are held as: strings</span><span class="w"></span>
+<span class="na">can use the API to get converted values directly: true</span><span class="w"></span>
 
-<span class="k">[Multiline Values]</span>
-<span class="na">chorus: I&#39;m a lumberjack, and I&#39;m okay</span>
-    <span class="na">I sleep all night and I work all day</span>
+<span class="k">[Multiline Values]</span><span class="w"></span>
+<span class="na">chorus: I&#39;m a lumberjack, and I&#39;m okay</span><span class="w"></span>
+<span class="w">    </span><span class="na">I sleep all night and I work all day</span><span class="w"></span>
 
-<span class="k">[No Values]</span>
-<span class="na">key_without_value</span>
-<span class="na">empty string value here</span> <span class="o">=</span>
+<span class="k">[No Values]</span><span class="w"></span>
+<span class="na">key_without_value</span><span class="w"></span>
+<span class="na">empty string value here</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
 
-<span class="k">[You can use comments]</span>
-<span class="c1"># like this</span>
-<span class="c1">; or this</span>
+<span class="k">[You can use comments]</span><span class="w"></span>
+<span class="c1"># like this</span><span class="w"></span>
+<span class="c1">; or this</span><span class="w"></span>
 
-<span class="c1"># By default only in an empty line.</span>
-<span class="c1"># Inline comments can be harmful because they prevent users</span>
-<span class="c1"># from using the delimiting characters as parts of values.</span>
-<span class="c1"># That being said, this can be customized.</span>
+<span class="c1"># By default only in an empty line.</span><span class="w"></span>
+<span class="c1"># Inline comments can be harmful because they prevent users</span><span class="w"></span>
+<span class="c1"># from using the delimiting characters as parts of values.</span><span class="w"></span>
+<span class="c1"># That being said, this can be customized.</span><span class="w"></span>
 
-    <span class="k">[Sections Can Be Indented]</span>
-        <span class="na">can_values_be_as_well</span> <span class="o">=</span> <span class="s">True</span>
-        <span class="na">does_that_mean_anything_special</span> <span class="o">=</span> <span class="s">False</span>
-        <span class="na">purpose</span> <span class="o">=</span> <span class="s">formatting for readability</span>
-        <span class="na">multiline_values</span> <span class="o">=</span> <span class="s">are</span>
-            <span class="na">handled just fine as</span>
-            <span class="na">long as they are indented</span>
-            <span class="na">deeper than the first line</span>
-            <span class="na">of a value</span>
-        <span class="c1"># Did I mention we can indent comments, too?</span>
+<span class="w">    </span><span class="k">[Sections Can Be Indented]</span><span class="w"></span>
+<span class="w">        </span><span class="na">can_values_be_as_well</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">True</span><span class="w"></span>
+<span class="w">        </span><span class="na">does_that_mean_anything_special</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">False</span><span class="w"></span>
+<span class="w">        </span><span class="na">purpose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">formatting for readability</span><span class="w"></span>
+<span class="w">        </span><span class="na">multiline_values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">are</span><span class="w"></span>
+<span class="w">            </span><span class="na">handled just fine as</span><span class="w"></span>
+<span class="w">            </span><span class="na">long as they are indented</span><span class="w"></span>
+<span class="w">            </span><span class="na">deeper than the first line</span><span class="w"></span>
+<span class="w">            </span><span class="na">of a value</span><span class="w"></span>
+<span class="w">        </span><span class="c1"># Did I mention we can indent comments, too?</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -388,13 +388,13 @@ may be treated as parts of multiline values or ignored.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">BasicInterpolation</span></span><a class="headerlink" href="#configparser.BasicInterpolation" title="永久链接至目标">¶</a></dt>
 <dd><p>默认实现由 <a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 来使用。 它允许值包含引用了相同小节中其他值或者特殊的默认小节中的值的格式字符串 <a class="footnote-reference brackets" href="#id15" id="id10">1</a>。 额外的默认值可以在初始化时提供。</p>
 <p>例如:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span>
-<span class="na">home_dir: /Users</span>
-<span class="na">my_dir: %(home_dir)s/lumberjack</span>
-<span class="na">my_pictures: %(my_dir)s/Pictures</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span><span class="w"></span>
+<span class="na">home_dir: /Users</span><span class="w"></span>
+<span class="na">my_dir: %(home_dir)s/lumberjack</span><span class="w"></span>
+<span class="na">my_pictures: %(my_dir)s/Pictures</span><span class="w"></span>
 
-<span class="k">[Escape]</span>
-<span class="na">gain: 80%%  # use a %% to escape the % sign (% is the only character that needs to be escaped)</span>
+<span class="k">[Escape]</span><span class="w"></span>
+<span class="na">gain: 80%%  # use a %% to escape the % sign (% is the only character that needs to be escaped)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>在上面的例子里，<a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 的 <em>interpolation</em> 设为 <code class="docutils literal notranslate"><span class="pre">BasicInterpolation()</span></code>，这会将 <code class="docutils literal notranslate"><span class="pre">%(home_dir)s</span></code> 求解为 <code class="docutils literal notranslate"><span class="pre">home_dir</span></code> 的值 (在这里是 <code class="docutils literal notranslate"><span class="pre">/Users</span></code>)。 <code class="docutils literal notranslate"><span class="pre">%(my_dir)s</span></code> 的将被实际求解为 <code class="docutils literal notranslate"><span class="pre">/Users/lumberjack</span></code>。 所有插值都是按需进行的，这样引用链中使用的键不必以任何特定顺序在配置文件中指明。</p>
@@ -406,32 +406,32 @@ may be treated as parts of multiline values or ignored.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ExtendedInterpolation</span></span><a class="headerlink" href="#configparser.ExtendedInterpolation" title="永久链接至目标">¶</a></dt>
 <dd><p>一个用于插值的替代处理程序实现了更高级的语法，它被用于 <code class="docutils literal notranslate"><span class="pre">zc.buildout</span></code> 中的实例。 扩展插值使用 <code class="docutils literal notranslate"><span class="pre">${section:option}</span></code> 来表示来自外部小节的值。 插值可以跨越多个层级。 为了方便使用，<code class="docutils literal notranslate"><span class="pre">section:</span></code> 部分可被省略，插值会默认作用于当前小节（可能会从特殊小节获取默认值）。</p>
 <p>例如，上面使用基本插值描述的配置，使用扩展插值将是这个样子:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span>
-<span class="na">home_dir: /Users</span>
-<span class="na">my_dir: ${home_dir}/lumberjack</span>
-<span class="na">my_pictures: ${my_dir}/Pictures</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span><span class="w"></span>
+<span class="na">home_dir: /Users</span><span class="w"></span>
+<span class="na">my_dir: ${home_dir}/lumberjack</span><span class="w"></span>
+<span class="na">my_pictures: ${my_dir}/Pictures</span><span class="w"></span>
 
-<span class="k">[Escape]</span>
-<span class="na">cost: $$80  # use a $$ to escape the $ sign ($ is the only character that needs to be escaped)</span>
+<span class="k">[Escape]</span><span class="w"></span>
+<span class="na">cost: $$80  # use a $$ to escape the $ sign ($ is the only character that needs to be escaped)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>来自其他小节的值也可以被获取:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Common]</span>
-<span class="na">home_dir: /Users</span>
-<span class="na">library_dir: /Library</span>
-<span class="na">system_dir: /System</span>
-<span class="na">macports_dir: /opt/local</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Common]</span><span class="w"></span>
+<span class="na">home_dir: /Users</span><span class="w"></span>
+<span class="na">library_dir: /Library</span><span class="w"></span>
+<span class="na">system_dir: /System</span><span class="w"></span>
+<span class="na">macports_dir: /opt/local</span><span class="w"></span>
 
-<span class="k">[Frameworks]</span>
-<span class="na">Python: 3.2</span>
-<span class="na">path: ${Common:system_dir}/Library/Frameworks/</span>
+<span class="k">[Frameworks]</span><span class="w"></span>
+<span class="na">Python: 3.2</span><span class="w"></span>
+<span class="na">path: ${Common:system_dir}/Library/Frameworks/</span><span class="w"></span>
 
-<span class="k">[Arthur]</span>
-<span class="na">nickname: Two Sheds</span>
-<span class="na">last_name: Jackson</span>
-<span class="na">my_dir: ${Common:home_dir}/twosheds</span>
-<span class="na">my_pictures: ${my_dir}/Pictures</span>
-<span class="na">python_dir: ${Frameworks:path}/Python/Versions/${Frameworks:Python}</span>
+<span class="k">[Arthur]</span><span class="w"></span>
+<span class="na">nickname: Two Sheds</span><span class="w"></span>
+<span class="na">last_name: Jackson</span><span class="w"></span>
+<span class="na">my_dir: ${Common:home_dir}/twosheds</span><span class="w"></span>
+<span class="na">my_pictures: ${my_dir}/Pictures</span><span class="w"></span>
+<span class="na">python_dir: ${Frameworks:path}/Python/Versions/${Frameworks:Python}</span><span class="w"></span>
 </pre></div>
 </div>
 </dd></dl>
@@ -588,11 +588,11 @@ may be treated as parts of multiline values or ignored.</p>
 </li>
 <li><p><em>empty_lines_in_values</em>，默认值: <code class="docutils literal notranslate"><span class="pre">True</span></code></p>
 <p>在配置解析器中，值可以包含多行，只要它们的缩进级别低于它们所对应的键。 默认情况下解析器还会将空行视为值的一部分。 于此同时，键本身也可以任意缩进以提升可读性。 因此，当配置文件变得非常庞大而复杂时，用户很容易失去对文件结构的掌控。 例如:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Section]</span>
-<span class="na">key</span> <span class="o">=</span> <span class="s">multiline</span>
-  <span class="na">value with a gotcha</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Section]</span><span class="w"></span>
+<span class="na">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">multiline</span><span class="w"></span>
+<span class="w">  </span><span class="na">value with a gotcha</span><span class="w"></span>
 
- <span class="na">this</span> <span class="o">=</span> <span class="s">is still a part of the multiline value of &#39;key&#39;</span>
+<span class="w"> </span><span class="na">this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">is still a part of the multiline value of &#39;key&#39;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>在用户查看时这可能会特别有问题，如果她是使用比例字体来编辑文件的话。 这就是为什么当你的应用不需要带有空行的值时，你应该考虑禁用它们。 这将使得空行每次都会作为键之间的分隔。 在上面的示例中，空行产生了两个键，<code class="docutils literal notranslate"><span class="pre">key</span></code> 和 <code class="docutils literal notranslate"><span class="pre">this</span></code>。</p>
@@ -1202,7 +1202,7 @@ may be treated as parts of multiline values or ignored.</p>
       </ul>
     </div>  
     <div class="footer">
-    &copy; <a href="../copyright.html">版权所有</a> 2001-2021, Python Software Foundation.
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2022, Python Software Foundation.
     <br />
     This page is licensed under the Python Software Foundation License Version 2.
     <br />
@@ -1216,7 +1216,7 @@ may be treated as parts of multiline values or ignored.</p>
 <br />
     <br />
 
-    最后更新于 12月 20, 2021.
+    最后更新于 1月 07, 2022.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
