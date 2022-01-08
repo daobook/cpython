@@ -150,7 +150,7 @@
 <span id="abc-abstract-base-classes"></span><h1><a class="reference internal" href="#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> --- 抽象基类<a class="headerlink" href="#module-abc" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/abc.py">Lib/abc.py</a></p>
 <hr class="docutils" />
-<p>该模块提供了在 Python 中定义 <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">抽象基类</span></a> (ABC) 的组件，在 <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a> 中已有概述。查看 PEP 文档了解为什么需要在 Python 中增加这个模块。（也可查看 <span class="target" id="index-5"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3141"><strong>PEP 3141</strong></a> 以及 <a class="reference internal" href="numbers.html#module-numbers" title="numbers: Numeric abstract base classes (Complex, Real, Integral, etc.)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">numbers</span></code></a> 模块了解基于 ABC 的数字类型继承关系。）</p>
+<p>该模块提供了在 Python 中定义 <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">抽象基类</span></a> (ABC) 的组件，在 <span class="target" id="index-4"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a> 中已有概述。查看 PEP 文档了解为什么需要在 Python 中增加这个模块。（也可查看 <span class="target" id="index-5"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3141"><strong>PEP 3141</strong></a> 以及 <a class="reference internal" href="numbers.html#module-numbers" title="numbers: Numeric abstract base classes (Complex, Real, Integral, etc.)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">numbers</span></code></a> 模块了解基于 ABC 的 numbers 继承关系。）</p>
 <p><a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> 模块中有一些派生自 ABC 的具体类；当然这些类还可以进一步被派生。此外，<a class="reference internal" href="collections.abc.html#module-collections.abc" title="collections.abc: Abstract base classes for containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code></a> 子模块中有一些 ABC 可被用于测试一个类或实例是否提供特定的接口，例如它是否可哈希或它是否为映射等。</p>
 <p>该模块提供了一个元类 <a class="reference internal" href="#abc.ABCMeta" title="abc.ABCMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABCMeta</span></code></a>，可以用来定义抽象类，另外还提供一个工具类 <a class="reference internal" href="#abc.ABC" title="abc.ABC"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a>，可以用它以继承的方式定义抽象基类。</p>
 <dl class="py class">
@@ -184,7 +184,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="abc.ABCMeta.register">
 <span class="sig-name descname"><span class="pre">register</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subclass</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#abc.ABCMeta.register" title="永久链接至目标">¶</a></dt>
-<dd><p>将“子类”注册为该抽象基类的“抽象子类”，例如：</p>
+<dd><p>将 <em>subclass</em> 注册为该抽象基类的 “虚拟子类”，例如：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
 
 <span class="k">class</span> <span class="nc">MyABC</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
@@ -297,7 +297,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>不同于 Java 抽象方法，这些抽象方法可能具有一个实现。 这个实现可在重载它的类上通过 <a class="reference internal" href="functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a> 机制来调用。 这在使用协作多重继承的框架中可以被用作超调用的一个端点。</p>
+<p>不同于 Java 抽象方法，这些抽象方法可能具有一个实现。 这个实现可在重载它的类上通过 <a class="reference internal" href="functions.html#super" title="super"><code class="xref py py-func docutils literal notranslate"><span class="pre">super()</span></code></a> 机制来调用。 这在使用协作多重继承的框架中可以被用作 super-call 的一个端点。</p>
 </div>
 </dd></dl>
 
@@ -503,7 +503,7 @@
 <br />
     <br />
 
-    最后更新于 1月 07, 2022.
+    最后更新于 1月 08, 2022.
     <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
     <br />
 
