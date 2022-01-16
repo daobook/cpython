@@ -201,7 +201,7 @@
 <p>我们可以从这四个命令中学到几个概念：</p>
 <ul class="simple">
 <li><p><strong class="command">ls</strong> 是一个即使在运行的时候没有提供任何选项，也非常有用的命令。在默认情况下他会输出当前文件夹包含的文件和文件夹。</p></li>
-<li><p>如果我们想要使用比它默认提供的更多功能，我们需要告诉该命令更多信息。在这个例子里，我们想要查看一个不同的目录，<code class="docutils literal notranslate"><span class="pre">pypy</span></code>。我们所做的是指定所谓的位置参数。之所以这样命名，是因为程序应该如何处理该参数值，完全取决于它在命令行出现的位置。更能体现这个概念的命令如 <strong class="command">cp</strong>，它最基本的用法是 <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">SRC</span> <span class="pre">DEST</span></code>。第一个位置参数指的是*你想要复制的*，第二个位置参数指的是*你想要复制到的位置*。</p></li>
+<li><p>如果我们想要使用比它默认提供的更多功能，我们需要告诉该命令更多信息。在这个例子里，我们想要查看一个不同的目录，<code class="docutils literal notranslate"><span class="pre">pypy</span></code>。我们所做的是指定所谓的位置参数。之所以这样命名，是因为程序应该如何处理该参数值，完全取决于它在命令行出现的位置。更能体现这个概念的命令如 <strong class="command">cp</strong>，它最基本的用法是 <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">SRC</span> <span class="pre">DEST</span></code>。第一个位置参数指的是 <em>你想要复制的</em>，第二个位置参数指的是 <em>你想要复制到的位置</em>。</p></li>
 <li><p>现在假设我们想要改变这个程序的行为。在我们的例子中，我们不仅仅只是输出每个文件的文件名，还输出了更多信息。在这个例子中，<code class="docutils literal notranslate"><span class="pre">-l</span></code> 被称为可选参数。</p></li>
 <li><p>这是一段帮助文档的文字。它是非常有用的，因为当你遇到一个你从未使用过的程序时，你可以通过阅读它的帮助文档来弄清楚它是如何运行的。</p></li>
 </ul>
@@ -266,9 +266,8 @@
 <ul class="simple">
 <li><p>我们增加了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_argument()</span></code> 方法，该方法用于指定程序能够接受哪些命令行选项。在这个例子中，我将选项命名为 <code class="docutils literal notranslate"><span class="pre">echo</span></code>，与其功能一致。</p></li>
 <li><p>现在调用我们的程序必须要指定一个选项。</p></li>
-<li><p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code> method actually returns some data from the
-options specified, in this case, <code class="docutils literal notranslate"><span class="pre">echo</span></code>.</p></li>
-<li><p>这一变量是 <a class="reference internal" href="../library/argparse.html#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> 免费施放的某种 “魔法”（即是说，不需要指定哪个变量是存储哪个值的）。你也可以注意到，这一名称与传递给方法的字符串参数一致，都是  <code class="docutils literal notranslate"><span class="pre">echo</span></code>。</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse_args()</span></code> 方法实际上返回所指定的选项中的一些信息，在这个例子中返回的是 <code class="docutils literal notranslate"><span class="pre">echo</span></code>。</p></li>
+<li><p>这一变量是 <a class="reference internal" href="../library/argparse.html#module-argparse" title="argparse: Command-line option and argument parsing library."><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> 自由施放的某种 “魔法”（即是说，不需要指定哪个变量是存储哪个值的）。你也可以注意到，这一名称与传递给方法的字符串参数一致，都是  <code class="docutils literal notranslate"><span class="pre">echo</span></code>。</p></li>
 </ul>
 <p>然而请注意，尽管显示的帮助看起来清楚完整，但它可以比现在更有帮助。比如我们可以知道 <code class="docutils literal notranslate"><span class="pre">echo</span></code> 是一个位置参数，但我们除了靠猜或者看源代码，没法知道它是用来干什么的。所以，我们可以把它改造得更有用：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
@@ -447,7 +446,7 @@ options specified, in this case, <code class="docutils literal notranslate"><spa
 <li><p>我们带回了一个位置参数，结果发生了报错。</p></li>
 <li><p>注意顺序无关紧要。</p></li>
 </ul>
-<p>给我们的程序加上接受多个冗长度的值，然后实际来用用：</p>
+<p>给程序加上接受多个 verbosity 的值，然后实际使用：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;square&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
@@ -868,7 +867,7 @@ options specified, in this case, <code class="docutils literal notranslate"><spa
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="/license.html">History and License</a> for more information.<br />
+    
     <br />
 
     The Python Software Foundation is a non-profit corporation.
