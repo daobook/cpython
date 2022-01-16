@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. 错误和异常 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. 错误和异常 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -81,6 +81,7 @@
 <li><a class="reference internal" href="#user-defined-exceptions">8.6. 用户自定义异常</a></li>
 <li><a class="reference internal" href="#defining-clean-up-actions">8.7. 定义清理操作</a></li>
 <li><a class="reference internal" href="#predefined-clean-up-actions">8.8. 预定义的清理操作</a></li>
+<li><a class="reference internal" href="#raising-and-handling-multiple-unrelated-exceptions">8.9. Raising and Handling Multiple Unrelated Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -133,7 +134,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 教程</a> &#187;</li>
@@ -259,7 +260,8 @@
     <span class="k">raise</span>
 </pre></div>
 </div>
-<p>可以选择让最后一个 except 子句省略异常名称，但在此之后异常值必须从 <code class="docutils literal notranslate"><span class="pre">sys.exc_info()[1]</span></code> 获取。</p>
+<p>Alternatively the last except clause may omit the exception name(s), however the exception
+value must then be retrieved with <code class="docutils literal notranslate"><span class="pre">sys.exception()</span></code>.</p>
 <p><a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 语句具有可选的 <em>else 子句</em>，该子句如果存在，它必须放在所有 <em>except 子句</em> 之后。 它适用于 <em>try 子句</em> 没有引发异常但又必须要执行的代码。 例如:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
     <span class="k">try</span><span class="p">:</span>
@@ -377,39 +379,9 @@
 <section id="user-defined-exceptions">
 <span id="tut-userexceptions"></span><h2><span class="section-number">8.6. </span>用户自定义异常<a class="headerlink" href="#user-defined-exceptions" title="永久链接至标题">¶</a></h2>
 <p>程序可以通过创建新的异常类命名自己的异常（Python 类的内容详见 <a class="reference internal" href="classes.html#tut-classes"><span class="std std-ref">类</span></a>）。不论是以直接还是间接的方式，异常都应从 <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> 类派生。</p>
-<p>异常类和其他类一样，可以执行任何操作。但通常会比较简单，只提供让处理异常的程序提取错误信息的一些属性。创建能触发多个不同错误的模块时，一般只为该模块定义异常基类，然后再根据不同的错误条件，创建指定异常类的子类：</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Error</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for exceptions in this module.&quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-<span class="k">class</span> <span class="nc">InputError</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Exception raised for errors in the input.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        expression -- input expression in which the error occurred</span>
-<span class="sd">        message -- explanation of the error</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expression</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
-
-<span class="k">class</span> <span class="nc">TransitionError</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Raised when an operation attempts a state transition that&#39;s not</span>
-<span class="sd">    allowed.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        previous -- state at beginning of transition</span>
-<span class="sd">        next -- attempted new state</span>
-<span class="sd">        message -- explanation of why the specific transition is not allowed</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">previous</span><span class="p">,</span> <span class="nb">next</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">previous</span> <span class="o">=</span> <span class="n">previous</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
-</pre></div>
-</div>
+<p>Exception classes can be defined which do anything any other class can do, but
+are usually kept simple, often only offering a number of attributes that allow
+information about the error to be extracted by handlers for the exception.</p>
 <p>大多数异常命名都以 “Error” 结尾，类似标准异常的命名。</p>
 <p>许多标准模块都需要自定义异常，以报告由其定义的函数中出现的错误。有关类的说明，详见 <a class="reference internal" href="classes.html#tut-classes"><span class="std std-ref">类</span></a>。</p>
 </section>
@@ -489,6 +461,90 @@
 </div>
 <p>语句执行完毕后，即使在处理行时遇到问题，都会关闭文件 <em>f</em>。和文件一样，支持预定义清理操作的对象会在文档中指出这一点。</p>
 </section>
+<section id="raising-and-handling-multiple-unrelated-exceptions">
+<span id="tut-exception-groups"></span><h2><span class="section-number">8.9. </span>Raising and Handling Multiple Unrelated Exceptions<a class="headerlink" href="#raising-and-handling-multiple-unrelated-exceptions" title="永久链接至标题">¶</a></h2>
+<p>There are situations where it is necessary to report several exceptions that
+have occurred. This it often the case in concurrency frameworks, when several
+tasks may have failed in parallel, but there are also other use cases where
+it is desirable to continue execution and collect multiple errors rather than
+raise the first exception.</p>
+<p>The builtin <a class="reference internal" href="../library/exceptions.html#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> wraps a list of exception instances so
+that they can be raised together. It is an exception itself, so it can be
+caught like any other exception.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">excs</span> <span class="o">=</span> <span class="p">[</span><span class="ne">OSError</span><span class="p">(</span><span class="s1">&#39;error 1&#39;</span><span class="p">),</span> <span class="ne">SystemError</span><span class="p">(</span><span class="s1">&#39;error 2&#39;</span><span class="p">)]</span>
+<span class="gp">... </span>    <span class="k">raise</span> <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s1">&#39;there were problems&#39;</span><span class="p">,</span> <span class="n">excs</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">()</span>
+<span class="go">  + Exception Group Traceback (most recent call last):</span>
+<span class="go">  |   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="go">  |   File &quot;&lt;stdin&gt;&quot;, line 3, in f</span>
+<span class="go">  | ExceptionGroup: there were problems</span>
+<span class="go">  +-+---------------- 1 ----------------</span>
+<span class="go">    | OSError: error 1</span>
+<span class="go">    +---------------- 2 ----------------</span>
+<span class="go">    | SystemError: error 2</span>
+<span class="go">    +------------------------------------</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;caught </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">: e&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">caught &lt;class &#39;ExceptionGroup&#39;&gt;: e</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>By using <code class="docutils literal notranslate"><span class="pre">except*</span></code> instead of <code class="docutils literal notranslate"><span class="pre">except</span></code>, we can selectively
+handle only the exceptions in the group that match a certain
+type. In the following example, which shows a nested exception
+group, each <code class="docutils literal notranslate"><span class="pre">except*</span></code> clause extracts from the group exceptions
+of a certain type while letting all other exceptions propagate to
+other clauses and eventually to be reraised.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">raise</span> <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s2">&quot;group1&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="p">[</span><span class="ne">OSError</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>                          <span class="ne">SystemError</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>                          <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s2">&quot;group2&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                                         <span class="p">[</span><span class="ne">OSError</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="ne">RecursionError</span><span class="p">(</span><span class="mi">4</span><span class="p">)])])</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">f</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span><span class="o">*</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There were OSErrors&quot;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span><span class="o">*</span> <span class="ne">SystemError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There were SystemErrors&quot;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">There were OSErrors</span>
+<span class="go">There were SystemErrors</span>
+<span class="go">  + Exception Group Traceback (most recent call last):</span>
+<span class="go">  |   File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;</span>
+<span class="go">  |   File &quot;&lt;stdin&gt;&quot;, line 2, in f</span>
+<span class="go">  | ExceptionGroup: group1</span>
+<span class="go">  +-+---------------- 1 ----------------</span>
+<span class="go">    | ExceptionGroup: group2</span>
+<span class="go">    +-+---------------- 1 ----------------</span>
+<span class="go">      | RecursionError: 4</span>
+<span class="go">      +------------------------------------</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Note that the exceptions nested in an exception group must be instances,
+not types. This is because in practice the exceptions would typically
+be ones that have already been raised and caught by the program, along
+the following pattern:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">excs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">test</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">excs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">excs</span><span class="p">:</span>
+<span class="gp">... </span>   <span class="k">raise</span> <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s2">&quot;Test Failures&quot;</span><span class="p">,</span> <span class="n">excs</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -509,6 +565,7 @@
 <li><a class="reference internal" href="#user-defined-exceptions">8.6. 用户自定义异常</a></li>
 <li><a class="reference internal" href="#defining-clean-up-actions">8.7. 定义清理操作</a></li>
 <li><a class="reference internal" href="#predefined-clean-up-actions">8.8. 预定义的清理操作</a></li>
+<li><a class="reference internal" href="#raising-and-handling-multiple-unrelated-exceptions">8.9. Raising and Handling Multiple Unrelated Exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -560,7 +617,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 教程</a> &#187;</li>
@@ -588,16 +645,16 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

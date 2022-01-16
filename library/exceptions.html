@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>内置异常 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置异常 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -81,6 +81,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#warnings">警告</a></li>
+<li><a class="reference internal" href="#exception-groups">Exception groups</a></li>
 <li><a class="reference internal" href="#exception-hierarchy">异常层次结构</a></li>
 </ul>
 </li>
@@ -134,7 +135,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 标准库</a> &#187;</li>
@@ -839,6 +840,86 @@ be used to enrich exceptions after they have been caught.</p>
 </dd></dl>
 
 </section>
+<section id="exception-groups">
+<h2>Exception groups<a class="headerlink" href="#exception-groups" title="永久链接至标题">¶</a></h2>
+<p>The following are used when it is necessary to raise multiple unrelated
+exceptions. They are part of the exception hierarchy so they can be
+handled with <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> like all other exceptions. In addition,
+they are recognised by <a class="reference internal" href="../reference/compound_stmts.html#except-star"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except*</span></code></a>, which matches
+their subgroups based on the types of the contained exceptions.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="ExceptionGroup">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">ExceptionGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExceptionGroup" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="BaseExceptionGroup">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-name descname"><span class="pre">BaseExceptionGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BaseExceptionGroup" title="永久链接至目标">¶</a></dt>
+<dd><p>Both of these exception types wrap the exceptions in the sequence <code class="docutils literal notranslate"><span class="pre">excs</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">msg</span></code> parameter must be a string. The difference between the two
+classes is that <a class="reference internal" href="#BaseExceptionGroup" title="BaseExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseExceptionGroup</span></code></a> extends <a class="reference internal" href="#BaseException" title="BaseException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseException</span></code></a> and
+it can wrap any exception, while <a class="reference internal" href="#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> extends <a class="reference internal" href="#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a>
+and it can only wrap subclasses of <a class="reference internal" href="#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a>. This design is so that
+<code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">Exception</span></code> catches an <a class="reference internal" href="#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> but not
+<a class="reference internal" href="#BaseExceptionGroup" title="BaseExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseExceptionGroup</span></code></a>.</p>
+<p>The <a class="reference internal" href="#BaseExceptionGroup" title="BaseExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseExceptionGroup</span></code></a> constructor returns an <a class="reference internal" href="#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a>
+rather than a <a class="reference internal" href="#BaseExceptionGroup" title="BaseExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseExceptionGroup</span></code></a> if all contained exceptions are
+<a class="reference internal" href="#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> instances, so it can be used to make the selection
+automatic. The <a class="reference internal" href="#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a> constructor, on the other hand,
+raises a <a class="reference internal" href="#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> if any contained exception is not an
+<a class="reference internal" href="#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> subclass.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BaseExceptionGroup.subgroup">
+<span class="sig-name descname"><span class="pre">subgroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BaseExceptionGroup.subgroup" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Returns an exception group that contains only the exceptions from the
+current group that match <em>condition</em>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if the result is empty.</p>
+<p>The condition can be either a function that accepts an exception and returns
+true for those that should be in the subgroup, or it can be an exception type
+or a tuple of exception types, which is used to check for a match using the
+same check that is used in an <code class="docutils literal notranslate"><span class="pre">except</span></code> clause.</p>
+<p>The nesting structure of the current exception is preserved in the result,
+as are the values of its <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">__traceback__</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">__cause__</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">__context__</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">__note__</span></code> fields.
+Empty nested groups are omitted from the result.</p>
+<p>The condition is checked for all exceptions in the nested exception group,
+including the top-level and any nested exception groups. If the condition is
+true for such an exception group, it is included in the result in full.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BaseExceptionGroup.split">
+<span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">condition</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BaseExceptionGroup.split" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Like <a class="reference internal" href="#BaseExceptionGroup.subgroup" title="BaseExceptionGroup.subgroup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subgroup()</span></code></a>, but returns the pair <code class="docutils literal notranslate"><span class="pre">(match,</span> <span class="pre">rest)</span></code> where <code class="docutils literal notranslate"><span class="pre">match</span></code>
+is <code class="docutils literal notranslate"><span class="pre">subgroup(condition)</span></code> and <code class="docutils literal notranslate"><span class="pre">rest</span></code> is the remaining non-matching
+part.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="BaseExceptionGroup.derive">
+<span class="sig-name descname"><span class="pre">derive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#BaseExceptionGroup.derive" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<p>Returns an exception group with the same <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">__traceback__</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">__cause__</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">__context__</span></code>
+and <code class="xref py py-attr docutils literal notranslate"><span class="pre">__note__</span></code> but which wraps the exceptions in <code class="docutils literal notranslate"><span class="pre">excs</span></code>.</p>
+<p>This method is used by <a class="reference internal" href="#BaseExceptionGroup.subgroup" title="BaseExceptionGroup.subgroup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subgroup()</span></code></a> and <a class="reference internal" href="#BaseExceptionGroup.split" title="BaseExceptionGroup.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">split()</span></code></a>. A
+subclass needs to override it in order to make <a class="reference internal" href="#BaseExceptionGroup.subgroup" title="BaseExceptionGroup.subgroup"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subgroup()</span></code></a>
+and <a class="reference internal" href="#BaseExceptionGroup.split" title="BaseExceptionGroup.split"><code class="xref py py-meth docutils literal notranslate"><span class="pre">split()</span></code></a> return instances of the subclass rather
+than <a class="reference internal" href="#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a>.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyGroup</span><span class="p">(</span><span class="n">ExceptionGroup</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">derive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="k">return</span> <span class="n">MyGroup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">MyGroup</span><span class="p">(</span><span class="s2">&quot;eg&quot;</span><span class="p">,</span> <span class="p">[</span><span class="ne">ValueError</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="ne">TypeError</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span>
+<span class="go">(MyGroup(&#39;eg&#39;, [TypeError(2)]), MyGroup(&#39;eg&#39;, [ValueError(1)]))</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+</section>
 <section id="exception-hierarchy">
 <h2>异常层次结构<a class="headerlink" href="#exception-hierarchy" title="永久链接至标题">¶</a></h2>
 <p>内置异常的类层级结构如下：</p>
@@ -932,6 +1013,7 @@ be used to enrich exceptions after they have been caught.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#warnings">警告</a></li>
+<li><a class="reference internal" href="#exception-groups">Exception groups</a></li>
 <li><a class="reference internal" href="#exception-hierarchy">异常层次结构</a></li>
 </ul>
 </li>
@@ -984,7 +1066,7 @@ be used to enrich exceptions after they have been caught.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1012,16 +1094,16 @@ be used to enrich exceptions after they have been caught.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

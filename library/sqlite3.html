@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>sqlite3 --- SQLite 数据库 DB-API 2.0 接口模块 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sqlite3 --- SQLite 数据库 DB-API 2.0 接口模块 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -148,7 +148,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1111,8 +1111,16 @@ was changed, the prior value of the limit is returned.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="sqlite3.Cursor.lastrowid">
 <span class="sig-name descname"><span class="pre">lastrowid</span></span><a class="headerlink" href="#sqlite3.Cursor.lastrowid" title="永久链接至目标">¶</a></dt>
-<dd><p>这个只读属性会提供最近修改行的 rowid。 它只在你使用 <a class="reference internal" href="#sqlite3.Cursor.execute" title="sqlite3.Cursor.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> 方法执行 <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> 或 <code class="docutils literal notranslate"><span class="pre">REPLACE</span></code> 语句时会被设置。 对于 <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> 或 <code class="docutils literal notranslate"><span class="pre">REPLACE</span></code> 以外的操作或者当 <a class="reference internal" href="#sqlite3.Cursor.executemany" title="sqlite3.Cursor.executemany"><code class="xref py py-meth docutils literal notranslate"><span class="pre">executemany()</span></code></a> 被调用时，<a class="reference internal" href="#sqlite3.Cursor.lastrowid" title="sqlite3.Cursor.lastrowid"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lastrowid</span></code></a> 会被设为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。</p>
-<p>如果 <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> 或 <code class="docutils literal notranslate"><span class="pre">REPLACE</span></code> 语句操作失败则将返回上一次成功操作的 rowid。</p>
+<dd><p>This read-only attribute provides the row id of the last inserted row. It
+is only updated after successful <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> or <code class="docutils literal notranslate"><span class="pre">REPLACE</span></code> statements
+using the <a class="reference internal" href="#sqlite3.Cursor.execute" title="sqlite3.Cursor.execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">execute()</span></code></a> method.  For other statements, after
+<a class="reference internal" href="#sqlite3.Cursor.executemany" title="sqlite3.Cursor.executemany"><code class="xref py py-meth docutils literal notranslate"><span class="pre">executemany()</span></code></a> or <a class="reference internal" href="#sqlite3.Cursor.executescript" title="sqlite3.Cursor.executescript"><code class="xref py py-meth docutils literal notranslate"><span class="pre">executescript()</span></code></a>, or if the insertion failed,
+the value of <code class="docutils literal notranslate"><span class="pre">lastrowid</span></code> is left unchanged.  The initial value of
+<code class="docutils literal notranslate"><span class="pre">lastrowid</span></code> is <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Inserts into <code class="docutils literal notranslate"><span class="pre">WITHOUT</span> <span class="pre">ROWID</span></code> tables are not recorded.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>增加了 <code class="docutils literal notranslate"><span class="pre">REPLACE</span></code> 语句的支持。</p>
 </div>
@@ -1716,7 +1724,7 @@ extension support, you must pass the
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1745,16 +1753,16 @@ extension support, you must pass the
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

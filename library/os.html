@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>os --- 多种操作系统接口 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>os --- 多种操作系统接口 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -142,7 +142,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1283,6 +1283,17 @@ and values are <a class="reference internal" href="stdtypes.html#bytes" title="b
 </div>
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="os.SF_NOCACHE">
+<span class="sig-prename descclassname"><span class="pre">os.</span></span><span class="sig-name descname"><span class="pre">SF_NOCACHE</span></span><a class="headerlink" href="#os.SF_NOCACHE" title="永久链接至目标">¶</a></dt>
+<dd><p>Parameter to the <a class="reference internal" href="#os.sendfile" title="os.sendfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">sendfile()</span></code></a> function, if the implementation supports
+it. The data won't be cached in the virtual memory and will be freed afterwards.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="os.splice">
 <span class="sig-prename descclassname"><span class="pre">os.</span></span><span class="sig-name descname"><span class="pre">splice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_src</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset_dst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#os.splice" title="永久链接至目标">¶</a></dt>
@@ -1761,7 +1772,8 @@ and values are <a class="reference internal" href="stdtypes.html#bytes" title="b
 <span class="sig-prename descclassname"><span class="pre">os.</span></span><span class="sig-name descname"><span class="pre">makedirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0o777</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exist_ok</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#os.makedirs" title="永久链接至目标">¶</a></dt>
 <dd><p id="index-27">递归目录创建函数。与 <a class="reference internal" href="#os.mkdir" title="os.mkdir"><code class="xref py py-func docutils literal notranslate"><span class="pre">mkdir()</span></code></a> 类似，但会自动创建到达最后一级目录所需要的中间目录。</p>
 <p><em>mode</em> 参数会传递给 <a class="reference internal" href="#os.mkdir" title="os.mkdir"><code class="xref py py-func docutils literal notranslate"><span class="pre">mkdir()</span></code></a>，用来创建最后一级目录，对于该参数的解释，请参阅 <a class="reference internal" href="#mkdir-modebits"><span class="std std-ref">mkdir() 中的描述</span></a>。要设置某些新建的父目录的权限，可以在调用 <a class="reference internal" href="#os.makedirs" title="os.makedirs"><code class="xref py py-func docutils literal notranslate"><span class="pre">makedirs()</span></code></a> 之前设置 umask。现有父目录的权限不会更改。</p>
-<p>如果 <em>exist_ok</em> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code> (默认值)，则如果目标目录已存在将引发 <a class="reference internal" href="exceptions.html#FileExistsError" title="FileExistsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileExistsError</span></code></a>。</p>
+<p>If <em>exist_ok</em> is <code class="docutils literal notranslate"><span class="pre">False</span></code> (the default), a <a class="reference internal" href="exceptions.html#FileExistsError" title="FileExistsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileExistsError</span></code></a> is
+raised if the target directory already exists.</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>如果要创建的路径元素包含 <a class="reference internal" href="#os.pardir" title="os.pardir"><code class="xref py py-data docutils literal notranslate"><span class="pre">pardir</span></code></a> (如 UNIX 系统中的 &quot;..&quot;) <a class="reference internal" href="#os.makedirs" title="os.makedirs"><code class="xref py py-func docutils literal notranslate"><span class="pre">makedirs()</span></code></a> 将无法明确目标。</p>
@@ -1947,7 +1959,10 @@ and values are <a class="reference internal" href="stdtypes.html#bytes" title="b
 <dl class="py function">
 <dt class="sig sig-object py" id="os.rmdir">
 <span class="sig-prename descclassname"><span class="pre">os.</span></span><span class="sig-name descname"><span class="pre">rmdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_fd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#os.rmdir" title="永久链接至目标">¶</a></dt>
-<dd><p>移除（删除）目录 <em>path</em>。如果目录不存在或不为空，则会分别抛出 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> 或 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 异常。要删除整个目录树，可以使用 <a class="reference internal" href="shutil.html#shutil.rmtree" title="shutil.rmtree"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.rmtree()</span></code></a>。</p>
+<dd><p>Remove (delete) the directory <em>path</em>.  If the directory does not exist or is
+not empty, a <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> or an <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is raised
+respectively.  In order to remove whole directory trees,
+<a class="reference internal" href="shutil.html#shutil.rmtree" title="shutil.rmtree"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutil.rmtree()</span></code></a> can be used.</p>
 <p>本函数支持 <a class="reference internal" href="#dir-fd"><span class="std std-ref">基于目录描述符的相对路径</span></a>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">os.rmdir</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">path</span></code>、<code class="docutils literal notranslate"><span class="pre">dir_fd</span></code>。</p>
 <div class="versionadded">
@@ -3233,14 +3248,18 @@ and values are <a class="reference internal" href="stdtypes.html#bytes" title="b
 <span class="sig-prename descclassname"><span class="pre">os.</span></span><span class="sig-name descname"><span class="pre">times</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#os.times" title="永久链接至目标">¶</a></dt>
 <dd><p>返回当前的全局进程时间。返回值是一个有 5 个属性的对象：</p>
 <ul class="simple">
-<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code> - 用户时间</p></li>
-<li><p><a class="reference internal" href="#os.system" title="os.system"><code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code></a> - 系统时间</p></li>
-<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">children_user</span></code> - 所有子进程的用户时间</p></li>
-<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">children_system</span></code> - 所有子进程的系统时间</p></li>
-<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">elapsed</span></code> - 从过去的固定时间点起，经过的真实时间</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code> - user time</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code> - system time</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">children_user</span></code> - user time of all child processes</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">children_system</span></code> - system time of all child processes</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">elapsed</span></code> - elapsed real time since a fixed point in the past</p></li>
 </ul>
-<p>为了向后兼容，该对象的行为也类似于五元组，按照 <code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code>，<a class="reference internal" href="#os.system" title="os.system"><code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code></a>，<code class="xref py py-attr docutils literal notranslate"><span class="pre">children_user</span></code>，<code class="xref py py-attr docutils literal notranslate"><span class="pre">children_system</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">elapsed</span></code> 顺序组成。</p>
-<p>在 Unix 上请参阅 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/times(2)">times(2)</a></em> 和 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/times(3)">times(3)</a></em> 手册页，在 Windows 上请参阅 <a class="reference external" href="https://docs.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocesstimes">the GetProcessTimes MSDN</a> 。在 Windows 上，只有 <code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code> 和 <a class="reference internal" href="#os.system" title="os.system"><code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code></a> 是已知的，其他属性均为零。</p>
+<p>For backwards compatibility, this object also behaves like a five-tuple
+containing <code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">children_user</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">children_system</span></code>, and <code class="xref py py-attr docutils literal notranslate"><span class="pre">elapsed</span></code> in that order.</p>
+<p>See the Unix manual page
+<em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/times(2)">times(2)</a></em> and <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/times(3)">times(3)</a></em> manual page on Unix or <a class="reference external" href="https://docs.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocesstimes">the GetProcessTimes MSDN</a>
+on Windows. On Windows, only <code class="xref py py-attr docutils literal notranslate"><span class="pre">user</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">system</span></code> are known; the other attributes are zero.</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>返回结果的类型由元组变成一个类似元组的对象，同时具有命名的属性。</p>
@@ -3859,7 +3878,7 @@ which is deprecated.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -3888,16 +3907,16 @@ which is deprecated.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

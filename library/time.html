@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>time --- 时间的访问和转换 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>time --- 时间的访问和转换 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -128,7 +128,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -445,7 +445,7 @@ which provides resolution of 100 nanoseconds. If <em>secs</em> is zero, <code cl
 used if available. On Windows, a waitable timer is now used.</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.5 版更改: </span>现在，即使该睡眠过程被信号中断，该函数也会保证调用它的线程至少会睡眠 <em>secs</em> 秒。信号处理例程抛出异常的情况除外。（欲了解我们做出这次改变的原因，请参见 <span class="target" id="index-35"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> ）</p>
+<p><span class="versionmodified changed">在 3.5 版更改: </span>现在，即使该睡眠过程被信号中断，该函数也会保证调用它的线程至少会睡眠 <em>secs</em> 秒。信号处理例程抛出异常的情况除外。（欲了解我们做出这次改变的原因，请参见 <span class="target" id="index-30"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0475"><strong>PEP 475</strong></a> ）</p>
 </div>
 </dd></dl>
 
@@ -549,11 +549,16 @@ used if available. On Windows, a waitable timer is now used.</p>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%z</span></code></p></td>
-<td><p>时区偏移以格式 +HHMM 或 -HHMM 形式的 UTC/GMT 的正或负时差指示，其中H表示十进制小时数字，M表示小数分钟数字 [-23:59, +23:59] 。</p></td>
+<td><p>Time zone offset indicating a positive or
+negative time difference from UTC/GMT of the
+form +HHMM or -HHMM, where H represents decimal
+hour digits and M represents decimal minute
+digits [-23:59, +23:59]. <a class="footnote-reference brackets" href="#id4" id="id1">1</a></p></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%Z</span></code></p></td>
-<td><p>时区名称（如果不存在时区，则不包含字符）。</p></td>
+<td><p>Time zone name (no characters if no time zone
+exists). Deprecated. <a class="footnote-reference brackets" href="#id4" id="id2">1</a></p></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%%</span></code></p></td>
@@ -568,7 +573,8 @@ used if available. On Windows, a waitable timer is now used.</p>
 <li><p>范围真的是 <code class="docutils literal notranslate"><span class="pre">0</span></code> 到 <code class="docutils literal notranslate"><span class="pre">61</span></code> ；值 <code class="docutils literal notranslate"><span class="pre">60</span></code> 在表示 <a class="reference external" href="https://en.wikipedia.org/wiki/Leap_second">leap seconds</a> 的时间戳中有效，并且由于历史原因支持值 <code class="docutils literal notranslate"><span class="pre">61</span></code> 。</p></li>
 <li><p>当与 <a class="reference internal" href="#time.strptime" title="time.strptime"><code class="xref py py-func docutils literal notranslate"><span class="pre">strptime()</span></code></a> 函数一起使用时， <code class="docutils literal notranslate"><span class="pre">%U</span></code> 和 <code class="docutils literal notranslate"><span class="pre">%W</span></code> 仅用于指定星期几和年份的计算。</p></li>
 </ol>
-<p>下面是一个示例，一个与 <span class="target" id="index-36"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2822.html"><strong>RFC 2822</strong></a> Internet电子邮件标准以兼容的日期格式。  <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
+<p>Here is an example, a format for dates compatible with that specified  in the
+<span class="target" id="index-10"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2822.html"><strong>RFC 2822</strong></a> Internet email standard.  <a class="footnote-reference brackets" href="#id4" id="id3">1</a></p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">gmtime</span><span class="p">,</span> <span class="n">strftime</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%a</span><span class="s2">, </span><span class="si">%d</span><span class="s2"> %b %Y %H:%M:%S +0000&quot;</span><span class="p">,</span> <span class="n">gmtime</span><span class="p">())</span>
 <span class="go">&#39;Thu, 28 Jun 2001 14:17:15 +0000&#39;</span>
@@ -703,14 +709,14 @@ used if available. On Windows, a waitable timer is now used.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="time.tzset">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">tzset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#time.tzset" title="永久链接至目标">¶</a></dt>
-<dd><p>重置库例程使用的时间转换规则。环境变量 <span class="target" id="index-37"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 指定如何完成。它还将设置变量 <code class="docutils literal notranslate"><span class="pre">tzname</span></code> （来自 <span class="target" id="index-38"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量）， <code class="docutils literal notranslate"><span class="pre">timezone</span></code> （UTC的西部非DST秒）， <code class="docutils literal notranslate"><span class="pre">altzone</span></code> （UTC以西的DST秒）和 <code class="docutils literal notranslate"><span class="pre">daylight</span></code> （如果此时区没有任何夏令时规则则为0，如果有夏令时适用的时间，无论过去、现在或未来，则为非零）。</p>
+<dd><p>重置库例程使用的时间转换规则。环境变量 <span class="target" id="index-31"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 指定如何完成。它还将设置变量 <code class="docutils literal notranslate"><span class="pre">tzname</span></code> （来自 <span class="target" id="index-32"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量）， <code class="docutils literal notranslate"><span class="pre">timezone</span></code> （UTC的西部非DST秒）， <code class="docutils literal notranslate"><span class="pre">altzone</span></code> （UTC以西的DST秒）和 <code class="docutils literal notranslate"><span class="pre">daylight</span></code> （如果此时区没有任何夏令时规则则为0，如果有夏令时适用的时间，无论过去、现在或未来，则为非零）。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>虽然在很多情况下，更改 <span class="target" id="index-39"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量而不调用 <a class="reference internal" href="#time.tzset" title="time.tzset"><code class="xref py py-func docutils literal notranslate"><span class="pre">tzset()</span></code></a> 可能会影响函数的输出，例如 <a class="reference internal" href="#time.localtime" title="time.localtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">localtime()</span></code></a> ，不应该依赖此行为。</p>
-<p><span class="target" id="index-40"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 不应该包含空格。</p>
+<p>虽然在很多情况下，更改 <span class="target" id="index-33"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量而不调用 <a class="reference internal" href="#time.tzset" title="time.tzset"><code class="xref py py-func docutils literal notranslate"><span class="pre">tzset()</span></code></a> 可能会影响函数的输出，例如 <a class="reference internal" href="#time.localtime" title="time.localtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">localtime()</span></code></a> ，不应该依赖此行为。</p>
+<p><span class="target" id="index-34"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 不应该包含空格。</p>
 </div>
-<p><span class="target" id="index-41"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量的标准格式是（为了清晰起见，添加了空格）:</p>
+<p><span class="target" id="index-35"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量的标准格式是（为了清晰起见，添加了空格）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">std</span> <span class="n">offset</span> <span class="p">[</span><span class="n">dst</span> <span class="p">[</span><span class="n">offset</span> <span class="p">[,</span><span class="n">start</span><span class="p">[</span><span class="o">/</span><span class="n">time</span><span class="p">],</span> <span class="n">end</span><span class="p">[</span><span class="o">/</span><span class="n">time</span><span class="p">]]]]</span>
 </pre></div>
 </div>
@@ -742,7 +748,7 @@ used if available. On Windows, a waitable timer is now used.</p>
 <span class="go">&#39;16:08:12 05/08/03 AEST&#39;</span>
 </pre></div>
 </div>
-<p>在许多Unix系统（包括 *BSD ， Linux ， Solaris 和 Darwin 上），使用系统的区域信息（ <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/tzfile(5)">tzfile(5)</a></em> ）数据库来指定时区规则会更方便。为此，将 <span class="target" id="index-42"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量设置为所需时区数据文件的路径，相对于系统 'zoneinfo' 时区数据库的根目录，通常位于 <code class="file docutils literal notranslate"><span class="pre">/usr/share/zoneinfo</span></code> 。 例如，<code class="docutils literal notranslate"><span class="pre">'US/Eastern'</span></code> 、 <code class="docutils literal notranslate"><span class="pre">'Australia/Melbourne'</span></code> 、 <code class="docutils literal notranslate"><span class="pre">'Egypt'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'Europe/Amsterdam'</span></code>。</p>
+<p>在许多Unix系统（包括 *BSD ， Linux ， Solaris 和 Darwin 上），使用系统的区域信息（ <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/tzfile(5)">tzfile(5)</a></em> ）数据库来指定时区规则会更方便。为此，将 <span class="target" id="index-36"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">TZ</span></code> 环境变量设置为所需时区数据文件的路径，相对于系统 'zoneinfo' 时区数据库的根目录，通常位于 <code class="file docutils literal notranslate"><span class="pre">/usr/share/zoneinfo</span></code> 。 例如，<code class="docutils literal notranslate"><span class="pre">'US/Eastern'</span></code> 、 <code class="docutils literal notranslate"><span class="pre">'Australia/Melbourne'</span></code> 、 <code class="docutils literal notranslate"><span class="pre">'Egypt'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'Europe/Amsterdam'</span></code>。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;TZ&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;US/Eastern&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">tzset</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">tzname</span>
@@ -916,8 +922,13 @@ used if available. On Windows, a waitable timer is now used.</p>
 </div>
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>现在不推荐使用 <code class="docutils literal notranslate"><span class="pre">%Z</span></code> ，但是所有 ANSI C 库都不支持扩展为首选小时/分钟偏移量的``%z``转义符。 此外，严格的 1982 年原始 <span class="target" id="index-43"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc822.html"><strong>RFC 822</strong></a> 标准要求两位数的年份（%y而不是%Y），但是实际在2000年之前很久就转移到了4位数年。之后， <span class="target" id="index-44"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc822.html"><strong>RFC 822</strong></a> 已经废弃了，4位数的年份首先被推荐 <span class="target" id="index-45"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1123.html"><strong>RFC 1123</strong></a> ，然后被 <span class="target" id="index-46"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2822.html"><strong>RFC 2822</strong></a> 强制执行。</p>
+<dt class="label" id="id4"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>)</span></dt>
+<dd><p>The use of <code class="docutils literal notranslate"><span class="pre">%Z</span></code> is now deprecated, but the <code class="docutils literal notranslate"><span class="pre">%z</span></code> escape that expands to the
+preferred hour/minute offset is not supported by all ANSI C libraries. Also, a
+strict reading of the original 1982 <span class="target" id="index-19"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc822.html"><strong>RFC 822</strong></a> standard calls for a two-digit
+year (<code class="docutils literal notranslate"><span class="pre">%y</span></code> rather than <code class="docutils literal notranslate"><span class="pre">%Y</span></code>), but practice moved to 4-digit years long before the
+year 2000.  After that, <span class="target" id="index-20"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc822.html"><strong>RFC 822</strong></a> became obsolete and the 4-digit year has
+been first recommended by <span class="target" id="index-21"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc1123.html"><strong>RFC 1123</strong></a> and then mandated by <span class="target" id="index-22"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2822.html"><strong>RFC 2822</strong></a>.</p>
 </dd>
 </dl>
 </section>
@@ -987,7 +998,7 @@ used if available. On Windows, a waitable timer is now used.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1016,16 +1027,16 @@ used if available. On Windows, a waitable timer is now used.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

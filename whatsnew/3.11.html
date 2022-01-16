@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>What&#39;s New In Python 3.11 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What&#39;s New In Python 3.11 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -167,7 +167,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python的新变化</a> &#187;</li>
@@ -198,10 +198,10 @@
 <h1>What's New In Python 3.11<a class="headerlink" href="#what-s-new-in-python-3-11" title="永久链接至标题">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">Release</dt>
-<dd class="field-odd"><p>3.11.0a3</p>
+<dd class="field-odd"><p>3.11.0a4</p>
 </dd>
 <dt class="field-even">Date</dt>
-<dd class="field-even"><p>一月 08, 2022</p>
+<dd class="field-even"><p>一月 16, 2022</p>
 </dd>
 </dl>
 <p>This article explains the new features in Python 3.11, compared to 3.10.</p>
@@ -417,6 +417,9 @@ tracebacks are enabled. Users can now register an
 <a class="reference internal" href="../library/sys.html#sys.unraisablehook" title="sys.unraisablehook"><code class="xref py py-func docutils literal notranslate"><span class="pre">unraisable</span> <span class="pre">hook</span> <span class="pre">handler</span></code></a> to improve their debug
 experience.
 (Contributed by Erlend E. Aasland in <a class="reference external" href="https://bugs.python.org/issue45828">bpo-45828</a>.)</p></li>
+<li><p>Fetch across rollback no longer raises <code class="xref py py-exc docutils literal notranslate"><span class="pre">InterfaceError</span></code>.
+Instead we leave it to the SQLite library to handle these cases.
+(Contributed by Erlend E. Aasland in <a class="reference external" href="https://bugs.python.org/issue44092">bpo-44092</a>.)</p></li>
 </ul>
 </section>
 <section id="sys">
@@ -427,6 +430,9 @@ from the <code class="docutils literal notranslate"><span class="pre">value</spa
 modified while it is being handled, the changes are reflected in
 the results of subsequent calls to <code class="xref py py-func docutils literal notranslate"><span class="pre">exc_info()</span></code>.
 (Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue45711">bpo-45711</a>.)</p></li>
+<li><p>Add <a class="reference internal" href="../library/sys.html#sys.exception" title="sys.exception"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exception()</span></code></a> which returns the active exception instance
+(equivalent to <code class="docutils literal notranslate"><span class="pre">sys.exc_info()[1]</span></code>).
+(Contributed by Irit Katriel in <a class="reference external" href="https://bugs.python.org/issue46328">bpo-46328</a>.)</p></li>
 </ul>
 </section>
 <section id="threading">
@@ -504,13 +510,15 @@ larger <em>k</em>).
 <a class="reference internal" href="../library/dis.html#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a>, <a class="reference internal" href="../library/dis.html#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a> and <a class="reference internal" href="../library/dis.html#opcode-PRECALL_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">PRECALL_METHOD</span></code></a>.
 This decouples the argument shifting for methods from the handling of
 keyword arguments and allows better specialization of calls.</p></li>
-<li><p>Removed <code class="docutils literal notranslate"><span class="pre">COPY_DICT_WITHOUT_KEYS</span></code>.</p></li>
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">COPY_DICT_WITHOUT_KEYS</span></code> and <code class="docutils literal notranslate"><span class="pre">GEN_START</span></code>.</p></li>
 <li><p><a class="reference internal" href="../library/dis.html#opcode-MATCH_CLASS"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">MATCH_CLASS</span></code></a> and <a class="reference internal" href="../library/dis.html#opcode-MATCH_KEYS"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">MATCH_KEYS</span></code></a> no longer push an additional
 boolean value indicating whether the match succeeded or failed. Instead, they
 indicate failure with <a class="reference internal" href="../library/constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> (where a tuple of extracted values would
 otherwise be).</p></li>
 <li><p>Added <a class="reference internal" href="../library/dis.html#opcode-COPY"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">COPY</span></code></a>, which pushes the <em>i</em>-th item to the top of the stack.
 The item is not removed from its original location.</p></li>
+<li><p>Add <a class="reference internal" href="../library/dis.html#opcode-POP_JUMP_IF_NOT_NONE"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">POP_JUMP_IF_NOT_NONE</span></code></a> and <a class="reference internal" href="../library/dis.html#opcode-POP_JUMP_IF_NONE"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">POP_JUMP_IF_NONE</span></code></a> opcodes to
+speed up conditional jumps.</p></li>
 <li><p><a class="reference internal" href="../library/dis.html#opcode-JUMP_IF_NOT_EXC_MATCH"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">JUMP_IF_NOT_EXC_MATCH</span></code></a> no longer pops the active exception.</p></li>
 </ul>
 </section>
@@ -628,13 +636,16 @@ use <a class="reference internal" href="../library/inspect.html#inspect.signatur
 <li><p>the <code class="docutils literal notranslate"><span class="pre">formatargspec</span></code> function, deprecated since Python 3.5;
 use the <a class="reference internal" href="../library/inspect.html#inspect.signature" title="inspect.signature"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.signature()</span></code></a> function and <code class="xref py py-class docutils literal notranslate"><span class="pre">Signature</span></code> object
 directly.</p></li>
-<li><p>the undocumented <code class="docutils literal notranslate"><span class="pre">Signature.from_callable</span></code> and <code class="docutils literal notranslate"><span class="pre">Signature.from_function</span></code>
+<li><p>the undocumented <code class="docutils literal notranslate"><span class="pre">Signature.from_builtin</span></code> and <code class="docutils literal notranslate"><span class="pre">Signature.from_function</span></code>
 functions, deprecated since Python 3.5; use the
 <a class="reference internal" href="../library/inspect.html#inspect.Signature.from_callable" title="inspect.Signature.from_callable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Signature.from_callable()</span></code></a> method
 instead.</p></li>
 </ul>
 <p>(Contributed by Hugo van Kemenade in <a class="reference external" href="https://bugs.python.org/issue45320">bpo-45320</a>.)</p>
 </li>
+<li><p>Remove namespace package support from unittest discovery. It was introduced in
+Python 3.4 but has been broken since Python 3.7.
+(Contributed by Inada Naoki in <a class="reference external" href="https://bugs.python.org/issue23882">bpo-23882</a>.)</p></li>
 </ul>
 </section>
 <section id="porting-to-python-3-11">
@@ -697,6 +708,14 @@ libsqlite3, zlib, bzip2, liblzma, libcrypt, and uuid flags are detected by
 platform <code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code>. The effort is inspired by previous work
 like Pyodide.
 (Contributed by Christian Heimes and Ethan Smith in <a class="reference external" href="https://bugs.python.org/issue40280">bpo-40280</a>.)</p></li>
+<li><p>CPython will now use 30-bit digits by default for the Python <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>
+implementation. Previously, the default was to use 30-bit digits on platforms
+with <code class="docutils literal notranslate"><span class="pre">SIZEOF_VOID_P</span> <span class="pre">&gt;=</span> <span class="pre">8</span></code>, and 15-bit digits otherwise. It's still possible
+to explicitly request use of 15-bit digits via either the
+<code class="docutils literal notranslate"><span class="pre">--enable-big-digits</span></code> option to the configure script or (for Windows) the
+<code class="docutils literal notranslate"><span class="pre">PYLONG_BITS_IN_DIGIT</span></code> variable in <code class="docutils literal notranslate"><span class="pre">PC/pyconfig.h</span></code>, but this option may
+be removed at some point in the future. (Contributed by Mark Dickinson in
+<a class="reference external" href="https://bugs.python.org/issue45569">bpo-45569</a>.)</p></li>
 </ul>
 </section>
 <section id="c-api-changes">
@@ -820,6 +839,107 @@ been included directly, consider including <code class="docutils literal notrans
 limited C API. It was never usable there, because it used internal structures
 which are not available in the limited C API.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46007">bpo-46007</a>.)</p></li>
+<li><p>Changes of the <a class="reference internal" href="../c-api/veryhigh.html#c.PyFrameObject" title="PyFrameObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyFrameObject</span></code></a> structure members:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f_code</span></code>: removed, use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetCode" title="PyFrame_GetCode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code></a> instead.
+Warning: the function returns a <a class="reference internal" href="../glossary.html#term-strong-reference"><span class="xref std std-term">strong reference</span></a>, need to call
+<a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_back</span></code>: changed, use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_builtins</span></code>: removed,
+use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString(frame,</span> <span class="pre">&quot;f_builtins&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_globals</span></code>: removed,
+use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString(frame,</span> <span class="pre">&quot;f_globals&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_locals</span></code>: removed,
+use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString(frame,</span> <span class="pre">&quot;f_locals&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_lasti</span></code>: removed,
+use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString(frame,</span> <span class="pre">&quot;f_lasti&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_valuesstack</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_stackdepth</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_gen</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_iblock</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_state</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_blockstack</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_localsplus</span></code>: removed.</p></li>
+</ul>
+<p>The Python frame object is now created lazily. A side effect is that the
+<code class="docutils literal notranslate"><span class="pre">f_back</span></code> member must not be accessed directly, since its value is now also
+computed lazily. The <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a> function must be called
+instead.</p>
+<p>Code defining <code class="docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code> on Python 3.8 and older:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#if PY_VERSION_HEX &lt; 0x030900B1</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">PyCodeObject</span><span class="o">*</span> <span class="n">PyFrame_GetCode</span><span class="p">(</span><span class="n">PyFrameObject</span> <span class="o">*</span><span class="n">frame</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Py_INCREF</span><span class="p">(</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">f_code</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">frame</span><span class="o">-&gt;</span><span class="n">f_code</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>Code defining <code class="docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code> on Python 3.8 and older:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#if PY_VERSION_HEX &lt; 0x030900B1</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">PyFrameObject</span><span class="o">*</span> <span class="n">PyFrame_GetBack</span><span class="p">(</span><span class="n">PyFrameObject</span> <span class="o">*</span><span class="n">frame</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Py_XINCREF</span><span class="p">(</span><span class="n">frame</span><span class="o">-&gt;</span><span class="n">f_back</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">frame</span><span class="o">-&gt;</span><span class="n">f_back</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>Or use <a class="reference external" href="https://github.com/pythoncapi/pythoncapi_compat">the pythoncapi_compat project</a> to get these functions
+on old Python functions.</p>
+</li>
+<li><p>Changes of the <a class="reference internal" href="../c-api/init.html#c.PyThreadState" title="PyThreadState"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyThreadState</span></code></a> structure members:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">frame</span></code>: removed, use <a class="reference internal" href="../c-api/init.html#c.PyThreadState_GetFrame" title="PyThreadState_GetFrame"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_GetFrame()</span></code></a> (function added
+to Python 3.9 by <a class="reference external" href="https://bugs.python.org/issue40429">bpo-40429</a>).
+Warning: the function returns a <a class="reference internal" href="../glossary.html#term-strong-reference"><span class="xref std std-term">strong reference</span></a>, need to call
+<a class="reference internal" href="../c-api/refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tracing</span></code>: changed, use <a class="reference internal" href="../c-api/init.html#c.PyThreadState_EnterTracing" title="PyThreadState_EnterTracing"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_EnterTracing()</span></code></a>
+and <a class="reference internal" href="../c-api/init.html#c.PyThreadState_LeaveTracing" title="PyThreadState_LeaveTracing"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_LeaveTracing()</span></code></a>
+(functions added to Python 3.11 by <a class="reference external" href="https://bugs.python.org/issue43760">bpo-43760</a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">recursion_depth</span></code>: removed,
+use <code class="docutils literal notranslate"><span class="pre">(tstate-&gt;recursion_limit</span> <span class="pre">-</span> <span class="pre">tstate-&gt;recursion_remaining)</span></code> instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stackcheck_counter</span></code>: removed.</p></li>
+</ul>
+<p>Code defining <code class="docutils literal notranslate"><span class="pre">PyThreadState_GetFrame()</span></code> on Python 3.8 and older:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#if PY_VERSION_HEX &lt; 0x030900B1</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">PyFrameObject</span><span class="o">*</span> <span class="n">PyThreadState_GetFrame</span><span class="p">(</span><span class="n">PyThreadState</span> <span class="o">*</span><span class="n">tstate</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">Py_XINCREF</span><span class="p">(</span><span class="n">tstate</span><span class="o">-&gt;</span><span class="n">frame</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">frame</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>Code defining <code class="docutils literal notranslate"><span class="pre">PyThreadState_EnterTracing()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">PyThreadState_LeaveTracing()</span></code> on Python 3.10 and older:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#if PY_VERSION_HEX &lt; 0x030B00A2</span>
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">PyThreadState_EnterTracing</span><span class="p">(</span><span class="n">PyThreadState</span> <span class="o">*</span><span class="n">tstate</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">tracing</span><span class="o">++</span><span class="p">;</span>
+<span class="c1">#if PY_VERSION_HEX &gt;= 0x030A00A1</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">cframe</span><span class="o">-&gt;</span><span class="n">use_tracing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">#else</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">use_tracing</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">#endif</span>
+<span class="p">}</span>
+
+<span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="n">PyThreadState_LeaveTracing</span><span class="p">(</span><span class="n">PyThreadState</span> <span class="o">*</span><span class="n">tstate</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nb">int</span> <span class="n">use_tracing</span> <span class="o">=</span> <span class="p">(</span><span class="n">tstate</span><span class="o">-&gt;</span><span class="n">c_tracefunc</span> <span class="o">!=</span> <span class="n">NULL</span> <span class="o">||</span> <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">c_profilefunc</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">);</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">tracing</span><span class="o">--</span><span class="p">;</span>
+<span class="c1">#if PY_VERSION_HEX &gt;= 0x030A00A1</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">cframe</span><span class="o">-&gt;</span><span class="n">use_tracing</span> <span class="o">=</span> <span class="n">use_tracing</span><span class="p">;</span>
+<span class="c1">#else</span>
+    <span class="n">tstate</span><span class="o">-&gt;</span><span class="n">use_tracing</span> <span class="o">=</span> <span class="n">use_tracing</span><span class="p">;</span>
+<span class="c1">#endif</span>
+<span class="p">}</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>Or use <a class="reference external" href="https://github.com/pythoncapi/pythoncapi_compat">the pythoncapi_compat project</a> to get these functions
+on old Python functions.</p>
+</li>
 </ul>
 </section>
 <section id="id3">
@@ -992,7 +1112,7 @@ limited C API.
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python的新变化</a> &#187;</li>
@@ -1020,16 +1140,16 @@ limited C API.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

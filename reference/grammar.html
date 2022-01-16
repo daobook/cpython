@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>10. 完整的语法规范 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. 完整的语法规范 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -118,7 +118,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -271,6 +271,7 @@
          <span class="o">|</span> <span class="nf">single_subscript_attribute_target</span><span class="p">)</span> &#39;:&#39; <span class="nf">expression</span> <span class="p">[</span>&#39;=&#39; <span class="nf">annotated_rhs</span> <span class="p">]</span> 
     <span class="o">|</span> <span class="p">(</span><span class="nf">star_targets</span> &#39;=&#39; <span class="p">)</span><span class="o">+</span> <span class="p">(</span><span class="nf">yield_expr</span> <span class="o">|</span> <span class="nf">star_expressions</span><span class="p">)</span> !&#39;=&#39; <span class="p">[</span>TYPE_COMMENT<span class="p">]</span> 
     <span class="o">|</span> <span class="nf">single_target</span> <span class="nf">augassign</span> ~ <span class="p">(</span><span class="nf">yield_expr</span> <span class="o">|</span> <span class="nf">star_expressions</span><span class="p">)</span> 
+
 <span class="nf">annotated_rhs</span><span class="p">:</span> <span class="nf">yield_expr</span> <span class="o">|</span> <span class="nf">star_expressions</span>
 
 <span class="nf">augassign</span><span class="p">:</span>
@@ -301,6 +302,7 @@
 
 <span class="nf">del_stmt</span><span class="p">:</span>
     <span class="o">|</span> <span class="k">&#39;del&#39;</span> <span class="nf">del_targets</span> &amp;<span class="p">(</span>&#39;;&#39; <span class="o">|</span> NEWLINE<span class="p">)</span> 
+
 <span class="nf">yield_stmt</span><span class="p">:</span> <span class="nf">yield_expr</span> 
 
 <span class="nf">assert_stmt</span><span class="p">:</span> <span class="k">&#39;assert&#39;</span> <span class="nf">expression</span> <span class="p">[</span>&#39;,&#39; <span class="nf">expression</span> <span class="p">]</span> 
@@ -340,6 +342,7 @@
 <span class="nf">block</span><span class="p">:</span>
     <span class="o">|</span> NEWLINE INDENT <span class="nf">statements</span> DEDENT 
     <span class="o">|</span> <span class="nf">simple_stmts</span>
+
 <span class="nf">decorators</span><span class="p">:</span> <span class="p">(</span>&#39;@&#39; <span class="nf">named_expression</span> NEWLINE <span class="p">)</span><span class="o">+</span> 
 
 <span class="c c-Singleline"># Class definitions</span>
@@ -390,6 +393,7 @@
     <span class="o">|</span> &#39;*&#39; <span class="nf">param_no_default</span> <span class="nf">param_maybe_default</span><span class="o">*</span> <span class="p">[</span><span class="nf">kwds</span><span class="p">]</span> 
     <span class="o">|</span> &#39;*&#39; &#39;,&#39; <span class="nf">param_maybe_default</span><span class="o">+</span> <span class="p">[</span><span class="nf">kwds</span><span class="p">]</span> 
     <span class="o">|</span> <span class="nf">kwds</span> 
+
 <span class="nf">kwds</span><span class="p">:</span> &#39;**&#39; <span class="nf">param_no_default</span> 
 
 <span class="c c-Singleline"># One parameter.  This *includes* a following comma and type comment.</span>
@@ -442,6 +446,7 @@
 <span class="nf">for_stmt</span><span class="p">:</span>
     <span class="o">|</span> <span class="k">&#39;for&#39;</span> <span class="nf">star_targets</span> <span class="k">&#39;in&#39;</span> ~ <span class="nf">star_expressions</span> &#39;:&#39; <span class="p">[</span>TYPE_COMMENT<span class="p">]</span> <span class="nf">block</span> <span class="p">[</span><span class="nf">else_block</span><span class="p">]</span> 
     <span class="o">|</span> ASYNC <span class="k">&#39;for&#39;</span> <span class="nf">star_targets</span> <span class="k">&#39;in&#39;</span> ~ <span class="nf">star_expressions</span> &#39;:&#39; <span class="p">[</span>TYPE_COMMENT<span class="p">]</span> <span class="nf">block</span> <span class="p">[</span><span class="nf">else_block</span><span class="p">]</span> 
+
 <span class="c c-Singleline"># With statement</span>
 <span class="c c-Singleline"># --------------</span>
 
@@ -450,6 +455,7 @@
     <span class="o">|</span> <span class="k">&#39;with&#39;</span> &#39;,&#39;<span class="o">.</span><span class="nf">with_item</span><span class="o">+</span> &#39;:&#39; <span class="p">[</span>TYPE_COMMENT<span class="p">]</span> <span class="nf">block</span> 
     <span class="o">|</span> ASYNC <span class="k">&#39;with&#39;</span> &#39;(&#39; &#39;,&#39;<span class="o">.</span><span class="nf">with_item</span><span class="o">+</span> &#39;,&#39;<span class="o">?</span> &#39;)&#39; &#39;:&#39; <span class="nf">block</span> 
     <span class="o">|</span> ASYNC <span class="k">&#39;with&#39;</span> &#39;,&#39;<span class="o">.</span><span class="nf">with_item</span><span class="o">+</span> &#39;:&#39; <span class="p">[</span>TYPE_COMMENT<span class="p">]</span> <span class="nf">block</span> 
+
 <span class="nf">with_item</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">expression</span> <span class="k">&#39;as&#39;</span> <span class="nf">star_target</span> &amp;<span class="p">(</span>&#39;,&#39; <span class="o">|</span> &#39;)&#39; <span class="o">|</span> &#39;:&#39;<span class="p">)</span> 
     <span class="o">|</span> <span class="nf">expression</span> 
@@ -479,6 +485,7 @@
 
 <span class="nf">match_stmt</span><span class="p">:</span>
     <span class="o">|</span> <span class="k">&quot;match&quot;</span> <span class="nf">subject_expr</span> &#39;:&#39; NEWLINE INDENT <span class="nf">case_block</span><span class="o">+</span> DEDENT 
+
 <span class="nf">subject_expr</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">star_named_expression</span> &#39;,&#39; <span class="nf">star_named_expressions</span><span class="o">?</span> 
     <span class="o">|</span> <span class="nf">named_expression</span>
@@ -498,6 +505,7 @@
 
 <span class="nf">as_pattern</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">or_pattern</span> <span class="k">&#39;as&#39;</span> <span class="nf">pattern_capture_target</span> 
+
 <span class="nf">or_pattern</span><span class="p">:</span>
     <span class="o">|</span> &#39;|&#39;<span class="o">.</span><span class="nf">closed_pattern</span><span class="o">+</span> 
 
@@ -607,6 +615,7 @@
     <span class="o">|</span> <span class="nf">name_or_attr</span> &#39;(&#39; <span class="nf">positional_patterns</span> &#39;,&#39;<span class="o">?</span> &#39;)&#39; 
     <span class="o">|</span> <span class="nf">name_or_attr</span> &#39;(&#39; <span class="nf">keyword_patterns</span> &#39;,&#39;<span class="o">?</span> &#39;)&#39; 
     <span class="o">|</span> <span class="nf">name_or_attr</span> &#39;(&#39; <span class="nf">positional_patterns</span> &#39;,&#39; <span class="nf">keyword_patterns</span> &#39;,&#39;<span class="o">?</span> &#39;)&#39; 
+
 <span class="nf">positional_patterns</span><span class="p">:</span>
     <span class="o">|</span> &#39;,&#39;<span class="o">.</span><span class="nf">pattern</span><span class="o">+</span> 
 
@@ -667,8 +676,8 @@
     <span class="o">|</span> <span class="k">&#39;not&#39;</span> <span class="nf">inversion</span> 
     <span class="o">|</span> <span class="nf">comparison</span>
 
-<span class="c c-Singleline"># Comparisons operators</span>
-<span class="c c-Singleline"># ---------------------</span>
+<span class="c c-Singleline"># Comparison operators</span>
+<span class="c c-Singleline"># --------------------</span>
 
 <span class="nf">comparison</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">bitwise_or</span> <span class="nf">compare_op_bitwise_or_pair</span><span class="o">+</span> 
@@ -698,7 +707,7 @@
 <span class="nf">isnot_bitwise_or</span><span class="p">:</span> <span class="k">&#39;is&#39;</span> <span class="k">&#39;not&#39;</span> <span class="nf">bitwise_or</span> 
 <span class="nf">is_bitwise_or</span><span class="p">:</span> <span class="k">&#39;is&#39;</span> <span class="nf">bitwise_or</span> 
 
-<span class="c c-Singleline"># Logical operators</span>
+<span class="c c-Singleline"># Bitwise operators</span>
 <span class="c c-Singleline"># -----------------</span>
 
 <span class="nf">bitwise_or</span><span class="p">:</span>
@@ -782,6 +791,7 @@
 
 <span class="nf">group</span><span class="p">:</span>
     <span class="o">|</span> &#39;(&#39; <span class="p">(</span><span class="nf">yield_expr</span> <span class="o">|</span> <span class="nf">named_expression</span><span class="p">)</span> &#39;)&#39; 
+
 <span class="c c-Singleline"># Lambda functions</span>
 <span class="c c-Singleline"># ----------------</span>
 
@@ -814,6 +824,7 @@
     <span class="o">|</span> &#39;*&#39; <span class="nf">lambda_param_no_default</span> <span class="nf">lambda_param_maybe_default</span><span class="o">*</span> <span class="p">[</span><span class="nf">lambda_kwds</span><span class="p">]</span> 
     <span class="o">|</span> &#39;*&#39; &#39;,&#39; <span class="nf">lambda_param_maybe_default</span><span class="o">+</span> <span class="p">[</span><span class="nf">lambda_kwds</span><span class="p">]</span> 
     <span class="o">|</span> <span class="nf">lambda_kwds</span> 
+
 <span class="nf">lambda_kwds</span><span class="p">:</span> &#39;**&#39; <span class="nf">lambda_param_no_default</span> 
 
 <span class="nf">lambda_param_no_default</span><span class="p">:</span>
@@ -845,7 +856,6 @@
 
 <span class="nf">dict</span><span class="p">:</span>
     <span class="o">|</span> &#39;{&#39; <span class="p">[</span><span class="nf">double_starred_kvpairs</span><span class="p">]</span> &#39;}&#39; 
-    <span class="o">|</span> &#39;{&#39; <span class="nf">invalid_double_starred_kvpairs</span> &#39;}&#39;
 
 <span class="nf">double_starred_kvpairs</span><span class="p">:</span> &#39;,&#39;<span class="o">.</span><span class="nf">double_starred_kvpair</span><span class="o">+</span> <span class="p">[</span>&#39;,&#39;<span class="p">]</span> 
 
@@ -864,19 +874,25 @@
 <span class="nf">for_if_clause</span><span class="p">:</span>
     <span class="o">|</span> ASYNC <span class="k">&#39;for&#39;</span> <span class="nf">star_targets</span> <span class="k">&#39;in&#39;</span> ~ <span class="nf">disjunction</span> <span class="p">(</span><span class="k">&#39;if&#39;</span> <span class="nf">disjunction</span> <span class="p">)</span><span class="o">*</span> 
     <span class="o">|</span> <span class="k">&#39;for&#39;</span> <span class="nf">star_targets</span> <span class="k">&#39;in&#39;</span> ~ <span class="nf">disjunction</span> <span class="p">(</span><span class="k">&#39;if&#39;</span> <span class="nf">disjunction</span> <span class="p">)</span><span class="o">*</span> 
+
 <span class="nf">listcomp</span><span class="p">:</span>
     <span class="o">|</span> &#39;[&#39; <span class="nf">named_expression</span> <span class="nf">for_if_clauses</span> &#39;]&#39; 
+
 <span class="nf">setcomp</span><span class="p">:</span>
     <span class="o">|</span> &#39;{&#39; <span class="nf">named_expression</span> <span class="nf">for_if_clauses</span> &#39;}&#39; 
+
 <span class="nf">genexp</span><span class="p">:</span>
     <span class="o">|</span> &#39;(&#39; <span class="p">(</span> <span class="nf">assignment_expression</span> <span class="o">|</span> <span class="nf">expression</span> !&#39;:=&#39;<span class="p">)</span> <span class="nf">for_if_clauses</span> &#39;)&#39; 
+
 <span class="nf">dictcomp</span><span class="p">:</span>
     <span class="o">|</span> &#39;{&#39; <span class="nf">kvpair</span> <span class="nf">for_if_clauses</span> &#39;}&#39; 
+
 <span class="c c-Singleline"># FUNCTION CALL ARGUMENTS</span>
 <span class="c c-Singleline"># =======================</span>
 
 <span class="nf">arguments</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">args</span> <span class="p">[</span>&#39;,&#39;<span class="p">]</span> &amp;&#39;)&#39; 
+
 <span class="nf">args</span><span class="p">:</span>
     <span class="o">|</span> &#39;,&#39;<span class="o">.</span><span class="p">(</span><span class="nf">starred_expression</span> <span class="o">|</span> <span class="p">(</span> <span class="nf">assignment_expression</span> <span class="o">|</span> <span class="nf">expression</span> !&#39;:=&#39;<span class="p">)</span> !&#39;=&#39;<span class="p">)</span><span class="o">+</span> <span class="p">[</span>&#39;,&#39; <span class="nf">kwargs</span> <span class="p">]</span> 
     <span class="o">|</span> <span class="nf">kwargs</span> 
@@ -1044,7 +1060,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -1072,16 +1088,16 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

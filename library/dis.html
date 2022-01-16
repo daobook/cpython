@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>dis --- Python 字节码反汇编器 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dis --- Python 字节码反汇编器 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -129,7 +129,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -726,19 +726,6 @@ Exception representation on the stack now consist of one, not three, items.</p>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-POP_EXCEPT_AND_RERAISE">
-<span class="sig-name descname"><span class="pre">POP_EXCEPT_AND_RERAISE</span></span><a class="headerlink" href="#opcode-POP_EXCEPT_AND_RERAISE" title="永久链接至目标">¶</a></dt>
-<dd><p>Pops the exception currently on top of the stack. Pops the integer value on top
-of the stack and sets the <code class="docutils literal notranslate"><span class="pre">f_lasti</span></code> attribute of the frame with that value.
-Then pops the next exception from the stack uses it to restore the current exception.
-Finally it re-raises the originally popped exception.
-Used in exception handler cleanup.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-LOAD_ASSERTION_ERROR">
 <span class="sig-name descname"><span class="pre">LOAD_ASSERTION_ERROR</span></span><a class="headerlink" href="#opcode-LOAD_ASSERTION_ERROR" title="永久链接至目标">¶</a></dt>
 <dd><p>将 <a class="reference internal" href="exceptions.html#AssertionError" title="AssertionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code></a> 推入栈顶。 由 <a class="reference internal" href="../reference/simple_stmts.html#assert"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">assert</span></code></a> 语句使用。</p>
@@ -1055,13 +1042,31 @@ exception group followed by the matching part.</p>
 </dd></dl>
 
 <dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-POP_JUMP_IF_NOT_NONE">
+<span class="sig-name descname"><span class="pre">POP_JUMP_IF_NOT_NONE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-POP_JUMP_IF_NOT_NONE" title="永久链接至目标">¶</a></dt>
+<dd><p>If TOS is not none, sets the bytecode counter to <em>target</em>.  TOS is popped.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-POP_JUMP_IF_NONE">
+<span class="sig-name descname"><span class="pre">POP_JUMP_IF_NONE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-POP_JUMP_IF_NONE" title="永久链接至目标">¶</a></dt>
+<dd><p>If TOS is none, sets the bytecode counter to <em>target</em>.  TOS is popped.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-PREP_RERAISE_STAR">
 <span class="sig-name descname"><span class="pre">PREP_RERAISE_STAR</span></span><a class="headerlink" href="#opcode-PREP_RERAISE_STAR" title="永久链接至目标">¶</a></dt>
 <dd><p>Combines the raised and reraised exceptions list from TOS, into an exception
 group to propagate from a try-except* block. Uses the original exception
 group from TOS1 to reconstruct the structure of reraised exceptions. Pops
-two items from the stack and pushes 0 (for lasti, which is unused) followed
-by the exception to reraise or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there isn't one.</p>
+two items from the stack and pushes the exception to reraise or <code class="docutils literal notranslate"><span class="pre">None</span></code>
+if there isn't one.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -1337,19 +1342,6 @@ success (<code class="docutils literal notranslate"><span class="pre">True</span
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-GEN_START">
-<span class="sig-name descname"><span class="pre">GEN_START</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">kind</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-GEN_START" title="永久链接至目标">¶</a></dt>
-<dd><blockquote>
-<div><p>Pops TOS. The <code class="docutils literal notranslate"><span class="pre">kind</span></code> operand corresponds to the type of generator or
-coroutine. The legal kinds are 0 for generator, 1 for coroutine,
-and 2 for async generator.</p>
-</div></blockquote>
-<div class="versionadded">
-<p><span class="versionmodified added">3.10 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-ROT_N">
 <span class="sig-name descname"><span class="pre">ROT_N</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">count</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-ROT_N" title="永久链接至目标">¶</a></dt>
 <dd><p>将栈的前 <em>count</em> 项向上提升一个位置，并将 TOS 下移至位置 <em>count</em>。</p>
@@ -1363,6 +1355,24 @@ and 2 for async generator.</p>
 <span class="sig-name descname"><span class="pre">COPY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-COPY" title="永久链接至目标">¶</a></dt>
 <dd><p>Push the <em>i</em>-th item to the top of the stack. The item is not removed from its
 original location.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-RESUME">
+<span class="sig-name descname"><span class="pre">RESUME</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">where</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-RESUME" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div><p>A no-op. Performs internal tracing, debugging and optimization checks.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">where</span></code> operand marks where the <code class="docutils literal notranslate"><span class="pre">RESUME</span></code> occurs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0</span></code> The start of a function</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span></code> After a <code class="docutils literal notranslate"><span class="pre">yield</span></code> expression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2</span></code> After a <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> expression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> After an <code class="docutils literal notranslate"><span class="pre">await</span></code> expression</p></li>
+</ul>
+</div></blockquote>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -1509,7 +1519,7 @@ original location.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1538,16 +1548,16 @@ original location.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

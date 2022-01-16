@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>内置类型 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内置类型 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -191,7 +191,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 标准库</a> &#187;</li>
@@ -930,6 +930,11 @@ Python objects in the Python/C API.</p>
 </tbody>
 </table>
 <p>相同类型的序列也支持比较。 特别地，tuple 和 list 的比较是通过比较对应元素的字典顺序。 这意味着想要比较结果相等，则每个元素比较结果都必须相等，并且两个序列长度必须相同。 （完整细节请参阅语言参考的 <a class="reference internal" href="../reference/expressions.html#comparisons"><span class="std std-ref">比较运算</span></a> 部分。）</p>
+<p id="index-20">Forward and reversed iterators over mutable sequences access values using an
+index.  That index will continue to march forward (or backward) even if the
+underlying sequence is mutated.  The iterator terminates only when an
+<a class="reference internal" href="exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> or a <a class="reference internal" href="exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> is encountered (or when the index
+drops below zero).</p>
 <p>注释：</p>
 <ol class="arabic">
 <li><p>虽然 <code class="docutils literal notranslate"><span class="pre">in</span></code> 和 <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> 操作在通常情况下仅被用于简单的成员检测，某些专门化序列 (例如 <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>) 也使用它们进行子序列检测:</p>
@@ -975,15 +980,15 @@ Python objects in the Python/C API.</p>
 </section>
 <section id="immutable-sequence-types">
 <span id="typesseq-immutable"></span><h3>不可变序列类型<a class="headerlink" href="#immutable-sequence-types" title="永久链接至标题">¶</a></h3>
-<p id="index-20">不可变序列类型普遍实现而可变序列类型未实现的唯一操作就是对 <a class="reference internal" href="functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> 内置函数的支持。</p>
+<p id="index-21">不可变序列类型普遍实现而可变序列类型未实现的唯一操作就是对 <a class="reference internal" href="functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> 内置函数的支持。</p>
 <p>这种支持允许不可变类型，例如 <a class="reference internal" href="#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 实例被用作 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 键，以及存储在 <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 和 <a class="reference internal" href="#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> 实例中。</p>
 <p>尝试对包含有不可哈希值的不可变序列进行哈希运算将会导致 <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>。</p>
 </section>
 <section id="mutable-sequence-types">
 <span id="typesseq-mutable"></span><h3>可变序列类型<a class="headerlink" href="#mutable-sequence-types" title="永久链接至标题">¶</a></h3>
-<p id="index-21">以下表格中的操作是在可变序列类型上定义的。 <a class="reference internal" href="collections.abc.html#collections.abc.MutableSequence" title="collections.abc.MutableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSequence</span></code></a> ABC 被提供用来更容易地在自定义序列类型上正确实现这些操作。</p>
+<p id="index-22">以下表格中的操作是在可变序列类型上定义的。 <a class="reference internal" href="collections.abc.html#collections.abc.MutableSequence" title="collections.abc.MutableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSequence</span></code></a> ABC 被提供用来更容易地在自定义序列类型上正确实现这些操作。</p>
 <p>表格中的 <em>s</em> 是可变序列类型的实例，<em>t</em> 是任意可迭代对象，而 <em>x</em> 是符合对 <em>s</em> 所规定类型与值限制的任何对象 (例如，<a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 仅接受满足 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">255</span></code> 值限制的整数)。</p>
-<table class="docutils align-default" id="index-22">
+<table class="docutils align-default" id="index-23">
 <colgroup>
 <col style="width: 36%" />
 <col style="width: 39%" />
@@ -1070,7 +1075,7 @@ Python objects in the Python/C API.</p>
 </section>
 <section id="lists">
 <span id="typesseq-list"></span><h3>列表<a class="headerlink" href="#lists" title="永久链接至标题">¶</a></h3>
-<p id="index-23">列表是可变序列，通常用于存放同类项目的集合（其中精确的相似程度将根据应用而变化）。</p>
+<p id="index-24">列表是可变序列，通常用于存放同类项目的集合（其中精确的相似程度将根据应用而变化）。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="list">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">list</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">iterable</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#list" title="永久链接至目标">¶</a></dt>
@@ -1105,7 +1110,7 @@ Python objects in the Python/C API.</p>
 </section>
 <section id="tuples">
 <span id="typesseq-tuple"></span><h3>元组<a class="headerlink" href="#tuples" title="永久链接至标题">¶</a></h3>
-<p id="index-24">元组是不可变序列，通常用于储存异构数据的多项集（例如由 <a class="reference internal" href="functions.html#enumerate" title="enumerate"><code class="xref py py-func docutils literal notranslate"><span class="pre">enumerate()</span></code></a> 内置函数所产生的二元组）。 元组也被用于需要同构数据的不可变序列的情况（例如允许存储到 <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 或 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 的实例）。</p>
+<p id="index-25">元组是不可变序列，通常用于储存异构数据的多项集（例如由 <a class="reference internal" href="functions.html#enumerate" title="enumerate"><code class="xref py py-func docutils literal notranslate"><span class="pre">enumerate()</span></code></a> 内置函数所产生的二元组）。 元组也被用于需要同构数据的不可变序列的情况（例如允许存储到 <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 或 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 的实例）。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="tuple">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">tuple</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">iterable</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#tuple" title="永久链接至目标">¶</a></dt>
@@ -1125,7 +1130,7 @@ Python objects in the Python/C API.</p>
 </section>
 <section id="ranges">
 <span id="typesseq-range"></span><h3>range 对象<a class="headerlink" href="#ranges" title="永久链接至标题">¶</a></h3>
-<p id="index-25"><a class="reference internal" href="#range" title="range"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> 类型表示不可变的数字序列，通常用于在 <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 循环中循环指定的次数。</p>
+<p id="index-26"><a class="reference internal" href="#range" title="range"><code class="xref py py-class docutils literal notranslate"><span class="pre">range</span></code></a> 类型表示不可变的数字序列，通常用于在 <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 循环中循环指定的次数。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="range">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#range" title="永久链接至目标">¶</a></dt>
@@ -1216,7 +1221,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 </section>
 <section id="text-sequence-type-str">
-<span id="textseq"></span><span id="index-26"></span><h2>文本序列类型 --- <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><a class="headerlink" href="#text-sequence-type-str" title="永久链接至标题">¶</a></h2>
+<span id="textseq"></span><span id="index-27"></span><h2>文本序列类型 --- <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a><a class="headerlink" href="#text-sequence-type-str" title="永久链接至标题">¶</a></h2>
 <p>在 Python 中处理文本数据是使用 <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 对象，也称为 <em class="dfn">字符串</em>。 字符串是由 Unicode 码位构成的不可变 <a class="reference internal" href="#typesseq"><span class="std std-ref">序列</span></a>。 字符串字面值有多种不同的写法：</p>
 <ul class="simple">
 <li><p>单引号: <code class="docutils literal notranslate"><span class="pre">'允许包含有</span> <span class="pre">&quot;双&quot;</span> <span class="pre">引号'</span></code></p></li>
@@ -1228,18 +1233,18 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <p>请参阅 <a class="reference internal" href="../reference/lexical_analysis.html#strings"><span class="std std-ref">字符串与字节串字面值</span></a> 有解有关不同字符串字面值的更多信息，包括所支持的转义序列，以及使用 <code class="docutils literal notranslate"><span class="pre">r</span></code> (&quot;raw&quot;) 前缀来禁用大多数转义序列的处理。</p>
 <p>字符串也可以通过使用 <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 构造器从其他对象创建。</p>
 <p>由于不存在单独的“字符”类型，对字符串做索引操作将产生一个长度为 1 的字符串。 也就是说，对于一个非空字符串 <em>s</em>, <code class="docutils literal notranslate"><span class="pre">s[0]</span> <span class="pre">==</span> <span class="pre">s[0:1]</span></code>。</p>
-<p id="index-27">不存在可变的字符串类型，但是 <a class="reference internal" href="#str.join" title="str.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.join()</span></code></a> 或 <a class="reference internal" href="io.html#io.StringIO" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> 可以被被用来根据多个片段高效率地构建字符串。</p>
+<p id="index-28">不存在可变的字符串类型，但是 <a class="reference internal" href="#str.join" title="str.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.join()</span></code></a> 或 <a class="reference internal" href="io.html#io.StringIO" title="io.StringIO"><code class="xref py py-class docutils literal notranslate"><span class="pre">io.StringIO</span></code></a> 可以被被用来根据多个片段高效率地构建字符串。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>为了与 Python 2 系列的向下兼容，再次允许字符串字面值使用 <code class="docutils literal notranslate"><span class="pre">u</span></code> 前缀。 它对字符串字面值的含义没有影响，并且不能与 <code class="docutils literal notranslate"><span class="pre">r</span></code> 前缀同时出现。</p>
 </div>
-<span class="target" id="index-28"></span><dl class="py class">
+<span class="target" id="index-29"></span><dl class="py class">
 <dt class="sig sig-object py" id="str">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#str" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'strict'</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>返回 <em>object</em> 的 <a class="reference internal" href="#textseq"><span class="std std-ref">字符串</span></a> 版本。 如果未提供 <em>object</em> 则返回空字符串。 在其他情况下 <code class="docutils literal notranslate"><span class="pre">str()</span></code> 的行为取决于 <em>encoding</em> 或 <em>errors</em> 是否有给出，具体见下。</p>
 <p>如果 <em>encoding</em> 或 <em>errors</em> 均未给出，<code class="docutils literal notranslate"><span class="pre">str(object)</span></code> 返回 <a class="reference internal" href="../reference/datamodel.html#object.__str__" title="object.__str__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__str__()</span></code></a>，这是 <em>object</em> 的“非正式”或格式良好的字符串表示。 对于字符串对象，这是该字符串本身。 如果 <em>object</em> 没有 <a class="reference internal" href="../reference/datamodel.html#object.__str__" title="object.__str__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code></a> 方法，则 <a class="reference internal" href="#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> 将回退为返回 <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">repr(object)</span></code></a>。</p>
-<p id="index-29">如果 <em>encoding</em> 或 <em>errors</em> 至少给出其中之一，则 <em>object</em> 应该是一个 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> (例如 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 或 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>)。 在此情况下，如果 <em>object</em> 是一个 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> (或 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>) 对象，则 <code class="docutils literal notranslate"><span class="pre">str(bytes,</span> <span class="pre">encoding,</span> <span class="pre">errors)</span></code> 等价于 <a class="reference internal" href="#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode(encoding,</span> <span class="pre">errors)</span></code></a>。 否则的话，会在调用 <a class="reference internal" href="#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a> 之前获取缓冲区对象下层的 bytes 对象。 请参阅 <a class="reference internal" href="#binaryseq"><span class="std std-ref">二进制序列类型 --- bytes, bytearray, memoryview</span></a> 与 <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">缓冲协议</span></a> 了解有关缓冲区对象的信息。</p>
+<p id="index-30">如果 <em>encoding</em> 或 <em>errors</em> 至少给出其中之一，则 <em>object</em> 应该是一个 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> (例如 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 或 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>)。 在此情况下，如果 <em>object</em> 是一个 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> (或 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>) 对象，则 <code class="docutils literal notranslate"><span class="pre">str(bytes,</span> <span class="pre">encoding,</span> <span class="pre">errors)</span></code> 等价于 <a class="reference internal" href="#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode(encoding,</span> <span class="pre">errors)</span></code></a>。 否则的话，会在调用 <a class="reference internal" href="#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a> 之前获取缓冲区对象下层的 bytes 对象。 请参阅 <a class="reference internal" href="#binaryseq"><span class="std std-ref">二进制序列类型 --- bytes, bytearray, memoryview</span></a> 与 <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">缓冲协议</span></a> 了解有关缓冲区对象的信息。</p>
 <p>将一个 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象传入 <a class="reference internal" href="#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> 而不给出 <em>encoding</em> 或 <em>errors</em> 参数的操作属于第一种情况， 将返回非正式的字符串表示（另请参阅 Python 的 <a class="reference internal" href="../using/cmdline.html#cmdoption-b"><code class="xref std std-option docutils literal notranslate"><span class="pre">-b</span></code></a> 命令行选项）。 例如:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Zoot!&#39;</span><span class="p">)</span>
 <span class="go">&quot;b&#39;Zoot!&#39;&quot;</span>
@@ -1249,8 +1254,8 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </dd></dl>
 
 <section id="string-methods">
-<span id="index-30"></span><span id="id5"></span><h3>字符串的方法<a class="headerlink" href="#string-methods" title="永久链接至标题">¶</a></h3>
-<p id="index-31">字符串实现了所有 <a class="reference internal" href="#typesseq-common"><span class="std std-ref">一般</span></a> 序列的操作，还额外提供了以下列出的一些附加方法。</p>
+<span id="index-31"></span><span id="id5"></span><h3>字符串的方法<a class="headerlink" href="#string-methods" title="永久链接至标题">¶</a></h3>
+<p id="index-32">字符串实现了所有 <a class="reference internal" href="#typesseq-common"><span class="std std-ref">一般</span></a> 序列的操作，还额外提供了以下列出的一些附加方法。</p>
 <p>字符串还支持两种字符串格式化样式，一种提供了很大程度的灵活性和可定制性 (参阅 <a class="reference internal" href="#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a>, <a class="reference internal" href="string.html#formatstrings"><span class="std std-ref">格式字符串语法</span></a> 和 <a class="reference internal" href="string.html#string-formatting"><span class="std std-ref">自定义字符串格式化</span></a>) 而另一种是基于 C <code class="docutils literal notranslate"><span class="pre">printf</span></code> 样式的格式化，它可处理的类型范围较窄，并且更难以正确使用，但对于它可处理的情况往往会更为快速 (<a class="reference internal" href="#old-string-formatting"><span class="std std-ref">printf 风格的字符串格式化</span></a>)。</p>
 <p>标准库的 <a class="reference internal" href="text.html#textservices"><span class="std std-ref">文本处理服务</span></a> 部分涵盖了许多其他模块，提供各种文本相关工具（例如包含于 <a class="reference internal" href="re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块中的正则表达式支持）。</p>
 <dl class="py method">
@@ -1630,7 +1635,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </div>
 </dd></dl>
 
-<span class="target" id="index-32"></span><dl class="py method">
+<span class="target" id="index-33"></span><dl class="py method">
 <dt class="sig sig-object py" id="str.splitlines">
 <span class="sig-prename descclassname"><span class="pre">str.</span></span><span class="sig-name descname"><span class="pre">splitlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keepends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#str.splitlines" title="永久链接至目标">¶</a></dt>
 <dd><p>返回由原字符串中各行组成的列表，在行边界的位置拆分。 结果列表中不包含行边界，除非给出了 <em>keepends</em> 且为真值。</p>
@@ -1795,13 +1800,13 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="printf-style-string-formatting">
 <span id="old-string-formatting"></span><h3><code class="docutils literal notranslate"><span class="pre">printf</span></code> 风格的字符串格式化<a class="headerlink" href="#printf-style-string-formatting" title="永久链接至标题">¶</a></h3>
-<div class="admonition note" id="index-33">
+<div class="admonition note" id="index-34">
 <p class="admonition-title">注解</p>
 <p>此处介绍的格式化操作具有多种怪异特性，可能导致许多常见错误（例如无法正确显示元组和字典）。 使用较新的 <a class="reference internal" href="../reference/lexical_analysis.html#f-strings"><span class="std std-ref">格式化字符串字面值</span></a>，<a class="reference internal" href="#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> 接口或 <a class="reference internal" href="string.html#template-strings"><span class="std std-ref">模板字符串</span></a> 有助于避免这样的错误。 这些替代方案中的每一种都更好地权衡并提供了简单、灵活以及可扩展性优势。</p>
 </div>
 <p>字符串具有一种特殊的内置操作：使用 <code class="docutils literal notranslate"><span class="pre">%</span></code> (取模) 运算符。 这也被称为字符串的 <em>格式化</em> 或 <em>插值</em> 运算符。 对于 <code class="docutils literal notranslate"><span class="pre">format</span> <span class="pre">%</span> <span class="pre">values</span></code> (其中 <em>format</em> 为一个字符串)，在 <em>format</em> 中的 <code class="docutils literal notranslate"><span class="pre">%</span></code> 转换标记符将被替换为零个或多个 <em>values</em> 条目。 其效果类似于在 C 语言中使用 <code class="xref c c-func docutils literal notranslate"><span class="pre">sprintf()</span></code>。</p>
 <p>如果 <em>format</em> 要求一个单独参数，则 <em>values</em> 可以为一个非元组对象。 <a class="footnote-reference brackets" href="#id16" id="id10">5</a>  否则的话，<em>values</em> 必须或者是一个包含项数与格式字符串中指定的转换符项数相同的元组，或者是一个单独映射对象（例如字典）。</p>
-<p id="index-34">转换标记符包含两个或更多字符并具有以下组成，且必须遵循此处规定的顺序：</p>
+<p id="index-35">转换标记符包含两个或更多字符并具有以下组成，且必须遵循此处规定的顺序：</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">'%'</span></code> 字符，用于标记转换符的起始。</p></li>
 <li><p>映射键（可选），由加圆括号的字符序列组成 (例如 <code class="docutils literal notranslate"><span class="pre">(somename)</span></code>)。</p></li>
@@ -1819,7 +1824,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </div>
 <p>在此情况下格式中不能出现 <code class="docutils literal notranslate"><span class="pre">*</span></code> 标记符（因其需要一个序列类的参数列表）。</p>
 <p>转换旗标为：</p>
-<table class="docutils align-default" id="index-35">
+<table class="docutils align-default" id="index-36">
 <colgroup>
 <col style="width: 12%" />
 <col style="width: 88%" />
@@ -1943,7 +1948,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <p>小数点前后的有效数码位数由精度决定，默认为 6。</p>
 </li>
 <li><p>如果精度为 <code class="docutils literal notranslate"><span class="pre">N</span></code>，输出将截短为 <code class="docutils literal notranslate"><span class="pre">N</span></code> 个字符。</p></li>
-<li><p>参见 <span class="target" id="index-72"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0237"><strong>PEP 237</strong></a>。</p></li>
+<li><p>参见 <span class="target" id="index-73"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0237"><strong>PEP 237</strong></a>。</p></li>
 </ol>
 <p>由于 Python 字符串显式指明长度，<code class="docutils literal notranslate"><span class="pre">%s</span></code> 转换不会将 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code> 视为字符串的结束。</p>
 <div class="versionchanged">
@@ -1952,12 +1957,12 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 </section>
 <section id="binary-sequence-types-bytes-bytearray-memoryview">
-<span id="binaryseq"></span><span id="index-37"></span><h2>二进制序列类型 --- <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>, <a class="reference internal" href="#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a><a class="headerlink" href="#binary-sequence-types-bytes-bytearray-memoryview" title="永久链接至标题">¶</a></h2>
-<p id="index-38">操作二进制数据的核心内置类型是 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>。 它们由 <a class="reference internal" href="#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a> 提供支持，该对象使用 <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">缓冲区协议</span></a> 来访问其他二进制对象所在内存，不需要创建对象的副本。</p>
+<span id="binaryseq"></span><span id="index-38"></span><h2>二进制序列类型 --- <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>, <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>, <a class="reference internal" href="#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a><a class="headerlink" href="#binary-sequence-types-bytes-bytearray-memoryview" title="永久链接至标题">¶</a></h2>
+<p id="index-39">操作二进制数据的核心内置类型是 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>。 它们由 <a class="reference internal" href="#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a> 提供支持，该对象使用 <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">缓冲区协议</span></a> 来访问其他二进制对象所在内存，不需要创建对象的副本。</p>
 <p><a class="reference internal" href="array.html#module-array" title="array: Space efficient arrays of uniformly typed numeric values."><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code></a> 模块支持高效地存储基本数据类型，例如 32 位整数和 IEEE754 双精度浮点值。</p>
 <section id="bytes-objects">
 <span id="typebytes"></span><h3>bytes 对象<a class="headerlink" href="#bytes-objects" title="永久链接至标题">¶</a></h3>
-<p id="index-39">bytes 对象是由单个字节构成的不可变序列。 由于许多主要二进制协议都基于 ASCII 文本编码，因此 bytes 对象提供了一些仅在处理 ASCII 兼容数据时可用，并且在许多特性上与字符串对象紧密相关的方法。</p>
+<p id="index-40">bytes 对象是由单个字节构成的不可变序列。 由于许多主要二进制协议都基于 ASCII 文本编码，因此 bytes 对象提供了一些仅在处理 ASCII 兼容数据时可用，并且在许多特性上与字符串对象紧密相关的方法。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="bytes">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">bytes</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">source</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">encoding</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">errors</span></em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#bytes" title="永久链接至目标">¶</a></dt>
@@ -2029,7 +2034,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="bytearray-objects">
 <span id="typebytearray"></span><h3>bytearray 对象<a class="headerlink" href="#bytearray-objects" title="永久链接至标题">¶</a></h3>
-<p id="index-40"><a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 对象是 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象的可变对应物。</p>
+<p id="index-41"><a class="reference internal" href="#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 对象是 <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象的可变对应物。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="bytearray">
 <em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">bytearray</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">source</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">encoding</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">errors</span></em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#bytearray" title="永久链接至目标">¶</a></dt>
@@ -2080,7 +2085,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="bytes-and-bytearray-operations">
 <span id="bytes-methods"></span><h3>bytes 和 bytearray 操作<a class="headerlink" href="#bytes-and-bytearray-operations" title="永久链接至标题">¶</a></h3>
-<p id="index-41">bytes 和 bytearray 对象都支持 <a class="reference internal" href="#typesseq-common"><span class="std std-ref">通用</span></a> 序列操作。 它们不仅能与相同类型的操作数，也能与任何 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> 进行互操作。 由于这样的灵活性，它们可以在操作中自由地混合而不会导致错误。 但是，操作结果的返回值类型可能取决于操作数的顺序。</p>
+<p id="index-42">bytes 和 bytearray 对象都支持 <a class="reference internal" href="#typesseq-common"><span class="std std-ref">通用</span></a> 序列操作。 它们不仅能与相同类型的操作数，也能与任何 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> 进行互操作。 由于这样的灵活性，它们可以在操作中自由地混合而不会导致错误。 但是，操作结果的返回值类型可能取决于操作数的顺序。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>bytes 和 bytearray 对象的方法不接受字符串作为其参数，就像字符串的方法不接受 bytes 对象作为其参数一样。 例如，你必须使用以下写法:</p>
@@ -2618,7 +2623,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </div>
 </dd></dl>
 
-<span class="target" id="index-42"></span><dl class="py method">
+<span class="target" id="index-43"></span><dl class="py method">
 <dt class="sig sig-object py" id="bytes.splitlines">
 <span class="sig-prename descclassname"><span class="pre">bytes.</span></span><span class="sig-name descname"><span class="pre">splitlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keepends</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#bytes.splitlines" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="bytearray.splitlines">
@@ -2734,13 +2739,13 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="printf-style-bytes-formatting">
 <span id="bytes-formatting"></span><h3><code class="docutils literal notranslate"><span class="pre">printf</span></code> 风格的字节串格式化<a class="headerlink" href="#printf-style-bytes-formatting" title="永久链接至标题">¶</a></h3>
-<div class="admonition note" id="index-43">
+<div class="admonition note" id="index-44">
 <p class="admonition-title">注解</p>
 <p>此处介绍的格式化操作具有多种怪异特性，可能导致许多常见错误（例如无法正确显示元组和字典）。 如果要打印的值可能为元组或字典，请将其放入一个元组中。</p>
 </div>
 <p>字节串对象 (<code class="docutils literal notranslate"><span class="pre">bytes</span></code>/<code class="docutils literal notranslate"><span class="pre">bytearray</span></code>) 具有一种特殊的内置操作：使用 <code class="docutils literal notranslate"><span class="pre">%</span></code> (取模) 运算符。 这也被称为字节串的 <em>格式化</em> 或 <em>插值</em> 运算符。 对于 <code class="docutils literal notranslate"><span class="pre">format</span> <span class="pre">%</span> <span class="pre">values</span></code> (其中 <em>format</em> 为一个字节串对象)，在 <em>format</em> 中的 <code class="docutils literal notranslate"><span class="pre">%</span></code> 转换标记符将被替换为零个或多个 <em>values</em> 条目。 其效果类似于在 C 语言中使用 <code class="xref c c-func docutils literal notranslate"><span class="pre">sprintf()</span></code>。</p>
 <p>如果 <em>format</em> 要求一个单独参数，则 <em>values</em> 可以为一个非元组对象。 <a class="footnote-reference brackets" href="#id16" id="id11">5</a>  否则的话，<em>values</em> 必须或是是一个包含项数与格式字节串对象中指定的转换符项数相同的元组，或者是一个单独的映射对象（例如元组）。</p>
-<p id="index-44">转换标记符包含两个或更多字符并具有以下组成，且必须遵循此处规定的顺序：</p>
+<p id="index-45">转换标记符包含两个或更多字符并具有以下组成，且必须遵循此处规定的顺序：</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">'%'</span></code> 字符，用于标记转换符的起始。</p></li>
 <li><p>映射键（可选），由加圆括号的字符序列组成 (例如 <code class="docutils literal notranslate"><span class="pre">(somename)</span></code>)。</p></li>
@@ -2758,7 +2763,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </div>
 <p>在此情况下格式中不能出现 <code class="docutils literal notranslate"><span class="pre">*</span></code> 标记符（因其需要一个序列类的参数列表）。</p>
 <p>转换旗标为：</p>
-<table class="docutils align-default" id="index-45">
+<table class="docutils align-default" id="index-46">
 <colgroup>
 <col style="width: 12%" />
 <col style="width: 88%" />
@@ -2888,7 +2893,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <li><p>如果精度为 <code class="docutils literal notranslate"><span class="pre">N</span></code>，输出将截短为 <code class="docutils literal notranslate"><span class="pre">N</span></code> 个字符。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">b'%s'</span></code> 已弃用，但在 3.x 系列中将不会被移除。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">b'%r'</span></code> 已弃用，但在 3.x 系列中将不会被移除。</p></li>
-<li><p>参见 <span class="target" id="index-73"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0237"><strong>PEP 237</strong></a>。</p></li>
+<li><p>参见 <span class="target" id="index-74"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0237"><strong>PEP 237</strong></a>。</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
@@ -2896,7 +2901,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-74"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0461"><strong>PEP 461</strong></a> - 为 bytes 和 bytearray 添加 % 格式化</p>
+<p><span class="target" id="index-75"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0461"><strong>PEP 461</strong></a> - 为 bytes 和 bytearray 添加 % 格式化</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
@@ -2979,7 +2984,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <dl class="py method">
 <dt class="sig sig-object py" id="memoryview.__eq__">
 <span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exporter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memoryview.__eq__" title="永久链接至目标">¶</a></dt>
-<dd><p>memoryview 与 <span class="target" id="index-75"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a> 中的导出器这两者如果形状相同，并且如果当使用 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 语法解读操作数的相应格式代码时所有对应值都相同，则它们就是等价的。</p>
+<dd><p>memoryview 与 <span class="target" id="index-76"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3118"><strong>PEP 3118</strong></a> 中的导出器这两者如果形状相同，并且如果当使用 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 语法解读操作数的相应格式代码时所有对应值都相同，则它们就是等价的。</p>
 <p>对于 <a class="reference internal" href="#memoryview.tolist" title="memoryview.tolist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tolist()</span></code></a> 当前所支持的 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 格式字符串子集，如果 <code class="docutils literal notranslate"><span class="pre">v.tolist()</span> <span class="pre">==</span> <span class="pre">w.tolist()</span></code> 则 <code class="docutils literal notranslate"><span class="pre">v</span></code> 和 <code class="docutils literal notranslate"><span class="pre">w</span></code> 相等:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
@@ -3356,7 +3361,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="set-types-set-frozenset">
 <span id="types-set"></span><h2>集合类型 --- <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a>, <a class="reference internal" href="#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a><a class="headerlink" href="#set-types-set-frozenset" title="永久链接至标题">¶</a></h2>
-<p id="index-49"><em class="dfn">set</em> 对象是由具有唯一性的 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 对象所组成的无序多项集。 常见的用途包括成员检测、从序列中去除重复项以及数学中的集合类计算，例如交集、并集、差集与对称差集等等。 （关于其他容器对象请参看 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference internal" href="#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> 与 <a class="reference internal" href="#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 等内置类，以及 <a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> 模块。）</p>
+<p id="index-50"><em class="dfn">set</em> 对象是由具有唯一性的 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 对象所组成的无序多项集。 常见的用途包括成员检测、从序列中去除重复项以及数学中的集合类计算，例如交集、并集、差集与对称差集等等。 （关于其他容器对象请参看 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference internal" href="#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> 与 <a class="reference internal" href="#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 等内置类，以及 <a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> 模块。）</p>
 <p>与其他多项集一样，集合也支持 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">set</span></code>, <code class="docutils literal notranslate"><span class="pre">len(set)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">set</span></code>。 作为一种无序的多项集，集合并不记录元素位置或插入顺序。 相应地，集合不支持索引、切片或其他序列类的操作。</p>
 <p>目前有两种内置集合类型，<a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 和 <a class="reference internal" href="#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a>。 <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 类型是可变的 --- 其内容可以使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">remove()</span></code> 这样的方法来改变。 由于是可变类型，它没有哈希值，且不能被用作字典的键或其他集合的元素。 <a class="reference internal" href="#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">frozenset</span></code></a> 类型是不可变并且为 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> --- 其内容在被创建后不能再改变；因此它可以被用作字典的键或其他集合的元素。</p>
 <p>除了可以使用 <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 构造器，非空的 set (不是 frozenset) 还可以通过将以逗号分隔的元素列表包含于花括号之内来创建，例如: <code class="docutils literal notranslate"><span class="pre">{'jack',</span> <span class="pre">'sjoerd'}</span></code>。</p>
@@ -3541,7 +3546,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="mapping-types-dict">
 <span id="typesmapping"></span><h2>映射类型 --- <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a><a class="headerlink" href="#mapping-types-dict" title="永久链接至标题">¶</a></h2>
-<p id="index-50"><a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a> 对象会将 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 值映射到任意对象。 映射属于可变对象。 目前仅有一种标准映射类型 <em class="dfn">字典</em>。 （关于其他容器对象请参看 <a class="reference internal" href="#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 与 <a class="reference internal" href="#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 等内置类，以及 <a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> 模块。）</p>
+<p id="index-51"><a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a> 对象会将 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 值映射到任意对象。 映射属于可变对象。 目前仅有一种标准映射类型 <em class="dfn">字典</em>。 （关于其他容器对象请参看 <a class="reference internal" href="#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference internal" href="#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> 与 <a class="reference internal" href="#tuple" title="tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a> 等内置类，以及 <a class="reference internal" href="collections.html#module-collections" title="collections: Container datatypes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections</span></code></a> 模块。）</p>
 <p>字典的键 <em>几乎</em> 可以是任何值。 非 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 的值，即包含列表、字典或其他可变类型的值（此类对象基于值而非对象标识进行比较）不可用作键。 数字类型用作键时遵循数字比较的一般规则：如果两个数值相等 (例如 <code class="docutils literal notranslate"><span class="pre">1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">1.0</span></code>) 则两者可以被用来索引同一字典条目。 （但是请注意，由于计算机对于浮点数存储的只是近似值，因此将其用作字典键是不明智的。）</p>
 <p>字典可以通过将以逗号分隔的 <code class="docutils literal notranslate"><span class="pre">键:</span> <span class="pre">值</span></code> 对列表包含于花括号之内来创建，例如: <code class="docutils literal notranslate"><span class="pre">{'jack':</span> <span class="pre">4098,</span> <span class="pre">'sjoerd':</span> <span class="pre">4127}</span></code> 或 <code class="docutils literal notranslate"><span class="pre">{4098:</span> <span class="pre">'jack',</span> <span class="pre">4127:</span> <span class="pre">'sjoerd'}</span></code>，也可以通过 <a class="reference internal" href="#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 构造器来创建。</p>
 <dl class="py class">
@@ -3589,7 +3594,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">d[key]</span></span></dt>
 <dd><p>返回 <em>d</em> 中以 <em>key</em> 为键的项。 如果映射中不存在 <em>key</em> 则会引发 <a class="reference internal" href="exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。</p>
-<p id="index-51">如果字典的子类定义了方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code> 并且 <em>key</em> 不存在，则 <code class="docutils literal notranslate"><span class="pre">d[key]</span></code> 操作将调用该方法并附带键 <em>key</em> 作为参数。 <code class="docutils literal notranslate"><span class="pre">d[key]</span></code> 随后将返回或引发 <code class="docutils literal notranslate"><span class="pre">__missing__(key)</span></code> 调用所返回或引发的任何对象或异常。 没有其他操作或方法会发起调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code>。 如果未定义 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code>，则会引发 <a class="reference internal" href="exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code> 必须是一个方法；它不能是一个实例变量:</p>
+<p id="index-52">如果字典的子类定义了方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code> 并且 <em>key</em> 不存在，则 <code class="docutils literal notranslate"><span class="pre">d[key]</span></code> 操作将调用该方法并附带键 <em>key</em> 作为参数。 <code class="docutils literal notranslate"><span class="pre">d[key]</span></code> 随后将返回或引发 <code class="docutils literal notranslate"><span class="pre">__missing__(key)</span></code> 调用所返回或引发的任何对象或异常。 没有其他操作或方法会发起调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code>。 如果未定义 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code>，则会引发 <a class="reference internal" href="exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__missing__()</span></code> 必须是一个方法；它不能是一个实例变量:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Counter</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__missing__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="k">return</span> <span class="mi">0</span>
@@ -3868,7 +3873,7 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 </section>
 <section id="context-manager-types">
 <span id="typecontextmanager"></span><h2>上下文管理器类型<a class="headerlink" href="#context-manager-types" title="永久链接至标题">¶</a></h2>
-<p id="index-52">Python 的 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句支持通过上下文管理器所定义的运行时上下文这一概念。 此对象的实现使用了一对专门方法，允许用户自定义类来定义运行时上下文，在语句体被执行前进入该上下文，并在语句执行完毕时退出该上下文：</p>
+<p id="index-53">Python 的 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句支持通过上下文管理器所定义的运行时上下文这一概念。 此对象的实现使用了一对专门方法，允许用户自定义类来定义运行时上下文，在语句体被执行前进入该上下文，并在语句执行完毕时退出该上下文：</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="contextmanager.__enter__">
 <span class="sig-prename descclassname"><span class="pre">contextmanager.</span></span><span class="sig-name descname"><span class="pre">__enter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contextmanager.__enter__" title="永久链接至目标">¶</a></dt>
@@ -3896,10 +3901,10 @@ undecorated generator function.</p>
 </section>
 <section id="type-annotation-types-generic-alias-union">
 <h2>类型注解的类型 --- <a class="reference internal" href="#types-genericalias"><span class="std std-ref">Generic Alias</span></a> 、 <a class="reference internal" href="#types-union"><span class="std std-ref">Union</span></a><a class="headerlink" href="#type-annotation-types-generic-alias-union" title="永久链接至标题">¶</a></h2>
-<p id="index-53"><a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a> 的内置类型为 <a class="reference internal" href="#types-genericalias"><span class="std std-ref">Generic Alias</span></a> 和 <a class="reference internal" href="#types-union"><span class="std std-ref">Union</span></a>。</p>
+<p id="index-54"><a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a> 的内置类型为 <a class="reference internal" href="#types-genericalias"><span class="std std-ref">Generic Alias</span></a> 和 <a class="reference internal" href="#types-union"><span class="std std-ref">Union</span></a>。</p>
 <section id="generic-alias-type">
 <span id="types-genericalias"></span><h3>GenericAlias 类型<a class="headerlink" href="#generic-alias-type" title="永久链接至标题">¶</a></h3>
-<p id="index-54"><code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 对象是通过对类（通常是容器类）作下标来创建的，如 <code class="docutils literal notranslate"><span class="pre">list[int]</span></code> 。主要用于 <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a>。</p>
+<p id="index-55"><code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 对象是通过对类（通常是容器类）作下标来创建的，如 <code class="docutils literal notranslate"><span class="pre">list[int]</span></code> 。主要用于 <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a>。</p>
 <p>通常，容器对象的 <a class="reference internal" href="../reference/expressions.html#subscriptions"><span class="std std-ref">抽取</span></a> 操作会调用该对象的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> 方法。 但是，对某些容器类执行抽取操作可能会改去调用该类的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 类方法。 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 类方法应当会返回一个 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 对象。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
@@ -4054,7 +4059,7 @@ undecorated generator function.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <ul class="simple">
-<li><p><span class="target" id="index-76"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> —— “标准集合类中的类型提示泛型”</p></li>
+<li><p><span class="target" id="index-77"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> —— “标准集合类中的类型提示泛型”</p></li>
 <li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> —— 用于实现应用参数后的泛型。</p></li>
 <li><p><a class="reference internal" href="typing.html#generics"><span class="std std-ref">泛型（Generic）</span></a> —— <a class="reference internal" href="typing.html#module-typing" title="typing: Support for type hints (see :pep:`484`)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">typing</span></code></a> 模块中的泛型。</p></li>
 </ul>
@@ -4066,7 +4071,7 @@ undecorated generator function.</p>
 </section>
 <section id="union-type">
 <span id="types-union"></span><h3>union 类型<a class="headerlink" href="#union-type" title="永久链接至标题">¶</a></h3>
-<p id="index-57">联合对象包含了在多个 <a class="reference internal" href="#bltin-type-objects"><span class="std std-ref">类型对象</span></a> 上执行 <code class="docutils literal notranslate"><span class="pre">|</span></code> (按位或) 运算后的值。 这些类型主要用于 <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">类型标注</span></a>。与 <a class="reference internal" href="typing.html#typing.Union" title="typing.Union"><code class="xref py py-data docutils literal notranslate"><span class="pre">typing.Union</span></code></a> 相比，联合类型表达式可以实现更简洁的类型提示语法。</p>
+<p id="index-58">联合对象包含了在多个 <a class="reference internal" href="#bltin-type-objects"><span class="std std-ref">类型对象</span></a> 上执行 <code class="docutils literal notranslate"><span class="pre">|</span></code> (按位或) 运算后的值。 这些类型主要用于 <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">类型标注</span></a>。与 <a class="reference internal" href="typing.html#typing.Union" title="typing.Union"><code class="xref py py-data docutils literal notranslate"><span class="pre">typing.Union</span></code></a> 相比，联合类型表达式可以实现更简洁的类型提示语法。</p>
 <dl class="describe">
 <dt class="sig sig-object">
 <span class="sig-name descname"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span> <span class="pre">|</span> <span class="pre">...</span></span></dt>
@@ -4161,7 +4166,7 @@ undecorated generator function.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-77"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0604"><strong>PEP 604</strong></a> —— 提出了 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span></code> 语法和 union 类型。</p>
+<p><span class="target" id="index-78"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0604"><strong>PEP 604</strong></a> —— 提出了 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span></code> 语法和 union 类型。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
@@ -4189,7 +4194,7 @@ undecorated generator function.</p>
 </section>
 <section id="methods">
 <span id="typesmethods"></span><h3>方法<a class="headerlink" href="#methods" title="永久链接至标题">¶</a></h3>
-<p id="index-59">方法是使用属性表示法来调用的函数。 存在两种形式：内置方法（例如列表的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> 方法）和类实例方法。 内置方法由支持它们的类型来描述。</p>
+<p id="index-60">方法是使用属性表示法来调用的函数。 存在两种形式：内置方法（例如列表的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> 方法）和类实例方法。 内置方法由支持它们的类型来描述。</p>
 <p>如果你通过一个实例来访问方法（即定义在类命名空间内的函数），你会得到一个特殊对象: <em class="dfn">绑定方法</em> (或称 <em class="dfn">实例方法</em>) 对象。 当被调用时，它会将 <code class="docutils literal notranslate"><span class="pre">self</span></code> 参数添加到参数列表。 绑定方法具有两个特殊的只读属性: <code class="docutils literal notranslate"><span class="pre">m.__self__</span></code> 操作该方法的对象，而 <code class="docutils literal notranslate"><span class="pre">m.__func__</span></code> 是实现该方法的函数。 调用 <code class="docutils literal notranslate"><span class="pre">m(arg-1,</span> <span class="pre">arg-2,</span> <span class="pre">...,</span> <span class="pre">arg-n)</span></code> 完全等价于调用 <code class="docutils literal notranslate"><span class="pre">m.__func__(m.__self__,</span> <span class="pre">arg-1,</span> <span class="pre">arg-2,</span> <span class="pre">...,</span> <span class="pre">arg-n)</span></code>。</p>
 <p>与函数对象类似，绑定方法对象也支持获取任意属性。 但是，由于方法属性实际上保存于下层的函数对象中 (<code class="docutils literal notranslate"><span class="pre">meth.__func__</span></code>)，因此不允许设置绑定方法的方法属性。 尝试设置方法的属性将会导致引发 <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>。 想要设置方法属性，你必须在下层的函数对象中显式地对其进行设置:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
@@ -4209,15 +4214,15 @@ undecorated generator function.</p>
 <p>更多信息请参阅 <a class="reference internal" href="../reference/datamodel.html#types"><span class="std std-ref">标准类型层级结构</span></a>。</p>
 </section>
 <section id="code-objects">
-<span id="bltin-code-objects"></span><span id="index-60"></span><h3>代码对象<a class="headerlink" href="#code-objects" title="永久链接至标题">¶</a></h3>
-<p id="index-61">代码对象被具体实现用来表示“伪编译”的可执行 Python 代码，例如一个函数体。 它们不同于函数对象，因为它们不包含对其全局执行环境的引用。 代码对象由内置的 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 函数返回，并可通过从函数对象的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">__code__</span></code> 属性从中提取。 另请参阅 <a class="reference internal" href="code.html#module-code" title="code: Facilities to implement read-eval-print loops."><code class="xref py py-mod docutils literal notranslate"><span class="pre">code</span></code></a> 模块。</p>
+<span id="bltin-code-objects"></span><span id="index-61"></span><h3>代码对象<a class="headerlink" href="#code-objects" title="永久链接至标题">¶</a></h3>
+<p id="index-62">代码对象被具体实现用来表示“伪编译”的可执行 Python 代码，例如一个函数体。 它们不同于函数对象，因为它们不包含对其全局执行环境的引用。 代码对象由内置的 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 函数返回，并可通过从函数对象的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">__code__</span></code> 属性从中提取。 另请参阅 <a class="reference internal" href="code.html#module-code" title="code: Facilities to implement read-eval-print loops."><code class="xref py py-mod docutils literal notranslate"><span class="pre">code</span></code></a> 模块。</p>
 <p>访问 <code class="docutils literal notranslate"><span class="pre">__code__</span></code> 会触发 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">object.__getattr__</span></code>，参数为 <code class="docutils literal notranslate"><span class="pre">obj</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&quot;__code__&quot;</span></code>。</p>
-<p id="index-62">可以通过将代码对象（而非源码字符串）传给 <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> 或 <a class="reference internal" href="functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 内置函数来执行或求值。</p>
+<p id="index-63">可以通过将代码对象（而非源码字符串）传给 <a class="reference internal" href="functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> 或 <a class="reference internal" href="functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 内置函数来执行或求值。</p>
 <p>更多信息请参阅 <a class="reference internal" href="../reference/datamodel.html#types"><span class="std std-ref">标准类型层级结构</span></a>。</p>
 </section>
 <section id="type-objects">
 <span id="bltin-type-objects"></span><h3>类型对象<a class="headerlink" href="#type-objects" title="永久链接至标题">¶</a></h3>
-<p id="index-63">类型对象表示各种对象类型。 对象的类型可通过内置函数 <a class="reference internal" href="functions.html#type" title="type"><code class="xref py py-func docutils literal notranslate"><span class="pre">type()</span></code></a> 来获取。 类型没有特殊的操作。 标准库模块 <a class="reference internal" href="types.html#module-types" title="types: Names for built-in types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code></a> 定义了所有标准内置类型的名称。</p>
+<p id="index-64">类型对象表示各种对象类型。 对象的类型可通过内置函数 <a class="reference internal" href="functions.html#type" title="type"><code class="xref py py-func docutils literal notranslate"><span class="pre">type()</span></code></a> 来获取。 类型没有特殊的操作。 标准库模块 <a class="reference internal" href="types.html#module-types" title="types: Names for built-in types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code></a> 定义了所有标准内置类型的名称。</p>
 <p>类型以这样的写法来表示: <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'int'&gt;</span></code>。</p>
 </section>
 <section id="the-null-object">
@@ -4226,7 +4231,7 @@ undecorated generator function.</p>
 <p>该对象的写法为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 </section>
 <section id="the-ellipsis-object">
-<span id="bltin-ellipsis-object"></span><span id="index-64"></span><h3>省略符对象<a class="headerlink" href="#the-ellipsis-object" title="永久链接至标题">¶</a></h3>
+<span id="bltin-ellipsis-object"></span><span id="index-65"></span><h3>省略符对象<a class="headerlink" href="#the-ellipsis-object" title="永久链接至标题">¶</a></h3>
 <p>此对象常被用于切片 (参见 <a class="reference internal" href="../reference/expressions.html#slicings"><span class="std std-ref">切片</span></a>)。 它不支持任何特殊的操作。 省略符对象只有一种值 <a class="reference internal" href="constants.html#Ellipsis" title="Ellipsis"><code class="xref py py-const docutils literal notranslate"><span class="pre">Ellipsis</span></code></a> (这是个内置名称)。 <code class="docutils literal notranslate"><span class="pre">type(Ellipsis)()</span></code> 会生成 <a class="reference internal" href="constants.html#Ellipsis" title="Ellipsis"><code class="xref py py-const docutils literal notranslate"><span class="pre">Ellipsis</span></code></a> 单例。</p>
 <p>该对象的写法为 <code class="docutils literal notranslate"><span class="pre">Ellipsis</span></code> 或 <code class="docutils literal notranslate"><span class="pre">...</span></code>。</p>
 </section>
@@ -4238,7 +4243,7 @@ undecorated generator function.</p>
 <section id="boolean-values">
 <span id="bltin-boolean-values"></span><h3>布尔值<a class="headerlink" href="#boolean-values" title="永久链接至标题">¶</a></h3>
 <p>布尔值是两个常量对象 <code class="docutils literal notranslate"><span class="pre">False</span></code> 和 <code class="docutils literal notranslate"><span class="pre">True</span></code>。 它们被用来表示逻辑上的真假（不过其他值也可被当作真值或假值）。 在数字类的上下文中（例如被用作算术运算符的参数时），它们的行为分别类似于整数 0 和 1。 内置函数 <a class="reference internal" href="functions.html#bool" title="bool"><code class="xref py py-func docutils literal notranslate"><span class="pre">bool()</span></code></a> 可被用来将任意值转换为布尔值，只要该值可被解析为一个逻辑值（参见之前的 <a class="reference internal" href="#truth"><span class="std std-ref">逻辑值检测</span></a> 部分）。</p>
-<p id="index-65">该对象的写法分别为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 和 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
+<p id="index-66">该对象的写法分别为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 和 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
 </section>
 <section id="internal-objects">
 <span id="typesinternal"></span><h3>内部对象<a class="headerlink" href="#internal-objects" title="永久链接至标题">¶</a></h3>
@@ -4451,7 +4456,7 @@ undecorated generator function.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -4479,16 +4484,16 @@ undecorated generator function.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.

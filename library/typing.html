@@ -6,10 +6,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>typing --- 类型提示支持 &#8212; Python 3.11.0a3 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typing --- 类型提示支持 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2021.11.1" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
     
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a3 文档 中搜索"
+          title="在 Python 3.11.0a4 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -160,7 +160,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -701,7 +701,7 @@ that <code class="docutils literal notranslate"><span class="pre">LoggedVar[t]</
 <dt class="sig sig-object py" id="typing.Union">
 <span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Union</span></span><a class="headerlink" href="#typing.Union" title="永久链接至目标">¶</a></dt>
 <dd><p>Union type; <code class="docutils literal notranslate"><span class="pre">Union[X,</span> <span class="pre">Y]</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span></code> and means either X or Y.</p>
-<p>To define a union, use e.g. <code class="docutils literal notranslate"><span class="pre">Union[int,</span> <span class="pre">str]</span></code> or the shorthand <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code>.  Details:</p>
+<p>To define a union, use e.g. <code class="docutils literal notranslate"><span class="pre">Union[int,</span> <span class="pre">str]</span></code> or the shorthand <code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">|</span> <span class="pre">str</span></code>. Using that shorthand is recommended. Details:</p>
 <ul>
 <li><p>参数必须是某种类型，且至少有一个。</p></li>
 <li><p>联合类型之联合类型会被展平，例如：</p>
@@ -782,7 +782,7 @@ that <code class="docutils literal notranslate"><span class="pre">LoggedVar[t]</
 <p>例如，为了注释一个装饰器 <code class="docutils literal notranslate"><span class="pre">with_lock</span></code>，它为被装饰的函数提供了 <a class="reference internal" href="threading.html#threading.Lock" title="threading.Lock"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Lock</span></code></a>，<code class="docutils literal notranslate"><span class="pre">Concatenate</span></code> 可以用来表示 <code class="docutils literal notranslate"><span class="pre">with_lock</span></code> 期望一个可调用对象，该对象接收一个 <code class="docutils literal notranslate"><span class="pre">Lock</span></code> 作为第一个参数，并返回一个具有不同类型签名的可调用对象。 在这种情况下，<a class="reference internal" href="#typing.ParamSpec" title="typing.ParamSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParamSpec</span></code></a> 表示返回的可调用对象的参数类型取决于被传入的可调用程序的参数类型:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Concatenate</span><span class="p">,</span> <span class="n">ParamSpec</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Concatenate</span><span class="p">,</span> <span class="n">ParamSpec</span><span class="p">,</span> <span class="n">TypeVar</span>
 
 <span class="n">P</span> <span class="o">=</span> <span class="n">ParamSpec</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
 <span class="n">R</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;R&#39;</span><span class="p">)</span>
@@ -1957,6 +1957,14 @@ These types should be directly imported from <code class="docutils literal notra
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The decorator will now set the <code class="docutils literal notranslate"><span class="pre">__final__</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+on the decorated object. Thus, a check like
+<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">getattr(obj,</span> <span class="pre">&quot;__final__&quot;,</span> <span class="pre">False)</span></code> can be used at runtime
+to determine whether an object <code class="docutils literal notranslate"><span class="pre">obj</span></code> has been marked as final.
+If the decorated object does not support setting attributes,
+the decorator returns the object unchanged without raising an exception.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -2208,7 +2216,7 @@ a user, but may be used by introspection tools.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a3 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -2237,16 +2245,16 @@ a user, but may be used by introspection tools.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    See <a href="">History and License</a> for more information.
-    <br /><br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
 
     The Python Software Foundation is a non-profit corporation.
 <a href="https://www.python.org/psf/donations/">Please donate.</a>
 <br />
     <br />
 
-    最后更新于 1月 08, 2022.
-    <a href="https://docs.python.org/3/bugs.html">Found a bug</a>?
+    最后更新于 1月 16, 2022.
+    <a href="/bugs.html">Found a bug</a>?
     <br />
 
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
