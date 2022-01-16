@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-13 09:49+0800\n"
+"POT-Creation-Date: 2022-01-16 17:17+0800\n"
 "PO-Revision-Date: 2021-06-28 01:05+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
@@ -21,7 +21,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.9.0\n"
 
 #: ../../library/exceptions.rst:4
 msgid "Built-in Exceptions"
@@ -1132,11 +1132,98 @@ msgstr "与 :class:`bytes` 和 :class:`bytearray` 相关的警告的基类。"
 msgid "Base class for warnings related to resource usage."
 msgstr "资源使用相关警告的基类。"
 
-#: ../../library/exceptions.rst:856
+#: ../../library/exceptions.rst:855
+#, fuzzy
+msgid "Exception groups"
+msgstr "OS 异常"
+
+#: ../../library/exceptions.rst:857
+msgid ""
+"The following are used when it is necessary to raise multiple unrelated "
+"exceptions. They are part of the exception hierarchy so they can be "
+"handled with :keyword:`except` like all other exceptions. In addition, "
+"they are recognised by :keyword:`except*<except_star>`, which matches "
+"their subgroups based on the types of the contained exceptions."
+msgstr ""
+
+#: ../../library/exceptions.rst:866
+msgid ""
+"Both of these exception types wrap the exceptions in the sequence "
+"``excs``. The ``msg`` parameter must be a string. The difference between "
+"the two classes is that :exc:`BaseExceptionGroup` extends "
+":exc:`BaseException` and it can wrap any exception, while "
+":exc:`ExceptionGroup` extends :exc:`Exception` and it can only wrap "
+"subclasses of :exc:`Exception`. This design is so that ``except "
+"Exception`` catches an :exc:`ExceptionGroup` but not "
+":exc:`BaseExceptionGroup`."
+msgstr ""
+
+#: ../../library/exceptions.rst:874
+msgid ""
+"The :exc:`BaseExceptionGroup` constructor returns an "
+":exc:`ExceptionGroup` rather than a :exc:`BaseExceptionGroup` if all "
+"contained exceptions are :exc:`Exception` instances, so it can be used to"
+" make the selection automatic. The :exc:`ExceptionGroup` constructor, on "
+"the other hand, raises a :exc:`TypeError` if any contained exception is "
+"not an :exc:`Exception` subclass."
+msgstr ""
+
+#: ../../library/exceptions.rst:883
+msgid ""
+"Returns an exception group that contains only the exceptions from the "
+"current group that match *condition*, or ``None`` if the result is empty."
+msgstr ""
+
+#: ../../library/exceptions.rst:886
+msgid ""
+"The condition can be either a function that accepts an exception and "
+"returns true for those that should be in the subgroup, or it can be an "
+"exception type or a tuple of exception types, which is used to check for "
+"a match using the same check that is used in an ``except`` clause."
+msgstr ""
+
+#: ../../library/exceptions.rst:891
+msgid ""
+"The nesting structure of the current exception is preserved in the "
+"result, as are the values of its :attr:`message`, :attr:`__traceback__`, "
+":attr:`__cause__`, :attr:`__context__` and :attr:`__note__` fields. Empty"
+" nested groups are omitted from the result."
+msgstr ""
+
+#: ../../library/exceptions.rst:896
+msgid ""
+"The condition is checked for all exceptions in the nested exception "
+"group, including the top-level and any nested exception groups. If the "
+"condition is true for such an exception group, it is included in the "
+"result in full."
+msgstr ""
+
+#: ../../library/exceptions.rst:902
+msgid ""
+"Like :meth:`subgroup`, but returns the pair ``(match, rest)`` where "
+"``match`` is ``subgroup(condition)`` and ``rest`` is the remaining non-"
+"matching part."
+msgstr ""
+
+#: ../../library/exceptions.rst:908
+msgid ""
+"Returns an exception group with the same :attr:`message`, "
+":attr:`__traceback__`, :attr:`__cause__`, :attr:`__context__` and "
+":attr:`__note__` but which wraps the exceptions in ``excs``."
+msgstr ""
+
+#: ../../library/exceptions.rst:912
+msgid ""
+"This method is used by :meth:`subgroup` and :meth:`split`. A subclass "
+"needs to override it in order to make :meth:`subgroup` and :meth:`split` "
+"return instances of the subclass rather than :exc:`ExceptionGroup`. ::"
+msgstr ""
+
+#: ../../library/exceptions.rst:928
 msgid "Exception hierarchy"
 msgstr "异常层次结构"
 
-#: ../../library/exceptions.rst:858
+#: ../../library/exceptions.rst:930
 msgid "The class hierarchy for built-in exceptions is:"
 msgstr "内置异常的类层级结构如下："
 

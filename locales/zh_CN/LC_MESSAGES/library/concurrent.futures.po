@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-21 00:25+0800\n"
+"POT-Creation-Date: 2022-01-16 17:17+0800\n"
 "PO-Revision-Date: 2021-06-28 00:57+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
@@ -22,7 +22,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.9.0\n"
 
 #: ../../library/concurrent.futures.rst:2
 msgid ":mod:`concurrent.futures` --- Launching parallel tasks"
@@ -63,8 +63,9 @@ msgid ""
 msgstr "抽象类提供异步执行调用方法。要通过它的子类调用，而不是直接调用。"
 
 #: ../../library/concurrent.futures.rst:33
+#, fuzzy
 msgid ""
-"Schedules the callable, *fn*, to be executed as ``fn(*args **kwargs)`` "
+"Schedules the callable, *fn*, to be executed as ``fn(*args, **kwargs)`` "
 "and returns a :class:`Future` object representing the execution of the "
 "callable. ::"
 msgstr ""
@@ -558,19 +559,21 @@ msgid "Module Functions"
 msgstr "模块函数"
 
 #: ../../library/concurrent.futures.rst:446
+#, fuzzy
 msgid ""
 "Wait for the :class:`Future` instances (possibly created by different "
-":class:`Executor` instances) given by *fs* to complete.  Returns a named "
-"2-tuple of sets.  The first set, named ``done``, contains the futures "
-"that completed (finished or cancelled futures) before the wait completed."
-"  The second set, named ``not_done``, contains the futures that did not "
-"complete (pending or running futures)."
+":class:`Executor` instances) given by *fs* to complete. Duplicate futures"
+" given to *fs* are removed and will be returned only once. Returns a "
+"named 2-tuple of sets.  The first set, named ``done``, contains the "
+"futures that completed (finished or cancelled futures) before the wait "
+"completed.  The second set, named ``not_done``, contains the futures that"
+" did not complete (pending or running futures)."
 msgstr ""
 "等待 *fs* 指定的 :class:`Future` 实例（可能由不同的 :class:`Executor` 实例创建）完成。 "
 "返回一个由集合构成的具名  2 元组。 第一个集合名称为 ``done``，包含在等待完成之前已完成的期程（包括正常结束或被取消的 future "
 "对象）。 第二个集合名称为 ``not_done``，包含未完成的 future 对象（包括挂起的或正在运行的 future 对象）。"
 
-#: ../../library/concurrent.futures.rst:453
+#: ../../library/concurrent.futures.rst:454
 msgid ""
 "*timeout* can be used to control the maximum number of seconds to wait "
 "before returning.  *timeout* can be an int or float.  If *timeout* is not"
@@ -579,48 +582,48 @@ msgstr ""
 "*timeout* 可以用来控制返回前最大的等待秒数。 *timeout* 可以为 int 或 float 类型。 如果 *timeout* "
 "未指定或为 ``None`` ，则不限制等待时间。"
 
-#: ../../library/concurrent.futures.rst:457
+#: ../../library/concurrent.futures.rst:458
 msgid ""
 "*return_when* indicates when this function should return.  It must be one"
 " of the following constants:"
 msgstr "*return_when* 指定此函数应在何时返回。它必须为以下常数之一:"
 
-#: ../../library/concurrent.futures.rst:463
+#: ../../library/concurrent.futures.rst:464
 msgid "Constant"
 msgstr "常量"
 
-#: ../../library/concurrent.futures.rst:463
+#: ../../library/concurrent.futures.rst:464
 msgid "Description"
 msgstr "描述"
 
-#: ../../library/concurrent.futures.rst:465
+#: ../../library/concurrent.futures.rst:466
 msgid ":const:`FIRST_COMPLETED`"
 msgstr ":const:`FIRST_COMPLETED`"
 
-#: ../../library/concurrent.futures.rst:465
+#: ../../library/concurrent.futures.rst:466
 msgid "The function will return when any future finishes or is cancelled."
 msgstr "函数将在任意可等待对象结束或取消时返回。"
 
-#: ../../library/concurrent.futures.rst:468
+#: ../../library/concurrent.futures.rst:469
 msgid ":const:`FIRST_EXCEPTION`"
 msgstr ":const:`FIRST_EXCEPTION`"
 
-#: ../../library/concurrent.futures.rst:468
+#: ../../library/concurrent.futures.rst:469
 msgid ""
 "The function will return when any future finishes by raising an "
 "exception.  If no future raises an exception then it is equivalent to "
 ":const:`ALL_COMPLETED`."
 msgstr "函数将在任意可等待对象因引发异常而结束时返回。当没有引发任何异常时它就相当于 :const:`ALL_COMPLETED`。"
 
-#: ../../library/concurrent.futures.rst:474
+#: ../../library/concurrent.futures.rst:475
 msgid ":const:`ALL_COMPLETED`"
 msgstr ":const:`ALL_COMPLETED`"
 
-#: ../../library/concurrent.futures.rst:474
+#: ../../library/concurrent.futures.rst:475
 msgid "The function will return when all futures finish or are cancelled."
 msgstr "函数将在所有可等待对象结束或取消时返回。"
 
-#: ../../library/concurrent.futures.rst:480
+#: ../../library/concurrent.futures.rst:481
 #, fuzzy
 msgid ""
 "Returns an iterator over the :class:`Future` instances (possibly created "
@@ -641,49 +644,49 @@ msgstr ""
 "秒之后结果仍不可用，则返回的迭代器将引发 :exc:`concurrent.futures.TimeoutError`。 *timeout* "
 "可以为整数或浮点数。 如果 *timeout* 未指定或为 ``None``，则不限制等待时间。"
 
-#: ../../library/concurrent.futures.rst:494
+#: ../../library/concurrent.futures.rst:495
 msgid ":pep:`3148` -- futures - execute computations asynchronously"
 msgstr ":pep:`3148` -- future 对象 - 异步执行指令。"
 
-#: ../../library/concurrent.futures.rst:494
+#: ../../library/concurrent.futures.rst:495
 msgid ""
 "The proposal which described this feature for inclusion in the Python "
 "standard library."
 msgstr "该提案描述了Python标准库中包含的这个特性。"
 
-#: ../../library/concurrent.futures.rst:499
+#: ../../library/concurrent.futures.rst:500
 msgid "Exception classes"
 msgstr "Exception 类"
 
-#: ../../library/concurrent.futures.rst:505
+#: ../../library/concurrent.futures.rst:506
 msgid "Raised when a future is cancelled."
 msgstr "future 对象被取消时会触发。"
 
-#: ../../library/concurrent.futures.rst:509
+#: ../../library/concurrent.futures.rst:510
 #, fuzzy
 msgid ""
 "A deprecated alias of :exc:`TimeoutError`, raised when a future operation"
 " exceeds the given timeout."
 msgstr "future 对象执行超出给定的超时数值时引发。"
 
-#: ../../library/concurrent.futures.rst:514
+#: ../../library/concurrent.futures.rst:515
 msgid "This class was made an alias of :exc:`TimeoutError`."
 msgstr ""
 
-#: ../../library/concurrent.futures.rst:519
+#: ../../library/concurrent.futures.rst:520
 msgid ""
 "Derived from :exc:`RuntimeError`, this exception class is raised when an "
 "executor is broken for some reason, and cannot be used to submit or "
 "execute new tasks."
 msgstr "当执行器被某些原因中断而且不能用来提交或执行新任务时就会被引发派生于 :exc:`RuntimeError` 的异常类。"
 
-#: ../../library/concurrent.futures.rst:527
+#: ../../library/concurrent.futures.rst:528
 msgid ""
 "Raised when an operation is performed on a future that is not allowed in "
 "the current state."
 msgstr "当某个操作在一个当前状态所不允许的 future 上执行时将被引发。"
 
-#: ../../library/concurrent.futures.rst:536
+#: ../../library/concurrent.futures.rst:537
 msgid ""
 "Derived from :exc:`~concurrent.futures.BrokenExecutor`, this exception "
 "class is raised when one of the workers of a :class:`ThreadPoolExecutor` "
@@ -692,7 +695,7 @@ msgstr ""
 "当 :class:`ThreadPoolExecutor` 中的其中一个工作者初始化失败时会引发派生于 "
 ":exc:`~concurrent.futures.BrokenExecutor` 的异常类。"
 
-#: ../../library/concurrent.futures.rst:546
+#: ../../library/concurrent.futures.rst:547
 msgid ""
 "Derived from :exc:`~concurrent.futures.BrokenExecutor` (formerly "
 ":exc:`RuntimeError`), this exception class is raised when one of the "
