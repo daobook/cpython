@@ -425,7 +425,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Something else&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>我们可以向一个模式添加 <code class="docutils literal notranslate"><span class="pre">if</span></code> 子句，称为“守护项”。 如果守护项为假值，则 <code class="docutils literal notranslate"><span class="pre">match</span></code> 将继续尝试下一个 case 语句块。 请注意值的捕获发生在守护项被求值之前。:</p>
+<p>我们可以向一个模式添加 <code class="docutils literal notranslate"><span class="pre">if</span></code> 子句，称为“守护项”（guard）。如果守护项为假值，则 <code class="docutils literal notranslate"><span class="pre">match</span></code> 将继续尝试下一个 case 语句块。 请注意值的捕获发生在守护项被求值之前</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">match</span> <span class="n">point</span><span class="p">:</span>
     <span class="k">case</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Y=X at </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -437,10 +437,7 @@
 <ul>
 <li><p>类似于解包赋值，元组和列表模式具有完全相同的含义并且实际上能匹配任意序列。 一个重要的例外是它们不能匹配迭代器或字符串。</p></li>
 <li><p>序列模式支持扩展解包操作: <code class="docutils literal notranslate"><span class="pre">[x,</span> <span class="pre">y,</span> <span class="pre">*rest]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">*rest)</span></code> 的作用类似于解包赋值。 在 <code class="docutils literal notranslate"><span class="pre">*</span></code> 之后的名称也可以为 <code class="docutils literal notranslate"><span class="pre">_</span></code>，因此 <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">*_)</span></code> 可以匹配包含至少两个条目的序列而不必绑定其余的条目。</p></li>
-<li><p>Mapping patterns: <code class="docutils literal notranslate"><span class="pre">{&quot;bandwidth&quot;:</span> <span class="pre">b,</span> <span class="pre">&quot;latency&quot;:</span> <span class="pre">l}</span></code> captures the
-<code class="docutils literal notranslate"><span class="pre">&quot;bandwidth&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;latency&quot;</span></code> values from a dictionary.  Unlike sequence
-patterns, extra keys are ignored.  An unpacking like <code class="docutils literal notranslate"><span class="pre">**rest</span></code> is also
-supported.  (But <code class="docutils literal notranslate"><span class="pre">**_</span></code> would be redundant, so it is not allowed.)</p></li>
+<li><p>映射模式： <code class="docutils literal notranslate"><span class="pre">{&quot;bandwidth&quot;:</span> <span class="pre">b,</span> <span class="pre">&quot;latency&quot;:</span> <span class="pre">l}</span></code> 从字典中获取 <code class="docutils literal notranslate"><span class="pre">&quot;bandwidth&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;latency&quot;</span></code> 的值。与序列模式不同，额外的键会被忽略。也支持像 <code class="docutils literal notranslate"><span class="pre">**rest</span></code> 这样的解包方式。（但是 <code class="docutils literal notranslate"><span class="pre">**_</span></code> 是多余的，所以不允许。）</p></li>
 <li><p>子模式可使用 <code class="docutils literal notranslate"><span class="pre">as</span></code> 关键字来捕获:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">case</span> <span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="k">as</span> <span class="n">p2</span><span class="p">):</span> <span class="o">...</span>
 </pre></div>
@@ -1029,7 +1026,7 @@ sketch : Cheese Shop Sketch
 <br />
     <br />
 
-    最后更新于 1月 16, 2022.
+    最后更新于 1月 17, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
