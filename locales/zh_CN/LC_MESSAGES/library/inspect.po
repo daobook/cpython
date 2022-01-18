@@ -45,7 +45,8 @@ msgid ""
 "all the information you need to display a detailed traceback."
 msgstr ""
 ":mod:`inspect` "
-"模块提供了一些有用的函数帮助获取对象的信息，例如模块、类、方法、函数、回溯、帧对象以及代码对象。例如它可以帮助你检查类的内容，获取某个方法的源代码，取得并格式化某个函数的参数列表，或者获取你需要显示的回溯的详细信息。"
+"模块提供了一些有用的函数帮助获取对象的信息，例如模块、类、方法、函数、回溯、帧对象以及代码对象。"
+"例如它可以帮助你检查类的内容，获取某个方法的源代码，取得并格式化某个函数的实参列表，或者获取你需要显示的回溯的详细信息。"
 
 #: ../../library/inspect.rst:21
 msgid ""
@@ -67,7 +68,7 @@ msgid ""
 "find the following special attributes:"
 msgstr ""
 ":func:`getmembers` 函数获取对象的成员，例如类或模块。函数名以\"is\"开始的函数主要作为 "
-":func:`getmembers` 的第2个参数使用。它们也可用于判定某对象是否有如下的特殊属性:"
+":func:`getmembers` 的第 2 个实参使用。它们也可用于判定某对象是否有如下的特殊属性:"
 
 #: ../../library/inspect.rst:41
 msgid "Type"
@@ -190,7 +191,7 @@ msgstr "__defaults__"
 
 #: ../../library/inspect.rst:87
 msgid "tuple of any default values for positional or keyword parameters"
-msgstr "所有位置或关键字参数的默认值的元组"
+msgstr "所有位置或关键字形参的默认值的元组"
 
 #: ../../library/inspect.rst:91
 msgid "__kwdefaults__"
@@ -470,7 +471,7 @@ msgstr "co_varnames"
 
 #: ../../library/inspect.rst:202
 msgid "tuple of names of arguments and local variables"
-msgstr "参数名和局部变量的元组"
+msgstr "实参名和局部变量的元组"
 
 #: ../../library/inspect.rst:206
 msgid "generator"
@@ -795,7 +796,7 @@ msgstr ""
 
 #: ../../library/inspect.rst:498
 msgid "Retrieving source code"
-msgstr ""
+msgstr "检索源代码"
 
 #: ../../library/inspect.rst:502
 msgid ""
@@ -804,10 +805,12 @@ msgid ""
 "provided and the object is a class, a method, a property or a descriptor,"
 " retrieve the documentation string from the inheritance hierarchy."
 msgstr ""
+"获取一个对象的文档字符串，用 :func:`cleandoc` 清理。"
+"如果没有提供一个对象的文档字符串，并且该对象是一个类、一个方法、一个属性或一个描述符，则从继承层次结构中检索文档字符串。"
 
 #: ../../library/inspect.rst:507
 msgid "Documentation strings are now inherited if not overridden."
-msgstr ""
+msgstr "文档字符串现在如果不被重写就会被继承。"
 
 #: ../../library/inspect.rst:513
 msgid ""
@@ -817,6 +820,8 @@ msgid ""
 "source code is unavailable, return ``None``.  This could happen if the "
 "object has been defined in C or the interactive shell."
 msgstr ""
+"用一个字符串返回紧挨着对象的源代码（对于类、函数或方法）的任何一行注解，或者在 Python 源文件的顶部（如果对象是一个模块）。 "
+"如果对象的源代码不可用，则返回 ``None``。 如果该对象是在 C 语言或交互式 shell 中定义的，就可能发生这种情况。"
 
 #: ../../library/inspect.rst:522
 msgid ""
@@ -824,10 +829,11 @@ msgid ""
 "defined. This will fail with a :exc:`TypeError` if the object is a built-"
 "in module, class, or function."
 msgstr ""
+"返回定义对象的（文本或二进制）文件的名称。如果该对象是一个内置的模块、类或函数，这将会以 :exc:`TypeError` 失败。"
 
 #: ../../library/inspect.rst:529
 msgid "Try to guess which module an object was defined in."
-msgstr ""
+msgstr "尝试猜测一个对象是在哪个模块中定义的。"
 
 #: ../../library/inspect.rst:534
 msgid ""
@@ -835,6 +841,8 @@ msgid ""
 "  This will fail with a :exc:`TypeError` if the object is a built-in "
 "module, class, or function."
 msgstr ""
+"返回定义对象的 Python 源文件的名称。"
+"如果对象是一个内置的模块、类或函数，这将导致 :exc:`TypeError` 失败。"
 
 #: ../../library/inspect.rst:541
 msgid ""
@@ -845,12 +853,17 @@ msgid ""
 "original source file the first line of code was found.  An :exc:`OSError`"
 " is raised if the source code cannot be retrieved."
 msgstr ""
+"返回一个对象的源行和起始行号的列表。"
+"实参可以是一个模块、类、方法、函数、回溯（traceback）、框架（frame）或代码对象（code object）。"
+"源代码被返回为对应于该对象的行的列表，行号表示在原始源文件中找到第一行代码的位置。"
+"如果不能检索到源代码，会引发一个 :exc:`OSError`。"
 
 #: ../../library/inspect.rst:548 ../../library/inspect.rst:560
 msgid ""
 ":exc:`OSError` is raised instead of :exc:`IOError`, now an alias of the "
 "former."
 msgstr ""
+":exc:`OSError` 被引发，而不是 :exc:`IOError`，现在是前者的别名。"
 
 #: ../../library/inspect.rst:555
 msgid ""
@@ -859,12 +872,16 @@ msgid ""
 "source code is returned as a single string.  An :exc:`OSError` is raised "
 "if the source code cannot be retrieved."
 msgstr ""
+"返回一个对象的源代码文本。"
+"实参可以是一个模块、类、方法、函数、回溯、框架或代码对象。"
+"源代码将以单个字符串的形式返回。如果不能检索到源代码，会引发一个 :exc:`OSError`。"
 
 #: ../../library/inspect.rst:567
 msgid ""
 "Clean up indentation from docstrings that are indented to line up with "
 "blocks of code."
 msgstr ""
+"清理缩进到与代码块一致的文档字符串的缩进。"
 
 #: ../../library/inspect.rst:570
 msgid ""
@@ -873,10 +890,12 @@ msgid ""
 "removed.  Empty lines at the beginning and end are subsequently removed."
 "  Also, all tabs are expanded to spaces."
 msgstr ""
+"所有先导空白都从第一行中删除。从第二行开始，任何可以统一删除的前导空白都被删除。开头和结尾的空行随后被删除。"
+"此外，所有的制表符都被扩展为空格。"
 
 #: ../../library/inspect.rst:579
 msgid "Introspecting callables with the Signature object"
-msgstr ""
+msgstr "用 Signature 对象对可调用程序进行自省"
 
 #: ../../library/inspect.rst:583
 msgid ""
@@ -884,16 +903,19 @@ msgid ""
 "and its return annotation.  To retrieve a Signature object, use the "
 ":func:`signature` function."
 msgstr ""
+"Signature 对象代表了一个可调用对象的调用签名和它的 return 注解。"
+"要检索签名对象，请使用 :func:`signature` 函数。"
 
 #: ../../library/inspect.rst:589
 msgid "Return a :class:`Signature` object for the given ``callable``::"
-msgstr ""
+msgstr "返回一个 :class:`Signature` 对象，用于给定的 ``callable`` ::"
 
 #: ../../library/inspect.rst:606
 msgid ""
 "Accepts a wide range of Python callables, from plain functions and "
 "classes to :func:`functools.partial` objects."
 msgstr ""
+"接受广泛的 Python 可调用文件，从普通函数和类到 :func:`functools.partial` 对象。"
 
 #: ../../library/inspect.rst:609
 msgid ""
@@ -906,6 +928,10 @@ msgid ""
 ":func:`inspect.get_annotations()` for instructions on how to use these "
 "parameters."
 msgstr ""
+"对于使用字符串注解的模块中定义的对象（``from __future__ import annotations``）， "
+":func:`signature` 将尝试使用 :func:`inspect.get_annotations()` 自动解除注解的字符串。"
+"``global``, ``locals``, 和 ``eval_str`` 形参在解析注解时被传入 :func:`inspect.get_annotations()`；"
+"关于如何使用这些形参，请参见 :func:`inspect.get_annotations()` 的文档。"
 
 #: ../../library/inspect.rst:618
 msgid ""
@@ -915,6 +941,8 @@ msgid ""
 " call(s) to un-stringize the annotations could potentially raise any kind"
 " of exception."
 msgstr ""
+"如果不能提供签名，则引发 :exc:`ValueError`，如果不支持该类型的对象，则引发 :exc:`TypeError`。"
+"另外，如果注解是字符串化的，并且 ``eval_str`` 不是假的，``eval()`` 调用来解除注解的字符串化，有可能引发任何类型的异常。"
 
 #: ../../library/inspect.rst:624
 msgid ""
@@ -922,6 +950,8 @@ msgid ""
 "prior to it are positional-only. For more info, see :ref:`the FAQ entry "
 "on positional-only parameters <faq-positional-only-arguments>`."
 msgstr ""
+"函数签名中的斜线（/）表示它前面的形参是仅有位置的。"
+"更多信息，请参见 :ref:`关于仅有位置的形参的常见问题条目 <faq-positional-only-arguments>`。"
 
 #: ../../library/inspect.rst:628
 msgid ""
@@ -929,10 +959,11 @@ msgid ""
 "``callable`` specifically (``callable.__wrapped__`` will not be used to "
 "unwrap decorated callables.)"
 msgstr ""
+"``follow_wrapped`` 形参。传递 ``False`` 以获得具体的 ``callable`` 的签名（``callable.__wrapped__`` 将不会被用来解除装饰的可调用程序）。"
 
 #: ../../library/inspect.rst:633
 msgid "``globals``, ``locals``, and ``eval_str`` parameters."
-msgstr ""
+msgstr "``globals``, ``locals`` 和 ``eval_str`` 形参"
 
 #: ../../library/inspect.rst:638
 msgid ""
@@ -940,6 +971,8 @@ msgid ""
 "Python.  For example, in CPython, some built-in functions defined in C "
 "provide no metadata about their arguments."
 msgstr ""
+"在 Python 的某些实现中，一些可调用函数可能是不可反省的。"
+"例如，在 CPython 中，一些用 C 语言定义的内置函数没有提供关于其实参的元数据。"
 
 #: ../../library/inspect.rst:645
 msgid ""
@@ -947,6 +980,8 @@ msgid ""
 "return annotation.  For each parameter accepted by the function it stores"
 " a :class:`Parameter` object in its :attr:`parameters` collection."
 msgstr ""
+"一个 Signature 对象代表了一个函数的调用签名和它的 return 注解。"
+"对于函数接受的每个形参，它在其 :attr:`parameters` 集合中存储一个 :class:`Parameter` 对象。"
 
 #: ../../library/inspect.rst:649
 msgid ""
@@ -956,26 +991,31 @@ msgid ""
 "positional-only first, then positional-or-keyword, and that parameters "
 "with defaults follow parameters without defaults."
 msgstr ""
+"可选的 *parameters* 实参是一个 :class:`Parameter` 对象的序列，"
+"它被验证以检查是否有名称重复的形参，以及形参的顺序是否正确，即先是仅有位置的形参，"
+"然后是有位置或关键字的形参，以及有默认值的形参紧随没有默认值的形参。"
 
 #: ../../library/inspect.rst:655
 msgid ""
 "The optional *return_annotation* argument, can be an arbitrary Python "
 "object, is the \"return\" annotation of the callable."
 msgstr ""
+"可选的 *return_annotation* 实参，可以是一个任意的 Python 对象，是可调用对象的 \"return\" 注解。"
 
 #: ../../library/inspect.rst:658
 msgid ""
 "Signature objects are *immutable*.  Use :meth:`Signature.replace` to make"
 " a modified copy."
 msgstr ""
+"Signature 对象是 *不可变的*。使用 :meth:`Signature.replace` 来制作一个修改的副本。"
 
 #: ../../library/inspect.rst:661
 msgid "Signature objects are picklable and hashable."
-msgstr ""
+msgstr "签名对象是可提取（picklable）和可散列的。"
 
 #: ../../library/inspect.rst:666
 msgid "A special class-level marker to specify absence of a return annotation."
-msgstr ""
+msgstr "一个特殊的类级标记，用于指定没有 return 注解。"
 
 #: ../../library/inspect.rst:670
 msgid ""
@@ -983,6 +1023,7 @@ msgid ""
 ":class:`Parameter` objects.  Parameters appear in strict definition "
 "order, including keyword-only parameters."
 msgstr ""
+"形参名称与相应的 :class:`Parameter` 对象的有序映射。形参以严格的定义顺序出现，包括只有关键字的形参。"
 
 #: ../../library/inspect.rst:674 ../../library/inspect.rst:998
 msgid ""
@@ -990,12 +1031,14 @@ msgid ""
 " of keyword-only parameters as of version 3.7, although in practice this "
 "order had always been preserved in Python 3."
 msgstr ""
+"Python 只明确地保证从 3.7 版开始保留只用关键字的形参的声明顺序，尽管实际上这个顺序在 Python 3 中一直被保留着。"
 
 #: ../../library/inspect.rst:681
 msgid ""
 "The \"return\" annotation for the callable.  If the callable has no "
 "\"return\" annotation, this attribute is set to :attr:`Signature.empty`."
 msgstr ""
+"可调用程序的 \"return\" 注解。如果可调用程序没有 \"return\" 注解，这个属性将被设置为 :attr:`Signature.empty`。"
 
 #: ../../library/inspect.rst:686
 msgid ""
@@ -1003,6 +1046,8 @@ msgid ""
 "Returns :class:`BoundArguments` if ``*args`` and ``**kwargs`` match the "
 "signature, or raises a :exc:`TypeError`."
 msgstr ""
+"创建一个从位置形参和关键字 arguments 到 parameters 的映射。"
+"如果 ``*args``  和 ``**kwargs`` 符合签名，则返回 :class:`BoundArguments`，否则引发 :exc:`TypeError`。"
 
 #: ../../library/inspect.rst:692
 msgid ""
@@ -1011,6 +1056,8 @@ msgid ""
 "Returns :class:`BoundArguments`, or raises a :exc:`TypeError` if the "
 "passed arguments do not match the signature."
 msgstr ""
+"与 :meth:`Signature.bind` 的工作方式相同，但允许省略一些必要的实参（模仿 :func:`functools.partial` 的行为）。"
+"返回 :class:`BoundArguments`，如果传递的实参与签名不匹配，则引发 :exc:`TypeError`。"
 
 #: ../../library/inspect.rst:699
 msgid ""
@@ -1020,6 +1067,9 @@ msgid ""
 "base signature.  To remove return_annotation from the copied Signature, "
 "pass in :attr:`Signature.empty`."
 msgstr ""
+"在被替换的实例基础上创建一个新的 Signature 实例。"
+"可以通过不同的 ``parameters`` 和/或 ``return_annotation`` 来覆盖基本签名的相应属性。"
+"要从复制的签名中移除 return_annotation，请传入 :attr:`Signature.empty`。"
 
 #: ../../library/inspect.rst:716
 msgid ""
@@ -1028,60 +1078,70 @@ msgid ""
 "without unwrapping its ``__wrapped__`` chain. ``globalns`` and "
 "``localns`` will be used as the namespaces when resolving annotations."
 msgstr ""
+"为给定的可调用的 ``obj`` 返回一个 :class:`Signature` （或其子类）对象。"
+"通过 ``follow_wrapped=False`` 来获得 ``obj`` 的签名，而不需要解开其 ``__wrapped__`` 链。"
+"``globalns`` 和 ``localns`` 将在解析注解时作为命名空间使用。"
 
 #: ../../library/inspect.rst:721
 msgid "This method simplifies subclassing of :class:`Signature`::"
-msgstr ""
+msgstr "这个方法简化了 :class:`Signature` 的子类化 ::"
 
 #: ../../library/inspect.rst:730
 msgid "``globalns`` and ``localns`` parameters."
-msgstr ""
+msgstr "``globalns`` 和 ``localns`` 形参。"
 
 #: ../../library/inspect.rst:736
 msgid ""
 "Parameter objects are *immutable*.  Instead of modifying a Parameter "
 "object, you can use :meth:`Parameter.replace` to create a modified copy."
 msgstr ""
+"形参对象是 *不可变的*。你可以使用 :meth:`Parameter.replace` 来创建一个修改过的副本，而不是修改一个 Parameter 对象。"
 
 #: ../../library/inspect.rst:739
 msgid "Parameter objects are picklable and hashable."
-msgstr ""
+msgstr "Parameter 对象是可拾取和可哈希的。"
 
 #: ../../library/inspect.rst:744
 msgid ""
 "A special class-level marker to specify absence of default values and "
 "annotations."
 msgstr ""
+"一个特殊的类级标记，用于指定没有默认值和注解。"
 
 #: ../../library/inspect.rst:749
 msgid ""
 "The name of the parameter as a string.  The name must be a valid Python "
 "identifier."
 msgstr ""
+"形参的名称，是一个字符串。该名称必须是一个有效的 Python 标识符。"
 
 #: ../../library/inspect.rst:754
 msgid ""
 "CPython generates implicit parameter names of the form ``.0`` on the code"
 " objects used to implement comprehensions and generator expressions."
 msgstr ""
+"CPython 在用于实现理解和生成器表达式的代码对象上生成形式为 ``.0`` 的隐含形参名。"
 
 #: ../../library/inspect.rst:758
 msgid ""
 "These parameter names are exposed by this module as names like "
 "``implicit0``."
 msgstr ""
+"这些形参名称被本模块暴露为 ``implicit0`` 等名称。"
 
 #: ../../library/inspect.rst:764
 msgid ""
 "The default value for the parameter.  If the parameter has no default "
 "value, this attribute is set to :attr:`Parameter.empty`."
 msgstr ""
+"该形参的默认值。如果该形参没有默认值，这个属性将被设置为 :attr:`Parameter.empty`。"
 
 #: ../../library/inspect.rst:769
 msgid ""
 "The annotation for the parameter.  If the parameter has no annotation, "
 "this attribute is set to :attr:`Parameter.empty`."
 msgstr ""
+"形参的注解。如果形参没有注解，这个属性被设置为 :attr:`Parameter.empty`。"
 
 #: ../../library/inspect.rst:774
 msgid ""
@@ -1089,6 +1149,7 @@ msgid ""
 "values (accessible via :class:`Parameter`, like "
 "``Parameter.KEYWORD_ONLY``):"
 msgstr ""
+"描述了实参值如何被绑定到形参上。可能的值（可通过 :class:`Parameter` 访问，如 ``Parameter.KEYWORD_ONLY``）："
 
 #: ../../library/inspect.rst:780
 msgid "Name"
@@ -1108,6 +1169,7 @@ msgid ""
 "parameters are those which appear before a ``/`` entry (if present) in a "
 "Python function definition."
 msgstr ""
+"Value 必须作为一个位置实参提供。只有位置形参是那些出现在 Python 函数定义中的 ``/`` 条目之前的参数（如果存在的话）。"
 
 #: ../../library/inspect.rst:787
 msgid "*POSITIONAL_OR_KEYWORD*"
@@ -1154,15 +1216,15 @@ msgstr ""
 
 #: ../../library/inspect.rst:808
 msgid "Example: print all keyword-only arguments without default values::"
-msgstr ""
+msgstr "例子：打印所有只有关键字的实参，没有默认值 ::"
 
 #: ../../library/inspect.rst:822
 msgid "Describes a enum value of Parameter.kind."
-msgstr ""
+msgstr "描述了 Parameter.kind 的一个枚举值。"
 
 #: ../../library/inspect.rst:826
 msgid "Example: print all descriptions of arguments::"
-msgstr ""
+msgstr "例子：打印所有实参的描述 ::"
 
 #: ../../library/inspect.rst:841
 msgid ""
@@ -1171,6 +1233,9 @@ msgid ""
 "corresponding argument.  To remove a default value or/and an annotation "
 "from a Parameter, pass :attr:`Parameter.empty`."
 msgstr ""
+"在被替换的实例基础上创建一个新的参数实例。"
+"要覆盖一个 :class:`Parameter` 属性，请传递相应的参数。"
+"要从参数中移除默认值或/和注释，请传递 :attr:`Parameter.empty`。"
 
 #: ../../library/inspect.rst:859
 msgid ""
@@ -1178,12 +1243,14 @@ msgid ""
 "``None`` if their ``kind`` was set to ``POSITIONAL_ONLY``. This is no "
 "longer permitted."
 msgstr ""
+"在 Python 3.3 中，如果它们的 ``kind`` 被设置为 ``POSITIONAL_ONLY``，则允许 ``name`` 被设置为 ``None``。这已不再允许。"
 
 #: ../../library/inspect.rst:866
 msgid ""
 "Result of a :meth:`Signature.bind` or :meth:`Signature.bind_partial` "
 "call. Holds the mapping of arguments to the function's parameters."
 msgstr ""
+":meth:`Signature.bind` 或 :meth:`Signature.bind_partial` 调用的结果。保存实参对函数形参的映射。"
 
 #: ../../library/inspect.rst:871
 msgid ""
@@ -1411,13 +1478,14 @@ msgstr ""
 
 #: ../../library/inspect.rst:1098
 msgid "Compute the annotations dict for an object."
-msgstr ""
+msgstr "计算一个对象的注解 dict。"
 
 #: ../../library/inspect.rst:1100
 msgid ""
 "``obj`` may be a callable, class, or module. Passing in an object of any "
 "other type raises :exc:`TypeError`."
 msgstr ""
+"``obj`` 可以是一个 callable，类，或模块。传入任何其他类型的对象会引发 :exc:`TypeError`。"
 
 #: ../../library/inspect.rst:1103
 msgid ""
@@ -1425,10 +1493,11 @@ msgid ""
 " called; calling it twice on the same object will return two different "
 "but equivalent dicts."
 msgstr ""
+"返回一个dict。``get_annotations()`` 每次调用都会返回一个新的 dict；对同一个对象调用两次会返回两个不同但等价的 dict。"
 
 #: ../../library/inspect.rst:1107
 msgid "This function handles several details for you:"
-msgstr ""
+msgstr "这个函数为你处理几个细节："
 
 #: ../../library/inspect.rst:1109
 msgid ""
@@ -1436,6 +1505,8 @@ msgid ""
 "using :func:`eval()`.  This is intended for use with stringized "
 "annotations (``from __future__ import annotations``)."
 msgstr ""
+"如果 ``eval_str`` 为真，``str`` 类型的值将使用 :func:`eval()` 进行解串。"
+"这是为了与字符串化的注释一起使用（``from __future__ import annotations``)）。"
 
 #: ../../library/inspect.rst:1113
 msgid ""
@@ -1443,28 +1514,33 @@ msgid ""
 "(Functions and methods always have an annotations dict; classes, modules,"
 " and other types of callables may not.)"
 msgstr ""
+"如果 ``obj`` 没有注释 dict，返回一个空 dict。"
+"（函数和方法总是有一个注解字典；类、模块和其他类型的可调用程序可能没有）。"
 
 #: ../../library/inspect.rst:1117
 msgid ""
 "Ignores inherited annotations on classes.  If a class doesn't have its "
 "own annotations dict, returns an empty dict."
 msgstr ""
+"忽略类上的继承注解。如果一个类没有自己的注解字典，则返回一个空字典。"
 
 #: ../../library/inspect.rst:1119
 msgid ""
 "All accesses to object members and dict values are done using "
 "``getattr()`` and ``dict.get()`` for safety."
 msgstr ""
+"为了安全起见，访问对象成员和 dict 值使用 ``getattr()`` 和 ``dict.get()``。"
 
 #: ../../library/inspect.rst:1121
 msgid "Always, always, always returns a freshly-created dict."
-msgstr ""
+msgstr "总是，总是，总是返回一个新创建的 dict。"
 
 #: ../../library/inspect.rst:1123
 msgid ""
 "``eval_str`` controls whether or not values of type ``str`` are replaced "
 "with the result of calling :func:`eval()` on those values:"
 msgstr ""
+"``eval_str`` 控制 ``str`` 类型的值是否被替换成对这些值调用 :func:`eval()`  的结果："
 
 #: ../../library/inspect.rst:1126
 msgid ""
@@ -1473,10 +1549,12 @@ msgid ""
 ":func:`eval()` raises an exception, it will unwind the stack past the "
 "``get_annotations`` call.)"
 msgstr ""
+"如果 eval_str 为真，:func:`eval()` 将对 ``str`` 类型的值进行调用。"
+"（注意，``get_annotations`` 不捕捉异常；如果 :func:`eval()` 引发异常，它将在 ``get_annotations`` 调用后解绑堆栈）。"
 
 #: ../../library/inspect.rst:1130
 msgid "If eval_str is false (the default), values of type ``str`` are unchanged."
-msgstr ""
+msgstr "如果 eval_str 为 false（默认），那么 ``str`` 类型的值将不会改变。"
 
 #: ../../library/inspect.rst:1132
 msgid ""
@@ -1485,10 +1563,12 @@ msgid ""
 " ``locals`` is ``None``, this function may replace that value with a "
 "context-specific default, contingent on ``type(obj)``:"
 msgstr ""
+"``globals`` 和 ``locals`` 被传递到 :func:`eval()`；更多信息请参见 :func:`eval()` 的文档。"
+"如果 ``globals`` 或 ``locals`` 是 ``None``，这个函数可能会用特定环境的默认值替换该值，取决于 ``type(obj)``："
 
 #: ../../library/inspect.rst:1137
 msgid "If ``obj`` is a module, ``globals`` defaults to ``obj.__dict__``."
-msgstr ""
+msgstr "如果 ``obj`` 是一个模块，``globals`` 默认为 ``obj.__dict__``。"
 
 #: ../../library/inspect.rst:1138
 msgid ""
@@ -1496,6 +1576,7 @@ msgid ""
 "``sys.modules[obj.__module__].__dict__`` and ``locals`` defaults to the "
 "``obj`` class namespace."
 msgstr ""
+"如果 ``obj`` 是一个类，``globals`` 默认为 ``sys.modules[obj.__module__].__dict__``，``locals`` 默认为 ``obj`` 类的命名空间。"
 
 #: ../../library/inspect.rst:1141
 msgid ""
@@ -1503,6 +1584,8 @@ msgid ""
 "although if ``obj`` is a wrapped function (using "
 "``functools.update_wrapper()``) it is first unwrapped."
 msgstr ""
+"如果 ``obj`` 是一个可调用的，``globals`` 默认为 ``obj.__globals__``，"
+"尽管如果 ``obj`` 是一个被包裹的函数（使用 ``functools.update_wrapper()``），它首先被解开。"
 
 #: ../../library/inspect.rst:1145
 msgid ""
@@ -1510,6 +1593,8 @@ msgid ""
 "annotations dict of any object.  See :ref:`annotations-howto` for more "
 "information on annotations best practices."
 msgstr ""
+"调用 ``get_annotations`` 是访问任何对象的注解 dict 的最佳做法。"
+"参见 :ref:`annotations-howto` 以了解更多关于注解的最佳实践。"
 
 #: ../../library/inspect.rst:1155
 msgid "The interpreter stack"

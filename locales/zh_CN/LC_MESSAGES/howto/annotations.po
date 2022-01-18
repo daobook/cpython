@@ -48,8 +48,8 @@ msgid ""
 "``__annotations__`` on Python objects, we encourage you to follow the "
 "guidelines described below."
 msgstr ""
-"本文意在汇聚对象的注解字典用法的最佳实践。 如果 Python 代码会去查看 Python 对象的 ``__annotations__`` "
-"属性，建议遵循以下准则。"
+"本文意在汇聚对象的注解字典用法的最佳实践。"
+"如果 Python 代码会去查看 Python 对象的 ``__annotations__`` 属性，建议遵循以下准则。"
 
 #: ../../howto/annotations.rst:16
 msgid ""
@@ -59,8 +59,8 @@ msgid ""
 "versions 3.9 and older, other best practices for ``__annotations__`` that"
 " apply to any Python version, and quirks of ``__annotations__``."
 msgstr ""
-"本文分为四个部分：在 Python 3.10 以上版本中访问对象注解的最佳实践、在Python 3.9 "
-"以上版本中访问对象注解的最佳实践、适用于任何 Python 版本的其他 ```__annotations__`` "
+"本文分为四个部分：在 Python 3.10 以上版本中访问对象注解的最佳实践、在 Python 3.9 "
+"以上版本中访问对象注解的最佳实践、适用于任何 Python 版本的其他 ``__annotations__`` "
 "最佳实践、``__annotations__`` 的特别之处。"
 
 #: ../../howto/annotations.rst:26
@@ -70,8 +70,8 @@ msgid ""
 "information on how to use \"type hints\" in your code, please see the "
 ":mod:`typing` module."
 msgstr ""
-"请注意，本文是专门介绍 ``__annotations__`` 的，而不是介绍注解的用法。若要了解“类型提示”的使用信息，请参阅 "
-":mod:`typing` 模块。"
+"请注意，本文是专门介绍 ``__annotations__`` 的，而不是介绍注解的用法。"
+"若要了解“类型提示”的使用信息，请参阅 :mod:`typing` 模块。"
 
 #: ../../howto/annotations.rst:33
 msgid "Accessing The Annotations Dict Of An Object In Python 3.10 And Newer"
@@ -113,7 +113,7 @@ msgid ""
 "'__annotations__', None)``."
 msgstr ""
 "不过其他类型的可调用对象可能就没有定义 ``__annotations__`` 属性，比如由 :func:`functools.partial` "
-"创建的可调用对象。当访问某个未知对象的``__annotations__`` 时，Python 3.10 以上版本的最佳做法是带三个参数去调用 "
+"创建的可调用对象。当访问某个未知对象的 ``__annotations__`` 时，Python 3.10 以上版本的最佳做法是带三个参数去调用 "
 ":func:`getattr` ，比如 ``getattr(o, '__annotations__', None)``。"
 
 #: ../../howto/annotations.rst:62
@@ -126,7 +126,8 @@ msgid ""
 "much more complicated than in newer versions. The problem is a design "
 "flaw in these older versions of Python, specifically to do with class "
 "annotations."
-msgstr "在 Python 3.9 之前的版本中，访问对象的注解字典要比高版本中复杂得多。这个是 Python 低版本的一个设计缺陷，特别是访问类的注解时。"
+msgstr "在 Python 3.9 之前的版本中，访问对象的注解字典要比高版本中复杂得多。"
+"这个是 Python 低版本的一个设计缺陷，特别是访问类的注解时。"
 
 #: ../../howto/annotations.rst:69
 msgid ""
@@ -137,8 +138,7 @@ msgid ""
 "``__annotations__`` attribute."
 msgstr ""
 "要访问其他对象——函数、可调用对象和模块——的注释字典，最佳做法与 3.10 版本相同，假定不想调用 "
-":func:`inspect.get_annotations`：你应该用三个参数调用 :func:`getattr` ，以访问对象的 "
-"``__annotations__`` 属性。"
+":func:`inspect.get_annotations`：你应该用三个参数调用 :func:`getattr`，以访问对象的 ``__annotations__`` 属性。"
 
 #: ../../howto/annotations.rst:76
 msgid ""
@@ -148,7 +148,7 @@ msgid ""
 "``__annotations__`` attribute of a class may inadvertently return the "
 "annotations dict of a *base class.* As an example::"
 msgstr ""
-"不幸的是，对于类而言，这并不是最佳做法。因为 ```__annotations__`` 是类的可选属性，并且类可以从基类继承属性，访问某个类的 "
+"不幸的是，对于类而言，这并不是最佳做法。因为 ``__annotations__`` 是类的可选属性，并且类可以从基类继承属性，访问某个类的 "
 "``__annotations__`` 属性可能会无意间返回 *基类* 的注解数据。"
 
 #: ../../howto/annotations.rst:92
@@ -165,8 +165,8 @@ msgid ""
 " defined, best practice is to call the ``get`` method on the class dict."
 msgstr ""
 "若要查看的对象是个类（``isinstance(o, type)``），代码不得不另辟蹊径。这时的最佳做法依赖于 Python 3.9 "
-"以下版本的一处细节：若某个类定义了注解，则会存放于字典 ``__dict__`` 中。由于类不一定会定义注解，最好的做法是在类的 dict 上调用"
-" ``get`` 方法。"
+"以下版本的一处细节：若某个类定义了注解，则会存放于字典 ``__dict__`` 中。"
+"由于类不一定会定义注解，最好的做法是在类的 dict 上调用 ``get`` 方法。"
 
 #: ../../howto/annotations.rst:103
 msgid ""
@@ -190,7 +190,7 @@ msgid ""
 "``__dict__`` attribute, so for extra safety you may also wish to use "
 ":func:`getattr` to access ``__dict__``."
 msgstr ""
-"请注意，有些特殊的或畸形的类型对象可能没有 ``__dict__`` 属性，为了以防万一，可能还需要用 :func:`getattr` 来访问` "
+"请注意，有些特殊的或畸形的类型对象可能没有 ``__dict__`` 属性，为了以防万一，可能还需要用 :func:`getattr` 来访问 "
 "``__dict__``。"
 
 #: ../../howto/annotations.rst:123
@@ -299,7 +299,7 @@ msgstr "任何版本 Python 中使用 ``__annotations__`` 的最佳实践"
 msgid ""
 "You should avoid assigning to the ``__annotations__`` member of objects "
 "directly.  Let Python manage setting ``__annotations__``."
-msgstr "应避免直接给对象的 ``__annotations__`` 成员赋值。请让 Python 来管理``__annotations__``。"
+msgstr "应避免直接给对象的 ``__annotations__`` 成员赋值。请让 Python 来管理 ``__annotations__``。"
 
 #: ../../howto/annotations.rst:177
 msgid ""
