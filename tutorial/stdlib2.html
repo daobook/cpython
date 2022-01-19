@@ -221,7 +221,7 @@
 <span class="go">&#39;Nottinghamfolk send $10 to the ditch fund.&#39;</span>
 </pre></div>
 </div>
-<p>如果在字典或关键字参数中未提供某个占位符的值，那么 <a class="reference internal" href="../library/string.html#string.Template.substitute" title="string.Template.substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">substitute()</span></code></a> 方法将抛出 <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。对于邮件合并类型的应用，用户提供的数据有可能是不完整的，此时使用 <a class="reference internal" href="../library/string.html#string.Template.safe_substitute" title="string.Template.safe_substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">safe_substitute()</span></code></a> 方法更加合适 —— 如果数据缺失，它会直接将占位符原样保留。</p>
+<p>如果在字典或关键字参数中未提供某个占位符的值，那么 <a class="reference internal" href="../library/string.html#string.Template.substitute" title="string.Template.substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">substitute()</span></code></a> 方法将抛出 <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。对于 mail-merge 风格的应用，用户提供的数据有可能是不完整的，此时使用 <a class="reference internal" href="../library/string.html#string.Template.safe_substitute" title="string.Template.safe_substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">safe_substitute()</span></code></a> 方法更加合适 —— 如果数据缺失，它会直接将占位符原样保留。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s1">&#39;Return the $item to $owner.&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">item</span><span class="o">=</span><span class="s1">&#39;unladen swallow&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">substitute</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -548,7 +548,7 @@ CRITICAL:root:Critical error -- shutting down
 <br />
     <br />
 
-    最后更新于 1月 17, 2022.
+    最后更新于 1月 19, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
