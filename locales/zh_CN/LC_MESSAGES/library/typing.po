@@ -335,8 +335,8 @@ msgid ""
 msgstr ""
 "以其他可调用对象为参数的可调用对象可以使用 :class:`ParamSpec` "
 "来表明其参数类型是相互依赖的。此外，如果该可调用对象增加或删除了其他可调用对象的参数，可以使用 :data:`Concatenate` 操作符。 "
-"它们分别采取 ``Callable[ParamSpecVariable, ReturnType]`` 和 "
-"``Callable[Concatenate[Arg1Type, Arg2Type, ..., ParamSpecVariable], ReturnType]`` 的形式。"
+"它们分别采取 ``Callable[ParamSpecVariable, ReturnType]`` "
+"和 ``Callable[Concatenate[Arg1Type, Arg2Type, ..., ParamSpecVariable], ReturnType]`` 的形式。"
 
 #: ../../library/typing.rst:222 ../../library/typing.rst:713
 msgid ""
@@ -362,7 +362,7 @@ msgid ""
 "statically inferred in a generic way, abstract base classes have been "
 "extended to support subscription to denote expected types for container "
 "elements."
-msgstr "容器中，对象的类型信息不能以泛型方式静态推断，因此，抽象基类扩展支持下标，用于表示容器元素的预期类型。"
+msgstr "容器中，对象的类型信息不能以泛型方式静态推断，因此，抽象基类被扩展支持下标，用于表示容器元素的预期类型。"
 
 #: ../../library/typing.rst:246
 msgid ""
@@ -386,13 +386,11 @@ msgid ""
 msgstr "``Generic[T]`` 是定义类 ``LoggedVar`` 的基类，该类使用单类型参数 ``T``。在该类体内，``T`` 是有效的类型。"
 
 #: ../../library/typing.rst:294
-#, fuzzy
 msgid ""
 "The :class:`Generic` base class defines :meth:`~object.__class_getitem__`"
 " so that ``LoggedVar[t]`` is valid as a type::"
 msgstr ""
-":class:`Generic` 基类定义了 :meth:`__class_getitem__` ，因此，``LoggedVar[t]`` "
-"也是有效类型："
+":class:`Generic` 基类定义了 :meth:`~object.__class_getitem__`，因此，``LoggedVar[t]`` 也是有效类型："
 
 #: ../../library/typing.rst:303
 msgid ""
@@ -2244,6 +2242,9 @@ msgid ""
 "setting attributes, the decorator returns the object unchanged without "
 "raising an exception."
 msgstr ""
+"装饰器现在将在被装饰的对象上设置 ``__final__`` 属性为 ``True``。因此，一个类似于 ``if getattr(obj, \"__final__\",  "
+"False)`` 可以在运行时用来确定一个对象 ``obj`` 是否已经被标记为 final。"
+"如果被装饰的对象不支持设置属性，装饰器会返回该对象而不引发异常。"
 
 #: ../../library/typing.rst:1999
 msgid "Decorator to indicate that annotations are not type hints."
@@ -2327,6 +2328,8 @@ msgid ""
 "evaluation of annotations (:pep:`563`) may remove the need for most "
 "forward references."
 msgstr ""
+":func:`get_type_hints` 在导入的 :ref:`type aliases <type-aliases>` 中不工作，该类型包括前向引用（forward references）。"
+"启用注解的延迟评估（:pep:`563`）可能会消除对大多数前向引用的需求。"
 
 #: ../../library/typing.rst:2068
 msgid "Added ``include_extras`` parameter as part of :pep:`593`."
@@ -2337,7 +2340,6 @@ msgid "Provide basic introspection for generic types and special typing forms."
 msgstr "为泛型类型与特殊类型形式提供了基本的内省功能。"
 
 #: ../../library/typing.rst:2076
-#, fuzzy
 msgid ""
 "For a typing object of the form ``X[Y, Z, ...]`` these functions return "
 "``X`` and ``(Y, Z, ...)``. If ``X`` is a generic alias for a builtin or "
@@ -2347,25 +2349,25 @@ msgid ""
 "original arguments ``[Y, Z, ...]`` due to type caching. For unsupported "
 "objects return ``None`` and ``()`` correspondingly. Examples::"
 msgstr ""
-"对于 ``X[Y, Z, ...]`` 形式的类型对象，这些函数返回 ``X`` 与 ``(Y, Z, ...)``。如果 ``X`` "
-"是内置对象或 :mod:`collections` class 的泛型别名， 会将其标准化为原始类。如果 ``X`` 是包含在其他泛型类型中的 "
-":class:`Union` 或 :class:`Literal`，``(Y, Z, ...)`` 的顺序会因类型缓存，而与原始参数 ``[Y, "
-"Z, ...]`` 的顺序不同。对于不支持的对象会相应地返回 ``None`` 或 ``()``。例如："
+"对于 ``X[Y, Z, ...]`` 形式的类型对象，这些函数返回 ``X`` 与 ``(Y, Z, ...)``。"
+"如果 ``X`` 是内置对象或 :mod:`collections` class 的泛型别名，会将其标准化为原始类。"
+"如果 ``X`` 是一个联合体或包含在另一个通用类型中的 :class:`Literal`，"
+"由于类型缓存的原因，``(Y, Z, ...)`` 的顺序可能与原始实参 ``[Y, Z, ...]`` 的顺序不同。"
+"对于不支持的对象，相应地返回 ``None`` 和 ``()``。例子 ::"
 
 #: ../../library/typing.rst:2095
 msgid "Check if a type is a :class:`TypedDict`."
 msgstr "检查一个类型是否为 :class:`TypedDict`。"
 
 #: ../../library/typing.rst:2110
-#, fuzzy
 msgid ""
 "A class used for internal typing representation of string forward "
 "references. For example, ``list[\"SomeClass\"]`` is implicitly "
 "transformed into ``list[ForwardRef(\"SomeClass\")]``.  This class should "
 "not be instantiated by a user, but may be used by introspection tools."
 msgstr ""
-"用于字符串前向引用的内部类型表示的类。 例如，``List[\"SomeClass\"]`` 会被隐式转换为 "
-"``List[ForwardRef(\"SomeClass\")]``。 这个类不应由用户来实例化，但可以由内省工具使用。"
+"用于字符串前向引用的内部类型表示的类。例如，``list[\"SomeClass\"]`` 会被隐式转换为 "
+"``list[ForwardRef(\"SomeClass\")]``。这个类不应由用户来实例化，但可以由内省工具使用。"
 
 #: ../../library/typing.rst:2116
 msgid ""
