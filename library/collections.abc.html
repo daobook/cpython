@@ -74,7 +74,7 @@
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> --- 容器的抽象基类</a><ul>
 <li><a class="reference internal" href="#collections-abstract-base-classes">容器抽象基类</a></li>
-<li><a class="reference internal" href="#collections-abstract-base-classes-detailed-descriptions">Collections Abstract Base Classes -- Detailed Descriptions</a></li>
+<li><a class="reference internal" href="#collections-abstract-base-classes-detailed-descriptions">容器抽象基类 -- 详细描述</a></li>
 <li><a class="reference internal" href="#examples-and-recipes">Examples and Recipes</a></li>
 </ul>
 </li>
@@ -164,12 +164,8 @@
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/_collections_abc.py">Lib/_collections_abc.py</a></p>
 <hr class="docutils" />
 <p>该模块定义了一些 <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">抽象基类</span></a>，它们可用于判断一个具体类是否具有某一特定的接口；例如，这个类是否可哈希，或其是否为映射类。</p>
-<p>An <a class="reference internal" href="functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> or <a class="reference internal" href="functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> test for an interface works in one
-of three ways.</p>
-<p>1) A newly written class can inherit directly from one of the
-abstract base classes.  The class must supply the required abstract
-methods.  The remaining mixin methods come from inheritance and can be
-overridden if desired.  Other methods may be added as needed:</p>
+<p>接口的 <a class="reference internal" href="functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> 或 <a class="reference internal" href="functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> 测试以三种方式之一工作。</p>
+<p>1）新写的类可以直接继承自一个抽象基类。该类必须提供所需的抽象方法。其余的混合方法来自于继承，如果需要，可以被重写。其他方法可以根据需要添加：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">Sequence</span><span class="p">):</span>                      <span class="c1"># Direct inheritance</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>             <span class="c1"># Extra method not required by the ABC</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>  <span class="o">...</span>  <span class="c1"># Required abstract method</span>
@@ -183,13 +179,7 @@ overridden if desired.  Other methods may be added as needed:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>2) Existing classes and built-in classes can be registered as &quot;virtual
-subclasses&quot; of the ABCs.  Those classes should define the full API
-including all of the abstract methods and all of the mixin methods.
-This lets users rely on <a class="reference internal" href="functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> or <a class="reference internal" href="functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> tests
-to determine whether the full interface is supported.  The exception to
-this rule is for methods that are automatically inferred from the rest
-of the API:</p>
+<p>2）现有的类和内置类可以注册为 ABC 的 &quot;虚拟子类&quot;。这些类应该定义完整的 API，包括所有的抽象方法和所有的混合方法。这让用户可以依靠 <a class="reference internal" href="functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> 或 <a class="reference internal" href="functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> 测试来确定是否支持完整的接口。这一规则的例外是那些从 API 的其他部分自动推断出来的方法：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">D</span><span class="p">:</span>                                 <span class="c1"># No inheritance</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>              <span class="c1"># Extra method not required by the ABC</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>  <span class="o">...</span>   <span class="c1"># Abstract method</span>
@@ -206,14 +196,8 @@ of the API:</p>
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>In this example, class <code class="xref py py-class docutils literal notranslate"><span class="pre">D</span></code> does not need to define
-<code class="docutils literal notranslate"><span class="pre">__contains__</span></code>, <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>, and <code class="docutils literal notranslate"><span class="pre">__reversed__</span></code> because the
-<a class="reference internal" href="../reference/expressions.html#comparisons"><span class="std std-ref">in-operator</span></a>, the <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iteration</span></a>
-logic, and the <a class="reference internal" href="functions.html#reversed" title="reversed"><code class="xref py py-func docutils literal notranslate"><span class="pre">reversed()</span></code></a> function automatically fall back to
-using <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__len__</span></code>.</p>
-<p>3) Some simple interfaces are directly recognizable by the presence of
-the required methods (unless those methods have been set to
-<a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>):</p>
+<p>在这个例子中，类 <code class="xref py py-class docutils literal notranslate"><span class="pre">D</span></code> 不需要定义 <code class="docutils literal notranslate"><span class="pre">__contains__</span></code>、<code class="docutils literal notranslate"><span class="pre">__iter__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__reversed__</span></code>，因为 <a class="reference internal" href="../reference/expressions.html#comparisons"><span class="std std-ref">in-operator</span></a>、 <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iteration</span></a> 逻辑和 <a class="reference internal" href="functions.html#reversed" title="reversed"><code class="xref py py-func docutils literal notranslate"><span class="pre">reversed()</span></code></a> 函数自动回落到使用 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__len__</span></code>。</p>
+<p>3）一些简单的接口可以通过所需方法的存在直接识别（除非这些方法被设置为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>）：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">E</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="o">...</span>
     <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="nb">next</span><span class="p">):</span> <span class="o">...</span>
@@ -225,16 +209,9 @@ the required methods (unless those methods have been set to
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>Complex interfaces do not support this last technique because an
-interface is more than just the presence of method names.  Interfaces
-specify semantics and relationships between methods that cannot be
-inferred solely from the presence of specific method names.  For
-example, knowing that a class supplies <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>, <code class="docutils literal notranslate"><span class="pre">__len__</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">__iter__</span></code> is insufficient for distinguishing a <a class="reference internal" href="#collections.abc.Sequence" title="collections.abc.Sequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a> from
-a <a class="reference internal" href="#collections.abc.Mapping" title="collections.abc.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>.</p>
+<p>复杂的接口不支持最后一种技术，因为接口不仅仅是方法名称的存在。接口指定了语义和方法之间的关系，这不能仅仅从特定方法名称的存在中推断出来。例如，知道一个类提供了 <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>、<code class="docutils literal notranslate"><span class="pre">__len__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__iter__</span></code>，并不足以区分 <a class="reference internal" href="#collections.abc.Sequence" title="collections.abc.Sequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a> 和 <a class="reference internal" href="#collections.abc.Mapping" title="collections.abc.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.9 新版功能: </span>These abstract classes now support <code class="docutils literal notranslate"><span class="pre">[]</span></code>. See <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>
-and <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a>.</p>
+<p><span class="versionmodified added">3.9 新版功能: </span>这些抽象类现在支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。参见 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a> 和 <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a>。</p>
 </div>
 <section id="collections-abstract-base-classes">
 <span id="id1"></span><h2>容器抽象基类<a class="headerlink" href="#collections-abstract-base-classes" title="永久链接至标题">¶</a></h2>
@@ -413,26 +390,18 @@ and <span class="target" id="index-0"></span><a class="pep reference external" h
 </tr>
 </tbody>
 </table>
-<p class="rubric">Footnotes</p>
+<p class="rubric">脚注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id17"><span class="brackets">1</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>,<a href="#id6">4</a>,<a href="#id7">5</a>,<a href="#id8">6</a>,<a href="#id9">7</a>,<a href="#id10">8</a>,<a href="#id11">9</a>,<a href="#id12">10</a>,<a href="#id13">11</a>,<a href="#id14">12</a>,<a href="#id15">13</a>,<a href="#id16">14</a>)</span></dt>
-<dd><p>These ABCs override <code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__subclasshook__()</span></code> to support
-testing an interface by verifying the required methods are present
-and have not been set to <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>.  This only works for simple
-interfaces.  More complex interfaces require registration or direct
-subclassing.</p>
+<dd><p>这些 ABC 覆盖了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__subclasshook__()</span></code>，以支持通过验证所需的方法是否存在并且没有被设置为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> 来测试一个接口。这只适用于简单的接口。更复杂的接口需要注册或直接子类化。</p>
 </dd>
 <dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id5">2</a></span></dt>
-<dd><p>Checking <code class="docutils literal notranslate"><span class="pre">isinstance(obj,</span> <span class="pre">Iterable)</span></code> detects classes that are
-registered as <a class="reference internal" href="#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> or that have an <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code>
-method, but it does not detect classes that iterate with the
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> method.  The only reliable way to determine
-whether an object is <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> is to call <code class="docutils literal notranslate"><span class="pre">iter(obj)</span></code>.</p>
+<dd><p>使用 <code class="docutils literal notranslate"><span class="pre">isinstance(obj,</span> <span class="pre">Iterable)</span></code> 可以检测一个类是否已经注册到了 <a class="reference internal" href="#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> 或者实现了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code> 函数，但是无法检测这个类是否能够使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code> 方法进行迭代。检测一个对象是否是 <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a> 的唯一可信赖的方法是调用 <code class="docutils literal notranslate"><span class="pre">iter(obj)</span></code>。</p>
 </dd>
 </dl>
 </section>
 <section id="collections-abstract-base-classes-detailed-descriptions">
-<h2>Collections Abstract Base Classes -- Detailed Descriptions<a class="headerlink" href="#collections-abstract-base-classes-detailed-descriptions" title="永久链接至标题">¶</a></h2>
+<h2>容器抽象基类 -- 详细描述<a class="headerlink" href="#collections-abstract-base-classes-detailed-descriptions" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="collections.abc.Container">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">collections.abc.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><a class="headerlink" href="#collections.abc.Container" title="永久链接至目标">¶</a></dt>
@@ -491,7 +460,7 @@ whether an object is <a class="reference internal" href="../glossary.html#term-i
 <dl class="py class">
 <dt class="sig sig-object py" id="collections.abc.Generator">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">collections.abc.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><a class="headerlink" href="#collections.abc.Generator" title="永久链接至目标">¶</a></dt>
-<dd><p>生成器类，实现了 <span class="target" id="index-9"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> 中定义的协议，继承并扩展了迭代器，提供了 <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>, <a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw()</span></code></a> 和 <a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> 方法。参见 <a class="reference internal" href="../glossary.html#term-generator"><span class="xref std std-term">generator</span></a> 的定义。</p>
+<dd><p>生成器类，实现了 <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> 中定义的协议，继承并扩展了迭代器，提供了 <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>, <a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw()</span></code></a> 和 <a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> 方法。参见 <a class="reference internal" href="../glossary.html#term-generator"><span class="xref std std-term">generator</span></a> 的定义。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
 </div>
@@ -563,11 +532,7 @@ Use <a class="reference internal" href="inspect.html#inspect.isawaitable" title=
 <dd><p>用于协程兼容类的抽象基类。实现了如下定义在 <a class="reference internal" href="../reference/datamodel.html#coroutine-objects"><span class="std std-ref">协程对象</span></a>: 里的方法： <a class="reference internal" href="../reference/datamodel.html#coroutine.send" title="coroutine.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a>，<a class="reference internal" href="../reference/datamodel.html#coroutine.throw" title="coroutine.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw()</span></code></a> 和 <a class="reference internal" href="../reference/datamodel.html#coroutine.close" title="coroutine.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a>。通常的实现里还需要实现 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__await__()</span></code> 方法。所有的 <a class="reference internal" href="#collections.abc.Coroutine" title="collections.abc.Coroutine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Coroutine</span></code></a> 实例都必须是 <a class="reference internal" href="#collections.abc.Awaitable" title="collections.abc.Awaitable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Awaitable</span></code></a> 实例。参见 <a class="reference internal" href="../glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a> 的定义。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>In CPython, generator-based coroutines (generators decorated with
-<a class="reference internal" href="types.html#types.coroutine" title="types.coroutine"><code class="xref py py-func docutils literal notranslate"><span class="pre">types.coroutine()</span></code></a>) are
-<em>awaitables</em>, even though they do not have an <code class="xref py py-meth docutils literal notranslate"><span class="pre">__await__()</span></code> method.
-Using <code class="docutils literal notranslate"><span class="pre">isinstance(gencoro,</span> <span class="pre">Coroutine)</span></code> for them will return <code class="docutils literal notranslate"><span class="pre">False</span></code>.
-Use <a class="reference internal" href="inspect.html#inspect.isawaitable" title="inspect.isawaitable"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.isawaitable()</span></code></a> to detect them.</p>
+<p>在 CPython 中，基于生成器的 coroutine（用 <a class="reference internal" href="types.html#types.coroutine" title="types.coroutine"><code class="xref py py-func docutils literal notranslate"><span class="pre">types.coroutine()</span></code></a> 装饰的生成器）是 <em>awaitables</em>，尽管它们没有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__await__()</span></code> 方法。对它们使用 <code class="docutils literal notranslate"><span class="pre">isinstance(gencoro,</span> <span class="pre">Coroutine)</span></code> 将返回 <code class="docutils literal notranslate"><span class="pre">False</span></code>。使用 <a class="reference internal" href="inspect.html#inspect.isawaitable" title="inspect.isawaitable"><code class="xref py py-func docutils literal notranslate"><span class="pre">inspect.isawaitable()</span></code></a> 来检测它们。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
@@ -595,7 +560,7 @@ Use <a class="reference internal" href="inspect.html#inspect.isawaitable" title=
 <dl class="py class">
 <dt class="sig sig-object py" id="collections.abc.AsyncGenerator">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">collections.abc.</span></span><span class="sig-name descname"><span class="pre">AsyncGenerator</span></span><a class="headerlink" href="#collections.abc.AsyncGenerator" title="永久链接至目标">¶</a></dt>
-<dd><p>为异步生成器类提供的抽象基类，这些类实现了定义在 <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0525"><strong>PEP 525</strong></a> 和 <span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 里的协议。</p>
+<dd><p>为异步生成器类提供的抽象基类，这些类实现了定义在 <span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0525"><strong>PEP 525</strong></a> 和 <span class="target" id="index-13"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 里的协议。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能.</span></p>
 </div>
@@ -604,8 +569,7 @@ Use <a class="reference internal" href="inspect.html#inspect.isawaitable" title=
 </section>
 <section id="examples-and-recipes">
 <h2>Examples and Recipes<a class="headerlink" href="#examples-and-recipes" title="永久链接至标题">¶</a></h2>
-<p>ABCs allow us to ask classes or instances if they provide
-particular functionality, for example:</p>
+<p>ABC 允许我们询问类或实例是否提供特定的功能，例如：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">myvar</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sized</span><span class="p">):</span>
     <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">myvar</span><span class="p">)</span>
@@ -645,7 +609,7 @@ particular functionality, for example:</p>
 <p class="admonition-title">参见</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://code.activestate.com/recipes/576694/">OrderedSet recipe</a> 是基于 <a class="reference internal" href="#collections.abc.MutableSet" title="collections.abc.MutableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableSet</span></code></a> 构建的一个示例。</p></li>
-<li><p>对于抽象基类，参见 <a class="reference internal" href="abc.html#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> 模块和 <span class="target" id="index-12"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a>。</p></li>
+<li><p>对于抽象基类，参见 <a class="reference internal" href="abc.html#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> 模块和 <span class="target" id="index-14"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a>。</p></li>
 </ul>
 </div>
 </section>
@@ -662,7 +626,7 @@ particular functionality, for example:</p>
   <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> --- 容器的抽象基类</a><ul>
 <li><a class="reference internal" href="#collections-abstract-base-classes">容器抽象基类</a></li>
-<li><a class="reference internal" href="#collections-abstract-base-classes-detailed-descriptions">Collections Abstract Base Classes -- Detailed Descriptions</a></li>
+<li><a class="reference internal" href="#collections-abstract-base-classes-detailed-descriptions">容器抽象基类 -- 详细描述</a></li>
 <li><a class="reference internal" href="#examples-and-recipes">Examples and Recipes</a></li>
 </ul>
 </li>
@@ -752,7 +716,7 @@ particular functionality, for example:</p>
 <br />
     <br />
 
-    最后更新于 1月 19, 2022.
+    最后更新于 1月 20, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

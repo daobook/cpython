@@ -866,11 +866,11 @@ dict insertion, O(n<sup>2</sup>) complexity.  See
 </section>
 <section id="implementing-descriptors">
 <span id="descriptors"></span><h4><span class="section-number">3.3.2.2. </span>实现描述器<a class="headerlink" href="#implementing-descriptors" title="永久链接至标题">¶</a></h4>
-<p>以下方法仅当一个包含该方法的类（称为 <em>描述器</em> 类）的实例出现于 <em>owner</em> 类中的时候才会起作用（该描述器必须在所有者类或其某个上级类的字典中）。在以下示例中，“属性”指的是名称为所有者类 <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> 中的特征属性的键名的属性。</p>
+<p>以下方法仅当一个包含该方法的类（称为 <em>描述器</em> 类）的实例出现于 <em>owner</em> 类中的时候才会起作用（该描述器必须在 <em>owner</em> 类或其某个上级类的字典中）。在以下示例中，“属性”指的是名称为 <em>owner</em> 类 <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> 中的特征属性的键名的属性。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__get__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__get__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__get__" title="永久链接至目标">¶</a></dt>
-<dd><p>调用此方法以获取所有者类的属性（类属性访问）或该类的实例的属性（实例属性访问）。可选的 <em>owner</em> 参数是所有者类而 <em>instance</em> 是被用来访问属性的实例，如果通过 <em>owner</em> 来访问属性则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<dd><p>调用此方法以获取 <em>owner</em> 类的属性（类属性访问）或该类的实例的属性（实例属性访问）。可选的 <em>owner</em> 参数是 <em>owner</em> 类而 <em>instance</em> 是被用来访问属性的实例，如果通过 <em>owner</em> 来访问属性则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 <p>此方法应当返回计算得到的属性值或是引发 <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> 异常。</p>
 <p><span class="target" id="index-120"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0252"><strong>PEP 252</strong></a> 指明 <a class="reference internal" href="#object.__get__" title="object.__get__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code></a> 为带有一至二个参数的可调用对象。 Python 自身内置的描述器支持此规格定义；但是，某些第三方工具可能要求必须带两个参数。 Python 自身的 <a class="reference internal" href="#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code></a> 实现总是会传入两个参数，无论它们是否被要求提供。</p>
 </dd></dl>
@@ -878,14 +878,14 @@ dict insertion, O(n<sup>2</sup>) complexity.  See
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__set__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__set__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__set__" title="永久链接至目标">¶</a></dt>
-<dd><p>调用此方法以设置 <em>instance</em> 指定的所有者类的实例的属性为新值 <em>value</em>。</p>
+<dd><p>调用此方法以设置 <em>instance</em> 指定的 <em>owner</em> 类的实例的属性为新值 <em>value</em>。</p>
 <p>请注意，添加 <a class="reference internal" href="#object.__set__" title="object.__set__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__set__()</span></code></a> 或 <a class="reference internal" href="#object.__delete__" title="object.__delete__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__delete__()</span></code></a> 会将描述器变成“数据描述器”。 更多细节请参阅 <a class="reference internal" href="#descriptor-invocation"><span class="std std-ref">调用描述器</span></a>。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__delete__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__delete__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__delete__" title="永久链接至目标">¶</a></dt>
-<dd><p>调用此方法以删除 <em>instance</em> 指定的所有者类的实例的属性。</p>
+<dd><p>调用此方法以删除 <em>instance</em> 指定的 <em>owner</em> 类的实例的属性。</p>
 </dd></dl>
 
 <p>属性 <code class="xref py py-attr docutils literal notranslate"><span class="pre">__objclass__</span></code> 会被 <a class="reference internal" href="../library/inspect.html#module-inspect" title="inspect: Extract information and source code from live objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">inspect</span></code></a> 模块解读为指定此对象定义所在的类（正确设置此属性有助于动态类属性的运行时内省）。对于可调用对象来说，它可以指明预期或要求提供一个特定类型（或子类）的实例作为第一个位置参数（例如，CPython 会为实现于 C 中的未绑定方法设置此属性）。</p>
@@ -974,7 +974,7 @@ and makes callbacks to those with a <a class="reference internal" href="#object.
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__set_name__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__set_name__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__set_name__" title="永久链接至目标">¶</a></dt>
-<dd><p>在所有者类 <em>owner</em> 创建时被调用。描述器会被赋值给 <em>name</em></p>
+<dd><p>在 <em>owner</em> 类 <em>owner</em> 创建时被调用。描述器会被赋值给 <em>name</em></p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>  <span class="c1"># Automatically calls: x.__set_name__(A, &#39;x&#39;)</span>
 </pre></div>
@@ -1985,7 +1985,7 @@ supported, which is why the reflected method is not called.</p>
 <br />
     <br />
 
-    最后更新于 1月 19, 2022.
+    最后更新于 1月 20, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
