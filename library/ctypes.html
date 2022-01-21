@@ -255,7 +255,7 @@ Windows, or macOS, they contain doctest directives in comments.</p>
 </pre></div>
 </div>
 <p><em>windll</em> 不会通过这样的魔法手段来帮你决定选择哪一种函数，你必须显式的调用 <code class="docutils literal notranslate"><span class="pre">GetModuleHandleA</span></code> 或 <code class="docutils literal notranslate"><span class="pre">GetModuleHandleW</span></code>，并分别使用字节对象或字符串对象作参数。</p>
-<p>有时候，dlls的导出的函数名不符合 Python 的标识符规范，比如 <code class="docutils literal notranslate"><span class="pre">&quot;??2&#64;YAPAXI&#64;Z&quot;</span></code>。此时，你必须使用 <a class="reference internal" href="functions.html#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 方法来获得该函数。</p>
+<p>有时候，dlls 的导出的函数名不符合 Python 的标识符规范，比如 <code class="docutils literal notranslate"><span class="pre">&quot;??2&#64;YAPAXI&#64;Z&quot;</span></code>。此时，你必须使用 <a class="reference internal" href="functions.html#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 方法来获得该函数。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">getattr</span><span class="p">(</span><span class="n">cdll</span><span class="o">.</span><span class="n">msvcrt</span><span class="p">,</span> <span class="s2">&quot;??2@YAPAXI@Z&quot;</span><span class="p">)</span>  
 <span class="go">&lt;_FuncPtr object at 0x...&gt;</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -276,7 +276,7 @@ Windows, or macOS, they contain doctest directives in comments.</p>
 </section>
 <section id="calling-functions">
 <span id="ctypes-calling-functions"></span><h3>调用函数<a class="headerlink" href="#calling-functions" title="永久链接至标题">¶</a></h3>
-<p>你可以貌似是调用其它 Python 函数那样直接调用这些函数。在这个例子中，我们调用了 <code class="docutils literal notranslate"><span class="pre">time()</span></code> 函数，该函数返回一个系统时间戳（从 Unix 时间起点到现在的秒数），而``GetModuleHandleA()`` 函数返回一个 win32 模块句柄。</p>
+<p>你可以貌似是调用其它 Python 函数那样直接调用这些函数。在这个例子中，我们调用了 <code class="docutils literal notranslate"><span class="pre">time()</span></code> 函数，该函数返回一个系统时间戳（从 Unix 时间起点到现在的秒数），而 <code class="docutils literal notranslate"><span class="pre">GetModuleHandleA()</span></code> 函数返回一个 win32 模块句柄。</p>
 <p>此函数中调用的两个函数都使用了空指针（用 <code class="docutils literal notranslate"><span class="pre">None</span></code> 作为空指针）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>  
 <span class="go">1150640792</span>
@@ -482,7 +482,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 </section>
 <section id="calling-functions-continued">
 <span id="ctypes-calling-functions-continued"></span><h3>调用函数，继续<a class="headerlink" href="#calling-functions-continued" title="永久链接至标题">¶</a></h3>
-<p>注意 printf 将打印到真正标准输出设备，而*不是* <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>，因此这些实例只能在控制台提示符下工作，而不能在 <em>IDLE</em> 或 <em>PythonWin</em> 中运行。</p>
+<p>注意 printf 将打印到真正标准输出设备，而 <em>不是</em> <a class="reference internal" href="sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>，因此这些实例只能在控制台提示符下工作，而不能在 <em>IDLE</em> 或 <em>PythonWin</em> 中运行。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">printf</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">printf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">printf</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello, </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;World!&quot;</span><span class="p">)</span>
 <span class="go">Hello, World!</span>
@@ -500,7 +500,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<p>正如前面所提到过的，除了整数、字符串以及字节串之外，所有的 Python 类型都必须使用它们对应的 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 类型包装，才能够被正确地转换为所需的C语言类型。</p>
+<p>正如前面所提到过的，除了整数、字符串以及字节串之外，所有的 Python 类型都必须使用它们对应的 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 类型包装，才能够被正确地转换为所需的 C 语言类型。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">printf</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;An int </span><span class="si">%d</span><span class="s2">, a double </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">c_double</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>
 <span class="go">An int 1234, a double 3.140000</span>
 <span class="go">31</span>
@@ -510,7 +510,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 </section>
 <section id="calling-functions-with-your-own-custom-data-types">
 <span id="ctypes-calling-functions-with-own-custom-data-types"></span><h3>使用自定义的数据类型调用函数<a class="headerlink" href="#calling-functions-with-your-own-custom-data-types" title="永久链接至标题">¶</a></h3>
-<p>你也可以通过自定义  <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 参数转换方式来允许自定义类型作为参数。 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 会寻找 <code class="xref py py-attr docutils literal notranslate"><span class="pre">_as_parameter_</span></code> 属性并使用它作为函数参数。当然，它必须是数字、字符串或者二进制字符串:</p>
+<p>你也可以通过自定义  <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 参数转换方式来允许自定义类型作为参数。<a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 会寻找 <code class="xref py py-attr docutils literal notranslate"><span class="pre">_as_parameter_</span></code> 属性并使用它作为函数参数。当然，它必须是数字、字符串或者二进制字符串:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Bottles</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
 <span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">_as_parameter_</span> <span class="o">=</span> <span class="n">number</span>
@@ -2209,7 +2209,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <br />
     <br />
 
-    最后更新于 1月 20, 2022.
+    最后更新于 1月 21, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
