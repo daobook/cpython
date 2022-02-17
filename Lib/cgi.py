@@ -85,10 +85,7 @@ def initlog(*allargs):
             logfp = open(logfile, "a", encoding="locale")
         except OSError:
             pass
-    if not logfp:
-        log = nolog
-    else:
-        log = dolog
+    log = nolog if not logfp else dolog
     log(*allargs)
 
 def dolog(fmt, *args):
@@ -147,16 +144,12 @@ def parse(fp=None, environ=os.environ, keep_blank_values=0,
 
     # field keys and values (except for files) are returned as strings
     # an encoding is required to decode the bytes read from self.fp
-    if hasattr(fp,'encoding'):
-        encoding = fp.encoding
-    else:
-        encoding = 'latin-1'
-
+    encoding = fp.encoding if hasattr(fp,'encoding') else 'latin-1'
     # fp.read() must return bytes
     if isinstance(fp, TextIOWrapper):
         fp = fp.buffer
 
-    if not 'REQUEST_METHOD' in environ:
+    if 'REQUEST_METHOD' not in environ:
         environ['REQUEST_METHOD'] = 'GET'       # For testing stand-alone
     if environ['REQUEST_METHOD'] == 'POST':
         ctype, pdict = parse_header(environ['CONTENT_TYPE'])
@@ -170,19 +163,18 @@ def parse(fp=None, environ=os.environ, keep_blank_values=0,
         else:
             qs = ''                     # Unknown content-type
         if 'QUERY_STRING' in environ:
-            if qs: qs = qs + '&'
+            if qs:
+                qs = f'{qs}&'
             qs = qs + environ['QUERY_STRING']
         elif sys.argv[1:]:
-            if qs: qs = qs + '&'
+            if qs:
+                qs = f'{qs}&'
             qs = qs + sys.argv[1]
         environ['QUERY_STRING'] = qs    # XXX Shouldn't, really
     elif 'QUERY_STRING' in environ:
         qs = environ['QUERY_STRING']
     else:
-        if sys.argv[1:]:
-            qs = sys.argv[1]
-        else:
-            qs = ""
+        qs = sys.argv[1] if sys.argv[1:] else ""
         environ['QUERY_STRING'] = qs    # XXX Shouldn't, really
     return urllib.parse.parse_qs(qs, keep_blank_values, strict_parsing,
                                  encoding=encoding, separator=separator)
@@ -233,7 +225,7 @@ def parse_header(line):
     Return the main content-type and a dictionary of options.
 
     """
-    parts = _parseparam(';' + line)
+    parts = _parseparam(f';{line}')
     key = parts.__next__()
     pdict = {}
     for p in parts:

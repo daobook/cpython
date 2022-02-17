@@ -33,7 +33,7 @@ def get_header_version_info(srcdir):
 
     release = version = '%s.%s' % (d['PY_MAJOR_VERSION'], d['PY_MINOR_VERSION'])
     micro = int(d['PY_MICRO_VERSION'])
-    release += '.' + str(micro)
+    release += f'.{micro}'
 
     level = d['PY_RELEASE_LEVEL']
     suffixes = {

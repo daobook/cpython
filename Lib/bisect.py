@@ -31,22 +31,12 @@ def bisect_right(a, x, lo=0, hi=None, *, key=None):
         raise ValueError('lo must be non-negative')
     if hi is None:
         hi = len(a)
-    # Note, the comparison uses "<" to match the
-    # __lt__() logic in list.sort() and in heapq.
-    if key is None:
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if x < a[mid]:
-                hi = mid
-            else:
-                lo = mid + 1
-    else:
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if x < key(a[mid]):
-                hi = mid
-            else:
-                lo = mid + 1
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if key is None and x < a[mid] or key is not None and x < key(a[mid]):
+            hi = mid
+        else:
+            lo = mid + 1
     return lo
 
 
@@ -80,22 +70,12 @@ def bisect_left(a, x, lo=0, hi=None, *, key=None):
         raise ValueError('lo must be non-negative')
     if hi is None:
         hi = len(a)
-    # Note, the comparison uses "<" to match the
-    # __lt__() logic in list.sort() and in heapq.
-    if key is None:
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if a[mid] < x:
-                lo = mid + 1
-            else:
-                hi = mid
-    else:
-        while lo < hi:
-            mid = (lo + hi) // 2
-            if key(a[mid]) < x:
-                lo = mid + 1
-            else:
-                hi = mid
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if key is None and a[mid] < x or key is not None and key(a[mid]) < x:
+            lo = mid + 1
+        else:
+            hi = mid
     return lo
 
 
