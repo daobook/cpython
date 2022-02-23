@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-16 17:17+0800\n"
+"POT-Creation-Date: 2022-02-23 14:07+0800\n"
 "PO-Revision-Date: 2021-06-28 01:13+0000\n"
 "Last-Translator: laazy <laaazy@sjtu.edu.cn>, 2021\n"
 "Language: zh_CN\n"
@@ -40,7 +40,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.0\n"
+"Generated-By: Babel 2.9.1\n"
 
 #: ../../library/stdtypes.rst:8
 msgid "Built-in Types"
@@ -5855,61 +5855,83 @@ msgstr "GenericAlias 类型"
 
 #: ../../library/stdtypes.rst:4837
 msgid ""
-"``GenericAlias`` objects are created by subscripting a class (usually a "
-"container), such as ``list[int]``.  They are intended primarily for "
-":term:`type annotations <annotation>`."
+"``GenericAlias`` objects are generally created by :ref:`subscripting "
+"<subscriptions>` a class. They are most often used with :ref:`container "
+"classes <sequence-types>`, such as :class:`list` or :class:`dict`. For "
+"example, ``list[int]`` is a ``GenericAlias`` object created by "
+"subscripting the ``list`` class with the argument :class:`int`. "
+"``GenericAlias`` objects are intended primarily for use with :term:`type "
+"annotations <annotation>`."
 msgstr ""
-"``GenericAlias`` 对象是创建用来对类（通常是容器类）作下标的，如 ``list[int]``。主要用于 :term:`type"
-" annotations <annotation>`。"
 
-#: ../../library/stdtypes.rst:4841
+#: ../../library/stdtypes.rst:4847
 msgid ""
-"Usually, the :ref:`subscription <subscriptions>` of container objects "
-"calls the method :meth:`__getitem__` of the object.  However, the "
-"subscription of some containers' classes may call the classmethod "
-":meth:`__class_getitem__` of the class instead. The classmethod "
-":meth:`__class_getitem__` should return a ``GenericAlias`` object."
+"It is generally only possible to subscript a class if the class "
+"implements the special method :meth:`~object.__class_getitem__`."
 msgstr ""
-"通常，容器对象的 :ref:`抽取 <subscriptions>` 操作会调用该对象的 :meth:`__getitem__` 方法。 "
-"但是，对某些容器类执行抽取操作可能会改去调用该类的 :meth:`__class_getitem__` 类方法。 "
-":meth:`__class_getitem__` 类方法应当会返回一个 ``GenericAlias`` 对象。"
 
-#: ../../library/stdtypes.rst:4848
+#: ../../library/stdtypes.rst:4850
+#, fuzzy
 msgid ""
-"If the :meth:`__getitem__` of the class' metaclass is present, it will "
-"take precedence over the :meth:`__class_getitem__` defined in the class "
-"(see :pep:`560` for more details)."
-msgstr ""
-"如果元类的 :meth:`__getitem__` 存在，将优先于类定义的 :meth:`__class_getitem__`  （详见 :pep:`560`）。"
-
-#: ../../library/stdtypes.rst:4852
-msgid ""
-"The ``GenericAlias`` object acts as a proxy for :term:`generic types "
-"<generic type>`, implementing *parameterized generics* - a specific "
-"instance of a generic which provides the types for container elements."
+"A ``GenericAlias`` object acts as a proxy for a :term:`generic type`, "
+"implementing *parameterized generics*."
 msgstr ""
 "``GenericAlias`` 对象作为 :term:`泛型类型 <generic type>` 的代理，具体实现 *形参化的泛型* —— "
 "一个泛型的具体实例，为容器元素提供类型。"
 
-#: ../../library/stdtypes.rst:4856
+#: ../../library/stdtypes.rst:4853
 msgid ""
-"The user-exposed type for the ``GenericAlias`` object can be accessed "
-"from :class:`types.GenericAlias` and used for :func:`isinstance` checks."
-"  It can also be used to create ``GenericAlias`` objects directly."
+"For a container class, the argument(s) supplied to a :ref:`subscription "
+"<subscriptions>` of the class may indicate the type(s) of the elements an"
+" object contains. For example, ``set[bytes]`` can be used in type "
+"annotations to signify a :class:`set` in which all the elements are of "
+"type :class:`bytes`."
+msgstr ""
+
+#: ../../library/stdtypes.rst:4859
+msgid ""
+"For a class which defines :meth:`~object.__class_getitem__` but is not a "
+"container, the argument(s) supplied to a subscription of the class will "
+"often indicate the return type(s) of one or more methods defined on an "
+"object. For example, :mod:`regular expressions <re>` can be used on both "
+"the :class:`str` data type and the :class:`bytes` data type:"
+msgstr ""
+
+#: ../../library/stdtypes.rst:4865
+msgid ""
+"If ``x = re.search('foo', 'foo')``, ``x`` will be a :ref:`re.Match "
+"<match-objects>` object where the return values of ``x.group(0)`` and "
+"``x[0]`` will both be of type :class:`str`. We can represent this kind of"
+" object in type annotations with the ``GenericAlias`` ``re.Match[str]``."
+msgstr ""
+
+#: ../../library/stdtypes.rst:4871
+msgid ""
+"If ``y = re.search(b'bar', b'bar')``, (note the ``b`` for "
+":class:`bytes`), ``y`` will also be an instance of ``re.Match``, but the "
+"return values of ``y.group(0)`` and ``y[0]`` will both be of type "
+":class:`bytes`. In type annotations, we would represent this variety of "
+":ref:`re.Match <match-objects>` objects with ``re.Match[bytes]``."
+msgstr ""
+
+#: ../../library/stdtypes.rst:4877
+#, fuzzy
+msgid ""
+"``GenericAlias`` objects are instances of the class "
+":class:`types.GenericAlias`, which can also be used to create "
+"``GenericAlias`` objects directly."
 msgstr ""
 "用户通过 ``GenericAlias`` 对象暴露的类型可由 :class:`types.GenericAlias` 访问，并用于 "
 ":func:`isinstance` 检查。也可用来直接创建 ``GenericAlias`` 对象。"
 
-#: ../../library/stdtypes.rst:4862
+#: ../../library/stdtypes.rst:4883
 msgid ""
-"Creates a ``GenericAlias`` representing a type ``T`` containing elements "
-"of types *X*, *Y*, and more depending on the ``T`` used. For example, a "
+"Creates a ``GenericAlias`` representing a type ``T`` parameterized by "
+"types *X*, *Y*, and more depending on the ``T`` used. For example, a "
 "function expecting a :class:`list` containing :class:`float` elements::"
 msgstr ""
-"创建代表类型 ``T`` 的 ``GenericAlias`` ，包含  *X* 、*Y* 等类型的元素，元素类型更多取决于所用的 "
-"``T``。比如某函数需要包含 :class:`float` 元素的 :class:`list`  ："
 
-#: ../../library/stdtypes.rst:4870
+#: ../../library/stdtypes.rst:4891
 msgid ""
 "Another example for :term:`mapping` objects, using a :class:`dict`, which"
 " is a generic type expecting two type parameters representing the key "
@@ -5920,238 +5942,320 @@ msgstr ""
 ":class:`dict`，泛型的两个类型参数分别代表了键类型和值类型。本例中的函数需要一个 ``dict``，其键的类型为 "
 ":class:`str`，值的类型为 :class:`int`:。"
 
-#: ../../library/stdtypes.rst:4878
+#: ../../library/stdtypes.rst:4899
 msgid ""
 "The builtin functions :func:`isinstance` and :func:`issubclass` do not "
 "accept ``GenericAlias`` types for their second argument::"
-msgstr "内置函数 :func:`isinstance` 和 :func:`issubclass` 不接受第二个参数为 ``GenericAlias`` 类型："
+msgstr ""
+"内置函数 :func:`isinstance` 和 :func:`issubclass` 不接受第二个参数为 ``GenericAlias`` "
+"类型："
 
-#: ../../library/stdtypes.rst:4886
+#: ../../library/stdtypes.rst:4907
+#, fuzzy
 msgid ""
 "The Python runtime does not enforce :term:`type annotations "
 "<annotation>`. This extends to generic types and their type parameters. "
-"When creating an object from a ``GenericAlias``, container elements are "
-"not checked against their type. For example, the following code is "
-"discouraged, but will run without errors::"
+"When creating a container object from a ``GenericAlias``, the elements in"
+" the container are not checked against their type. For example, the "
+"following code is discouraged, but will run without errors::"
 msgstr ""
 "Python 运行时不会强制执行 :term:`type annotations "
 "<annotation>`。这种方式延伸到了泛型及其类型参数。当由 ``GenericAlias`` "
 "创建对象时，不会检查容器元素的类型。例如，以下代码虽不值得鼓励，但运行时不会出错："
 
-#: ../../library/stdtypes.rst:4896
+#: ../../library/stdtypes.rst:4917
 msgid ""
 "Furthermore, parameterized generics erase type parameters during object "
 "creation::"
 msgstr "不仅如此，在创建对象的过程中，应用了参数后的泛型还会抹除类型参数："
 
-#: ../../library/stdtypes.rst:4907
+#: ../../library/stdtypes.rst:4928
 msgid ""
 "Calling :func:`repr` or :func:`str` on a generic shows the parameterized "
 "type::"
 msgstr "在泛型上调用 :func:`repr` 或 :func:`str` 会显示应用参数之后的类型："
 
-#: ../../library/stdtypes.rst:4915
+#: ../../library/stdtypes.rst:4936
+#, fuzzy
 msgid ""
-"The :meth:`__getitem__` method of generics will raise an exception to "
-"disallow mistakes like ``dict[str][str]``::"
+"The :meth:`~object.__getitem__` method of generic containers will raise "
+"an exception to disallow mistakes like ``dict[str][str]``::"
 msgstr "调用泛型的 :meth:`__getitem__` 方法将触发异常，以防出现 ``dict[str][str]`` 之类的错误："
 
-#: ../../library/stdtypes.rst:4923
+#: ../../library/stdtypes.rst:4944
+#, fuzzy
 msgid ""
 "However, such expressions are valid when :ref:`type variables <generics>`"
 " are used.  The index must have as many elements as there are type "
-"variable items in the ``GenericAlias`` object's :attr:`__args__ "
-"<genericalias.__args__>`. ::"
+"variable items in the ``GenericAlias`` object's "
+":attr:`~genericalias.__args__`. ::"
 msgstr ""
 "不过在用到 :ref:`type variables <generics>` 时，这种表达式是有效的。索引元素数量必须与 "
 "``GenericAlias`` 对象的 :attr:`__args__ <genericalias.__args__>` 的类型变量项数一样。"
 
-#: ../../library/stdtypes.rst:4934
-msgid "Standard Generic Collections"
+#: ../../library/stdtypes.rst:4955
+#, fuzzy
+msgid "Standard Generic Classes"
 msgstr "标准的泛型集合类"
 
-#: ../../library/stdtypes.rst:4936
-msgid "These standard library collections support parameterized generics."
+#: ../../library/stdtypes.rst:4957
+#, fuzzy
+msgid ""
+"The following standard library classes support parameterized generics. "
+"This list is non-exhaustive."
 msgstr "以下标准集合类支持参数化泛型："
 
-#: ../../library/stdtypes.rst:4938
+#: ../../library/stdtypes.rst:4960
 msgid ":class:`tuple`"
 msgstr ":class:`tuple`"
 
-#: ../../library/stdtypes.rst:4939
+#: ../../library/stdtypes.rst:4961
 msgid ":class:`list`"
 msgstr ":class:`list`"
 
-#: ../../library/stdtypes.rst:4940
+#: ../../library/stdtypes.rst:4962
 msgid ":class:`dict`"
 msgstr ":class:`dict`"
 
-#: ../../library/stdtypes.rst:4941
+#: ../../library/stdtypes.rst:4963
 msgid ":class:`set`"
 msgstr ":class:`set`"
 
-#: ../../library/stdtypes.rst:4942
+#: ../../library/stdtypes.rst:4964
 msgid ":class:`frozenset`"
 msgstr ":class:`frozenset`"
 
-#: ../../library/stdtypes.rst:4943
+#: ../../library/stdtypes.rst:4965
 msgid ":class:`type`"
 msgstr ":class:`type`"
 
-#: ../../library/stdtypes.rst:4944
+#: ../../library/stdtypes.rst:4966
 msgid ":class:`collections.deque`"
 msgstr ":class:`collections.deque`"
 
-#: ../../library/stdtypes.rst:4945
+#: ../../library/stdtypes.rst:4967
 msgid ":class:`collections.defaultdict`"
 msgstr ":class:`collections.defaultdict`"
 
-#: ../../library/stdtypes.rst:4946
+#: ../../library/stdtypes.rst:4968
 msgid ":class:`collections.OrderedDict`"
 msgstr ":class:`collections.OrderedDict`"
 
-#: ../../library/stdtypes.rst:4947
+#: ../../library/stdtypes.rst:4969
 msgid ":class:`collections.Counter`"
 msgstr ":class:`collections.Counter`"
 
-#: ../../library/stdtypes.rst:4948
+#: ../../library/stdtypes.rst:4970
 msgid ":class:`collections.ChainMap`"
 msgstr ":class:`collections.ChainMap`"
 
-#: ../../library/stdtypes.rst:4949
+#: ../../library/stdtypes.rst:4971
 msgid ":class:`collections.abc.Awaitable`"
 msgstr ":class:`collections.abc.Awaitable`"
 
-#: ../../library/stdtypes.rst:4950
+#: ../../library/stdtypes.rst:4972
 msgid ":class:`collections.abc.Coroutine`"
 msgstr ":class:`collections.abc.Coroutine`"
 
-#: ../../library/stdtypes.rst:4951
+#: ../../library/stdtypes.rst:4973
 msgid ":class:`collections.abc.AsyncIterable`"
 msgstr ":class:`collections.abc.AsyncIterable`"
 
-#: ../../library/stdtypes.rst:4952
+#: ../../library/stdtypes.rst:4974
 msgid ":class:`collections.abc.AsyncIterator`"
 msgstr ":class:`collections.abc.AsyncIterable`"
 
-#: ../../library/stdtypes.rst:4953
+#: ../../library/stdtypes.rst:4975
 msgid ":class:`collections.abc.AsyncGenerator`"
 msgstr ":class:`collections.abc.AsyncGenerator`"
 
-#: ../../library/stdtypes.rst:4954
+#: ../../library/stdtypes.rst:4976
 msgid ":class:`collections.abc.Iterable`"
 msgstr ":class:`collections.abc.Iterable`"
 
-#: ../../library/stdtypes.rst:4955
+#: ../../library/stdtypes.rst:4977
 msgid ":class:`collections.abc.Iterator`"
 msgstr ":class:`collections.abc.Iterator`"
 
-#: ../../library/stdtypes.rst:4956
+#: ../../library/stdtypes.rst:4978
 msgid ":class:`collections.abc.Generator`"
 msgstr ":class:`collections.abc.Generator`"
 
-#: ../../library/stdtypes.rst:4957
+#: ../../library/stdtypes.rst:4979
 msgid ":class:`collections.abc.Reversible`"
 msgstr ":class:`collections.abc.Reversible`"
 
-#: ../../library/stdtypes.rst:4958
+#: ../../library/stdtypes.rst:4980
 msgid ":class:`collections.abc.Container`"
 msgstr ":class:`collections.abc.Container`"
 
-#: ../../library/stdtypes.rst:4959
+#: ../../library/stdtypes.rst:4981
 msgid ":class:`collections.abc.Collection`"
 msgstr ":class:`collections.abc.Collection`"
 
-#: ../../library/stdtypes.rst:4960
+#: ../../library/stdtypes.rst:4982
 msgid ":class:`collections.abc.Callable`"
 msgstr ":class:`collections.abc.Callable`"
 
-#: ../../library/stdtypes.rst:4961
+#: ../../library/stdtypes.rst:4983
 msgid ":class:`collections.abc.Set`"
 msgstr ":class:`collections.abc.Set`"
 
-#: ../../library/stdtypes.rst:4962
+#: ../../library/stdtypes.rst:4984
 msgid ":class:`collections.abc.MutableSet`"
 msgstr ":class:`collections.abc.MutableSet`"
 
-#: ../../library/stdtypes.rst:4963
+#: ../../library/stdtypes.rst:4985
 msgid ":class:`collections.abc.Mapping`"
 msgstr ":class:`collections.abc.Mapping`"
 
-#: ../../library/stdtypes.rst:4964
+#: ../../library/stdtypes.rst:4986
 msgid ":class:`collections.abc.MutableMapping`"
 msgstr ":class:`collections.abc.MutableMapping`"
 
-#: ../../library/stdtypes.rst:4965
+#: ../../library/stdtypes.rst:4987
 msgid ":class:`collections.abc.Sequence`"
 msgstr ":class:`collections.abc.Sequence`"
 
-#: ../../library/stdtypes.rst:4966
+#: ../../library/stdtypes.rst:4988
 msgid ":class:`collections.abc.MutableSequence`"
 msgstr ":class:`collections.abc.MutableSequence`"
 
-#: ../../library/stdtypes.rst:4967
+#: ../../library/stdtypes.rst:4989
 msgid ":class:`collections.abc.ByteString`"
 msgstr ":class:`collections.abc.ByteString`"
 
-#: ../../library/stdtypes.rst:4968
+#: ../../library/stdtypes.rst:4990
 msgid ":class:`collections.abc.MappingView`"
 msgstr ":class:`collections.abc.MappingView`"
 
-#: ../../library/stdtypes.rst:4969
+#: ../../library/stdtypes.rst:4991
 msgid ":class:`collections.abc.KeysView`"
 msgstr ":class:`collections.abc.KeysView`"
 
-#: ../../library/stdtypes.rst:4970
+#: ../../library/stdtypes.rst:4992
 msgid ":class:`collections.abc.ItemsView`"
 msgstr ":class:`collections.abc.ItemsView`"
 
-#: ../../library/stdtypes.rst:4971
+#: ../../library/stdtypes.rst:4993
 msgid ":class:`collections.abc.ValuesView`"
 msgstr ":class:`collections.abc.ValuesView`"
 
-#: ../../library/stdtypes.rst:4972
+#: ../../library/stdtypes.rst:4994
 msgid ":class:`contextlib.AbstractContextManager`"
 msgstr ":class:`contextlib.AbstractContextManager`"
 
-#: ../../library/stdtypes.rst:4973
+#: ../../library/stdtypes.rst:4995
 msgid ":class:`contextlib.AbstractAsyncContextManager`"
 msgstr ":class:`contextlib.AbstractAsyncContextManager`"
 
-#: ../../library/stdtypes.rst:4974
+#: ../../library/stdtypes.rst:4996
+#, fuzzy
+msgid ":class:`dataclasses.Field`"
+msgstr ":class:`tuple`"
+
+#: ../../library/stdtypes.rst:4997
+msgid ":class:`functools.cached_property`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:4998
+msgid ":class:`functools.partialmethod`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:4999
+#, fuzzy
+msgid ":class:`os.PathLike`"
+msgstr ":class:`tuple`"
+
+#: ../../library/stdtypes.rst:5000
+#, fuzzy
+msgid ":class:`queue.LifoQueue`"
+msgstr ":class:`tuple`"
+
+#: ../../library/stdtypes.rst:5001
+#, fuzzy
+msgid ":class:`queue.Queue`"
+msgstr ":class:`tuple`"
+
+#: ../../library/stdtypes.rst:5002
+msgid ":class:`queue.PriorityQueue`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5003
+#, fuzzy
+msgid ":class:`queue.SimpleQueue`"
+msgstr ":class:`tuple`"
+
+#: ../../library/stdtypes.rst:5004
 msgid ":ref:`re.Pattern <re-objects>`"
 msgstr ":ref:`re.Pattern <re-objects>`"
 
-#: ../../library/stdtypes.rst:4975
+#: ../../library/stdtypes.rst:5005
 msgid ":ref:`re.Match <match-objects>`"
 msgstr ":ref:`re.Match <match-objects>`"
 
-#: ../../library/stdtypes.rst:4979
-msgid "Special Attributes of Generic Alias"
+#: ../../library/stdtypes.rst:5006
+msgid ":class:`shelve.BsdDbShelf`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5007
+msgid ":class:`shelve.DbfilenameShelf`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5008
+#, fuzzy
+msgid ":class:`shelve.Shelf`"
+msgstr ":class:`set`"
+
+#: ../../library/stdtypes.rst:5009
+msgid ":class:`types.MappingProxyType`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5010
+msgid ":class:`weakref.WeakKeyDictionary`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5011
+msgid ":class:`weakref.WeakMethod`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5012
+#, fuzzy
+msgid ":class:`weakref.WeakSet`"
+msgstr ":class:`set`"
+
+#: ../../library/stdtypes.rst:5013
+msgid ":class:`weakref.WeakValueDictionary`"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5018
+#, fuzzy
+msgid "Special Attributes of ``GenericAlias`` objects"
 msgstr "泛型的特殊属性"
 
-#: ../../library/stdtypes.rst:4981
+#: ../../library/stdtypes.rst:5020
 msgid "All parameterized generics implement special read-only attributes."
 msgstr "应用参数后的泛型都实现了一些特殊的只读属性："
 
-#: ../../library/stdtypes.rst:4985
+#: ../../library/stdtypes.rst:5024
 msgid "This attribute points at the non-parameterized generic class::"
 msgstr "本属性指向未应用参数之前的泛型类："
 
-#: ../../library/stdtypes.rst:4993
+#: ../../library/stdtypes.rst:5032
+#, fuzzy
 msgid ""
 "This attribute is a :class:`tuple` (possibly of length 1) of generic "
-"types passed to the original :meth:`__class_getitem__` of the generic "
-"container::"
+"types passed to the original :meth:`~object.__class_getitem__` of the "
+"generic class::"
 msgstr "该属性是传给泛型容器的原始 :meth:`__class_getitem__` 的泛型所组成的 :class:`tuple` (长度可能为 1)。"
 
-#: ../../library/stdtypes.rst:5003
+#: ../../library/stdtypes.rst:5042
 msgid ""
 "This attribute is a lazily computed tuple (possibly empty) of unique type"
 " variables found in ``__args__``::"
 msgstr "该属性是延迟计算出来的一个元组（可能为空），包含了  ``__args__`` 中的类型变量。"
 
-#: ../../library/stdtypes.rst:5014
+#: ../../library/stdtypes.rst:5053
 msgid ""
 "A ``GenericAlias`` object with :class:`typing.ParamSpec` parameters may "
 "not have correct ``__parameters__`` after substitution because "
@@ -6160,23 +6264,43 @@ msgstr ""
 "带有参数 :class:`typing.ParamSpec`  的 ``GenericAlias`` 对象，在类型替换后其 "
 "``__parameters__`` 可能会不准确，因为 :class:`typing.ParamSpec` 主要用于静态类型检查。"
 
-#: ../../library/stdtypes.rst:5020
-msgid ":pep:`585` -- \"Type Hinting Generics In Standard Collections\""
+#: ../../library/stdtypes.rst:5060
+msgid ":pep:`484` - Type Hints"
+msgstr ""
+
+#: ../../library/stdtypes.rst:5060
+msgid "Introducing Python's framework for type annotations."
+msgstr ""
+
+#: ../../library/stdtypes.rst:5065
+#, fuzzy
+msgid ":pep:`585` - Type Hinting Generics In Standard Collections"
 msgstr ":pep:`585` —— “标准集合类中的类型提示泛型”"
 
-#: ../../library/stdtypes.rst:5021
-msgid ":meth:`__class_getitem__` -- Used to implement parameterized generics."
-msgstr ":meth:`__class_getitem__` —— 用于实现应用参数后的泛型。"
+#: ../../library/stdtypes.rst:5063
+msgid ""
+"Introducing the ability to natively parameterize standard-library "
+"classes, provided they implement the special class method "
+":meth:`~object.__class_getitem__`."
+msgstr ""
 
-#: ../../library/stdtypes.rst:5022
-msgid ":ref:`generics` -- Generics in the :mod:`typing` module."
-msgstr ":ref:`generics` —— :mod:`typing` 模块中的泛型。"
+#: ../../library/stdtypes.rst:5068
+msgid ""
+":ref:`Generics`, :ref:`user-defined generics <user-defined-generics>` and"
+" :class:`typing.Generic`"
+msgstr ""
 
-#: ../../library/stdtypes.rst:5030
+#: ../../library/stdtypes.rst:5068
+msgid ""
+"Documentation on how to implement generic classes that can be "
+"parameterized at runtime and understood by static type-checkers."
+msgstr ""
+
+#: ../../library/stdtypes.rst:5077
 msgid "Union Type"
 msgstr "union 类型"
 
-#: ../../library/stdtypes.rst:5036
+#: ../../library/stdtypes.rst:5083
 msgid ""
 "A union object holds the value of the ``|`` (bitwise or) operation on "
 "multiple :ref:`type objects <bltin-type-objects>`.  These types are "
@@ -6188,7 +6312,7 @@ msgstr ""
 "这些类型主要用于 :term:`类型标注 <annotation>`。与 :data:`typing.Union` "
 "相比，联合类型表达式可以实现更简洁的类型提示语法。"
 
-#: ../../library/stdtypes.rst:5043
+#: ../../library/stdtypes.rst:5090
 msgid ""
 "Defines a union object which holds types *X*, *Y*, and so forth. ``X | "
 "Y`` means either X or Y.  It is equivalent to ``typing.Union[X, Y]``. For"
@@ -6198,45 +6322,45 @@ msgstr ""
 "定义包含了 *X*、*Y* 等类型的 union 对象。``X | Y`` 表示 X 或 Y。相当于``typing.Union[X, Y]`` "
 "。比如以下函数的参数应为类型  :class:`int` 或 :class:`float` ："
 
-#: ../../library/stdtypes.rst:5053
+#: ../../library/stdtypes.rst:5100
 msgid ""
 "Union objects can be tested for equality with other union objects.  "
 "Details:"
 msgstr "union 对象可与其他 union 对象进行比较。详细结果如下："
 
-#: ../../library/stdtypes.rst:5055
+#: ../../library/stdtypes.rst:5102
 msgid "Unions of unions are flattened::"
 msgstr "多次组合的结果会平推："
 
-#: ../../library/stdtypes.rst:5059
+#: ../../library/stdtypes.rst:5106
 msgid "Redundant types are removed::"
 msgstr "冗余的类型会被删除："
 
-#: ../../library/stdtypes.rst:5063
+#: ../../library/stdtypes.rst:5110
 msgid "When comparing unions, the order is ignored::"
 msgstr "在相互比较时，会忽略顺序："
 
-#: ../../library/stdtypes.rst:5067
+#: ../../library/stdtypes.rst:5114
 msgid "It is compatible with :data:`typing.Union`::"
 msgstr "与 :data:`typing.union` 兼容："
 
-#: ../../library/stdtypes.rst:5071
+#: ../../library/stdtypes.rst:5118
 msgid "Optional types can be spelled as a union with ``None``::"
 msgstr "Optional 类型可表示为与 ``None`` 的组合。"
 
-#: ../../library/stdtypes.rst:5078
+#: ../../library/stdtypes.rst:5125
 msgid ""
 "Calls to :func:`isinstance` and :func:`issubclass` are also supported "
 "with a union object::"
 msgstr ":func:`isinstance` 和 :func:`issubclass` 也支持 union 对象："
 
-#: ../../library/stdtypes.rst:5084
+#: ../../library/stdtypes.rst:5131
 msgid ""
 "However, union objects containing :ref:`parameterized generics <types-"
 "genericalias>` cannot be used::"
 msgstr "但不能使用包含 :ref:`parameterized generics <types-genericalias>` 的 union 对象："
 
-#: ../../library/stdtypes.rst:5092
+#: ../../library/stdtypes.rst:5139
 msgid ""
 "The user-exposed type for the union object can be accessed from "
 ":data:`types.UnionType` and used for :func:`isinstance` checks.  An "
@@ -6245,7 +6369,7 @@ msgstr ""
 "union 对象构成的用户类型可以经由 :data:`types.UnionType` 访问，并可用于 :func:`isinstance` "
 "检查。 而不能由类型直接实例化为对象："
 
-#: ../../library/stdtypes.rst:5105
+#: ../../library/stdtypes.rst:5152
 msgid ""
 "The :meth:`__or__` method for type objects was added to support the "
 "syntax ``X | Y``.  If a metaclass implements :meth:`__or__`, the Union "
@@ -6254,25 +6378,25 @@ msgstr ""
 "为了支持 ``X | Y`` 语法，类型对象加入了 :meth:`__or__` 方法。若是元类已实现了 :meth:`__or__`，union"
 " 也可以覆盖掉："
 
-#: ../../library/stdtypes.rst:5123
+#: ../../library/stdtypes.rst:5170
 msgid ":pep:`604` -- PEP proposing the ``X | Y`` syntax and the Union type."
 msgstr ":pep:`604` —— 提出了 ``X | Y`` 语法和 union 类型。"
 
-#: ../../library/stdtypes.rst:5131
+#: ../../library/stdtypes.rst:5178
 msgid "Other Built-in Types"
 msgstr "其他内置类型"
 
-#: ../../library/stdtypes.rst:5133
+#: ../../library/stdtypes.rst:5180
 msgid ""
 "The interpreter supports several other kinds of objects. Most of these "
 "support only one or two operations."
 msgstr "解释器支持一些其他种类的对象。 这些对象大都仅支持一两种操作。"
 
-#: ../../library/stdtypes.rst:5140
+#: ../../library/stdtypes.rst:5187
 msgid "Modules"
 msgstr "模块"
 
-#: ../../library/stdtypes.rst:5142
+#: ../../library/stdtypes.rst:5189
 msgid ""
 "The only special operation on a module is attribute access: ``m.name``, "
 "where *m* is a module and *name* accesses a name defined in *m*'s symbol "
@@ -6286,7 +6410,7 @@ msgstr ""
 "模块属性可以被赋值。 （请注意 :keyword:`import` 语句严格来说也是对模块对象的一种操作；``import foo`` "
 "不要求存在一个名为 *foo* 的模块对象，而是要求存在一个对于名为 *foo* 的模块的 (永久性) *定义*。）"
 
-#: ../../library/stdtypes.rst:5149
+#: ../../library/stdtypes.rst:5196
 msgid ""
 "A special attribute of every module is :attr:`~object.__dict__`. This is "
 "the dictionary containing the module's symbol table. Modifying this "
@@ -6301,7 +6425,7 @@ msgstr ""
 "``m.__dict__['a'] = 1``，这会将 ``m.a`` 定义为 ``1``，但是你不能写 ``m.__dict__ = "
 "{}``)。 不建议直接修改 :attr:`~object.__dict__`。"
 
-#: ../../library/stdtypes.rst:5157
+#: ../../library/stdtypes.rst:5204
 msgid ""
 "Modules built into the interpreter are written like this: ``<module 'sys'"
 " (built-in)>``.  If loaded from a file, they are written as ``<module "
@@ -6310,25 +6434,25 @@ msgstr ""
 "内置于解释器中的模块会写成这样: ``<module 'sys' (built-in)>``。 如果是从一个文件加载，则会写成 ``<module"
 " 'os' from '/usr/local/lib/pythonX.Y/os.pyc'>``。"
 
-#: ../../library/stdtypes.rst:5165
+#: ../../library/stdtypes.rst:5212
 msgid "Classes and Class Instances"
 msgstr "类与类实例"
 
-#: ../../library/stdtypes.rst:5167
+#: ../../library/stdtypes.rst:5214
 msgid "See :ref:`objects` and :ref:`class` for these."
 msgstr "关于这些类型请参阅 :ref:`objects` 和 :ref:`class`。"
 
-#: ../../library/stdtypes.rst:5173
+#: ../../library/stdtypes.rst:5220
 msgid "Functions"
 msgstr "函数"
 
-#: ../../library/stdtypes.rst:5175
+#: ../../library/stdtypes.rst:5222
 msgid ""
 "Function objects are created by function definitions.  The only operation"
 " on a function object is to call it: ``func(argument-list)``."
 msgstr "函数对象是通过函数定义创建的。 对函数对象的唯一操作是调用它: ``func(argument-list)``。"
 
-#: ../../library/stdtypes.rst:5178
+#: ../../library/stdtypes.rst:5225
 msgid ""
 "There are really two flavors of function objects: built-in functions and "
 "user-defined functions.  Both support the same operation (to call the "
@@ -6336,15 +6460,15 @@ msgid ""
 "object types."
 msgstr "实际上存在两种不同的函数对象：内置函数和用户自定义函数。 两者支持同样的操作（调用函数），但实现方式不同，因此对象类型也不同。"
 
-#: ../../library/stdtypes.rst:5182
+#: ../../library/stdtypes.rst:5229
 msgid "See :ref:`function` for more information."
 msgstr "更多信息请参阅 :ref:`function`。"
 
-#: ../../library/stdtypes.rst:5188
+#: ../../library/stdtypes.rst:5235
 msgid "Methods"
 msgstr "方法"
 
-#: ../../library/stdtypes.rst:5192
+#: ../../library/stdtypes.rst:5239
 msgid ""
 "Methods are functions that are called using the attribute notation. There"
 " are two flavors: built-in methods (such as :meth:`append` on lists) and "
@@ -6354,7 +6478,7 @@ msgstr ""
 "方法是使用属性表示法来调用的函数。 存在两种形式：内置方法（例如列表的 :meth:`append` 方法）和类实例方法。 "
 "内置方法由支持它们的类型来描述。"
 
-#: ../../library/stdtypes.rst:5197
+#: ../../library/stdtypes.rst:5244
 msgid ""
 "If you access a method (a function defined in a class namespace) through "
 "an instance, you get a special object: a :dfn:`bound method` (also called"
@@ -6370,7 +6494,7 @@ msgstr ""
 "操作该方法的对象，而 ``m.__func__`` 是实现该方法的函数。 调用 ``m(arg-1, arg-2, ..., arg-n)`` "
 "完全等价于调用 ``m.__func__(m.__self__, arg-1, arg-2, ..., arg-n)``。"
 
-#: ../../library/stdtypes.rst:5206
+#: ../../library/stdtypes.rst:5253
 msgid ""
 "Like function objects, bound method objects support getting arbitrary "
 "attributes.  However, since method attributes are actually stored on the "
@@ -6384,15 +6508,15 @@ msgstr ""
 "(``meth.__func__``)，因此不允许设置绑定方法的方法属性。 尝试设置方法的属性将会导致引发 "
 ":exc:`AttributeError`。 想要设置方法属性，你必须在下层的函数对象中显式地对其进行设置::"
 
-#: ../../library/stdtypes.rst:5226 ../../library/stdtypes.rst:5257
+#: ../../library/stdtypes.rst:5273 ../../library/stdtypes.rst:5304
 msgid "See :ref:`types` for more information."
 msgstr "更多信息请参阅 :ref:`types`。"
 
-#: ../../library/stdtypes.rst:5234
+#: ../../library/stdtypes.rst:5281
 msgid "Code Objects"
 msgstr "代码对象"
 
-#: ../../library/stdtypes.rst:5240
+#: ../../library/stdtypes.rst:5287
 msgid ""
 "Code objects are used by the implementation to represent \"pseudo-"
 "compiled\" executable Python code such as a function body. They differ "
@@ -6406,7 +6530,7 @@ msgstr ""
 "代码对象由内置的 :func:`compile` 函数返回，并可通过从函数对象的 :attr:`__code__` 属性从中提取。 另请参阅 "
 ":mod:`code` 模块。"
 
-#: ../../library/stdtypes.rst:5247
+#: ../../library/stdtypes.rst:5294
 msgid ""
 "Accessing ``__code__`` raises an :ref:`auditing event <auditing>` "
 "``object.__getattr__`` with arguments ``obj`` and ``\"__code__\"``."
@@ -6414,17 +6538,17 @@ msgstr ""
 "访问 ``__code__`` 会触发 :ref:`审计事件 <auditing>` ``object.__getattr__``，参数为 "
 "``obj`` 和 ``\"__code__\"``。"
 
-#: ../../library/stdtypes.rst:5254
+#: ../../library/stdtypes.rst:5301
 msgid ""
 "A code object can be executed or evaluated by passing it (instead of a "
 "source string) to the :func:`exec` or :func:`eval`  built-in functions."
 msgstr "可以通过将代码对象（而非源码字符串）传给 :func:`exec` 或 :func:`eval` 内置函数来执行或求值。"
 
-#: ../../library/stdtypes.rst:5263
+#: ../../library/stdtypes.rst:5310
 msgid "Type Objects"
 msgstr "类型对象"
 
-#: ../../library/stdtypes.rst:5269
+#: ../../library/stdtypes.rst:5316
 msgid ""
 "Type objects represent the various object types.  An object's type is "
 "accessed by the built-in function :func:`type`.  There are no special "
@@ -6434,15 +6558,15 @@ msgstr ""
 "类型对象表示各种对象类型。 对象的类型可通过内置函数 :func:`type` 来获取。 类型没有特殊的操作。 标准库模块 "
 ":mod:`types` 定义了所有标准内置类型的名称。"
 
-#: ../../library/stdtypes.rst:5274
+#: ../../library/stdtypes.rst:5321
 msgid "Types are written like this: ``<class 'int'>``."
 msgstr "类型以这样的写法来表示: ``<class 'int'>``。"
 
-#: ../../library/stdtypes.rst:5280
+#: ../../library/stdtypes.rst:5327
 msgid "The Null Object"
 msgstr "空对象"
 
-#: ../../library/stdtypes.rst:5282
+#: ../../library/stdtypes.rst:5329
 msgid ""
 "This object is returned by functions that don't explicitly return a "
 "value.  It supports no special operations.  There is exactly one null "
@@ -6452,15 +6576,15 @@ msgstr ""
 "此对象会由不显式地返回值的函数所返回。 它不支持任何特殊的操作。 空对象只有一种值 ``None`` (这是个内置名称)。 "
 "``type(None)()`` 会生成同一个单例。"
 
-#: ../../library/stdtypes.rst:5286
+#: ../../library/stdtypes.rst:5333
 msgid "It is written as ``None``."
 msgstr "该对象的写法为 ``None``。"
 
-#: ../../library/stdtypes.rst:5293
+#: ../../library/stdtypes.rst:5340
 msgid "The Ellipsis Object"
 msgstr "省略符对象"
 
-#: ../../library/stdtypes.rst:5295
+#: ../../library/stdtypes.rst:5342
 msgid ""
 "This object is commonly used by slicing (see :ref:`slicings`).  It "
 "supports no special operations.  There is exactly one ellipsis object, "
@@ -6470,15 +6594,15 @@ msgstr ""
 "此对象常被用于切片 (参见 :ref:`slicings`)。 它不支持任何特殊的操作。 省略符对象只有一种值 :const:`Ellipsis`"
 " (这是个内置名称)。 ``type(Ellipsis)()`` 会生成 :const:`Ellipsis` 单例。"
 
-#: ../../library/stdtypes.rst:5300
+#: ../../library/stdtypes.rst:5347
 msgid "It is written as ``Ellipsis`` or ``...``."
 msgstr "该对象的写法为 ``Ellipsis`` 或 ``...``。"
 
-#: ../../library/stdtypes.rst:5306
+#: ../../library/stdtypes.rst:5353
 msgid "The NotImplemented Object"
 msgstr "未实现对象"
 
-#: ../../library/stdtypes.rst:5308
+#: ../../library/stdtypes.rst:5355
 msgid ""
 "This object is returned from comparisons and binary operations when they "
 "are asked to operate on types they don't support. See :ref:`comparisons` "
@@ -6488,15 +6612,15 @@ msgstr ""
 "此对象会被作为比较和二元运算被应用于它们所不支持的类型时的返回值。请参阅 :ref:`comparisons` 了解更多信息。 "
 "未实现对象只有一种值 ``NotImplemented``。 ``type(NotImplemented)()`` 会生成这个单例。"
 
-#: ../../library/stdtypes.rst:5313
+#: ../../library/stdtypes.rst:5360
 msgid "It is written as ``NotImplemented``."
 msgstr "该对象的写法为 ``NotImplemented``。"
 
-#: ../../library/stdtypes.rst:5319
+#: ../../library/stdtypes.rst:5366
 msgid "Boolean Values"
 msgstr "布尔值"
 
-#: ../../library/stdtypes.rst:5321
+#: ../../library/stdtypes.rst:5368
 msgid ""
 "Boolean values are the two constant objects ``False`` and ``True``.  They"
 " are used to represent truth values (although other values can also be "
@@ -6510,98 +6634,98 @@ msgstr ""
 "在数字类的上下文中（例如被用作算术运算符的参数时），它们的行为分别类似于整数 0 和 1。 内置函数 :func:`bool` "
 "可被用来将任意值转换为布尔值，只要该值可被解析为一个逻辑值（参见之前的 :ref:`truth` 部分）。"
 
-#: ../../library/stdtypes.rst:5334
+#: ../../library/stdtypes.rst:5381
 msgid "They are written as ``False`` and ``True``, respectively."
 msgstr "该对象的写法分别为 ``False`` 和 ``True``。"
 
-#: ../../library/stdtypes.rst:5340
+#: ../../library/stdtypes.rst:5387
 msgid "Internal Objects"
 msgstr "内部对象"
 
-#: ../../library/stdtypes.rst:5342
+#: ../../library/stdtypes.rst:5389
 msgid ""
 "See :ref:`types` for this information.  It describes stack frame objects,"
 " traceback objects, and slice objects."
 msgstr "有关此对象的信息请参阅 :ref:`types`。 其中描述了栈帧对象、回溯对象以及切片对象等等。"
 
-#: ../../library/stdtypes.rst:5349
+#: ../../library/stdtypes.rst:5396
 msgid "Special Attributes"
 msgstr "特殊属性"
 
-#: ../../library/stdtypes.rst:5351
+#: ../../library/stdtypes.rst:5398
 msgid ""
 "The implementation adds a few special read-only attributes to several "
 "object types, where they are relevant.  Some of these are not reported by"
 " the :func:`dir` built-in function."
 msgstr "语言实现为部分对象类型添加了一些特殊的只读属性，它们具有各自的作用。 其中一些并不会被 :func:`dir` 内置函数所列出。"
 
-#: ../../library/stdtypes.rst:5358
+#: ../../library/stdtypes.rst:5405
 msgid ""
 "A dictionary or other mapping object used to store an object's (writable)"
 " attributes."
 msgstr "一个字典或其他类型的映射对象，用于存储对象的（可写）属性。"
 
-#: ../../library/stdtypes.rst:5364
+#: ../../library/stdtypes.rst:5411
 msgid "The class to which a class instance belongs."
 msgstr "类实例所属的类。"
 
-#: ../../library/stdtypes.rst:5369
+#: ../../library/stdtypes.rst:5416
 msgid "The tuple of base classes of a class object."
 msgstr "由类对象的基类所组成的元组。"
 
-#: ../../library/stdtypes.rst:5374
+#: ../../library/stdtypes.rst:5421
 msgid ""
 "The name of the class, function, method, descriptor, or generator "
 "instance."
 msgstr "类、函数、方法、描述器或生成器实例的名称。"
 
-#: ../../library/stdtypes.rst:5380
+#: ../../library/stdtypes.rst:5427
 msgid ""
 "The :term:`qualified name` of the class, function, method, descriptor, or"
 " generator instance."
 msgstr "类、函数、方法、描述器或生成器实例的 :term:`qualified name`。"
 
-#: ../../library/stdtypes.rst:5388
+#: ../../library/stdtypes.rst:5435
 msgid ""
 "This attribute is a tuple of classes that are considered when looking for"
 " base classes during method resolution."
 msgstr "此属性是由类组成的元组，在方法解析期间会基于它来查找基类。"
 
-#: ../../library/stdtypes.rst:5394
+#: ../../library/stdtypes.rst:5441
 msgid ""
 "This method can be overridden by a metaclass to customize the method "
 "resolution order for its instances.  It is called at class instantiation,"
 " and its result is stored in :attr:`~class.__mro__`."
 msgstr "此方法可被一个元类来重载，以为其实例定制方法解析顺序。 它会在类实例化时被调用，其结果存储于 :attr:`~class.__mro__` 之中。"
 
-#: ../../library/stdtypes.rst:5401
+#: ../../library/stdtypes.rst:5448
 msgid ""
 "Each class keeps a list of weak references to its immediate subclasses.  "
 "This method returns a list of all those references still alive.  The list"
 " is in definition order.  Example::"
 msgstr "每个类都存有对直接子类的弱引用列表。本方法返回所有存活引用的列表。列表的顺序按照子类定义的排列。例如："
 
-#: ../../library/stdtypes.rst:5410
+#: ../../library/stdtypes.rst:5457
 msgid "Footnotes"
 msgstr "备注"
 
-#: ../../library/stdtypes.rst:5411
+#: ../../library/stdtypes.rst:5458
 msgid ""
 "Additional information on these special methods may be found in the "
 "Python Reference Manual (:ref:`customization`)."
 msgstr "有关这些特殊方法的额外信息可参看 Python 参考指南 (:ref:`customization`)。"
 
-#: ../../library/stdtypes.rst:5414
+#: ../../library/stdtypes.rst:5461
 msgid ""
 "As a consequence, the list ``[1, 2]`` is considered equal to ``[1.0, "
 "2.0]``, and similarly for tuples."
 msgstr "作为结果，列表 ``[1, 2]`` 与 ``[1.0, 2.0]`` 是相等的，元组的情况也类似。"
 
-#: ../../library/stdtypes.rst:5417
+#: ../../library/stdtypes.rst:5464
 msgid "They must have since the parser can't tell the type of the operands."
 msgstr "必须如此，因为解析器无法判断操作数的类型。"
 
-#: ../../library/stdtypes.rst:5419
+#: ../../library/stdtypes.rst:5466
 msgid ""
 "Cased characters are those with general category property being one of "
 "\"Lu\" (Letter, uppercase), \"Ll\" (Letter, lowercase), or \"Lt\" "
@@ -6610,9 +6734,64 @@ msgstr ""
 "区分大小写的字符是指所属一般类别属性为 \"Lu\" (Letter, uppercase), \"Ll\" (Letter, "
 "lowercase) 或 \"Lt\" (Letter, titlecase) 之一的字符。"
 
-#: ../../library/stdtypes.rst:5422
+#: ../../library/stdtypes.rst:5469
 msgid ""
 "To format only a tuple you should therefore provide a singleton tuple "
 "whose only element is the tuple to be formatted."
 msgstr "若只是要格式化一个元组，则应提供一个单例元组，其中只包含一个元素，就是需要格式化的那个元组。"
+
+#~ msgid ""
+#~ "``GenericAlias`` objects are created by "
+#~ "subscripting a class (usually a "
+#~ "container), such as ``list[int]``.  They "
+#~ "are intended primarily for :term:`type "
+#~ "annotations <annotation>`."
+#~ msgstr ""
+#~ "``GenericAlias`` 对象是创建用来对类（通常是容器类）作下标的，如 "
+#~ "``list[int]``。主要用于 :term:`type annotations "
+#~ "<annotation>`。"
+
+#~ msgid ""
+#~ "Usually, the :ref:`subscription <subscriptions>` "
+#~ "of container objects calls the method"
+#~ " :meth:`__getitem__` of the object.  "
+#~ "However, the subscription of some "
+#~ "containers' classes may call the "
+#~ "classmethod :meth:`__class_getitem__` of the "
+#~ "class instead. The classmethod "
+#~ ":meth:`__class_getitem__` should return a "
+#~ "``GenericAlias`` object."
+#~ msgstr ""
+#~ "通常，容器对象的 :ref:`抽取 <subscriptions>` 操作会调用该对象的 "
+#~ ":meth:`__getitem__` 方法。 但是，对某些容器类执行抽取操作可能会改去调用该类的 "
+#~ ":meth:`__class_getitem__` 类方法。 :meth:`__class_getitem__`"
+#~ " 类方法应当会返回一个 ``GenericAlias`` 对象。"
+
+#~ msgid ""
+#~ "If the :meth:`__getitem__` of the class'"
+#~ " metaclass is present, it will take"
+#~ " precedence over the :meth:`__class_getitem__`"
+#~ " defined in the class (see :pep:`560`"
+#~ " for more details)."
+#~ msgstr ""
+#~ "如果元类的 :meth:`__getitem__` 存在，将优先于类定义的 "
+#~ ":meth:`__class_getitem__`  （详见 :pep:`560`）。"
+
+#~ msgid ""
+#~ "Creates a ``GenericAlias`` representing a "
+#~ "type ``T`` containing elements of types"
+#~ " *X*, *Y*, and more depending on "
+#~ "the ``T`` used. For example, a "
+#~ "function expecting a :class:`list` containing"
+#~ " :class:`float` elements::"
+#~ msgstr ""
+#~ "创建代表类型 ``T`` 的 ``GenericAlias`` ，包含  *X*"
+#~ " 、*Y* 等类型的元素，元素类型更多取决于所用的 ``T``。比如某函数需要包含 "
+#~ ":class:`float` 元素的 :class:`list`  ："
+
+#~ msgid ":meth:`__class_getitem__` -- Used to implement parameterized generics."
+#~ msgstr ":meth:`__class_getitem__` —— 用于实现应用参数后的泛型。"
+
+#~ msgid ":ref:`generics` -- Generics in the :mod:`typing` module."
+#~ msgstr ":ref:`generics` —— :mod:`typing` 模块中的泛型。"
 
