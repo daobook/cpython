@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. 在Windows上使用 Python &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. 在Windows上使用 Python &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -177,7 +177,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python安装和使用</a> &#187;</li>
@@ -255,7 +255,11 @@
 <section id="installing-without-ui">
 <span id="install-quiet-option"></span><h3><span class="section-number">4.1.3. </span>无UI 安装<a class="headerlink" href="#installing-without-ui" title="永久链接至标题">¶</a></h3>
 <p>安装程序UI中的所有选项也可以从命令行指定，允许脚本安装程序在许多机器上复制安装，而无需用户交互。还可以在不禁用UI的情况下设置这些选项，以更改一些默认值。</p>
-<p>要完全隐藏安装程序UI并静默安装Python，请使用 <code class="docutils literal notranslate"><span class="pre">/quiet</span></code> 选项。要跳过用户交互但仍然显示进度和错误，请使用 <code class="docutils literal notranslate"><span class="pre">/passive</span></code> 选项。可以通过 <code class="docutils literal notranslate"><span class="pre">/uninstall</span></code> 选项立即开始删除Python  - -   不会显示任何提示。</p>
+<p>To completely hide the installer UI and install Python silently, pass the
+<code class="docutils literal notranslate"><span class="pre">/quiet</span></code> option. To skip past the user interaction but still display
+progress and errors, pass the <code class="docutils literal notranslate"><span class="pre">/passive</span></code> option. The <code class="docutils literal notranslate"><span class="pre">/uninstall</span></code>
+option may be passed to immediately begin removing Python - no confirmation
+prompt will be displayed.</p>
 <p>所有其他选项都传递为 <code class="docutils literal notranslate"><span class="pre">name=value</span></code> ，其中值通常是 <code class="docutils literal notranslate"><span class="pre">0</span></code> 来禁用某个特性， <code class="docutils literal notranslate"><span class="pre">1</span></code> 来启用某个特性或路径。可用选项的完整列表如下所示。</p>
 <table class="docutils align-default">
 <colgroup>
@@ -299,70 +303,78 @@
 <td><p>0</p></td>
 </tr>
 <tr class="row-odd"><td><p>PrependPath</p></td>
-<td><p>将install和Scripts目录添加到 <span class="target" id="index-59"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 以及将 <code class="docutils literal notranslate"><span class="pre">.PY</span></code> 添加到 <span class="target" id="index-60"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATHEXT</span></code></p></td>
+<td><p>Prepend install and Scripts
+directories  to <span class="target" id="index-3"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> and
+add <code class="docutils literal notranslate"><span class="pre">.PY</span></code> to <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATHEXT</span></code></p></td>
 <td><p>0</p></td>
 </tr>
-<tr class="row-even"><td><p>Shortcuts</p></td>
+<tr class="row-even"><td><p>AppendPath</p></td>
+<td><p>Append install and Scripts
+directories  to <span class="target" id="index-5"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> and
+add <code class="docutils literal notranslate"><span class="pre">.PY</span></code> to <span class="target" id="index-6"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATHEXT</span></code></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Shortcuts</p></td>
 <td><p>如果已安装，为解释器，文档和IDLE创建快捷方式</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_doc</p></td>
+<tr class="row-even"><td><p>Include_doc</p></td>
 <td><p>安装Python手册</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>Include_debug</p></td>
+<tr class="row-odd"><td><p>Include_debug</p></td>
 <td><p>安装调试二进制文件</p></td>
 <td><p>0</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_dev</p></td>
+<tr class="row-even"><td><p>Include_dev</p></td>
 <td><p>安装开发人员头文件和库</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>Include_exe</p></td>
+<tr class="row-odd"><td><p>Include_exe</p></td>
 <td><p>安装 <code class="file docutils literal notranslate"><span class="pre">python.exe</span></code> 及相关文件</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_launcher</p></td>
+<tr class="row-even"><td><p>Include_launcher</p></td>
 <td><p>安装 <a class="reference internal" href="#launcher"><span class="std std-ref">适用于Windows的Python启动器</span></a> .</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>InstallLauncherAllUsers</p></td>
+<tr class="row-odd"><td><p>InstallLauncherAllUsers</p></td>
 <td><p>为所有用户安装 <a class="reference internal" href="#launcher"><span class="std std-ref">适用于Windows的Python启动器</span></a> 。</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_lib</p></td>
+<tr class="row-even"><td><p>Include_lib</p></td>
 <td><p>安装标准库和扩展模块</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>Include_pip</p></td>
+<tr class="row-odd"><td><p>Include_pip</p></td>
 <td><p>安装捆绑的pip和setuptools</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_symbols</p></td>
+<tr class="row-even"><td><p>Include_symbols</p></td>
 <td><p>安装调试符号(<cite>*</cite>.pdb)</p></td>
 <td><p>0</p></td>
 </tr>
-<tr class="row-even"><td><p>Include_tcltk</p></td>
+<tr class="row-odd"><td><p>Include_tcltk</p></td>
 <td><p>安装Tcl/Tk 支持和IDLE</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>Include_test</p></td>
+<tr class="row-even"><td><p>Include_test</p></td>
 <td><p>安装标准库测试套件</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-even"><td><p>Include_tools</p></td>
+<tr class="row-odd"><td><p>Include_tools</p></td>
 <td><p>安装实用程序脚本</p></td>
 <td><p>1</p></td>
 </tr>
-<tr class="row-odd"><td><p>LauncherOnly</p></td>
+<tr class="row-even"><td><p>LauncherOnly</p></td>
 <td><p>仅安装启动器。这将覆盖大多数其他选项。</p></td>
 <td><p>0</p></td>
 </tr>
-<tr class="row-even"><td><p>SimpleInstall</p></td>
+<tr class="row-odd"><td><p>SimpleInstall</p></td>
 <td><p>禁用大多数安装UI</p></td>
 <td><p>0</p></td>
 </tr>
-<tr class="row-odd"><td><p>SimpleInstallDescription</p></td>
+<tr class="row-even"><td><p>SimpleInstallDescription</p></td>
 <td><p>使用简化安装UI时显示的自定义消息。</p></td>
 <td><p>（空）</p></td>
 </tr>
@@ -509,12 +521,12 @@ Python 3.5.2
 </pre></div>
 </div>
 <p>这些环境变量的更改将应用​​于在该控制台中执行的任何其他命令，并且，由该控制台启动的任何应用程序都继承设这些设置。</p>
-<p>在百分号中包含的变量名将被现有值替换，允许在开始或结束时添加新值。通过将包含 <strong class="program">python.exe</strong> 的目录添加到开头来修改 <span class="target" id="index-61"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code>  是确保启动正确版本的Python的常用方法。</p>
+<p>在百分号中包含的变量名将被现有值替换，允许在开始或结束时添加新值。通过将包含 <strong class="program">python.exe</strong> 的目录添加到开头来修改 <span class="target" id="index-59"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code>  是确保启动正确版本的Python的常用方法。</p>
 <p>要永久修改默认环境变量，请单击“开始”并搜索“编辑环境变量”，或打开系统属性的 <span class="guilabel">高级系统设置</span> ，然后单击 <span class="guilabel">环境变量</span> 按钮。在此对话框中，您可以添加或修改用户和系统变量。要更改系统变量，您需要对计算机进行无限制访问（即管理员权限）。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>Windows会将用户变量串联在系统变量 <em>之后</em> ，这可能会在修改 <span class="target" id="index-62"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 时导致意外结果。</p>
-<p><span class="target" id="index-63"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 变量被Python 2和Python 3的所有版本使用，因此除非它只包含与所有已安装的Python版本兼容的代码，否则不要永久配置此变量。</p>
+<p>Windows会将用户变量串联在系统变量 <em>之后</em> ，这可能会在修改 <span class="target" id="index-60"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 时导致意外结果。</p>
+<p><span class="target" id="index-61"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 变量被Python 2和Python 3的所有版本使用，因此除非它只包含与所有已安装的Python版本兼容的代码，否则不要永久配置此变量。</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -538,8 +550,8 @@ Python 3.5.2
 <p><span class="versionmodified changed">在 3.5 版更改.</span></p>
 </div>
 <p>除了使用自动创建的Python解释器的开始菜单项之外，您可能还想在命令提示符下启动Python。安装程序有一个选项可以为您设置。</p>
-<p>在安装程序的第一页上，可以选择标记为“将Python添加到环境变量”的选项，以使安装程序将安装位置添加到 <span class="target" id="index-64"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。还添加了 <code class="file docutils literal notranslate"><span class="pre">Scripts\</span></code> 文件夹的位置。这允许你输入 <strong class="command">python</strong> 来运行解释器，并且 <strong class="command">pip</strong> 用于包安装程序。因此，您还可以使用命令行选项执行脚本，请参阅 <a class="reference internal" href="cmdline.html#using-on-cmdline"><span class="std std-ref">命令行</span></a> 文档。</p>
-<p>如果在安装时未启用此选项，则始终可以重新运行安装程序，选择“修改”并启用它。或者，您可以使用 <a class="reference internal" href="#setting-envvars"><span class="std std-ref">附录：设置环境变量</span></a> 的方法手动修改 <span class="target" id="index-65"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。您需要将Python安装目录添加到 <span class="target" id="index-66"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 环境变量中，该内容与其他条目用分号分隔。示例变量可能如下所示（假设前两个条目已经存在）:</p>
+<p>在安装程序的第一页上，可以选择标记为“将Python添加到环境变量”的选项，以使安装程序将安装位置添加到 <span class="target" id="index-62"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。还添加了 <code class="file docutils literal notranslate"><span class="pre">Scripts\</span></code> 文件夹的位置。这允许你输入 <strong class="command">python</strong> 来运行解释器，并且 <strong class="command">pip</strong> 用于包安装程序。因此，您还可以使用命令行选项执行脚本，请参阅 <a class="reference internal" href="cmdline.html#using-on-cmdline"><span class="std std-ref">命令行</span></a> 文档。</p>
+<p>如果在安装时未启用此选项，则始终可以重新运行安装程序，选择“修改”并启用它。或者，您可以使用 <a class="reference internal" href="#setting-envvars"><span class="std std-ref">附录：设置环境变量</span></a> 的方法手动修改 <span class="target" id="index-63"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。您需要将Python安装目录添加到 <span class="target" id="index-64"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 环境变量中，该内容与其他条目用分号分隔。示例变量可能如下所示（假设前两个条目已经存在）:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Python 3.9
 </pre></div>
 </div>
@@ -552,15 +564,15 @@ Python 3.5.2
 </div>
 <p>Windows 仍然使用传统编码格式作为系统的编码格式（ANSI 代码页）。 Python 使用它作为文本文件默认的编码格式 (即 <a class="reference internal" href="../library/locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code></a>)。</p>
 <p>这可能会造成问题，因为因特网和大多数 Unix 系统包括 WSL (Windows Subsystem for Linux) 广泛使用 UTF-8。</p>
-<p>你可以使用 <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 将默认的文本编码格式改为 UTF-8。 要启用 <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 可以通过 <code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">utf8</span></code> 命令行选项，或者 <code class="docutils literal notranslate"><span class="pre">PYTHONUTF8=1</span></code> 环境变量。 请参阅 <span class="target" id="index-67"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> 了解如何启用 UTF-8 模式，并参阅 <a class="reference internal" href="#setting-envvars"><span class="std std-ref">附录：设置环境变量</span></a> 了解如何修改环境变量。</p>
+<p>你可以使用 <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 将默认的文本编码格式改为 UTF-8。 要启用 <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 可以通过 <code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">utf8</span></code> 命令行选项，或者 <code class="docutils literal notranslate"><span class="pre">PYTHONUTF8=1</span></code> 环境变量。 请参阅 <span class="target" id="index-65"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> 了解如何启用 UTF-8 模式，并参阅 <a class="reference internal" href="#setting-envvars"><span class="std std-ref">附录：设置环境变量</span></a> 了解如何修改环境变量。</p>
 <p>当 <a class="reference internal" href="../library/os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 启用时，你仍然可以通过 &quot;mbcs&quot; 编解码器使用系统编码格式（ANSI 代码页）。</p>
 <p>请注意添加 <code class="docutils literal notranslate"><span class="pre">PYTHONUTF8=1</span></code> 到默认环境变量将会影响你的系统中的所有 Python 3.7+ 应用。 如果你有任何 Python 3.7+ 应用仍然依赖于传统的系统编码格式，则推荐设置临时环境变量或使用 <code class="docutils literal notranslate"><span class="pre">-X</span> <span class="pre">utf8</span></code> 命令行选项。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>即使在不启用 UTF-8 模式时，Windows 版的 Python 也会在以下情况中默认使用 UTF-8：</p>
 <ul class="simple">
-<li><p>控制台 I/O 包括标准 I/O (详情见 <span class="target" id="index-68"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0528"><strong>PEP 528</strong></a>)。</p></li>
-<li><p><a class="reference internal" href="../glossary.html#term-filesystem-encoding-and-error-handler"><span class="xref std std-term">文件系统编码格式</span></a> (参见 <span class="target" id="index-69"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0529"><strong>PEP 529</strong></a> 了解详情)。</p></li>
+<li><p>控制台 I/O 包括标准 I/O (详情见 <span class="target" id="index-66"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0528"><strong>PEP 528</strong></a>)。</p></li>
+<li><p><a class="reference internal" href="../glossary.html#term-filesystem-encoding-and-error-handler"><span class="xref std std-term">文件系统编码格式</span></a> (参见 <span class="target" id="index-67"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0529"><strong>PEP 529</strong></a> 了解详情)。</p></li>
 </ul>
 </div>
 </section>
@@ -570,8 +582,8 @@ Python 3.5.2
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
 <p>用于Windows的Python启动器是一个实用程序，可帮助定位和执行不同的Python版本。它允许脚本（或命令行）指示特定Python版本的首选项，并将定位并执行该版本。</p>
-<p>与 <span class="target" id="index-70"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 变量不同，启动器将正确选择最合适的Python版本。它更倾向于按用户安装而不是系统安装，并按语言版本排序，而不是使用最新安装的版本。</p>
-<p>启动器最初是在 <span class="target" id="index-71"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0397"><strong>PEP 397</strong></a> 中指定的。</p>
+<p>与 <span class="target" id="index-68"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 变量不同，启动器将正确选择最合适的Python版本。它更倾向于按用户安装而不是系统安装，并按语言版本排序，而不是使用最新安装的版本。</p>
+<p>启动器最初是在 <span class="target" id="index-69"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0397"><strong>PEP 397</strong></a> 中指定的。</p>
 <section id="getting-started">
 <h3><span class="section-number">4.8.1. </span>入门<a class="headerlink" href="#getting-started" title="永久链接至标题">¶</a></h3>
 <section id="from-the-command-line">
@@ -579,7 +591,7 @@ Python 3.5.2
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改.</span></p>
 </div>
-<p>全局安装Python 3.3及更高版本将把启动器放在你的 <span class="target" id="index-72"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 上。启动程序与所有可用的Python版本兼容，因此安装哪个版本无关紧要。要检查启动程序是否可用，请在命令提示符中执行以下命令：</p>
+<p>全局安装Python 3.3及更高版本将把启动器放在你的 <span class="target" id="index-70"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 上。启动程序与所有可用的Python版本兼容，因此安装哪个版本无关紧要。要检查启动程序是否可用，请在命令提示符中执行以下命令：</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>py
 </pre></div>
 </div>
@@ -598,7 +610,7 @@ Python 3.5.2
 operable program or batch file.
 </pre></div>
 </div>
-<p>除非在安装时选择了该选项，单个用户安装的Python不会将启动程序添加到 <span class="target" id="index-73"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。</p>
+<p>除非在安装时选择了该选项，单个用户安装的Python不会将启动程序添加到 <span class="target" id="index-71"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 。</p>
 </section>
 <section id="virtual-environments">
 <h4><span class="section-number">4.8.1.2. </span>从虚拟环境<a class="headerlink" href="#virtual-environments" title="永久链接至标题">¶</a></h4>
@@ -651,7 +663,7 @@ operable program or batch file.
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能: </span>从python启动程序3.7开始，可以通过“-64”后缀调用64位版本。此外，可以指定没有次要的主要和架构（即 <code class="docutils literal notranslate"><span class="pre">/usr/bin/python3-64</span></code> ）。</p>
 </div>
-<p>shebang line的 <code class="docutils literal notranslate"><span class="pre">/usr/bin/env</span></code> 形式还有一个特殊属性。在寻找已安装的Python解释器之前，此表单将搜索可执行文件 <span class="target" id="index-74"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 以获取Python可执行文件。这对应于Unix中 <code class="docutils literal notranslate"><span class="pre">env</span></code> 程序的行为，该程序将在 <span class="target" id="index-75"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 执行搜索。</p>
+<p>shebang line的 <code class="docutils literal notranslate"><span class="pre">/usr/bin/env</span></code> 形式还有一个特殊属性。在寻找已安装的Python解释器之前，此表单将搜索可执行文件 <span class="target" id="index-72"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 以获取Python可执行文件。这对应于Unix中 <code class="docutils literal notranslate"><span class="pre">env</span></code> 程序的行为，该程序将在 <span class="target" id="index-73"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 执行搜索。</p>
 </section>
 <section id="arguments-in-shebang-lines">
 <h3><span class="section-number">4.8.3. </span>shebang lines 的参数<a class="headerlink" href="#arguments-in-shebang-lines" title="永久链接至标题">¶</a></h3>
@@ -672,7 +684,7 @@ operable program or batch file.
 <h4><span class="section-number">4.8.4.2. </span>自定义默认的Python版本<a class="headerlink" href="#customizing-default-python-versions" title="永久链接至标题">¶</a></h4>
 <p>在某些情况下，可以在命令中包含版本限定符，以指定命令将使用哪个Python版本。版本限定符以主版本号开头，可以选择后跟 ('.') 和次版本说明符。此外，可以通过添加 &quot;-32&quot; 或 “-64” 来指定是请求32位还是64位实现。</p>
 <p>例如，一个shebang line 的 <code class="docutils literal notranslate"><span class="pre">#!python</span></code> 行没有版本限定符，而 <code class="docutils literal notranslate"><span class="pre">#!python3</span></code> 有一个版本限定符，它只指定一个主要版本。</p>
-<p>如果在命令中找不到版本限定符，则可以设置环境变量 <span class="target" id="index-76"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PY_PYTHON</span></code> 以指定默认版本限定符。 如果未设置，则默认为 &quot;3&quot;。 该变量可以指定能通过命令行传递的任何值，比如 &quot;3&quot;, &quot;3.7&quot;, &quot;3.7-32&quot; 或 &quot;3.7-64&quot;。 （请注意 &quot;-64&quot; 选项仅适用于 Python 3.7 或更高版本中包含的启动器。）</p>
+<p>如果在命令中找不到版本限定符，则可以设置环境变量 <span class="target" id="index-74"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PY_PYTHON</span></code> 以指定默认版本限定符。 如果未设置，则默认为 &quot;3&quot;。 该变量可以指定能通过命令行传递的任何值，比如 &quot;3&quot;, &quot;3.7&quot;, &quot;3.7-32&quot; 或 &quot;3.7-64&quot;。 （请注意 &quot;-64&quot; 选项仅适用于 Python 3.7 或更高版本中包含的启动器。）</p>
 <p>如果没有找到次要版本限定符，则可以设置环境变量 <code class="docutils literal notranslate"><span class="pre">PY_PYTHON{major}</span></code> （其中 <code class="docutils literal notranslate"><span class="pre">{major}</span></code> 是上面确定的当前主要版本限定符）以指定完整版本。如果没有找到这样的选项，启动器将枚举已安装的Python版本并使用为主要版本找到的最新次要版本，尽管不能保证，但该版本可能是该系列中最新安装的版本。</p>
 <p>在安装了相同（major.minor）Python版本的32位和64位的64位Windows上，64位版本将始终是首选。对于启动程序的32位和64位实现都是如此 -- 这对于启动程序32位和64位都是正确的 -- 如果可用，32位启动程序将倾向于执行指定版本的64位Python安装。这样就可以预测启动器的行为，只知道PC上安装了哪些版本，而不考虑它们的安装顺序（即，不知道32位或64位版本的Python和相应的启动器是否是最后安装）。如上所述，可以在版本说明符上使用可选的“-32”或“-64”后缀来更改此行为。</p>
 <p>示例：</p>
@@ -716,14 +728,14 @@ operable program or batch file.
 <p>当找不到 <code class="docutils literal notranslate"><span class="pre">._pth</span></code> 文件时， <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 是如何在Windows上填充的：</p>
 <ul class="simple">
 <li><p>在开始时，添加一个空条目，该条目对应于当前目录。</p></li>
-<li><p>如果环境变量 <span class="target" id="index-77"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 存在，如 <a class="reference internal" href="cmdline.html#using-on-envvars"><span class="std std-ref">环境变量</span></a> 中所述，则接下来添加其条目。请注意，在Windows上，此变量中的路径必须用分号分隔，以区别于驱动器标识符中使用的冒号（ <code class="docutils literal notranslate"><span class="pre">C:\</span></code>  等）。</p></li>
+<li><p>如果环境变量 <span class="target" id="index-75"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 存在，如 <a class="reference internal" href="cmdline.html#using-on-envvars"><span class="std std-ref">环境变量</span></a> 中所述，则接下来添加其条目。请注意，在Windows上，此变量中的路径必须用分号分隔，以区别于驱动器标识符中使用的冒号（ <code class="docutils literal notranslate"><span class="pre">C:\</span></code>  等）。</p></li>
 <li><p>额外的 &quot;应用程序路径&quot; 可以作为子键被同时添加到注册表 <code class="docutils literal notranslate"><span class="pre">HKEY_CURRENT_USER</span></code> 和 <code class="docutils literal notranslate"><span class="pre">HKEY_LOCAL_MACHINE</span></code> 分支下的 <code class="samp docutils literal notranslate"><span class="pre">\SOFTWARE\Python\PythonCore{version}\PythonPath</span></code> 中。 以分号分隔的路径字符串作为默认值的子键将导致每个路径都被添加到 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 中。 （请注意所有已知的安装程序都只使用 HKLM，因此 HKCU 通常为空。）</p></li>
-<li><p>如果设置了环境变量 <span class="target" id="index-78"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>  ，则将其假定为 “Python 主目录” 。否则，主Python可执行文件的路径用于定位 “landmark 文件” （ <code class="docutils literal notranslate"><span class="pre">Lib\os.py</span></code> 或 <code class="docutils literal notranslate"><span class="pre">pythonXY.zip</span></code> ）以推断 ”Python 主目录“ 。如果找到了Python主目录，则基于该文件夹将相关的子目录添加到 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> （<code class="docutils literal notranslate"><span class="pre">Lib</span></code> , <code class="docutils literal notranslate"><span class="pre">plat-win</span></code> 等）。否则，核心Python路径是从存储在注册表中的PythonPath构造的。</p></li>
-<li><p>如果找不到Python Home，也没有指定 <span class="target" id="index-79"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 环境变量，并且找不到注册表项，则使用具有相对条目的默认路径（例如 <code class="docutils literal notranslate"><span class="pre">.\Lib;</span> <span class="pre">.\plat-win</span></code> 等等）。</p></li>
+<li><p>如果设置了环境变量 <span class="target" id="index-76"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>  ，则将其假定为 “Python 主目录” 。否则，主Python可执行文件的路径用于定位 “landmark 文件” （ <code class="docutils literal notranslate"><span class="pre">Lib\os.py</span></code> 或 <code class="docutils literal notranslate"><span class="pre">pythonXY.zip</span></code> ）以推断 ”Python 主目录“ 。如果找到了Python主目录，则基于该文件夹将相关的子目录添加到 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> （<code class="docutils literal notranslate"><span class="pre">Lib</span></code> , <code class="docutils literal notranslate"><span class="pre">plat-win</span></code> 等）。否则，核心Python路径是从存储在注册表中的PythonPath构造的。</p></li>
+<li><p>如果找不到Python Home，也没有指定 <span class="target" id="index-77"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 环境变量，并且找不到注册表项，则使用具有相对条目的默认路径（例如 <code class="docutils literal notranslate"><span class="pre">.\Lib;</span> <span class="pre">.\plat-win</span></code> 等等）。</p></li>
 </ul>
 <p>如果在主可执行文件旁边或在可执行文件上一级的目录中找到 <code class="docutils literal notranslate"><span class="pre">pyvenv.cfg</span></code> 文件，则以下变体适用：</p>
 <ul class="simple">
-<li><p>如果 <code class="docutils literal notranslate"><span class="pre">home</span></code> 是一个绝对路径，并且 <span class="target" id="index-80"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> 未设置，则在推断起始位置时使用此路径而不是主可执行文件的路径。</p></li>
+<li><p>如果 <code class="docutils literal notranslate"><span class="pre">home</span></code> 是一个绝对路径，并且 <span class="target" id="index-78"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> 未设置，则在推断起始位置时使用此路径而不是主可执行文件的路径。</p></li>
 </ul>
 <p>这一切的最终结果是：</p>
 <ul class="simple">
@@ -735,7 +747,7 @@ operable program or batch file.
 <ul class="simple">
 <li><p>在您的可执行文件中包含一个 <code class="docutils literal notranslate"><span class="pre">._pth</span></code> 文件，其中包含目录。这将忽略注册表和环境变量中列出的路径，并忽略 <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> ，除非列出 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">site</span></code> 。</p></li>
 <li><p>如果你在自己的可执行文件中加载 <code class="file docutils literal notranslate"><span class="pre">python3.dll</span></code> 或 <code class="file docutils literal notranslate"><span class="pre">python37.dll</span></code> ，在 <a class="reference internal" href="../c-api/init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> 之前，要显式调用 <a class="reference internal" href="../c-api/init.html#c.Py_SetPath" title="Py_SetPath"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SetPath()</span></code></a>  或（至少） <a class="reference internal" href="../c-api/init.html#c.Py_SetProgramName" title="Py_SetProgramName"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SetProgramName()</span></code></a></p></li>
-<li><p>清除 和/或 覆盖 <span class="target" id="index-81"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 并在启动来自应用程序的 <code class="file docutils literal notranslate"><span class="pre">python.exe</span></code> 之前设置 <span class="target" id="index-82"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> 。</p></li>
+<li><p>清除 和/或 覆盖 <span class="target" id="index-79"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> 并在启动来自应用程序的 <code class="file docutils literal notranslate"><span class="pre">python.exe</span></code> 之前设置 <span class="target" id="index-80"></span><a class="reference internal" href="cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> 。</p></li>
 <li><p>如果您不能使用前面的建议（例如，您是一个允许人们直接运行 <code class="file docutils literal notranslate"><span class="pre">python.exe</span></code> 的分发版），请确保安装目录中存在 landmark 文件 (<code class="file docutils literal notranslate"><span class="pre">Lib\os.py</span></code>)。 （请注意，在 ZIP 文件中不会检测到该文件，但会检测到正确命名的 ZIP 文件。）</p></li>
 </ul>
 <p>这些将确保系统范围安装中的文件不会优先于与应用程序捆绑在一起的标准库的副本。否则，用户可能会在使用您的应用程序时遇到问题请注意，第一个建议是最好的，因为其他建议可能仍然容易受到注册表和用户站点包中的非标准路径的影响。</p>
@@ -806,7 +818,7 @@ operable program or batch file.
 </section>
 <section id="other-platforms">
 <h2><span class="section-number">4.12. </span>其他平台<a class="headerlink" href="#other-platforms" title="永久链接至标题">¶</a></h2>
-<p>随着Python的不断发展，不再支持以前曾经支持的一些平台（由于缺少用户或开发人员）。检查 <span class="target" id="index-83"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0011"><strong>PEP 11</strong></a> 了解所有不支持的平台的详细信息。</p>
+<p>随着Python的不断发展，不再支持以前曾经支持的一些平台（由于缺少用户或开发人员）。检查 <span class="target" id="index-81"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0011"><strong>PEP 11</strong></a> 了解所有不支持的平台的详细信息。</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://pythonce.sourceforge.net/">Windows CE</a> 仍然受支持。</p></li>
 <li><p><a class="reference external" href="https://cygwin.com/">Cygwin</a> 安装包也提供安装Python解释器 (cf. <a class="reference external" href="ftp://ftp.uni-erlangen.de/pub/pc/gnuwin32/cygwin/mirrors/cygnus/release/python">Cygwin package source</a>, <a class="reference external" href="http://www.tishler.net/jason/software/python/">Maintainer releases</a>)</p></li>
@@ -928,7 +940,7 @@ operable program or batch file.
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python安装和使用</a> &#187;</li>
@@ -964,7 +976,7 @@ operable program or batch file.
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

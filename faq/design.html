@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>设计和历史常见问题 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计和历史常见问题 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -153,7 +153,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常见问题</a> &#187;</li>
@@ -335,26 +335,23 @@
 <h2><a class="toc-backref" href="#id13">为什么Python中没有switch或case语句？</a><a class="headerlink" href="#why-isn-t-there-a-switch-or-case-statement-in-python" title="永久链接至标题">¶</a></h2>
 <p>你可以足够方便地使用一串 <code class="docutils literal notranslate"><span class="pre">if...</span> <span class="pre">elif...</span> <span class="pre">elif...</span> <span class="pre">else</span></code> 来做到这一点。 对于字面值或某一命名空间内的常量，你还可以 使用 <code class="docutils literal notranslate"><span class="pre">match</span> <span class="pre">...</span> <span class="pre">case</span></code> 语句。</p>
 <p>对于需要从大量可能性中进行选择的情况，可以创建一个字典，将case 值映射到要调用的函数。例如：</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_1</span><span class="p">(</span><span class="o">...</span><span class="p">):</span>
-    <span class="o">...</span>
-
-<span class="n">functions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">function_1</span><span class="p">,</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">functions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="n">function_1</span><span class="p">,</span>
              <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="n">function_2</span><span class="p">,</span>
-             <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">method_1</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+             <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">method_1</span><span class="p">}</span>
 
 <span class="n">func</span> <span class="o">=</span> <span class="n">functions</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
 <span class="n">func</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>对于对象调用方法，可以通过使用 <a class="reference internal" href="../library/functions.html#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 内置检索具有特定名称的方法来进一步简化：</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">visit_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
-    <span class="o">...</span>
-<span class="o">...</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyVisitor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">visit_a</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
 
-<span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="n">method_name</span> <span class="o">=</span> <span class="s1">&#39;visit_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
-    <span class="n">method</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">method_name</span> <span class="o">=</span> <span class="s1">&#39;visit_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
+        <span class="n">method</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>建议对方法名使用前缀，例如本例中的 <code class="docutils literal notranslate"><span class="pre">visit_</span></code> 。如果没有这样的前缀，如果值来自不受信任的源，攻击者将能够调用对象上的任何方法。</p>
@@ -679,7 +676,7 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常见问题</a> &#187;</li>
@@ -715,7 +712,7 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>7. 简单语句 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. 简单语句 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -145,7 +145,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -393,10 +393,17 @@
 <pre id="index-27">
 <strong id="grammar-token-python-grammar-raise_stmt"><span id="grammar-token-raise-stmt"></span>raise_stmt</strong> ::=  &quot;raise&quot; [<a class="reference internal" href="expressions.html#grammar-token-python-grammar-expression"><code class="xref docutils literal notranslate"><span class="pre">expression</span></code></a> [&quot;from&quot; <a class="reference internal" href="expressions.html#grammar-token-python-grammar-expression"><code class="xref docutils literal notranslate"><span class="pre">expression</span></code></a>]]
 </pre>
-<p>如果不带表达式，<a class="reference internal" href="#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 会重新引发当前作用域内最后一个激活的异常。 如果当前作用域内没有激活的异常，将会引发 <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> 来提示错误。</p>
+<p>If no expressions are present, <a class="reference internal" href="#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> re-raises the
+exception that is currently being handled, which is also known as the <em>active exception</em>.
+If there isn't currently an active exception, a <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> exception is raised
+indicating that this is an error.</p>
 <p>否则的话，<a class="reference internal" href="#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 会将第一个表达式求值为异常对象。 它必须为 <a class="reference internal" href="../library/exceptions.html#BaseException" title="BaseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseException</span></code></a> 的子类或实例。 如果它是一个类，当需要时会通过不带参数地实例化该类来获得异常的实例。</p>
 <p>异常的 <em class="dfn">类型</em> 为异常实例的类，<em class="dfn">值</em> 为实例本身。</p>
-<p id="index-28">当异常被引发时通常会自动创建一个回溯对象并将其关联到可写的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">__traceback__</span></code> 属性。 你可以创建一个异常并同时使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">with_traceback()</span></code> 异常方法（该方法将返回同一异常实例，并将回溯对象设为其参数）设置自己的回溯，就像这样:</p>
+<p id="index-28">A traceback object is normally created automatically when an exception is raised
+and attached to it as the <code class="xref py py-attr docutils literal notranslate"><span class="pre">__traceback__</span></code> attribute, which is writable.
+You can create an exception and set your own traceback in one step using the
+<a class="reference internal" href="../library/exceptions.html#BaseException.with_traceback" title="BaseException.with_traceback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">with_traceback()</span></code></a> exception method (which returns the
+same exception instance, with its traceback set to its argument), like so:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;foo occurred&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">tracebackobj</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -417,7 +424,11 @@
 <span class="gr">RuntimeError</span>: <span class="n">Something bad happened</span>
 </pre></div>
 </div>
-<p>如果一个异常在异常处理器或 <a class="reference internal" href="compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> clause: 中被引发，类似的机制会隐式地发挥作用，之前的异常将被关联到新异常的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">__context__</span></code> 属性:</p>
+<p>A similar mechanism works implicitly if a new exception is raised when
+an exception is already being handled.  An exception may be handled
+when an <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> or <a class="reference internal" href="compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> clause, or a
+<a class="reference internal" href="compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement, is used.  The previous exception is then
+attached as the new exception's <code class="xref py py-attr docutils literal notranslate"><span class="pre">__context__</span></code> attribute:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">except</span><span class="p">:</span>
@@ -680,7 +691,7 @@ traceback it had when it was caught.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -716,7 +727,7 @@ traceback it had when it was caught.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

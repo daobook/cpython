@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>typing --- 类型提示支持 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typing --- 类型提示支持 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -160,7 +160,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -269,6 +269,11 @@ the binary-or operator <code class="docutils literal notranslate"><span class="p
 </li>
 <li><dl class="simple">
 <dt><span class="target" id="index-14"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0647"><strong>PEP 647</strong></a>: User-Defined Type Guards</dt><dd><p><em>Introducing</em> <a class="reference internal" href="#typing.TypeGuard" title="typing.TypeGuard"><code class="xref py py-data docutils literal notranslate"><span class="pre">TypeGuard</span></code></a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><span class="target" id="index-15"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0673"><strong>PEP 673</strong></a>: Self type</dt><dd><p><em>Introducing</em> <a class="reference internal" href="#typing.Self" title="typing.Self"><code class="xref py py-data docutils literal notranslate"><span class="pre">Self</span></code></a></p>
 </dd>
 </dl>
 </li>
@@ -646,6 +651,35 @@ the binary-or operator <code class="docutils literal notranslate"><span class="p
 </dd></dl>
 
 <dl class="py data">
+<dt class="sig sig-object py" id="typing.Never">
+<span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Never</span></span><a class="headerlink" href="#typing.Never" title="永久链接至目标">¶</a></dt>
+<dd><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Bottom_type">bottom type</a>,
+a type that has no members.</p>
+<p>This can be used to define a function that should never be
+called, or a function that never returns:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Never</span>
+
+<span class="k">def</span> <span class="nf">never_call_me</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="n">Never</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">int_or_str</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">never_call_me</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>  <span class="c1"># type checker error</span>
+    <span class="k">match</span> <span class="n">arg</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nb">int</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It&#39;s an int&quot;</span><span class="p">)</span>
+        <span class="k">case</span> <span class="nb">str</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It&#39;s a str&quot;</span><span class="p">)</span>
+        <span class="k">case</span> <span class="k">_</span><span class="p">:</span>
+            <span class="n">never_call_me</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>  <span class="c1"># ok, arg is of type Never</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能: </span>On older Python versions, <a class="reference internal" href="#typing.NoReturn" title="typing.NoReturn"><code class="xref py py-data docutils literal notranslate"><span class="pre">NoReturn</span></code></a> may be used to express the
+same concept. <code class="docutils literal notranslate"><span class="pre">Never</span></code> was added to make the intended meaning more explicit.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
 <dt class="sig sig-object py" id="typing.NoReturn">
 <span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">NoReturn</span></span><a class="headerlink" href="#typing.NoReturn" title="永久链接至目标">¶</a></dt>
 <dd><p>标记没有返回值的函数的特殊类型。例如：</p>
@@ -655,11 +689,64 @@ the binary-or operator <code class="docutils literal notranslate"><span class="p
     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;no way&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">NoReturn</span></code> can also be used as a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Bottom_type">bottom type</a>, a type that
+has no values. Starting in Python 3.11, the <a class="reference internal" href="#typing.Never" title="typing.Never"><code class="xref py py-data docutils literal notranslate"><span class="pre">Never</span></code></a> type should
+be used for this concept instead. Type checkers should treat the two
+equivalently.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5.4 新版功能.</span></p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6.2 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="typing.Self">
+<span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Self</span></span><a class="headerlink" href="#typing.Self" title="永久链接至目标">¶</a></dt>
+<dd><p>Special type to represent the current enclosed class.
+For example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Self</span>
+
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+   <span class="k">def</span> <span class="nf">returns_self</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+      <span class="o">...</span>
+      <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>This annotation is semantically equivalent to the following,
+albeit in a more succinct fashion:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
+
+<span class="n">Self</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;Self&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;Foo&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+   <span class="k">def</span> <span class="nf">returns_self</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+      <span class="o">...</span>
+      <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>In general if something currently follows the pattern of:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span><span class="p">:</span>
+   <span class="k">def</span> <span class="nf">return_self</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Foo&quot;</span><span class="p">:</span>
+      <span class="o">...</span>
+      <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>You should use use <a class="reference internal" href="#typing.Self" title="typing.Self"><code class="xref py py-data docutils literal notranslate"><span class="pre">Self</span></code></a> as calls to <code class="docutils literal notranslate"><span class="pre">SubclassOfFoo.returns_self</span></code> would have
+<code class="docutils literal notranslate"><span class="pre">Foo</span></code> as the return type and not <code class="docutils literal notranslate"><span class="pre">SubclassOfFoo</span></code>.</p>
+<p>Other common use cases include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="functions.html#classmethod" title="classmethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">classmethod</span></code></a>s that are used as alternative constructors and return instances
+of the <code class="docutils literal notranslate"><span class="pre">cls</span></code> parameter.</p></li>
+<li><p>Annotating an <a class="reference internal" href="../reference/datamodel.html#object.__enter__" title="object.__enter__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__enter__()</span></code></a> method which returns self.</p></li>
+</ul>
+</div></blockquote>
+<p>For more information, see <span class="target" id="index-23"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0673"><strong>PEP 673</strong></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -1022,7 +1109,7 @@ is not a subtype of the former, since <code class="docutils literal notranslate"
 The responsibility of writing type-safe type guards is left to the user.</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">TypeGuard</span></code> also works with type variables.  For more information, see
-<span class="target" id="index-33"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0647"><strong>PEP 647</strong></a> (User-Defined Type Guards).</p>
+<span class="target" id="index-35"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0647"><strong>PEP 647</strong></a> (User-Defined Type Guards).</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
 </div>
@@ -1322,19 +1409,39 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <span class="k">assert</span> <span class="n">Point2D</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>用于自省的类型信息可以通过 <code class="docutils literal notranslate"><span class="pre">Point2D.__annotations__</span></code>、<code class="docutils literal notranslate"><span class="pre">Point2D.__total__</span></code> 、<code class="docutils literal notranslate"><span class="pre">Point2D.__required_keys__</span></code> 和``Point2D.__optional_keys__`` 访问。为了允许在不支持 <span class="target" id="index-179"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a> 的旧版本的Python中使用这个特性，<code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> 支持另外两种等价的语法形式:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
-<span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
+<p>The type info for introspection can be accessed via <code class="docutils literal notranslate"><span class="pre">Point2D.__annotations__</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Point2D.__total__</span></code>, <code class="docutils literal notranslate"><span class="pre">Point2D.__required_keys__</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Point2D.__optional_keys__</span></code>.
+To allow using this feature with older versions of Python that do not
+support <span class="target" id="index-41"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a>, <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> supports two additional equivalent
+syntactic forms:</p>
+<ul>
+<li><p>Using a literal <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> as the second argument:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
 </pre></div>
+</div>
+</li>
+<li><p>Using keyword arguments:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="deprecated-removed">
+<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.13: </span>The keyword-argument syntax is deprecated in 3.11 and will be removed
+in 3.13. It may also be unsupported by static type checkers.</p>
 </div>
 <p>默认情况下，所有的键都必须出现在一个 <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> 中。 可以通过指定总数来重写这一点。用法:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Point2D</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">x</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">y</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="c1"># Alternative syntax</span>
+<span class="n">Point2D</span> <span class="o">=</span> <span class="n">TypedDict</span><span class="p">(</span><span class="s1">&#39;Point2D&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">},</span> <span class="n">total</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>这意味着一个 <code class="docutils literal notranslate"><span class="pre">Point2D</span></code> <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> 可以省略任何一个键。 类型检查器只需要支持一个字面的 <code class="docutils literal notranslate"><span class="pre">False</span></code> 或 <code class="docutils literal notranslate"><span class="pre">True</span></code> 作为 <code class="docutils literal notranslate"><span class="pre">total</span></code> 参数的值。 <code class="docutils literal notranslate"><span class="pre">True</span></code> 是默认的，它使类主体中定义的所有项目都是必需的。</p>
-<p>更多示例与 <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> 的详细规则，详见 <span class="target" id="index-180"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0589"><strong>PEP 589</strong></a>。</p>
+<p>更多示例与 <code class="docutils literal notranslate"><span class="pre">TypedDict</span></code> 的详细规则，详见 <span class="target" id="index-179"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0589"><strong>PEP 589</strong></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -1356,7 +1463,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 </pre></div>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.dict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-181"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.dict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-180"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1375,7 +1482,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 </pre></div>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.list</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-182"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.list</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-181"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1384,7 +1491,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">set,</span> <span class="pre">MutableSet[T]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Set" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.set</span></code></a> 的泛型版本。适用于注解返回类型。注解参数时，最好使用 <a class="reference internal" href="#typing.AbstractSet" title="typing.AbstractSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractSet</span></code></a> 等抽象容器类型。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.set</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-183"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#set" title="set"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.set</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-182"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1393,7 +1500,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">FrozenSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">frozenset,</span> <span class="pre">AbstractSet[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.FrozenSet" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.frozenset</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.frozenset</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-184"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="stdtypes.html#frozenset" title="frozenset"><code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.frozenset</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-183"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1412,7 +1519,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <p><span class="versionmodified added">3.5.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.defaultdict" title="collections.defaultdict"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.defaultdict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-185"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.defaultdict" title="collections.defaultdict"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.defaultdict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-184"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1424,7 +1531,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <p><span class="versionmodified added">3.7.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.OrderedDict" title="collections.OrderedDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-186"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.OrderedDict" title="collections.OrderedDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-185"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1439,7 +1546,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <p><span class="versionmodified added">3.6.1 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.ChainMap" title="collections.ChainMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.ChainMap</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-187"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.ChainMap" title="collections.ChainMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.ChainMap</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-186"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1454,7 +1561,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <p><span class="versionmodified added">3.6.1 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.Counter" title="collections.Counter"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.Counter</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-188"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.Counter" title="collections.Counter"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.Counter</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-187"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1469,7 +1576,7 @@ The responsibility of writing type-safe type guards is left to the user.</p>
 <p><span class="versionmodified added">3.6.1 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.deque" title="collections.deque"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.deque</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-189"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.html#collections.deque" title="collections.deque"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.deque</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-188"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1501,7 +1608,7 @@ These types should be directly imported from <code class="docutils literal notra
 These types should be directly imported from <code class="docutils literal notranslate"><span class="pre">typing</span></code> instead.</p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块中的 <code class="docutils literal notranslate"><span class="pre">Pattern</span></code> 与 <code class="docutils literal notranslate"><span class="pre">Match</span></code> 类现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-190"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块中的 <code class="docutils literal notranslate"><span class="pre">Pattern</span></code> 与 <code class="docutils literal notranslate"><span class="pre">Match</span></code> 类现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-189"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1530,7 +1637,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">AbstractSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Sized,</span> <span class="pre">Collection[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.AbstractSet" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Set" title="collections.abc.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Set</span></code></a>  的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Set" title="collections.abc.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Set</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-191"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Set" title="collections.abc.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Set</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-190"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1541,7 +1648,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p>该类型代表了 <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>、<a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a>、<a class="reference internal" href="stdtypes.html#memoryview" title="memoryview"><code class="xref py py-class docutils literal notranslate"><span class="pre">memoryview</span></code></a> 等字节序列类型。</p>
 <p>作为该类型的简称，<a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 可用于标注上述任意类型的参数。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ByteString" title="collections.abc.ByteString"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ByteString</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-192"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ByteString" title="collections.abc.ByteString"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ByteString</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-191"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1553,7 +1660,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.6.0 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Collection" title="collections.abc.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Collection</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-193"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Collection" title="collections.abc.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Collection</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-192"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 与 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1562,7 +1669,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Container</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Generic[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Container" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Container" title="collections.abc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Container</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Container" title="collections.abc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Container</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-194"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Container" title="collections.abc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Container</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-193"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1571,7 +1678,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">ItemsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">MappingView,</span> <span class="pre">Generic[KT_co,</span> <span class="pre">VT_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.ItemsView" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.ItemsView" title="collections.abc.ItemsView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ItemsView</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ItemsView" title="collections.abc.ItemsView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ItemsView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-195"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ItemsView" title="collections.abc.ItemsView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ItemsView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-194"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1580,7 +1687,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">KeysView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">MappingView[KT_co],</span> <span class="pre">AbstractSet[KT_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.KeysView" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.KeysView" title="collections.abc.KeysView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.KeysView</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.KeysView" title="collections.abc.KeysView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.KeysView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-196"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.KeysView" title="collections.abc.KeysView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.KeysView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-195"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1593,7 +1700,7 @@ These types should be directly imported from <code class="docutils literal notra
 </pre></div>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Mapping" title="collections.abc.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Mapping</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-197"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Mapping" title="collections.abc.Mapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Mapping</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-196"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1602,7 +1709,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">MappingView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Sized,</span> <span class="pre">Iterable[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.MappingView" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.MappingView" title="collections.abc.MappingView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MappingView</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MappingView" title="collections.abc.MappingView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MappingView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-198"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MappingView" title="collections.abc.MappingView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MappingView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-197"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1611,7 +1718,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">MutableMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Mapping[KT,</span> <span class="pre">VT]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.MutableMapping" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.MutableMapping" title="collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableMapping</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableMapping" title="collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableMapping</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-199"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableMapping" title="collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableMapping</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-198"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1620,7 +1727,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">MutableSequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Sequence[T]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.MutableSequence" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.MutableSequence" title="collections.abc.MutableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSequence</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableSequence" title="collections.abc.MutableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSequence</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-200"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableSequence" title="collections.abc.MutableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSequence</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-199"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1629,7 +1736,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">MutableSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">AbstractSet[T]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.MutableSet" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.MutableSet" title="collections.abc.MutableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSet</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableSet" title="collections.abc.MutableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSet</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-201"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.MutableSet" title="collections.abc.MutableSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.MutableSet</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-200"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1638,7 +1745,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Reversible[T_co],</span> <span class="pre">Collection[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Sequence" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Sequence" title="collections.abc.Sequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Sequence</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Sequence" title="collections.abc.Sequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Sequence</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-202"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Sequence" title="collections.abc.Sequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Sequence</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-201"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1647,7 +1754,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">ValuesView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">MappingView[VT_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.ValuesView" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.ValuesView" title="collections.abc.ValuesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ValuesView</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ValuesView" title="collections.abc.ValuesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ValuesView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-203"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.ValuesView" title="collections.abc.ValuesView"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.ValuesView</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-202"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1659,7 +1766,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Iterable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Generic[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Iterable" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterable</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-204"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-203"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1668,7 +1775,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Iterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Iterable[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Iterator" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Iterator" title="collections.abc.Iterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterator</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Iterator" title="collections.abc.Iterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-205"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Iterator" title="collections.abc.Iterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Iterator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-204"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1699,7 +1806,7 @@ These types should be directly imported from <code class="docutils literal notra
 </pre></div>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Generator" title="collections.abc.Generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Generator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-206"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Generator" title="collections.abc.Generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Generator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-205"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1714,7 +1821,7 @@ These types should be directly imported from <code class="docutils literal notra
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">Reversible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">Iterable[T_co]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.Reversible" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="collections.abc.html#collections.abc.Reversible" title="collections.abc.Reversible"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Reversible</span></code></a> 的泛型版本。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Reversible" title="collections.abc.Reversible"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Reversible</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-207"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Reversible" title="collections.abc.Reversible"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Reversible</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-206"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1742,7 +1849,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.5.3 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Coroutine" title="collections.abc.Coroutine"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Coroutine</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-208"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Coroutine" title="collections.abc.Coroutine"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Coroutine</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-207"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1776,7 +1883,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.6.1 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncGenerator" title="collections.abc.AsyncGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncGenerator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-209"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncGenerator" title="collections.abc.AsyncGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncGenerator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-208"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1788,7 +1895,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.5.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncIterable" title="collections.abc.AsyncIterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-210"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncIterable" title="collections.abc.AsyncIterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-209"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1800,7 +1907,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.5.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncIterator" title="collections.abc.AsyncIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-211"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.AsyncIterator" title="collections.abc.AsyncIterator"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.AsyncIterator</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-210"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1812,7 +1919,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.5.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Awaitable" title="collections.abc.Awaitable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Awaitable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-212"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="collections.abc.html#collections.abc.Awaitable" title="collections.abc.Awaitable"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Awaitable</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-211"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1830,7 +1937,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.6.0 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="contextlib.html#contextlib.AbstractContextManager" title="contextlib.AbstractContextManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.AbstractContextManager</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-213"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="contextlib.html#contextlib.AbstractContextManager" title="contextlib.AbstractContextManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.AbstractContextManager</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-212"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1845,7 +1952,7 @@ These types should be directly imported from <code class="docutils literal notra
 <p><span class="versionmodified added">3.6.2 新版功能.</span></p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="contextlib.html#contextlib.AbstractAsyncContextManager" title="contextlib.AbstractAsyncContextManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.AbstractAsyncContextManager</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-214"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
+<p><span class="versionmodified deprecated">3.9 版后已移除: </span><a class="reference internal" href="contextlib.html#contextlib.AbstractAsyncContextManager" title="contextlib.AbstractAsyncContextManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextlib.AbstractAsyncContextManager</span></code></a> 现已支持 <code class="docutils literal notranslate"><span class="pre">[]</span></code>。详见 <span class="target" id="index-213"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 和 <a class="reference internal" href="stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias 类型</span></a>。</p>
 </div>
 </dd></dl>
 
@@ -1910,6 +2017,61 @@ These types should be directly imported from <code class="docutils literal notra
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="typing.assert_never">
+<span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">assert_never</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.assert_never" title="永久链接至目标">¶</a></dt>
+<dd><p>Assert to the type checker that a line of code is unreachable.</p>
+<p>Example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">int_or_str</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">arg</span><span class="p">:</span>
+        <span class="k">case</span> <span class="nb">int</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It&#39;s an int&quot;</span><span class="p">)</span>
+        <span class="k">case</span> <span class="nb">str</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It&#39;s a str&quot;</span><span class="p">)</span>
+        <span class="k">case</span> <span class="k">_</span> <span class="k">as</span> <span class="n">unreachable</span><span class="p">:</span>
+            <span class="n">assert_never</span><span class="p">(</span><span class="n">unreachable</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a type checker finds that a call to <code class="docutils literal notranslate"><span class="pre">assert_never()</span></code> is
+reachable, it will emit an error.</p>
+<p>At runtime, this throws an exception when called.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="typing.reveal_type">
+<span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">reveal_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#typing.reveal_type" title="永久链接至目标">¶</a></dt>
+<dd><p>Reveal the inferred static type of an expression.</p>
+<p>When a static type checker encounters a call to this function,
+it emits a diagnostic with the type of the argument. For example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">reveal_type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Revealed type is &quot;builtins.int&quot;</span>
+</pre></div>
+</div>
+<p>This can be useful when you want to debug how your type checker
+handles a particular piece of code.</p>
+<p>The function returns its argument unchanged, which allows using
+it within an expression:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">reveal_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Revealed type is &quot;builtins.int&quot;</span>
+</pre></div>
+</div>
+<p>Most type checkers support <code class="docutils literal notranslate"><span class="pre">reveal_type()</span></code> anywhere, even if the
+name is not imported from <code class="docutils literal notranslate"><span class="pre">typing</span></code>. Importing the name from
+<code class="docutils literal notranslate"><span class="pre">typing</span></code> allows your code to run without runtime errors and
+communicates intent more clearly.</p>
+<p>At runtime, this function prints the runtime type of its argument to stderr
+and returns it unchanged:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">reveal_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># prints &quot;Runtime type is int&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># prints &quot;1&quot;</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="typing.overload">
 <span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">overload</span></span><a class="headerlink" href="#typing.overload" title="永久链接至目标">¶</a></dt>
 <dd><p><code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code> 装饰器可以修饰支持多个不同参数类型组合的函数或方法。<code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code> - 装饰定义的系列必须紧跟一个非 <code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code>-装饰定义（用于同一个函数/方法）。<code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code>-装饰定义仅是为了协助类型检查器， 因为该装饰器会被非 <code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code>-装饰定义覆盖，后者用于运行时，而且会被类型检查器忽略。在运行时直接调用 <code class="docutils literal notranslate"><span class="pre">&#64;overload</span></code> 装饰的函数会触发 <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>。下面的重载示例给出了比联合类型或类型变量更精准的类型：</p>
@@ -1926,7 +2088,7 @@ These types should be directly imported from <code class="docutils literal notra
     <span class="o">&lt;</span><span class="n">actual</span> <span class="n">implementation</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>详见 <span class="target" id="index-215"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a>，与其他类型语义进行对比。</p>
+<p>详见 <span class="target" id="index-214"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a>，与其他类型语义进行对比。</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1948,7 +2110,7 @@ These types should be directly imported from <code class="docutils literal notra
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>这些属性没有运行时检查。详见 <span class="target" id="index-216"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0591"><strong>PEP 591</strong></a>。</p>
+<p>这些属性没有运行时检查。详见 <span class="target" id="index-215"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0591"><strong>PEP 591</strong></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -1961,7 +2123,9 @@ These types should be directly imported from <code class="docutils literal notra
 <dt class="sig sig-object py" id="typing.no_type_check">
 <span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">typing.</span></span><span class="sig-name descname"><span class="pre">no_type_check</span></span><a class="headerlink" href="#typing.no_type_check" title="永久链接至目标">¶</a></dt>
 <dd><p>标明注解不是类型提示的装饰器。</p>
-<p>用作类或函数的 <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a>。用于类时，递归地应用于该类中定义的所有方法，（但不影响超类或子类中定义的方法）。</p>
+<p>This works as class or function <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a>.  With a class, it
+applies recursively to all methods and classes defined in that class
+(but not to methods defined in its superclasses or subclasses).</p>
 <p>本方法可直接修改函数。</p>
 </dd></dl>
 
@@ -2009,10 +2173,10 @@ These types should be directly imported from <code class="docutils literal notra
 </div>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p><a class="reference internal" href="#typing.get_type_hints" title="typing.get_type_hints"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_type_hints()</span></code></a> 在导入的 <a class="reference internal" href="#type-aliases"><span class="std std-ref">type aliases</span></a> 中不工作，该类型包括前向引用（forward references）。启用注解的延迟评估（<span class="target" id="index-217"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0563"><strong>PEP 563</strong></a>）可能会消除对大多数前向引用的需求。</p>
+<p><a class="reference internal" href="#typing.get_type_hints" title="typing.get_type_hints"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_type_hints()</span></code></a> 在导入的 <a class="reference internal" href="#type-aliases"><span class="std std-ref">type aliases</span></a> 中不工作，该类型包括前向引用（forward references）。启用注解的延迟评估（<span class="target" id="index-216"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0563"><strong>PEP 563</strong></a>）可能会消除对大多数前向引用的需求。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span><span class="target" id="index-218"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0593"><strong>PEP 593</strong></a> 的组成部分，添加了 <code class="docutils literal notranslate"><span class="pre">include_extras</span></code> 参数。</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span><span class="target" id="index-217"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0593"><strong>PEP 593</strong></a> 的组成部分，添加了 <code class="docutils literal notranslate"><span class="pre">include_extras</span></code> 参数。</p>
 </div>
 </dd></dl>
 
@@ -2062,7 +2226,7 @@ These types should be directly imported from <code class="docutils literal notra
 <dd><p>用于字符串前向引用的内部类型表示的类。例如，<code class="docutils literal notranslate"><span class="pre">list[&quot;SomeClass&quot;]</span></code> 会被隐式转换为 <code class="docutils literal notranslate"><span class="pre">list[ForwardRef(&quot;SomeClass&quot;)]</span></code>。这个类不应由用户来实例化，但可以由内省工具使用。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p><span class="target" id="index-219"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 泛型类型例如 <code class="docutils literal notranslate"><span class="pre">list[&quot;SomeClass&quot;]</span></code> 将不会被隐式地转换为 <code class="docutils literal notranslate"><span class="pre">list[ForwardRef(&quot;SomeClass&quot;)]</span></code> 因而将不会自动解析为 <code class="docutils literal notranslate"><span class="pre">list[SomeClass]</span></code>。</p>
+<p><span class="target" id="index-218"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0585"><strong>PEP 585</strong></a> 泛型类型例如 <code class="docutils literal notranslate"><span class="pre">list[&quot;SomeClass&quot;]</span></code> 将不会被隐式地转换为 <code class="docutils literal notranslate"><span class="pre">list[ForwardRef(&quot;SomeClass&quot;)]</span></code> 因而将不会自动解析为 <code class="docutils literal notranslate"><span class="pre">list[SomeClass]</span></code>。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7.4 新版功能.</span></p>
@@ -2086,7 +2250,11 @@ These types should be directly imported from <code class="docutils literal notra
 <p>第一个类型注解必须用引号标注，才能把它当作“前向引用”，从而在解释器运行时中隐藏 <code class="docutils literal notranslate"><span class="pre">expensive_mod</span></code> 引用。局部变量的类型注释不会被评估，因此，第二个注解不需要用引号引起来。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>Python 3.7 或更高版本中使用 <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span></code> 时，函数定义时不处理注解， 而是把注解当作字符串存在 <code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> 里，这样就不必为注解使用引号。（详见 <span class="target" id="index-220"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0563"><strong>PEP 563</strong></a>）。</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">__future__</span> <span class="pre">import</span> <span class="pre">annotations</span></code> is used in Python 3.7 or later,
+annotations are not evaluated at function definition time.
+Instead, they are stored as strings in <code class="docutils literal notranslate"><span class="pre">__annotations__</span></code>.
+This makes it unnecessary to use quotes around the annotation.
+(see <span class="target" id="index-82"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0563"><strong>PEP 563</strong></a>).</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5.2 新版功能.</span></p>
@@ -2193,7 +2361,7 @@ These types should be directly imported from <code class="docutils literal notra
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -2230,7 +2398,7 @@ These types should be directly imported from <code class="docutils literal notra
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

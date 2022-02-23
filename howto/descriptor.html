@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>描述器使用指南 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>描述器使用指南 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -161,7 +161,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -629,7 +629,13 @@
     <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>有趣的是，属性查找不会直接调用 <a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> ，点运算符和 <a class="reference internal" href="../library/functions.html#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 函数均通过辅助函数执行属性查找：</p>
+<p>Note, there is no <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> hook in the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code>
+code.  That is why calling <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code> directly or with
+<code class="docutils literal notranslate"><span class="pre">super().__getattribute__</span></code> will bypass <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> entirely.</p>
+<p>Instead, it is the dot operator and the <a class="reference internal" href="../library/functions.html#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> function that are
+responsible for invoking <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> whenever <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code>
+raises an <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>.  Their logic is encapsulated in a helper
+function:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getattr_hook</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
     <span class="s2">&quot;Emulate slot_tp_getattr_hook() in Objects/typeobject.c&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -640,8 +646,6 @@
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>             <span class="c1"># __getattr__</span>
 </pre></div>
 </div>
-<p>因此，如果 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> 存在，则只要 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code> 引发 <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> （直接引发异常或在描述符调用中引发都一样），就会调用它。</p>
-<p>同时，如果用户直接调用 <a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">object.__getattribute__()</span></code></a> ，则 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code>  的钩子将被绕开。</p>
 </section>
 <section id="invocation-from-a-class">
 <h3><a class="toc-backref" href="#id19">通过类调用</a><a class="headerlink" href="#invocation-from-a-class" title="永久链接至标题">¶</a></h3>
@@ -772,17 +776,17 @@
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fget</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;unreadable attribute </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;property &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&#39; has no getter&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fget</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t set attribute </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;property &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&#39; has no setter&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fset</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__delete__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fdel</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;can&#39;t delete attribute </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;property &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&#39; has no deleter&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fdel</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fget</span><span class="p">):</span>
@@ -1052,7 +1056,7 @@ attributes stored in <code class="docutils literal notranslate"><span class="pre
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mark</span><span class="o">.</span><span class="n">dept</span> <span class="o">=</span> <span class="s1">&#39;Space Pirate&#39;</span>
 <span class="gt">Traceback (most recent call last):</span>
     <span class="o">...</span>
-<span class="gr">AttributeError</span>: <span class="n">can&#39;t set attribute</span>
+<span class="gr">AttributeError</span>: <span class="n">property &#39;dept&#39; of &#39;Immutable&#39; object has no setter</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mark</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="s1">&#39;Mars&#39;</span>
 <span class="gt">Traceback (most recent call last):</span>
     <span class="o">...</span>
@@ -1125,7 +1129,7 @@ instance dictionary to function correctly:</p>
     <span class="s1">&#39;Simulate how the type metaclass adds member objects for slots&#39;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcls</span><span class="p">,</span> <span class="n">clsname</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
-        <span class="s1">&#39;Emuluate type_new() in Objects/typeobject.c&#39;</span>
+        <span class="s1">&#39;Emulate type_new() in Objects/typeobject.c&#39;</span>
         <span class="c1"># type_new() calls PyTypeReady() which calls add_methods()</span>
         <span class="n">slot_names</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;slot_names&#39;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="k">for</span> <span class="n">offset</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slot_names</span><span class="p">):</span>
@@ -1303,7 +1307,7 @@ instance dictionary to function correctly:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -1339,7 +1343,7 @@ instance dictionary to function correctly:</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

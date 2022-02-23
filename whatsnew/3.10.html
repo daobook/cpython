@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Python 3.10 有什么新变化 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 3.10 有什么新变化 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -241,7 +241,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python的新变化</a> &#187;</li>
@@ -272,10 +272,10 @@
 <h1>Python 3.10 有什么新变化<a class="headerlink" href="#what-s-new-in-python-3-10" title="永久链接至标题">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">发布版本</dt>
-<dd class="field-odd"><p>3.11.0a4</p>
+<dd class="field-odd"><p>3.11.0a5</p>
 </dd>
 <dt class="field-even">日期</dt>
-<dd class="field-even"><p>二月 01, 2022</p>
+<dd class="field-even"><p>二月 23, 2022</p>
 </dd>
 <dt class="field-odd">编者</dt>
 <dd class="field-odd"><p>Pablo Galindo Salgado</p>
@@ -939,7 +939,7 @@ keyword-only fields.</p>
 <p>Both <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">birthday</span></code> are keyword-only parameters to the
 generated __init__ method.</p>
 <p>You can specify keyword-only on a per-field basis:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Birthday</span><span class="p">:</span>
@@ -1020,16 +1020,30 @@ module constants have a <a class="reference internal" href="../library/functions
 </section>
 <section id="idle-and-idlelib">
 <h3>IDLE 与 idlelib<a class="headerlink" href="#idle-and-idlelib" title="永久链接至标题">¶</a></h3>
-<p>IDLE 会发起 <a class="reference internal" href="../library/sys.html#sys.excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a>  调用（不带 '-n' 参数启动时）。之前用户钩子会被忽略。（由 Ken Hilton 在 <a class="reference external" href="https://bugs.python.org/issue43008">bpo-43008</a> 中提供补丁）</p>
-<p>此修改已被反向移植到 3.9 维护发行版中。</p>
+<p>Make IDLE invoke <a class="reference internal" href="../library/sys.html#sys.excepthook" title="sys.excepthook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.excepthook()</span></code></a> (when started without '-n').
+User hooks were previously ignored.  (Contributed by Ken Hilton in
+<a class="reference external" href="https://bugs.python.org/issue43008">bpo-43008</a>.)</p>
+<p>Rearrange the settings dialog.  Split the General tab into Windows
+and Shell/Ed tabs.  Move help sources, which extend the Help menu, to the
+Extensions tab.  Make space for new options and shorten the dialog. The
+latter makes the dialog better fit small screens.  (Contributed by Terry Jan
+Reedy in <a class="reference external" href="https://bugs.python.org/issue40468">bpo-40468</a>.)  Move the indent space setting from the Font tab to
+the new Windows tab.  (Contributed by Mark Roseman and Terry Jan Reedy in
+<a class="reference external" href="https://bugs.python.org/issue33962">bpo-33962</a>.)</p>
+<p>The changes above were backported to a 3.9 maintenance release.</p>
 <p>增加了 Shell 侧栏。 将主提示符（“&gt;&gt;&gt;”）移至侧栏。二级提示符（“...”）也加入侧栏。在编辑器的行号侧栏上鼠标单击和可选的拖动，会选定一行或多行文本。在选定文本行后右击将显示包含“copy with prompts”的上下文菜单。这会将侧栏的提示符与选定文本行合并。该选项也会在文本的上下文菜单中显示。（由 Tal Einat 在 <a class="reference external" href="https://bugs.python.org/issue37903">bpo-37903</a> 中贡献）</p>
-<p>不用制表符而用空格来缩进交互式代码。这使得交互式代码“看起来很正确”。增加 shell 侧边栏的一个主要动机就是为了实现这一点。（由 Terry Jan Reedy 贡献于 <a class="reference external" href="https://bugs.python.org/issue37892">bpo-37892</a> ）</p>
-<p>希望能将这些 shell 的改变回馈至后续的 3.9 维护版本中。</p>
+<p>Use spaces instead of tabs to indent interactive code.  This makes
+interactive code entries 'look right'.  Making this feasible was a
+major motivation for adding the shell sidebar.  (Contributed by
+Terry Jan Reedy in <a class="reference external" href="https://bugs.python.org/issue37892">bpo-37892</a>.)</p>
 <p>Highlight the new <a class="reference internal" href="../reference/lexical_analysis.html#soft-keywords"><span class="std std-ref">soft keywords</span></a> <a class="reference internal" href="../reference/compound_stmts.html#match"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">match</span></code></a>,
 <a class="reference internal" href="../reference/compound_stmts.html#match"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">case</span></code></a>, and <a class="reference internal" href="../reference/compound_stmts.html#wildcard-patterns"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">_</span></code></a> in
 pattern-matching statements. However, this highlighting is not perfect
 and will be incorrect in some rare cases, including some <code class="docutils literal notranslate"><span class="pre">_</span></code>-s in
 <code class="docutils literal notranslate"><span class="pre">case</span></code> patterns.  (Contributed by Tal Einat in <a class="reference external" href="https://bugs.python.org/issue44010">bpo-44010</a>.)</p>
+<p>New in 3.10 maintenance releases.</p>
+<p>Apply syntax highlighting to <cite>.pyi</cite> files. (Contributed by Alex
+Waygood and Terry Jan Reedy in <a class="reference external" href="https://bugs.python.org/issue45447">bpo-45447</a>.)</p>
 </section>
 <section id="importlib-metadata">
 <h3>importlib.metadata<a class="headerlink" href="#importlib-metadata" title="永久链接至标题">¶</a></h3>
@@ -1725,7 +1739,7 @@ Python executable.
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python的新变化</a> &#187;</li>
@@ -1761,7 +1775,7 @@ Python executable.
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

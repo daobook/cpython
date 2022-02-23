@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>dis --- Python 字节码反汇编器 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dis --- Python 字节码反汇编器 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -129,7 +129,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -175,10 +175,14 @@
 </div>
 <p>可以使用以下命令显示 <code class="xref py py-func docutils literal notranslate"><span class="pre">myfunc()</span></code> 的反汇编</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dis</span><span class="o">.</span><span class="n">dis</span><span class="p">(</span><span class="n">myfunc</span><span class="p">)</span>
-<span class="go">  2           0 LOAD_GLOBAL              0 (len)</span>
-<span class="go">              2 LOAD_FAST                0 (alist)</span>
-<span class="go">              4 CALL_NO_KW               1</span>
-<span class="go">              6 RETURN_VALUE</span>
+<span class="go">  1           0 RESUME                   0</span>
+
+<span class="go">  2           2 PUSH_NULL</span>
+<span class="go">              4 LOAD_GLOBAL              0 (len)</span>
+<span class="go">              6 LOAD_FAST                0 (alist)</span>
+<span class="go">              8 PRECALL                  1</span>
+<span class="go">             10 CALL                     1</span>
+<span class="go">             12 RETURN_VALUE</span>
 </pre></div>
 </div>
 <p>(&quot;2&quot; 是行号)。</p>
@@ -235,9 +239,12 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">instr</span> <span class="ow">in</span> <span class="n">bytecode</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">instr</span><span class="o">.</span><span class="n">opname</span><span class="p">)</span>
 <span class="gp">...</span>
+<span class="go">RESUME</span>
+<span class="go">PUSH_NULL</span>
 <span class="go">LOAD_GLOBAL</span>
 <span class="go">LOAD_FAST</span>
-<span class="go">CALL_NO_KW</span>
+<span class="go">PRECALL</span>
+<span class="go">CALL</span>
 <span class="go">RETURN_VALUE</span>
 </pre></div>
 </div>
@@ -416,8 +423,47 @@ otherwise an empty string.</p>
 <dd><p>如果其他代码跳到这里，则为 <code class="docutils literal notranslate"><span class="pre">True</span></code> ，否则为 <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
 </dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="dis.Instruction.positions">
+<span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#dis.Instruction.positions" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#dis.Positions" title="dis.Positions"><code class="xref py py-class docutils literal notranslate"><span class="pre">dis.Positions</span></code></a> object holding the
+start and end locations that are covered by this instruction.</p>
+</dd></dl>
+
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Field <code class="docutils literal notranslate"><span class="pre">positions</span></code> is added.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dis.Positions">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">Positions</span></span><a class="headerlink" href="#dis.Positions" title="永久链接至目标">¶</a></dt>
+<dd><p>In case the information is not available, some fields might be <cite>None</cite>.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="dis.Positions.lineno">
+<span class="sig-name descname"><span class="pre">lineno</span></span><a class="headerlink" href="#dis.Positions.lineno" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="dis.Positions.end_lineno">
+<span class="sig-name descname"><span class="pre">end_lineno</span></span><a class="headerlink" href="#dis.Positions.end_lineno" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="dis.Positions.col_offset">
+<span class="sig-name descname"><span class="pre">col_offset</span></span><a class="headerlink" href="#dis.Positions.col_offset" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="dis.Positions.end_col_offset">
+<span class="sig-name descname"><span class="pre">end_col_offset</span></span><a class="headerlink" href="#dis.Positions.end_col_offset" title="永久链接至目标">¶</a></dt>
+<dd></dd></dl>
+
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -426,7 +472,8 @@ otherwise an empty string.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-NOP">
 <span class="sig-name descname"><span class="pre">NOP</span></span><a class="headerlink" href="#opcode-NOP" title="永久链接至目标">¶</a></dt>
-<dd><p>什么都不做。 用作字节码优化器的占位符。</p>
+<dd><p>Do nothing code.  Used as a placeholder by the bytecode optimizer, and to
+generate line tracing events.</p>
 </dd></dl>
 
 <dl class="std opcode">
@@ -436,41 +483,21 @@ otherwise an empty string.</p>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-ROT_TWO">
-<span class="sig-name descname"><span class="pre">ROT_TWO</span></span><a class="headerlink" href="#opcode-ROT_TWO" title="永久链接至目标">¶</a></dt>
-<dd><p>交换两个最顶层的堆栈项。</p>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-ROT_THREE">
-<span class="sig-name descname"><span class="pre">ROT_THREE</span></span><a class="headerlink" href="#opcode-ROT_THREE" title="永久链接至目标">¶</a></dt>
-<dd><p>将第二个和第三个堆栈项向上提升一个位置，顶项移动到位置三。</p>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-ROT_FOUR">
-<span class="sig-name descname"><span class="pre">ROT_FOUR</span></span><a class="headerlink" href="#opcode-ROT_FOUR" title="永久链接至目标">¶</a></dt>
-<dd><p>将第二个、第三个和第四个堆栈项向上提升一个位置，将顶项移动到第四个位置。</p>
+<dt class="sig sig-object std" id="opcode-COPY">
+<span class="sig-name descname"><span class="pre">COPY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-COPY" title="永久链接至目标">¶</a></dt>
+<dd><p>Push the <em>i</em>-th item to the top of the stack. The item is not removed from its
+original location.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.8 新版功能.</span></p>
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-DUP_TOP">
-<span class="sig-name descname"><span class="pre">DUP_TOP</span></span><a class="headerlink" href="#opcode-DUP_TOP" title="永久链接至目标">¶</a></dt>
-<dd><p>复制堆栈顶部的引用。</p>
+<dt class="sig sig-object std" id="opcode-SWAP">
+<span class="sig-name descname"><span class="pre">SWAP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-SWAP" title="永久链接至目标">¶</a></dt>
+<dd><p>Swap TOS with the item at position <em>i</em>.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.2 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-DUP_TOP_TWO">
-<span class="sig-name descname"><span class="pre">DUP_TOP_TWO</span></span><a class="headerlink" href="#opcode-DUP_TOP_TWO" title="永久链接至目标">¶</a></dt>
-<dd><p>复制堆栈顶部的两个引用，使它们保持相同的顺序。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.2 新版功能.</span></p>
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -717,9 +744,6 @@ has occurred in a <a class="reference internal" href="../reference/compound_stmt
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.11 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">__exit__</span></code> function is in position 8 of the stack rather than 7.</p>
-</div>
-<div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">__exit__</span></code> function is in position 4 of the stack rather than 7.
 Exception representation on the stack now consist of one, not three, items.</p>
 </div>
@@ -738,7 +762,7 @@ Exception representation on the stack now consist of one, not three, items.</p>
 <dt class="sig sig-object std" id="opcode-LOAD_BUILD_CLASS">
 <span class="sig-name descname"><span class="pre">LOAD_BUILD_CLASS</span></span><a class="headerlink" href="#opcode-LOAD_BUILD_CLASS" title="永久链接至目标">¶</a></dt>
 <dd><p>Pushes <code class="xref py py-func docutils literal notranslate"><span class="pre">builtins.__build_class__()</span></code> onto the stack.  It is later called
-by <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> to construct a class.</p>
+to construct a class.</p>
 </dd></dl>
 
 <dl class="std opcode">
@@ -796,7 +820,6 @@ success (<code class="docutils literal notranslate"><span class="pre">True</span
 </div>
 </dd></dl>
 
-<p>以下所有操作码均使用其参数。</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-STORE_NAME">
 <span class="sig-name descname"><span class="pre">STORE_NAME</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">namei</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-STORE_NAME" title="永久链接至目标">¶</a></dt>
@@ -1097,6 +1120,15 @@ if there isn't one.</p>
 </dd></dl>
 
 <dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-JUMP_NO_INTERRUPT">
+<span class="sig-name descname"><span class="pre">JUMP_NO_INTERRUPT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">target</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-JUMP_NO_INTERRUPT" title="永久链接至目标">¶</a></dt>
+<dd><p>Set bytecode counter to <em>target</em>. Do not check for interrupts.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-FOR_ITER">
 <span class="sig-name descname"><span class="pre">FOR_ITER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">delta</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-FOR_ITER" title="永久链接至目标">¶</a></dt>
 <dd><p>TOS 是一个 <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a>。 请调用其 <a class="reference internal" href="stdtypes.html#iterator.__next__" title="iterator.__next__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__()</span></code></a> 方法。 如果此操作产生了一个新值，则将其推入栈顶（将迭代器留在其下方）。 如果迭代器提示已耗尽，TOS 会被弹出，并且字节码计数器将增加 <em>delta</em>。</p>
@@ -1216,32 +1248,28 @@ closures.</p>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_NO_KW">
-<span class="sig-name descname"><span class="pre">CALL_NO_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_NO_KW" title="永久链接至目标">¶</a></dt>
-<dd><p>Calls a callable object with positional arguments.
-<em>argc</em> indicates the number of positional arguments.
-The top of the stack contains positional arguments, with the right-most
-argument on top.  Below the arguments is a callable object to call.
-<code class="docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code> pops all arguments and the callable object off the stack,
-calls the callable object with those arguments, and pushes the return value
-returned by the callable object.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-CALL_KW">
-<span class="sig-name descname"><span class="pre">CALL_KW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL_KW" title="永久链接至目标">¶</a></dt>
-<dd><p>Calls a callable object with positional (if any) and keyword arguments.
-<em>argc</em> indicates the total number of positional and keyword arguments.
-The top element on the stack contains a tuple with the names of the
-keyword arguments, which must be strings.
-Below that are the values for the keyword arguments,
-in the order corresponding to the tuple.
-Below that are positional arguments, with the right-most parameter on
-top.  Below the arguments is a callable object to call.
-<code class="docutils literal notranslate"><span class="pre">CALL_KW</span></code> pops all arguments and the callable object off the stack,
+<dt class="sig sig-object std" id="opcode-CALL">
+<span class="sig-name descname"><span class="pre">CALL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-CALL" title="永久链接至目标">¶</a></dt>
+<dd><p>Calls a callable object with the number of arguments specified by <code class="docutils literal notranslate"><span class="pre">argc</span></code>,
+including the named arguments specified by the preceding
+<a class="reference internal" href="#opcode-KW_NAMES"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">KW_NAMES</span></code></a>, if any.
+On the stack are (in ascending order), either:</p>
+<ul class="simple">
+<li><p>NULL</p></li>
+<li><p>The callable</p></li>
+<li><p>The positional arguments</p></li>
+<li><p>The named arguments</p></li>
+</ul>
+<p>or:</p>
+<ul class="simple">
+<li><p>The callable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self</span></code></p></li>
+<li><p>The remaining positional arguments</p></li>
+<li><p>The named arguments</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">argc</span></code> is the total of the positional and named arguments, excluding
+<code class="docutils literal notranslate"><span class="pre">self</span></code> when a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is not present.</p>
+<p><code class="docutils literal notranslate"><span class="pre">CALL</span></code> pops all arguments and the callable object off the stack,
 calls the callable object with those arguments, and pushes the return value
 returned by the callable object.</p>
 <div class="versionadded">
@@ -1261,19 +1289,47 @@ returned by the callable object.</p>
 <dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-LOAD_METHOD">
 <span class="sig-name descname"><span class="pre">LOAD_METHOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">namei</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-LOAD_METHOD" title="永久链接至目标">¶</a></dt>
-<dd><p>从 TOS 对象加载一个名为 <code class="docutils literal notranslate"><span class="pre">co_names[namei]</span></code> 的方法。 TOS 将被弹出。 此字节码可区分两种情况：如果 TOS 有一个名称正确的方法，字节码会将未绑定方法和 TOS 推入栈顶。 TOS 将在调用未绑定方法时被用作 <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code> 的第一个参数 (<code class="docutils literal notranslate"><span class="pre">self</span></code>)。 否则会将 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 和属性查找所返回的对象推入栈顶。</p>
+<dd><p>Loads a method named <code class="docutils literal notranslate"><span class="pre">co_names[namei]</span></code> from the TOS object. TOS is popped.
+This bytecode distinguishes two cases: if TOS has a method with the correct
+name, the bytecode pushes the unbound method and TOS. TOS will be used as
+the first argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>) by <a class="reference internal" href="#opcode-CALL"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL</span></code></a> when calling the
+unbound method. Otherwise, <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the object return by the attribute
+lookup are pushed.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-PRECALL_METHOD">
-<span class="sig-name descname"><span class="pre">PRECALL_METHOD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-PRECALL_METHOD" title="永久链接至目标">¶</a></dt>
-<dd><p>Prefixes either <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> or <a class="reference internal" href="#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a>.
-This opcode is designed to be used with <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a>.
-Sets internal variables, so that <a class="reference internal" href="#opcode-CALL_NO_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_NO_KW</span></code></a> or <a class="reference internal" href="#opcode-CALL_KW"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_KW</span></code></a>
-clean up after <a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> correctly.</p>
+<dt class="sig sig-object std" id="opcode-PRECALL">
+<span class="sig-name descname"><span class="pre">PRECALL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">argc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-PRECALL" title="永久链接至目标">¶</a></dt>
+<dd><p>Prefixes <a class="reference internal" href="#opcode-CALL"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL</span></code></a>. Logically this is a no op.
+It exists to enable effective specialization of calls.
+<code class="docutils literal notranslate"><span class="pre">argc</span></code> is the number of arguments as described in <a class="reference internal" href="#opcode-CALL"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-PUSH_NULL">
+<span class="sig-name descname"><span class="pre">PUSH_NULL</span></span><a class="headerlink" href="#opcode-PUSH_NULL" title="永久链接至目标">¶</a></dt>
+<dd><blockquote>
+<div><p>Pushes a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> to the stack.
+Used in the call sequence to match the <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pushed by
+<a class="reference internal" href="#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> for non-method calls.</p>
+</div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-KW_NAMES">
+<span class="sig-name descname"><span class="pre">KW_NAMES</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-KW_NAMES" title="永久链接至目标">¶</a></dt>
+<dd><p>Prefixes <a class="reference internal" href="#opcode-PRECALL"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">PRECALL</span></code></a>.
+Stores a reference to <code class="docutils literal notranslate"><span class="pre">co_consts[consti]</span></code> into an internal variable
+for use by <a class="reference internal" href="#opcode-CALL"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL</span></code></a>. <code class="docutils literal notranslate"><span class="pre">co_consts[consti]</span></code> must be a tuple of strings.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -1342,25 +1398,6 @@ success (<code class="docutils literal notranslate"><span class="pre">True</span
 </dd></dl>
 
 <dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-ROT_N">
-<span class="sig-name descname"><span class="pre">ROT_N</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">count</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-ROT_N" title="永久链接至目标">¶</a></dt>
-<dd><p>将栈的前 <em>count</em> 项向上提升一个位置，并将 TOS 下移至位置 <em>count</em>。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.10 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
-<dt class="sig sig-object std" id="opcode-COPY">
-<span class="sig-name descname"><span class="pre">COPY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">i</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-COPY" title="永久链接至目标">¶</a></dt>
-<dd><p>Push the <em>i</em>-th item to the top of the stack. The item is not removed from its
-original location.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="std opcode">
 <dt class="sig sig-object std" id="opcode-RESUME">
 <span class="sig-name descname"><span class="pre">RESUME</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">where</span></em><span class="sig-paren">)</span><a class="headerlink" href="#opcode-RESUME" title="永久链接至目标">¶</a></dt>
 <dd><blockquote>
@@ -1373,6 +1410,36 @@ original location.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> After an <code class="docutils literal notranslate"><span class="pre">await</span></code> expression</p></li>
 </ul>
 </div></blockquote>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-RETURN_GENERATOR">
+<span class="sig-name descname"><span class="pre">RETURN_GENERATOR</span></span><a class="headerlink" href="#opcode-RETURN_GENERATOR" title="永久链接至目标">¶</a></dt>
+<dd><p>Create a generator, coroutine, or async generator from the current frame.
+Clear the current frame and return the newly created generator.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-SEND">
+<span class="sig-name descname"><span class="pre">SEND</span></span><a class="headerlink" href="#opcode-SEND" title="永久链接至目标">¶</a></dt>
+<dd><p>Sends <code class="docutils literal notranslate"><span class="pre">None</span></code> to the sub-generator of this generator.
+Used in <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> statements.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std opcode">
+<dt class="sig sig-object std" id="opcode-ASYNC_GEN_WRAP">
+<span class="sig-name descname"><span class="pre">ASYNC_GEN_WRAP</span></span><a class="headerlink" href="#opcode-ASYNC_GEN_WRAP" title="永久链接至目标">¶</a></dt>
+<dd><p>Wraps the value on top of the stack in an <code class="docutils literal notranslate"><span class="pre">async_generator_wrapped_value</span></code>.
+Used to yield in async generators.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -1519,7 +1586,7 @@ original location.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1556,7 +1623,7 @@ original location.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

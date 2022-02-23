@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. 复合语句 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. 复合语句 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -157,7 +157,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -239,10 +239,20 @@
 <span id="for"></span><h2><span class="section-number">8.3. </span><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code> 语句<a class="headerlink" href="#the-for-statement" title="永久链接至标题">¶</a></h2>
 <p id="index-6"><a class="reference internal" href="#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 语句用于对序列（例如字符串、元组或列表）或其他可迭代对象中的元素进行迭代:</p>
 <pre>
-<strong id="grammar-token-python-grammar-for_stmt"><span id="grammar-token-for-stmt"></span>for_stmt</strong> ::=  &quot;for&quot; <a class="reference internal" href="simple_stmts.html#grammar-token-python-grammar-target_list"><code class="xref docutils literal notranslate"><span class="pre">target_list</span></code></a> &quot;in&quot; <a class="reference internal" href="expressions.html#grammar-token-python-grammar-expression_list"><code class="xref docutils literal notranslate"><span class="pre">expression_list</span></code></a> &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>
+<strong id="grammar-token-python-grammar-for_stmt"><span id="grammar-token-for-stmt"></span>for_stmt</strong> ::=  &quot;for&quot; <a class="reference internal" href="simple_stmts.html#grammar-token-python-grammar-target_list"><code class="xref docutils literal notranslate"><span class="pre">target_list</span></code></a> &quot;in&quot; <a class="reference internal" href="expressions.html#grammar-token-python-grammar-starred_list"><code class="xref docutils literal notranslate"><span class="pre">starred_list</span></code></a> &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>
               [&quot;else&quot; &quot;:&quot; <a class="reference internal" href="#grammar-token-python-grammar-suite"><code class="xref docutils literal notranslate"><span class="pre">suite</span></code></a>]
 </pre>
-<p>表达式列表会被求值一次；它应该产生一个可迭代对象。 系统将为 <code class="docutils literal notranslate"><span class="pre">expression_list</span></code> 的结果创建一个迭代器，然后将为迭代器所提供的每一项执行一次子句体，具体次序与迭代器的返回顺序一致。 每一项会按标准赋值规则 (参见 <a class="reference internal" href="simple_stmts.html#assignment"><span class="std std-ref">赋值语句</span></a>) 被依次赋值给目标列表，然后子句体将被执行。 当所有项被耗尽时 (这会在序列为空或迭代器引发 <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> 异常时立刻发生)，<code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> 子句的子句体如果存在将会被执行，并终止循环。</p>
+<p>The expression list is evaluated once; it should yield an iterable object.  An
+iterator is created for the result of the <code class="docutils literal notranslate"><span class="pre">starred_list</span></code>.  The expression
+list can contain starred elements (<code class="docutils literal notranslate"><span class="pre">*x,</span> <span class="pre">*y</span></code>) that will be unpacked in the
+final iterator (as when constructing a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> or <code class="docutils literal notranslate"><span class="pre">list</span></code> literal). The
+suite is then executed once for each item provided by the iterator, in the
+order returned by the iterator.  Each item in turn is assigned to the target
+list using the standard rules for assignments (see <a class="reference internal" href="simple_stmts.html#assignment"><span class="std std-ref">赋值语句</span></a>), and then
+the suite is executed.  When the items are exhausted (which is immediately when
+the sequence is empty or an iterator raises a <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a> exception),
+the suite in the <code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> clause, if present, is executed, and the loop
+terminates.</p>
 <p id="index-7">第一个子句体中的 <a class="reference internal" href="simple_stmts.html#break"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">break</span></code></a> 语句在执行时将终止循环且不执行 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> 子句体。 第一个子句体中的 <a class="reference internal" href="simple_stmts.html#continue"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">continue</span></code></a> 语句在执行时将跳过子句体中的剩余部分并转往下一项继续执行，或者在没有下一项时转往 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> 子句执行。</p>
 <p>for 循环会对目标列表中的变量进行赋值。 这将覆盖之前对这些变量的所有赋值，包括在 for 循环体中的赋值:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -253,6 +263,9 @@
 </pre></div>
 </div>
 <p id="index-8">目标列表中的名称在循环结束时不会被删除，但如果序列为空，则它们根本不会被循环所赋值。 提示：内置函数 <a class="reference internal" href="../library/stdtypes.html#range" title="range"><code class="xref py py-func docutils literal notranslate"><span class="pre">range()</span></code></a> 会返回一个可迭代的整数序列，适用于模拟 Pascal 中的 <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">:=</span> <span class="pre">a</span> <span class="pre">to</span> <span class="pre">b</span> <span class="pre">do</span></code> 这种效果；例如 <code class="docutils literal notranslate"><span class="pre">list(range(3))</span></code> 会返回列表 <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2]</span></code>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Starred elements are now allowed in the expression list.</p>
+</div>
 </section>
 <section id="the-try-statement">
 <span id="finally"></span><span id="except-star"></span><span id="except"></span><span id="try"></span><h2><span class="section-number">8.4. </span><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code> 语句<a class="headerlink" href="#the-try-statement" title="永久链接至标题">¶</a></h2>
@@ -325,8 +338,8 @@ when leaving an exception handler:</p>
 </pre></div>
 </div>
 <p id="index-12">The <a class="reference internal" href="#except-star"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except*</span></code></a> clause(s) are used for handling
-<code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup`s.</span> <span class="pre">The</span> <span class="pre">exception</span> <span class="pre">type</span> <span class="pre">for</span> <span class="pre">matching</span> <span class="pre">is</span> <span class="pre">interpreted</span> <span class="pre">as</span> <span class="pre">in</span>
-<span class="pre">the</span> <span class="pre">case</span> <span class="pre">of</span> <span class="pre">:keyword:`except</span></code>, but in the case of exception groups we can have
+<a class="reference internal" href="../library/exceptions.html#ExceptionGroup" title="ExceptionGroup"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExceptionGroup</span></code></a>s. The exception type for matching is interpreted as in
+the case of <a class="reference internal" href="#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a>, but in the case of exception groups we can have
 partial matches when the type matches some of the exceptions in the group.
 This means that multiple except* clauses can execute, each handling part of
 the exception group. Each clause executes once and handles an exception group
@@ -1354,7 +1367,7 @@ are mappings.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -1390,7 +1403,7 @@ are mappings.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>协程与任务 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协程与任务 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -138,7 +138,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -396,7 +396,7 @@ a task disappearing mid execution.</p>
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>添加了 <code class="docutils literal notranslate"><span class="pre">name</span></code> 形参。</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>Added the <em>name</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -426,8 +426,8 @@ a task disappearing mid execution.</p>
 <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">display_date</span><span class="p">())</span>
 </pre></div>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -444,8 +444,8 @@ a task disappearing mid execution.</p>
 <p>如果 <em>return_exceptions</em> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，异常会和成功的结果一样处理，并聚合至结果列表。</p>
 <p>如果 <code class="docutils literal notranslate"><span class="pre">gather()</span></code> <em>被取消</em>，所有被提交 (尚未完成) 的可等待对象也会 <em>被取消</em>。</p>
 <p>如果 <em>aws</em> 序列中的任一 Task 或 Future 对象 <em>被取消</em>，它将被当作引发了 <a class="reference internal" href="asyncio-exceptions.html#asyncio.CancelledError" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> 一样处理 -- 在此情况下 <code class="docutils literal notranslate"><span class="pre">gather()</span></code> 调用 <strong>不会</strong> 被取消。这是为了防止一个已提交的 Task/Future 被取消导致其他 Tasks/Future 也被取消。</p>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <p id="asyncio-example-gather">示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
@@ -491,8 +491,8 @@ a task disappearing mid execution.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>如果 <em>gather</em> 本身被取消，则无论 <em>return_exceptions</em> 取值为何，消息都会被传播。</p>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.10 版后已移除: </span>如果未提供位置参数或者并非所有位置参数均为 Future 类对象并且没有正在运行的事件循环则会发出弃用警告。</p>
@@ -524,8 +524,8 @@ a task disappearing mid execution.</p>
     <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.10 版后已移除: </span>如果 <em>aw</em> 不是 Future 类对象并且没有正在运行的事件循环则会发出弃用警告。</p>
@@ -546,8 +546,8 @@ a task disappearing mid execution.</p>
 <p>要避免任务 <a class="reference internal" href="#asyncio.Task.cancel" title="asyncio.Task.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">取消</span></code></a>，可以加上 <a class="reference internal" href="#asyncio.shield" title="asyncio.shield"><code class="xref py py-func docutils literal notranslate"><span class="pre">shield()</span></code></a>。</p>
 <p>此函数将等待直到 Future 确实被取消，所以总等待时间可能超过 <em>timeout</em>。 如果在取消期间发生了异常，异常将会被传播。</p>
 <p>如果等待被取消，则 <em>aw</em> 指定的对象也会被取消。</p>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <p id="asyncio-example-waitfor">示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">eternity</span><span class="p">():</span>
@@ -574,8 +574,8 @@ a task disappearing mid execution.</p>
 for <em>aw</em> to be cancelled.  Previously, it raised
 <a class="reference internal" href="exceptions.html#TimeoutError" title="TimeoutError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TimeoutError</span></code></a> immediately.</p>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -623,8 +623,8 @@ returned in the second set.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.8 版后已移除: </span>如果 <em>aws</em> 中的某个可等待对象为协程，它将自动被作为任务调度。直接向 <code class="docutils literal notranslate"><span class="pre">wait()</span></code> 传入协程对象已弃用，因为这会导致 <a class="reference internal" href="#asyncio-example-wait-coroutine"><span class="std std-ref">令人迷惑的行为</span></a>。</p>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <div class="admonition note" id="asyncio-example-wait-coroutine">
 <p class="admonition-title">注解</p>
@@ -652,10 +652,10 @@ returned in the second set.</p>
 </div>
 </div>
 <div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
-</div>
-<div class="deprecated-removed">
 <p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.11: </span>直接向 <code class="docutils literal notranslate"><span class="pre">wait()</span></code> 传入协程对象的方式已弃用。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -665,8 +665,8 @@ returned in the second set.</p>
 <dd><p>并发地运行 <em>aws</em> 可迭代对象中的 <a class="reference internal" href="#asyncio-awaitables"><span class="std std-ref">可等待对象</span></a>。 返回一个协程的迭代器。 所返回的每个协程可被等待以从剩余的可等待对象的可迭代对象中获得最早的下一个结果。</p>
 <p>Raises <a class="reference internal" href="exceptions.html#TimeoutError" title="TimeoutError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TimeoutError</span></code></a> if the timeout occurs before
 all Futures are done.</p>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <p>示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">coro</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">aws</span><span class="p">):</span>
@@ -674,8 +674,8 @@ all Futures are done.</p>
     <span class="c1"># ...</span>
 </pre></div>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><code class="docutils literal notranslate"><span class="pre">loop</span></code> 形参。 这个函数从 3.7 开始就会隐式地获取当前正在运行的事件循环。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#whatsnew310-removed"><span class="std std-ref">3.10 有什么新变化的“已移除内容”章节</span></a>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span>Removed the <em>loop</em> parameter.</p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.10 版后已移除: </span>如果 <em>aws</em> 可迭代对象中的可等待对象不全为 Future 类对象并且没有正在运行的事件循环则会发出弃用警告。</p>
@@ -810,10 +810,7 @@ they were run in the main thread. For example:</p>
 <p><span class="versionmodified changed">在 3.7 版更改: </span>加入对 <a class="reference internal" href="contextvars.html#module-contextvars" title="contextvars: Context Variables"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code></a> 模块的支持。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>添加了 <code class="docutils literal notranslate"><span class="pre">name</span></code> 形参。</p>
-</div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.8, removed in version 3.10: </span><em>loop</em> 形参。</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>Added the <em>name</em> parameter.</p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.10 版后已移除: </span>如果未指定 <em>loop</em> 并且没有正在运行的事件循环则会发出弃用警告。</p>
@@ -825,7 +822,10 @@ they were run in the main thread. For example:</p>
 <p>这将安排在下一轮事件循环中抛出一个 <a class="reference internal" href="asyncio-exceptions.html#asyncio.CancelledError" title="asyncio.CancelledError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CancelledError</span></code></a> 异常给被封包的协程。</p>
 <p>协程在之后有机会进行清理甚至使用 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... ... <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">CancelledError</span></code> ... <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 代码块抑制异常来拒绝请求。不同于 <a class="reference internal" href="asyncio-future.html#asyncio.Future.cancel" title="asyncio.Future.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Future.cancel()</span></code></a>，<a class="reference internal" href="#asyncio.Task.cancel" title="asyncio.Task.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Task.cancel()</span></code></a> 不保证 Task 会被取消，虽然抑制完全取消并不常见，也很不鼓励这样做。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>增加了 <code class="docutils literal notranslate"><span class="pre">msg</span></code> 形参。</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>Added the <em>msg</em> parameter.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">msg</span></code> parameter is propagated from cancelled task to its awaiter.</p>
 </div>
 <p id="asyncio-example-task-cancel">以下示例演示了协程是如何侦听取消请求的:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">cancel_me</span><span class="p">():</span>
@@ -1041,7 +1041,7 @@ they were run in the main thread. For example:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1079,7 +1079,7 @@ they were run in the main thread. For example:</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>事件循环 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件循环 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -155,7 +155,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -438,7 +438,7 @@
 <p>第三方的事件循环可以使用它们自己的 <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> 子类来满足互操作性。这种情况下结果类型是一个 <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> 的子类。</p>
 <p>如果提供了 <em>name</em> 参数且不为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，它会使用 <a class="reference internal" href="asyncio-task.html#asyncio.Task.set_name" title="asyncio.Task.set_name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Task.set_name()</span></code></a> 来设为任务的名称。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>添加了 <code class="docutils literal notranslate"><span class="pre">name</span></code> 形参。</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>Added the <em>name</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -490,19 +490,19 @@
 <li><p>如果给出 <em>local_addr</em>，它应当是一个用来在本地绑定套接字的 <code class="docutils literal notranslate"><span class="pre">(local_host,</span> <span class="pre">local_port)</span></code> 元组。 <em>local_host</em> 和 <em>local_port</em> 会使用 <code class="docutils literal notranslate"><span class="pre">getaddrinfo()</span></code> 来查找，这与 <em>host</em> 和 <em>port</em> 类似。</p></li>
 <li><p><em>ssl_handshake_timeout</em> 是（用于 TLS 连接的）在放弃连接之前要等待 TLS 握手完成的秒数。 如果参数为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则使用 (默认的) <code class="docutils literal notranslate"><span class="pre">60.0</span></code>。</p></li>
 </ul>
-<div class="versionadded">
-<p><span class="versionmodified added">3.8 新版功能: </span>增加了 <em>happy_eyeballs_delay</em> 和 <em>interleave</em> 形参。</p>
-<p>Happy Eyeballs 算法：成功使用双栈主机。 当服务器的 IPv4 路径和协议工作正常，但服务器的 IPv6 路径和协议工作不正常时，双栈客户端应用程序相比单独 IPv4 客户端会感受到明显的连接延迟。 这是不可接受的因为它会导致双栈客户端糟糕的用户体验。 此文档指明了减少这种用户可见延迟的算法要求并提供了具体的算法。</p>
-<p>详情参见: <a class="reference external" href="https://tools.ietf.org/html/rfc6555">https://tools.ietf.org/html/rfc6555</a></p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能: </span><em>ssl_handshake_timeout</em> 形参。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.5 版更改: </span><a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> 类中添加 SSL/TLS 支持。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>套接字选项 <code class="xref py py-data docutils literal notranslate"><span class="pre">TCP_NODELAY</span></code> 默认已为所有 TCP 连接进行了设置。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.5 版更改: </span><a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> 类中添加 SSL/TLS 支持。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> parameter.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.8 版更改: </span>增加了 <em>happy_eyeballs_delay</em> 和 <em>interleave</em> 形参。</p>
+<p>Happy Eyeballs 算法：成功使用双栈主机。 当服务器的 IPv4 路径和协议工作正常，但服务器的 IPv6 路径和协议工作不正常时，双栈客户端应用程序相比单独 IPv4 客户端会感受到明显的连接延迟。 这是不可接受的因为它会导致双栈客户端糟糕的用户体验。 此文档指明了减少这种用户可见延迟的算法要求并提供了具体的算法。</p>
+<p>详情参见: <a class="reference external" href="https://tools.ietf.org/html/rfc6555">https://tools.ietf.org/html/rfc6555</a></p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -557,11 +557,9 @@ UDP. Explicitly passing <code class="docutils literal notranslate"><span class="
 <p><em>path</em> 是所要求的 Unix 域套接字的名字，除非指定了 <em>sock</em> 形参。 抽象的 Unix 套接字, <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="pathlib.html#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 路径都是受支持的。</p>
 <p>请查看 <a class="reference internal" href="#asyncio.loop.create_connection" title="asyncio.loop.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_connection()</span></code></a> 方法的文档了解有关此方法的参数的信息。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能: </span><em>ssl_handshake_timeout</em> 形参。</p>
-</div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span><em>path</em> 形参现在可以是 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a> 对象。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> parameter.
+The <em>path</em> parameter can now be a <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>.</p>
 </div>
 </dd></dl>
 
@@ -597,17 +595,16 @@ a different random port will be selected for each interface).</p></li>
 <li><p><em>ssl_handshake_timeout</em> 是（用于 TLS 服务器的）在放弃连接之前要等待 TLS 握手完成的秒数。 如果参数为 (默认值) <code class="docutils literal notranslate"><span class="pre">None</span></code> 则为 <code class="docutils literal notranslate"><span class="pre">60.0</span></code> 秒。</p></li>
 <li><p><em>start_serving</em> 设置成 <code class="docutils literal notranslate"><span class="pre">True</span></code> (默认值) 会导致创建server并立即开始接受连接。设置成 <code class="docutils literal notranslate"><span class="pre">False</span></code> ，用户需要等待 <a class="reference internal" href="#asyncio.Server.start_serving" title="asyncio.Server.start_serving"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Server.start_serving()</span></code></a> 或者 <a class="reference internal" href="#asyncio.Server.serve_forever" title="asyncio.Server.serve_forever"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Server.serve_forever()</span></code></a> 以使server开始接受连接。</p></li>
 </ul>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能: </span>增加了 <em>ssl_handshake_timeout</em> 和 <em>start_serving</em> 形参。</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>套接字选项 <code class="xref py py-data docutils literal notranslate"><span class="pre">TCP_NODELAY</span></code> 默认已为所有 TCP 连接进行了设置。</p>
-</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span><a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> 类中添加 SSL/TLS 支持。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5.1 版更改: </span><em>host</em> 形参可以是一个字符串的序列。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.6 版更改: </span>Added <em>ssl_handshake_timeout</em> and <em>start_serving</em> parameters.
+The socket option <code class="xref py py-data docutils literal notranslate"><span class="pre">TCP_NODELAY</span></code> is set by default
+for all TCP connections.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -622,11 +619,9 @@ a different random port will be selected for each interface).</p></li>
 <p><em>path</em> 是必要的 Unix 域套接字名称，除非提供了 <em>sock</em> 参数。 抽象的 Unix 套接字, <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 和 <a class="reference internal" href="pathlib.html#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 路径都是受支持的。</p>
 <p>请查看 <a class="reference internal" href="#asyncio.loop.create_server" title="asyncio.loop.create_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_server()</span></code></a> 方法的文档了解有关此方法的参数的信息。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能: </span>The <em>ssl_handshake_timeout</em> and <em>start_serving</em> parameters.</p>
-</div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span><em>path</em> 形参现在可以是 <a class="reference internal" href="pathlib.html#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 对象。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> and <em>start_serving</em> parameters.
+The <em>path</em> parameter can now be a <a class="reference internal" href="pathlib.html#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> object.</p>
 </div>
 </dd></dl>
 
@@ -644,10 +639,10 @@ a different random port will be selected for each interface).</p></li>
 </ul>
 <p>返回一个 <code class="docutils literal notranslate"><span class="pre">(transport,</span> <span class="pre">protocol)</span></code> 对。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能: </span><em>ssl_handshake_timeout</em> 形参。</p>
-</div>
-<div class="versionadded">
 <p><span class="versionmodified added">3.5.3 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -1504,7 +1499,7 @@ the server is already serving.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1542,7 +1537,7 @@ the server is already serving.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

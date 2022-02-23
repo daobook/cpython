@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>hashlib --- 安全哈希与消息摘要 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hashlib --- 安全哈希与消息摘要 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -143,7 +143,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -332,12 +332,17 @@
 <span class="sig-prename descclassname"><span class="pre">hashlib.</span></span><span class="sig-name descname"><span class="pre">pbkdf2_hmac</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hash_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dklen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hashlib.pbkdf2_hmac" title="永久链接至目标">¶</a></dt>
 <dd><p>此函数提供 PKCS#5 基于密码的密钥派生函数 2。 它使用 HMAC 作为伪随机函数。</p>
 <p>字符串 <em>hash_name</em> 是要求用于 HMAC 的哈希摘要算法的名称，例如 'sha1' 或 'sha256'。 <em>password</em> 和 <em>salt</em> 会以字节串缓冲区的形式被解析。 应用和库应当将 <em>password</em> 限制在合理长度 (例如 1024)。 <em>salt</em> 应当为适当来源例如 <a class="reference internal" href="os.html#os.urandom" title="os.urandom"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.urandom()</span></code></a> 的大约 16 个或更多的字节串数据。</p>
-<p><em>iterations</em> 数值应当基于哈希算法和算力来选择。 在 2013 年时，建议至少为 100,000 次 SHA-256 迭代。</p>
+<p>The number of <em>iterations</em> should be chosen based on the hash algorithm and
+computing power. As of 2022, hundreds of thousands of iterations of SHA-256
+are suggested. For rationale as to why and how to choose what is best for
+your application, read <em>Appendix A.2.2</em> of <a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf">NIST-SP-800-132</a>. The answers
+on the <a class="reference external" href="https://security.stackexchange.com/questions/3959/recommended-of-iterations-when-using-pbkdf2-sha256/">stackexchange pbkdf2 iterations question</a> explain in detail.</p>
 <p><em>dklen</em> 为派生密钥的长度。 如果 <em>dklen</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则会使用哈希算法 <em>hash_name</em> 的摘要大小，例如 SHA-512 为 64。</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">hashlib</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;salt&#39;</span><span class="p">,</span> <span class="mi">100000</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">pbkdf2_hmac</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">our_app_iters</span> <span class="o">=</span> <span class="mi">500_000</span>  <span class="c1"># Application specific, read above.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span> <span class="o">=</span> <span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;bad salt&#39;</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">our_app_iters</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
-<span class="go">&#39;0394a2ede332c9a13eb82e9b24631604c31df978b4e2f0fbd2c549944f9d79a5&#39;</span>
+<span class="go">&#39;15530bba69924174860db778f2c6f8104d3aaf9d26241840c8c4a641c8d000a9&#39;</span>
 </pre></div>
 </div>
 <div class="versionadded">
@@ -733,6 +738,8 @@ indifferentiability property inherited from BLAKE.</p>
 </dd>
 <dt><a class="reference external" href="https://www.ietf.org/rfc/rfc8018.txt">https://www.ietf.org/rfc/rfc8018.txt</a></dt><dd><p>PKCS #5: 基于密码的加密规范描述 2.1 版</p>
 </dd>
+<dt><a class="reference external" href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf">https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-132.pdf</a></dt><dd><p>NIST Recommendation for Password-Based Key Derivation.</p>
+</dd>
 </dl>
 </div>
 </section>
@@ -818,7 +825,7 @@ indifferentiability property inherited from BLAKE.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -855,7 +862,7 @@ indifferentiability property inherited from BLAKE.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>re --- 正则表达式操作 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>re --- 正则表达式操作 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -141,7 +141,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -448,7 +448,7 @@
 <span id="contents-of-module-re"></span><h2>模块内容<a class="headerlink" href="#module-contents" title="永久链接至标题">¶</a></h2>
 <p>模块定义了几个函数、常量，和一个异常。有些函数是编译后的正则表达式方法的简化版本（少了一些特性）。重要的应用程序大多会在使用前先编译正则表达式。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>标志常量现在是 <code class="xref py py-class docutils literal notranslate"><span class="pre">RegexFlag</span></code> 类的实例，这个类是 <a class="reference internal" href="enum.html#enum.IntFlag" title="enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> 的子类。</p>
+<p><span class="versionmodified changed">在 3.6 版更改: </span>标志常量现在是 <a class="reference internal" href="#re.RegexFlag" title="re.RegexFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegexFlag</span></code></a> 类的实例，这个类是 <a class="reference internal" href="enum.html#enum.IntFlag" title="enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> 的子类。</p>
 </div>
 <dl class="py function">
 <dt class="sig sig-object py" id="re.compile">
@@ -468,6 +468,15 @@
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p>通过 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 编译后的样式，和模块级的函数会被缓存， 所以少数的正则表达式使用无需考虑编译的问题。</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="re.RegexFlag">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">RegexFlag</span></span><a class="headerlink" href="#re.RegexFlag" title="永久链接至目标">¶</a></dt>
+<dd><p>An <a class="reference internal" href="enum.html#enum.IntFlag" title="enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> class containing the regex options listed below.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能: </span>- added to <code class="docutils literal notranslate"><span class="pre">__all__</span></code></p>
 </div>
 </dd></dl>
 
@@ -515,6 +524,22 @@
 <dt class="sig sig-object py" id="re.MULTILINE">
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">MULTILINE</span></span><a class="headerlink" href="#re.MULTILINE" title="永久链接至目标">¶</a></dt>
 <dd><p>设置以后，样式字符 <code class="docutils literal notranslate"><span class="pre">'^'</span></code> 匹配字符串的开始，和每一行的开始（换行符后面紧跟的符号）；样式字符 <code class="docutils literal notranslate"><span class="pre">'$'</span></code> 匹配字符串尾，和每一行的结尾（换行符前面那个符号）。默认情况下，<code class="docutils literal notranslate"><span class="pre">’^’</span></code> 匹配字符串头，<code class="docutils literal notranslate"><span class="pre">'$'</span></code> 匹配字符串尾。对应内联标记 <code class="docutils literal notranslate"><span class="pre">(?m)</span></code> 。</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="re.NOFLAG">
+<span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">NOFLAG</span></span><a class="headerlink" href="#re.NOFLAG" title="永久链接至目标">¶</a></dt>
+<dd><p>Indicates no flag being applied, the value is <code class="docutils literal notranslate"><span class="pre">0</span></code>.  This flag may be used
+as a default value for a function keyword argument or as a base value that
+will be conditionally ORed with other flags.  Example of use as a default
+value:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">NOFLAG</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py data">
@@ -1422,7 +1447,7 @@ affect the form of the result.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1459,7 +1484,7 @@ affect the form of the result.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

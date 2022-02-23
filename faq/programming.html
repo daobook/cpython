@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>编程常见问题 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编程常见问题 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -132,7 +132,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常见问题</a> &#187;</li>
@@ -1425,7 +1425,10 @@ with either a space or parentheses.</p>
 </div>
 <p>在标准库代码中，给出了一些正确使用对象身份测试的常见模式：</p>
 <p>1） 正如 <span class="target" id="index-10"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a> 所推荐的，对象身份测试是 <code class="docutils literal notranslate"><span class="pre">None</span></code> 值的推荐检测方式。这样的代码读起来就像自然的英文，并可以避免与其他可能为布尔值且计算结果为 False 的对象相混淆。</p>
-<p>2） 如果 <code class="docutils literal notranslate"><span class="pre">None</span></code> 也是有效的输入值，则可选参数的检测就可能比较棘手。 这时可以创建一个单例哨兵对象，要确保与其他对象都不相同。例如，下面是一个类似 <a class="reference internal" href="../library/stdtypes.html#dict.pop" title="dict.pop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dict.pop()</span></code></a> 的方法：</p>
+<p>2) Detecting optional arguments can be tricky when <code class="docutils literal notranslate"><span class="pre">None</span></code> is a valid input
+value.  In those situations, you can create a singleton sentinel object
+guaranteed to be distinct from other objects.  For example, here is how
+to implement a method that behaves like <a class="reference internal" href="../library/stdtypes.html#dict.pop" title="dict.pop"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dict.pop()</span></code></a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">_sentinel</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">_sentinel</span><span class="p">):</span>
@@ -1494,7 +1497,10 @@ parent class:</p>
 <h3><a class="toc-backref" href="#id69">我该如何缓存方法调用？</a><a class="headerlink" href="#how-do-i-cache-method-calls" title="永久链接至标题">¶</a></h3>
 <p>缓存方法的两个主要工具是 <a class="reference internal" href="../library/functools.html#functools.cached_property" title="functools.cached_property"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.cached_property()</span></code></a> 和 <a class="reference internal" href="../library/functools.html#functools.lru_cache" title="functools.lru_cache"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.lru_cache()</span></code></a>。 前者在实例层级上存储结果而后者在类层级上存储结果。</p>
 <p><em>cached_property</em> 方式仅适用于不接受任何参数的方法。 它不会创建对实例的引用。 被缓存的方法结果将仅在实例的生存其内被保留。</p>
-<p>此方式的优点是当一个实例不再被使用时，缓存的方法结果将被立即释放。 它的缺点是如果实例被累加，方法结果也会被累加。 它们的大小将会不受限制地增长。</p>
+<p>The advantage is that when an instance is no longer used, the cached
+method result will be released right away.  The disadvantage is that if
+instances accumulate, so too will the accumulated method results.  They
+can grow without bound.</p>
 <p><em>lru_cache</em> 方式适用于具有可哈希参数的方法。 它会创建对实例的引用，除非特别设置了传入弱引用。</p>
 <p>最少近期使用算法的优点是缓存会受指定的 <em>maxsize</em> 限制。 它的缺点是实例会保持存活，直到其达到生存期或者缓存被清空。</p>
 <p>这个例子演示了几种不同的方式:</p>
@@ -1725,7 +1731,7 @@ strange place, but it does work.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常见问题</a> &#187;</li>
@@ -1761,7 +1767,7 @@ strange place, but it does work.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

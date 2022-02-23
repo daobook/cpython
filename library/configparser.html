@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>configparser --- 配置文件解析器 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>configparser --- 配置文件解析器 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -136,7 +136,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -334,6 +334,8 @@ in which case the key/value delimiter may also be left
 out.  Values can also span multiple lines, as long as they are indented deeper
 than the first line of the value.  Depending on the parser's mode, blank lines
 may be treated as parts of multiline values or ignored.</p>
+<p>By default,  a valid section name can be any string that does not contain '\n' or ']'.
+To change this, see <a class="reference internal" href="#configparser.ConfigParser.SECTCRE" title="configparser.ConfigParser.SECTCRE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ConfigParser.SECTCRE</span></code></a>.</p>
 <p>配置文件可以包含注释，要带有指定字符前缀 (默认为 <code class="docutils literal notranslate"><span class="pre">#</span></code> 和 <code class="docutils literal notranslate"><span class="pre">;</span></code> <a class="footnote-reference brackets" href="#id15" id="id8">1</a>)。 注释可以单独出现于原本的空白行，并可使用缩进。 <a class="footnote-reference brackets" href="#id15" id="id9">1</a></p>
 <p>例如:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Simple Values]</span><span class="w"></span>
@@ -877,7 +879,7 @@ may be treated as parts of multiline values or ignored.</p>
 <dd><p>从 <em>f</em> 读取并解析配置数据，它必须是一个产生 Unicode 字符串的可迭代对象（例如以文本模式打开的文件）。</p>
 <p>可选参数 <em>source</em> 指定要读取的文件名称。 如果未给出并且 <em>f</em> 具有 <code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code> 属性，则该属性会被用作 <em>source</em>；默认值为 <code class="docutils literal notranslate"><span class="pre">'&lt;???&gt;'</span></code>。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.2 新版功能: </span>替代 <code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code>。</p>
+<p><span class="versionmodified added">3.2 新版功能: </span>替代 <a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a>。</p>
 </div>
 </dd></dl>
 
@@ -980,6 +982,29 @@ may be treated as parts of multiline values or ignored.</p>
 </pre></div>
 </div>
 <p>请注意当读取配置文件时，选项名称两边的空格将在调用 <a class="reference internal" href="#configparser.ConfigParser.optionxform" title="configparser.ConfigParser.optionxform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optionxform()</span></code></a> 之前被去除。</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="configparser.ConfigParser.readfp">
+<span class="sig-name descname"><span class="pre">readfp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.readfp" title="永久链接至目标">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">3.2 版后已移除: </span>Use <a class="reference internal" href="#configparser.ConfigParser.read_file" title="configparser.ConfigParser.read_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_file()</span></code></a> instead.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.2 版更改: </span><a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a> now iterates on <em>fp</em> instead of calling <code class="docutils literal notranslate"><span class="pre">fp.readline()</span></code>.</p>
+</div>
+<p>For existing code calling <a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a> with arguments which don't
+support iteration, the following generator may be used as a wrapper
+around the file-like object:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">readline_generator</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">line</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Instead of <code class="docutils literal notranslate"><span class="pre">parser.readfp(fp)</span></code> use
+<code class="docutils literal notranslate"><span class="pre">parser.read_file(readline_generator(fp))</span></code>.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1093,9 +1118,6 @@ may be treated as parts of multiline values or ignored.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span><code class="docutils literal notranslate"><span class="pre">filename</span></code> 属性和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 参数被重命名为 <code class="docutils literal notranslate"><span class="pre">source</span></code> 以保持一致性。</p>
 </div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.11 版更改: </span>The deprecated <code class="docutils literal notranslate"><span class="pre">filename</span></code> attribute was removed.</p>
-</div>
 </dd></dl>
 
 <p class="rubric">备注</p>
@@ -1179,7 +1201,7 @@ may be treated as parts of multiline values or ignored.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1216,7 +1238,7 @@ may be treated as parts of multiline values or ignored.</p>
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

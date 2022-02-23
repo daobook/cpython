@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>time --- 时间的访问和转换 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>time --- 时间的访问和转换 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -128,7 +128,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -163,13 +163,16 @@
 <p>尽管所有平台皆可使用此模块，但模块内的函数并非所有平台都可用。此模块中定义的大多数函数的实现都是调用其所在平台的C语言库的同名函数。因为这些函数的语义可能因平台而异，所以使用时最好查阅对应平台的相关文档。</p>
 <p>下面是一些术语和惯例的解释.</p>
 <span class="target" id="epoch"></span><ul class="simple" id="index-0">
-<li><p><em class="dfn">epoch</em> 是时间开始的点，其值取决于平台。对于Unix， epoch 是1970年1月1日00:00:00（UTC）。要找出给定平台上的 epoch ，请查看 <code class="docutils literal notranslate"><span class="pre">time.gmtime(0)</span></code> 。</p></li>
+<li><p>The <em class="dfn">epoch</em> is the point where the time starts, the return value of
+<code class="docutils literal notranslate"><span class="pre">time.gmtime(0)</span></code>. It is January 1, 1970, 00:00:00 (UTC) on all platforms.</p></li>
 </ul>
 <ul class="simple" id="index-1">
 <li><p>术语 <em class="dfn">纪元秒数</em> 是指自 epoch （纪元）时间点以来经过的总秒数，通常不包括 <a class="reference external" href="https://en.wikipedia.org/wiki/Leap_second">闰秒</a>。 在所有符合 POSIX 标准的平台上，闰秒都不会记录在总秒数中。</p></li>
 </ul>
 <ul class="simple" id="index-2">
-<li><p>此模块中的函数可能无法处理纪元之前或遥远未来的日期和时间。“遥远未来”的定义由对应的C语言库决定；对于32位系统，它通常是指2038年及以后。</p></li>
+<li><p>The functions in this module may not handle dates and times before the <a class="reference internal" href="#epoch">epoch</a> or
+far in the future.  The cut-off point in the future is determined by the C
+library; for 32-bit systems, it is typically in 2038.</p></li>
 </ul>
 <ul class="simple" id="index-3">
 <li><p>函数 <a class="reference internal" href="#time.strptime" title="time.strptime"><code class="xref py py-func docutils literal notranslate"><span class="pre">strptime()</span></code></a> 在接收到 <code class="docutils literal notranslate"><span class="pre">%y</span></code> 格式代码时可以解析使用 2 位数表示的年份。当解析 2 位数年份时，函数会按照 POSIX 和 ISO C 标准进行年份转换：数值 69--99 被映射为 1969--1999；数值 0--68 被映射为 2000--2068。</p></li>
@@ -307,7 +310,10 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="time.ctime">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">ctime</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">secs</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#time.ctime" title="永久链接至目标">¶</a></dt>
-<dd><p>转换以距离初始纪元的秒数表示的时间为以下形式的字符串: <code class="docutils literal notranslate"><span class="pre">'Sun</span> <span class="pre">Jun</span> <span class="pre">20</span> <span class="pre">23:21:05</span> <span class="pre">1993'</span></code> 代表本地时间。 日期字段的长度为两个字符，如果日期只有一个数字则会以零填充，例如: <code class="docutils literal notranslate"><span class="pre">'Wed</span> <span class="pre">Jun</span>&#160; <span class="pre">9</span> <span class="pre">04:26:40</span> <span class="pre">1993'</span></code>。</p>
+<dd><p>Convert a time expressed in seconds since the <a class="reference internal" href="#epoch">epoch</a> to a string of a form:
+<code class="docutils literal notranslate"><span class="pre">'Sun</span> <span class="pre">Jun</span> <span class="pre">20</span> <span class="pre">23:21:05</span> <span class="pre">1993'</span></code> representing local time. The day field
+is two characters long and is space padded if the day is a single digit,
+e.g.: <code class="docutils literal notranslate"><span class="pre">'Wed</span> <span class="pre">Jun</span>&#160; <span class="pre">9</span> <span class="pre">04:26:40</span> <span class="pre">1993'</span></code>.</p>
 <p>如果 <em>secs</em> 未提供或为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>，则使用 <a class="reference internal" href="#time.time" title="time.time"><code class="xref py py-func docutils literal notranslate"><span class="pre">time()</span></code></a> 所返回的当前时间。 <code class="docutils literal notranslate"><span class="pre">ctime(secs)</span></code> 等价于 <code class="docutils literal notranslate"><span class="pre">asctime(localtime(secs))</span></code>。 <a class="reference internal" href="#time.ctime" title="time.ctime"><code class="xref py py-func docutils literal notranslate"><span class="pre">ctime()</span></code></a> 不会使用区域设置信息。</p>
 </dd></dl>
 
@@ -337,7 +343,12 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="time.gmtime">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">gmtime</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">secs</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#time.gmtime" title="永久链接至目标">¶</a></dt>
-<dd><p>将以自 epoch 开始的秒数表示的时间转换为 UTC 的 <a class="reference internal" href="#time.struct_time" title="time.struct_time"><code class="xref py py-class docutils literal notranslate"><span class="pre">struct_time</span></code></a> ，其中 dst 标志始终为零。 如果未提供 <em>secs</em> 或为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> ，则使用 <a class="reference internal" href="#time.time" title="time.time"><code class="xref py py-func docutils literal notranslate"><span class="pre">time()</span></code></a> 所返回的当前时间。 一秒以内的小数将被忽略。 有关 <a class="reference internal" href="#time.struct_time" title="time.struct_time"><code class="xref py py-class docutils literal notranslate"><span class="pre">struct_time</span></code></a> 对象的说明请参见上文。 有关此函数的逆操作请参阅 <a class="reference internal" href="calendar.html#calendar.timegm" title="calendar.timegm"><code class="xref py py-func docutils literal notranslate"><span class="pre">calendar.timegm()</span></code></a>。</p>
+<dd><p>Convert a time expressed in seconds since the <a class="reference internal" href="#epoch">epoch</a> to a <a class="reference internal" href="#time.struct_time" title="time.struct_time"><code class="xref py py-class docutils literal notranslate"><span class="pre">struct_time</span></code></a> in
+UTC in which the dst flag is always zero.  If <em>secs</em> is not provided or
+<a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, the current time as returned by <a class="reference internal" href="#time.time" title="time.time"><code class="xref py py-func docutils literal notranslate"><span class="pre">time()</span></code></a> is used.  Fractions
+of a second are ignored.  See above for a description of the
+<a class="reference internal" href="#time.struct_time" title="time.struct_time"><code class="xref py py-class docutils literal notranslate"><span class="pre">struct_time</span></code></a> object. See <a class="reference internal" href="calendar.html#calendar.timegm" title="calendar.timegm"><code class="xref py py-func docutils literal notranslate"><span class="pre">calendar.timegm()</span></code></a> for the inverse of this
+function.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -671,7 +682,11 @@ exists). Deprecated. <a class="footnote-reference brackets" href="#id4" id="id2"
 <dl class="py function">
 <dt class="sig sig-object py" id="time.time">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="functions.html#float" title="float"><span class="pre">float</span></a></span></span><a class="headerlink" href="#time.time" title="永久链接至目标">¶</a></dt>
-<dd><p>返回以浮点数表示的从 <a class="reference internal" href="#epoch">epoch</a> 开始的秒数的时间值。 epoch 的具体日期和 <a class="reference external" href="https://en.wikipedia.org/wiki/Leap_second">leap seconds</a> 的处理取决于平台。 在 Windows 和大多数 Unix 系统中， epoch 是 1970 年 1 月 1 日 00:00:00 (UTC)，并且闰秒将不计入从 epoch 开始的秒数。 这通常被称为 <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_time">Unix 时间</a>。 要了解给定平台上 epoch 的具体定义，请查看 <code class="docutils literal notranslate"><span class="pre">gmtime(0)</span></code>。</p>
+<dd><p>Return the time in seconds since the <a class="reference internal" href="#epoch">epoch</a> as a floating point
+number. The handling of <a class="reference external" href="https://en.wikipedia.org/wiki/Leap_second">leap seconds</a> is platform dependent.
+On Windows and most Unix systems, the leap seconds are not counted towards
+the time in seconds since the <a class="reference internal" href="#epoch">epoch</a>. This is commonly referred to as <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_time">Unix
+time</a>.</p>
 <p>请注意，即使时间总是作为浮点数返回，但并非所有系统都提供高于1秒的精度。虽然此函数通常返回非递减值，但如果在两次调用之间设置了系统时钟，则它可以返回比先前调用更低的值。</p>
 <p>返回的数字 <a class="reference internal" href="#time.time" title="time.time"><code class="xref py py-func docutils literal notranslate"><span class="pre">time()</span></code></a> 可以通过将其传递给 <a class="reference internal" href="#time.gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">gmtime()</span></code></a> 函数或转换为UTC中更常见的时间格式（即年、月、日、小时等）或通过将它传递给 <a class="reference internal" href="#time.localtime" title="time.localtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">localtime()</span></code></a> 函数获得本地时间。在这两种情况下都返回一个 <a class="reference internal" href="#time.struct_time" title="time.struct_time"><code class="xref py py-class docutils literal notranslate"><span class="pre">struct_time</span></code></a> 对象，日历日期组件可以从中作为属性访问。</p>
 <p>使用 <a class="reference internal" href="#time.time_ns" title="time.time_ns"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_ns()</span></code></a> 以避免 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 类型导致的精度损失。</p>
@@ -998,7 +1013,7 @@ been first recommended by <span class="target" id="index-21"></span><a class="rf
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1035,7 +1050,7 @@ been first recommended by <span class="target" id="index-21"></span><a class="rf
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

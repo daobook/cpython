@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>ssl --- 套接字对象的 TLS/SSL 包装器 &#8212; Python 3.11.0a4 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ssl --- 套接字对象的 TLS/SSL 包装器 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a4 文档 中搜索"
+          title="在 Python 3.11.0a5 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -164,7 +164,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -1760,7 +1760,13 @@ load CA certificates from other locations, too.</p>
 <p>每个 <code class="docutils literal notranslate"><span class="pre">SSLContext</span></code> 只能设置一个回调。 如果 <em>sni_callback</em> 被设置为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则会禁用回调。 对该函数的后续调用将禁用之前注册的回调。</p>
 <p>此回调函数将附带三个参数来调用；第一个参数是 <a class="reference internal" href="#ssl.SSLSocket" title="ssl.SSLSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLSocket</span></code></a>，第二个参数是代表客户端准备与之通信的服务器的字符串 (或者如果 TLS Client Hello 不包含服务器名称则为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>) 而第三个参数是原来的 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a>。 服务器名称参数为文本形式。 对于国际化域名，服务器名称是一个 IDN A 标签 (<code class="docutils literal notranslate"><span class="pre">&quot;xn--pythn-mua.org&quot;</span></code>)。</p>
 <p>此回调的一个典型用法是将 <a class="reference internal" href="#ssl.SSLSocket" title="ssl.SSLSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLSocket</span></code></a> 的 <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLSocket.context</span></code></a> 属性修改为一个 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 类型的新对象，该对象代表与服务器相匹配的证书链。</p>
-<p>由于 TLS 连接处于早期协商阶段，因此仅能使用有限的方法和属性例如 <a class="reference internal" href="#ssl.SSLSocket.selected_alpn_protocol" title="ssl.SSLSocket.selected_alpn_protocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.selected_alpn_protocol()</span></code></a> 和 <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLSocket.context</span></code></a>。 <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a>, <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a>, <a class="reference internal" href="#ssl.SSLSocket.cipher" title="ssl.SSLSocket.cipher"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.cipher()</span></code></a> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.compress()</span></code> 方法要求 TLS 连接已经过 TLS Client Hello 因而将既不包含返回有意义的值，也不能安全地调用它们。</p>
+<p>Due to the early negotiation phase of the TLS connection, only limited
+methods and attributes are usable like
+<a class="reference internal" href="#ssl.SSLSocket.selected_alpn_protocol" title="ssl.SSLSocket.selected_alpn_protocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.selected_alpn_protocol()</span></code></a> and <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLSocket.context</span></code></a>.
+The <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a>,
+<a class="reference internal" href="#ssl.SSLSocket.cipher" title="ssl.SSLSocket.cipher"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.cipher()</span></code></a> and <a class="reference internal" href="#ssl.SSLSocket.compression" title="ssl.SSLSocket.compression"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.compression()</span></code></a> methods require that
+the TLS connection has progressed beyond the TLS Client Hello and therefore
+will not return meaningful values nor can they be called safely.</p>
 <p><em>sni_callback</em> 函数必须返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> 以允许 TLS 协商继续进行。 如果想要 TLS 失败，则可以返回常量 <a class="reference internal" href="#ssl.ALERT_DESCRIPTION_INTERNAL_ERROR" title="ssl.ALERT_DESCRIPTION_INTERNAL_ERROR"><code class="xref py py-const docutils literal notranslate"><span class="pre">ALERT_DESCRIPTION_*</span></code></a>。 其他返回值将导致 TLS 的致命错误 <a class="reference internal" href="#ssl.ALERT_DESCRIPTION_INTERNAL_ERROR" title="ssl.ALERT_DESCRIPTION_INTERNAL_ERROR"><code class="xref py py-const docutils literal notranslate"><span class="pre">ALERT_DESCRIPTION_INTERNAL_ERROR</span></code></a>。</p>
 <p>如果从 <em>sni_callback</em> 函数引发了异常，则 TLS 连接将终止并发出 TLS 致命警告消息 <a class="reference internal" href="#ssl.ALERT_DESCRIPTION_HANDSHAKE_FAILURE" title="ssl.ALERT_DESCRIPTION_HANDSHAKE_FAILURE"><code class="xref py py-const docutils literal notranslate"><span class="pre">ALERT_DESCRIPTION_HANDSHAKE_FAILURE</span></code></a>。</p>
 <p>如果 OpenSSL library 库在构建时定义了 OPENSSL_NO_TLSEXT 则此方法将返回 <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>。</p>
@@ -2010,7 +2016,7 @@ instead of hard-coded <a class="reference internal" href="#ssl.SSLObject" title=
 <dd><p>是否要尝试验证其他对等方的证书以及如果验证失败应采取何种行为。 该属性值必须为 <a class="reference internal" href="#ssl.CERT_NONE" title="ssl.CERT_NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">CERT_NONE</span></code></a>, <a class="reference internal" href="#ssl.CERT_OPTIONAL" title="ssl.CERT_OPTIONAL"><code class="xref py py-data docutils literal notranslate"><span class="pre">CERT_OPTIONAL</span></code></a> 或 <a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-data docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a> 之一。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span><a class="reference internal" href="#ssl.SSLContext.verify_mode" title="ssl.SSLContext.verify_mode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLContext.verify_mode</span></code></a> 返回 <a class="reference internal" href="#ssl.VerifyMode" title="ssl.VerifyMode"><code class="xref py py-class docutils literal notranslate"><span class="pre">VerifyMode</span></code></a> 枚举:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span><span class="o">.</span><span class="n">verify_mode</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span><span class="o">.</span><span class="n">verify_mode</span>  
 <span class="go">&lt;VerifyMode.CERT_REQUIRED: 2&gt;</span>
 </pre></div>
 </div>
@@ -2583,7 +2589,7 @@ instead of hard-coded <a class="reference internal" href="#ssl.SSLObject" title=
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a4 Documentation</a> &#187;
+      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -2620,7 +2626,7 @@ instead of hard-coded <a class="reference internal" href="#ssl.SSLObject" title=
 <br />
     <br />
 
-    最后更新于 2月 01, 2022.
+    最后更新于 2月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
