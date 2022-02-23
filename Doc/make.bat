@@ -10,7 +10,37 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=.
 set BUILDDIR=build
 
-if "%1" == "" goto help
+if not defined SPHINXLINT (
+    %PYTHON% -c "import sphinxlint" > nul 2> nul
+    if errorlevel 1 (
+        echo Installing sphinx-lint with %PYTHON%
+        %PYTHON% -m pip install sphinx-lint
+        if errorlevel 1 exit /B
+    )
+    set SPHINXLINT=%PYTHON% -m sphinxlint
+)
+
+if "%1" NEQ "htmlhelp" goto :skiphhcsearch
+if exist "%HTMLHELP%" goto :skiphhcsearch
+
+rem Search for HHC in likely places
+set HTMLHELP=
+where hhc /q && set "HTMLHELP=hhc" && goto :skiphhcsearch
+where /R ..\externals hhc > "%TEMP%\hhc.loc" 2> nul && set /P HTMLHELP= < "%TEMP%\hhc.loc" & del "%TEMP%\hhc.loc"
+if not exist "%HTMLHELP%" where /R "%ProgramFiles(x86)%" hhc > "%TEMP%\hhc.loc" 2> nul && set /P HTMLHELP= < "%TEMP%\hhc.loc" & del "%TEMP%\hhc.loc"
+if not exist "%HTMLHELP%" where /R "%ProgramFiles%" hhc > "%TEMP%\hhc.loc" 2> nul && set /P HTMLHELP= < "%TEMP%\hhc.loc" & del "%TEMP%\hhc.loc"
+if not exist "%HTMLHELP%" (
+    echo.
+    echo.The HTML Help Workshop was not found.  Set the HTMLHELP variable
+    echo.to the path to hhc.exe or download and install it from
+    echo.http://msdn.microsoft.com/en-us/library/ms669985
+    exit /B 1
+)
+:skiphhcsearch
+
+if not defined DISTVERSION for /f "usebackq" %%v in (`%PYTHON% tools/extensions/patchlevel.py`) do set DISTVERSION=%%v
+
+if not defined BUILDDIR set BUILDDIR=build
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -28,8 +58,26 @@ if errorlevel 9009 (
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
-:help
-%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+:htmlview
+if NOT "%2" EQU "" (
+    echo.Can't specify filenames to build with htmlview target, ignoring.
+)
+cmd /C %this% html
+
+if EXIST "%BUILDDIR%\html\index.html" (
+    echo.Opening "%BUILDDIR%\html\index.html" in the default web browser...
+    start "" "%BUILDDIR%\html\index.html"
+)
+
+goto end
+
+:check
+cmd /S /C "%SPHINXLINT% -i tools"
+goto end
+
+:serve
+cmd /S /C "%PYTHON% ..\Tools\scripts\serve.py "%BUILDDIR%\html""
+goto end
 
 :end
 popd
