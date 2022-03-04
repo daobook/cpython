@@ -171,6 +171,8 @@
 <p>参数 <em>dir</em>、<em>prefix</em> 和 <em>suffix</em> 的含义和默认值都与它们在 <a class="reference internal" href="#tempfile.mkstemp" title="tempfile.mkstemp"><code class="xref py py-func docutils literal notranslate"><span class="pre">mkstemp()</span></code></a> 中的相同。</p>
 <p>在 POSIX 平台上，它返回的对象是真实的文件对象。在其他平台上，它是一个文件类对象 (file-like object)，它的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">file</span></code> 属性是底层的真实文件对象。</p>
 <p>如果可用，则使用 <a class="reference internal" href="os.html#os.O_TMPFILE" title="os.O_TMPFILE"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.O_TMPFILE</span></code></a> 标志（仅限于 Linux，需要 3.11 及更高版本的内核）。</p>
+<p>On platforms that are neither Posix nor Cygwin, TemporaryFile is an alias
+for NamedTemporaryFile.</p>
 <p class="audit-hook">引发一个 <code class="docutils literal notranslate"><span class="pre">tempfile.mkstemp</span></code> <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a>，附带参数 <code class="docutils literal notranslate"><span class="pre">fullpath</span></code>。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>如果可用，现在用的是 <a class="reference internal" href="os.html#os.O_TMPFILE" title="os.O_TMPFILE"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.O_TMPFILE</span></code></a> 标志。</p>

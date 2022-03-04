@@ -524,6 +524,10 @@ implemented in PyPy.)</p></li>
 to 10 times or more faster for large arguments (the speed up is larger for
 larger <em>k</em>).
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue37295">bpo-37295</a>.)</p></li>
+<li><p>Dict don't store hash value when all inserted keys are Unicode objects.
+This reduces dict size. For example, <code class="docutils literal notranslate"><span class="pre">sys.getsizeof(dict.fromkeys(&quot;abcdefg&quot;))</span></code>
+becomes 272 bytes from 352 bytes on 64bit platform.
+(Contributed by Inada Naoki in <a class="reference external" href="https://bugs.python.org/issue46845">bpo-46845</a>.)</p></li>
 </ul>
 </section>
 <section id="cpython-bytecode-changes">
@@ -671,6 +675,11 @@ Python 3.4 but has been broken since Python 3.7.
 <li><p>Remove <code class="docutils literal notranslate"><span class="pre">__class_getitem__</span></code> method from <a class="reference internal" href="../library/pathlib.html#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.PurePath</span></code></a>,
 because it was not used and added by mistake in previous versions.
 (Contributed by Nikita Sobolev in <a class="reference external" href="https://bugs.python.org/issue46483">bpo-46483</a>.)</p></li>
+<li><p>Remove the undocumented private <code class="docutils literal notranslate"><span class="pre">float.__set_format__()</span></code> method, previously
+known as <code class="docutils literal notranslate"><span class="pre">float.__setformat__()</span></code> in Python 3.7. Its docstring said: &quot;You
+probably don't want to use this function. It exists mainly to be used in
+Python's test suite.&quot;
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46852">bpo-46852</a>.)</p></li>
 </ul>
 </section>
 <section id="porting-to-python-3-11">
@@ -711,6 +720,8 @@ if no locale is specified.
 <section id="build-changes">
 <h2>Build Changes<a class="headerlink" href="#build-changes" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
+<li><p>Building Python now requires a C11 compiler without optional C11 features.
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46656">bpo-46656</a>.)</p></li>
 <li><p>CPython can now be built with the ThinLTO option via <code class="docutils literal notranslate"><span class="pre">--with-lto=thin</span></code>.
 (Contributed by Dong-hee Na and Brett Holman in <a class="reference external" href="https://bugs.python.org/issue44340">bpo-44340</a>.)</p></li>
 <li><p>libpython is no longer linked against libcrypt.
@@ -720,10 +731,11 @@ the following functions: <code class="docutils literal notranslate"><span class=
 <code class="docutils literal notranslate"><span class="pre">isinf()</span></code>, <code class="docutils literal notranslate"><span class="pre">isnan()</span></code>, <code class="docutils literal notranslate"><span class="pre">round()</span></code>.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue45440">bpo-45440</a>.)</p></li>
 <li><p>Building Python now requires a C99 <code class="docutils literal notranslate"><span class="pre">&lt;math.h&gt;</span></code> header file providing
-a <code class="docutils literal notranslate"><span class="pre">NAN</span></code> constant, or the <code class="docutils literal notranslate"><span class="pre">__builtin_nan()</span></code> built-in function. If a
-platform does not support Not-a-Number (NaN), the <code class="docutils literal notranslate"><span class="pre">Py_NO_NAN</span></code> macro can be
-defined in the <code class="docutils literal notranslate"><span class="pre">pyconfig.h</span></code> file.
+a <code class="docutils literal notranslate"><span class="pre">NAN</span></code> constant, or the <code class="docutils literal notranslate"><span class="pre">__builtin_nan()</span></code> built-in function.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46640">bpo-46640</a>.)</p></li>
+<li><p>Building Python now requires support for floating point Not-a-Number (NaN):
+remove the <code class="docutils literal notranslate"><span class="pre">Py_NO_NAN</span></code> macro.
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46656">bpo-46656</a>.)</p></li>
 <li><p>Freelists for object structs can now be disabled. A new <strong class="program">configure</strong>
 option <code class="xref std std-option docutils literal notranslate"><span class="pre">--without-freelists</span></code> can be used to disable all freelists
 except empty tuple singleton.
@@ -905,37 +917,37 @@ been included directly, consider including <code class="docutils literal notrans
 limited C API. It was never usable there, because it used internal structures
 which are not available in the limited C API.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue46007">bpo-46007</a>.)</p></li>
-<li><p>Changes of the private <a class="reference internal" href="../c-api/veryhigh.html#c.PyFrameObject" title="PyFrameObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyFrameObject</span></code></a> structure members.</p>
-<p>While the documentation notes that the fields of <code class="docutils literal notranslate"><span class="pre">PyFrameObject</span></code> are
-subject to change at any time, they have been stable for a long time
-and were used in several popular extensions.
-In Python 3.11, the frame struct was reorganized to allow performance
-optimizations. Rather than reading the fields directly, extensions should
-use functions:</p>
+<li><p>The <a class="reference internal" href="../c-api/veryhigh.html#c.PyFrameObject" title="PyFrameObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyFrameObject</span></code></a> structure member has been moved to the internal C
+API headers.</p>
+<p>While the documentation notes that the <a class="reference internal" href="../c-api/veryhigh.html#c.PyFrameObject" title="PyFrameObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyFrameObject</span></code></a> fields are
+subject to change at any time, they have been stable for a long time and were
+used in several popular extensions.</p>
+<p>In Python 3.11, the frame struct was reorganized to allow performance
+optimizations. Some fields were removed entirely, as they were details of the
+old implementation.</p>
+<p><a class="reference internal" href="../c-api/veryhigh.html#c.PyFrameObject" title="PyFrameObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyFrameObject</span></code></a> fields:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">f_code</span></code>: removed, use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetCode" title="PyFrame_GetCode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code></a> instead.
-Warning: the function returns a <a class="reference internal" href="../glossary.html#term-strong-reference"><span class="xref std std-term">strong reference</span></a>, need to call
-<a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_back</span></code>: changed (see below), use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_builtins</span></code>: removed,
-use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_builtins&quot;)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_globals</span></code>: removed,
-use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_globals&quot;)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_locals</span></code>: removed,
-use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_locals&quot;)</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_lasti</span></code>: removed,
-use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_lasti&quot;)</span></code>.</p></li>
-</ul>
-<p>The following fields were removed entirely, as they were details
-of the old implementation:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">f_valuesstack</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_stackdepth</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_gen</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_iblock</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_state</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_blockstack</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">f_localsplus</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_back</span></code>: use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_blockstack</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_builtins</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_builtins&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_code</span></code>: use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetCode" title="PyFrame_GetCode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_gen</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_globals</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_globals&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_iblock</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_lasti</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_lasti&quot;)</span></code>.
+Code using <code class="docutils literal notranslate"><span class="pre">f_lasti</span></code> with <code class="docutils literal notranslate"><span class="pre">PyCode_Addr2Line()</span></code> must use
+<a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetLineNumber" title="PyFrame_GetLineNumber"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetLineNumber()</span></code></a> instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_lineno</span></code>: use <a class="reference internal" href="../c-api/reflection.html#c.PyFrame_GetLineNumber" title="PyFrame_GetLineNumber"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetLineNumber()</span></code></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_locals</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_locals&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_stackdepth</span></code>: removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_state</span></code>: no public API (renamed to <code class="docutils literal notranslate"><span class="pre">f_frame.f_state</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_trace</span></code>: no public API.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_trace_lines</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_trace_lines&quot;)</span></code>
+(it also be modified).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_trace_opcodes</span></code>: use <code class="docutils literal notranslate"><span class="pre">PyObject_GetAttrString((PyObject*)frame,</span> <span class="pre">&quot;f_trace_opcodes&quot;)</span></code>
+(it also be modified).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_localsplus</span></code>: no public API (renamed to <code class="docutils literal notranslate"><span class="pre">f_frame.localsplus</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_valuestack</span></code>: removed.</p></li>
 </ul>
 <p>The Python frame object is now created lazily. A side effect is that the
 <code class="docutils literal notranslate"><span class="pre">f_back</span></code> member must not be accessed directly, since its value is now also
@@ -961,8 +973,8 @@ instead.</p>
 <span class="c1">#endif</span>
 </pre></div>
 </div>
-<p>Or use <a class="reference external" href="https://github.com/pythoncapi/pythoncapi_compat">the pythoncapi_compat project</a> to get these APIs
-on older Python versions.</p>
+<p>Or use the <a class="reference external" href="https://github.com/python/pythoncapi_compat">pythoncapi_compat project</a> to get these two
+functions on older Python versions.</p>
 </li>
 <li><p>Changes of the <a class="reference internal" href="../c-api/init.html#c.PyThreadState" title="PyThreadState"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyThreadState</span></code></a> structure members:</p>
 <ul class="simple">
@@ -1013,7 +1025,7 @@ use <code class="docutils literal notranslate"><span class="pre">(tstate-&gt;rec
 <span class="c1">#endif</span>
 </pre></div>
 </div>
-<p>Or use <a class="reference external" href="https://github.com/pythoncapi/pythoncapi_compat">the pythoncapi_compat project</a> to get these functions
+<p>Or use <a class="reference external" href="https://github.com/python/pythoncapi_compat">the pythoncapi_compat project</a> to get these functions
 on old Python functions.</p>
 </li>
 </ul>
@@ -1084,6 +1096,9 @@ limited C API.
 public C API by mistake, it must only be used by Python internally.
 Use the <code class="docutils literal notranslate"><span class="pre">PyTypeObject.tp_members</span></code> member instead.
 (Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue40170">bpo-40170</a>.)</p></li>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">HAVE_PY_SET_53BIT_PRECISION</span></code> macro (moved to the internal C
+API).
+(Contributed by Victor Stinner in <a class="reference external" href="https://bugs.python.org/issue45412">bpo-45412</a>.)</p></li>
 </ul>
 </section>
 </section>

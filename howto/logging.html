@@ -654,6 +654,15 @@ WARNING:And this, too
 <p>应该有预计的效果。如果一个组织生成了许多库，则指定的记录器名称可以是 “orgname.foo” 而不仅仅是 “foo” 。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
+<p>It is strongly advised that you <em>do not log to the root logger</em>
+in your library. Instead, use a logger with a unique and easily
+identifiable name, such as the <code class="docutils literal notranslate"><span class="pre">__name__</span></code> for your library's top-level package
+or module. Logging to the root logger will make it difficult or impossible for
+the application developer to configure the logging verbosity or handlers of
+your library as they wish.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
 <p>强烈建议你 <em>不要将</em> <a class="reference internal" href="../library/logging.handlers.html#logging.NullHandler" title="logging.NullHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">NullHandler</span></code></a> <em>以外的任何处理器添加到库的记录器中</em> 。这是因为处理器的配置是使用你的库的应用程序开发人员的权利。应用程序开发人员了解他们的目标受众以及哪些处理器最适合他们的应用程序：如果你在“底层”添加处理器，则可能会干扰他们执行单元测试和提供符合其要求的日志的能力。</p>
 </div>
 </section>

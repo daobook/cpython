@@ -164,8 +164,14 @@
 <p><a class="reference internal" href="#module-dis" title="dis: Disassembler for Python bytecode."><code class="xref py py-mod docutils literal notranslate"><span class="pre">dis</span></code></a> 模块通过反汇编支持CPython的 <a class="reference internal" href="../glossary.html#term-bytecode"><span class="xref std std-term">bytecode</span></a> 分析。该模块作为输入的 CPython 字节码在文件 <code class="file docutils literal notranslate"><span class="pre">Include/opcode.h</span></code> 中定义，并由编译器和解释器使用。</p>
 <div class="impl-detail compound">
 <p class="compound-first"><strong>CPython implementation detail:</strong> 字节码是 CPython 解释器的实现细节。不保证不会在Python版本之间添加、删除或更改字节码。不应考虑将此模块的跨 Python VM 或 Python 版本的使用。</p>
-<div class="compound-last versionchanged">
+<div class="compound-middle versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>每条指令使用2个字节。以前字节数因指令而异。</p>
+</div>
+<div class="compound-last versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Some instructions are accompanied by one or more inline cache entries,
+which take the form of <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CACHE</span></code> instructions. These instructions
+are hidden by default, but can be shown by passing <code class="docutils literal notranslate"><span class="pre">show_caches=True</span></code> to
+any <a class="reference internal" href="#module-dis" title="dis: Disassembler for Python bytecode."><code class="xref py py-mod docutils literal notranslate"><span class="pre">dis</span></code></a> utility.</p>
 </div>
 </div>
 <p>示例：给出函数 <code class="xref py py-func docutils literal notranslate"><span class="pre">myfunc()</span></code>:</p>
@@ -194,14 +200,14 @@
 <p>字节码分析 API 允许将 Python 代码片段包装在 <a class="reference internal" href="#dis.Bytecode" title="dis.Bytecode"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bytecode</span></code></a> 对象中，以便轻松访问已编译代码的详细信息。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="dis.Bytecode">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">Bytecode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.Bytecode" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">Bytecode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.Bytecode" title="永久链接至目标">¶</a></dt>
 <dd><p>分析的字节码对应于函数、生成器、异步生成器、协程、方法、源代码字符串或代码对象（由 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 返回）。</p>
 <p>这是下面列出的许多函数的便利包装，最值得注意的是 <a class="reference internal" href="#dis.get_instructions" title="dis.get_instructions"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_instructions()</span></code></a> ，迭代于 <a class="reference internal" href="#dis.Bytecode" title="dis.Bytecode"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bytecode</span></code></a> 的实例产生字节码操作 <a class="reference internal" href="#dis.Instruction" title="dis.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instruction</span></code></a> 的实例。</p>
 <p>如果 <em>first_line</em> 不是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则表示应该为反汇编代码中的第一个源代码行报告的行号。否则，源行信息（如果有的话）直接来自反汇编的代码对象。</p>
 <p>如果 <em>current_offset</em> 不是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则它指的是反汇编代码中的指令偏移量。设置它意味着 <a class="reference internal" href="#dis.Bytecode.dis" title="dis.Bytecode.dis"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dis()</span></code></a> 将针对指定的操作码显示“当前指令”标记。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="dis.Bytecode.from_traceback">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.Bytecode.from_traceback" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_traceback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.Bytecode.from_traceback" title="永久链接至目标">¶</a></dt>
 <dd><p>从给定回溯构造一个 <a class="reference internal" href="#dis.Bytecode" title="dis.Bytecode"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bytecode</span></code></a> 实例，将设置 <em>current_offset</em> 为异常负责的指令。</p>
 </dd></dl>
 
@@ -231,6 +237,9 @@
 
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>现在可以处理协程和异步生成器对象。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">show_caches</span></code> parameter.</p>
 </div>
 </dd></dl>
 
@@ -280,7 +289,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dis.dis">
-<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">dis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.dis" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">dis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.dis" title="永久链接至目标">¶</a></dt>
 <dd><p>反汇编 <em>x</em> 对象。 <em>x</em> 可以表示模块、类、方法、函数、生成器、异步生成器、协程、代码对象、源代码字符串或原始字节码的字节序列。对于模块，它会反汇编所有功能。对于一个类，它反汇编所有方法（包括类和静态方法）。对于代码对象或原始字节码序列，它每字节码指令打印一行。它还递归地反汇编嵌套代码对象（推导式代码，生成器表达式和嵌套函数，以及用于构建嵌套类的代码）。在被反汇编之前，首先使用 <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 内置函数将字符串编译为代码对象。如果未提供任何对象，则此函数会反汇编最后一次回溯。</p>
 <p>如果提供的话，反汇编将作为文本写入提供的 <em>file</em> 参数，否则写入 <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> 。</p>
 <p>递归的最大深度受 <em>depth</em> 限制，除非它是 <code class="docutils literal notranslate"><span class="pre">None</span></code> 。 <code class="docutils literal notranslate"><span class="pre">depth=0</span></code> 表示没有递归。</p>
@@ -293,23 +302,29 @@
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>现在可以处理协程和异步生成器对象。</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">show_caches</span></code> parameter.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dis.distb">
-<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">distb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.distb" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">distb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.distb" title="永久链接至目标">¶</a></dt>
 <dd><p>如果没有传递，则使用最后一个回溯来反汇编回溯的堆栈顶部函数。 指示了导致异常的指令。</p>
 <p>如果提供的话，反汇编将作为文本写入提供的 <em>file</em> 参数，否则写入 <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code> 。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>添加 <em>file</em> 形参。</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">show_caches</span></code> parameter.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dis.disassemble">
-<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">disassemble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lasti</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.disassemble" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">disassemble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lasti</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.disassemble" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="dis.disco">
-<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">disco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lasti</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.disco" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">disco</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lasti</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.disco" title="永久链接至目标">¶</a></dt>
 <dd><p>反汇编代码对象，如果提供了 <em>lasti</em> ，则指示最后一条指令。输出分为以下几列：</p>
 <ol class="arabic simple">
 <li><p>行号，用于每行的第一条指令</p></li>
@@ -325,16 +340,22 @@
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>添加 <em>file</em> 形参。</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">show_caches</span></code> parameter.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dis.get_instructions">
-<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">get_instructions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.get_instructions" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">dis.</span></span><span class="sig-name descname"><span class="pre">get_instructions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_caches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dis.get_instructions" title="永久链接至目标">¶</a></dt>
 <dd><p>在所提供的函数、方法、源代码字符串或代码对象中的指令上返回一个迭代器。</p>
 <p>迭代器生成一系列 <a class="reference internal" href="#dis.Instruction" title="dis.Instruction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Instruction</span></code></a> ，命名为元组，提供所提供代码中每个操作的详细信息。</p>
 <p>如果 <em>first_line</em> 不是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则表示应该为反汇编代码中的第一个源代码行报告的行号。否则，源行信息（如果有的话）直接来自反汇编的代码对象。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">show_caches</span></code> parameter.</p>
 </div>
 </dd></dl>
 

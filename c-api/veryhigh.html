@@ -453,8 +453,14 @@ defaults, a dictionary of default values for <a class="reference internal" href=
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyFrameObject">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFrameObject</span></span></span><a class="headerlink" href="#c.PyFrameObject" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>The C structure of the objects used to describe frame objects. The
-fields of this type are subject to change at any time.</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>The C structure of the objects used to describe frame objects.</p>
+<p>The structure is only part of the internal C API: fields should not be
+access directly. Use getter functions like <a class="reference internal" href="reflection.html#c.PyFrame_GetCode" title="PyFrame_GetCode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code></a> and
+<a class="reference internal" href="reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a>.</p>
+<p>Debuggers and profilers can use the limited C API to access this structure.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The structure moved to the internal C API headers.</p>
+</div>
 </dd></dl>
 
 <dl class="c function">

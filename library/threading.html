@@ -357,7 +357,7 @@ overridden in a subclass.  In other words, <em>only</em>  override the
 <p><em>group</em> 应该为 <code class="docutils literal notranslate"><span class="pre">None</span></code>；为了日后扩展 <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadGroup</span></code> 类实现而保留。</p>
 <p><em>target</em> 是用于 <a class="reference internal" href="#threading.Thread.run" title="threading.Thread.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> 方法调用的可调用对象。默认是 <code class="docutils literal notranslate"><span class="pre">None</span></code>，表示不需要调用任何方法。</p>
 <p><em>name</em> 是线程名称。 在默认情况下，会以 &quot;Thread-<em>N</em>&quot; 的形式构造唯一名称，其中 <em>N</em> 为一个较小的十进制数值，或是 &quot;Thread-<em>N</em> (target)&quot; 的形式，其中 &quot;target&quot; 为 <code class="docutils literal notranslate"><span class="pre">target.__name__</span></code>，如果指定了 <em>target</em> 参数的话。</p>
-<p><em>args</em> 是用于调用目标函数的参数元组。默认是 <code class="docutils literal notranslate"><span class="pre">()</span></code>。</p>
+<p><em>args</em> is a list or tuple of arguments for the target invocation.  Defaults to <code class="docutils literal notranslate"><span class="pre">()</span></code>.</p>
 <p><em>kwargs</em> 是用于调用目标函数的关键字参数字典。默认是 <code class="docutils literal notranslate"><span class="pre">{}</span></code>。</p>
 <p>如果不是 <code class="docutils literal notranslate"><span class="pre">None</span></code>，<em>daemon</em> 参数将显式地设置该线程是否为守护模式。 如果是 <code class="docutils literal notranslate"><span class="pre">None</span></code> (默认值)，线程将继承当前线程的守护模式属性。</p>
 <p>如果子类型重载了构造函数，它一定要确保在做任何事前，先发起调用基类构造器(<code class="docutils literal notranslate"><span class="pre">Thread.__init__()</span></code>)。</p>
@@ -380,6 +380,18 @@ overridden in a subclass.  In other words, <em>only</em>  override the
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#threading.Thread.run" title="永久链接至目标">¶</a></dt>
 <dd><p>代表线程活动的方法。</p>
 <p>你可以在子类型里重载这个方法。 标准的 <a class="reference internal" href="#threading.Thread.run" title="threading.Thread.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> 方法会对作为 <em>target</em> 参数传递给该对象构造器的可调用对象（如果存在）发起调用，并附带从 <em>args</em> 和 <em>kwargs</em> 参数分别获取的位置和关键字参数。</p>
+<p>Using list or tuple as the <em>args</em> argument which passed to the <a class="reference internal" href="#threading.Thread" title="threading.Thread"><code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></a>
+could achieve the same effect.</p>
+<p>Example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="go">1</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
