@@ -472,7 +472,7 @@ msgid ""
 "intended primarily for static type checking."
 msgstr ""
 "请注意，带有 :class:`ParamSpec` "
-"的泛型在某些情况下可能不会有正确的``__parameters__``，因为它们主要用于静态类型检查。"
+"的泛型在某些情况下可能不会有正确的 ``__parameters__``，因为它们主要用于静态类型检查。"
 
 #: ../../library/typing.rst:411
 msgid ""
@@ -920,7 +920,7 @@ msgid ""
 msgstr ""
 "与 :data:`Callable` 和 :class:`ParamSpec` "
 "一起使用，对一个高阶可调用对象进行类型注释，该对象可以增加、删除或转换另一个可调用对象的参数。 "
-"使用形式为``Concatenate[Arg1Type, Arg2Type, ..., ParamSpecVariable]``。 "
+"使用形式为 ``Concatenate[Arg1Type, Arg2Type, ..., ParamSpecVariable]``。 "
 "``Concatenate`` 目前只在作为 :data:`Callable` 的第一个参数时有效。``Concatenate`` "
 "的最后一个参数必须是一个 :class:`ParamSpec`。"
 
@@ -1186,8 +1186,9 @@ msgid ""
 "code.  The conditional expression here is sometimes referred to as a "
 "\"type guard\"::"
 msgstr ""
-"PX旨在使 *类型缩小* 受益--"
-"这是静态类型检查器用来确定程序代码流中表达式的更精确类型的一种技术。通常，类型缩小是通过分析条件性代码流并将缩小的结果应用于一个代码块来完成的。 "
+"``TypeGuard`` 旨在使 *type narrowing* 受益——"
+"这是静态类型检查器用来确定程序代码流中表达式的更精确类型的一种技术。"
+"通常，类型窄化是通过分析条件性代码流并将窄化的结果应用于一个代码块来完成的。 "
 "这里的条件表达式有时被称为 \"类型保护\"::"
 
 #: ../../library/typing.rst:1081
@@ -1196,14 +1197,14 @@ msgid ""
 "as a type guard.  Such a function should use ``TypeGuard[...]`` as its "
 "return type to alert static type checkers to this intention."
 msgstr ""
-"有时，使用一个用户定义的布尔函数作为类型保护会很方便。 这样的函数应该使用 ``TypeGuard[...]`` "
-"作为其返回类型，以提醒静态类型检查器注意这一意图。"
+"有时，使用一个用户定义的布尔函数作为类型保护会很方便。"
+"这样的函数应该使用 ``TypeGuard[...]`` 作为其返回类型，以提醒静态类型检查器注意这一意图。"
 
 #: ../../library/typing.rst:1085
 msgid ""
 "Using  ``-> TypeGuard`` tells the static type checker that for a given "
 "function:"
-msgstr "对于一个给定的函数，使用 ``-> TypeGuard`` 告诉静态类型检查器:"
+msgstr "对于一个给定的函数，使用 ``-> TypeGuard`` 告诉静态类型检查器："
 
 #: ../../library/typing.rst:1088
 msgid "The return value is a boolean."
@@ -1231,10 +1232,9 @@ msgid ""
 "``TypeA`` to ``TypeB``."
 msgstr ""
 "简而言之，``def foo(arg: TypeA) -> TypeGuard[TypeB]: ...`` 形式的意思是：如果 "
-"``foo(arg)`` 返回 ``True``，那么 ``arg`` 将把 ``TypeA`` 缩小为 ``TypeB``。"
+"``foo(arg)`` 返回 ``True``，那么 ``arg`` 将把 ``TypeA`` 窄化为 ``TypeB``。"
 
 #: ../../library/typing.rst:1116
-#, fuzzy
 msgid ""
 "``TypeB`` need not be a narrower form of ``TypeA`` -- it can even be a "
 "wider form. The main reason is to allow for things like narrowing "
@@ -1242,14 +1242,15 @@ msgid ""
 " of the former, since ``list`` is invariant. The responsibility of "
 "writing type-safe type guards is left to the user."
 msgstr ""
-"``TypeB`` 不必是 ``TypeA`` 的缩小形式，它甚至可以是扩大形式。 主要原因是允许像把 ``List[object]`` 缩小到 "
-"``List[str]`` 这样的事情，即使后者不是前者的一个子类型，因为 ``List`` 是不变的。 编写类型安全的类型防护的责任留给了用户。"
+"``TypeB`` 不必是 ``TypeA`` 的窄化形式，它甚至可以是扩大形式。"
+"主要原因是允许像把 ``List[object]`` 窄化到 ``List[str]`` 这样的事情，即使后者不是前者的一个子类型，因为 ``List`` 是不变量。"
+"编写类型安全的类型防护的责任留给了用户。"
 
 #: ../../library/typing.rst:1122
 msgid ""
 "``TypeGuard`` also works with type variables.  For more information, see "
 ":pep:`647` (User-Defined Type Guards)."
-msgstr " ``TypeGuard`` 也适用于类型变量。 更多信息，请参见 :pep:`647` (用户定义的类型保护器)。"
+msgstr " ``TypeGuard`` 也适用于类型变量。更多信息，请参见 :pep:`647` (用户定义的类型保护)。"
 
 #: ../../library/typing.rst:1129
 msgid "Building generic types"
@@ -1429,7 +1430,7 @@ msgid ""
 "``ParamSpecKwargs``. They are intended for runtime introspection and have"
 " no special meaning to static type checkers."
 msgstr ""
-":class:`ParamSpec`的参数和关键字参数属性。``ParamSpec`` 的 ``P.args`` 属性是 "
+":class:`ParamSpec` 的参数和关键字参数属性。``ParamSpec`` 的 ``P.args`` 属性是 "
 "``ParamSpecArgs`` 的一个实例，``P.kwargs`` 是 ``ParamSpecKwargs`` 的一个实例。 "
 "它们的目的是用于运行时内部检查的，对静态类型检查器没有特殊意义。"
 

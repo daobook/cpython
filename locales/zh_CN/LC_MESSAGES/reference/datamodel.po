@@ -3280,14 +3280,16 @@ msgid ""
 "signify a :class:`list` in which all the elements are of type "
 ":class:`int`."
 msgstr ""
+"当使用 :term:`type annotations<annotation>` 时，使用 Python 的方括号符号 *parameterize* :term:`generic type` 通常很有用。"
+"例如，注解 ``list[int]`` 可以用来表示 :class:`list`，其中所有元素的类型都是 :class:`int`。"
 
 #: ../../reference/datamodel.rst:2275
 msgid ":pep:`484` - Type Hints"
-msgstr ""
+msgstr ":pep:`484` —— 类型提示"
 
 #: ../../reference/datamodel.rst:2275
 msgid "Introducing Python's framework for type annotations"
-msgstr ""
+msgstr "介绍 Python 的类型注解框架"
 
 #: ../../reference/datamodel.rst:2278
 msgid ":ref:`Generic Alias Types<types-genericalias>`"
@@ -3295,31 +3297,34 @@ msgstr ""
 
 #: ../../reference/datamodel.rst:2278
 msgid "Documentation for objects representing parameterized generic classes"
-msgstr ""
+msgstr "对象表示参数化泛型类的的文档"
 
 #: ../../reference/datamodel.rst:2281
 msgid ""
 ":ref:`Generics`, :ref:`user-defined generics<user-defined-generics>` and "
 ":class:`typing.Generic`"
 msgstr ""
+":ref:`Generics`，:ref:`user-defined generics<user-defined-generics>` 和 :class:`typing.Generic`"
 
 #: ../../reference/datamodel.rst:2281
 msgid ""
 "Documentation on how to implement generic classes that can be "
 "parameterized at runtime and understood by static type-checkers."
 msgstr ""
+"关于如何实现可在运行时参数化并被静态类型检查器理解的泛型类的文档。"
 
 #: ../../reference/datamodel.rst:2284
 msgid ""
 "A class can *generally* only be parameterized if it defines the special "
 "class method ``__class_getitem__()``."
 msgstr ""
+"类通常只能在定义了特殊的类方法 ``__class_getitem__()`` 时被参数化。"
 
 #: ../../reference/datamodel.rst:2289
 msgid ""
 "Return an object representing the specialization of a generic class by "
 "type arguments found in *key*."
-msgstr "按照 *key* 参数指定的类型返回一个表示泛型类的专门化对象。"
+msgstr "按照 *key* 参数指定的类型返回一个表示泛型类的特殊化对象。"
 
 #: ../../reference/datamodel.rst:2292
 msgid ""
@@ -3327,10 +3332,12 @@ msgid ""
 " method. As such, there is no need for it to be decorated with "
 ":func:`@classmethod<classmethod>` when it is defined."
 msgstr ""
+"当在类上定义时，``__class_getitem__()`` 自动成为一个类方法。"
+"因此，当它被定义时，就不需要用 :func:`@classmethod<classmethod>` 来装饰它了。"
 
 #: ../../reference/datamodel.rst:2298
 msgid "The purpose of *__class_getitem__*"
-msgstr ""
+msgstr "*__class_getitem__* 的目的"
 
 #: ../../reference/datamodel.rst:2300
 msgid ""
@@ -3338,6 +3345,7 @@ msgid ""
 "parameterization of standard-library generic classes in order to more "
 "easily apply :term:`type hints<type hint>` to these classes."
 msgstr ""
+" :meth:`~object.__class_getitem__` 的目的是允许标准库泛型类运行时参数化，以便更容易地应用 :term:`type hints<type hint>` 到这些类。"
 
 #: ../../reference/datamodel.rst:2304
 msgid ""
@@ -3348,6 +3356,8 @@ msgid ""
 ":class:`typing.Generic`, which has its own implementation of "
 "``__class_getitem__()``."
 msgstr ""
+"要实现可在运行时参数化并被静态类型检查器理解的自定义泛型类，"
+"用户应该继承已经实现的 :meth:`~object.__class_getitem__`，或继承自 :class:`typing.Generic`，它有自己的 ``__class_getitem__()`` 实现。"
 
 #: ../../reference/datamodel.rst:2310
 msgid ""
@@ -3356,6 +3366,8 @@ msgid ""
 "party type-checkers such as mypy. Using ``__class_getitem__()`` on any "
 "class for purposes other than type hinting is discouraged."
 msgstr ""
+"在标准库之外定义的类上的 :meth:`~object.__class_getitem__` 自定义实现可能无法被第三方类型检查程序（如 mypy）理解。"
+"除类型提示外，不鼓励在任何类上使用 ``__class_getitem__()``。"
 
 #: ../../reference/datamodel.rst:2320
 msgid "*__class_getitem__* versus *__getitem__*"
@@ -3370,6 +3382,9 @@ msgid ""
 "be called instead. ``__class_getitem__()`` should return a "
 ":ref:`GenericAlias<types-genericalias>` object if it is properly defined."
 msgstr ""
+"通常，使用方括号的对象的 :ref:`subscription<subscriptions>` 将调用对象类上定义的 :meth:`~object.__getitem__` 实例方法。"
+"但是，如果订阅的对象本身是一个类，则类方法 :meth:`~object.__class_getitem__` 可以被调用。"
+"``__class_getitem__()`` 应该返回 :ref:`GenericAlias<types-genericalias>` 对象，如果它被正确定义。"
 
 #: ../../reference/datamodel.rst:2329
 msgid ""
@@ -3378,6 +3393,7 @@ msgid ""
 ":meth:`~object.__getitem__` or :meth:`~object.__class_getitem__` should "
 "be called::"
 msgstr ""
+"使用 :term:`expression` ``obj[x]``， Python 解释器遵循如下过程来决定 :meth:`~object.__getitem__` 或 :meth:`~object.__class_getitem__` 应该被调用 ::"
 
 #: ../../reference/datamodel.rst:2357
 msgid ""
@@ -3388,6 +3404,10 @@ msgid ""
 "such as ``list[int]``, ``dict[str, float]`` and ``tuple[str, bytes]`` all"
 " result in :meth:`~object.__class_getitem__` being called::"
 msgstr ""
+"在 Python 中，所有类本身都是其他类的实例。"
+"类的类被称为该类的 :term:`metaclass`，而且大多数类都有 :class:`type` 类作为它们的元类。"
+":class:`type` 没有定义 :meth:`~object.__getitem__`，意味着表达式，"
+"如 ``list[int]``，``dict[str, float]`` 和 ``tuple[str, bytes]`` 都会导致 :meth:`~object.__class_getitem__` 被调用："
 
 #: ../../reference/datamodel.rst:2376
 msgid ""
@@ -3396,6 +3416,8 @@ msgid ""
 "different behaviour. An example of this can be found in the :mod:`enum` "
 "module::"
 msgstr ""
+"然而，如果一个类有一个定义 :meth:`~object.__getitem__` 的自定义元类，订阅类可能会导致不同的行为。"
+"一个例子可以在 :mod:`enum` 模块中找到 ::"
 
 #: ../../reference/datamodel.rst:2401
 #, fuzzy
@@ -3408,6 +3430,7 @@ msgid ""
 ":ref:`subscription<subscriptions>` results in ``__class_getitem__()`` "
 "being called instead of :meth:`~object.__getitem__`"
 msgstr ""
+"“引入 :meth:`~object.__class_getitem__`，并概述当 :ref:`subscription<subscriptions>` 导致调用 ``__class_getitem__()`` 而不是 :meth:`~object.__getitem__` 时的情况"
 
 #: ../../reference/datamodel.rst:2408
 msgid "Emulating callable objects"
@@ -3531,7 +3554,6 @@ msgid "and so forth.  Missing slice items are always filled in with ``None``."
 msgstr "其他形式以此类推。略去的切片项总是以 ``None`` 补全。"
 
 #: ../../reference/datamodel.rst:2507
-#, fuzzy
 msgid ""
 "Called to implement evaluation of ``self[key]``. For :term:`sequence` "
 "types, the accepted keys should be integers and slice objects.  Note that"
@@ -3543,11 +3565,11 @@ msgid ""
 "raised. For :term:`mapping` types, if *key* is missing (not in the "
 "container), :exc:`KeyError` should be raised."
 msgstr ""
-"调用此方法以实现 ``self[key]`` "
-"的求值。对于序列类型，接受的键应为整数和切片对象。请注意负数索引（如果类想要模拟序列类型）的特殊解读是取决于 "
+"调用此方法以实现 ``self[key]`` 的求值。对于 :term:`sequence` 类型，接受的键应为整数和切片对象。"
+"请注意负数索引（如果类想要模拟 :term:`sequence` 类型）的特殊解读是取决于 "
 ":meth:`__getitem__` 方法。如果 *key* 的类型不正确则会引发 :exc:`TypeError` "
-"异常；如果为序列索引集范围以外的值（在进行任何负数索引的特殊解读之后）则应引发 :exc:`IndexError` 异常。对于映射类型，如果 "
-"*key* 找不到（不在容器中）则应引发 :exc:`KeyError` 异常。"
+"异常；如果为序列索引集范围以外的值（在进行任何负数索引的特殊解读之后）则应引发 :exc:`IndexError` 异常。"
+"对于 :term:`mapping` 类型，如果 *key* 找不到（不在容器中）则应引发 :exc:`KeyError` 异常。"
 
 #: ../../reference/datamodel.rst:2519
 msgid ""
