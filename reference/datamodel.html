@@ -99,7 +99,7 @@
 </li>
 <li><a class="reference internal" href="#customizing-instance-and-subclass-checks">3.3.4. 自定义实例及子类检查</a></li>
 <li><a class="reference internal" href="#emulating-generic-types">3.3.5. 模拟泛型类型</a><ul>
-<li><a class="reference internal" href="#the-purpose-of-class-getitem">3.3.5.1. The purpose of <em>__class_getitem__</em></a></li>
+<li><a class="reference internal" href="#the-purpose-of-class-getitem">3.3.5.1. <em>__class_getitem__</em> 的目的</a></li>
 <li><a class="reference internal" href="#class-getitem-versus-getitem">3.3.5.2. <em>__class_getitem__</em> versus <em>__getitem__</em></a></li>
 </ul>
 </li>
@@ -771,7 +771,7 @@ by carefully-chosen inputs that exploit the worst case performance of a
 dict insertion, O(n<sup>2</sup>) complexity.  See
 <a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">http://www.ocert.org/advisories/ocert-2011-003.html</a> for details.</p>
 <p>改变哈希值会影响集合的迭代次序。Python 也从不保证这个次序不会被改变（通常它在 32 位和 64 位构建上是不一致的）。</p>
-<p>另见 <span class="target" id="index-118"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHASHSEED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a>.</p>
+<p>另见 <span class="target" id="index-119"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHASHSEED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code></a>.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>默认启用哈希随机化。</p>
@@ -859,7 +859,7 @@ dict insertion, O(n<sup>2</sup>) complexity.  See
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-119"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0562"><strong>PEP 562</strong></a> - 模块 __getattr__ 和 __dir__</dt><dd><p>描述用于模块的 <code class="docutils literal notranslate"><span class="pre">__getattr__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__dir__</span></code> 函数。</p>
+<dt><span class="target" id="index-120"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0562"><strong>PEP 562</strong></a> - 模块 __getattr__ 和 __dir__</dt><dd><p>描述用于模块的 <code class="docutils literal notranslate"><span class="pre">__getattr__</span></code> 和 <code class="docutils literal notranslate"><span class="pre">__dir__</span></code> 函数。</p>
 </dd>
 </dl>
 </div>
@@ -872,7 +872,7 @@ dict insertion, O(n<sup>2</sup>) complexity.  See
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__get__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owner</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__get__" title="永久链接至目标">¶</a></dt>
 <dd><p>调用此方法以获取 <em>owner</em> 类的属性（类属性访问）或该类的实例的属性（实例属性访问）。可选的 <em>owner</em> 参数是 <em>owner</em> 类而 <em>instance</em> 是被用来访问属性的实例，如果通过 <em>owner</em> 来访问属性则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 <p>此方法应当返回计算得到的属性值或是引发 <a class="reference internal" href="../library/exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> 异常。</p>
-<p><span class="target" id="index-120"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0252"><strong>PEP 252</strong></a> 指明 <a class="reference internal" href="#object.__get__" title="object.__get__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code></a> 为带有一至二个参数的可调用对象。 Python 自身内置的描述器支持此规格定义；但是，某些第三方工具可能要求必须带两个参数。 Python 自身的 <a class="reference internal" href="#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code></a> 实现总是会传入两个参数，无论它们是否被要求提供。</p>
+<p><span class="target" id="index-121"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0252"><strong>PEP 252</strong></a> 指明 <a class="reference internal" href="#object.__get__" title="object.__get__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__get__()</span></code></a> 为带有一至二个参数的可调用对象。 Python 自身内置的描述器支持此规格定义；但是，某些第三方工具可能要求必须带两个参数。 Python 自身的 <a class="reference internal" href="#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code></a> 实现总是会传入两个参数，无论它们是否被要求提供。</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1025,7 +1025,7 @@ If needed, <a class="reference internal" href="#object.__set_name__" title="obje
 <p>如果在类定义中出现的基类不是 <a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> 的实例，则使用 <code class="docutils literal notranslate"><span class="pre">__mro_entries__</span></code> 方法对其进行搜索，当找到结果时，它会以原始基类元组做参数进行调用。此方法必须返回类的元组以替代此基类被使用。元组可以为空，在此情况下原始基类将被忽略。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-121"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0560"><strong>PEP 560</strong></a> - 对 typing 模块和泛型类型的核心支持</p>
+<p><span class="target" id="index-122"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0560"><strong>PEP 560</strong></a> - 对 typing 模块和泛型类型的核心支持</p>
 </div>
 </section>
 <section id="determining-the-appropriate-metaclass">
@@ -1052,7 +1052,7 @@ the final class object is created the namespace is copied into a new <code class
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-122"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3115"><strong>PEP 3115</strong></a> - Python 3000 中的元类</dt><dd><p>引入 <code class="docutils literal notranslate"><span class="pre">__prepare__</span></code> 命名空间钩子</p>
+<dt><span class="target" id="index-123"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3115"><strong>PEP 3115</strong></a> - Python 3000 中的元类</dt><dd><p>引入 <code class="docutils literal notranslate"><span class="pre">__prepare__</span></code> 命名空间钩子</p>
 </dd>
 </dl>
 </div>
@@ -1085,7 +1085,7 @@ immediate parent of the new class in its method resolution order.</p></li>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-123"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3135"><strong>PEP 3135</strong></a> - 新的超类型</dt><dd><p>描述隐式的 <code class="docutils literal notranslate"><span class="pre">__class__</span></code> 闭包引用</p>
+<dt><span class="target" id="index-124"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3135"><strong>PEP 3135</strong></a> - 新的超类型</dt><dd><p>描述隐式的 <code class="docutils literal notranslate"><span class="pre">__class__</span></code> 闭包引用</p>
 </dd>
 </dl>
 </div>
@@ -1115,67 +1115,45 @@ immediate parent of the new class in its method resolution order.</p></li>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-124"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a> - 引入抽象基类</dt><dd><p>新增功能描述，通过 <a class="reference internal" href="#class.__instancecheck__" title="class.__instancecheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__instancecheck__()</span></code></a> 和 <a class="reference internal" href="#class.__subclasscheck__" title="class.__subclasscheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasscheck__()</span></code></a> 来定制 <a class="reference internal" href="../library/functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> 和 <a class="reference internal" href="../library/functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> 行为，加入此功能的动机是出于向该语言添加抽象基类的内容（参见 <a class="reference internal" href="../library/abc.html#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> 模块）。</p>
+<dt><span class="target" id="index-125"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3119"><strong>PEP 3119</strong></a> - 引入抽象基类</dt><dd><p>新增功能描述，通过 <a class="reference internal" href="#class.__instancecheck__" title="class.__instancecheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__instancecheck__()</span></code></a> 和 <a class="reference internal" href="#class.__subclasscheck__" title="class.__subclasscheck__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__subclasscheck__()</span></code></a> 来定制 <a class="reference internal" href="../library/functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> 和 <a class="reference internal" href="../library/functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> 行为，加入此功能的动机是出于向该语言添加抽象基类的内容（参见 <a class="reference internal" href="../library/abc.html#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> 模块）。</p>
 </dd>
 </dl>
 </div>
 </section>
 <section id="emulating-generic-types">
 <h3><span class="section-number">3.3.5. </span>模拟泛型类型<a class="headerlink" href="#emulating-generic-types" title="永久链接至标题">¶</a></h3>
-<p>When using <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a>, it is often useful to
-<em>parameterize</em> a <a class="reference internal" href="../glossary.html#term-generic-type"><span class="xref std std-term">generic type</span></a> using Python's square-brackets notation.
-For example, the annotation <code class="docutils literal notranslate"><span class="pre">list[int]</span></code> might be used to signify a
-<a class="reference internal" href="../library/stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> in which all the elements are of type <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
+<p>当使用 <a class="reference internal" href="../glossary.html#term-annotation"><span class="xref std std-term">type annotations</span></a> 时，使用 Python 的方括号符号 <em>parameterize</em> <a class="reference internal" href="../glossary.html#term-generic-type"><span class="xref std std-term">generic type</span></a> 通常很有用。例如，注解 <code class="docutils literal notranslate"><span class="pre">list[int]</span></code> 可以用来表示 <a class="reference internal" href="../library/stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>，其中所有元素的类型都是 <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-92"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> - Type Hints</dt><dd><p>Introducing Python's framework for type annotations</p>
+<dt><span class="target" id="index-126"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0484"><strong>PEP 484</strong></a> —— 类型提示</dt><dd><p>介绍 Python 的类型注解框架</p>
 </dd>
-<dt><a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">Generic Alias Types</span></a></dt><dd><p>Documentation for objects representing parameterized generic classes</p>
+<dt><a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">Generic Alias Types</span></a></dt><dd><p>对象表示参数化泛型类的的文档</p>
 </dd>
-<dt><a class="reference internal" href="../library/typing.html#generics"><span class="std std-ref">泛型（Generic）</span></a>, <a class="reference internal" href="../library/typing.html#user-defined-generics"><span class="std std-ref">user-defined generics</span></a> and <a class="reference internal" href="../library/typing.html#typing.Generic" title="typing.Generic"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></dt><dd><p>Documentation on how to implement generic classes that can be
-parameterized at runtime and understood by static type-checkers.</p>
+<dt><a class="reference internal" href="../library/typing.html#generics"><span class="std std-ref">泛型（Generic）</span></a>，<a class="reference internal" href="../library/typing.html#user-defined-generics"><span class="std std-ref">user-defined generics</span></a> 和 <a class="reference internal" href="../library/typing.html#typing.Generic" title="typing.Generic"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a></dt><dd><p>关于如何实现可在运行时参数化并被静态类型检查器理解的泛型类的文档。</p>
 </dd>
 </dl>
 </div>
-<p>A class can <em>generally</em> only be parameterized if it defines the special
-class method <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code>.</p>
+<p>类通常只能在定义了特殊的类方法 <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 时被参数化。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__class_getitem__">
 <em class="property"><span class="pre">classmethod</span> </em><span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__class_getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__class_getitem__" title="永久链接至目标">¶</a></dt>
-<dd><p>按照 <em>key</em> 参数指定的类型返回一个表示泛型类的专门化对象。</p>
-<p>When defined on a class, <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> is automatically a class
-method. As such, there is no need for it to be decorated with
-<a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;classmethod</span></code></a> when it is defined.</p>
+<dd><p>按照 <em>key</em> 参数指定的类型返回一个表示泛型类的特殊化对象。</p>
+<p>当在类上定义时，<code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 自动成为一个类方法。因此，当它被定义时，就不需要用 <a class="reference internal" href="../library/functions.html#classmethod" title="classmethod"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;classmethod</span></code></a> 来装饰它了。</p>
 </dd></dl>
 
 <section id="the-purpose-of-class-getitem">
-<h4><span class="section-number">3.3.5.1. </span>The purpose of <em>__class_getitem__</em><a class="headerlink" href="#the-purpose-of-class-getitem" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">3.3.5.1. </span><em>__class_getitem__</em> 的目的<a class="headerlink" href="#the-purpose-of-class-getitem" title="永久链接至标题">¶</a></h4>
 <p>The purpose of <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> is to allow runtime
 parameterization of standard-library generic classes in order to more easily
 apply <a class="reference internal" href="../glossary.html#term-type-hint"><span class="xref std std-term">type hints</span></a> to these classes.</p>
-<p>To implement custom generic classes that can be parameterized at runtime and
-understood by static type-checkers, users should either inherit from a standard
-library class that already implements <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a>, or
-inherit from <a class="reference internal" href="../library/typing.html#typing.Generic" title="typing.Generic"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a>, which has its own implementation of
-<code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code>.</p>
-<p>Custom implementations of <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> on classes defined
-outside of the standard library may not be understood by third-party
-type-checkers such as mypy. Using <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> on any class for
-purposes other than type hinting is discouraged.</p>
+<p>要实现可在运行时参数化并被静态类型检查器理解的自定义泛型类，用户应该继承已经实现的 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a>，或继承自 <a class="reference internal" href="../library/typing.html#typing.Generic" title="typing.Generic"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></a>，它有自己的 <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 实现。</p>
+<p>在标准库之外定义的类上的 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> 自定义实现可能无法被第三方类型检查程序（如 mypy）理解。除类型提示外，不鼓励在任何类上使用 <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code>。</p>
 </section>
 <section id="class-getitem-versus-getitem">
 <span id="classgetitem-versus-getitem"></span><h4><span class="section-number">3.3.5.2. </span><em>__class_getitem__</em> versus <em>__getitem__</em><a class="headerlink" href="#class-getitem-versus-getitem" title="永久链接至标题">¶</a></h4>
-<p>Usually, the <a class="reference internal" href="expressions.html#subscriptions"><span class="std std-ref">subscription</span></a> of an object using square
-brackets will call the <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> instance method defined on
-the object's class. However, if the object being subscribed is itself a class,
-the class method <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> may be called instead.
-<code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> should return a <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a>
-object if it is properly defined.</p>
-<p>Presented with the <a class="reference internal" href="../glossary.html#term-expression"><span class="xref std std-term">expression</span></a> <code class="docutils literal notranslate"><span class="pre">obj[x]</span></code>, the Python interpreter
-follows something like the following process to decide whether
-<a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> or <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> should be
-called:</p>
+<p>通常，使用方括号的对象的 <a class="reference internal" href="expressions.html#subscriptions"><span class="std std-ref">subscription</span></a> 将调用对象类上定义的 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> 实例方法。但是，如果订阅的对象本身是一个类，则类方法 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> 可以被调用。<code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 应该返回 <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 对象，如果它被正确定义。</p>
+<p>使用 <a class="reference internal" href="../glossary.html#term-expression"><span class="xref std std-term">expression</span></a> <code class="docutils literal notranslate"><span class="pre">obj[x]</span></code>， Python 解释器遵循如下过程来决定 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> 或 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> 应该被调用</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">isclass</span>
 
 <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -1200,12 +1178,7 @@ called:</p>
         <span class="p">)</span>
 </pre></div>
 </div>
-<p>In Python, all classes are themselves instances of other classes. The class of
-a class is known as that class's <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a>, and most classes have the
-<a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> class as their metaclass. <a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> does not define
-<a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>, meaning that expressions such as <code class="docutils literal notranslate"><span class="pre">list[int]</span></code>,
-<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">float]</span></code> and <code class="docutils literal notranslate"><span class="pre">tuple[str,</span> <span class="pre">bytes]</span></code> all result in
-<a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> being called:</p>
+<p>在 Python 中，所有类本身都是其他类的实例。类的类被称为该类的 <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a>，而且大多数类都有 <a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> 类作为它们的元类。<a class="reference internal" href="../library/functions.html#type" title="type"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a> 没有定义 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>，意味着表达式，如 <code class="docutils literal notranslate"><span class="pre">list[int]</span></code>，<code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">float]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tuple[str,</span> <span class="pre">bytes]</span></code> 都会导致 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a> 被调用：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># list has class &quot;type&quot; as its metaclass, like most classes:</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="go">&lt;class &#39;type&#39;&gt;</span>
@@ -1219,9 +1192,7 @@ a class is known as that class's <a class="reference internal" href="../glossary
 <span class="go">&lt;class &#39;types.GenericAlias&#39;&gt;</span>
 </pre></div>
 </div>
-<p>However, if a class has a custom metaclass that defines
-<a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a>, subscribing the class may result in different
-behaviour. An example of this can be found in the <a class="reference internal" href="../library/enum.html#module-enum" title="enum: Implementation of an enumeration class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> module:</p>
+<p>然而，如果一个类有一个定义 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> 的自定义元类，订阅类可能会导致不同的行为。一个例子可以在 <a class="reference internal" href="../library/enum.html#module-enum" title="enum: Implementation of an enumeration class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">enum</span></code></a> 模块中找到</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Menu</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="sd">&quot;&quot;&quot;A breakfast menu&quot;&quot;&quot;</span>
@@ -1243,9 +1214,7 @@ behaviour. An example of this can be found in the <a class="reference internal" 
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-93"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0560"><strong>PEP 560</strong></a> - Core Support for typing module and generic types</dt><dd><p>Introducing <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a>, and outlining when a
-<a class="reference internal" href="expressions.html#subscriptions"><span class="std std-ref">subscription</span></a> results in <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code>
-being called instead of <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a></p>
+<dt><span class="target" id="index-93"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0560"><strong>PEP 560</strong></a> - Core Support for typing module and generic types</dt><dd><p>“引入 <a class="reference internal" href="#object.__class_getitem__" title="object.__class_getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__class_getitem__()</span></code></a>，并概述当 <a class="reference internal" href="expressions.html#subscriptions"><span class="std std-ref">subscription</span></a> 导致调用 <code class="docutils literal notranslate"><span class="pre">__class_getitem__()</span></code> 而不是 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> 时的情况</p>
 </dd>
 </dl>
 </div>
@@ -1328,15 +1297,7 @@ through the object's keys; for sequences, it should iterate through the values.<
 <dl class="py method">
 <dt class="sig sig-object py" id="object.__getitem__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#object.__getitem__" title="永久链接至目标">¶</a></dt>
-<dd><p>Called to implement evaluation of <code class="docutils literal notranslate"><span class="pre">self[key]</span></code>. For <a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> types,
-the accepted keys should be integers and slice objects.  Note that the
-special interpretation of negative indexes (if the class wishes to emulate a
-<a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> type) is up to the <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> method. If <em>key</em> is
-of an inappropriate type, <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> may be raised; if of a value
-outside the set of indexes for the sequence (after any special
-interpretation of negative values), <a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> should be raised. For
-<a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a> types, if <em>key</em> is missing (not in the container),
-<a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> should be raised.</p>
+<dd><p>调用此方法以实现 <code class="docutils literal notranslate"><span class="pre">self[key]</span></code> 的求值。对于 <a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> 类型，接受的键应为整数和切片对象。请注意负数索引（如果类想要模拟 <a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a> 类型）的特殊解读是取决于 <a class="reference internal" href="#object.__getitem__" title="object.__getitem__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code></a> 方法。如果 <em>key</em> 的类型不正确则会引发 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> 异常；如果为序列索引集范围以外的值（在进行任何负数索引的特殊解读之后）则应引发 <a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> 异常。对于 <a class="reference internal" href="../glossary.html#term-mapping"><span class="xref std std-term">mapping</span></a> 类型，如果 <em>key</em> 找不到（不在容器中）则应引发 <a class="reference internal" href="../library/exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a> 异常。</p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
 <p><a class="reference internal" href="compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 循环在有不合法索引时会期待捕获 <a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> 以便正确地检测到序列的结束。</p>
@@ -1582,7 +1543,7 @@ an instance of a class that has an <a class="reference internal" href="#object._
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-125"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0343"><strong>PEP 343</strong></a> - &quot;with&quot; 语句</dt><dd><p>Python <a class="reference internal" href="compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句的规范描述、背景和示例。</p>
+<dt><span class="target" id="index-127"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0343"><strong>PEP 343</strong></a> - &quot;with&quot; 语句</dt><dd><p>Python <a class="reference internal" href="compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句的规范描述、背景和示例。</p>
 </dd>
 </dl>
 </div>
@@ -1603,7 +1564,7 @@ an instance of a class that has an <a class="reference internal" href="#object._
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-126"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0634"><strong>PEP 634</strong></a> - 结构化模式匹配</dt><dd><p>有关 Python <code class="docutils literal notranslate"><span class="pre">match</span></code> 语句的规范说明。</p>
+<dt><span class="target" id="index-128"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0634"><strong>PEP 634</strong></a> - 结构化模式匹配</dt><dd><p>有关 Python <code class="docutils literal notranslate"><span class="pre">match</span></code> 语句的规范说明。</p>
 </dd>
 </dl>
 </div>
@@ -1700,7 +1661,7 @@ are also awaitable, but they do not implement <a class="reference internal" href
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-127"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 了解有关可等待对象的详细信息。</p>
+<p><span class="target" id="index-129"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0492"><strong>PEP 492</strong></a> 了解有关可等待对象的详细信息。</p>
 </div>
 </section>
 <section id="coroutine-objects">
@@ -1882,7 +1843,7 @@ supported, which is why the reflected method is not called.</p>
 </li>
 <li><a class="reference internal" href="#customizing-instance-and-subclass-checks">3.3.4. 自定义实例及子类检查</a></li>
 <li><a class="reference internal" href="#emulating-generic-types">3.3.5. 模拟泛型类型</a><ul>
-<li><a class="reference internal" href="#the-purpose-of-class-getitem">3.3.5.1. The purpose of <em>__class_getitem__</em></a></li>
+<li><a class="reference internal" href="#the-purpose-of-class-getitem">3.3.5.1. <em>__class_getitem__</em> 的目的</a></li>
 <li><a class="reference internal" href="#class-getitem-versus-getitem">3.3.5.2. <em>__class_getitem__</em> versus <em>__getitem__</em></a></li>
 </ul>
 </li>
@@ -1988,7 +1949,7 @@ supported, which is why the reflected method is not called.</p>
 <br />
     <br />
 
-    最后更新于 2月 23, 2022.
+    最后更新于 3月 04, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
