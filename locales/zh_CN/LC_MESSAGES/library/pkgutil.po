@@ -45,6 +45,7 @@ msgid ""
 "Extend the search path for the modules which comprise a package.  Intended "
 "use is to place the following code in a package's :file:`__init__.py`::"
 msgstr ""
+"扩展包组成的模块的搜索路径。打算使用的是将以下代码放在包的 :file:`__init__.py`::"
 
 #: ../../library/pkgutil.rst:28
 msgid ""
@@ -53,6 +54,8 @@ msgid ""
 "wants to distribute different parts of a single logical package as multiple "
 "directories."
 msgstr ""
+"这将把 ``sys.path`` 上的以包名命名的目录的所有子目录添加到包的 ``__path__`` 中。"
+"如果想要将一个逻辑包的不同部分分发到多个目录中，这是非常有用的。"
 
 #: ../../library/pkgutil.rst:33
 msgid ""
@@ -64,6 +67,9 @@ msgid ""
 ":file:`\\*.pkg` file are added to the path, regardless of whether they exist"
 " on the filesystem.  (This is a feature.)"
 msgstr ""
+"它还会查找 :file:`\\*.pkg` 文件开始，从 ``*`` 匹配 *name* 参数的地方开始。"
+"这个特性类似于 :file:`\\*.pth` 文件（请参阅 :mod:`site` 模块获取更多信息），除了它没有以 ``import`` 开头的特殊行。"
+":file:`\\*.pkg` 文件表面上是可信的：除了检查重复，所有条目都在 :file:`\\*.pkg` 文件被添加到该路径，无论它们是否存在于文件系统中。（这是一个特性。）"
 
 #: ../../library/pkgutil.rst:41
 msgid ""
@@ -71,6 +77,8 @@ msgid ""
 "returned unchanged.  The input path is not modified; an extended copy is "
 "returned.  Items are only appended to the copy at the end."
 msgstr ""
+"如果输入路径不是一个列表（就像冻结包的情况一样），它将不加修改地返回。"
+"输入路径没有被修改；返回扩展副本。项只被附加到末尾的副本上。"
 
 #: ../../library/pkgutil.rst:45
 msgid ""
@@ -80,10 +88,12 @@ msgid ""
 "filenames may cause this function to raise an exception (in line with "
 ":func:`os.path.isdir` behavior)."
 msgstr ""
+"假定 :data:`sys.path` 是一个序列。不是引用现有目录的字符串的 :data:`sys.path` 将被忽略。"
+"当作为文件名使用时，引起错误的 :data:`sys.path` 可能会导致此函数引发异常（与 :func:`os.path.isdir` 行为一致）。"
 
 #: ../../library/pkgutil.rst:54
 msgid ":pep:`302` Finder that wraps Python's \"classic\" import algorithm."
-msgstr ""
+msgstr "pep:`302` 封装 Python 的 \"classic\" 导入算法的 Finder。"
 
 #: ../../library/pkgutil.rst:56
 msgid ""
@@ -111,7 +121,7 @@ msgstr ""
 
 #: ../../library/pkgutil.rst:80
 msgid "Retrieve a module :term:`loader` for the given *fullname*."
-msgstr ""
+msgstr "检索给定 *fullname* 的模块 :term:`loader`"
 
 #: ../../library/pkgutil.rst:82
 msgid ""
@@ -120,6 +130,7 @@ msgid ""
 ":exc:`ImportError` and only returns the loader rather than the full "
 ":class:`ModuleSpec`."
 msgstr ""
+"这是向后兼容包装 :func:`importlib.util.find_spec`，它将大多数失败转换为 :exc:`ImportError`，并且只返回 loader 而不是完整的 :class:`ModuleSpec`。"
 
 #: ../../library/pkgutil.rst:87 ../../library/pkgutil.rst:104
 #: ../../library/pkgutil.rst:119 ../../library/pkgutil.rst:140
@@ -128,30 +139,33 @@ msgid ""
 "Updated to be based directly on :mod:`importlib` rather than relying on the "
 "package internal :pep:`302` import emulation."
 msgstr ""
+"更新为直接基于 :mod:`importlib` 而不是依赖于包内部 :pep:`302` 导入仿真。"
 
 #: ../../library/pkgutil.rst:91 ../../library/pkgutil.rst:123
 msgid "Updated to be based on :pep:`451`"
-msgstr ""
+msgstr "基于 :pep:`451` 更新"
 
 #: ../../library/pkgutil.rst:96
 msgid "Retrieve a :term:`finder` for the given *path_item*."
-msgstr ""
+msgstr "为给定的 *path_item* 检索 :term:`finder`。"
 
 #: ../../library/pkgutil.rst:98
 msgid ""
 "The returned finder is cached in :data:`sys.path_importer_cache` if it was "
 "newly created by a path hook."
 msgstr ""
+"返回的 finder 被缓存在 :data:`sys.path_importer_cache` 中，如果它是由路径钩子新创建的。"
 
 #: ../../library/pkgutil.rst:101
 msgid ""
 "The cache (or part of it) can be cleared manually if a rescan of "
 ":data:`sys.path_hooks` is necessary."
 msgstr ""
+"如果重新扫描 :data:`sys.path_hooks` 是必要的，可以手动清除缓存（或部分缓存）。"
 
 #: ../../library/pkgutil.rst:111
 msgid "Get a :term:`loader` object for *module_or_name*."
-msgstr ""
+msgstr "为 *module_or_name* 获得 :term:`loader` 对象。"
 
 #: ../../library/pkgutil.rst:113
 msgid ""
@@ -161,10 +175,13 @@ msgid ""
 "not already imported, its containing package (if any) is imported, in order "
 "to establish the package ``__path__``."
 msgstr ""
+"如果该模块或包可以通过正常的导入机制访问，则返回围绕该机制相关部分的包装器。"
+"如果无法找到或导入模块，则返回 ``None``。"
+"如果命名的模块还没有被导入，它包含的包（如果有的话）会被导入，以建立包 ``__path__``。"
 
 #: ../../library/pkgutil.rst:129
 msgid "Yield :term:`finder` objects for the given module name."
-msgstr ""
+msgstr "为给定模块名称生成 :term:`finder` 对象。"
 
 #: ../../library/pkgutil.rst:131
 msgid ""
@@ -172,32 +189,37 @@ msgid ""
 "fullname, otherwise they will be all registered top level finders (i.e. "
 "those on both sys.meta_path and sys.path_hooks)."
 msgstr ""
+"如果 fullname 包含 '.'，这些查找器将用于包含 fullname 的包，否则它们将都是注册的顶级查找器（即在 sys.meta_path 和sys.path_hooks)。"
 
 #: ../../library/pkgutil.rst:135
 msgid ""
 "If the named module is in a package, that package is imported as a side "
 "effect of invoking this function."
 msgstr ""
+"如果命名的模块在一个包中，这个包会作为调用这个函数的副作用被导入。"
 
 #: ../../library/pkgutil.rst:138
 msgid "If no module name is specified, all top level finders are produced."
-msgstr ""
+msgstr "如果未指定模块名，则生成所有顶级查找器。"
 
 #: ../../library/pkgutil.rst:147
 msgid ""
 "Yields :class:`ModuleInfo` for all submodules on *path*, or, if *path* is "
 "``None``, all top-level modules on ``sys.path``."
 msgstr ""
+"生成 :class:`ModuleInfo` 用于 *path* 上的所有子模块，或者，如果 *path* 为 ``None``，则为 ``sys.path`` 上的所有顶级模块。"
 
 #: ../../library/pkgutil.rst:150 ../../library/pkgutil.rst:171
 msgid ""
 "*path* should be either ``None`` or a list of paths to look for modules in."
 msgstr ""
+"*path* 应该是 ``None`` 或用于查找模块的路径列表。"
 
 #: ../../library/pkgutil.rst:152 ../../library/pkgutil.rst:173
 msgid ""
 "*prefix* is a string to output on the front of every module name on output."
 msgstr ""
+"*prefix* 是一个字符串，输出时放在每个模块名称的前面。"
 
 #: ../../library/pkgutil.rst:156 ../../library/pkgutil.rst:195
 msgid ""
@@ -206,12 +228,15 @@ msgid ""
 "for :class:`importlib.machinery.FileFinder` and "
 ":class:`zipimport.zipimporter`."
 msgstr ""
+"只适用于 :term:`finder`，它定义了 ``iter_modules()`` 方法。"
+"这个接口是非标准的，所以模块也提供了 :class:`importlib.machinery.FileFinder` 和 :class:`zipimport.zipimporter` 的实现。"
 
 #: ../../library/pkgutil.rst:168
 msgid ""
 "Yields :class:`ModuleInfo` for all modules recursively on *path*, or, if "
 "*path* is ``None``, all accessible modules."
 msgstr ""
+"为 *path* 上的所有模块递归地生成 :class:`ModuleInfo` ，或者，如果 *path* 为 ``None``，则为所有可访问模块。"
 
 #: ../../library/pkgutil.rst:175
 msgid ""
@@ -219,6 +244,7 @@ msgid ""
 "the given *path*, in order to access the ``__path__`` attribute to find "
 "submodules."
 msgstr ""
+"注意这个函数必须导入给定 *path* 上的所有 *packages* （*而不是* 所有模块！），以便访问 ``__path__`` 属性来查找子模块。"
 
 #: ../../library/pkgutil.rst:179
 msgid ""
@@ -228,6 +254,8 @@ msgid ""
 ":exc:`ImportError`\\s are caught and ignored, while all other exceptions are"
 " propagated, terminating the search."
 msgstr ""
+"*onerror* 是一个函数，如果在尝试导入一个包时发生任何异常，它将被调用一个参数（被导入的包的名称）。"
+"如果没有提供 *onerror* 函数，:exc:`ImportError` 会被捕获并忽略，而所有其他异常都会被传播，从而终止搜索。"
 
 #: ../../library/pkgutil.rst:185
 msgid "Examples::"
@@ -235,7 +263,7 @@ msgstr "示例::"
 
 #: ../../library/pkgutil.rst:207
 msgid "Get a resource from a package."
-msgstr "从包中获取一个资源。"
+msgstr "从包中获取资源。"
 
 #: ../../library/pkgutil.rst:209
 msgid ""
@@ -246,18 +274,24 @@ msgid ""
 "``/`` as the path separator.  The parent directory name ``..`` is not "
 "allowed, and nor is a rooted name (starting with a ``/``)."
 msgstr ""
+"这是 :term:`loader` :meth:`get_data API <importlib.abc.ResourceLoader.get_data>` 的包装器。"
+"*package* 参数应该是包的名字，采用标准模块格式（``foo.bar``）。"
+"*resource* 参数应该以相对文件名的形式存在，使用 ``/`` 作为路径分隔符。"
+"父目录名 ``..`` 不允许使用，也不允许使用根名称（以 ``/`` 开头）。"
 
 #: ../../library/pkgutil.rst:216
 msgid ""
 "The function returns a binary string that is the contents of the specified "
 "resource."
 msgstr ""
+"函数返回二进制字符串，它是指定资源的内容。"
 
 #: ../../library/pkgutil.rst:219
 msgid ""
 "For packages located in the filesystem, which have already been imported, "
 "this is the rough equivalent of::"
 msgstr ""
+"对于文件系统中已经导入的包，这大致相当于::"
 
 #: ../../library/pkgutil.rst:225
 msgid ""
@@ -268,10 +302,12 @@ msgid ""
 "package>` does not support :meth:`get_data "
 "<importlib.abc.ResourceLoader.get_data>`."
 msgstr ""
+"如果包无法定位或加载，或者它使用了 :term:`loader`，而该 loader 不支持 :meth:`get_data <importlib.abc.ResourceLoader.get_data>`，则返回 ``None``。"
+"特别是 :term:`命名空间包 <namespace package>` 的 :term:`loader` 不支持 :meth:`get_data <importlib.abc.ResourceLoader.get_data>`。"
 
 #: ../../library/pkgutil.rst:234
 msgid "Resolve a name to an object."
-msgstr ""
+msgstr "将名称解析为对象。"
 
 #: ../../library/pkgutil.rst:236
 msgid ""
@@ -279,6 +315,7 @@ msgid ""
 ":issue:`12915`) - and equivalent functionality is also in widely used third-"
 "party packages such as setuptools, Django and Pyramid."
 msgstr ""
+"这个功能在标准库的许多地方都有使用（参见 :issue:`12915`），同样的功能也在广泛使用的第三方包中，如 setuptools、Django 和 Pyramid。"
 
 #: ../../library/pkgutil.rst:240
 msgid ""
@@ -286,6 +323,7 @@ msgid ""
 " where W is shorthand for a valid Python identifier and dot stands for a "
 "literal period in these pseudo-regexes:"
 msgstr ""
+"预计 *name* 将是以下格式之一的字符串，其中 W 是有效的 Python 标识符的缩写，而在这些伪正则表达式中，点代表 literal 句点："
 
 #: ../../library/pkgutil.rst:244
 msgid "``W(.W)*``"
@@ -304,6 +342,9 @@ msgid ""
 "inferred by inspection, repeated attempts to import must be done with this "
 "form."
 msgstr ""
+"第一种形式仅用于向后兼容。"
+"它假设带点的名称的某些部分是一个包，其余部分是包中某个位置的一个对象，可能嵌套在其他对象中。"
+"因为不能通过检查推断出包停止的位置和对象层次结构开始的位置，所以必须使用这个表单重复尝试导入。"
 
 #: ../../library/pkgutil.rst:254
 msgid ""
@@ -313,23 +354,27 @@ msgid ""
 "hierarchy within that package. Only one import is needed in this form. If it"
 " ends with the colon, then a module object is returned."
 msgstr ""
+"在第二种形式中，调用者通过提供一个冒号来明确划分点：冒号左边的带点名称是要导入的包，右边的带点名称是包中的对象层次结构。"
+"此形式中只需要一次导入。如果以冒号结尾，则返回一个模块对象。"
 
 #: ../../library/pkgutil.rst:260
 msgid ""
 "The function will return an object (which might be a module), or raise one "
 "of the following exceptions:"
 msgstr ""
+"函数将返回一个对象（可能是模块），或引发以下异常之一："
 
 #: ../../library/pkgutil.rst:263
 msgid ":exc:`ValueError` -- if *name* isn't in a recognised format."
-msgstr ""
+msgstr ":exc:`ValueError` —— 如果 *name* 不是一个可识别的格式。"
 
 #: ../../library/pkgutil.rst:265
 msgid ":exc:`ImportError` -- if an import failed when it shouldn't have."
-msgstr ""
+msgstr ":exc:`ImportError` —— 如果导入在不应该失败的情况下失败。"
 
 #: ../../library/pkgutil.rst:267
 msgid ""
 ":exc:`AttributeError` -- If a failure occurred when traversing the object "
 "hierarchy within the imported package to get to the desired object."
 msgstr ""
+":exc:`AttributeError` —— 如果在导入的包中遍历对象层次结构以获取所需对象时发生失败。"
