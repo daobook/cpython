@@ -161,12 +161,7 @@
 <hr class="docutils" />
 <p>此模块添加了从 ZIP 格式档案中导入 Python 模块（ <code class="file docutils literal notranslate"><span class="pre">*.py</span></code> ， <code class="file docutils literal notranslate"><span class="pre">*.pyc</span></code> ）和包的能力。通常不需要明确地使用 <a class="reference internal" href="#module-zipimport" title="zipimport: Support for importing Python modules from ZIP archives."><code class="xref py py-mod docutils literal notranslate"><span class="pre">zipimport</span></code></a> 模块，内置的 <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 机制会自动将此模块用于 ZIP 档案路径的 <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 项目上。</p>
 <p>通常， <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 是字符串的目录名称列表。此模块同样允许 <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 的一项成为命名 ZIP 文件档案的字符串。 ZIP 档案可以容纳子目录结构去支持包的导入，并且可以将归档文件中的路径指定为仅从子目录导入。比如说，路径 <code class="file docutils literal notranslate"><span class="pre">example.zip/lib/</span></code> 将只会从档案中的 <code class="file docutils literal notranslate"><span class="pre">lib/</span></code> 子目录导入。</p>
-<p>Any files may be present in the ZIP archive, but importers are only invoked for
-<code class="file docutils literal notranslate"><span class="pre">.py</span></code> and <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> files.  ZIP import of dynamic modules
-(<code class="file docutils literal notranslate"><span class="pre">.pyd</span></code>, <code class="file docutils literal notranslate"><span class="pre">.so</span></code>) is disallowed. Note that if an archive only contains
-<code class="file docutils literal notranslate"><span class="pre">.py</span></code> files, Python will not attempt to modify the archive by adding the
-corresponding <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> file, meaning that if a ZIP archive
-doesn't contain <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> files, importing may be rather slow.</p>
+<p>任何文件都可能出现在 ZIP 存档文件中，但是导入器只会调用 <code class="file docutils literal notranslate"><span class="pre">.py</span></code> 和 <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> 文件。动态模块的 ZIP 导入（<code class="file docutils literal notranslate"><span class="pre">.pyd</span></code>，<code class="file docutils literal notranslate"><span class="pre">.so</span></code>）是不允许的。请注意，如果存档文件只包含 <code class="file docutils literal notranslate"><span class="pre">.py</span></code> 文件，Python 将不会尝试通过添加相应的 <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> 来修改存档文件，这意味着如果一个ZIP归档文件不包含 <code class="file docutils literal notranslate"><span class="pre">.pyc</span></code> 文件，导入可能会相当慢。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>以前，不支持带有档案注释的 ZIP 档案。</p>
 </div>
@@ -433,7 +428,7 @@ doesn't contain <code class="file docutils literal notranslate"><span class="pre
 <br />
     <br />
 
-    最后更新于 3月 09, 2022.
+    最后更新于 3月 15, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

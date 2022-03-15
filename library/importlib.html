@@ -176,21 +176,13 @@
 <hr class="docutils" />
 <section id="introduction">
 <h2>概述<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
-<p>The purpose of the <a class="reference internal" href="#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> package is three-fold.</p>
-<p>One is to provide the
-implementation of the <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement (and thus, by extension, the
-<a class="reference internal" href="functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> function) in Python source code. This provides an
-implementation of <code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code> which is portable to any Python
-interpreter. This also provides an implementation which is easier to
-comprehend than one implemented in a programming language other than Python.</p>
+<p><a class="reference internal" href="#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a> 包的目的有三个方面。</p>
+<p>一种是在 Python 源代码中提供 <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句（这样，通过扩展， <a class="reference internal" href="functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a>  函数）的实现。这提供了一个可移植到任何 Python 解释器的导入实现。这也提供了一个比用 Python 以外的编程语言实现更容易理解的实现。</p>
 <p>第二个目的是实现 <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 的部分被公开在这个包中，使得用户更容易创建他们自己的自定义对象 (通常被称为 <a class="reference internal" href="../glossary.html#term-importer"><span class="xref std std-term">importer</span></a>) 来参与到导入过程中。</p>
-<p>Three, the package contains modules exposing additional functionality for
-managing aspects of Python packages:</p>
+<p>三，这个包包含了一些模块，这些模块公开了用于管理 Python 包的各个方面的额外功能：</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="importlib.metadata.html#module-importlib.metadata" title="importlib.metadata: The implementation of the importlib metadata."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.metadata</span></code></a> presents access to metadata from third-party
-distributions.</p></li>
-<li><p><a class="reference internal" href="importlib.resources.html#module-importlib.resources" title="importlib.resources: Package resource reading, opening, and access"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.resources</span></code></a> provides routines for accessing non-code
-&quot;resources&quot; from Python packages.</p></li>
+<li><p><a class="reference internal" href="importlib.metadata.html#module-importlib.metadata" title="importlib.metadata: The implementation of the importlib metadata."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.metadata</span></code></a> 表示从第三方发行版访问元数据。</p></li>
+<li><p><a class="reference internal" href="importlib.resources.html#module-importlib.resources" title="importlib.resources: Package resource reading, opening, and access"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.resources</span></code></a> 提供了从 Python 包中访问非代码 &quot;resources&quot; 的例程。</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -215,7 +207,7 @@ distributions.</p></li>
 </dd>
 <dt><span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0451"><strong>PEP 451</strong></a></dt><dd><p>导入系统的一个模块规范类型</p>
 </dd>
-<dt><span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0488"><strong>PEP 488</strong></a></dt><dd><p>消除PYO文件</p>
+<dt><span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0488"><strong>PEP 488</strong></a></dt><dd><p>消除 PYO 文件</p>
 </dd>
 <dt><span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0489"><strong>PEP 489</strong></a></dt><dd><p>多阶段扩展模块初始化</p>
 </dd>
@@ -244,7 +236,7 @@ distributions.</p></li>
 <dt class="sig sig-object py" id="importlib.import_module">
 <span class="sig-prename descclassname"><span class="pre">importlib.</span></span><span class="sig-name descname"><span class="pre">import_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.import_module" title="永久链接至目标">¶</a></dt>
 <dd><p>导入一个模块。参数 <em>name</em> 指定了以绝对或相对导入方式导入什么模块 (比如要么像这样 <code class="docutils literal notranslate"><span class="pre">pkg.mod</span></code> 或者这样 <code class="docutils literal notranslate"><span class="pre">..mod</span></code>)。如果参数 name 使用相对导入的方式来指定，那么那个参数 <em>packages</em> 必须设置为那个包名，这个包名作为解析这个包名的锚点 (比如  <code class="docutils literal notranslate"><span class="pre">import_module('..mod',</span> <span class="pre">'pkg.subpkg')</span></code> 将会导入 <code class="docutils literal notranslate"><span class="pre">pkg.mod</span></code>)。</p>
-<p><a class="reference internal" href="#importlib.import_module" title="importlib.import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_module()</span></code></a> 函数是一个对 <a class="reference internal" href="#importlib.__import__" title="importlib.__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.__import__()</span></code></a> 进行简化的包装器。 这意味着该函数的所有主义都来自于 <a class="reference internal" href="#importlib.__import__" title="importlib.__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.__import__()</span></code></a>。 这两个函数之间最重要的不同点在于 <a class="reference internal" href="#importlib.import_module" title="importlib.import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_module()</span></code></a> 返回指定的包或模块 (例如 <code class="docutils literal notranslate"><span class="pre">pkg.mod</span></code>)，而 <a class="reference internal" href="functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> 返回最高层级的包或模块 (例如 <code class="docutils literal notranslate"><span class="pre">pkg</span></code>)。</p>
+<p><a class="reference internal" href="#importlib.import_module" title="importlib.import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_module()</span></code></a> 函数是一个对 <a class="reference internal" href="#importlib.__import__" title="importlib.__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.__import__()</span></code></a> 进行简化的包装器。 这意味着该函数的所有语义都来自于 <a class="reference internal" href="#importlib.__import__" title="importlib.__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.__import__()</span></code></a>。 这两个函数之间最重要的不同点在于 <a class="reference internal" href="#importlib.import_module" title="importlib.import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_module()</span></code></a> 返回指定的包或模块 (例如 <code class="docutils literal notranslate"><span class="pre">pkg.mod</span></code>)，而 <a class="reference internal" href="functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> 返回最高层级的包或模块 (例如 <code class="docutils literal notranslate"><span class="pre">pkg</span></code>)。</p>
 <p>如果动态导入一个自从解释器开始执行以来被创建的模块（即创建了一个 Python 源代码文件），为了让导入系统知道这个新模块，可能需要调用 <a class="reference internal" href="#importlib.invalidate_caches" title="importlib.invalidate_caches"><code class="xref py py-func docutils literal notranslate"><span class="pre">invalidate_caches()</span></code></a>。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>父包会被自动导入。</p>
@@ -275,8 +267,7 @@ distributions.</p></li>
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.10 版更改: </span>Namespace packages created/installed in a different <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>
-location after the same namespace was already imported are noticed.</p>
+<p><span class="versionmodified changed">在 3.10 版更改: </span>命名空间包创建/安装在不同的 <a class="reference internal" href="sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 在导入了相同的命名空间后，路径的位置会被注意到。</p>
 </div>
 </dd></dl>
 
@@ -1849,7 +1840,7 @@ package).</p>
 <br />
     <br />
 
-    最后更新于 3月 09, 2022.
+    最后更新于 3月 15, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
