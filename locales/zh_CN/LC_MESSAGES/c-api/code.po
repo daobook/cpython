@@ -12,17 +12,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 18:53+0800\n"
+"POT-Creation-Date: 2022-04-29 14:49+0800\n"
 "PO-Revision-Date: 2021-06-28 00:48+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.1\n"
 
 #: ../../c-api/code.rst:8
 msgid "Code Objects"
@@ -58,29 +58,40 @@ msgid "Return the number of free variables in *co*."
 msgstr "返回 *co* 中的自由变量数。"
 
 #: ../../c-api/code.rst:38
+#, fuzzy
 msgid ""
 "Return a new code object.  If you need a dummy code object to create a "
 "frame, use :c:func:`PyCode_NewEmpty` instead.  Calling "
-":c:func:`PyCode_New` directly can bind you to a precise Python version "
-"since the definition of the bytecode changes often."
+":c:func:`PyCode_New` directly will bind you to a precise Python version "
+"since the definition of the bytecode changes often. The many arguments of"
+" this function are inter-dependent in complex ways, meaning that subtle "
+"changes to values are likely to result in incorrect execution or VM "
+"crashes. Use this function only with extreme care."
 msgstr ""
 "返回一个新的代码对象。 如果你需要一个虚拟代码对象来创建一个代码帧，请使用 :c:func:`PyCode_NewEmpty`。 调用 "
 ":c:func:`PyCode_New` 直接可以绑定到准确的 Python 版本，因为字节码的定义经常变化。"
 
-#: ../../c-api/code.rst:45
+#: ../../c-api/code.rst:45 ../../c-api/code.rst:55
+msgid "Added ``exceptiontable`` parameter."
+msgstr ""
+
+#: ../../c-api/code.rst:50
+#, fuzzy
 msgid ""
 "Similar to :c:func:`PyCode_New`, but with an extra \"posonlyargcount\" "
-"for positional-only arguments."
+"for positional-only arguments. The same caveats that apply to "
+"``PyCode_New`` also apply to this function."
 msgstr "类似于 :c:func:`PyCode_New`，但带有一个额外的 \"posonlyargcount\" 用于仅限位置参数。"
 
-#: ../../c-api/code.rst:51
+#: ../../c-api/code.rst:60
+#, fuzzy
 msgid ""
 "Return a new empty code object with the specified filename, function "
-"name, and first line number.  It is illegal to :func:`exec` or "
-":func:`eval` the resulting code object."
+"name, and first line number. The resulting code object will raise an "
+"``Exception`` if executed."
 msgstr "返回具有指定文件名、函数名和第一行号的新空代码对象。 对于 :func:`exec` 或 :func:`eval` 生成的代码对象是非法的。"
 
-#: ../../c-api/code.rst:57
+#: ../../c-api/code.rst:66
 msgid ""
 "Return the line number of the instruction that occurs on or before "
 "``byte_offset`` and ends after it. If you just need the line number of a "
@@ -89,24 +100,25 @@ msgstr ""
 "返回在 ``byte_offset`` 位置或之前以及之后发生的指令的行号。 如果你只需要一个帧的行号，请改用 "
 ":c:func:`PyFrame_GetLineNumber`。"
 
-#: ../../c-api/code.rst:60
+#: ../../c-api/code.rst:69
+#, fuzzy
 msgid ""
 "For efficiently iterating over the line numbers in a code object, use "
-"`the API described in PEP 626 <https://www.python.org/dev/peps/pep-0626"
-"/#out-of-process-debuggers-and-profilers>`_."
+"`the API described in PEP 626 <https://peps.python.org/pep-0626/#out-of-"
+"process-debuggers-and-profilers>`_."
 msgstr ""
 "要高效地迭代一个代码对象中的行号，请使用 `PEP 626 描述的 API "
 "<https://www.python.org/dev/peps/pep-0626/#out-of-process-debuggers-and-"
 "profilers>`_。"
 
-#: ../../c-api/code.rst:65
+#: ../../c-api/code.rst:74
 msgid ""
 "Sets the passed ``int`` pointers to the source code line and column "
 "numbers for the instruction at ``byte_offset``. Sets the value to ``0`` "
 "when information is not available for any particular element."
 msgstr ""
 
-#: ../../c-api/code.rst:69
+#: ../../c-api/code.rst:78
 msgid "Returns ``1`` if the function succeeds and 0 otherwise."
 msgstr ""
 

@@ -18,17 +18,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 14:44+0800\n"
+"POT-Creation-Date: 2022-04-29 14:49+0800\n"
 "PO-Revision-Date: 2021-06-28 01:06+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.1\n"
 
 #: ../../library/functools.rst:2
 msgid ""
@@ -485,19 +485,23 @@ msgstr ""
 "对于带有类型标注的函数，该装饰器将自动推断第一个参数的类型::"
 
 #: ../../library/functools.rst:439
+msgid ":data:`types.UnionType` and :data:`typing.Union` can also be used::"
+msgstr ""
+
+#: ../../library/functools.rst:456
 msgid ""
 "For code which doesn't use type annotations, the appropriate type "
 "argument can be passed explicitly to the decorator itself::"
 msgstr "对于不使用类型标注的代码，可以将适当的类型参数显式地传给装饰器本身::"
 
-#: ../../library/functools.rst:450
+#: ../../library/functools.rst:467
 #, fuzzy
 msgid ""
 "To enable registering :term:`lambdas<lambda>` and pre-existing functions,"
 " the :func:`register` attribute can also be used in a functional form::"
 msgstr "要启用注册 lambda 和现有函数，可以使用函数形式的 :func:`register` 属性::"
 
-#: ../../library/functools.rst:458
+#: ../../library/functools.rst:475
 #, fuzzy
 msgid ""
 "The :func:`register` attribute returns the undecorated function. This "
@@ -505,13 +509,13 @@ msgid ""
 "unit tests for each variant independently::"
 msgstr ":func:`register` 属性将返回启用了装饰器堆栈、封存的未装饰函数，并会为每个变量单独创建单元测试::"
 
-#: ../../library/functools.rst:472
+#: ../../library/functools.rst:489
 msgid ""
 "When called, the generic function dispatches on the type of the first "
 "argument::"
 msgstr "在调用时，泛型函数会根据第一个参数的类型进行分派::"
 
-#: ../../library/functools.rst:492
+#: ../../library/functools.rst:509
 #, fuzzy
 msgid ""
 "Where there is no registered implementation for a specific type, its "
@@ -523,7 +527,7 @@ msgstr ""
 "在没有用于特定类型的已注册实现的情况下，则会使用其方法解析顺序来查找更通用的实现。 以 ``@singledispatch`` "
 "装饰的原始函数将为最基本的 ``object`` 类型进行注册，这意味着它将在找不到更好的实现时被使用。"
 
-#: ../../library/functools.rst:498
+#: ../../library/functools.rst:515
 #, fuzzy
 msgid ""
 "If an implementation is registered to an :term:`abstract base class`, "
@@ -531,31 +535,38 @@ msgid ""
 "implementation::"
 msgstr "如果一个实现注册到了 :term:`abstract base class`，虚拟子类将会被发送到该实现::"
 
-#: ../../library/functools.rst:513
+#: ../../library/functools.rst:530
 #, fuzzy
 msgid ""
 "To check which implementation the generic function will choose for a "
 "given type, use the ``dispatch()`` attribute::"
 msgstr "要检查泛型函数将为给定类型选择哪个实现，请使用 ``dispatch()`` 属性::"
 
-#: ../../library/functools.rst:521
+#: ../../library/functools.rst:538
 msgid ""
 "To access all registered implementations, use the read-only ``registry`` "
 "attribute::"
 msgstr "要访问所有忆注册实现，请使用只读的 ``registry`` 属性::"
 
-#: ../../library/functools.rst:535
+#: ../../library/functools.rst:552
 #, fuzzy
 msgid "The :func:`register` attribute now supports using type annotations."
 msgstr ":func:`register` 属性支持使用类型标注。"
 
-#: ../../library/functools.rst:541
+#: ../../library/functools.rst:555
+#, fuzzy
+msgid ""
+"The :func:`register` attribute now supports :data:`types.UnionType` and "
+":data:`typing.Union` as type annotations."
+msgstr ":func:`register` 属性支持使用类型标注。"
+
+#: ../../library/functools.rst:562
 msgid ""
 "Transform a method into a :term:`single-dispatch <single dispatch>` "
 ":term:`generic function`."
 msgstr "将一个方法转换为 :term:`单分派 <single dispatch>` :term:`generic function`。"
 
-#: ../../library/functools.rst:544
+#: ../../library/functools.rst:565
 #, fuzzy
 msgid ""
 "To define a generic method, decorate it with the "
@@ -566,7 +577,7 @@ msgstr ""
 "要定义一个泛型方法，应使用 ``@singledispatchmethod`` 装饰器进行装饰。 请注意分派是作用于第一个非 self 或非 "
 "cls 参数的类型，要相应地创建你的函数::"
 
-#: ../../library/functools.rst:562
+#: ../../library/functools.rst:583
 #, fuzzy
 msgid ""
 "``@singledispatchmethod`` supports nesting with other decorators such as "
@@ -579,7 +590,7 @@ msgstr ""
 "``dispatcher.register``，则 ``singledispatchmethod`` 必须是 *最外层* 的装饰器。 "
 "下面的示例定义了 ``Negator`` 类，其中包含绑定到类的 ``neg`` 方法::"
 
-#: ../../library/functools.rst:584
+#: ../../library/functools.rst:605
 #, fuzzy
 msgid ""
 "The same pattern can be used for other similar decorators: "
@@ -587,7 +598,7 @@ msgid ""
 ":func:`@abstractmethod<abc.abstractmethod>`, and others."
 msgstr "同样的模式也被用于其他类似的装饰器: ``staticmethod``, ``abstractmethod`` 等等。"
 
-#: ../../library/functools.rst:593
+#: ../../library/functools.rst:614
 msgid ""
 "Update a *wrapper* function to look like the *wrapped* function. The "
 "optional arguments are tuples to specify which attributes of the original"
@@ -607,7 +618,7 @@ msgstr ""
 " ``__qualname__``, ``__annotations__`` 和 ``__doc__`` 即文档字符串) 以及 "
 "``WRAPPER_UPDATES`` (它将更新 wrapper 函数的 ``__dict__`` 即实例字典)。"
 
-#: ../../library/functools.rst:603
+#: ../../library/functools.rst:624
 msgid ""
 "To allow access to the original function for introspection and other "
 "purposes (e.g. bypassing a caching decorator such as :func:`lru_cache`), "
@@ -617,7 +628,7 @@ msgstr ""
 "为了允许出于内省和其他目的访问原始函数（例如绕过 :func:`lru_cache` 之类的缓存装饰器），此函数会自动为 wrapper "
 "添加一个指向被包装函数的 ``__wrapped__`` 属性。"
 
-#: ../../library/functools.rst:608
+#: ../../library/functools.rst:629
 msgid ""
 "The main intended use for this function is in :term:`decorator` functions"
 " which wrap the decorated function and return the wrapper. If the wrapper"
@@ -628,7 +639,7 @@ msgstr ""
 "此函数的主要目的是在 :term:`decorator` 函数中用来包装被装饰的函数并返回包装器。 "
 "如果包装器函数未被更新，则被返回函数的元数据将反映包装器定义而不是原始函数定义，这通常没有什么用处。"
 
-#: ../../library/functools.rst:614
+#: ../../library/functools.rst:635
 msgid ""
 ":func:`update_wrapper` may be used with callables other than functions. "
 "Any attributes named in *assigned* or *updated* that are missing from the"
@@ -641,19 +652,19 @@ msgstr ""
 "中命名的任何属性如果不存在于被包装对象则会被忽略（即该函数将不会尝试在包装器函数上设置它们）。 如果包装器函数自身缺少在 *updated* "
 "中命名的任何属性则仍将引发 :exc:`AttributeError`。"
 
-#: ../../library/functools.rst:620
+#: ../../library/functools.rst:641
 msgid "Automatic addition of the ``__wrapped__`` attribute."
 msgstr "自动添加 ``__wrapped__`` 属性。"
 
-#: ../../library/functools.rst:623
+#: ../../library/functools.rst:644
 msgid "Copying of the ``__annotations__`` attribute by default."
 msgstr "默认拷贝 ``__annotations__`` 属性。"
 
-#: ../../library/functools.rst:626
+#: ../../library/functools.rst:647
 msgid "Missing attributes no longer trigger an :exc:`AttributeError`."
 msgstr "不存在的属性将不再触发 :exc:`AttributeError`。"
 
-#: ../../library/functools.rst:629
+#: ../../library/functools.rst:650
 msgid ""
 "The ``__wrapped__`` attribute now always refers to the wrapped function, "
 "even if that function defined a ``__wrapped__`` attribute. (see "
@@ -662,7 +673,7 @@ msgstr ""
 "``__wrapped__`` 属性现在总是指向被包装的函数，即使该函数定义了 ``__wrapped__`` 属性。 (参见 "
 ":issue:`17482`)"
 
-#: ../../library/functools.rst:637
+#: ../../library/functools.rst:658
 msgid ""
 "This is a convenience function for invoking :func:`update_wrapper` as a "
 "function decorator when defining a wrapper function.  It is equivalent to"
@@ -673,7 +684,7 @@ msgstr ""
 "``partial(update_wrapper, wrapped=wrapped, assigned=assigned, "
 "updated=updated)``。 例如::"
 
-#: ../../library/functools.rst:663
+#: ../../library/functools.rst:684
 msgid ""
 "Without the use of this decorator factory, the name of the example "
 "function would have been ``'wrapper'``, and the docstring of the original"
@@ -682,35 +693,35 @@ msgstr ""
 "如果不使用这个装饰器工厂函数，则 example 函数的名称将变为 ``'wrapper'``，并且 :func:`example` "
 "原本的文档字符串将会丢失。"
 
-#: ../../library/functools.rst:671
+#: ../../library/functools.rst:692
 msgid ":class:`partial` Objects"
 msgstr ":class:`partial` 对象"
 
-#: ../../library/functools.rst:673
+#: ../../library/functools.rst:694
 msgid ""
 ":class:`partial` objects are callable objects created by :func:`partial`."
 " They have three read-only attributes:"
 msgstr ":class:`partial` 对象是由 :func:`partial` 创建的可调用对象。 它们具有三个只读属性："
 
-#: ../../library/functools.rst:679
+#: ../../library/functools.rst:700
 msgid ""
 "A callable object or function.  Calls to the :class:`partial` object will"
 " be forwarded to :attr:`func` with new arguments and keywords."
 msgstr "一个可调用对象或函数。 对 :class:`partial` 对象的调用将被转发给 :attr:`func` 并附带新的参数和关键字。"
 
-#: ../../library/functools.rst:685
+#: ../../library/functools.rst:706
 msgid ""
 "The leftmost positional arguments that will be prepended to the "
 "positional arguments provided to a :class:`partial` object call."
 msgstr "最左边的位置参数将放置在提供给 :class:`partial` 对象调用的位置参数之前。"
 
-#: ../../library/functools.rst:691
+#: ../../library/functools.rst:712
 msgid ""
 "The keyword arguments that will be supplied when the :class:`partial` "
 "object is called."
 msgstr "当调用 :class:`partial` 对象时将要提供的关键字参数。"
 
-#: ../../library/functools.rst:694
+#: ../../library/functools.rst:715
 msgid ""
 ":class:`partial` objects are like :class:`function` objects in that they "
 "are callable, weak referencable, and can have attributes.  There are some"

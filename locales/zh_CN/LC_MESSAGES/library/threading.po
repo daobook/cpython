@@ -17,17 +17,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-04 20:27+0800\n"
+"POT-Creation-Date: 2022-04-29 14:49+0800\n"
 "PO-Revision-Date: 2021-06-28 01:15+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.1\n"
 
 #: ../../library/threading.rst:2
 msgid ":mod:`threading` --- Thread-based parallelism"
@@ -657,13 +657,14 @@ msgstr ""
 "。模块函数 :func:`.enumerate` 返回包含所有存活线程的列表。"
 
 #: ../../library/threading.rst:444
+#, fuzzy
 msgid ""
-"A boolean value indicating whether this thread is a daemon thread (True) "
-"or not (False).  This must be set before :meth:`~Thread.start` is called,"
-" otherwise :exc:`RuntimeError` is raised.  Its initial value is inherited"
-" from the creating thread; the main thread is not a daemon thread and "
-"therefore all threads created in the main thread default to "
-":attr:`~Thread.daemon` = ``False``."
+"A boolean value indicating whether this thread is a daemon thread "
+"(``True``) or not (``False``).  This must be set before "
+":meth:`~Thread.start` is called, otherwise :exc:`RuntimeError` is raised."
+"  Its initial value is inherited from the creating thread; the main "
+"thread is not a daemon thread and therefore all threads created in the "
+"main thread default to :attr:`~Thread.daemon` = ``False``."
 msgstr ""
 "一个表示这个线程是（True）否（False）守护线程的布尔值。一定要在调用 :meth:`~Thread.start` 前设置好，不然会抛出 "
 ":exc:`RuntimeError` 。初始值继承于创建线程；主线程不是守护线程，因此主线程创建的所有线程默认都是 "
@@ -768,12 +769,13 @@ msgstr ""
 " 会阻塞，并立即返回 ``False`` ；否则，将锁锁定并返回 ``True``。"
 
 #: ../../library/threading.rst:515
+#, fuzzy
 msgid ""
 "When invoked with the floating-point *timeout* argument set to a positive"
 " value, block for at most the number of seconds specified by *timeout* "
 "and as long as the lock cannot be acquired.  A *timeout* argument of "
 "``-1`` specifies an unbounded wait.  It is forbidden to specify a "
-"*timeout* when *blocking* is false."
+"*timeout* when *blocking* is ``False``."
 msgstr ""
 "当浮点型 *timeout* 参数被设置为正值调用时，只要无法获得锁，将最多阻塞 *timeout* 设定的秒数。*timeout* 参数被设置为"
 "  ``-1`` 时将无限等待。当 *blocking* 为 false 时，*timeout* 指定的值将被忽略。"
@@ -817,7 +819,8 @@ msgid "There is no return value."
 msgstr "没有返回值。"
 
 #: ../../library/threading.rst:547
-msgid "Return true if the lock is acquired."
+#, fuzzy
+msgid "Return ``True`` if the lock is acquired."
 msgstr "如果获得了锁则返回真值。"
 
 #: ../../library/threading.rst:554
@@ -886,27 +889,30 @@ msgstr ""
 "如果这个线程已经拥有锁，递归级别增加一，并立即返回。否则，如果其他线程拥有该锁，则阻塞至该锁解锁。一旦锁被解锁(不属于任何线程)，则抢夺所有权，设置递归等级为一，并返回。如果多个线程被阻塞，等待锁被解锁，一次只有一个线程能抢到锁的所有权。在这种情况下，没有返回值。"
 
 #: ../../library/threading.rst:596
+#, fuzzy
 msgid ""
-"When invoked with the *blocking* argument set to true, do the same thing "
-"as when called without arguments, and return ``True``."
+"When invoked with the *blocking* argument set to ``True``, do the same "
+"thing as when called without arguments, and return ``True``."
 msgstr "当发起调用时将 *blocking* 参数设为真值，则执行与无参数调用时一样的操作，然后返回 ``True``。"
 
 #: ../../library/threading.rst:599
+#, fuzzy
 msgid ""
-"When invoked with the *blocking* argument set to false, do not block.  If"
-" a call without an argument would block, return ``False`` immediately; "
-"otherwise, do the same thing as when called without arguments, and return"
-" ``True``."
+"When invoked with the *blocking* argument set to ``False``, do not block."
+"  If a call without an argument would block, return ``False`` "
+"immediately; otherwise, do the same thing as when called without "
+"arguments, and return ``True``."
 msgstr ""
 "当发起调用时将 *blocking* 参数设为假值，则不进行阻塞。 如果一个无参数调用将要阻塞，则立即返回 "
 "``False``；在其他情况下，执行与无参数调用时一样的操作，然后返回 ``True``。"
 
 #: ../../library/threading.rst:603
+#, fuzzy
 msgid ""
 "When invoked with the floating-point *timeout* argument set to a positive"
 " value, block for at most the number of seconds specified by *timeout* "
 "and as long as the lock cannot be acquired.  Return ``True`` if the lock "
-"has been acquired, false if the timeout has elapsed."
+"has been acquired, ``False`` if the timeout has elapsed."
 msgstr ""
 "当发起调用时将浮点数的 *timeout* 参数设为正值时，只要无法获得锁，将最多阻塞 *timeout* 所指定的秒数。 如果已经获得锁则返回 "
 "``True``，如果超时则返回假值。"
@@ -1271,8 +1277,9 @@ msgstr ""
 "的调用将只唤醒一个线程。 线程被唤醒的次序是不可确定的。"
 
 #: ../../library/threading.rst:847
+#, fuzzy
 msgid ""
-"When invoked with *blocking* set to false, do not block.  If a call "
+"When invoked with *blocking* set to ``False``, do not block.  If a call "
 "without an argument would block, return ``False`` immediately; otherwise,"
 " do the same thing as when called without arguments, and return ``True``."
 msgstr ""

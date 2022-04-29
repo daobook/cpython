@@ -15,17 +15,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-21 18:53+0800\n"
+"POT-Creation-Date: 2022-04-29 14:49+0800\n"
 "PO-Revision-Date: 2021-06-28 00:47+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.1\n"
 
 #: ../../glossary.rst:5
 msgid "Glossary"
@@ -1271,14 +1271,14 @@ msgid "iterable"
 msgstr "iterable -- 可迭代对象"
 
 #: ../../glossary.rst:626
+#, fuzzy
 msgid ""
 "An object capable of returning its members one at a time. Examples of "
 "iterables include all sequence types (such as :class:`list`, "
 ":class:`str`, and :class:`tuple`) and some non-sequence types like "
 ":class:`dict`, :term:`file objects <file object>`, and objects of any "
 "classes you define with an :meth:`__iter__` method or with a "
-":meth:`__getitem__` method that implements :term:`Sequence <sequence>` "
-"semantics."
+":meth:`__getitem__` method that implements :term:`sequence` semantics."
 msgstr ""
 "能够逐一返回其成员项的对象。 可迭代对象的例子包括所有序列类型 (例如 :class:`list`, :class:`str` 和 "
 ":class:`tuple`) 以及某些非序列类型例如 :class:`dict`, :term:`文件对象 <file object>` "
@@ -1372,15 +1372,16 @@ msgstr ""
 ":func:`itertools.groupby`。"
 
 #: ../../glossary.rst:679
+#, fuzzy
 msgid ""
 "There are several ways to create a key function.  For example. the "
 ":meth:`str.lower` method can serve as a key function for case insensitive"
 " sorts.  Alternatively, a key function can be built from a "
 ":keyword:`lambda` expression such as ``lambda r: (r[0], r[2])``.  Also, "
-"the :mod:`operator` module provides three key function constructors: "
-":func:`~operator.attrgetter`, :func:`~operator.itemgetter`, and "
-":func:`~operator.methodcaller`.  See the :ref:`Sorting HOW TO "
-"<sortinghowto>` for examples of how to create and use key functions."
+":func:`operator.attrgetter`, :func:`operator.itemgetter`, and "
+":func:`operator.methodcaller` are three key function constructors.  See "
+"the :ref:`Sorting HOW TO <sortinghowto>` for examples of how to create "
+"and use key functions."
 msgstr ""
 "要创建一个键函数有多种方式。例如，:meth:`str.lower` 方法可以用作忽略大小写排序的键函数。另外，键函数也可通过 "
 ":keyword:`lambda` 表达式来创建，例如 ``lambda r: (r[0], r[2])``。还有 :mod:`operator`"
@@ -1388,19 +1389,19 @@ msgstr ""
 "和 :func:`~operator.methodcaller`。请查看 :ref:`如何排序 <sortinghowto>` "
 "一节以获取创建和使用键函数的示例。"
 
-#: ../../glossary.rst:687
+#: ../../glossary.rst:686
 msgid "keyword argument"
 msgstr "keyword argument -- 关键字参数"
 
-#: ../../glossary.rst:689 ../../glossary.rst:978
+#: ../../glossary.rst:688 ../../glossary.rst:977
 msgid "See :term:`argument`."
 msgstr "参见 :term:`argument`。"
 
-#: ../../glossary.rst:690
+#: ../../glossary.rst:689
 msgid "lambda"
 msgstr "lambda"
 
-#: ../../glossary.rst:692
+#: ../../glossary.rst:691
 msgid ""
 "An anonymous inline function consisting of a single :term:`expression` "
 "which is evaluated when the function is called.  The syntax to create a "
@@ -1409,11 +1410,11 @@ msgstr ""
 "由一个单独 :term:`expression` 构成的匿名内联函数，表达式会在调用时被求值。创建 lambda 函数的句法为 ``lambda "
 "[parameters]: expression``"
 
-#: ../../glossary.rst:695
+#: ../../glossary.rst:694
 msgid "LBYL"
 msgstr "LBYL"
 
-#: ../../glossary.rst:697
+#: ../../glossary.rst:696
 msgid ""
 "Look before you leap.  This coding style explicitly tests for pre-"
 "conditions before making calls or lookups.  This style contrasts with the"
@@ -1423,7 +1424,7 @@ msgstr ""
 "“先查看后跳跃”的英文缩写。这种代码编写风格会在进行调用或查找之前显式地检查前提条件。此风格与 :term:`EAFP` "
 "方式恰成对比，其特点是大量使用 :keyword:`if` 语句。"
 
-#: ../../glossary.rst:702
+#: ../../glossary.rst:701
 msgid ""
 "In a multi-threaded environment, the LBYL approach can risk introducing a"
 " race condition between \"the looking\" and \"the leaping\".  For "
@@ -1436,41 +1437,43 @@ msgstr ""
 " mapping[key]`` 可能由于在检查操作之后其他线程从 *mapping* 中移除了 *key* 而出错。这种问题可通过加锁或使用 "
 "EAFP 方式来解决。"
 
-#: ../../glossary.rst:707
+#: ../../glossary.rst:706
 msgid "locale encoding"
 msgstr "locale encoding -- 语言区域编码格式"
 
-#: ../../glossary.rst:709
+#: ../../glossary.rst:708
+#, fuzzy
 msgid ""
 "On Unix, it is the encoding of the LC_CTYPE locale. It can be set with "
-"``locale.setlocale(locale.LC_CTYPE, new_locale)``."
+":func:`locale.setlocale(locale.LC_CTYPE, new_locale) <locale.setlocale>`."
 msgstr ""
 "在 Unix 上，它是 LC_CTYPE 语言区域的编码格式。 它可以通过 ``locale.setlocale(locale.LC_CTYPE,"
 " new_locale)`` 来设置。"
 
-#: ../../glossary.rst:712
-msgid "On Windows, it is the ANSI code page (ex: ``cp1252``)."
+#: ../../glossary.rst:711
+#, fuzzy
+msgid "On Windows, it is the ANSI code page (ex: ``\"cp1252\"``)."
 msgstr "在 Windows 上，它是 ANSI 代码页 (例如: ``cp1252``)。"
 
-#: ../../glossary.rst:714
-msgid ""
-"``locale.getpreferredencoding(False)`` can be used to get the locale "
-"encoding."
+#: ../../glossary.rst:713
+msgid "On Android and VxWorks, Python uses ``\"utf-8\"`` as the locale encoding."
+msgstr ""
+
+#: ../../glossary.rst:715
+#, fuzzy
+msgid "``locale.getencoding()`` can be used to get the locale encoding."
 msgstr "``locale.getpreferredencoding(False)`` 可被用来获取语言区域编码格式。"
 
 #: ../../glossary.rst:717
-msgid ""
-"Python uses the :term:`filesystem encoding and error handler` to convert "
-"between Unicode filenames and bytes filenames."
-msgstr ""
-"Python 使用 :term:`filesystem encoding and error handler` 在 Unicode "
-"文件名和字节串文件名之间进行转换。"
+#, fuzzy
+msgid "See also the :term:`filesystem encoding and error handler`."
+msgstr "filesystem encoding and error handler  -- 文件系统编码格式与错误处理句柄"
 
-#: ../../glossary.rst:719
+#: ../../glossary.rst:718
 msgid "list"
 msgstr "list -- 列表"
 
-#: ../../glossary.rst:721
+#: ../../glossary.rst:720
 msgid ""
 "A built-in Python :term:`sequence`.  Despite its name it is more akin to "
 "an array in other languages than to a linked list since access to "
@@ -1479,11 +1482,11 @@ msgstr ""
 "Python 内置的一种 :term:`sequence`。虽然名为列表，但更类似于其他语言中的数组而非链接列表，因为访问元素的时间复杂度为 "
 "O(1)。"
 
-#: ../../glossary.rst:724
+#: ../../glossary.rst:723
 msgid "list comprehension"
 msgstr "list comprehension -- 列表推导式"
 
-#: ../../glossary.rst:726
+#: ../../glossary.rst:725
 msgid ""
 "A compact way to process all or part of the elements in a sequence and "
 "return a list with the results.  ``result = ['{:#04x}'.format(x) for x in"
@@ -1495,11 +1498,11 @@ msgstr ""
 "range(256) if x % 2 == 0]`` 将生成一个 0 到 255 范围内的十六进制偶数对应字符串（0x..）的列表。其中 "
 ":keyword:`if` 子句是可选的，如果省略则 ``range(256)`` 中的所有元素都会被处理。"
 
-#: ../../glossary.rst:732
+#: ../../glossary.rst:731
 msgid "loader"
 msgstr "loader -- 加载器"
 
-#: ../../glossary.rst:734
+#: ../../glossary.rst:733
 msgid ""
 "An object that loads a module. It must define a method named "
 ":meth:`load_module`. A loader is typically returned by a :term:`finder`. "
@@ -1510,23 +1513,24 @@ msgstr ""
 " :pep:`302`，对于 :term:`abstract base class` 可参见 "
 ":class:`importlib.abc.Loader`。"
 
-#: ../../glossary.rst:738
+#: ../../glossary.rst:737
 msgid "magic method"
 msgstr "magic method -- 魔术方法"
 
-#: ../../glossary.rst:742
+#: ../../glossary.rst:741
 msgid "An informal synonym for :term:`special method`."
 msgstr ":term:`special method` 的非正式同义词 。"
 
-#: ../../glossary.rst:743
+#: ../../glossary.rst:742
 msgid "mapping"
 msgstr "mapping -- 映射"
 
-#: ../../glossary.rst:745
+#: ../../glossary.rst:744
+#, fuzzy
 msgid ""
 "A container object that supports arbitrary key lookups and implements the"
-" methods specified in the :class:`~collections.abc.Mapping` or "
-":class:`~collections.abc.MutableMapping` :ref:`abstract base classes "
+" methods specified in the :class:`collections.abc.Mapping` or "
+":class:`collections.abc.MutableMapping` :ref:`abstract base classes "
 "<collections-abstract-base-classes>`.  Examples include :class:`dict`, "
 ":class:`collections.defaultdict`, :class:`collections.OrderedDict` and "
 ":class:`collections.Counter`."
@@ -1537,11 +1541,11 @@ msgstr ""
 ":class:`collections.defaultdict`, :class:`collections.OrderedDict` 以及 "
 ":class:`collections.Counter`。"
 
-#: ../../glossary.rst:751
+#: ../../glossary.rst:750
 msgid "meta path finder"
 msgstr "meta path finder -- 元路径查找器"
 
-#: ../../glossary.rst:753
+#: ../../glossary.rst:752
 msgid ""
 "A :term:`finder` returned by a search of :data:`sys.meta_path`.  Meta "
 "path finders are related to, but different from :term:`path entry finders"
@@ -1550,17 +1554,17 @@ msgstr ""
 ":data:`sys.meta_path` 的搜索所返回的 :term:`finder`。元路径查找器与 :term:`path entry "
 "finders <path entry finder>` 存在关联但并不相同。"
 
-#: ../../glossary.rst:757
+#: ../../glossary.rst:756
 msgid ""
 "See :class:`importlib.abc.MetaPathFinder` for the methods that meta path "
 "finders implement."
 msgstr "请查看 :class:`importlib.abc.MetaPathFinder` 了解元路径查找器所实现的方法。"
 
-#: ../../glossary.rst:759
+#: ../../glossary.rst:758
 msgid "metaclass"
 msgstr "metaclass -- 元类"
 
-#: ../../glossary.rst:761
+#: ../../glossary.rst:760
 msgid ""
 "The class of a class.  Class definitions create a class name, a class "
 "dictionary, and a list of base classes.  The metaclass is responsible for"
@@ -1576,15 +1580,15 @@ msgstr ""
 " "
 "的特别之处在于可以创建自定义元类。大部分用户永远不需要这个工具，但当需要出现时，元类可提供强大而优雅的解决方案。它们已被用于记录属性访问日志、添加线程安全性、跟踪对象创建、实现单例，以及其他许多任务。"
 
-#: ../../glossary.rst:771
+#: ../../glossary.rst:770
 msgid "More information can be found in :ref:`metaclasses`."
 msgstr "更多详情参见 :ref:`metaclasses`。"
 
-#: ../../glossary.rst:772
+#: ../../glossary.rst:771
 msgid "method"
 msgstr "method -- 方法"
 
-#: ../../glossary.rst:774
+#: ../../glossary.rst:773
 msgid ""
 "A function which is defined inside a class body.  If called as an "
 "attribute of an instance of that class, the method will get the instance "
@@ -1594,11 +1598,11 @@ msgstr ""
 "在类内部定义的函数。如果作为该类的实例的一个属性来调用，方法将会获取实例对象作为其第一个 :term:`argument` (通常命名为 "
 "``self``)。参见 :term:`function` 和 :term:`nested scope`。"
 
-#: ../../glossary.rst:778
+#: ../../glossary.rst:777
 msgid "method resolution order"
 msgstr "method resolution order -- 方法解析顺序"
 
-#: ../../glossary.rst:780
+#: ../../glossary.rst:779
 msgid ""
 "Method Resolution Order is the order in which base classes are searched "
 "for a member during lookup. See `The Python 2.3 Method Resolution Order "
@@ -1609,11 +1613,11 @@ msgstr ""
 "<https://www.python.org/download/releases/2.3/mro/>`_ 了解自 2.3 版起 Python "
 "解析器所用相关算法的详情。"
 
-#: ../../glossary.rst:784
+#: ../../glossary.rst:783
 msgid "module"
 msgstr "module -- 模块"
 
-#: ../../glossary.rst:786
+#: ../../glossary.rst:785
 msgid ""
 "An object that serves as an organizational unit of Python code.  Modules "
 "have a namespace containing arbitrary Python objects.  Modules are loaded"
@@ -1622,50 +1626,50 @@ msgstr ""
 "此对象是 Python 代码的一种组织单位。各模块具有独立的命名空间，可包含任意 Python 对象。模块可通过 "
 ":term:`importing` 操作被加载到 Python 中。"
 
-#: ../../glossary.rst:790
+#: ../../glossary.rst:789
 msgid "See also :term:`package`."
 msgstr "另见 :term:`package`。"
 
-#: ../../glossary.rst:791
+#: ../../glossary.rst:790
 msgid "module spec"
 msgstr "module spec -- 模块规格"
 
-#: ../../glossary.rst:793
+#: ../../glossary.rst:792
 msgid ""
 "A namespace containing the import-related information used to load a "
 "module. An instance of :class:`importlib.machinery.ModuleSpec`."
 msgstr "一个命名空间，其中包含用于加载模块的相关导入信息。是 :class:`importlib.machinery.ModuleSpec` 的实例。"
 
-#: ../../glossary.rst:795
+#: ../../glossary.rst:794
 msgid "MRO"
 msgstr "MRO"
 
-#: ../../glossary.rst:797
+#: ../../glossary.rst:796
 msgid "See :term:`method resolution order`."
 msgstr "参见 :term:`method resolution order`。"
 
-#: ../../glossary.rst:798
+#: ../../glossary.rst:797
 msgid "mutable"
 msgstr "mutable -- 可变"
 
-#: ../../glossary.rst:800
+#: ../../glossary.rst:799
 msgid ""
 "Mutable objects can change their value but keep their :func:`id`.  See "
 "also :term:`immutable`."
 msgstr "可变对象可以在其 :func:`id` 保持固定的情况下改变其取值。另请参见 :term:`immutable`。"
 
-#: ../../glossary.rst:802
+#: ../../glossary.rst:801
 msgid "named tuple"
 msgstr "named tuple -- 具名元组"
 
-#: ../../glossary.rst:804
+#: ../../glossary.rst:803
 msgid ""
 "The term \"named tuple\" applies to any type or class that inherits from "
 "tuple and whose indexable elements are also accessible using named "
 "attributes.  The type or class may have other features as well."
 msgstr "术语“具名元组”可用于任何继承自元组，并且其中的可索引元素还能使用名称属性来访问的类型或类。 这样的类型或类还可能拥有其他特性。"
 
-#: ../../glossary.rst:808
+#: ../../glossary.rst:807
 msgid ""
 "Several built-in types are named tuples, including the values returned by"
 " :func:`time.localtime` and :func:`os.stat`.  Another example is "
@@ -1674,7 +1678,7 @@ msgstr ""
 "有些内置类型属于具名元组，包括 :func:`time.localtime` 和 :func:`os.stat` 的返回值。 另一个例子是 "
 ":data:`sys.float_info`::"
 
-#: ../../glossary.rst:819
+#: ../../glossary.rst:818
 msgid ""
 "Some named tuples are built-in types (such as the above examples). "
 "Alternatively, a named tuple can be created from a regular class "
@@ -1688,11 +1692,11 @@ msgstr ""
 "这样的类可以手工编写，或者使用工厂函数 :func:`collections.namedtuple` 创建。 "
 "后一种方式还会添加一些手工编写或内置具名元组所没有的额外方法。"
 
-#: ../../glossary.rst:826
+#: ../../glossary.rst:825
 msgid "namespace"
 msgstr "namespace -- 命名空间"
 
-#: ../../glossary.rst:828
+#: ../../glossary.rst:827
 msgid ""
 "The place where a variable is stored.  Namespaces are implemented as "
 "dictionaries.  There are the local, global and built-in namespaces as "
@@ -1711,11 +1715,11 @@ msgstr ""
 ":func:`itertools.islice` 这种写法明确了这些函数是由 :mod:`random` 与 :mod:`itertools` "
 "模块分别实现的。"
 
-#: ../../glossary.rst:838
+#: ../../glossary.rst:837
 msgid "namespace package"
 msgstr "namespace package -- 命名空间包"
 
-#: ../../glossary.rst:840
+#: ../../glossary.rst:839
 msgid ""
 "A :pep:`420` :term:`package` which serves only as a container for "
 "subpackages.  Namespace packages may have no physical representation, and"
@@ -1725,15 +1729,15 @@ msgstr ""
 ":pep:`420` 所引入的一种仅被用作子包的容器的 :term:`package`，命名空间包可以没有实体表示物，其描述方式与 "
 ":term:`regular package` 不同，因为它们没有 ``__init__.py`` 文件。"
 
-#: ../../glossary.rst:845
+#: ../../glossary.rst:844
 msgid "See also :term:`module`."
 msgstr "另可参见 :term:`module`。"
 
-#: ../../glossary.rst:846
+#: ../../glossary.rst:845
 msgid "nested scope"
 msgstr "nested scope -- 嵌套作用域"
 
-#: ../../glossary.rst:848
+#: ../../glossary.rst:847
 msgid ""
 "The ability to refer to a variable in an enclosing definition.  For "
 "instance, a function defined inside another function can refer to "
@@ -1746,11 +1750,11 @@ msgstr ""
 "在一个定义范围内引用变量的能力。例如，在另一函数之内定义的函数可以引用前者的变量。请注意嵌套作用域默认只对引用有效而对赋值无效。局部变量的读写都受限于最内层作用域。类似的，全局变量的读写则作用于全局命名空间。通过"
 " :keyword:`nonlocal` 关键字可允许写入外层作用域。"
 
-#: ../../glossary.rst:855
+#: ../../glossary.rst:854
 msgid "new-style class"
 msgstr "new-style class -- 新式类"
 
-#: ../../glossary.rst:857
+#: ../../glossary.rst:856
 msgid ""
 "Old name for the flavor of classes now used for all class objects.  In "
 "earlier Python versions, only new-style classes could use Python's newer,"
@@ -1760,21 +1764,21 @@ msgstr ""
 "对于目前已被应于所有类对象的类形式的旧称谓。在早先的 Python 版本中，只有新式类能够使用 Python 新增的更灵活特性，例如 "
 ":attr:`~object.__slots__`、描述符、特征属性、:meth:`__getattribute__`、类方法和静态方法等。"
 
-#: ../../glossary.rst:861
+#: ../../glossary.rst:860
 msgid "object"
 msgstr "object -- 对象"
 
-#: ../../glossary.rst:863
+#: ../../glossary.rst:862
 msgid ""
 "Any data with state (attributes or value) and defined behavior (methods)."
 "  Also the ultimate base class of any :term:`new-style class`."
 msgstr "任何具有状态（属性或值）以及预定义行为（方法）的数据。object 也是任何 :term:`new-style class` 的最顶层基类名。"
 
-#: ../../glossary.rst:866
+#: ../../glossary.rst:865
 msgid "package"
 msgstr "package -- 包"
 
-#: ../../glossary.rst:868
+#: ../../glossary.rst:867
 msgid ""
 "A Python :term:`module` which can contain submodules or recursively, "
 "subpackages.  Technically, a package is a Python module with an "
@@ -1783,15 +1787,15 @@ msgstr ""
 "一种可包含子模块或递归地包含子包的 Python :term:`module`。从技术上说，包是带有 ``__path__`` 属性的 "
 "Python 模块。"
 
-#: ../../glossary.rst:872
+#: ../../glossary.rst:871
 msgid "See also :term:`regular package` and :term:`namespace package`."
 msgstr "另参见 :term:`regular package` 和 :term:`namespace package`。"
 
-#: ../../glossary.rst:873
+#: ../../glossary.rst:872
 msgid "parameter"
 msgstr "parameter -- 形参"
 
-#: ../../glossary.rst:875
+#: ../../glossary.rst:874
 msgid ""
 "A named entity in a :term:`function` (or method) definition that "
 "specifies an :term:`argument` (or in some cases, arguments) that the "
@@ -1800,7 +1804,7 @@ msgstr ""
 ":term:`function` （或方法）定义中的命名实体，它指定函数可以接受的一个 :term:`argument` "
 "（或在某些情况下，多个实参）。有五种形参："
 
-#: ../../glossary.rst:879
+#: ../../glossary.rst:878
 msgid ""
 ":dfn:`positional-or-keyword`: specifies an argument that can be passed "
 "either :term:`positionally <argument>` or as a :term:`keyword argument "
@@ -1810,7 +1814,7 @@ msgstr ""
 ":dfn:`positional-or-keyword`：位置或关键字，指定一个可以作为 :term:`位置参数 <argument>` "
 "传入也可以作为 :term:`关键字参数 <argument>` 传入的实参。这是默认的形参类型，例如下面的 *foo* 和 *bar*::"
 
-#: ../../glossary.rst:888
+#: ../../glossary.rst:887
 msgid ""
 ":dfn:`positional-only`: specifies an argument that can be supplied only "
 "by position. Positional-only parameters can be defined by including a "
@@ -1820,7 +1824,7 @@ msgstr ""
 ":dfn:`positional-only`：仅限位置，指定一个只能通过位置传入的参数。 仅限位置形参可通过在函数定义的形参列表中它们之后包含一个"
 " ``/`` 字符来定义，例如下面的 *posonly1* 和 *posonly2*::"
 
-#: ../../glossary.rst:897
+#: ../../glossary.rst:896
 msgid ""
 ":dfn:`keyword-only`: specifies an argument that can be supplied only by "
 "keyword.  Keyword-only parameters can be defined by including a single "
@@ -1832,7 +1836,7 @@ msgstr ""
 "only`：仅限关键字，指定一个只能通过关键字传入的参数。仅限关键字形参可通过在函数定义的形参列表中包含单个可变位置形参或者在多个可变位置形参之前放一个"
 " ``*`` 来定义，例如下面的 *kw_only1* 和 *kw_only2*::"
 
-#: ../../glossary.rst:905
+#: ../../glossary.rst:904
 msgid ""
 ":dfn:`var-positional`: specifies that an arbitrary sequence of positional"
 " arguments can be provided (in addition to any positional arguments "
@@ -1844,7 +1848,7 @@ msgstr ""
 "positional`：可变位置，指定可以提供由一个任意数量的位置参数构成的序列（附加在其他形参已接受的位置参数之后）。这种形参可通过在形参名称前加缀"
 " ``*`` 来定义，例如下面的 *args*::"
 
-#: ../../glossary.rst:913
+#: ../../glossary.rst:912
 msgid ""
 ":dfn:`var-keyword`: specifies that arbitrarily many keyword arguments can"
 " be provided (in addition to any keyword arguments already accepted by "
@@ -1855,13 +1859,13 @@ msgstr ""
 "keyword`：可变关键字，指定可以提供任意数量的关键字参数（附加在其他形参已接受的关键字参数之后）。这种形参可通过在形参名称前加缀 "
 "``**`` 来定义，例如上面的 *kwargs*。"
 
-#: ../../glossary.rst:919
+#: ../../glossary.rst:918
 msgid ""
 "Parameters can specify both optional and required arguments, as well as "
 "default values for some optional arguments."
 msgstr "形参可以同时指定可选和必选参数，也可以为某些可选参数指定默认值。"
 
-#: ../../glossary.rst:922
+#: ../../glossary.rst:921
 msgid ""
 "See also the :term:`argument` glossary entry, the FAQ question on "
 ":ref:`the difference between arguments and parameters <faq-argument-vs-"
@@ -1871,21 +1875,21 @@ msgstr ""
 "另参见 :term:`argument` 术语表条目、:ref:`参数与形参的区别 <faq-argument-vs-parameter>` "
 "中的常见问题、:class:`inspect.Parameter` 类、:ref:`function` 一节以及 :pep:`362`。"
 
-#: ../../glossary.rst:926
+#: ../../glossary.rst:925
 msgid "path entry"
 msgstr "path entry -- 路径入口"
 
-#: ../../glossary.rst:928
+#: ../../glossary.rst:927
 msgid ""
 "A single location on the :term:`import path` which the :term:`path based "
 "finder` consults to find modules for importing."
 msgstr ":term:`import path` 中的一个单独位置，会被 :term:`path based finder` 用来查找要导入的模块。"
 
-#: ../../glossary.rst:930
+#: ../../glossary.rst:929
 msgid "path entry finder"
 msgstr "path entry finder -- 路径入口查找器"
 
-#: ../../glossary.rst:932
+#: ../../glossary.rst:931
 msgid ""
 "A :term:`finder` returned by a callable on :data:`sys.path_hooks` (i.e. a"
 " :term:`path entry hook`) which knows how to locate modules given a "
@@ -1894,17 +1898,17 @@ msgstr ""
 "任一可调用对象使用 :data:`sys.path_hooks` (即 :term:`path entry hook`) 返回的 "
 ":term:`finder`，此种对象能通过 :term:`path entry` 来定位模块。"
 
-#: ../../glossary.rst:936
+#: ../../glossary.rst:935
 msgid ""
 "See :class:`importlib.abc.PathEntryFinder` for the methods that path "
 "entry finders implement."
 msgstr "请参看 :class:`importlib.abc.PathEntryFinder` 以了解路径入口查找器所实现的各个方法。"
 
-#: ../../glossary.rst:938
+#: ../../glossary.rst:937
 msgid "path entry hook"
 msgstr "path entry hook -- 路径入口钩子"
 
-#: ../../glossary.rst:940
+#: ../../glossary.rst:939
 msgid ""
 "A callable on the :data:`sys.path_hook` list which returns a :term:`path "
 "entry finder` if it knows how to find modules on a specific :term:`path "
@@ -1913,21 +1917,21 @@ msgstr ""
 "一种可调用对象，在知道如何查找特定 :term:`path entry` 中的模块的情况下能够使用 :data:`sys.path_hook` "
 "列表返回一个 :term:`path entry finder`。"
 
-#: ../../glossary.rst:943
+#: ../../glossary.rst:942
 msgid "path based finder"
 msgstr "path based finder -- 基于路径的查找器"
 
-#: ../../glossary.rst:945
+#: ../../glossary.rst:944
 msgid ""
 "One of the default :term:`meta path finders <meta path finder>` which "
 "searches an :term:`import path` for modules."
 msgstr "默认的一种 :term:`元路径查找器 <meta path finder>`，可在一个 :term:`import path` 中查找模块。"
 
-#: ../../glossary.rst:947
+#: ../../glossary.rst:946
 msgid "path-like object"
 msgstr "path-like object -- 路径类对象"
 
-#: ../../glossary.rst:949
+#: ../../glossary.rst:948
 msgid ""
 "An object representing a file system path. A path-like object is either a"
 " :class:`str` or :class:`bytes` object representing a path, or an object "
@@ -1944,11 +1948,11 @@ msgstr ""
 "类型的文件系统路径；:func:`os.fsdecode` 和 :func:`os.fsencode` 可被分别用来确保获得 "
 ":class:`str` 或 :class:`bytes` 类型的结果。此对象是由 :pep:`519` 引入的。"
 
-#: ../../glossary.rst:957
+#: ../../glossary.rst:956
 msgid "PEP"
 msgstr "PEP"
 
-#: ../../glossary.rst:959
+#: ../../glossary.rst:958
 msgid ""
 "Python Enhancement Proposal. A PEP is a design document providing "
 "information to the Python community, or describing a new feature for "
@@ -1958,7 +1962,7 @@ msgstr ""
 "“Python 增强提议”的英文缩写。一个 PEP 就是一份设计文档，用来向 Python 社区提供信息，或描述一个 Python "
 "的新增特性及其进度或环境。PEP 应当提供精确的技术规格和所提议特性的原理说明。"
 
-#: ../../glossary.rst:965
+#: ../../glossary.rst:964
 msgid ""
 "PEPs are intended to be the primary mechanisms for proposing major new "
 "features, for collecting community input on an issue, and for documenting"
@@ -1969,29 +1973,29 @@ msgstr ""
 "PEP 应被作为提出主要新特性建议、收集社区对特定问题反馈以及为必须加入 Python 的设计决策编写文档的首选机制。PEP "
 "的作者有责任在社区内部建立共识，并应将不同意见也记入文档。"
 
-#: ../../glossary.rst:971
+#: ../../glossary.rst:970
 msgid "See :pep:`1`."
 msgstr "参见 :pep:`1`。"
 
-#: ../../glossary.rst:972
+#: ../../glossary.rst:971
 msgid "portion"
 msgstr "portion -- 部分"
 
-#: ../../glossary.rst:974
+#: ../../glossary.rst:973
 msgid ""
 "A set of files in a single directory (possibly stored in a zip file) that"
 " contribute to a namespace package, as defined in :pep:`420`."
 msgstr "构成一个命名空间包的单个目录内文件集合（也可能存放于一个 zip 文件内），具体定义见 :pep:`420`。"
 
-#: ../../glossary.rst:976
+#: ../../glossary.rst:975
 msgid "positional argument"
 msgstr "positional argument -- 位置参数"
 
-#: ../../glossary.rst:979
+#: ../../glossary.rst:978
 msgid "provisional API"
 msgstr "provisional API -- 暂定 API"
 
-#: ../../glossary.rst:981
+#: ../../glossary.rst:980
 msgid ""
 "A provisional API is one which has been deliberately excluded from the "
 "standard library's backwards compatibility guarantees.  While major "
@@ -2006,44 +2010,44 @@ msgstr ""
 "是指被有意排除在标准库的向后兼容性保证之外的应用编程接口。虽然此类接口通常不会再有重大改变，但只要其被标记为暂定，就可能在核心开发者确定有必要的情况下进行向后不兼容的更改（甚至包括移除该接口）。此种更改并不会随意进行"
 " -- 仅在 API 被加入之前未考虑到的严重基础性缺陷被发现时才可能会这样做。"
 
-#: ../../glossary.rst:990
+#: ../../glossary.rst:989
 msgid ""
 "Even for provisional APIs, backwards incompatible changes are seen as a "
 "\"solution of last resort\" - every attempt will still be made to find a "
 "backwards compatible resolution to any identified problems."
 msgstr "即便是对暂定 API 来说，向后不兼容的更改也会被视为“最后的解决方案” —— 任何问题被确认时都会尽可能先尝试找到一种向后兼容的解决方案。"
 
-#: ../../glossary.rst:994
+#: ../../glossary.rst:993
 msgid ""
 "This process allows the standard library to continue to evolve over time,"
 " without locking in problematic design errors for extended periods of "
 "time.  See :pep:`411` for more details."
 msgstr "这种处理过程允许标准库持续不断地演进，不至于被有问题的长期性设计缺陷所困。详情见 :pep:`411`。"
 
-#: ../../glossary.rst:997
+#: ../../glossary.rst:996
 msgid "provisional package"
 msgstr "provisional package -- 暂定包"
 
-#: ../../glossary.rst:999
+#: ../../glossary.rst:998
 msgid "See :term:`provisional API`."
 msgstr "参见 :term:`provisional API`。"
 
-#: ../../glossary.rst:1000
+#: ../../glossary.rst:999
 msgid "Python 3000"
 msgstr "Python 3000"
 
-#: ../../glossary.rst:1002
+#: ../../glossary.rst:1001
 msgid ""
 "Nickname for the Python 3.x release line (coined long ago when the "
 "release of version 3 was something in the distant future.)  This is also "
 "abbreviated \"Py3k\"."
 msgstr "Python 3.x 发布路线的昵称（这个名字在版本 3 的发布还遥遥无期的时候就已出现了）。有时也被缩写为“Py3k”。"
 
-#: ../../glossary.rst:1005
+#: ../../glossary.rst:1004
 msgid "Pythonic"
 msgstr "Pythonic"
 
-#: ../../glossary.rst:1007
+#: ../../glossary.rst:1006
 msgid ""
 "An idea or piece of code which closely follows the most common idioms of "
 "the Python language, rather than implementing code using concepts common "
@@ -2056,15 +2060,15 @@ msgstr ""
 "的常用风格是使用 :keyword:`for` 语句循环来遍历一个可迭代对象中的所有元素。许多其他语言没有这样的结构，因此不熟悉 Python "
 "的人有时会选择使用一个数字计数器::"
 
-#: ../../glossary.rst:1017
+#: ../../glossary.rst:1016
 msgid "As opposed to the cleaner, Pythonic method::"
 msgstr "而相应的更简洁更 Pythonic 的方法是这样的::"
 
-#: ../../glossary.rst:1021
+#: ../../glossary.rst:1020
 msgid "qualified name"
 msgstr "qualified name -- 限定名称"
 
-#: ../../glossary.rst:1023
+#: ../../glossary.rst:1022
 msgid ""
 "A dotted name showing the \"path\" from a module's global scope to a "
 "class, function or method defined in that module, as defined in "
@@ -2074,64 +2078,63 @@ msgstr ""
 "一个以点号分隔的名称，显示从模块的全局作用域到该模块中定义的某个类、函数或方法的“路径”，相关定义见 "
 ":pep:`3155`。对于最高层级的函数和类，限定名称与对象名称一致::"
 
-#: ../../glossary.rst:1040
+#: ../../glossary.rst:1039
 msgid ""
 "When used to refer to modules, the *fully qualified name* means the "
 "entire dotted path to the module, including any parent packages, e.g. "
 "``email.mime.text``::"
 msgstr "当被用于引用模块时，*完整限定名称* 意为标示该模块的以点号分隔的整个路径，其中包含其所有的父包，例如 ``email.mime.text``::"
 
-#: ../../glossary.rst:1047
+#: ../../glossary.rst:1046
 msgid "reference count"
 msgstr "reference count -- 引用计数"
 
-#: ../../glossary.rst:1049
+#: ../../glossary.rst:1048
+#, fuzzy
 msgid ""
 "The number of references to an object.  When the reference count of an "
 "object drops to zero, it is deallocated.  Reference counting is generally"
 " not visible to Python code, but it is a key element of the "
-":term:`CPython` implementation.  The :mod:`sys` module defines a "
-":func:`~sys.getrefcount` function that programmers can call to return the"
-" reference count for a particular object."
+":term:`CPython` implementation.  Programmers can call the "
+":func:`sys.getrefcount` function to return the reference count for a "
+"particular object."
 msgstr ""
 "对特定对象的引用的数量。当一个对象的引用计数降为零时，所分配资源将被释放。引用计数对 Python 代码来说通常是不可见的，但它是 "
 ":term:`CPython` 实现的一个关键元素。:mod:`sys` 模块定义了一个 :func:`~sys.getrefcount` "
 "函数，程序员可调用它来返回特定对象的引用计数。"
 
-#: ../../glossary.rst:1055
+#: ../../glossary.rst:1054
 msgid "regular package"
 msgstr "regular package -- 常规包"
 
-#: ../../glossary.rst:1057
+#: ../../glossary.rst:1056
 msgid ""
 "A traditional :term:`package`, such as a directory containing an "
 "``__init__.py`` file."
 msgstr "传统型的 :term:`package`，例如包含有一个 ``__init__.py`` 文件的目录。"
 
-#: ../../glossary.rst:1060
+#: ../../glossary.rst:1059
 msgid "See also :term:`namespace package`."
 msgstr "另参见 :term:`namespace package`。"
 
-#: ../../glossary.rst:1061
+#: ../../glossary.rst:1060
 msgid "__slots__"
 msgstr "__slots__"
 
-#: ../../glossary.rst:1063
+#: ../../glossary.rst:1062
 msgid ""
 "A declaration inside a class that saves memory by pre-declaring space for"
 " instance attributes and eliminating instance dictionaries.  Though "
 "popular, the technique is somewhat tricky to get right and is best "
 "reserved for rare cases where there are large numbers of instances in a "
 "memory-critical application."
-msgstr ""
-"一种写在类内部的声明，通过预先声明实例属性等对象并移除实例字典来节省内存。"
-"虽然这种技巧很流行，但想要用好却并不容易，最好是只保留在少数情况下采用，例如极耗内存的应用程序，并且其中包含大量实例。"
+msgstr "一种写在类内部的声明，通过预先声明实例属性等对象并移除实例字典来节省内存。虽然这种技巧很流行，但想要用好却并不容易，最好是只保留在少数情况下采用，例如极耗内存的应用程序，并且其中包含大量实例。"
 
-#: ../../glossary.rst:1068
+#: ../../glossary.rst:1067
 msgid "sequence"
 msgstr "sequence -- 序列"
 
-#: ../../glossary.rst:1070
+#: ../../glossary.rst:1069
 msgid ""
 "An :term:`iterable` which supports efficient element access using integer"
 " indices via the :meth:`__getitem__` special method and defines a "
@@ -2148,7 +2151,7 @@ msgstr ""
 ":class:`dict` 也支持 :meth:`__getitem__` 和 "
 ":meth:`__len__`，但它被认为属于映射而非序列，因为它查找时使用任意的 :term:`immutable` 键而非整数。"
 
-#: ../../glossary.rst:1079
+#: ../../glossary.rst:1078
 msgid ""
 "The :class:`collections.abc.Sequence` abstract base class defines a much "
 "richer interface that goes beyond just :meth:`__getitem__` and "
@@ -2162,11 +2165,11 @@ msgstr ""
 ":meth:`__contains__` 和 :meth:`__reversed__`。 实现此扩展接口的类型可以使用 "
 ":func:`~abc.ABCMeta.register` 来显式地注册。"
 
-#: ../../glossary.rst:1086
+#: ../../glossary.rst:1085
 msgid "set comprehension"
 msgstr "set comprehension -- 集合推导式"
 
-#: ../../glossary.rst:1088
+#: ../../glossary.rst:1087
 msgid ""
 "A compact way to process all or part of the elements in an iterable and "
 "return a set with the results. ``results = {c for c in 'abracadabra' if c"
@@ -2176,21 +2179,21 @@ msgstr ""
 "处理一个可迭代对象中的所有或部分元素并返回结果集合的一种紧凑写法。 ``results = {c for c in 'abracadabra' "
 "if c not in 'abc'}`` 将生成字符串集合 ``{'r', 'd'}``。 参见 :ref:`comprehensions`。"
 
-#: ../../glossary.rst:1092
+#: ../../glossary.rst:1091
 msgid "single dispatch"
 msgstr "single dispatch -- 单分派"
 
-#: ../../glossary.rst:1094
+#: ../../glossary.rst:1093
 msgid ""
 "A form of :term:`generic function` dispatch where the implementation is "
 "chosen based on the type of a single argument."
 msgstr "一种 :term:`generic function` 分派形式，其实现是基于单个参数的类型来选择的。"
 
-#: ../../glossary.rst:1096
+#: ../../glossary.rst:1095
 msgid "slice"
 msgstr "slice -- 切片"
 
-#: ../../glossary.rst:1098
+#: ../../glossary.rst:1097
 msgid ""
 "An object usually containing a portion of a :term:`sequence`.  A slice is"
 " created using the subscript notation, ``[]`` with colons between numbers"
@@ -2201,11 +2204,11 @@ msgstr ""
 "中给出几个以冒号分隔的数字，例如 ``variable_name[1:3:5]``。方括号（下标）标记在内部使用 :class:`slice` "
 "对象。"
 
-#: ../../glossary.rst:1102
+#: ../../glossary.rst:1101
 msgid "special method"
 msgstr "special method -- 特殊方法"
 
-#: ../../glossary.rst:1106
+#: ../../glossary.rst:1105
 msgid ""
 "A method that is called implicitly by Python to execute a certain "
 "operation on a type, such as addition.  Such methods have names starting "
@@ -2215,11 +2218,11 @@ msgstr ""
 "一种由 Python 隐式调用的方法，用来对某个类型执行特定操作例如相加等等。这种方法的名称的首尾都为双下划线。特殊方法的文档参见 "
 ":ref:`specialnames`。"
 
-#: ../../glossary.rst:1110
+#: ../../glossary.rst:1109
 msgid "statement"
 msgstr "statement -- 语句"
 
-#: ../../glossary.rst:1112
+#: ../../glossary.rst:1111
 msgid ""
 "A statement is part of a suite (a \"block\" of code).  A statement is "
 "either an :term:`expression` or one of several constructs with a keyword,"
@@ -2228,18 +2231,18 @@ msgstr ""
 "语句是程序段（一个代码“块”）的组成单位。一条语句可以是一个 :term:`expression` 或某个带有关键字的结构，例如 "
 ":keyword:`if`、:keyword:`while` 或 :keyword:`for`。"
 
-#: ../../glossary.rst:1115
+#: ../../glossary.rst:1114
 msgid "strong reference"
 msgstr "strong reference -- 强引用"
 
-#: ../../glossary.rst:1117
+#: ../../glossary.rst:1116
 msgid ""
 "In Python's C API, a strong reference is a reference to an object which "
 "increments the object's reference count when it is created and decrements"
 " the object's reference count when it is deleted."
 msgstr "在 Python 的 C API 中，强引用是对象引用的一种，当它被创建时将会增加对象引用计数而当它被删除时则会减少对象引用计数。"
 
-#: ../../glossary.rst:1121
+#: ../../glossary.rst:1120
 msgid ""
 "The :c:func:`Py_NewRef` function can be used to create a strong reference"
 " to an object. Usually, the :c:func:`Py_DECREF` function must be called "
@@ -2249,23 +2252,23 @@ msgstr ""
 ":c:func:`Py_NewRef` 函数可被用于创建一个对象的强引用。 通常，必须在退出某个强引用的作用域时在该强引用上调用 "
 ":c:func:`Py_DECREF` 函数，以避免引用的泄漏。"
 
-#: ../../glossary.rst:1126
+#: ../../glossary.rst:1125
 msgid "See also :term:`borrowed reference`."
 msgstr "另请参阅 :term:`borrowed reference`。"
 
-#: ../../glossary.rst:1127
+#: ../../glossary.rst:1126
 msgid "text encoding"
 msgstr "text encoding -- 文本编码"
 
-#: ../../glossary.rst:1129
+#: ../../glossary.rst:1128
 msgid "A codec which encodes Unicode strings to bytes."
 msgstr "用于将Unicode字符串编码为字节串的编码器。"
 
-#: ../../glossary.rst:1130
+#: ../../glossary.rst:1129
 msgid "text file"
 msgstr "text file -- 文本文件"
 
-#: ../../glossary.rst:1132
+#: ../../glossary.rst:1131
 msgid ""
 "A :term:`file object` able to read and write :class:`str` objects. Often,"
 " a text file actually accesses a byte-oriented datastream and handles the"
@@ -2278,17 +2281,17 @@ msgstr ""
 "``'w'``）打开的文件、:data:`sys.stdin`、:data:`sys.stdout` 以及 "
 ":class:`io.StringIO` 的实例。"
 
-#: ../../glossary.rst:1139
+#: ../../glossary.rst:1138
 msgid ""
 "See also :term:`binary file` for a file object able to read and write "
 ":term:`bytes-like objects <bytes-like object>`."
 msgstr "另请参看 :term:`binary file` 了解能够读写 :term:`字节类对象 <bytes-like object>` 的文件对象。"
 
-#: ../../glossary.rst:1141
+#: ../../glossary.rst:1140
 msgid "triple-quoted string"
 msgstr "triple-quoted string -- 三引号字符串"
 
-#: ../../glossary.rst:1143
+#: ../../glossary.rst:1142
 msgid ""
 "A string which is bound by three instances of either a quotation mark "
 "(\") or an apostrophe (').  While they don't provide any functionality "
@@ -2299,11 +2302,11 @@ msgid ""
 "docstrings."
 msgstr "首尾各带三个连续双引号（\"）或者单引号（'）的字符串。它们在功能上与首尾各用一个引号标注的字符串没有什么不同，但是有多种用处。它们允许你在字符串内包含未经转义的单引号和双引号，并且可以跨越多行而无需使用连接符，在编写文档字符串时特别好用。"
 
-#: ../../glossary.rst:1150
+#: ../../glossary.rst:1149
 msgid "type"
 msgstr "type -- 类型"
 
-#: ../../glossary.rst:1152
+#: ../../glossary.rst:1151
 msgid ""
 "The type of a Python object determines what kind of object it is; every "
 "object has a type.  An object's type is accessible as its "
@@ -2313,56 +2316,56 @@ msgstr ""
 "类型决定一个 Python 对象属于什么种类；每个对象都具有一种类型。要知道对象的类型，可以访问它的 "
 ":attr:`~instance.__class__` 属性，或是通过 ``type(obj)`` 来获取。"
 
-#: ../../glossary.rst:1156
+#: ../../glossary.rst:1155
 msgid "type alias"
 msgstr "type alias -- 类型别名"
 
-#: ../../glossary.rst:1158
+#: ../../glossary.rst:1157
 msgid "A synonym for a type, created by assigning the type to an identifier."
 msgstr "一个类型的同义词，创建方式是把类型赋值给特定的标识符。"
 
-#: ../../glossary.rst:1160
+#: ../../glossary.rst:1159
 msgid ""
 "Type aliases are useful for simplifying :term:`type hints <type hint>`. "
 "For example::"
 msgstr "类型别名的作用是简化 :term:`类型提示 <type hint>`。例如::"
 
-#: ../../glossary.rst:1167
+#: ../../glossary.rst:1166
 msgid "could be made more readable like this::"
 msgstr "可以这样提高可读性::"
 
-#: ../../glossary.rst:1174 ../../glossary.rst:1188
+#: ../../glossary.rst:1173 ../../glossary.rst:1187
 msgid "See :mod:`typing` and :pep:`484`, which describe this functionality."
 msgstr "参见 :mod:`typing` 和 :pep:`484`，其中有对此功能的详细描述。"
 
-#: ../../glossary.rst:1175
+#: ../../glossary.rst:1174
 msgid "type hint"
 msgstr "type hint -- 类型提示"
 
-#: ../../glossary.rst:1177
+#: ../../glossary.rst:1176
 msgid ""
 "An :term:`annotation` that specifies the expected type for a variable, a "
 "class attribute, or a function parameter or return value."
 msgstr ":term:`annotation` 为变量、类属性、函数的形参或返回值指定预期的类型。"
 
-#: ../../glossary.rst:1180
+#: ../../glossary.rst:1179
 msgid ""
 "Type hints are optional and are not enforced by Python but they are "
 "useful to static type analysis tools, and aid IDEs with code completion "
 "and refactoring."
 msgstr "类型提示属于可选项，Python 不要求提供，但其可对静态类型分析工具起作用，并可协助 IDE 实现代码补全与重构。"
 
-#: ../../glossary.rst:1184
+#: ../../glossary.rst:1183
 msgid ""
 "Type hints of global variables, class attributes, and functions, but not "
 "local variables, can be accessed using :func:`typing.get_type_hints`."
 msgstr "全局变量、类属性和函数的类型提示可以使用 :func:`typing.get_type_hints` 来访问，但局部变量则不可以。"
 
-#: ../../glossary.rst:1189
+#: ../../glossary.rst:1188
 msgid "universal newlines"
 msgstr "universal newlines -- 通用换行"
 
-#: ../../glossary.rst:1191
+#: ../../glossary.rst:1190
 msgid ""
 "A manner of interpreting text streams in which all of the following are "
 "recognized as ending a line: the Unix end-of-line convention ``'\\n'``, "
@@ -2374,29 +2377,29 @@ msgstr ""
 "``'\\r\\n'`` 以及旧版 Macintosh 的约定 ``'\\r'``。参见 :pep:`278` 和 :pep:`3116` 和 "
 ":func:`bytes.splitlines` 了解更多用法说明。"
 
-#: ../../glossary.rst:1196
+#: ../../glossary.rst:1195
 msgid "variable annotation"
 msgstr "variable annotation -- 变量标注"
 
-#: ../../glossary.rst:1198
+#: ../../glossary.rst:1197
 msgid "An :term:`annotation` of a variable or a class attribute."
 msgstr "对变量或类属性的 :term:`annotation`。"
 
-#: ../../glossary.rst:1200
+#: ../../glossary.rst:1199
 msgid "When annotating a variable or a class attribute, assignment is optional::"
 msgstr "在标注变量或类属性时，还可选择为其赋值::"
 
-#: ../../glossary.rst:1205
+#: ../../glossary.rst:1204
 msgid ""
 "Variable annotations are usually used for :term:`type hints <type hint>`:"
 " for example this variable is expected to take :class:`int` values::"
 msgstr "变量标注通常被用作 :term:`类型提示 <type hint>`：例如以下变量预期接受 :class:`int` 类型的值::"
 
-#: ../../glossary.rst:1211
+#: ../../glossary.rst:1210
 msgid "Variable annotation syntax is explained in section :ref:`annassign`."
 msgstr "变量标注语法的详细解释见 :ref:`annassign` 一节。"
 
-#: ../../glossary.rst:1213
+#: ../../glossary.rst:1212
 msgid ""
 "See :term:`function annotation`, :pep:`484` and :pep:`526`, which "
 "describe this functionality. Also see :ref:`annotations-howto` for best "
@@ -2405,11 +2408,11 @@ msgstr ""
 "参见 :term:`function annotation`, :pep:`484` 和 :pep:`526`，其中描述了此功能。 另请参阅 "
 ":ref:`annotations-howto` 以了解使用标注的最佳实践。"
 
-#: ../../glossary.rst:1217
+#: ../../glossary.rst:1216
 msgid "virtual environment"
 msgstr "virtual environment -- 虚拟环境"
 
-#: ../../glossary.rst:1219
+#: ../../glossary.rst:1218
 msgid ""
 "A cooperatively isolated runtime environment that allows Python users and"
 " applications to install and upgrade Python distribution packages without"
@@ -2419,25 +2422,25 @@ msgstr ""
 "一种采用协作式隔离的运行时环境，允许 Python 用户和应用程序在安装和升级 Python 分发包时不会干扰到同一系统上运行的其他 Python"
 " 应用程序的行为。"
 
-#: ../../glossary.rst:1224
+#: ../../glossary.rst:1223
 msgid "See also :mod:`venv`."
 msgstr "另参见 :mod:`venv`。"
 
-#: ../../glossary.rst:1225
+#: ../../glossary.rst:1224
 msgid "virtual machine"
 msgstr "virtual machine -- 虚拟机"
 
-#: ../../glossary.rst:1227
+#: ../../glossary.rst:1226
 msgid ""
 "A computer defined entirely in software.  Python's virtual machine "
 "executes the :term:`bytecode` emitted by the bytecode compiler."
 msgstr "一台完全通过软件定义的计算机。Python 虚拟机可执行字节码编译器所生成的 :term:`bytecode`。"
 
-#: ../../glossary.rst:1229
+#: ../../glossary.rst:1228
 msgid "Zen of Python"
 msgstr "Zen of Python -- Python 之禅"
 
-#: ../../glossary.rst:1231
+#: ../../glossary.rst:1230
 msgid ""
 "Listing of Python design principles and philosophies that are helpful in "
 "understanding and using the language.  The listing can be found by typing"
@@ -2479,4 +2482,12 @@ msgstr "列出 Python 设计的原则与哲学，有助于理解与使用这种�
 #~ " float），两者必须转换为相同类型才能相加，否则将引发 "
 #~ ":exc:`TypeError`。如果没有强制类型转换机制，程序员必须将所有可兼容参数归一化为相同类型，例如要写成 "
 #~ "``float(3)+4.5`` 而不是 ``3+4.5``。"
+
+#~ msgid ""
+#~ "Python uses the :term:`filesystem encoding "
+#~ "and error handler` to convert between"
+#~ " Unicode filenames and bytes filenames."
+#~ msgstr ""
+#~ "Python 使用 :term:`filesystem encoding and "
+#~ "error handler` 在 Unicode 文件名和字节串文件名之间进行转换。"
 
