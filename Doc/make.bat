@@ -4,8 +4,36 @@ pushd %~dp0
 
 REM Command file for Sphinx documentation
 
-if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=sphinx-build
+call ..\PCbuild\find_python.bat %PYTHON%
+
+if not defined PYTHON set PYTHON=py
+
+if not defined SPHINXBUILD (
+    %PYTHON% -c "import sphinx" > nul 2> nul
+    if errorlevel 1 (
+        echo Installing sphinx with %PYTHON%
+        %PYTHON% -m pip install -r requirements.txt
+        if errorlevel 1 exit /B
+    )
+    set SPHINXBUILD=%PYTHON% -c "import sphinx.cmd.build, sys; sys.exit(sphinx.cmd.build.main())"
+)
+
+%PYTHON% -c "import python_docs_theme" > nul 2> nul
+if errorlevel 1 (
+    echo Installing python-docs-theme with %PYTHON%
+    %PYTHON% -m pip install python-docs-theme
+    if errorlevel 1 exit /B
+)
+
+if not defined BLURB (
+    %PYTHON% -c "import blurb" > nul 2> nul
+    if errorlevel 1 (
+        echo Installing blurb with %PYTHON%
+        rem Should have been installed with Sphinx earlier
+        %PYTHON% -m pip install blurb
+        if errorlevel 1 exit /B
+    )
+    set BLURB=%PYTHON% -m blurb
 )
 set SOURCEDIR=.
 set BUILDDIR=build
@@ -14,6 +42,7 @@ if not defined SPHINXLINT (
     %PYTHON% -c "import sphinxlint" > nul 2> nul
     if errorlevel 1 (
         echo Installing sphinx-lint with %PYTHON%
+        rem Should have been installed with Sphinx earlier
         %PYTHON% -m pip install sphinx-lint
         if errorlevel 1 exit /B
     )
