@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>array --- 高效的数值数组 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array — 高效的数值数组 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="weakref --- 弱引用" href="weakref.html" />
-    <link rel="prev" title="bisect --- 数组二分查找算法" href="bisect.html" />
+    <link rel="next" title="weakref — 弱引用" href="weakref.html" />
+    <link rel="prev" title="bisect — 数组二分查找算法" href="bisect.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/array.html" />
     
       
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="bisect.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> --- 数组二分查找算法</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="weakref.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="bisect.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> — 数组二分查找算法</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="weakref.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -102,10 +106,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="weakref.html" title="weakref --- 弱引用"
+          <a href="weakref.html" title="weakref — 弱引用"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="bisect.html" title="bisect --- 数组二分查找算法"
+          <a href="bisect.html" title="bisect — 数组二分查找算法"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> --- 高效的数值数组</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> — 高效的数值数组</a></li>
                 <li class="right">
                     
 
@@ -147,7 +151,7 @@
           <div class="body" role="main">
             
   <section id="module-array">
-<span id="array-efficient-arrays-of-numeric-values"></span><h1><a class="reference internal" href="#module-array" title="array: Space efficient arrays of uniformly typed numeric values."><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code></a> --- 高效的数值数组<a class="headerlink" href="#module-array" title="永久链接至标题">¶</a></h1>
+<span id="array-efficient-arrays-of-numeric-values"></span><h1><a class="reference internal" href="#module-array" title="array: Space efficient arrays of uniformly typed numeric values."><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code></a> — 高效的数值数组<a class="headerlink" href="#module-array" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" id="index-0" />
 <p>此模块定义了一种对象类型，可以紧凑地表示基本类型值的数组：字符、整数、浮点数等。 数组属于序列类型，其行为与列表非常相似，不同之处在于其中存储的对象类型是受限的。 类型在对象创建时使用单个字符的 <em class="dfn">类型码</em> 来指定。 已定义的类型码如下：</p>
 <table class="docutils align-default">
@@ -251,7 +255,9 @@
 <ol class="arabic">
 <li><p>由于平台的不同它可能为 16 位或 32 位。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span><code class="docutils literal notranslate"><span class="pre">array('u')</span></code> 现在使用 <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> 作为 C 类型而不再是已弃用的 <code class="docutils literal notranslate"><span class="pre">Py_UNICODE</span></code>。 这个改变不会影响其行为，因为 <code class="docutils literal notranslate"><span class="pre">Py_UNICODE</span></code> 自 Python 3.3 起就是 <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> 的别名。</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span><code class="docutils literal notranslate"><span class="pre">array('u')</span></code> now uses <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> as C type instead of deprecated
+<code class="docutils literal notranslate"><span class="pre">Py_UNICODE</span></code>. This change doesn’t affect its behavior because
+<code class="docutils literal notranslate"><span class="pre">Py_UNICODE</span></code> is alias of <code class="docutils literal notranslate"><span class="pre">wchar_t</span></code> since Python 3.3.</p>
 </div>
 <div class="deprecated-removed">
 <p><span class="versionmodified">Deprecated since version 3.3, will be removed in version 4.0.</span></p>
@@ -262,7 +268,7 @@
 <p>这个模块定义了以下类型：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="array.array">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">typecode</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">initializer</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typecode</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">initializer</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array" title="永久链接至目标">¶</a></dt>
 <dd><p>一个包含由 <em>typecode</em> 限制类型的条目的新数组，并由可选的 <em>initializer</em> 值进行初始化，该值必须为一个列表、<a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> 或包含正确类型元素的可迭代对象。</p>
 <p>如果给定一个列表或字符串，该 initializer 会被传给新数组的 <a class="reference internal" href="#array.array.fromlist" title="array.array.fromlist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fromlist()</span></code></a>, <a class="reference internal" href="#array.array.frombytes" title="array.array.frombytes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">frombytes()</span></code></a> 或 <a class="reference internal" href="#array.array.fromunicode" title="array.array.fromunicode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">fromunicode()</span></code></a> 方法（见下文）以将初始条目添加到数组中。 否则会将可迭代对象作为 initializer 传给 <a class="reference internal" href="#array.array.extend" title="array.array.extend"><code class="xref py py-meth docutils literal notranslate"><span class="pre">extend()</span></code></a> 方法。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">array.__new__</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">typecode</span></code>, <code class="docutils literal notranslate"><span class="pre">initializer</span></code>。</p>
@@ -299,7 +305,7 @@
 <span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">buffer_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array.buffer_info" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个元组 <code class="docutils literal notranslate"><span class="pre">(address,</span> <span class="pre">length)</span></code> 以给出用于存放数组内容的缓冲区元素的当前内存地址和长度。 以字节表示的内存缓冲区大小可通过 <code class="docutils literal notranslate"><span class="pre">array.buffer_info()[1]</span> <span class="pre">*</span> <span class="pre">array.itemsize</span></code> 来计算。 这在使用需要内存地址的低层级（因此不够安全） I/O 接口时会很有用，例如某些 <code class="xref c c-func docutils literal notranslate"><span class="pre">ioctl()</span></code> 操作。 只要数组存在并且没有应用改变长度的操作，返回数值就是有效的。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>当在 C 或 C++ 编写的代码中使用数组对象时（这是有效使用此类信息的唯一方式），使用数组对象所支持的缓冲区接口更为适宜。 此方法仅保留用作向下兼容，应避免在新代码中使用。 缓冲区接口的文档参见 <a class="reference internal" href="../c-api/buffer.html#bufferobjects"><span class="std std-ref">缓冲协议</span></a>。</p>
 </div>
 </dd></dl>
@@ -351,7 +357,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="array.array.index">
-<span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">start</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">stop</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array.index" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array.index" title="永久链接至目标">¶</a></dt>
 <dd><p>返回最小的 <em>i</em> 使得 <em>i</em> 为数组中首次出现的 <em>x</em> 的索引号。 指定可选参数 <em>start</em> 和 <em>stop</em> 以便在数组的一个子部分内部搜索 <em>x</em>。 如果未找到 <em>x</em> 则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.10 版更改: </span>添加了可选的 <em>start</em> 和 <em>stop</em> 形参。</p>
@@ -366,7 +372,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="array.array.pop">
-<span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">i</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array.pop" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">array.</span></span><span class="sig-name descname"><span class="pre">pop</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#array.array.pop" title="永久链接至目标">¶</a></dt>
 <dd><p>从数组中移除序号为 <em>i</em> 的项并将其返回。 可选参数值默认为 <code class="docutils literal notranslate"><span class="pre">-1</span></code>，因此默认将移除并返回末尾项。</p>
 </dd></dl>
 
@@ -421,7 +427,7 @@
 <dl class="simple">
 <dt>模块 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a></dt><dd><p>打包和解包异构二进制数据。</p>
 </dd>
-<dt>模块 <a class="reference internal" href="xdrlib.html#module-xdrlib" title="xdrlib: Encoders and decoders for the External Data Representation (XDR)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xdrlib</span></code></a></dt><dd><p>打包和解包用于某些远程过程调用系统的 External Data Representation (XDR) 数据。</p>
+<dt>模块 <a class="reference internal" href="xdrlib.html#module-xdrlib" title="xdrlib: Encoders and decoders for the External Data Representation (XDR). (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xdrlib</span></code></a></dt><dd><p>打包和解包用于某些远程过程调用系统的 External Data Representation (XDR) 数据。</p>
 </dd>
 <dt><a class="reference external" href="https://numpy.org/">NumPy</a></dt><dd><p>NumPy 软件包定义了另一种数组类型。</p>
 </dd>
@@ -436,12 +442,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="bisect.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> --- 数组二分查找算法</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="weakref.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="bisect.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> — 数组二分查找算法</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="weakref.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -467,10 +477,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="weakref.html" title="weakref --- 弱引用"
+          <a href="weakref.html" title="weakref — 弱引用"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="bisect.html" title="bisect --- 数组二分查找算法"
+          <a href="bisect.html" title="bisect — 数组二分查找算法"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -483,12 +493,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" >数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> --- 高效的数值数组</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> — 高效的数值数组</a></li>
                 <li class="right">
                     
 
@@ -512,7 +522,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -520,11 +530,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

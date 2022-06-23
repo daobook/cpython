@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>内存管理 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>内存管理 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">内存管理</a><ul>
 <li><a class="reference internal" href="#overview">概述</a></li>
 <li><a class="reference internal" href="#allocator-domains">Allocator Domains</a></li>
@@ -91,12 +92,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="init_config.html"
-                        title="上一章">Python初始化配置</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="objimpl.html"
-                        title="下一章">对象实现支持</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="init_config.html"
+                          title="上一章">Python初始化配置</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="objimpl.html"
+                          title="下一章">对象实现支持</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -139,7 +145,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API 参考手册</a> &#187;</li>
@@ -195,7 +201,7 @@
 </section>
 <section id="allocator-domains">
 <h2>Allocator Domains<a class="headerlink" href="#allocator-domains" title="永久链接至标题">¶</a></h2>
-<p>All allocating functions belong to one of three different &quot;domains&quot; (see also
+<p>All allocating functions belong to one of three different “domains” (see also
 <a class="reference internal" href="#c.PyMemAllocatorDomain" title="PyMemAllocatorDomain"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyMemAllocatorDomain</span></code></a>). These domains represent different allocation
 strategies and are optimized for different purposes. The specific details on
 how every domain allocates memory or what internal functions each domain calls
@@ -212,7 +218,7 @@ by <a class="reference internal" href="#c.PyObject_Malloc" title="PyObject_Mallo
 buffers where the allocation <em>must</em> go to the system allocator or where the
 allocator can operate without the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a>. The memory is requested directly
 to the system.</p></li>
-<li><p>&quot;Mem&quot; domain: intended for allocating memory for Python buffers and
+<li><p>“Mem” domain: intended for allocating memory for Python buffers and
 general-purpose memory buffers where the allocation must be performed with
 the <a class="reference internal" href="../glossary.html#term-GIL"><span class="xref std std-term">GIL</span></a> held. The memory is taken from the Python private heap.</p></li>
 <li><p>Object domain: intended for allocating memory belonging to Python objects. The
@@ -341,9 +347,9 @@ given domain,the matching specific deallocating functions must be used. For exam
 <h2>对象分配器<a class="headerlink" href="#object-allocators" title="永久链接至标题">¶</a></h2>
 <p>以下函数集，仿照 ANSI C 标准，并指定了请求零字节时的行为，可用于从Python堆分配和释放内存。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>There is no guarantee that the memory returned by these allocators can be
-successfully casted to a Python object when intercepting the allocating
+successfully cast to a Python object when intercepting the allocating
 functions in this domain by the methods described in
 the <a class="reference internal" href="#customize-memory-allocators"><span class="std std-ref">Customize Memory Allocators</span></a> section.</p>
 </div>
@@ -438,8 +444,8 @@ the <a class="reference internal" href="#customize-memory-allocators"><span clas
 <li><p><code class="docutils literal notranslate"><span class="pre">malloc</span></code>: system allocators from the standard C library, C functions:
 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">calloc()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">realloc()</span></code> and <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pymalloc</span></code>: <a class="reference internal" href="#pymalloc"><span class="std std-ref">pymalloc memory allocator</span></a>.</p></li>
-<li><p>&quot;+ debug&quot;: with <a class="reference internal" href="#pymem-debug-hooks"><span class="std std-ref">debug hooks on the Python memory allocators</span></a>.</p></li>
-<li><p>&quot;Debug build&quot;: <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">Python build in debug mode</span></a>.</p></li>
+<li><p>“+ debug”: with <a class="reference internal" href="#pymem-debug-hooks"><span class="std std-ref">debug hooks on the Python memory allocators</span></a>.</p></li>
+<li><p>“Debug build”: <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">Python build in debug mode</span></a>.</p></li>
 </ul>
 </section>
 <section id="customize-memory-allocators">
@@ -450,7 +456,8 @@ the <a class="reference internal" href="#customize-memory-allocators"><span clas
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyMemAllocatorEx">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMemAllocatorEx</span></span></span><a class="headerlink" href="#c.PyMemAllocatorEx" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>用于描述内存块分配器的结构体。包含四个字段：</p>
+<dd><p>Structure used to describe a memory block allocator. The structure has
+the following fields:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 60%" />
@@ -565,7 +572,7 @@ after calling <a class="reference internal" href="#c.PyMem_SetAllocator" title="
 <p>These debug hooks fill dynamically allocated memory blocks with special,
 recognizable bit patterns. Newly allocated memory is filled with the byte
 <code class="docutils literal notranslate"><span class="pre">0xCD</span></code> (<code class="docutils literal notranslate"><span class="pre">PYMEM_CLEANBYTE</span></code>), freed memory is filled with the byte <code class="docutils literal notranslate"><span class="pre">0xDD</span></code>
-(<code class="docutils literal notranslate"><span class="pre">PYMEM_DEADBYTE</span></code>). Memory blocks are surrounded by &quot;forbidden bytes&quot;
+(<code class="docutils literal notranslate"><span class="pre">PYMEM_DEADBYTE</span></code>). Memory blocks are surrounded by “forbidden bytes”
 filled with the byte <code class="docutils literal notranslate"><span class="pre">0xFD</span></code> (<code class="docutils literal notranslate"><span class="pre">PYMEM_FORBIDDENBYTE</span></code>). Strings of these bytes
 are unlikely to be valid addresses, floats, or ASCII strings.</p>
 <p>运行时检查：</p>
@@ -611,7 +618,7 @@ excess old bytes are also filled with PYMEM_DEADBYTE.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">p[N+S:N+2*S]</span></code></dt><dd><p>Only used if the <code class="docutils literal notranslate"><span class="pre">PYMEM_DEBUG_SERIALNO</span></code> macro is defined (not defined by
 default).</p>
 <p>A serial number, incremented by 1 on each call to a malloc-like or
-realloc-like function.  Big-endian <code class="docutils literal notranslate"><span class="pre">size_t</span></code>.  If &quot;bad memory&quot; is detected
+realloc-like function.  Big-endian <code class="docutils literal notranslate"><span class="pre">size_t</span></code>.  If “bad memory” is detected
 later, the serial number gives an excellent way to set a breakpoint on the
 next run, to capture the instant at which this block was passed out.  The
 static function bumpserialno() in obmalloc.c is the only place the serial
@@ -619,11 +626,11 @@ number is incremented, and exists so you can set such a breakpoint easily.</p>
 </dd>
 </dl>
 <p>A realloc-like or free-like function first checks that the PYMEM_FORBIDDENBYTE
-bytes at each end are intact.  If they've been altered, diagnostic output is
+bytes at each end are intact.  If they’ve been altered, diagnostic output is
 written to stderr, and the program is aborted via Py_FatalError().  The other
 main failure mode is provoking a memory error when a program reads up one of
 the special bit patterns and tries to use it as an address.  If you get in a
-debugger then and look at the object, you're likely to see that it's entirely
+debugger then and look at the object, you’re likely to see that it’s entirely
 filled with PYMEM_DEADBYTE (meaning freed memory is getting used) or
 PYMEM_CLEANBYTE (meaning uninitialized memory is getting used).</p>
 <div class="versionchanged">
@@ -643,7 +650,7 @@ and <code class="docutils literal notranslate"><span class="pre">0xFB</span></co
 </section>
 <section id="the-pymalloc-allocator">
 <span id="pymalloc"></span><h2>pymalloc 分配器<a class="headerlink" href="#the-pymalloc-allocator" title="永久链接至标题">¶</a></h2>
-<p>Python 有为具有短生命周期的小对象（小于或等于 512 字节）优化的 <em>pymalloc</em> 分配器。它使用固定大小为 256 KiB 的称为 &quot;arenas&quot; 的内存映射。对于大于512字节的分配，它回到使用 <a class="reference internal" href="#c.PyMem_RawMalloc" title="PyMem_RawMalloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_RawMalloc()</span></code></a> 和 <a class="reference internal" href="#c.PyMem_RawRealloc" title="PyMem_RawRealloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_RawRealloc()</span></code></a> 。</p>
+<p>Python 有为具有短生命周期的小对象（小于或等于 512 字节）优化的 <em>pymalloc</em> 分配器。它使用固定大小为 256 KiB 的称为 “arenas” 的内存映射。对于大于512字节的分配，它回到使用 <a class="reference internal" href="#c.PyMem_RawMalloc" title="PyMem_RawMalloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_RawMalloc()</span></code></a> 和 <a class="reference internal" href="#c.PyMem_RawRealloc" title="PyMem_RawRealloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_RawRealloc()</span></code></a> 。</p>
 <p><em>pymalloc</em> 是 <code class="xref c c-data docutils literal notranslate"><span class="pre">PYMEM_DOMAIN_MEM</span></code> (例如: <a class="reference internal" href="#c.PyMem_Malloc" title="PyMem_Malloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Malloc()</span></code></a>) 和 <code class="xref c c-data docutils literal notranslate"><span class="pre">PYMEM_DOMAIN_OBJ</span></code> (例如: <a class="reference internal" href="#c.PyObject_Malloc" title="PyObject_Malloc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_Malloc()</span></code></a>) 域的 <a class="reference internal" href="#default-memory-allocators"><span class="std std-ref">默认分配器</span></a> 。</p>
 <p>arena 分配器使用以下函数：</p>
 <ul class="simple">
@@ -770,8 +777,9 @@ the <span class="target" id="index-5"></span><a class="reference internal" href=
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">内存管理</a><ul>
 <li><a class="reference internal" href="#overview">概述</a></li>
 <li><a class="reference internal" href="#allocator-domains">Allocator Domains</a></li>
@@ -791,12 +799,17 @@ the <span class="target" id="index-5"></span><a class="reference internal" href=
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="init_config.html"
-                        title="上一章">Python初始化配置</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="objimpl.html"
-                        title="下一章">对象实现支持</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="init_config.html"
+                          title="上一章">Python初始化配置</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="objimpl.html"
+                          title="下一章">对象实现支持</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -838,7 +851,7 @@ the <span class="target" id="index-5"></span><a class="reference internal" href=
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -866,7 +879,7 @@ the <span class="target" id="index-5"></span><a class="reference internal" href=
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -874,11 +887,11 @@ the <span class="target" id="index-5"></span><a class="reference internal" href=
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

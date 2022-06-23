@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>heapq --- 堆队列算法 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>heapq — 堆队列算法 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="bisect --- 数组二分查找算法" href="bisect.html" />
-    <link rel="prev" title="collections.abc --- 容器的抽象基类" href="collections.abc.html" />
+    <link rel="next" title="bisect — 数组二分查找算法" href="bisect.html" />
+    <link rel="prev" title="collections.abc — 容器的抽象基类" href="collections.abc.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/heapq.html" />
     
       
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> --- 堆队列算法</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> — 堆队列算法</a><ul>
 <li><a class="reference internal" href="#basic-examples">基本示例</a></li>
 <li><a class="reference internal" href="#priority-queue-implementation-notes">优先队列实现说明</a></li>
 <li><a class="reference internal" href="#theory">理论</a></li>
@@ -80,12 +81,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="collections.abc.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> --- 容器的抽象基类</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="bisect.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> --- 数组二分查找算法</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="collections.abc.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> — 容器的抽象基类</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="bisect.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> — 数组二分查找算法</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -112,10 +118,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="bisect.html" title="bisect --- 数组二分查找算法"
+          <a href="bisect.html" title="bisect — 数组二分查找算法"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="collections.abc.html" title="collections.abc --- 容器的抽象基类"
+          <a href="collections.abc.html" title="collections.abc — 容器的抽象基类"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -128,12 +134,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> --- 堆队列算法</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> — 堆队列算法</a></li>
                 <li class="right">
                     
 
@@ -157,7 +163,7 @@
           <div class="body" role="main">
             
   <section id="module-heapq">
-<span id="heapq-heap-queue-algorithm"></span><h1><a class="reference internal" href="#module-heapq" title="heapq: Heap queue algorithm (a.k.a. priority queue)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code></a> --- 堆队列算法<a class="headerlink" href="#module-heapq" title="永久链接至标题">¶</a></h1>
+<span id="heapq-heap-queue-algorithm"></span><h1><a class="reference internal" href="#module-heapq" title="heapq: Heap queue algorithm (a.k.a. priority queue)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code></a> — 堆队列算法<a class="headerlink" href="#module-heapq" title="永久链接至标题">¶</a></h1>
 <p><strong>源码：</strong><a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/heapq.py">Lib/heapq.py</a></p>
 <hr class="docutils" />
 <p>这个模块提供了堆队列算法的实现，也称为优先队列算法。</p>
@@ -323,7 +329,7 @@
 <p>用于实现调度器的各种结构都得到了充分的研究，堆是非常适宜的一种，因为它们的速度相当快，并且几乎是恒定的，最坏的情况与平均情况没有太大差别。 虽然还存在其他总体而言更高效的实现方式，但其最坏的情况却可能非常糟糕。</p>
 <p>堆在大磁盘排序中也非常有用。 你应该已经了解大规模排序会有多个“运行轮次”（即预排序的序列，其大小通常与 CPU 内存容量相关），随后这些轮次会进入合并通道，轮次合并的组织往往非常巧妙 <a class="footnote-reference brackets" href="#id2" id="id1">1</a>。 非常重要的一点是初始排序应产生尽可能长的运行轮次。 锦标赛模式是达成此目标的好办法。 如果你使用全部有用内存来进行锦标赛，替换和安排恰好适合当前运行轮次的条目，你将可以对于随机输入生成两倍于内存大小的运行轮次，对于模糊排序的输入还会有更好的效果。</p>
 <p>另外，如果你输出磁盘上的第 0 个条目并获得一个可能不适合当前锦标赛的输入（因为其值要“胜过”上一个输出值），它无法被放入堆中，因此堆的尺寸将缩小。 被释放的内存可以被巧妙地立即重用以逐步构建第二个堆，其增长速度与第一个堆的缩减速度正好相同。 当第一个堆完全消失时，你可以切换新堆并启动新的运行轮次。 这样做既聪明又高效！</p>
-<p>总之，堆是值得了解的有用内存结构。 我在一些应用中用到了它们，并且认为保留一个 'heap' 模块是很有意义的。 :-)</p>
+<p>总之，堆是值得了解的有用内存结构。 我在一些应用中用到了它们，并且认为保留一个 ‘heap’ 模块是很有意义的。 :-)</p>
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -340,9 +346,10 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> --- 堆队列算法</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> — 堆队列算法</a><ul>
 <li><a class="reference internal" href="#basic-examples">基本示例</a></li>
 <li><a class="reference internal" href="#priority-queue-implementation-notes">优先队列实现说明</a></li>
 <li><a class="reference internal" href="#theory">理论</a></li>
@@ -350,12 +357,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="collections.abc.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> --- 容器的抽象基类</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="bisect.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> --- 数组二分查找算法</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="collections.abc.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code> — 容器的抽象基类</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="bisect.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bisect</span></code> — 数组二分查找算法</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -381,10 +393,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="bisect.html" title="bisect --- 数组二分查找算法"
+          <a href="bisect.html" title="bisect — 数组二分查找算法"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="collections.abc.html" title="collections.abc --- 容器的抽象基类"
+          <a href="collections.abc.html" title="collections.abc — 容器的抽象基类"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -397,12 +409,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" >数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> --- 堆队列算法</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">heapq</span></code> — 堆队列算法</a></li>
                 <li class="right">
                     
 
@@ -426,7 +438,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -434,11 +446,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

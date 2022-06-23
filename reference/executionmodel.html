@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. 执行模型 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. 执行模型 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">4. 执行模型</a><ul>
 <li><a class="reference internal" href="#structure-of-a-program">4.1. 程序的结构</a></li>
 <li><a class="reference internal" href="#naming-and-binding">4.2. 命名与绑定</a><ul>
@@ -86,12 +87,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datamodel.html"
-                        title="上一章"><span class="section-number">3. </span>数据模型</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="import.html"
-                        title="下一章"><span class="section-number">5. </span>导入系统</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datamodel.html"
+                          title="上一章"><span class="section-number">3. </span>数据模型</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="import.html"
+                          title="下一章"><span class="section-number">5. </span>导入系统</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -134,7 +140,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -204,7 +210,7 @@
 <p><a class="reference internal" href="simple_stmts.html#global"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">global</span></code></a> 语句与同一代码块中名称绑定具有相同的作用域。 如果一个自由变量的最近包含作用域中有一条 global 语句，则该自由变量也会被当作是全局变量。</p>
 <p><a class="reference internal" href="simple_stmts.html#nonlocal"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">nonlocal</span></code></a> 语句会使得相应的名称指向之前在最近包含函数作用域中绑定的变量。 如果指定名称不存在于任何包含函数作用域中则将在编译时引发 <a class="reference internal" href="../library/exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>。</p>
 <p id="index-10">模块的作用域会在模块第一次被导入时自动创建。 一个脚本的主模块总是被命名为 <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where top-level code is run. Covers command-line interfaces, import-time behavior, and ``__name__ == '__main__'``."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a>。</p>
-<p>类定义代码块以及传给 <a class="reference internal" href="../library/functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> 和 <a class="reference internal" href="../library/functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 的参数是名称解析上下文中的特殊情况。 类定义是可能使用并定义名称的可执行语句。 这些引用遵循正常的名称解析规则，例外之处在于未绑定的局部变量将会在全局命名空间中查找。 类定义的命名空间会成为该类的属性字典。 在类代码块中定义的名称的作用域会被限制在类代码块中；它不会扩展到方法的代码块中 -- 这也包括推导式和生成器表达式，因为它们都是使用函数作用域实现的。 这意味着以下代码将会失败:</p>
+<p>类定义代码块以及传给 <a class="reference internal" href="../library/functions.html#exec" title="exec"><code class="xref py py-func docutils literal notranslate"><span class="pre">exec()</span></code></a> 和 <a class="reference internal" href="../library/functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 的参数是名称解析上下文中的特殊情况。 类定义是可能使用并定义名称的可执行语句。 这些引用遵循正常的名称解析规则，例外之处在于未绑定的局部变量将会在全局命名空间中查找。 类定义的命名空间会成为该类的属性字典。 在类代码块中定义的名称的作用域会被限制在类代码块中；它不会扩展到方法的代码块中 – 这也包括推导式和生成器表达式，因为它们都是使用函数作用域实现的。 这意味着以下代码将会失败:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span>
     <span class="n">b</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
@@ -234,12 +240,16 @@
 <section id="exceptions">
 <span id="id2"></span><h2><span class="section-number">4.3. </span>异常<a class="headerlink" href="#exceptions" title="永久链接至标题">¶</a></h2>
 <span class="target" id="index-12"></span><p id="index-13">异常是中断代码块的正常控制流程以便处理错误或其他异常条件的一种方式。 异常会在错误被检测到的位置 <em>引发</em>，它可以被当前包围代码块或是任何直接或间接发起调用发生错误的代码块的其他代码块所 <em>处理</em>。</p>
-<p>Python 解析器会在检测到运行时错误（例如零作为被除数）的时候引发异常。 Python 程序也可以通过 <a class="reference internal" href="simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 语句显式地引发异常。 异常处理是通过 <a class="reference internal" href="compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 语句来指定的。 该语句的 <a class="reference internal" href="compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 子句可被用来指定清理代码，它并不处理异常，而是无论之前的代码是否发生异常都会被执行。</p>
+<p>Python 解析器会在检测到运行时错误（例如零作为被除数）的时候引发异常。 Python 程序也可以通过 <a class="reference internal" href="simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 语句显式地引发异常。 异常处理是通过 <a class="reference internal" href="compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> … <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 语句来指定的。 该语句的 <a class="reference internal" href="compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 子句可被用来指定清理代码，它并不处理异常，而是无论之前的代码是否发生异常都会被执行。</p>
 <p id="index-14">Python 的错误处理采用的是“终止”模型：异常处理器可以找出发生了什么问题，并在外层继续执行，但它不能修复错误的根源并重试失败的操作（除非通过从顶层重新进入出错的代码片段）。</p>
 <p id="index-15">当一个异常完全未被处理时，解释器会终止程序的执行，或者返回交互模式的主循环。 无论是哪种情况，它都会打印栈回溯信息，除非是当异常为 <a class="reference internal" href="../library/exceptions.html#SystemExit" title="SystemExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemExit</span></code></a> 的时候。</p>
-<p>异常是通过类实例来标识的。 <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 子句会依据实例的类来选择：它必须引用实例的类或是其所属的基类。 实例可通过处理器被接收，并可携带有关异常条件的附加信息。</p>
+<p>Exceptions are identified by class instances.  The <a class="reference internal" href="compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> clause is
+selected depending on the class of the instance: it must reference the class of
+the instance or a <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">non-virtual base class</span></a> thereof.
+The instance can be received by the handler and can carry additional information
+about the exceptional condition.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>异常消息不是 Python API 的组成部分。 其内容可能在 Python 升级到新版本时不经警告地发生改变，不应该被需要在多版本解释器中运行的代码所依赖。</p>
 </div>
 <p>另请参看  <a class="reference internal" href="compound_stmts.html#try"><span class="std std-ref">try 语句</span></a> 小节中对 <a class="reference internal" href="compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> 语句的描述以及 <a class="reference internal" href="simple_stmts.html#raise"><span class="std std-ref">raise 语句</span></a> 小节中对 <a class="reference internal" href="simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 语句的描述。</p>
@@ -259,8 +269,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">4. 执行模型</a><ul>
 <li><a class="reference internal" href="#structure-of-a-program">4.1. 程序的结构</a></li>
 <li><a class="reference internal" href="#naming-and-binding">4.2. 命名与绑定</a><ul>
@@ -275,12 +286,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datamodel.html"
-                        title="上一章"><span class="section-number">3. </span>数据模型</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="import.html"
-                        title="下一章"><span class="section-number">5. </span>导入系统</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datamodel.html"
+                          title="上一章"><span class="section-number">3. </span>数据模型</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="import.html"
+                          title="下一章"><span class="section-number">5. </span>导入系统</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -322,7 +338,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -350,7 +366,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -358,11 +374,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

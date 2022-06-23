@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>resource --- 资源使用信息 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>resource — 资源使用信息 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="nis --- Sun 的 NIS (黄页) 接口" href="nis.html" />
-    <link rel="prev" title="pipes --- 终端管道接口" href="pipes.html" />
+    <link rel="next" title="Unix syslog 库例程" href="syslog.html" />
+    <link rel="prev" title="fcntl —— 系统调用 fcntl 和 ioctl" href="fcntl.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/resource.html" />
     
       
@@ -70,21 +70,27 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — 资源使用信息</a><ul>
 <li><a class="reference internal" href="#resource-limits">资源限制</a></li>
 <li><a class="reference internal" href="#resource-usage">资源用量</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pipes.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="nis.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nis</span></code> --- Sun 的 NIS (黄页) 接口</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="fcntl.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fcntl</span></code> —— 系统调用 <code class="docutils literal notranslate"><span class="pre">fcntl</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="syslog.html"
+                          title="下一章">Unix syslog 库例程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -111,10 +117,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="nis.html" title="nis --- Sun 的 NIS (黄页) 接口"
+          <a href="syslog.html" title="Unix syslog 库例程"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="pipes.html" title="pipes --- 终端管道接口"
+          <a href="fcntl.html" title="fcntl —— 系统调用 fcntl 和 ioctl"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -127,12 +133,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix.html" accesskey="U">Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — 资源使用信息</a></li>
                 <li class="right">
                     
 
@@ -156,17 +162,17 @@
           <div class="body" role="main">
             
   <section id="module-resource">
-<span id="resource-resource-usage-information"></span><h1><a class="reference internal" href="#module-resource" title="resource: An interface to provide resource usage information on the current process. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code></a> --- 资源使用信息<a class="headerlink" href="#module-resource" title="永久链接至标题">¶</a></h1>
+<span id="resource-resource-usage-information"></span><h1><a class="reference internal" href="#module-resource" title="resource: An interface to provide resource usage information on the current process. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code></a> — 资源使用信息<a class="headerlink" href="#module-resource" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
 <p>该模块提供了测量和控制程序所利用的系统资源的基本机制。</p>
 <p>符号常量被用来指定特定的系统资源，并要求获得关于当前进程或其子进程的使用信息。</p>
 <p>当系统调用失败时，会触发一个 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 。</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="resource.error">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#resource.error" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#resource.error" title="永久链接至目标">¶</a></dt>
 <dd><p>一个被弃用的 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的别名。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>根据 <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3151"><strong>PEP 3151</strong></a>，这个类是 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的别名。</p>
+<p><span class="versionmodified changed">在 3.3 版更改: </span>根据 <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-3151/"><strong>PEP 3151</strong></a>，这个类是 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 的别名。</p>
 </div>
 </dd></dl>
 
@@ -198,7 +204,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="resource.prlimit">
-<span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">prlimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">pid</span></em>, <em class="sig-param"><span class="pre">resource</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">limits</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#resource.prlimit" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">prlimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">limits</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#resource.prlimit" title="永久链接至目标">¶</a></dt>
 <dd><p>将 <a class="reference internal" href="#resource.setrlimit" title="resource.setrlimit"><code class="xref py py-func docutils literal notranslate"><span class="pre">setrlimit()</span></code></a> 和 <a class="reference internal" href="#resource.getrlimit" title="resource.getrlimit"><code class="xref py py-func docutils literal notranslate"><span class="pre">getrlimit()</span></code></a> 合并为一个函数，支持获取和设置任意进程的资源限制。如果 <em>pid</em> 为0，那么该调用适用于当前进程。 <em>resource</em> 和 <em>limits</em> 的含义与 <a class="reference internal" href="#resource.setrlimit" title="resource.setrlimit"><code class="xref py py-func docutils literal notranslate"><span class="pre">setrlimit()</span></code></a> 相同，只是 <em>limits</em> 是可选的。</p>
 <p>当 <em>limits</em> 没有给出时，该函数返回进程 <em>pid</em> 的 <em>resource</em> 限制。当 <em>limits</em> 被给定时，进程的 <em>resource</em> 限制被设置，并返回以前的资源限制。</p>
 <p>当 <em>pid</em> 找不到时，触发 <a class="reference internal" href="exceptions.html#ProcessLookupError" title="ProcessLookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ProcessLookupError</span></code></a> ；当用户没有进程的 <code class="docutils literal notranslate"><span class="pre">CAP_SYS_RESOURCE</span></code> 时，触发 <a class="reference internal" href="exceptions.html#PermissionError" title="PermissionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PermissionError</span></code></a> 。</p>
@@ -524,21 +530,27 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — 资源使用信息</a><ul>
 <li><a class="reference internal" href="#resource-limits">资源限制</a></li>
 <li><a class="reference internal" href="#resource-usage">资源用量</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pipes.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="nis.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nis</span></code> --- Sun 的 NIS (黄页) 接口</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="fcntl.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fcntl</span></code> —— 系统调用 <code class="docutils literal notranslate"><span class="pre">fcntl</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="syslog.html"
+                          title="下一章">Unix syslog 库例程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -564,10 +576,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="nis.html" title="nis --- Sun 的 NIS (黄页) 接口"
+          <a href="syslog.html" title="Unix syslog 库例程"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="pipes.html" title="pipes --- 终端管道接口"
+          <a href="fcntl.html" title="fcntl —— 系统调用 fcntl 和 ioctl"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -580,12 +592,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix.html" >Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> — 资源使用信息</a></li>
                 <li class="right">
                     
 
@@ -609,7 +621,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -617,11 +629,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

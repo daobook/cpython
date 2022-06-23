@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>导入模块 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导入模块 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sys.html"
-                        title="上一章">操作系统实用程序</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="marshal.html"
-                        title="下一章">数据 marshal 操作支持</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sys.html"
+                          title="上一章">操作系统实用程序</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="marshal.html"
+                          title="下一章">数据 marshal 操作支持</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -159,9 +163,9 @@ argument contains a dot (when it specifies a submodule of a package), the
 named module rather than the top-level package containing it as would otherwise
 be the case.  (Unfortunately, this has an additional side effect when <em>name</em> in
 fact specifies a subpackage instead of a submodule: the submodules specified in
-the package's <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable are  loaded.)  Return a new reference to the
+the package’s <code class="docutils literal notranslate"><span class="pre">__all__</span></code> variable are  loaded.)  Return a new reference to the
 imported module, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> with an exception set on failure.  A failing
-import of a module doesn't leave the module in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a>.</p>
+import of a module doesn’t leave the module in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a>.</p>
 <p>该函数总是使用绝对路径导入。</p>
 </dd></dl>
 
@@ -172,8 +176,8 @@ import of a module doesn't leave the module in <a class="reference internal" hre
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>This function used to fail immediately when the import lock was held
 by another thread.  In Python 3.3 though, the locking scheme switched
-to per-module locks for most purposes, so this function's special
-behaviour isn't needed anymore.</p>
+to per-module locks for most purposes, so this function’s special
+behaviour isn’t needed anymore.</p>
 </div>
 </dd></dl>
 
@@ -219,8 +223,8 @@ UTF-8 encoded string instead of a Unicode object.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyImport_Import">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyImport_Import</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyImport_Import" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is a higher-level interface that calls the current &quot;import hook
-function&quot; (with an explicit <em>level</em> of 0, meaning absolute import).  It
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is a higher-level interface that calls the current “import hook
+function” (with an explicit <em>level</em> of 0, meaning absolute import).  It
 invokes the <a class="reference internal" href="../library/functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> function from the <code class="docutils literal notranslate"><span class="pre">__builtins__</span></code> of the
 current globals.  This means that the import is done using whatever import
 hooks are installed in the current environment.</p>
@@ -239,11 +243,11 @@ an exception set on failure (the module still exists in this case).</p>
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyImport_AddModuleObject</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyImport_AddModuleObject" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: Borrowed reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.7.</em><p>Return the module object corresponding to a module name.  The <em>name</em> argument
 may be of the form <code class="docutils literal notranslate"><span class="pre">package.module</span></code>. First check the modules dictionary if
-there's one there, and if not, create a new one and insert it in the modules
+there’s one there, and if not, create a new one and insert it in the modules
 dictionary. Return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> with an exception set on failure.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>This function does not load or import the module; if the module wasn't already
+<p class="admonition-title">备注</p>
+<p>This function does not load or import the module; if the module wasn’t already
 loaded, you will get an empty module object. Use <a class="reference internal" href="#c.PyImport_ImportModule" title="PyImport_ImportModule"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ImportModule()</span></code></a>
 or one of its variants to import a module.  Package structures implied by a
 dotted name for <em>name</em> are not created if not already present.</p>
@@ -271,12 +275,12 @@ is removed from <a class="reference internal" href="../library/sys.html#sys.modu
 in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.modules</span></code></a> on entry to <a class="reference internal" href="#c.PyImport_ExecCodeModule" title="PyImport_ExecCodeModule"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ExecCodeModule()</span></code></a>.  Leaving
 incompletely initialized modules in <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.modules</span></code></a> is dangerous, as imports of
 such modules have no way to know that the module object is an unknown (and
-probably damaged with respect to the module author's intents) state.</p>
-<p>The module's <a class="reference internal" href="../reference/import.html#spec__" title="__spec__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__spec__</span></code></a> and <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> will be set, if
-not set already, with the appropriate values.  The spec's loader will
-be set to the module's <code class="docutils literal notranslate"><span class="pre">__loader__</span></code> (if set) and to an instance of
+probably damaged with respect to the module author’s intents) state.</p>
+<p>The module’s <a class="reference internal" href="../reference/import.html#spec__" title="__spec__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__spec__</span></code></a> and <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> will be set, if
+not set already, with the appropriate values.  The spec’s loader will
+be set to the module’s <code class="docutils literal notranslate"><span class="pre">__loader__</span></code> (if set) and to an instance of
 <code class="xref py py-class docutils literal notranslate"><span class="pre">SourceFileLoader</span></code> otherwise.</p>
-<p>The module's <a class="reference internal" href="../reference/import.html#file__" title="__file__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__file__</span></code></a> attribute will be set to the code object's
+<p>The module’s <a class="reference internal" href="../reference/import.html#file__" title="__file__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__file__</span></code></a> attribute will be set to the code object’s
 <code class="xref c c-member docutils literal notranslate"><span class="pre">co_filename</span></code>.  If applicable, <a class="reference internal" href="../reference/import.html#cached__" title="__cached__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__cached__</span></code></a> will also
 be set.</p>
 <p>This function will reload the module if it was already imported.  See
@@ -336,7 +340,7 @@ file, in little-endian byte order. Returns <code class="docutils literal notrans
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyImport_GetMagicTag">
 <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyImport_GetMagicTag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyImport_GetMagicTag" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the magic tag string for <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3147"><strong>PEP 3147</strong></a> format Python bytecode file
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the magic tag string for <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-3147/"><strong>PEP 3147</strong></a> format Python bytecode file
 names.  Keep in mind that the value at <code class="docutils literal notranslate"><span class="pre">sys.implementation.cache_tag</span></code> is
 authoritative and should be used instead of this function.</p>
 <div class="versionadded">
@@ -367,7 +371,7 @@ an error.  Returns <code class="docutils literal notranslate"><span class="pre">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyImport_GetImporter</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyImport_GetImporter" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a finder object for a <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>/<code class="xref py py-attr docutils literal notranslate"><span class="pre">pkg.__path__</span></code> item
 <em>path</em>, possibly by fetching it from the <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a>
-dict.  If it wasn't yet cached, traverse <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> until a hook
+dict.  If it wasn’t yet cached, traverse <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> until a hook
 is found that can handle the path item.  Return <code class="docutils literal notranslate"><span class="pre">None</span></code> if no hook could;
 this tells our caller that the <a class="reference internal" href="../glossary.html#term-path-based-finder"><span class="xref std std-term">path based finder</span></a> could not find a
 finder for this path item. Cache the result in <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a>.
@@ -380,7 +384,7 @@ Return a new reference to the finder object.</p>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.7.</em><p>Load a frozen module named <em>name</em>.  Return <code class="docutils literal notranslate"><span class="pre">1</span></code> for success, <code class="docutils literal notranslate"><span class="pre">0</span></code> if the
 module is not found, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> with an exception set if the initialization
 failed.  To access the imported module on a successful load, use
-<a class="reference internal" href="#c.PyImport_ImportModule" title="PyImport_ImportModule"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ImportModule()</span></code></a>.  (Note the misnomer --- this function would
+<a class="reference internal" href="#c.PyImport_ImportModule" title="PyImport_ImportModule"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ImportModule()</span></code></a>.  (Note the misnomer — this function would
 reload the module if it was already imported.)</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -475,12 +479,16 @@ initialization.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sys.html"
-                        title="上一章">操作系统实用程序</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="marshal.html"
-                        title="下一章">数据 marshal 操作支持</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sys.html"
+                          title="上一章">操作系统实用程序</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="marshal.html"
+                          title="下一章">数据 marshal 操作支持</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -522,7 +530,7 @@ initialization.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -551,7 +559,7 @@ initialization.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -559,11 +567,11 @@ initialization.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

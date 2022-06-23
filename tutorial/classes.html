@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>9. 类 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9. 类 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">9. 类</a><ul>
 <li><a class="reference internal" href="#a-word-about-names-and-objects">9.1. 名称和对象</a></li>
 <li><a class="reference internal" href="#python-scopes-and-namespaces">9.2. Python 作用域和命名空间</a><ul>
@@ -100,12 +101,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="errors.html"
-                        title="上一章"><span class="section-number">8. </span>错误和异常</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="stdlib.html"
-                        title="下一章"><span class="section-number">10. </span>标准库简介</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="errors.html"
+                          title="上一章"><span class="section-number">8. </span>错误和异常</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="stdlib.html"
+                          title="下一章"><span class="section-number">10. </span>标准库简介</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -148,7 +154,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 教程</a> &#187;</li>
@@ -183,14 +189,14 @@
 <p>（由于缺乏关于类的公认术语，我会偶尔使用 Smalltalk、C++ 的术语，我还会使用 Modula-3 的术语，因为它的面向对象语义比 C++ 更接近 Python，但估计没几个读者听说过这门语言。）</p>
 <section id="a-word-about-names-and-objects">
 <span id="tut-object"></span><h2><span class="section-number">9.1. </span>名称和对象<a class="headerlink" href="#a-word-about-names-and-objects" title="永久链接至标题">¶</a></h2>
-<p>对象之间相互独立，多个名称（在多个作用域内）可以绑定到同一个对象。 其他语言称之为别名。Python 初学者通常不容易理解这个概念，处理数字、字符串、元组等不可变基本类型时，可以不必理会。 但是，对涉及可变对象，如列表、字典等大多数其他类型的 Python 代码的语义，别名可能会产生意料之外的效果。这样做，通常是为了让程序受益，因为别名在某些方面就像指针。例如，传递对象的代价很小，因为实现只传递一个指针；如果函数修改了作为参数传递的对象，调用者就可以看到更改 --- 无需 Pascal 用两个不同参数的传递机制。</p>
+<p>对象之间相互独立，多个名称（在多个作用域内）可以绑定到同一个对象。 其他语言称之为别名。Python 初学者通常不容易理解这个概念，处理数字、字符串、元组等不可变基本类型时，可以不必理会。 但是，对涉及可变对象，如列表、字典等大多数其他类型的 Python 代码的语义，别名可能会产生意料之外的效果。这样做，通常是为了让程序受益，因为别名在某些方面就像指针。例如，传递对象的代价很小，因为实现只传递一个指针；如果函数修改了作为参数传递的对象，调用者就可以看到更改 — 无需 Pascal 用两个不同参数的传递机制。</p>
 </section>
 <section id="python-scopes-and-namespaces">
 <span id="tut-scopes"></span><h2><span class="section-number">9.2. </span>Python 作用域和命名空间<a class="headerlink" href="#python-scopes-and-namespaces" title="永久链接至标题">¶</a></h2>
 <p>在介绍类之前，我首先要告诉你一些 Python 的作用域规则。类定义对命名空间有一些巧妙的技巧，你需要知道作用域和命名空间如何工作才能完全理解正在发生的事情。顺便说一下，关于这个主题的知识对任何高级 Python 程序员都很有用。</p>
 <p>让我们从一些定义开始。</p>
-<p><em>namespace</em> （命名空间）是一个从名字到对象的映射。 当前大部分命名空间都由 Python 字典实现，但一般情况下基本不会去关注它们（除了要面对性能问题时），而且也有可能在将来更改。 下面是几个命名空间的例子：存放内置函数的集合（包含 <a class="reference internal" href="../library/functions.html#abs" title="abs"><code class="xref py py-func docutils literal notranslate"><span class="pre">abs()</span></code></a> 这样的函数，和内建的异常等）；模块中的全局名称；函数调用中的局部名称。 从某种意义上说，对象的属性集合也是一种命名空间的形式。 关于命名空间的重要一点是，不同命名空间中的名称之间绝对没有关系；例如，两个不同的模块都可以定义一个 <code class="docutils literal notranslate"><span class="pre">maximize</span></code> 函数而不会产生混淆 --- 模块的用户必须在其前面加上模块名称。</p>
-<p>顺便说明一下，我把任何跟在一个点号之后的名称都称为 <em>属性</em> --- 例如，在表达式 <code class="docutils literal notranslate"><span class="pre">z.real</span></code> 中，<code class="docutils literal notranslate"><span class="pre">real</span></code> 是对象 <code class="docutils literal notranslate"><span class="pre">z</span></code> 的一个属性。按严格的说法，对模块中名称的引用属于属性引用：在表达式 <code class="docutils literal notranslate"><span class="pre">modname.funcname</span></code> 中，<code class="docutils literal notranslate"><span class="pre">modname</span></code> 是一个模块对象而 <code class="docutils literal notranslate"><span class="pre">funcname</span></code> 是它的一个属性。在此情况下在模块的属性和模块中定义的全局名称之间正好存在一个直观的映射：它们共享相同的命名空间！ <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
+<p><em>namespace</em> （命名空间）是一个从名字到对象的映射。 当前大部分命名空间都由 Python 字典实现，但一般情况下基本不会去关注它们（除了要面对性能问题时），而且也有可能在将来更改。 下面是几个命名空间的例子：存放内置函数的集合（包含 <a class="reference internal" href="../library/functions.html#abs" title="abs"><code class="xref py py-func docutils literal notranslate"><span class="pre">abs()</span></code></a> 这样的函数，和内建的异常等）；模块中的全局名称；函数调用中的局部名称。 从某种意义上说，对象的属性集合也是一种命名空间的形式。 关于命名空间的重要一点是，不同命名空间中的名称之间绝对没有关系；例如，两个不同的模块都可以定义一个 <code class="docutils literal notranslate"><span class="pre">maximize</span></code> 函数而不会产生混淆 — 模块的用户必须在其前面加上模块名称。</p>
+<p>顺便说明一下，我把任何跟在一个点号之后的名称都称为 <em>属性</em> — 例如，在表达式 <code class="docutils literal notranslate"><span class="pre">z.real</span></code> 中，<code class="docutils literal notranslate"><span class="pre">real</span></code> 是对象 <code class="docutils literal notranslate"><span class="pre">z</span></code> 的一个属性。按严格的说法，对模块中名称的引用属于属性引用：在表达式 <code class="docutils literal notranslate"><span class="pre">modname.funcname</span></code> 中，<code class="docutils literal notranslate"><span class="pre">modname</span></code> 是一个模块对象而 <code class="docutils literal notranslate"><span class="pre">funcname</span></code> 是它的一个属性。在此情况下在模块的属性和模块中定义的全局名称之间正好存在一个直观的映射：它们共享相同的命名空间！ <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
 <p>属性可以是只读或者可写的。如果为后者，那么对属性的赋值是可行的。模块属性是可写的，你可以写 <code class="docutils literal notranslate"><span class="pre">modname.the_answer</span> <span class="pre">=</span> <span class="pre">42</span></code> 。可写的属性同样可以用 <a class="reference internal" href="../reference/simple_stmts.html#del"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">del</span></code></a> 语句删除。例如， <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">modname.the_answer</span></code> 将会从名为 <code class="docutils literal notranslate"><span class="pre">modname</span></code> 的对象中移除 <code class="xref py py-attr docutils literal notranslate"><span class="pre">the_answer</span></code> 属性。</p>
 <p>命名空间在不同时刻被创建，拥有不同的生存期。包含内置名称的命名空间是在 Python 解释器启动时创建的，永远不会被删除。模块的全局命名空间在模块定义被读入时创建；通常，模块命名空间也会持续到解释器退出。被解释器的顶层调用执行的语句，从一个脚本文件读取或交互式地读取，被认为是 <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where top-level code is run. Covers command-line interfaces, import-time behavior, and ``__name__ == '__main__'``."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a> 模块调用的一部分，因此它们拥有自己的全局命名空间。（内置名称实际上也存在于一个模块中；这个模块被称作 <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a> 。）</p>
 <p>一个函数的本地命名空间在这个函数被调用时创建，并在函数返回或抛出一个不在函数内部处理的错误时被删除。（事实上，比起描述到底发生了什么，忘掉它更好。）当然，每次递归调用都会有它自己的本地命名空间。</p>
@@ -204,8 +210,8 @@
 </ul>
 <p>如果一个名称被声明为全局变量，则所有引用和赋值将直接指向包含该模块的全局名称的中间作用域。 要重新绑定在最内层作用域以外找到的变量，可以使用 <a class="reference internal" href="../reference/simple_stmts.html#nonlocal"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">nonlocal</span></code></a> 语句声明为非本地变量。 如果没有被声明为非本地变量，这些变量将是只读的（尝试写入这样的变量只会在最内层作用域中创建一个 <em>新的</em> 局部变量，而同名的外部变量保持不变）。</p>
 <p>通常，当前局部作用域将（按字面文本）引用当前函数的局部名称。 在函数以外，局部作用域将引用与全局作用域相一致的命名空间：模块的命名空间。 类定义将在局部命名空间内再放置另一个命名空间。</p>
-<p>重要的是应该意识到作用域是按字面文本来确定的：在一个模块内定义的函数的全局作用域就是该模块的命名空间，无论该函数从什么地方或以什么别名被调用。  另一方面，实际的名称搜索是在运行时动态完成的 --- 但是，Python 正在朝着“编译时静态名称解析”的方向发展，因此不要过于依赖动态名称解析！ （事实上，局部变量已经是被静态确定了。）</p>
-<p>Python 的一个特殊规定是这样的 -- 如果不存在生效的 <a class="reference internal" href="../reference/simple_stmts.html#global"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">global</span></code></a> 或 <a class="reference internal" href="../reference/simple_stmts.html#nonlocal"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">nonlocal</span></code></a> 语句 -- 则对名称的赋值总是会进入最内层作用域。 赋值不会复制数据 --- 它们只是将名称绑定到对象。 删除也是如此：语句 <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">x</span></code> 会从局部作用域所引用的命名空间中移除对 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的绑定。 事实上，所有引入新名称的操作都是使用局部作用域：特别地，<a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句和函数定义会在局部作用域中绑定模块或函数名称。</p>
+<p>重要的是应该意识到作用域是按字面文本来确定的：在一个模块内定义的函数的全局作用域就是该模块的命名空间，无论该函数从什么地方或以什么别名被调用。  另一方面，实际的名称搜索是在运行时动态完成的 — 但是，Python 正在朝着“编译时静态名称解析”的方向发展，因此不要过于依赖动态名称解析！ （事实上，局部变量已经是被静态确定了。）</p>
+<p>Python 的一个特殊规定是这样的 – 如果不存在生效的 <a class="reference internal" href="../reference/simple_stmts.html#global"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">global</span></code></a> 或 <a class="reference internal" href="../reference/simple_stmts.html#nonlocal"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">nonlocal</span></code></a> 语句 – 则对名称的赋值总是会进入最内层作用域。 赋值不会复制数据 — 它们只是将名称绑定到对象。 删除也是如此：语句 <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">x</span></code> 会从局部作用域所引用的命名空间中移除对 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的绑定。 事实上，所有引入新名称的操作都是使用局部作用域：特别地，<a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句和函数定义会在局部作用域中绑定模块或函数名称。</p>
 <p><a class="reference internal" href="../reference/simple_stmts.html#global"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">global</span></code></a> 语句可被用来表明特定变量生存于全局作用域并且应当在其中被重新绑定；<a class="reference internal" href="../reference/simple_stmts.html#nonlocal"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">nonlocal</span></code></a> 语句表明特定变量生存于外层作用域中并且应当在其中被重新绑定。</p>
 <section id="scopes-and-namespaces-example">
 <span id="tut-scopeexample"></span><h3><span class="section-number">9.2.1. </span>作用域和命名空间示例<a class="headerlink" href="#scopes-and-namespaces-example" title="永久链接至标题">¶</a></h3>
@@ -260,8 +266,8 @@ In global scope: global spam
 </pre></div>
 </div>
 <p>类定义与函数定义 (<a class="reference internal" href="../reference/compound_stmts.html#def"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">def</span></code></a> 语句) 一样必须被执行才会起作用。 （你可以尝试将类定义放在 <a class="reference internal" href="../reference/compound_stmts.html#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> 语句的一个分支或是函数的内部。）</p>
-<p>在实践中，类定义内的语句通常都是函数定义，但也允许有其他语句，有时还很有用 --- 我们会稍后再回来说明这个问题。 在类内部的函数定义通常具有一种特别形式的参数列表，这是方法调用的约定规范所指明的 --- 这个问题也将在稍后再说明。</p>
-<p>当进入类定义时，将创建一个新的命名空间，并将其用作局部作用域 --- 因此，所有对局部变量的赋值都是在这个新命名空间之内。 特别的，函数定义会绑定到这里的新函数名称。</p>
+<p>在实践中，类定义内的语句通常都是函数定义，但也允许有其他语句，有时还很有用 — 我们会稍后再回来说明这个问题。 在类内部的函数定义通常具有一种特别形式的参数列表，这是方法调用的约定规范所指明的 — 这个问题也将在稍后再说明。</p>
+<p>当进入类定义时，将创建一个新的命名空间，并将其用作局部作用域 — 因此，所有对局部变量的赋值都是在这个新命名空间之内。 特别的，函数定义会绑定到这里的新函数名称。</p>
 <p>当（从结尾处）正常离开类定义时，将创建一个 <em>类对象</em>。 这基本上是一个包围在类定义所创建命名空间内容周围的包装器；我们将在下一节了解有关类对象的更多信息。 原始的（在进入类定义之前起作用的）局部作用域将重新生效，类对象将在这里被绑定到类定义头所给出的类名称 (在这个示例中为 <code class="xref py py-class docutils literal notranslate"><span class="pre">ClassName</span></code>)。</p>
 </section>
 <section id="class-objects">
@@ -315,7 +321,7 @@ In global scope: global spam
 </pre></div>
 </div>
 <p>另一类实例属性引用称为 <em>方法</em>。 方法是“从属于”对象的函数。 （在 Python 中，方法这个术语并不是类实例所特有的：其他对象也可以有方法。 例如，列表对象具有 append, insert, remove, sort 等方法。 然而，在以下讨论中，我们使用方法一词将专指类实例对象的方法，除非另外显式地说明。）</p>
-<p id="index-0">实例对象的有效方法名称依赖于其所属的类。 根据定义，一个类中所有是函数对象的属性都是定义了其实例的相应方法。 因此在我们的示例中，<code class="docutils literal notranslate"><span class="pre">x.f</span></code> 是有效的方法引用，因为 <code class="docutils literal notranslate"><span class="pre">MyClass.f</span></code> 是一个函数，而 <code class="docutils literal notranslate"><span class="pre">x.i</span></code> 不是方法，因为 <code class="docutils literal notranslate"><span class="pre">MyClass.i</span></code> 不是函数。 但是 <code class="docutils literal notranslate"><span class="pre">x.f</span></code> 与 <code class="docutils literal notranslate"><span class="pre">MyClass.f</span></code> 并不是一回事 --- 它是一个 <em>方法对象</em>，不是函数对象。</p>
+<p id="index-0">实例对象的有效方法名称依赖于其所属的类。 根据定义，一个类中所有是函数对象的属性都是定义了其实例的相应方法。 因此在我们的示例中，<code class="docutils literal notranslate"><span class="pre">x.f</span></code> 是有效的方法引用，因为 <code class="docutils literal notranslate"><span class="pre">MyClass.f</span></code> 是一个函数，而 <code class="docutils literal notranslate"><span class="pre">x.i</span></code> 不是方法，因为 <code class="docutils literal notranslate"><span class="pre">MyClass.i</span></code> 不是函数。 但是 <code class="docutils literal notranslate"><span class="pre">x.f</span></code> 与 <code class="docutils literal notranslate"><span class="pre">MyClass.f</span></code> 并不是一回事 — 它是一个 <em>方法对象</em>，不是函数对象。</p>
 </section>
 <section id="method-objects">
 <span id="tut-methodobjects"></span><h3><span class="section-number">9.3.4. </span>方法对象<a class="headerlink" href="#method-objects" title="永久链接至标题">¶</a></h3>
@@ -330,7 +336,7 @@ In global scope: global spam
 </pre></div>
 </div>
 <p>将持续打印 <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">world</span></code>，直到结束。</p>
-<p>当一个方法被调用时到底发生了什么？ 你可能已经注意到上面调用 <code class="docutils literal notranslate"><span class="pre">x.f()</span></code> 时并没有带参数，虽然 <code class="xref py py-meth docutils literal notranslate"><span class="pre">f()</span></code> 的函数定义指定了一个参数。 这个参数发生了什么事？ 当不带参数地调用一个需要参数的函数时 Python 肯定会引发异常 --- 即使参数实际未被使用...</p>
+<p>当一个方法被调用时到底发生了什么？ 你可能已经注意到上面调用 <code class="docutils literal notranslate"><span class="pre">x.f()</span></code> 时并没有带参数，虽然 <code class="xref py py-meth docutils literal notranslate"><span class="pre">f()</span></code> 的函数定义指定了一个参数。 这个参数发生了什么事？ 当不带参数地调用一个需要参数的函数时 Python 肯定会引发异常 — 即使参数实际未被使用…</p>
 <p>实际上，你可能已经猜到了答案：方法的特殊之处就在于实例对象会作为函数的第一个参数被传入。 在我们的示例中，调用 <code class="docutils literal notranslate"><span class="pre">x.f()</span></code> 其实就相当于 <code class="docutils literal notranslate"><span class="pre">MyClass.f(x)</span></code>。 总之，调用一个具有 <em>n</em> 个参数的方法就相当于调用再多一个参数的对应函数，这个参数值为方法所属实例对象，位置在其他参数之前。</p>
 <p>如果你仍然无法理解方法的运作原理，那么查看实现细节可能会弄清楚问题。 当一个实例的非数据属性被引用时，将搜索实例所属的类。 如果被引用的属性名称表示一个有效的类属性中的函数对象，会通过打包（指向）查找到的实例对象和函数对象到一个抽象对象的方式来创建方法对象：这个抽象对象就是方法对象。 当附带参数列表调用方法对象时，将基于实例对象和参数列表构建一个新的参数列表，并使用这个新参数列表调用相应的函数对象。</p>
 </section>
@@ -401,9 +407,9 @@ In global scope: global spam
 <span id="tut-remarks"></span><h2><span class="section-number">9.4. </span>补充说明<a class="headerlink" href="#random-remarks" title="永久链接至标题">¶</a></h2>
 <p>如果同样的属性名称同时出现在实例和类中，则属性查找会优先选择实例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Warehouse</span><span class="p">:</span>
-<span class="go">        purpose = &#39;storage&#39;</span>
-<span class="go">        region = &#39;west&#39;</span>
-
+<span class="gp">... </span>   <span class="n">purpose</span> <span class="o">=</span> <span class="s1">&#39;storage&#39;</span>
+<span class="gp">... </span>   <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;west&#39;</span>
+<span class="gp">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">w1</span> <span class="o">=</span> <span class="n">Warehouse</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">w1</span><span class="o">.</span><span class="n">purpose</span><span class="p">,</span> <span class="n">w1</span><span class="o">.</span><span class="n">region</span><span class="p">)</span>
 <span class="go">storage west</span>
@@ -413,8 +419,8 @@ In global scope: global spam
 <span class="go">storage east</span>
 </pre></div>
 </div>
-<p>数据属性可以被方法以及一个对象的普通用户（“客户端”）所引用。 换句话说，类不能用于实现纯抽象数据类型。 实际上，在 Python 中没有任何东西能强制隐藏数据 --- 它是完全基于约定的。 （而在另一方面，用 C 语言编写的 Python 实现则可以完全隐藏实现细节，并在必要时控制对象的访问；此特性可以通过用 C 编写 Python 扩展来使用。）</p>
-<p>客户端应当谨慎地使用数据属性 --- 客户端可能通过直接操作数据属性的方式破坏由方法所维护的固定变量。 请注意客户端可以向一个实例对象添加他们自己的数据属性而不会影响方法的可用性，只要保证避免名称冲突 --- 再次提醒，在此使用命名约定可以省去许多令人头痛的麻烦。</p>
+<p>数据属性可以被方法以及一个对象的普通用户（“客户端”）所引用。 换句话说，类不能用于实现纯抽象数据类型。 实际上，在 Python 中没有任何东西能强制隐藏数据 — 它是完全基于约定的。 （而在另一方面，用 C 语言编写的 Python 实现则可以完全隐藏实现细节，并在必要时控制对象的访问；此特性可以通过用 C 编写 Python 扩展来使用。）</p>
+<p>客户端应当谨慎地使用数据属性 — 客户端可能通过直接操作数据属性的方式破坏由方法所维护的固定变量。 请注意客户端可以向一个实例对象添加他们自己的数据属性而不会影响方法的可用性，只要保证避免名称冲突 — 再次提醒，在此使用命名约定可以省去许多令人头痛的麻烦。</p>
 <p>在方法内部引用数据属性（或其他方法！）并没有简便方式。 我发现这实际上提升了方法的可读性：当浏览一个方法代码时，不会存在混淆局部变量和实例变量的机会。</p>
 <p>方法的第一个参数常常被命名为 <code class="docutils literal notranslate"><span class="pre">self</span></code>。 这也不过就是一个约定: <code class="docutils literal notranslate"><span class="pre">self</span></code> 这一名称在 Python 中绝对没有特殊含义。 但是要注意，不遵循此约定会使得你的代码对其他 Python 程序员来说缺乏可读性，而且也可以想像一个 <em>类浏览器</em> 程序的编写可能会依赖于这样的约定。</p>
 <p>任何一个作为类属性的函数都为该类的实例定义了一个相应方法。 函数定义的文本并非必须包含于类定义之内：将一个函数对象赋值给一个局部变量也是可以的。 例如:</p>
@@ -431,7 +437,7 @@ In global scope: global spam
     <span class="n">h</span> <span class="o">=</span> <span class="n">g</span>
 </pre></div>
 </div>
-<p>现在 <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code> 和 <code class="docutils literal notranslate"><span class="pre">h</span></code> 都是 <code class="xref py py-class docutils literal notranslate"><span class="pre">C</span></code> 类的引用函数对象的属性，因而它们就都是 <code class="xref py py-class docutils literal notranslate"><span class="pre">C</span></code> 的实例的方法 --- 其中 <code class="docutils literal notranslate"><span class="pre">h</span></code> 完全等同于 <code class="docutils literal notranslate"><span class="pre">g</span></code>。 但请注意，本示例的做法通常只会令程序的阅读者感到迷惑。</p>
+<p>现在 <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">g</span></code> 和 <code class="docutils literal notranslate"><span class="pre">h</span></code> 都是 <code class="xref py py-class docutils literal notranslate"><span class="pre">C</span></code> 类的引用函数对象的属性，因而它们就都是 <code class="xref py py-class docutils literal notranslate"><span class="pre">C</span></code> 的实例的方法 — 其中 <code class="docutils literal notranslate"><span class="pre">h</span></code> 完全等同于 <code class="docutils literal notranslate"><span class="pre">g</span></code>。 但请注意，本示例的做法通常只会令程序的阅读者感到迷惑。</p>
 <p>方法可以通过使用 <code class="docutils literal notranslate"><span class="pre">self</span></code> 参数的方法属性调用其他方法:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Bag</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -655,8 +661,9 @@ In global scope: global spam
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">9. 类</a><ul>
 <li><a class="reference internal" href="#a-word-about-names-and-objects">9.1. 名称和对象</a></li>
 <li><a class="reference internal" href="#python-scopes-and-namespaces">9.2. Python 作用域和命名空间</a><ul>
@@ -685,12 +692,17 @@ In global scope: global spam
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="errors.html"
-                        title="上一章"><span class="section-number">8. </span>错误和异常</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="stdlib.html"
-                        title="下一章"><span class="section-number">10. </span>标准库简介</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="errors.html"
+                          title="上一章"><span class="section-number">8. </span>错误和异常</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="stdlib.html"
+                          title="下一章"><span class="section-number">10. </span>标准库简介</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -732,7 +744,7 @@ In global scope: global spam
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 教程</a> &#187;</li>
@@ -760,7 +772,7 @@ In global scope: global spam
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -768,11 +780,11 @@ In global scope: global spam
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

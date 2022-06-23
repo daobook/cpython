@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>类型注解对象 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类型注解对象 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datetime.html"
-                        title="上一章">DateTime 对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="init.html"
-                        title="下一章">初始化，终结和线程</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datetime.html"
+                          title="上一章">DateTime 对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="init.html"
+                          title="下一章">初始化，终结和线程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -148,11 +152,11 @@
             
   <section id="objects-for-type-hinting">
 <span id="typehintobjects"></span><h1>类型注解对象<a class="headerlink" href="#objects-for-type-hinting" title="永久链接至标题">¶</a></h1>
-<p>提供几种用于类型提示的内置类型。 目前存在两种类型 -- <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 和 <a class="reference internal" href="../library/stdtypes.html#types-union"><span class="std std-ref">Union</span></a>。 只有 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 会向 C 开放。</p>
+<p>提供几种用于类型提示的内置类型。 目前存在两种类型 – <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 和 <a class="reference internal" href="../library/stdtypes.html#types-union"><span class="std std-ref">Union</span></a>。 只有 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 会向 C 开放。</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_GenericAlias">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">Py_GenericAlias</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">origin</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_GenericAlias" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.9.</em><p>创建一个 <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 对象。相当于调用 Python 类 <a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a> 。参数 <em>origin</em> 和 <em>args</em> 分别设置 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>'s <code class="docutils literal notranslate"><span class="pre">__origin__</span></code> 属性和 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 属性。 <em>origin</em> 应该是 <span class="xref c c-texpr"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span> 类型， <em>args</em> 可以是 <span class="xref c c-texpr"><a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><span class="n">PyTupleObject</span></a><span class="p">*</span></span> 类型或者任意 <code class="docutils literal notranslate"><span class="pre">PyObject*</span></code> 类型。如果传递的 <em>args</em> 不是一个元组，则自动构建一个 1 元元组，并将 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">(args,)</span></code> 。对参数进行了最小限度的检查，因此即使 <em>origin</em> 不是类型，函数也会成功。<code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 的 <code class="docutils literal notranslate"><span class="pre">__parameters__</span></code> 属性是通过 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 懒加载的。如果失败，则触发异常并返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.9.</em><p>创建一个 <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 对象。相当于调用 Python 类 <a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a> 。参数 <em>origin</em> 和 <em>args</em> 分别设置 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>‘s <code class="docutils literal notranslate"><span class="pre">__origin__</span></code> 属性和 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 属性。 <em>origin</em> 应该是 <span class="xref c c-texpr"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span> 类型， <em>args</em> 可以是 <span class="xref c c-texpr"><a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><span class="n">PyTupleObject</span></a><span class="p">*</span></span> 类型或者任意 <code class="docutils literal notranslate"><span class="pre">PyObject*</span></code> 类型。如果传递的 <em>args</em> 不是一个元组，则自动构建一个 1 元元组，并将 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">(args,)</span></code> 。对参数进行了最小限度的检查，因此即使 <em>origin</em> 不是类型，函数也会成功。<code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 的 <code class="docutils literal notranslate"><span class="pre">__parameters__</span></code> 属性是通过 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 懒加载的。如果失败，则触发异常并返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 。</p>
 <p>下面是一个如何创建一个扩展类型泛型的例子:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span><span class="w"></span>
 <span class="k">static</span><span class="w"> </span><span class="n">PyMethodDef</span><span class="w"> </span><span class="n">my_obj_methods</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -190,12 +194,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datetime.html"
-                        title="上一章">DateTime 对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="init.html"
-                        title="下一章">初始化，终结和线程</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datetime.html"
+                          title="上一章">DateTime 对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="init.html"
+                          title="下一章">初始化，终结和线程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -237,7 +245,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -266,7 +274,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -274,11 +282,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

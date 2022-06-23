@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pathlib --- 面向对象的文件系统路径 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pathlib — 面向对象的文件系统路径 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,13 +20,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="os.path --- 常用路径操作" href="os.path.html" />
+    <link rel="next" title="os.path — 常用路径操作" href="os.path.html" />
     <link rel="prev" title="文件和目录访问" href="filesys.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/pathlib.html" />
     
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a><ul>
 <li><a class="reference internal" href="#basic-use">基础使用</a></li>
 <li><a class="reference internal" href="#pure-paths">纯路径</a><ul>
 <li><a class="reference internal" href="#general-properties">通用性质</a></li>
@@ -90,12 +91,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="filesys.html"
-                        title="上一章">文件和目录访问</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="os.path.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> --- 常用路径操作</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="filesys.html"
+                          title="上一章">文件和目录访问</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="os.path.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> — 常用路径操作</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -122,7 +128,7 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="os.path.html" title="os.path --- 常用路径操作"
+          <a href="os.path.html" title="os.path — 常用路径操作"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="filesys.html" title="文件和目录访问"
@@ -138,12 +144,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" accesskey="U">文件和目录访问</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a></li>
                 <li class="right">
                     
 
@@ -167,7 +173,7 @@
           <div class="body" role="main">
             
   <section id="module-pathlib">
-<span id="pathlib-object-oriented-filesystem-paths"></span><h1><a class="reference internal" href="#module-pathlib" title="pathlib: Object-oriented filesystem paths"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code></a> --- 面向对象的文件系统路径<a class="headerlink" href="#module-pathlib" title="永久链接至标题">¶</a></h1>
+<span id="pathlib-object-oriented-filesystem-paths"></span><h1><a class="reference internal" href="#module-pathlib" title="pathlib: Object-oriented filesystem paths"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code></a> — 面向对象的文件系统路径<a class="headerlink" href="#module-pathlib" title="永久链接至标题">¶</a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -183,7 +189,7 @@
 </ol>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0428"><strong>PEP 428</strong></a>：pathlib 模块 -- 面向对象的的文件系统路径。</p>
+<p><span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0428/"><strong>PEP 428</strong></a>：pathlib 模块 – 面向对象的的文件系统路径。</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -237,7 +243,7 @@
 <p>纯路径对象提供了不实际访问文件系统的路径处理操作。有三种方式来访问这些类，也是不同的风格：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.PurePath">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PurePath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PurePath" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PurePath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PurePath" title="永久链接至目标">¶</a></dt>
 <dd><p>一个通用的类，代表当前系统的路径风格（实例化为 <a class="reference internal" href="#pathlib.PurePosixPath" title="pathlib.PurePosixPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePosixPath</span></code></a> 或者 <a class="reference internal" href="#pathlib.PureWindowsPath" title="pathlib.PureWindowsPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PureWindowsPath</span></code></a>）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PurePath</span><span class="p">(</span><span class="s1">&#39;setup.py&#39;</span><span class="p">)</span>      <span class="c1"># Running on a Unix machine</span>
 <span class="go">PurePosixPath(&#39;setup.py&#39;)</span>
@@ -267,9 +273,13 @@
 <span class="go">PureWindowsPath(&#39;c:/Program Files&#39;)</span>
 </pre></div>
 </div>
-<p>假斜线和单独的点都会被消除，但是双点 （<code class="docutils literal notranslate"><span class="pre">‘..’</span></code>） 不会，以防改变符号链接的含义。</p>
+<p>Spurious slashes and single dots are collapsed, but double dots (<code class="docutils literal notranslate"><span class="pre">'..'</span></code>)
+and leading double slashes (<code class="docutils literal notranslate"><span class="pre">'//'</span></code>) are not, since this would change the
+meaning of a path for various reasons (e.g. symbolic links, UNC paths):</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PurePath</span><span class="p">(</span><span class="s1">&#39;foo//bar&#39;</span><span class="p">)</span>
 <span class="go">PurePosixPath(&#39;foo/bar&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PurePath</span><span class="p">(</span><span class="s1">&#39;//foo/bar&#39;</span><span class="p">)</span>
+<span class="go">PurePosixPath(&#39;//foo/bar&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PurePath</span><span class="p">(</span><span class="s1">&#39;foo/./bar&#39;</span><span class="p">)</span>
 <span class="go">PurePosixPath(&#39;foo/bar&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">PurePath</span><span class="p">(</span><span class="s1">&#39;foo/../bar&#39;</span><span class="p">)</span>
@@ -285,7 +295,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.PurePosixPath">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PurePosixPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PurePosixPath" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PurePosixPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PurePosixPath" title="永久链接至目标">¶</a></dt>
 <dd><p>一个 <a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a> 的子类，路径风格不同于 Windows 文件系统:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s1">&#39;/etc&#39;</span><span class="p">)</span>
 <span class="go">PurePosixPath(&#39;/etc&#39;)</span>
@@ -296,10 +306,13 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.PureWindowsPath">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PureWindowsPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PureWindowsPath" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a> 的一个子类，路径风格为 Windows 文件系统路径:</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PureWindowsPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PureWindowsPath" title="永久链接至目标">¶</a></dt>
+<dd><p>A subclass of <a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a>, this path flavour represents Windows
+filesystem paths, including <a class="reference external" href="https://en.wikipedia.org/wiki/Path_(computing)#UNC">UNC paths</a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PureWindowsPath</span><span class="p">(</span><span class="s1">&#39;c:/Program Files/&#39;</span><span class="p">)</span>
 <span class="go">PureWindowsPath(&#39;c:/Program Files&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PureWindowsPath</span><span class="p">(</span><span class="s1">&#39;//server/share/file&#39;</span><span class="p">)</span>
+<span class="go">PureWindowsPath(&#39;//server/share/file&#39;)</span>
 </pre></div>
 </div>
 <p><em>pathsegments</em> 参数的指定和 <a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a> 相同。</p>
@@ -364,7 +377,7 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>只推荐在 Unix 下调用 <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>。在 Windows， unicode 形式是文件系统路径的规范表示法。</p>
 </div>
 </section>
@@ -427,6 +440,24 @@
 <span class="go">&#39;\\&#39;</span>
 </pre></div>
 </div>
+<p>If the path starts with more than two successive slashes,
+<a class="reference internal" href="#pathlib.PurePosixPath" title="pathlib.PurePosixPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePosixPath</span></code></a> collapses them:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s1">&#39;//etc&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">root</span>
+<span class="go">&#39;//&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s1">&#39;///etc&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">root</span>
+<span class="go">&#39;/&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PurePosixPath</span><span class="p">(</span><span class="s1">&#39;////etc&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">root</span>
+<span class="go">&#39;/&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>This behavior conforms to <em>The Open Group Base Specifications Issue 6</em>,
+paragraph <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap04.html#tag_04_11">4.11 Pathname Resolution</a>:</p>
+<p><em>“A pathname that begins with two successive slashes may be interpreted in
+an implementation-defined manner, although more than two leading slashes
+shall be treated as a single slash.”</em></p>
+</div>
 </dd></dl>
 
 <dl class="py data">
@@ -483,7 +514,7 @@ the path:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这是一个单纯的词法操作，因此有以下行为:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">PurePosixPath</span><span class="p">(</span><span class="s1">&#39;foo/..&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">parent</span>
@@ -763,7 +794,7 @@ the path:</p>
 <p>具体路径是纯路径的子类。除了后者提供的操作之外，它们还提供了对路径对象进行系统调用的方法。有三种方法可以实例化具体路径:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.Path">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">Path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">Path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path" title="永久链接至目标">¶</a></dt>
 <dd><p>一个 <a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a> 的子类，此类以当前系统的路径风格表示路径（实例化为 <a class="reference internal" href="#pathlib.PosixPath" title="pathlib.PosixPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosixPath</span></code></a> 或 <a class="reference internal" href="#pathlib.WindowsPath" title="pathlib.WindowsPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">WindowsPath</span></code></a>）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;setup.py&#39;</span><span class="p">)</span>
 <span class="go">PosixPath(&#39;setup.py&#39;)</span>
@@ -774,7 +805,7 @@ the path:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.PosixPath">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PosixPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PosixPath" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">PosixPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.PosixPath" title="永久链接至目标">¶</a></dt>
 <dd><p>一个 <a class="reference internal" href="#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 和 <a class="reference internal" href="#pathlib.PurePosixPath" title="pathlib.PurePosixPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePosixPath</span></code></a> 的子类，此类表示一个非 Windows 文件系统的具体路径:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;/etc&#39;</span><span class="p">)</span>
 <span class="go">PosixPath(&#39;/etc&#39;)</span>
@@ -785,7 +816,7 @@ the path:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="pathlib.WindowsPath">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">WindowsPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.WindowsPath" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pathlib.</span></span><span class="sig-name descname"><span class="pre">WindowsPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">pathsegments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.WindowsPath" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 和 <a class="reference internal" href="#pathlib.PureWindowsPath" title="pathlib.PureWindowsPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PureWindowsPath</span></code></a> 的子类，从类表示一个 Windows 文件系统的具体路径:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">WindowsPath</span><span class="p">(</span><span class="s1">&#39;c:/Program Files/&#39;</span><span class="p">)</span>
 <span class="go">WindowsPath(&#39;c:/Program Files&#39;)</span>
@@ -818,7 +849,7 @@ the path:</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="pathlib.Path.cwd">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">cwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.cwd" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">cwd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.cwd" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个新的表示当前目录的路径对象（和 <a class="reference internal" href="os.html#os.getcwd" title="os.getcwd"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.getcwd()</span></code></a> 返回的相同）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 <span class="go">PosixPath(&#39;/home/antoine/pathlib&#39;)</span>
@@ -828,7 +859,7 @@ the path:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pathlib.Path.home">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.home" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.home" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个表示用户家目录的新路径对象（与带 <code class="docutils literal notranslate"><span class="pre">~</span></code> 构造的 <a class="reference internal" href="os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> 所返回的相同）。 如果无法解析家目录，则会引发 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span>
 <span class="go">PosixPath(&#39;/home/antoine&#39;)</span>
@@ -889,7 +920,7 @@ the path:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果路径指向一个符号链接， <a class="reference internal" href="#pathlib.Path.exists" title="pathlib.Path.exists"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exists()</span></code></a> 返回此符号链接是否指向存在的文件或目录。</p>
 </div>
 </dd></dl>
@@ -918,7 +949,7 @@ the path:</p>
 <span class="go">[PosixPath(&#39;docs/conf.py&#39;)]</span>
 </pre></div>
 </div>
-<p>pattern 的形式与 <a class="reference internal" href="fnmatch.html#module-fnmatch" title="fnmatch: Unix shell style filename pattern matching."><code class="xref py py-mod docutils literal notranslate"><span class="pre">fnmatch</span></code></a> 的相同，还增加了 &quot;<code class="docutils literal notranslate"><span class="pre">**</span></code>&quot; 表示 &quot;此目录以及所有子目录，递归&quot;。 换句话说，它启用递归通配:</p>
+<p>pattern 的形式与 <a class="reference internal" href="fnmatch.html#module-fnmatch" title="fnmatch: Unix shell style filename pattern matching."><code class="xref py py-mod docutils literal notranslate"><span class="pre">fnmatch</span></code></a> 的相同，还增加了 “<code class="docutils literal notranslate"><span class="pre">**</span></code>” 表示 “此目录以及所有子目录，递归”。 换句话说，它启用递归通配:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;**/*.py&#39;</span><span class="p">))</span>
 <span class="go">[PosixPath(&#39;build/lib/pathlib.py&#39;),</span>
 <span class="go"> PosixPath(&#39;docs/conf.py&#39;),</span>
@@ -928,10 +959,14 @@ the path:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>在一个较大的目录树中使用 &quot;<code class="docutils literal notranslate"><span class="pre">**</span></code>&quot; 模式可能会消耗非常多的时间。</p>
+<p class="admonition-title">备注</p>
+<p>在一个较大的目录树中使用 “<code class="docutils literal notranslate"><span class="pre">**</span></code>” 模式可能会消耗非常多的时间。</p>
 </div>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">pathlib.Path.glob</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">pattern</span></code>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Return only directories if <em>pattern</em> ends with a pathname components
+separator (<a class="reference internal" href="os.html#os.sep" title="os.sep"><code class="xref py py-data docutils literal notranslate"><span class="pre">sep</span></code></a> or <a class="reference internal" href="os.html#os.altsep" title="os.altsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">altsep</span></code></a>).</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1014,7 +1049,10 @@ the path:</p>
 <span class="go">PosixPath(&#39;docs/Makefile&#39;)</span>
 </pre></div>
 </div>
-<p>子条目会以任意顺序生成，并且不包括特殊条目 <code class="docutils literal notranslate"><span class="pre">'.'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'..'</span></code>。 如果有文件在迭代器创建之后在目录中被移除或添加，是否要包括该文件对应的路径对象并没有规定。</p>
+<p>The children are yielded in arbitrary order, and the special entries
+<code class="docutils literal notranslate"><span class="pre">'.'</span></code> and <code class="docutils literal notranslate"><span class="pre">'..'</span></code> are not included.  If a file is removed from or added
+to the directory after creating the iterator, whether a path object for
+that file be included is unspecified.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1112,7 +1150,11 @@ the path:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pathlib.Path.rename">
 <span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.rename" title="永久链接至目标">¶</a></dt>
-<dd><p>将文件或目录重命名为给定的 <em>target</em>，并返回一个新的指向 <em>target</em> 的 Path 实例。 在 Unix 上，如果 <em>target</em> 存在且为一个文件，如果用户有足够权限，则它将被静默地替换。 <em>target</em> 可以是一个字符串或者另一个路径对象:</p>
+<dd><p>Rename this file or directory to the given <em>target</em>, and return a new Path
+instance pointing to <em>target</em>.  On Unix, if <em>target</em> exists and is a file,
+it will be replaced silently if the user has permission.
+On Windows, if <em>target</em> exists, <a class="reference internal" href="exceptions.html#FileExistsError" title="FileExistsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileExistsError</span></code></a> will be raised.
+<em>target</em> can be either a string or another path object:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;some text&#39;</span><span class="p">)</span>
 <span class="go">9</span>
@@ -1132,7 +1174,9 @@ the path:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pathlib.Path.replace">
 <span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.replace" title="永久链接至目标">¶</a></dt>
-<dd><p>将文件名目录重命名为给定的 <em>target</em>，并返回一个新的指向 <em>target</em> 的 Path 实例。 如果 <em>target</em> 指向一个现有文件或目录，则它将被无条件地替换。</p>
+<dd><p>Rename this file or directory to the given <em>target</em>, and return a new Path
+instance pointing to <em>target</em>.  If <em>target</em> points to an existing file or
+empty directory, it will be unconditionally replaced.</p>
 <p>目标路径可能为绝对或相对路径。 相对路径将被解释为相对于当前工作目录，而 <em>不是</em> 相对于 Path 对象的目录。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>添加了返回值，返回新的 Path 实例。</p>
@@ -1164,7 +1208,7 @@ Returns a new path object:</p>
 <span class="go">PosixPath(&#39;/home/antoine/pathlib&#39;)</span>
 </pre></div>
 </div>
-<p>&quot;<code class="docutils literal notranslate"><span class="pre">..</span></code>&quot; 组件也将被消除（只有这一种方法这么做）:</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">..</span></code>” 组件也将被消除（只有这一种方法这么做）:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;docs/../setup.py&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 <span class="go">PosixPath(&#39;/home/antoine/pathlib/setup.py&#39;)</span>
@@ -1179,7 +1223,7 @@ Returns a new path object:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pathlib.Path.rglob">
 <span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">rglob</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.rglob" title="永久链接至目标">¶</a></dt>
-<dd><p>这就像调用 <code class="xref py py-func docutils literal notranslate"><span class="pre">Path.glob`时在给定的相对</span> <span class="pre">*pattern*</span> <span class="pre">前面添加了&quot;``**/`()</span></code>&quot;</p>
+<dd><p>这就像调用 <code class="xref py py-func docutils literal notranslate"><span class="pre">Path.glob`时在给定的相对</span> <span class="pre">*pattern*</span> <span class="pre">前面添加了&quot;``**/`()</span></code>”</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">))</span>
 <span class="go">[PosixPath(&#39;build/lib/pathlib.py&#39;),</span>
 <span class="go"> PosixPath(&#39;docs/conf.py&#39;),</span>
@@ -1189,6 +1233,10 @@ Returns a new path object:</p>
 </pre></div>
 </div>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">pathlib.Path.rglob</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">pattern</span></code>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Return only directories if <em>pattern</em> ends with a pathname components
+separator (<a class="reference internal" href="os.html#os.sep" title="os.sep"><code class="xref py py-data docutils literal notranslate"><span class="pre">sep</span></code></a> or <a class="reference internal" href="os.html#os.altsep" title="os.altsep"><code class="xref py py-data docutils literal notranslate"><span class="pre">altsep</span></code></a>).</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1230,7 +1278,7 @@ Returns a new path object:</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>参数的顺序（link, target) 和 <a class="reference internal" href="os.html#os.symlink" title="os.symlink"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.symlink()</span></code></a> 是相反的。</p>
 </div>
 </dd></dl>
@@ -1240,27 +1288,11 @@ Returns a new path object:</p>
 <span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">hardlink_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.hardlink_to" title="永久链接至目标">¶</a></dt>
 <dd><p>将此路径设为一个指向与 <em>target</em> 相同文件的硬链接。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>参数顺序 (link, target) 和 <a class="reference internal" href="os.html#os.link" title="os.link"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.link()</span></code></a> 是相反的。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pathlib.Path.link_to">
-<span class="sig-prename descclassname"><span class="pre">Path.</span></span><span class="sig-name descname"><span class="pre">link_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pathlib.Path.link_to" title="永久链接至目标">¶</a></dt>
-<dd><p>创建硬链接 <em>target</em> 指向此路径。</p>
-<div class="admonition warning">
-<p class="admonition-title">警告</p>
-<p>此函数不会将此路径设为指向 <em>target</em> 的硬链接，尽管此函数名和参数名有此含义。 参数顺序 (target, link) 与 <a class="reference internal" href="#pathlib.Path.symlink_to" title="pathlib.Path.symlink_to"><code class="xref py py-func docutils literal notranslate"><span class="pre">Path.symlink_to()</span></code></a> 和 <a class="reference internal" href="#pathlib.Path.hardlink_to" title="pathlib.Path.hardlink_to"><code class="xref py py-func docutils literal notranslate"><span class="pre">Path.hardlink_to()</span></code></a> 相反，而与 <a class="reference internal" href="os.html#os.link" title="os.link"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.link()</span></code></a> 的一致。</p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified added">3.8 新版功能.</span></p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.10 版后已移除: </span>此方法已被弃用而建议改用 <a class="reference internal" href="#pathlib.Path.hardlink_to" title="pathlib.Path.hardlink_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.hardlink_to()</span></code></a>，因为 <a class="reference internal" href="#pathlib.Path.link_to" title="pathlib.Path.link_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.link_to()</span></code></a> 的参数顺序与 <a class="reference internal" href="#pathlib.Path.symlink_to" title="pathlib.Path.symlink_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.symlink_to()</span></code></a> 的不相匹配。</p>
 </div>
 </dd></dl>
 
@@ -1324,7 +1356,7 @@ Returns a new path object:</p>
 <h2>对应的 <a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> 模块的工具<a class="headerlink" href="#correspondence-to-tools-in-the-os-module" title="永久链接至标题">¶</a></h2>
 <p>以下是一个映射了 <a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> 与 <a class="reference internal" href="#pathlib.PurePath" title="pathlib.PurePath"><code class="xref py py-class docutils literal notranslate"><span class="pre">PurePath</span></code></a>/<a class="reference internal" href="#pathlib.Path" title="pathlib.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> 对应相同的函数的表。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>Not all pairs of functions/methods below are equivalent. Some of them,
 despite having some overlapping use-cases, have different semantics. They
 include <a class="reference internal" href="os.path.html#os.path.abspath" title="os.path.abspath"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.abspath()</span></code></a> and <a class="reference internal" href="#pathlib.Path.absolute" title="pathlib.Path.absolute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.absolute()</span></code></a>,
@@ -1332,8 +1364,8 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
 </div>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 55%" />
-<col style="width: 45%" />
+<col style="width: 52%" />
+<col style="width: 48%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p><a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> 和 <a class="reference internal" href="os.path.html#module-os.path" title="os.path: Operations on pathnames."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code></a></p></th>
@@ -1399,7 +1431,7 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
 <td><p><a class="reference internal" href="#pathlib.Path.readlink" title="pathlib.Path.readlink"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.readlink()</span></code></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="os.path.html#os.path.relpath" title="os.path.relpath"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.relpath()</span></code></a></p></td>
-<td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.relative_to()</span></code> <a class="footnote-reference brackets" href="#id6" id="id4">2</a></p></td>
+<td><p><a class="reference internal" href="#pathlib.PurePath.relative_to" title="pathlib.PurePath.relative_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PurePath.relative_to()</span></code></a> <a class="footnote-reference brackets" href="#id6" id="id4">2</a></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="os.html#os.stat" title="os.stat"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.stat()</span></code></a></p></td>
 <td><p><a class="reference internal" href="#pathlib.Path.stat" title="pathlib.Path.stat"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.stat()</span></code></a>,
@@ -1432,7 +1464,7 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
 <dd><p><a class="reference internal" href="os.path.html#os.path.abspath" title="os.path.abspath"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.abspath()</span></code></a> normalizes the resulting path, which may change its meaning in the presence of symlinks, while <a class="reference internal" href="#pathlib.Path.absolute" title="pathlib.Path.absolute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.absolute()</span></code></a> does not.</p>
 </dd>
 <dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id4">2</a></span></dt>
-<dd><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.relative_to()</span></code> 要求 <code class="docutils literal notranslate"><span class="pre">self</span></code> 为参数的子路径，但 <a class="reference internal" href="os.path.html#os.path.relpath" title="os.path.relpath"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.relpath()</span></code></a> 则不要求。</p>
+<dd><p><a class="reference internal" href="#pathlib.PurePath.relative_to" title="pathlib.PurePath.relative_to"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PurePath.relative_to()</span></code></a> requires <code class="docutils literal notranslate"><span class="pre">self</span></code> to be the subpath of the argument, but <a class="reference internal" href="os.path.html#os.path.relpath" title="os.path.relpath"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.relpath()</span></code></a> does not.</p>
 </dd>
 </dl>
 </section>
@@ -1445,9 +1477,10 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a><ul>
 <li><a class="reference internal" href="#basic-use">基础使用</a></li>
 <li><a class="reference internal" href="#pure-paths">纯路径</a><ul>
 <li><a class="reference internal" href="#general-properties">通用性质</a></li>
@@ -1465,12 +1498,17 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="filesys.html"
-                        title="上一章">文件和目录访问</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="os.path.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> --- 常用路径操作</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="filesys.html"
+                          title="上一章">文件和目录访问</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="os.path.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> — 常用路径操作</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1496,7 +1534,7 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="os.path.html" title="os.path --- 常用路径操作"
+          <a href="os.path.html" title="os.path — 常用路径操作"
              >下一页</a> |</li>
         <li class="right" >
           <a href="filesys.html" title="文件和目录访问"
@@ -1512,12 +1550,12 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" >文件和目录访问</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a></li>
                 <li class="right">
                     
 
@@ -1541,7 +1579,7 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1549,11 +1587,11 @@ include <a class="reference internal" href="os.path.html#os.path.abspath" title=
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

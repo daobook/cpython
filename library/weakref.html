@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>weakref --- 弱引用 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weakref — 弱引用 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="types --- 动态类型创建和内置类型名称" href="types.html" />
-    <link rel="prev" title="array --- 高效的数值数组" href="array.html" />
+    <link rel="next" title="types — 动态类型创建和内置类型名称" href="types.html" />
+    <link rel="prev" title="array — 高效的数值数组" href="array.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/weakref.html" />
     
       
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a><ul>
 <li><a class="reference internal" href="#weak-reference-objects">弱引用对象</a></li>
 <li><a class="reference internal" href="#example">示例</a></li>
 <li><a class="reference internal" href="#finalizer-objects">终结器对象</a></li>
@@ -81,12 +82,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="array.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> --- 高效的数值数组</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="types.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> --- 动态类型创建和内置类型名称</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="array.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> — 高效的数值数组</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="types.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> — 动态类型创建和内置类型名称</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -113,10 +119,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="types.html" title="types --- 动态类型创建和内置类型名称"
+          <a href="types.html" title="types — 动态类型创建和内置类型名称"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="array.html" title="array --- 高效的数值数组"
+          <a href="array.html" title="array — 高效的数值数组"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -129,12 +135,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a></li>
                 <li class="right">
                     
 
@@ -158,7 +164,7 @@
           <div class="body" role="main">
             
   <section id="module-weakref">
-<span id="weakref-weak-references"></span><h1><a class="reference internal" href="#module-weakref" title="weakref: Support for weak references and weak dictionaries."><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code></a> --- 弱引用<a class="headerlink" href="#module-weakref" title="永久链接至标题">¶</a></h1>
+<span id="weakref-weak-references"></span><span id="mod-weakref"></span><h1><a class="reference internal" href="#module-weakref" title="weakref: Support for weak references and weak dictionaries."><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code></a> — 弱引用<a class="headerlink" href="#module-weakref" title="永久链接至标题">¶</a></h1>
 <p><strong>源码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/weakref.py">Lib/weakref.py</a></p>
 <hr class="docutils" />
 <p><a class="reference internal" href="#module-weakref" title="weakref: Support for weak references and weak dictionaries."><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code></a> 模块允许Python程序员创建对象的 <em class="dfn">weak references</em> 。</p>
@@ -195,7 +201,7 @@ strings in the <code class="docutils literal notranslate"><span class="pre">__sl
 See <a class="reference internal" href="../reference/datamodel.html#slots"><span class="std std-ref">__slots__ documentation</span></a> for details.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.ref">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">object</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">callback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.ref" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.ref" title="永久链接至目标">¶</a></dt>
 <dd><p>返回对 <em>对象</em> 的弱引用。如果原始对象仍然存活，则可以通过调用引用对象来检索原始对象；如果引用的原始对象不再存在，则调用引用对象将得到 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> 。如果提供了 <em>回调</em> 而且值不是 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a> ，并且返回的弱引用对象仍然存活，则在对象即将终结时将调用回调;弱引用对象将作为回调的唯一参数传递；指示物将不再可用。</p>
 <p>许多弱引用也允许针对相同对象来构建。 为每个弱引用注册的回调将按从最近注册的回调到最早注册的回调的顺序被调用。</p>
 <p>回调所引发的异常将记录于标准错误输出，但无法被传播；它们会按与对象的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> 方法所引发的异常相同的方式被处理。</p>
@@ -215,7 +221,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 
 <dl class="py function">
 <dt class="sig sig-object py" id="weakref.proxy">
-<span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">proxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">object</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">callback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.proxy" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">proxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.proxy" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <em>object</em> 的一个使用弱引用的代理。 此函数支持在大多数上下文中使用代理，而不要求显式地对所使用的弱引用对象解除引用。 返回的对象类型将为 <code class="docutils literal notranslate"><span class="pre">ProxyType</span></code> 或 <code class="docutils literal notranslate"><span class="pre">CallableProxyType</span></code>，具体取决于 <em>object</em> 是否可调用。 Proxy 对象不是 <a class="reference internal" href="../glossary.html#term-hashable"><span class="xref std std-term">hashable</span></a> 对象，无论被引用对象是否可哈希；这可避免与它们的基本可变性质相关的多种问题，并可防止它们被用作字典键。 <em>callback</em> 与 <a class="reference internal" href="#weakref.ref" title="weakref.ref"><code class="xref py py-func docutils literal notranslate"><span class="pre">ref()</span></code></a> 函数的同名形参含义相同。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>扩展代理对象所支持的运算符，包括矩阵乘法运算符 <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&#64;=</span></code>。</p>
@@ -236,10 +242,10 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.WeakKeyDictionary">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakKeyDictionary</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">dict</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakKeyDictionary" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakKeyDictionary</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakKeyDictionary" title="永久链接至目标">¶</a></dt>
 <dd><p>弱引用键的映射类。 当不再存在对键的强引用时，字典中的条目将被丢弃。 这可被用来将额外数据关联到一个应用中其他部分所拥有的对象而无需在那些对象中添加属性。 这对于重载了属性访问的对象来说特别有用。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>增加了对 <code class="docutils literal notranslate"><span class="pre">|</span></code> 和 <code class="docutils literal notranslate"><span class="pre">|=</span></code> 运算符的支持，相关说明见 <span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0584"><strong>PEP 584</strong></a>。</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>增加了对 <code class="docutils literal notranslate"><span class="pre">|</span></code> 和 <code class="docutils literal notranslate"><span class="pre">|=</span></code> 运算符的支持，相关说明见 <span class="target" id="index-6"></span><a class="pep reference external" href="https://peps.python.org/pep-0584/"><strong>PEP 584</strong></a>。</p>
 </div>
 </dd></dl>
 
@@ -252,10 +258,10 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.WeakValueDictionary">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakValueDictionary</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">dict</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakValueDictionary" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakValueDictionary</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">dict</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakValueDictionary" title="永久链接至目标">¶</a></dt>
 <dd><p>弱引用值的映射类。 当不再存在对该值的强引用时，字典中的条目将被丢弃。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.9 版更改: </span>增加了对 <code class="docutils literal notranslate"><span class="pre">|</span></code> 和 <code class="docutils literal notranslate"><span class="pre">|=</span></code> 运算符的支持，相关说明见 <span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0584"><strong>PEP 584</strong></a>。</p>
+<p><span class="versionmodified changed">在 3.9 版更改: </span>增加了对 <code class="docutils literal notranslate"><span class="pre">|</span></code> 和 <code class="docutils literal notranslate"><span class="pre">|=</span></code> 运算符的支持，相关说明见 <span class="target" id="index-7"></span><a class="pep reference external" href="https://peps.python.org/pep-0584/"><strong>PEP 584</strong></a>。</p>
 </div>
 </dd></dl>
 
@@ -268,13 +274,13 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.WeakSet">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakSet</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">elements</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakSet" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakSet</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakSet" title="永久链接至目标">¶</a></dt>
 <dd><p>保持对其元素弱引用的集合类。 当不再有对某个元素的强引用时元素将被丢弃。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.WeakMethod">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakMethod" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">WeakMethod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weakref.WeakMethod" title="永久链接至目标">¶</a></dt>
 <dd><p>一个模拟对绑定方法（即在类中定义并在实例中查找的方法）进行弱引用的自定义 <a class="reference internal" href="#weakref.ref" title="weakref.ref"><code class="xref py py-class docutils literal notranslate"><span class="pre">ref</span></code></a> 子类。 由于绑定方法是临时性的，标准弱引用无法保持它。 <a class="reference internal" href="#weakref.WeakMethod" title="weakref.WeakMethod"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeakMethod</span></code></a> 包含特别代码用来重新创建绑定方法，直到对象或初始函数被销毁:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -302,7 +308,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 
 <dl class="py class">
 <dt class="sig sig-object py" id="weakref.finalize">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weakref.finalize" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">weakref.</span></span><span class="sig-name descname"><span class="pre">finalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#weakref.finalize" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个可调用的终结器对象，该对象将在 <em>obj</em> 作为垃圾回收时被调用。 与普通的弱引用不同，终结器将总是存活，直到引用对象被回收，这极大地简化了生存期管理。</p>
 <p>终结器总是被视为 <em>存活</em> 直到它被调用（显式调用或在垃圾回收时隐式调用），调用之后它将 <em>死亡</em>。 调用存活的终结器将返回 <code class="docutils literal notranslate"><span class="pre">func(*arg,</span> <span class="pre">**kwargs)</span></code> 的求值结果，而调用死亡的终结器将返回 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。</p>
 <p>在垃圾收集期间由终结器回调所引发异常将显示于标准错误输出，但无法被传播。 它们会按与对象的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__del__()</span></code> 方法或弱引用的回调所引发异常相同的方式被处理。</p>
@@ -339,7 +345,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 </dd></dl>
 
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>很重要的一点是确保 <em>func</em>, <em>args</em> 和 <em>kwargs</em> 不拥有任何对 <em>obj</em> 的引用，无论是直接的或是间接的，否则的话 <em>obj</em> 将永远不会被作为垃圾回收。 特别地，<em>func</em> 不应当是 <em>obj</em> 的一个绑定方法。</p>
 </div>
 <div class="versionadded">
@@ -374,7 +380,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0205"><strong>PEP 205</strong></a> - 弱引用</dt><dd><p>此特性的提议和理由，包括早期实现的链接和其他语言中类似特性的相关信息。</p>
+<dt><span class="target" id="index-8"></span><a class="pep reference external" href="https://peps.python.org/pep-0205/"><strong>PEP 205</strong></a> - 弱引用</dt><dd><p>此特性的提议和理由，包括早期实现的链接和其他语言中类似特性的相关信息。</p>
 </dd>
 </dl>
 </div>
@@ -551,7 +557,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果当程序退出时你恰好在守护线程中创建终结器对象，则有可能该终结器不会在退出时被调用。 但是，在一个守护线程中 <a class="reference internal" href="atexit.html#atexit.register" title="atexit.register"><code class="xref py py-func docutils literal notranslate"><span class="pre">atexit.register()</span></code></a>, <code class="docutils literal notranslate"><span class="pre">try:</span> <span class="pre">...</span> <span class="pre">finally:</span> <span class="pre">...</span></code> 和 <code class="docutils literal notranslate"><span class="pre">with:</span> <span class="pre">...</span></code> 同样不能保证执行清理。</p>
 </div>
 </section>
@@ -564,9 +570,10 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a><ul>
 <li><a class="reference internal" href="#weak-reference-objects">弱引用对象</a></li>
 <li><a class="reference internal" href="#example">示例</a></li>
 <li><a class="reference internal" href="#finalizer-objects">终结器对象</a></li>
@@ -575,12 +582,17 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="array.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> --- 高效的数值数组</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="types.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> --- 动态类型创建和内置类型名称</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="array.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">array</span></code> — 高效的数值数组</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="types.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> — 动态类型创建和内置类型名称</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -606,10 +618,10 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="types.html" title="types --- 动态类型创建和内置类型名称"
+          <a href="types.html" title="types — 动态类型创建和内置类型名称"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="array.html" title="array --- 高效的数值数组"
+          <a href="array.html" title="array — 高效的数值数组"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -622,12 +634,12 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" >数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> --- 弱引用</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">weakref</span></code> — 弱引用</a></li>
                 <li class="right">
                     
 
@@ -651,7 +663,7 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -659,11 +671,11 @@ See <a class="reference internal" href="../reference/datamodel.html#slots"><span
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

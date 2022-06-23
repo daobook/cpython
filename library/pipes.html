@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pipes --- 终端管道接口 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pipes — 终端管道接口 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="resource --- 资源使用信息" href="resource.html" />
-    <link rel="prev" title="fcntl —— 系统调用 fcntl 和 ioctl" href="fcntl.html" />
+    <link rel="next" title="smtpd — SMTP 服务器" href="smtpd.html" />
+    <link rel="prev" title="ossaudiodev — 访问兼容OSS的音频设备" href="ossaudiodev.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/pipes.html" />
     
       
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — 终端管道接口</a><ul>
 <li><a class="reference internal" href="#template-objects">模板对象</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="fcntl.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fcntl</span></code> —— 系统调用 <code class="docutils literal notranslate"><span class="pre">fcntl</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="resource.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="ossaudiodev.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code>  — 访问兼容OSS的音频设备</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="smtpd.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">smtpd</span></code> — SMTP 服务器</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -110,10 +116,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="resource.html" title="resource --- 资源使用信息"
+          <a href="smtpd.html" title="smtpd — SMTP 服务器"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="fcntl.html" title="fcntl —— 系统调用 fcntl 和 ioctl"
+          <a href="ossaudiodev.html" title="ossaudiodev — 访问兼容OSS的音频设备"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -126,12 +132,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="unix.html" accesskey="U">Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a></li>
+          <li class="nav-item nav-item-2"><a href="superseded.html" accesskey="U">被取代的模块</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — 终端管道接口</a></li>
                 <li class="right">
                     
 
@@ -155,16 +161,21 @@
           <div class="body" role="main">
             
   <section id="module-pipes">
-<span id="pipes-interface-to-shell-pipelines"></span><h1><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> --- 终端管道接口<a class="headerlink" href="#module-pipes" title="永久链接至标题">¶</a></h1>
+<span id="pipes-interface-to-shell-pipelines"></span><h1><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> — 终端管道接口<a class="headerlink" href="#module-pipes" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/pipes.py">Lib/pipes.py</a></p>
+<div class="deprecated-removed">
+<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.13: </span>The <a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> module is deprecated
+(see <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0594/#pipes"><strong>PEP 594</strong></a> for details).
+Please use the <a class="reference internal" href="subprocess.html#module-subprocess" title="subprocess: Subprocess management."><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> module instead.</p>
+</div>
 <hr class="docutils" />
-<p><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> 定义了一个类用来抽象 <em>pipeline</em> 的概念 --- 将数据从一个文件转到另一文件的转换器序列。</p>
+<p><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> 定义了一个类用来抽象 <em>pipeline</em> 的概念 — 将数据从一个文件转到另一文件的转换器序列。</p>
 <p>由于模块使用了 <strong class="program">/bin/sh</strong> 命令行，因此要求有 POSIX 或兼容 <a class="reference internal" href="os.html#os.system" title="os.system"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.system()</span></code></a> 和 <a class="reference internal" href="os.html#os.popen" title="os.popen"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.popen()</span></code></a> 的终端程序。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 在 VxWorks 上不可用。</p>
-<p><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> 模块定义了以下的类:</p>
+<p><a class="reference internal" href="#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a> 模块定义了以下的类:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pipes.Template">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pipes.</span></span><span class="sig-name descname"><span class="pre">Template</span></span><a class="headerlink" href="#pipes.Template" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pipes.</span></span><span class="sig-name descname"><span class="pre">Template</span></span><a class="headerlink" href="#pipes.Template" title="永久链接至目标">¶</a></dt>
 <dd><p>对管道的抽象。</p>
 </dd></dl>
 
@@ -236,20 +247,26 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — 终端管道接口</a><ul>
 <li><a class="reference internal" href="#template-objects">模板对象</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="fcntl.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fcntl</span></code> —— 系统调用 <code class="docutils literal notranslate"><span class="pre">fcntl</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ioctl</span></code></a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="resource.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code> --- 资源使用信息</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="ossaudiodev.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code>  — 访问兼容OSS的音频设备</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="smtpd.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">smtpd</span></code> — SMTP 服务器</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -275,10 +292,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="resource.html" title="resource --- 资源使用信息"
+          <a href="smtpd.html" title="smtpd — SMTP 服务器"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="fcntl.html" title="fcntl —— 系统调用 fcntl 和 ioctl"
+          <a href="ossaudiodev.html" title="ossaudiodev — 访问兼容OSS的音频设备"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -291,12 +308,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="unix.html" >Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> --- 终端管道接口</a></li>
+          <li class="nav-item nav-item-2"><a href="superseded.html" >被取代的模块</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code> — 终端管道接口</a></li>
                 <li class="right">
                     
 
@@ -320,7 +337,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -328,11 +345,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

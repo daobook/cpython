@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>shlex —— 简单的词法分析 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shlex —— 简单的词法分析 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
     <link rel="next" title="Tk图形用户界面(GUI)" href="tk.html" />
-    <link rel="prev" title="cmd --- 支持面向行的命令解释器" href="cmd.html" />
+    <link rel="prev" title="cmd — 支持面向行的命令解释器" href="cmd.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/shlex.html" />
     
       
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code> —— 简单的词法分析</a><ul>
 <li><a class="reference internal" href="#shlex-objects">shlex 对象</a></li>
 <li><a class="reference internal" href="#parsing-rules">解析规则</a></li>
@@ -80,12 +81,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="cmd.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code> --- 支持面向行的命令解释器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="tk.html"
-                        title="下一章">Tk图形用户界面(GUI)</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="cmd.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code> — 支持面向行的命令解释器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tk.html"
+                          title="下一章">Tk图形用户界面(GUI)</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -115,7 +121,7 @@
           <a href="tk.html" title="Tk图形用户界面(GUI)"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="cmd.html" title="cmd --- 支持面向行的命令解释器"
+          <a href="cmd.html" title="cmd — 支持面向行的命令解释器"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -128,7 +134,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -167,7 +173,7 @@
 <span class="sig-prename descclassname"><span class="pre">shlex.</span></span><span class="sig-name descname"><span class="pre">split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">posix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#shlex.split" title="永久链接至目标">¶</a></dt>
 <dd><p>用类似 shell 的语法拆分字符串 <em>s</em>。如果 <em>comments</em> 为 <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a> (默认值)，则不会解析给定字符串中的注释 (<a class="reference internal" href="#shlex.shlex.commenters" title="shlex.shlex.commenters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">commenters</span></code></a> 属性的 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 实例设为空字符串)。 本函数默认工作于 POSIX 模式下，但若 <em>posix</em> 参数为 False，则采用非 POSIX 模式。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>Since the <a class="reference internal" href="#shlex.split" title="shlex.split"><code class="xref py py-func docutils literal notranslate"><span class="pre">split()</span></code></a> function instantiates a <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a>
 instance, passing <code class="docutils literal notranslate"><span class="pre">None</span></code> for <em>s</em> will read the string to split from
 standard input.</p>
@@ -237,8 +243,8 @@ standard input.</p>
 <p><a class="reference internal" href="#module-shlex" title="shlex: Simple lexical analysis for Unix shell-like languages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code></a> 模块中定义了以下类：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="shlex.shlex">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">shlex.</span></span><span class="sig-name descname"><span class="pre">shlex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">posix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">punctuation_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#shlex.shlex" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 及其子类的实例是一种词义分析器对象。 利用初始化参数可指定从哪里读取字符。 初始化参数必须是具备 <a class="reference internal" href="io.html#io.TextIOBase.read" title="io.TextIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> 和 <a class="reference internal" href="io.html#io.TextIOBase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> 方法的文件/流对象，或者是一个字符串。 如果没有给出初始化参数，则会从 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> 获取输入。 第二个可选参数是个文件名字符串，用于设置 <a class="reference internal" href="#shlex.shlex.infile" title="shlex.shlex.infile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">infile</span></code></a> 属性的初始值。 如果 <em>instream</em> 参数被省略或等于 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>，则第二个参数默认为 &quot;stdin&quot;。 <em>posix</em> 参数定义了操作的模式：若 <em>posix</em> 不为真值（默认），则 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 实例将工作于兼容模式。 若运行于 POSIX 模式下，则 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 会尽可能地应用 POSIX shell 解析规则。 <em>punctuation_chars</em> 参数提供了一种使行为更接近于真正的 shell 解析的方式。 该参数可接受多种值：默认值、<code class="docutils literal notranslate"><span class="pre">False</span></code>、保持 Python 3.5 及更早版本的行为。 如果设为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，则会改变对字符 <code class="docutils literal notranslate"><span class="pre">();&lt;&gt;|&amp;</span></code> 的解析方式：这些字符将作为独立的词法单元被返回（视作标点符号）。 如果设为非空字符串，则这些字符将被用作标点符号。 出现在 <em>punctuation_chars</em> 中的 <a class="reference internal" href="#shlex.shlex.wordchars" title="shlex.shlex.wordchars"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wordchars</span></code></a> 属性中的任何字符都会从 <a class="reference internal" href="#shlex.shlex.wordchars" title="shlex.shlex.wordchars"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wordchars</span></code></a> 中被删除。 请参阅 <a class="reference internal" href="#improved-shell-compatibility"><span class="std std-ref">改进的 shell 兼容性</span></a> 了解详情。 <em>punctuation_chars</em> 只能在创建 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 实例时设置，以后不能再作修改。</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">shlex.</span></span><span class="sig-name descname"><span class="pre">shlex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">posix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">punctuation_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#shlex.shlex" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 及其子类的实例是一种词义分析器对象。 利用初始化参数可指定从哪里读取字符。 初始化参数必须是具备 <a class="reference internal" href="io.html#io.TextIOBase.read" title="io.TextIOBase.read"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code></a> 和 <a class="reference internal" href="io.html#io.TextIOBase.readline" title="io.TextIOBase.readline"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readline()</span></code></a> 方法的文件/流对象，或者是一个字符串。 如果没有给出初始化参数，则会从 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code> 获取输入。 第二个可选参数是个文件名字符串，用于设置 <a class="reference internal" href="#shlex.shlex.infile" title="shlex.shlex.infile"><code class="xref py py-attr docutils literal notranslate"><span class="pre">infile</span></code></a> 属性的初始值。 如果 <em>instream</em> 参数被省略或等于 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>，则第二个参数默认为 “stdin”。 <em>posix</em> 参数定义了操作的模式：若 <em>posix</em> 不为真值（默认），则 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 实例将工作于兼容模式。 若运行于 POSIX 模式下，则 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 会尽可能地应用 POSIX shell 解析规则。 <em>punctuation_chars</em> 参数提供了一种使行为更接近于真正的 shell 解析的方式。 该参数可接受多种值：默认值、<code class="docutils literal notranslate"><span class="pre">False</span></code>、保持 Python 3.5 及更早版本的行为。 如果设为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，则会改变对字符 <code class="docutils literal notranslate"><span class="pre">();&lt;&gt;|&amp;</span></code> 的解析方式：这些字符将作为独立的词法单元被返回（视作标点符号）。 如果设为非空字符串，则这些字符将被用作标点符号。 出现在 <em>punctuation_chars</em> 中的 <a class="reference internal" href="#shlex.shlex.wordchars" title="shlex.shlex.wordchars"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wordchars</span></code></a> 属性中的任何字符都会从 <a class="reference internal" href="#shlex.shlex.wordchars" title="shlex.shlex.wordchars"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wordchars</span></code></a> 中被删除。 请参阅 <a class="reference internal" href="#improved-shell-compatibility"><span class="std std-ref">改进的 shell 兼容性</span></a> 了解详情。 <em>punctuation_chars</em> 只能在创建 <a class="reference internal" href="#shlex.shlex" title="shlex.shlex"><code class="xref py py-class docutils literal notranslate"><span class="pre">shlex</span></code></a> 实例时设置，以后不能再作修改。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>加入 <em>punctuation_chars</em> 参数。</p>
 </div>
@@ -257,7 +263,7 @@ standard input.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="shlex.shlex.get_token">
 <span class="sig-prename descclassname"><span class="pre">shlex.</span></span><span class="sig-name descname"><span class="pre">get_token</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#shlex.shlex.get_token" title="永久链接至目标">¶</a></dt>
-<dd><p>返回一个词法单元。如果所有单词已用 <a class="reference internal" href="#shlex.shlex.push_token" title="shlex.shlex.push_token"><code class="xref py py-meth docutils literal notranslate"><span class="pre">push_token()</span></code></a> 堆叠在一起了，则从堆栈中弹出一个词法单元。否则就从输入流中读取一个。如果读取时遇到文件结束符，则会返回 <code class="xref py py-attr docutils literal notranslate"><span class="pre">eof`（在非</span> <span class="pre">POSIX</span> <span class="pre">模式下为空字符串</span> <span class="pre">`</span></code>''<code class="docutils literal notranslate"><span class="pre">，在</span> <span class="pre">POSIX</span> <span class="pre">模式下为</span> <span class="pre">``None</span></code>）。</p>
+<dd><p>返回一个词法单元。如果所有单词已用 <a class="reference internal" href="#shlex.shlex.push_token" title="shlex.shlex.push_token"><code class="xref py py-meth docutils literal notranslate"><span class="pre">push_token()</span></code></a> 堆叠在一起了，则从堆栈中弹出一个词法单元。否则就从输入流中读取一个。如果读取时遇到文件结束符，则会返回 <code class="xref py py-attr docutils literal notranslate"><span class="pre">eof`（在非</span> <span class="pre">POSIX</span> <span class="pre">模式下为空字符串</span> <span class="pre">`</span></code>’’<code class="docutils literal notranslate"><span class="pre">，在</span> <span class="pre">POSIX</span> <span class="pre">模式下为</span> <span class="pre">``None</span></code>）。</p>
 </dd></dl>
 
 <dl class="py method">
@@ -297,7 +303,7 @@ standard input.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="shlex.shlex.error_leader">
 <span class="sig-prename descclassname"><span class="pre">shlex.</span></span><span class="sig-name descname"><span class="pre">error_leader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#shlex.shlex.error_leader" title="永久链接至目标">¶</a></dt>
-<dd><p>本方法生成一条错误信息的首部，以 Unix C 编译器错误标签的形式；格式为``'&quot;%s&quot;, line %d: '<code class="docutils literal notranslate"><span class="pre">，其中</span> <span class="pre">``%s</span></code> 被替换为当前源文件的名称，<code class="docutils literal notranslate"><span class="pre">%d</span></code> 被替换为当前输入行号（可用可选参数覆盖）。</p>
+<dd><p>本方法生成一条错误信息的首部，以 Unix C 编译器错误标签的形式；格式为``’”%s”, line %d: ‘<code class="docutils literal notranslate"><span class="pre">，其中</span> <span class="pre">``%s</span></code> 被替换为当前源文件的名称，<code class="docutils literal notranslate"><span class="pre">%d</span></code> 被替换为当前输入行号（可用可选参数覆盖）。</p>
 <p>这是个快捷函数，旨在鼓励 <a class="reference internal" href="#module-shlex" title="shlex: Simple lexical analysis for Unix shell-like languages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code></a> 用户以标准的、可解析的格式生成错误信息，以便 Emacs 和其他 Unix 工具理解。</p>
 </dd></dl>
 
@@ -449,7 +455,7 @@ standard input.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果指定了 <code class="docutils literal notranslate"><span class="pre">punctuation_chars</span></code>，则 <a class="reference internal" href="#shlex.shlex.wordchars" title="shlex.shlex.wordchars"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wordchars</span></code></a> 属性的参数会是 <code class="docutils literal notranslate"><span class="pre">~-./*?=</span></code>。因为这些字符可以出现在文件名（包括通配符）和命令行参数中（如 <code class="docutils literal notranslate"><span class="pre">--color=auto</span></code>）。因此：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">shlex</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">shlex</span><span class="o">.</span><span class="n">shlex</span><span class="p">(</span><span class="s1">&#39;~/a &amp;&amp; b-c --color=auto || d *.py?&#39;</span><span class="p">,</span>
@@ -471,8 +477,9 @@ standard input.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">shlex</span></code> —— 简单的词法分析</a><ul>
 <li><a class="reference internal" href="#shlex-objects">shlex 对象</a></li>
 <li><a class="reference internal" href="#parsing-rules">解析规则</a></li>
@@ -481,12 +488,17 @@ standard input.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="cmd.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code> --- 支持面向行的命令解释器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="tk.html"
-                        title="下一章">Tk图形用户界面(GUI)</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="cmd.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cmd</span></code> — 支持面向行的命令解释器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tk.html"
+                          title="下一章">Tk图形用户界面(GUI)</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -515,7 +527,7 @@ standard input.</p>
           <a href="tk.html" title="Tk图形用户界面(GUI)"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="cmd.html" title="cmd --- 支持面向行的命令解释器"
+          <a href="cmd.html" title="cmd — 支持面向行的命令解释器"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -528,7 +540,7 @@ standard input.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -557,7 +569,7 @@ standard input.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -565,11 +577,11 @@ standard input.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

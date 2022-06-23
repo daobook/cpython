@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>使对象类型支持循环垃圾回收 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使对象类型支持循环垃圾回收 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">使对象类型支持循环垃圾回收</a><ul>
 <li><a class="reference internal" href="#controlling-the-garbage-collector-state">控制垃圾回收器状态</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="typeobj.html"
-                        title="上一章">类型对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="apiabiversion.html"
-                        title="下一章">API 和 ABI 版本管理</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="typeobj.html"
+                          title="上一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="apiabiversion.html"
+                          title="下一章">API 和 ABI 版本管理</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -126,7 +132,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -188,13 +194,13 @@
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyObject_GC_NewVar">
-<span class="n"><span class="pre">TYPE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_GC_NewVar</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TYPE</span></span>, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">type</span></span>, <span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_NewVar" title="永久链接至目标">¶</a><br /></dt>
+<span class="n"><span class="pre">TYPE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_GC_NewVar</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TYPE</span></span>, <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">type</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_NewVar" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>类似于 <a class="reference internal" href="allocation.html#c.PyObject_NewVar" title="PyObject_NewVar"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_NewVar()</span></code></a> ，适用于设置了 <a class="reference internal" href="typeobj.html#Py_TPFLAGS_HAVE_GC" title="Py_TPFLAGS_HAVE_GC"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_GC</span></code></a> 标签的容器对象。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyObject_GC_Resize">
-<span class="n"><span class="pre">TYPE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_GC_Resize</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TYPE</span></span>, <a class="reference internal" href="structures.html#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">op</span></span>, <span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="n"><span class="pre">newsize</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Resize" title="永久链接至目标">¶</a><br /></dt>
+<span class="n"><span class="pre">TYPE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_GC_Resize</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">TYPE</span></span>, <a class="reference internal" href="structures.html#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">op</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">newsize</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GC_Resize" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>为 <a class="reference internal" href="allocation.html#c.PyObject_NewVar" title="PyObject_NewVar"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_NewVar()</span></code></a> 所分配对象重新调整大小。 返回调整大小后的对象或在失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 <em>op</em> 必须尚未被垃圾回收器追踪。</p>
 </dd></dl>
 
@@ -288,7 +294,7 @@
 <p>这个 C-API 提供了以下函数用于控制垃圾回收的运行。</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyGC_Collect">
-<span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyGC_Collect</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyGC_Collect" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyGC_Collect</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">void</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyGC_Collect" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>执行完全的垃圾回收，如果垃圾回收器已启用的话。 （请注意 <a class="reference internal" href="../library/gc.html#gc.collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">gc.collect()</span></code></a> 会无条件地执行它。）</p>
 <p>返回已回收的 + 无法回收的不可获取对象的数量。 如果垃圾回收器被禁用或已在执行回收，则立即返回 <code class="docutils literal notranslate"><span class="pre">0</span></code>。 在垃圾回收期间发生的错误会被传给 <a class="reference internal" href="../library/sys.html#sys.unraisablehook" title="sys.unraisablehook"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.unraisablehook</span></code></a>。 此函数不会引发异常。</p>
 </dd></dl>
@@ -330,20 +336,26 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">使对象类型支持循环垃圾回收</a><ul>
 <li><a class="reference internal" href="#controlling-the-garbage-collector-state">控制垃圾回收器状态</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="typeobj.html"
-                        title="上一章">类型对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="apiabiversion.html"
-                        title="下一章">API 和 ABI 版本管理</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="typeobj.html"
+                          title="上一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="apiabiversion.html"
+                          title="下一章">API 和 ABI 版本管理</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -385,7 +397,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -414,7 +426,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -422,11 +434,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>公用对象的结构 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公用对象的结构 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">公用对象的结构</a><ul>
 <li><a class="reference internal" href="#base-object-types-and-macros">基本的对象类型和宏</a></li>
 <li><a class="reference internal" href="#implementing-functions-and-methods">Implementing functions and methods</a></li>
@@ -80,12 +81,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="allocation.html"
-                        title="上一章">在堆上分配对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="typeobj.html"
-                        title="下一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="allocation.html"
+                          title="上一章">在堆上分配对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="typeobj.html"
+                          title="下一章">类型对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -128,7 +134,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -165,9 +171,9 @@
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyObject">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyObject</span></span></span><a class="headerlink" href="#c.PyObject" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>All object types are extensions of this type.  This is a type which
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Limited API</span></a>. (Only some members are part of the stable ABI.)</em><p>All object types are extensions of this type.  This is a type which
 contains the information Python needs to treat a pointer to an object as an
-object.  In a normal &quot;release&quot; build, it contains only the object's
+object.  In a normal “release” build, it contains only the object’s
 reference count and a pointer to the corresponding type object.
 Nothing is actually declared to be a <a class="reference internal" href="#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a>, but every pointer
 to a Python object can be cast to a <span class="xref c c-texpr"><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>.  Access to the
@@ -178,7 +184,7 @@ members must be done by using the macros <a class="reference internal" href="#c.
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyVarObject">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyVarObject</span></span></span><a class="headerlink" href="#c.PyVarObject" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is an extension of <a class="reference internal" href="#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> that adds the <code class="xref py py-attr docutils literal notranslate"><span class="pre">ob_size</span></code>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Limited API</span></a>. (Only some members are part of the stable ABI.)</em><p>This is an extension of <a class="reference internal" href="#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> that adds the <code class="xref py py-attr docutils literal notranslate"><span class="pre">ob_size</span></code>
 field.  This is only used for objects that have some notion of <em>length</em>.
 This type does not often appear in the Python/C API.
 Access to the members must be done by using the macros
@@ -210,7 +216,7 @@ The PyObject_VAR_HEAD macro expands to:</p>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_Is">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_Is</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_Is" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_Is</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span>, <a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_Is" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Test if the <em>x</em> object is the <em>y</em> object, the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">y</span></code> in Python.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
@@ -219,7 +225,7 @@ The PyObject_VAR_HEAD macro expands to:</p>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_IsNone">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsNone</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsNone" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsNone</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsNone" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Test if an object is the <code class="docutils literal notranslate"><span class="pre">None</span></code> singleton,
 the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">None</span></code> in Python.</p>
 <div class="versionadded">
@@ -229,7 +235,7 @@ the same as <code class="docutils literal notranslate"><span class="pre">x</span
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_IsTrue">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsTrue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsTrue" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsTrue</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsTrue" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Test if an object is the <code class="docutils literal notranslate"><span class="pre">True</span></code> singleton,
 the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">True</span></code> in Python.</p>
 <div class="versionadded">
@@ -239,7 +245,7 @@ the same as <code class="docutils literal notranslate"><span class="pre">x</span
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_IsFalse">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsFalse</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsFalse" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IsFalse</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IsFalse" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p>Test if an object is the <code class="docutils literal notranslate"><span class="pre">False</span></code> singleton,
 the same as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">is</span> <span class="pre">False</span></code> in Python.</p>
 <div class="versionadded">
@@ -249,12 +255,13 @@ the same as <code class="docutils literal notranslate"><span class="pre">x</span
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_TYPE">
-<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">Py_TYPE</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_TYPE" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n"><span class="pre">PyTypeObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">Py_TYPE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_TYPE" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Get the type of the Python object <em>o</em>.</p>
 <p>Return a <a class="reference internal" href="../glossary.html#term-borrowed-reference"><span class="xref std std-term">borrowed reference</span></a>.</p>
 <p>Use the <a class="reference internal" href="#c.Py_SET_TYPE" title="Py_SET_TYPE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SET_TYPE()</span></code></a> function to set an object type.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.11 版更改: </span><a class="reference internal" href="#c.Py_TYPE" title="Py_TYPE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_TYPE()</span></code></a> is changed to an inline static function.</p>
+<p><span class="versionmodified changed">在 3.11 版更改: </span><a class="reference internal" href="#c.Py_TYPE" title="Py_TYPE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_TYPE()</span></code></a> is changed to an inline static function.
+The parameter type is no longer <span class="xref c c-texpr"><span class="k">const</span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>.</p>
 </div>
 </dd></dl>
 
@@ -279,9 +286,12 @@ Equivalent to: <code class="docutils literal notranslate"><span class="pre">Py_T
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_REFCNT">
-<span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_REFCNT</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_REFCNT" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_REFCNT</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_REFCNT" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Get the reference count of the Python object <em>o</em>.</p>
 <p>Use the <a class="reference internal" href="#c.Py_SET_REFCNT" title="Py_SET_REFCNT"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SET_REFCNT()</span></code></a> function to set an object reference count.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The parameter type is no longer <span class="xref c c-texpr"><span class="k">const</span><span class="w"> </span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.10 版更改: </span><a class="reference internal" href="#c.Py_REFCNT" title="Py_REFCNT"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_REFCNT()</span></code></a> is changed to the inline static function.</p>
 </div>
@@ -289,7 +299,7 @@ Equivalent to: <code class="docutils literal notranslate"><span class="pre">Py_T
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_SET_REFCNT">
-<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SET_REFCNT</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="n"><span class="pre">refcnt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SET_REFCNT" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SET_REFCNT</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">refcnt</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SET_REFCNT" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Set the object <em>o</em> reference counter to <em>refcnt</em>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
@@ -298,17 +308,18 @@ Equivalent to: <code class="docutils literal notranslate"><span class="pre">Py_T
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_SIZE">
-<span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SIZE</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SIZE" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SIZE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SIZE" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Get the size of the Python object <em>o</em>.</p>
 <p>Use the <a class="reference internal" href="#c.Py_SET_SIZE" title="Py_SET_SIZE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SET_SIZE()</span></code></a> function to set an object size.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.11 版更改: </span><a class="reference internal" href="#c.Py_SIZE" title="Py_SIZE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SIZE()</span></code></a> is changed to an inline static function.</p>
+<p><span class="versionmodified changed">在 3.11 版更改: </span><a class="reference internal" href="#c.Py_SIZE" title="Py_SIZE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_SIZE()</span></code></a> is changed to an inline static function.
+The parameter type is no longer <span class="xref c c-texpr"><span class="k">const</span><span class="w"> </span><a class="reference internal" href="#c.PyVarObject" title="PyVarObject"><span class="n">PyVarObject</span></a><span class="p">*</span></span>.</p>
 </div>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_SET_SIZE">
-<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SET_SIZE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SET_SIZE" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_SET_SIZE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyVarObject" title="PyVarObject"><span class="n"><span class="pre">PyVarObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_SET_SIZE" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Set the object <em>o</em> size to <em>size</em>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
@@ -418,7 +429,7 @@ The function signature is:</p>
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyMethodDef">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMethodDef</span></span></span><a class="headerlink" href="#c.PyMethodDef" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Structure used to describe a method of an extension type.  This structure has
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> (including all members).</em><p>Structure used to describe a method of an extension type.  This structure has
 four fields:</p>
 <table class="docutils align-default">
 <colgroup>
@@ -515,7 +526,6 @@ which is a tuple representing the names of the keyword arguments
 (which are guaranteed to be strings)
 or possibly <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if there are no keywords.  The values of the keyword
 arguments are stored in the <em>args</em> array, after the positional arguments.</p>
-<p>This is not part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">limited API</span></a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -538,11 +548,13 @@ The defining class might be a superclass of <code class="docutils literal notran
 <dl class="py data">
 <dt class="sig sig-object py" id="METH_NOARGS">
 <span class="sig-name descname"><span class="pre">METH_NOARGS</span></span><a class="headerlink" href="#METH_NOARGS" title="永久链接至目标">¶</a></dt>
-<dd><p>Methods without parameters don't need to check whether arguments are given if
+<dd><p>Methods without parameters don’t need to check whether arguments are given if
 they are listed with the <a class="reference internal" href="#METH_NOARGS" title="METH_NOARGS"><code class="xref py py-const docutils literal notranslate"><span class="pre">METH_NOARGS</span></code></a> flag.  They need to be of type
 <a class="reference internal" href="#c.PyCFunction" title="PyCFunction"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyCFunction</span></code></a>.  The first parameter is typically named <em>self</em> and will
 hold a reference to the module or object instance.  In all cases the second
 parameter will be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+<p>The function must have 2 parameters. Since the second parameter is unused,
+<a class="reference internal" href="intro.html#c.Py_UNUSED" title="Py_UNUSED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">Py_UNUSED</span></code></a> can be used to prevent a compiler warning.</p>
 </dd></dl>
 
 <dl class="py data">
@@ -597,7 +609,7 @@ than wrapper object calls.</p>
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyMemberDef">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMemberDef</span></span></span><a class="headerlink" href="#c.PyMemberDef" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Structure which describes an attribute of a type which corresponds to a C
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> (including all members).</em><p>Structure which describes an attribute of a type which corresponds to a C
 struct member.  Its fields are:</p>
 <table class="docutils align-default">
 <colgroup>
@@ -625,7 +637,7 @@ C struct</p></td>
 <td><p>Py_ssize_t</p></td>
 <td><p>the offset in bytes that the
 member is located on the
-type's object struct</p></td>
+type’s object struct</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">flags</span></code></p></td>
 <td><p>int</p></td>
@@ -756,7 +768,7 @@ if successful and a negative value on failure.</p>
 <dl class="c type">
 <dt class="sig sig-object c" id="c.PyGetSetDef">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyGetSetDef</span></span></span><a class="headerlink" href="#c.PyGetSetDef" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Structure to define property-like access for a type. See also description of
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> (including all members).</em><p>Structure to define property-like access for a type. See also description of
 the <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_getset" title="PyTypeObject.tp_getset"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyTypeObject.tp_getset</span></code></a> slot.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -777,7 +789,7 @@ the <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_getset" t
 </tr>
 <tr class="row-odd"><td><p>get</p></td>
 <td><p>getter</p></td>
-<td><p>C Function to get the attribute</p></td>
+<td><p>C function to get the attribute</p></td>
 </tr>
 <tr class="row-even"><td><p>set</p></td>
 <td><p>setter</p></td>
@@ -823,8 +835,9 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">公用对象的结构</a><ul>
 <li><a class="reference internal" href="#base-object-types-and-macros">基本的对象类型和宏</a></li>
 <li><a class="reference internal" href="#implementing-functions-and-methods">Implementing functions and methods</a></li>
@@ -833,12 +846,17 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="allocation.html"
-                        title="上一章">在堆上分配对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="typeobj.html"
-                        title="下一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="allocation.html"
+                          title="上一章">在堆上分配对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="typeobj.html"
+                          title="下一章">类型对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -880,7 +898,7 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -909,7 +927,7 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -917,11 +935,11 @@ Should return <code class="docutils literal notranslate"><span class="pre">0</sp
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>如何利用 urllib 包获取网络资源 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何利用 urllib 包获取网络资源 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">如何利用 urllib 包获取网络资源</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a></li>
 <li><a class="reference internal" href="#fetching-urls">获取 URL 资源</a><ul>
@@ -102,12 +103,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="unicode.html"
-                        title="上一章">Unicode 指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="argparse.html"
-                        title="下一章">Argparse 教程</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="unicode.html"
+                          title="上一章">Unicode 指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="argparse.html"
+                          title="下一章">Argparse 教程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -150,7 +156,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -181,12 +187,13 @@
 <span id="urllib-howto"></span><h1>如何利用 urllib 包获取网络资源<a class="headerlink" href="#howto-fetch-internet-resources-using-the-urllib-package" title="永久链接至标题">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">作者</dt>
-<dd class="field-odd"><p><a class="reference external" href="http://www.voidspace.org.uk/python/index.shtml">Michael Foord</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://agileabstractions.com/">Michael Foord</a></p>
 </dd>
 </dl>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>这份 HOWTO 文档的早期版本有一份法语的译文，可在 <a class="reference external" href="http://www.voidspace.org.uk/python/articles/urllib2_francais.shtml">urllib2 - Le Manuel manquant</a> 处查阅。</p>
+<p class="admonition-title">备注</p>
+<p>There is a French translation of an earlier revision of this
+HOWTO, available at <a class="reference external" href="https://web.archive.org/web/20200910051922/http://www.voidspace.org.uk/python/articles/urllib2_francais.shtml">urllib2 - Le Manuel manquant</a>.</p>
 </div>
 <section id="introduction">
 <h2>概述<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
@@ -194,7 +201,7 @@
 <p class="sidebar-title">Related Articles</p>
 <p>关于如何用 Python 获取 web 资源，以下文章或许也很有用：</p>
 <ul>
-<li><p><a class="reference external" href="http://www.voidspace.org.uk/python/articles/authentication.shtml">基础的身份认证</a></p>
+<li><p><a class="reference external" href="https://web.archive.org/web/20201215133350/http://www.voidspace.org.uk/python/articles/authentication.shtml">Basic Authentication</a></p>
 <blockquote>
 <div><p><em>基本认证</em> 的教程，带有一些 Python 示例。</p>
 </div></blockquote>
@@ -202,8 +209,8 @@
 </ul>
 </aside>
 <p><strong>urllib.request</strong> 是用于获取 URL （统一资源定位符）的 Python 模块。它以 <em>urlopen</em> 函数的形式提供了一个非常简单的接口，能用不同的协议获取 URL。同时它还为处理各种常见情形提供了一个稍微复杂一些的接口——比如：基础身份认证、cookies、代理等等。这些功能是由名为 handlers 和 opener 的对象提供的。</p>
-<p>urllib.request 支持多种  &quot;URL 方案&quot; （通过 URL中 <code class="docutils literal notranslate"><span class="pre">&quot;:&quot;</span></code> 之前的字符串加以区分——如 <code class="docutils literal notranslate"><span class="pre">&quot;ftp://python.org/&quot;`</span> <span class="pre">中的</span> <span class="pre">``&quot;ftp&quot;`</span></code>）即为采用其关联网络协议（FTP、HTTP 之类）的 URL 方案 。本教程重点关注最常用的 HTTP 场景。</p>
-<p>对于简单场景而言， <em>urlopen</em> 用起来十分容易。但只要在打开 HTTP URL 时遇到错误或非常情况，就需要对超文本传输协议有所了解才行。最全面、最权威的 HTTP 参考是 <span class="target" id="index-8"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2616.html"><strong>RFC 2616</strong></a> 。那是一份技术文档，并没有追求可读性。本 文旨在说明 <em>urllib</em> 的用法，为了便于阅读也附带了足够详细的 HTTP 信息。本文并不是为了替代 <a class="reference internal" href="../library/urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 文档，只是其补充说明而已。</p>
+<p>urllib.request 支持多种  “URL 方案” （通过 URL中 <code class="docutils literal notranslate"><span class="pre">&quot;:&quot;</span></code> 之前的字符串加以区分——如 <code class="docutils literal notranslate"><span class="pre">&quot;ftp://python.org/&quot;`</span> <span class="pre">中的</span> <span class="pre">``&quot;ftp&quot;`</span></code>）即为采用其关联网络协议（FTP、HTTP 之类）的 URL 方案 。本教程重点关注最常用的 HTTP 场景。</p>
+<p>对于简单场景而言， <em>urlopen</em> 用起来十分容易。但只要在打开 HTTP URL 时遇到错误或非常情况，就需要对超文本传输协议有所了解才行。最全面、最权威的 HTTP 参考是 <span class="target" id="index-8"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2616.html"><strong>RFC 2616</strong></a> 。那是一份技术文档，并没有追求可读性。本 文旨在说明 <em>urllib</em> 的用法，为了便于阅读也附带了足够详细的 HTTP 信息。本文并不是为了替代 <a class="reference internal" href="../library/urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 文档，只是其补充说明而已。</p>
 </section>
 <section id="fetching-urls">
 <h2>获取 URL 资源<a class="headerlink" href="#fetching-urls" title="永久链接至标题">¶</a></h2>
@@ -322,12 +329,12 @@
 <section id="httperror">
 <h3>HTTPError<a class="headerlink" href="#httperror" title="永久链接至标题">¶</a></h3>
 <p>从服务器返回的每个 HTTP 响应都包含一个数字的 “状态码”。有时该状态码表明服务器无法完成该请求。默认的处理函数将会处理这其中的一部分响应。如若响应是“redirection”，这是要求客户端从另一 URL 处获取数据，urllib 将会自行处理。对于那些无法处理的状况，urlopen 将会引发  <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> 。典型的错误包括：“404”（页面无法找到）、“403”（请求遭拒绝）和“401”（需要身份认证）。</p>
-<p>全部的 HTTP 错误码请参阅 <span class="target" id="index-9"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2616.html"><strong>RFC 2616</strong></a> 。</p>
+<p>全部的 HTTP 错误码请参阅 <span class="target" id="index-9"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2616.html"><strong>RFC 2616</strong></a> 。</p>
 <p><code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> 实例将包含一个整数型的“code”属性，对应于服务器发来的错误。</p>
 <section id="error-codes">
 <h4>错误代码<a class="headerlink" href="#error-codes" title="永久链接至标题">¶</a></h4>
-<p>由于默认处理函数会自行处理重定向（300 以内的错误码），而且 100--299 的状态码表示成功，因此通常只会出现 400--599 的错误码。</p>
-<p><a class="reference internal" href="../library/http.server.html#http.server.BaseHTTPRequestHandler.responses" title="http.server.BaseHTTPRequestHandler.responses"><code class="xref py py-attr docutils literal notranslate"><span class="pre">http.server.BaseHTTPRequestHandler.responses</span></code></a> 是很有用的响应码字典，其中给出了 <span class="target" id="index-10"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc2616.html"><strong>RFC 2616</strong></a> 用到的所有响应代码。为方便起见，将此字典转载如下：</p>
+<p>由于默认处理函数会自行处理重定向（300 以内的错误码），而且 100–299 的状态码表示成功，因此通常只会出现 400–599 的错误码。</p>
+<p><a class="reference internal" href="../library/http.server.html#http.server.BaseHTTPRequestHandler.responses" title="http.server.BaseHTTPRequestHandler.responses"><code class="xref py py-attr docutils literal notranslate"><span class="pre">http.server.BaseHTTPRequestHandler.responses</span></code></a> 是很有用的响应码字典，其中给出了 <span class="target" id="index-10"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2616.html"><strong>RFC 2616</strong></a> 用到的所有响应代码。为方便起见，将此字典转载如下：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Table mapping response codes to messages; entries have the</span>
 <span class="c1"># form {code: (shortmessage, longmessage)}.</span>
 <span class="n">responses</span> <span class="o">=</span> <span class="p">{</span>
@@ -436,7 +443,7 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p><code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">HTTPError</span></code> <em>必须</em> 首先处理，否则 <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">URLError</span></code> 将会 <em>同时</em> 捕获  <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> 。</p>
 </div>
 </section>
@@ -511,25 +518,25 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>在以上例子中，只向 <code class="docutils literal notranslate"><span class="pre">build_opener</span></code> 给出了 <code class="docutils literal notranslate"><span class="pre">HTTPBasicAuthHandler</span></code> 。默认情况下，opener 会有用于处理常见状况的 handler ——<code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code> （如果设置代理的话，比如设置了环境变量 <span class="target" id="index-11"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">http_proxy</span></code> ），<code class="docutils literal notranslate"><span class="pre">UnknownHandler</span></code> 、<code class="docutils literal notranslate"><span class="pre">HTTPHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">HTTPDefaultErrorHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">HTTPRedirectHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FTPHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">FileHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">DataHandler</span></code> 、 <code class="docutils literal notranslate"><span class="pre">HTTPErrorProcessor</span></code> 。</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">top_level_url</span></code> 其实 <em>要么</em> 是一条完整的 URL（包括 “http:” 部分和主机名及可选的端口号），比如 <code class="docutils literal notranslate"><span class="pre">&quot;http://example.com/&quot;</span></code> ， <em>要么</em> 是一条“访问权限”（即主机名，及可选的端口号），比如 <code class="docutils literal notranslate"><span class="pre">&quot;example.com&quot;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">&quot;example.com:8080&quot;</span></code> （后一个示例包含了端口号）。访问权限 <strong>不得</strong> 包含“用户信息”部分——比如 <code class="docutils literal notranslate"><span class="pre">&quot;joe:password&#64;example.com&quot;</span></code> 就不正确。</p>
 </section>
 <section id="proxies">
 <h2>代理<a class="headerlink" href="#proxies" title="永久链接至标题">¶</a></h2>
-<p><strong>urllib</strong> 将自动检测并使用代理设置。 这是通过 <code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code> 实现的，当检测到代理设置时，是正常 handler 链中的一部分。通常这是一件好事，但有时也可能会无效 <a class="footnote-reference brackets" href="#id12" id="id6">5</a>。 一种方案是配置自己的 <code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code> ，不要定义代理。 设置的步骤与 <a class="reference internal" href="#basic-authentication">Basic Authentication</a> handler 类似:</p>
+<p><strong>urllib</strong> 将自动检测并使用代理设置。 这是通过 <code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code> 实现的，当检测到代理设置时，是正常 handler 链中的一部分。通常这是一件好事，但有时也可能会无效 <a class="footnote-reference brackets" href="#id12" id="id6">5</a>。 一种方案是配置自己的 <code class="docutils literal notranslate"><span class="pre">ProxyHandler</span></code> ，不要定义代理。 设置的步骤与 <a class="reference external" href="https://web.archive.org/web/20201215133350/http://www.voidspace.org.uk/python/articles/authentication.shtml">Basic Authentication</a> handler 类似:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">proxy_support</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">({})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">proxy_support</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>目前 <code class="docutils literal notranslate"><span class="pre">urllib.request</span></code> <em>尚不</em> 支持通过代理抓取 <code class="docutils literal notranslate"><span class="pre">https</span></code> 链接地址。 但此功能可以通过扩展 urllib.request 来启用，如以下例程所示 <a class="footnote-reference brackets" href="#id13" id="id7">6</a>。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果设置了 <code class="docutils literal notranslate"><span class="pre">REQUEST_METHOD</span></code> 变量，则会忽略 <code class="docutils literal notranslate"><span class="pre">HTTP_PROXY</span></code> ；参阅 <a class="reference internal" href="../library/urllib.request.html#urllib.request.getproxies" title="urllib.request.getproxies"><code class="xref py py-func docutils literal notranslate"><span class="pre">getproxies()</span></code></a> 文档。</p>
 </div>
 </section>
@@ -585,8 +592,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">如何利用 urllib 包获取网络资源</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a></li>
 <li><a class="reference internal" href="#fetching-urls">获取 URL 资源</a><ul>
@@ -617,12 +625,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="unicode.html"
-                        title="上一章">Unicode 指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="argparse.html"
-                        title="下一章">Argparse 教程</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="unicode.html"
+                          title="上一章">Unicode 指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="argparse.html"
+                          title="下一章">Argparse 教程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -664,7 +677,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -692,7 +705,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -700,11 +713,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

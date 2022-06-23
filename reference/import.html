@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. 导入系统 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. 导入系统 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">5. 导入系统</a><ul>
 <li><a class="reference internal" href="#importlib">5.1. <code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a></li>
 <li><a class="reference internal" href="#packages">5.2. 包</a><ul>
@@ -113,12 +114,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="executionmodel.html"
-                        title="上一章"><span class="section-number">4. </span>执行模型</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="expressions.html"
-                        title="下一章"><span class="section-number">6. </span>表达式</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="executionmodel.html"
+                          title="上一章"><span class="section-number">4. </span>执行模型</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="expressions.html"
+                          title="下一章"><span class="section-number">6. </span>表达式</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -161,7 +167,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -196,7 +202,7 @@
 <p>当 <a class="reference internal" href="simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句被执行时，标准的内置 <a class="reference internal" href="../library/functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> 函数会被调用。 其他发起调用导入系统的机制 (例如 <a class="reference internal" href="../library/importlib.html#importlib.import_module" title="importlib.import_module"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.import_module()</span></code></a>) 可能会选择绕过 <a class="reference internal" href="../library/functions.html#import__" title="__import__"><code class="xref py py-func docutils literal notranslate"><span class="pre">__import__()</span></code></a> 并使用它们自己的解决方案来实现导入机制。</p>
 <p>当一个模块首次被导入时，Python 会搜索该模块，如果找到就创建一个 module 对象 <a class="footnote-reference brackets" href="#fnmo" id="id1">1</a> 并初始化它。 如果指定名称的模块未找到，则会引发 <a class="reference internal" href="../library/exceptions.html#ModuleNotFoundError" title="ModuleNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ModuleNotFoundError</span></code></a>。 当发起调用导入机制时，Python 会实现多种策略来搜索指定名称的模块。 这些策略可以通过使用使用下文所描述的多种钩子来加以修改和扩展。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>导入系统已被更新以完全实现 <span class="target" id="index-46"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0302"><strong>PEP 302</strong></a> 中的第二阶段要求。 不会再有任何隐式的导入机制 —— 整个导入系统都通过 <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> 暴露出来。 此外，对原生命名空间包的支持也已被实现 (参见 <span class="target" id="index-47"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a>)。</p>
+<p><span class="versionmodified changed">在 3.3 版更改: </span>导入系统已被更新以完全实现 <span class="target" id="index-45"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 中的第二阶段要求。 不会再有任何隐式的导入机制 —— 整个导入系统都通过 <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> 暴露出来。 此外，对原生命名空间包的支持也已被实现 (参见 <span class="target" id="index-46"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a>)。</p>
 </div>
 <section id="importlib">
 <h2><span class="section-number">5.1. </span><a class="reference internal" href="../library/importlib.html#module-importlib" title="importlib: The implementation of the import machinery."><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a><a class="headerlink" href="#importlib" title="永久链接至标题">¶</a></h2>
@@ -207,7 +213,11 @@
 <p id="index-3">Python 只有一种模块对象类型，所有模块都属于该类型，无论模块是用 Python、C 还是别的语言实现。 为了帮助组织模块并提供名称层次结构，Python 还引入了 <a class="reference internal" href="../glossary.html#term-package"><span class="xref std std-term">包</span></a> 的概念。</p>
 <p>你可以把包看成是文件系统中的目录，并把模块看成是目录中的文件，但请不要对这个类比做过于字面的理解，因为包和模块不是必须来自于文件系统。 为了方便理解本文档，我们将继续使用这种目录和文件的类比。 与文件系统一样，包通过层次结构进行组织，在包之内除了一般的模块，还可以有子包。</p>
 <p>要注意的一个重点概念是所有包都是模块，但并非所有模块都是包。 或者换句话说，包只是一种特殊的模块。 特别地，任何具有 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性的模块都会被当作是包。</p>
-<p>所有模块都有自己的名字。 子包名与其父包名以点号分隔，与 Python 的标准属性访问语法一致。 例如你可能看到一个名为 <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> 的模块以及一个名为 <a class="reference internal" href="../library/email.html#module-email" title="email: Package supporting the parsing, manipulating, and generating email messages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code></a> 的包，这个包中又有一个名为 <a class="reference internal" href="../library/email.mime.html#module-email.mime" title="email.mime: Build MIME messages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.mime</span></code></a> 的子包和该子包中的名为 <code class="xref py py-mod docutils literal notranslate"><span class="pre">email.mime.text</span></code> 的子包。</p>
+<p>All modules have a name.  Subpackage names are separated from their parent
+package name by a dot, akin to Python’s standard attribute access syntax.  Thus
+you might have a package called <a class="reference internal" href="../library/email.html#module-email" title="email: Package supporting the parsing, manipulating, and generating email messages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code></a>, which in turn has a subpackage
+called <a class="reference internal" href="../library/email.mime.html#module-email.mime" title="email.mime: Build MIME messages."><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.mime</span></code></a> and a module within that subpackage called
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">email.mime.text</span></code>.</p>
 <section id="regular-packages">
 <h3><span class="section-number">5.2.1. </span>常规包<a class="headerlink" href="#regular-packages" title="永久链接至标题">¶</a></h3>
 <p id="index-4">Python 定义了两种类型的包，<a class="reference internal" href="../glossary.html#term-regular-package"><span class="xref std std-term">常规包</span></a> 和 <a class="reference internal" href="../glossary.html#term-namespace-package"><span class="xref std std-term">命名空间包</span></a>。 常规包是传统的包类型，它们在 Python 3.2 及之前就已存在。 常规包通常以一个包含 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件的目录形式实现。 当一个常规包被导入时，这个 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件会隐式地被执行，它所定义的对象会被绑定到该包命名空间中的名称。<code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件可以包含与任何其他模块中所包含的 Python 代码相似的代码，Python 将在模块被导入时为其添加额外的属性。</p>
@@ -229,7 +239,7 @@
 <p id="index-5">命名空间包是由多个 <a class="reference internal" href="../glossary.html#term-portion"><span class="xref std std-term">部分</span></a> 构成的，每个部分为父包增加一个子包。 各个部分可能处于文件系统的不同位置。 部分也可能处于 zip 文件中、网络上，或者 Python 在导入期间可以搜索的其他地方。 命名空间包并不一定会直接对应到文件系统中的对象；它们有可能是无实体表示的虚拟模块。</p>
 <p>命名空间包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性不使用普通的列表。 而是使用定制的可迭代类型，如果其父包的路径 (或者最高层级包的 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>) 发生改变，这种对象会在该包内的下一次导入尝试时自动执行新的对包部分的搜索。</p>
 <p>命名空间包没有 <code class="docutils literal notranslate"><span class="pre">parent/__init__.py</span></code> 文件。 实际上，在导入搜索期间可能找到多个 <code class="docutils literal notranslate"><span class="pre">parent</span></code> 目录，每个都由不同的部分所提供。 因此 <code class="docutils literal notranslate"><span class="pre">parent/one</span></code> 的物理位置不一定与 <code class="docutils literal notranslate"><span class="pre">parent/two</span></code> 相邻。 在这种情况下，Python 将为顶级的 <code class="docutils literal notranslate"><span class="pre">parent</span></code> 包创建一个命名空间包，无论是它本身还是它的某个子包被导入。</p>
-<p>另请参阅 <span class="target" id="index-48"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a> 了解对命名空间包的规格描述。</p>
+<p>另请参阅 <span class="target" id="index-47"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a> 了解对命名空间包的规格描述。</p>
 </section>
 </section>
 <section id="searching">
@@ -315,7 +325,7 @@
 <div><ul class="simple">
 <li><p>如果在 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中存在指定名称的模块对象，导入操作会已经将其返回。</p></li>
 <li><p>在加载器执行模块代码之前，该模块将存在于 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中。 这一点很关键，因为该模块代码可能（直接或间接地）导入其自身；预先将其添加到 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 可防止在最坏情况下的无限递归和最好情况下的多次加载。</p></li>
-<li><p>如果加载失败，则该模块 -- 只限加载失败的模块 -- 将从 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中移除。 任何已存在于 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 缓存的模块，以及任何作为附带影响被成功加载的模块仍会保留在缓存中。 这与重新加载不同，后者会把即使加载失败的模块也保留在 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中。</p></li>
+<li><p>如果加载失败，则该模块 – 只限加载失败的模块 – 将从 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中移除。 任何已存在于 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 缓存的模块，以及任何作为附带影响被成功加载的模块仍会保留在缓存中。 这与重新加载不同，后者会把即使加载失败的模块也保留在 <a class="reference internal" href="../library/sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中。</p></li>
 <li><p>在模块创建完成但还未执行之前，导入机制会设置导入相关模块属性（在上面的示例伪代码中为 “_init_module_attrs”），详情参见 <a class="reference internal" href="#import-mod-attrs"><span class="std std-ref">后续部分</span></a>。</p></li>
 <li><p>模块执行是加载的关键时刻，在此期间将填充模块的命名空间。 执行会完全委托给加载器，由加载器决定要填充的内容和方式。</p></li>
 <li><p>在加载过程中创建并传递给 exec_module() 的模块并不一定就是在导入结束时返回的模块 <a class="footnote-reference brackets" href="#fnlo" id="id3">2</a>。</p></li>
@@ -367,20 +377,19 @@
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">spam</span><span class="o">/</span>
     <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
     <span class="n">foo</span><span class="o">.</span><span class="n">py</span>
-    <span class="n">bar</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>并且 <code class="docutils literal notranslate"><span class="pre">spam/__init__.py</span></code> 中有如下几行内容:</p>
+<p>and <code class="docutils literal notranslate"><span class="pre">spam/__init__.py</span></code> has the following line in it:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.foo</span> <span class="kn">import</span> <span class="n">Foo</span>
-<span class="kn">from</span> <span class="nn">.bar</span> <span class="kn">import</span> <span class="n">Bar</span>
 </pre></div>
 </div>
-<p>则执行如下代码将在 <code class="docutils literal notranslate"><span class="pre">spam</span></code> 模块中添加对 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 和 <code class="docutils literal notranslate"><span class="pre">bar</span></code> 的名称绑定:</p>
+<p>then executing the following puts name bindings for <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">Foo</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">spam</span></code> module:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spam</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">spam</span><span class="o">.</span><span class="n">foo</span>
 <span class="go">&lt;module &#39;spam.foo&#39; from &#39;/tmp/imports/spam/foo.py&#39;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">spam</span><span class="o">.</span><span class="n">bar</span>
-<span class="go">&lt;module &#39;spam.bar&#39; from &#39;/tmp/imports/spam/bar.py&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spam</span><span class="o">.</span><span class="n">Foo</span>
+<span class="go">&lt;class &#39;spam.foo.Foo&#39;&gt;</span>
 </pre></div>
 </div>
 <p>按照通常的 Python 名称绑定规则，这看起来可能会令人惊讶，但它实际上是导入系统的一个基本特性。 保持不变的一点是如果你有 <code class="docutils literal notranslate"><span class="pre">sys.modules['spam']</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys.modules['spam.foo']</span></code> (例如在上述导入之后就是如此)，则后者必须显示为前者的 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 属性。</p>
@@ -412,8 +421,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="package__">
 <span id="__package__"></span><span class="sig-name descname"><span class="pre">__package__</span></span><a class="headerlink" href="#package__" title="永久链接至目标">¶</a></dt>
-<dd><p>模块的 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 属性必须设定。 其取值必须为一个字符串，但可以与 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 取相同的值。 当模块是包时，其 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 值应该设为其 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 值。 当模块不是包时，对于最高层级模块 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 应该设为空字符串，对于子模块则应该设为其父包名。 更多详情可参阅 <span class="target" id="index-49"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0366"><strong>PEP 366</strong></a>。</p>
-<p>该属性取代 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 被用来为主模块计算显式相对导入，相关定义见 <span class="target" id="index-50"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0366"><strong>PEP 366</strong></a>。 预期它与 <code class="docutils literal notranslate"><span class="pre">__spec__.parent</span></code> 具有相同的值。</p>
+<dd><p>模块的 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 属性必须设定。 其取值必须为一个字符串，但可以与 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 取相同的值。 当模块是包时，其 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 值应该设为其 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 值。 当模块不是包时，对于最高层级模块 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 应该设为空字符串，对于子模块则应该设为其父包名。 更多详情可参阅 <span class="target" id="index-48"></span><a class="pep reference external" href="https://peps.python.org/pep-0366/"><strong>PEP 366</strong></a>。</p>
+<p>该属性取代 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 被用来为主模块计算显式相对导入，相关定义见 <span class="target" id="index-49"></span><a class="pep reference external" href="https://peps.python.org/pep-0366/"><strong>PEP 366</strong></a>。 预期它与 <code class="docutils literal notranslate"><span class="pre">__spec__.parent</span></code> 具有相同的值。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span><code class="docutils literal notranslate"><span class="pre">__package__</span></code> 预期与 <code class="docutils literal notranslate"><span class="pre">__spec__.parent</span></code> 具有相同的值。</p>
 </div>
@@ -455,8 +464,17 @@ It might be missing for certain types of modules, such as C
 modules that are statically linked into the interpreter, and the
 import system may opt to leave it unset if it has no semantic
 meaning (e.g. a module loaded from a database).</p>
-<p>如果设置了 <code class="docutils literal notranslate"><span class="pre">__file__</span></code>，则也可以再设置 <code class="docutils literal notranslate"><span class="pre">__cached__</span></code> 属性，后者取值为编译版本代码（例如字节码文件）所在的路径。 设置此属性不要求文件已存在；该路径可以简单地指向应该存放编译文件的位置 (参见 <span class="target" id="index-51"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3147"><strong>PEP 3147</strong></a>)。</p>
-<p>当未设置 <code class="docutils literal notranslate"><span class="pre">__file__</span></code> 时也可以设置 <code class="docutils literal notranslate"><span class="pre">__cached__</span></code>。 但是，那样的场景很不典型。 最终，加载器会使用 <code class="docutils literal notranslate"><span class="pre">__file__</span></code> 和/或 <code class="docutils literal notranslate"><span class="pre">__cached__</span></code>。 因此如果一个加载器可以从缓存加载模块但是不能从文件加载，那种非典型场景就是适当的。</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">__file__</span></code> is set then the <code class="docutils literal notranslate"><span class="pre">__cached__</span></code> attribute might also
+be set,  which is the path to any compiled version of
+the code (e.g. byte-compiled file). The file does not need to exist
+to set this attribute; the path can simply point to where the
+compiled file would exist (see <span class="target" id="index-13"></span><a class="pep reference external" href="https://peps.python.org/pep-3147/"><strong>PEP 3147</strong></a>).</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">__cached__</span></code> may be set even if <code class="docutils literal notranslate"><span class="pre">__file__</span></code> is not
+set.  However, that scenario is quite atypical.  Ultimately, the
+loader is what makes use of the module spec provided by the finder
+(from which <code class="docutils literal notranslate"><span class="pre">__file__</span></code> and <code class="docutils literal notranslate"><span class="pre">__cached__</span></code> are derived).  So
+if a loader can load from a cached module but otherwise does not load
+from a file, that atypical scenario may be appropriate.</p>
 </dd></dl>
 
 </section>
@@ -465,7 +483,7 @@ meaning (e.g. a module loaded from a database).</p>
 <p>根据定义，如果一个模块具有 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性，它就是包。</p>
 <p>包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性会在导入其子包期间被使用。 在导入机制内部，它的功能与 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 基本相同，即在导入期间提供一个模块搜索位置列表。 但是，<code class="docutils literal notranslate"><span class="pre">__path__</span></code> 通常会比 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 受到更多限制。</p>
 <p><code class="docutils literal notranslate"><span class="pre">__path__</span></code> 必须是由字符串组成的可迭代对象，但它也可以为空。 作用于 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 的规则同样适用于包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code>，并且 <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> (见下文) 会在遍历包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 时被查询。</p>
-<p>包的 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件可以设置或更改包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性，而且这是在 <span class="target" id="index-52"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a> 之前实现命名空间包的典型方式。 随着 <span class="target" id="index-53"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a> 的引入，命名空间包不再需要提供仅包含 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 操控代码的 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件；导入机制会自动为命名空间包正确地设置 <code class="docutils literal notranslate"><span class="pre">__path__</span></code>。</p>
+<p>包的 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件可以设置或更改包的 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 属性，而且这是在 <span class="target" id="index-50"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a> 之前实现命名空间包的典型方式。 随着 <span class="target" id="index-51"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a> 的引入，命名空间包不再需要提供仅包含 <code class="docutils literal notranslate"><span class="pre">__path__</span></code> 操控代码的 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件；导入机制会自动为命名空间包正确地设置 <code class="docutils literal notranslate"><span class="pre">__path__</span></code>。</p>
 </section>
 <section id="module-reprs">
 <h3><span class="section-number">5.4.6. </span>模块的 repr<a class="headerlink" href="#module-reprs" title="永久链接至标题">¶</a></h3>
@@ -474,7 +492,7 @@ meaning (e.g. a module loaded from a database).</p>
 <p>以下是所使用的确切规则:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>如果模块具有 <code class="docutils literal notranslate"><span class="pre">__spec__</span></code> 属性，其中的规格信息会被用来生成 repr。 被查询的属性有 &quot;name&quot;, &quot;loader&quot;, &quot;origin&quot; 和 &quot;has_location&quot; 等等。</p></li>
+<li><p>如果模块具有 <code class="docutils literal notranslate"><span class="pre">__spec__</span></code> 属性，其中的规格信息会被用来生成 repr。 被查询的属性有 “name”, “loader”, “origin” 和 “has_location” 等等。</p></li>
 <li><p>如果模块具有 <code class="docutils literal notranslate"><span class="pre">__file__</span></code> 属性，这会被用作模块 repr 的一部分。</p></li>
 <li><p>如果模块没有 <code class="docutils literal notranslate"><span class="pre">__file__</span></code> 但是有 <code class="docutils literal notranslate"><span class="pre">__loader__</span></code> 且取值不为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则加载器的 repr 会被用作模块 repr 的一部分。</p></li>
 <li><p>对于其他情况，仅在 repr 中使用模块的 <code class="docutils literal notranslate"><span class="pre">__name__</span></code>。</p></li>
@@ -517,13 +535,13 @@ meaning (e.g. a module loaded from a database).</p>
 <p>如果路径条目不存在于缓存中，基于路径的查找器会迭代 <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> 中的每个可调用对象。 对此列表中的每个 <a class="reference internal" href="../glossary.html#term-path-entry-hook"><span class="xref std std-term">路径条目钩子</span></a> 的调用会带有一个参数，即要搜索的路径条目。 每个可调用对象或是返回可处理路径条目的 <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>，或是引发 <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>。 基于路径的查找器使用 <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> 来表示钩子无法找到与 <a class="reference internal" href="../glossary.html#term-path-entry"><span class="xref std std-term">path entry</span></a> 相对应的 <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>。 该异常会被忽略并继续进行 <a class="reference internal" href="../glossary.html#term-import-path"><span class="xref std std-term">import path</span></a> 的迭代。 每个钩子应该期待接收一个字符串或字节串对象；字节串对象的编码由钩子决定（例如可以是文件系统使用的编码  UTF-8 或其它编码），如果钩子无法解码参数，它应该引发 <a class="reference internal" href="../library/exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a>。</p>
 <p>如果 <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> 迭代结束时没有返回 <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>，则基于路径的查找器 <a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 方法将在 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> 中存入 <code class="docutils literal notranslate"><span class="pre">None</span></code> (表示此路径条目没有对应的查找器) 并返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>，表示此 <a class="reference internal" href="../glossary.html#term-meta-path-finder"><span class="xref std std-term">meta path finder</span></a> 无法找到该模块。</p>
 <p>如果 <a class="reference internal" href="../library/sys.html#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> 中的某个 <a class="reference internal" href="../glossary.html#term-path-entry-hook"><span class="xref std std-term">path entry hook</span></a> 可调用对象的返回值 <em>是</em> 一个 <a class="reference internal" href="../glossary.html#term-path-entry-finder"><span class="xref std std-term">path entry finder</span></a>，则以下协议会被用来向查找器请求一个模块的规格说明，并在加载该模块时被使用。</p>
-<p>当前工作目录 -- 由一个空字符串表示 -- 的处理方式与 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 中的其他条目略有不同。 首先，如果发现当前工作目录不存在，则 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> 中不会存放任何值。 其次，每个模块查找会对当前工作目录的值进行全新查找。 第三，由 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> 所使用并由 <a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.machinery.PathFinder.find_spec()</span></code></a> 所返回的路径将是实际的当前工作目录而非空字符串。</p>
+<p>当前工作目录 – 由一个空字符串表示 – 的处理方式与 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 中的其他条目略有不同。 首先，如果发现当前工作目录不存在，则 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> 中不会存放任何值。 其次，每个模块查找会对当前工作目录的值进行全新查找。 第三，由 <a class="reference internal" href="../library/sys.html#sys.path_importer_cache" title="sys.path_importer_cache"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_importer_cache</span></code></a> 所使用并由 <a class="reference internal" href="../library/importlib.html#importlib.machinery.PathFinder.find_spec" title="importlib.machinery.PathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.machinery.PathFinder.find_spec()</span></code></a> 所返回的路径将是实际的当前工作目录而非空字符串。</p>
 </section>
 <section id="path-entry-finder-protocol">
 <h3><span class="section-number">5.5.2. </span>路径条目查找器协议<a class="headerlink" href="#path-entry-finder-protocol" title="永久链接至标题">¶</a></h3>
 <p>为了支持模块和已初始化包的导入，也为了给命名空间包提供组成部分，路径条目查找器必须实现 <a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 方法。</p>
 <p><a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 接受两个参数，即要导入模块的完整限定名称，以及（可选的）目标模块。 <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code> 返回模块的完全填充好的规格说明。 这个规格说明总是包含“加载器”集合（但有一个例外）。</p>
-<p>为了向导入机制提示该规格说明代表一个命名空间 <a class="reference internal" href="../glossary.html#term-portion"><span class="xref std std-term">portion</span></a>，路径条目查找器会将 &quot;submodule_search_locations&quot; 设为一个包含该部分的列表。</p>
+<p>为了向导入机制提示该规格说明代表一个命名空间 <a class="reference internal" href="../glossary.html#term-portion"><span class="xref std std-term">portion</span></a>，路径条目查找器会将 “submodule_search_locations” 设为一个包含该部分的列表。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span><a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_spec" title="importlib.abc.PathEntryFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 替代了 <a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_loader" title="importlib.abc.PathEntryFinder.find_loader"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code></a> 和 <a class="reference internal" href="../library/importlib.html#importlib.abc.PathEntryFinder.find_module" title="importlib.abc.PathEntryFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a>，后两者现在都已弃用，但会在 <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code> 未定义时被使用。</p>
 <p>较旧的路径条目查找器可能会实现这两个已弃用的方法中的一个而没有实现 <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code>。 为保持向后兼容，这两个方法仍会被接受。 但是，如果在路径条目查找器上实现了 <code class="docutils literal notranslate"><span class="pre">find_spec()</span></code>，这两个遗留方法就会被忽略。</p>
@@ -596,17 +614,17 @@ meaning (e.g. a module loaded from a database).</p>
 <p>XXX * (import_machinery.rst) 是否要专门增加一节来说明模块和包的属性，也许可以扩展或移植数据模型参考页中的相关条目？</p>
 <p>XXX 库手册中的 runpy 和 pkgutil 等等应该都在页面顶端增加指向新的导入系统章节的“另请参阅”链接。</p>
 <p>XXX 是否要增加关于初始化 <code class="docutils literal notranslate"><span class="pre">__main__</span></code> 的不同方式的更多解释？</p>
-<p>XXX 增加更多有关 <code class="docutils literal notranslate"><span class="pre">__main__</span></code> 怪异/坑人特性的信息 (例如直接从 <span class="target" id="index-54"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0395"><strong>PEP 395</strong></a> 复制)。</p>
+<p>XXX 增加更多有关 <code class="docutils literal notranslate"><span class="pre">__main__</span></code> 怪异/坑人特性的信息 (例如直接从 <span class="target" id="index-52"></span><a class="pep reference external" href="https://peps.python.org/pep-0395/"><strong>PEP 395</strong></a> 复制)。</p>
 </section>
 <section id="references">
 <h2><span class="section-number">5.10. </span>参考文献<a class="headerlink" href="#references" title="永久链接至标题">¶</a></h2>
 <p>导入机制自 Python 诞生之初至今已发生了很大的变化。 原始的 <a class="reference external" href="https://www.python.org/doc/essays/packages/">包规格说明</a> 仍然可以查阅，但在撰写该文档之后许多相关细节已被修改。</p>
-<p>原始的 <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> 规格说明见 <span class="target" id="index-55"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0302"><strong>PEP 302</strong></a>，后续的扩展说明见 <span class="target" id="index-56"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a>。</p>
-<p><span class="target" id="index-57"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a> 为 Python 3.3 引入了 <a class="reference internal" href="../glossary.html#term-namespace-package"><span class="xref std std-term">命名空间包</span></a>。 <span class="target" id="index-58"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0420"><strong>PEP 420</strong></a> 还引入了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code> 协议作为 <code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code> 的替代。</p>
-<p><span class="target" id="index-59"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0366"><strong>PEP 366</strong></a> 描述了新增的 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 属性，用于在模块中的显式相对导入。</p>
-<p><span class="target" id="index-60"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0328"><strong>PEP 328</strong></a> 引入了绝对和显式相对导入，并初次提出了 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 语义，最终由 <span class="target" id="index-61"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0366"><strong>PEP 366</strong></a> 为 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 加入规范描述。</p>
-<p><span class="target" id="index-62"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0338"><strong>PEP 338</strong></a> 定义了将模块作为脚本执行。</p>
-<p><span class="target" id="index-63"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0451"><strong>PEP 451</strong></a> 在 spec 对象中增加了对每个模块导入状态的封装。 它还将加载器的大部分样板责任移交回导入机制中。 这些改变允许弃用导入系统中的一些 API 并为查找器和加载器增加一些新的方法。</p>
+<p>原始的 <a class="reference internal" href="../library/sys.html#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.meta_path</span></code></a> 规格说明见 <span class="target" id="index-53"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a>，后续的扩展说明见 <span class="target" id="index-54"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a>。</p>
+<p><span class="target" id="index-55"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a> 为 Python 3.3 引入了 <a class="reference internal" href="../glossary.html#term-namespace-package"><span class="xref std std-term">命名空间包</span></a>。 <span class="target" id="index-56"></span><a class="pep reference external" href="https://peps.python.org/pep-0420/"><strong>PEP 420</strong></a> 还引入了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">find_loader()</span></code> 协议作为 <code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code> 的替代。</p>
+<p><span class="target" id="index-57"></span><a class="pep reference external" href="https://peps.python.org/pep-0366/"><strong>PEP 366</strong></a> 描述了新增的 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 属性，用于在模块中的显式相对导入。</p>
+<p><span class="target" id="index-58"></span><a class="pep reference external" href="https://peps.python.org/pep-0328/"><strong>PEP 328</strong></a> 引入了绝对和显式相对导入，并初次提出了 <code class="docutils literal notranslate"><span class="pre">__name__</span></code> 语义，最终由 <span class="target" id="index-59"></span><a class="pep reference external" href="https://peps.python.org/pep-0366/"><strong>PEP 366</strong></a> 为 <code class="docutils literal notranslate"><span class="pre">__package__</span></code> 加入规范描述。</p>
+<p><span class="target" id="index-60"></span><a class="pep reference external" href="https://peps.python.org/pep-0338/"><strong>PEP 338</strong></a> 定义了将模块作为脚本执行。</p>
+<p><span class="target" id="index-61"></span><a class="pep reference external" href="https://peps.python.org/pep-0451/"><strong>PEP 451</strong></a> 在 spec 对象中增加了对每个模块导入状态的封装。 它还将加载器的大部分样板责任移交回导入机制中。 这些改变允许弃用导入系统中的一些 API 并为查找器和加载器增加一些新的方法。</p>
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="fnmo"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -629,8 +647,9 @@ meaning (e.g. a module loaded from a database).</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">5. 导入系统</a><ul>
 <li><a class="reference internal" href="#importlib">5.1. <code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib</span></code></a></li>
 <li><a class="reference internal" href="#packages">5.2. 包</a><ul>
@@ -672,12 +691,17 @@ meaning (e.g. a module loaded from a database).</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="executionmodel.html"
-                        title="上一章"><span class="section-number">4. </span>执行模型</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="expressions.html"
-                        title="下一章"><span class="section-number">6. </span>表达式</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="executionmodel.html"
+                          title="上一章"><span class="section-number">4. </span>执行模型</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="expressions.html"
+                          title="下一章"><span class="section-number">6. </span>表达式</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -719,7 +743,7 @@ meaning (e.g. a module loaded from a database).</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -747,7 +771,7 @@ meaning (e.g. a module loaded from a database).</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -755,11 +779,11 @@ meaning (e.g. a module loaded from a database).</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

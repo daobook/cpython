@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>设计和历史常见问题 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设计和历史常见问题 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">设计和历史常见问题</a><ul>
 <li><a class="reference internal" href="#why-does-python-use-indentation-for-grouping-of-statements">为什么Python使用缩进来分组语句？</a></li>
 <li><a class="reference internal" href="#why-am-i-getting-strange-results-with-simple-arithmetic-operations">为什么简单的算术运算得到奇怪的结果？</a></li>
@@ -105,12 +106,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="programming.html"
-                        title="上一章">编程常见问题</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="library.html"
-                        title="下一章">代码库和插件 FAQ</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="programming.html"
+                          title="上一章">编程常见问题</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="library.html"
+                          title="下一章">代码库和插件 FAQ</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -153,7 +159,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常见问题</a> &#187;</li>
@@ -231,7 +237,7 @@
 </div>
 <p>如果条件为真，则只执行 <code class="docutils literal notranslate"><span class="pre">x++</span></code> 语句，但缩进会使你认为情况并非如此。 即使是经验丰富的 C 程序员有时也会长久地盯着它发呆，不明白为什么在 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y``时</span> <span class="pre">``y</span></code> 也会减少。</p>
 <p>因为没有开始/结束花括号，所以 Python 更不容易发生编码风格冲突。 在 C 中有许多不同的放置花括号的方式。 在习惯了阅读和编写某种特定风格的代码之后，当阅读（或被要求编写）另一种风格的代码时通常都会令人感觉有点不舒服）。</p>
-<p>许多编码风格将开始/结束括号单独放在一行上。这使得程序相当长，浪费了宝贵的屏幕空间，使得更难以对程序进行全面的了解。理想情况下，函数应该适合一个屏幕（例如，20--30行）。 20行Python可以完成比20行C更多的工作。这不仅仅是由于缺少开始/结束括号 -- 缺少声明和高级数据类型也是其中的原因  -- 但缩进基于语法肯定有帮助。</p>
+<p>许多编码风格将开始/结束括号单独放在一行上。这使得程序相当长，浪费了宝贵的屏幕空间，使得更难以对程序进行全面的了解。理想情况下，函数应该适合一个屏幕（例如，20–30行）。 20行Python可以完成比20行C更多的工作。这不仅仅是由于缺少开始/结束括号 – 缺少声明和高级数据类型也是其中的原因  – 但缩进基于语法肯定有帮助。</p>
 </section>
 <section id="why-am-i-getting-strange-results-with-simple-arithmetic-operations">
 <h2><a class="toc-backref" href="#id5">为什么简单的算术运算得到奇怪的结果？</a><a class="headerlink" href="#why-am-i-getting-strange-results-with-simple-arithmetic-operations" title="永久链接至标题">¶</a></h2>
@@ -265,13 +271,13 @@
 <h2><a class="toc-backref" href="#id7">为什么Python字符串是不可变的？</a><a class="headerlink" href="#why-are-python-strings-immutable" title="永久链接至标题">¶</a></h2>
 <p>有几个优点。</p>
 <p>一个是性能：知道字符串是不可变的，意味着我们可以在创建时为它分配空间，并且存储需求是固定不变的。这也是元组和列表之间区别的原因之一。</p>
-<p>另一个优点是，Python 中的字符串被视为与数字一样“基本”。 任何动作都不会将值 8 更改为其他值，在 Python 中，任何动作都不会将字符串 &quot;8&quot; 更改为其他值。</p>
+<p>另一个优点是，Python 中的字符串被视为与数字一样“基本”。 任何动作都不会将值 8 更改为其他值，在 Python 中，任何动作都不会将字符串 “8” 更改为其他值。</p>
 </section>
 <section id="why-must-self-be-used-explicitly-in-method-definitions-and-calls">
 <span id="why-self"></span><h2><a class="toc-backref" href="#id8">为什么必须在方法定义和调用中显式使用“self”？</a><a class="headerlink" href="#why-must-self-be-used-explicitly-in-method-definitions-and-calls" title="永久链接至标题">¶</a></h2>
 <p>这个想法借鉴了 Modula-3 语言。 出于多种原因它被证明是非常有用的。</p>
 <p>首先，更明显的显示出，使用的是方法或实例属性而不是局部变量。 阅读 <code class="docutils literal notranslate"><span class="pre">self.x</span></code> 或 <code class="docutils literal notranslate"><span class="pre">self.meth()</span></code> 可以清楚地表明，即使您不知道类的定义，也会使用实例变量或方法。在 C++ 中，可以通过缺少局部变量声明来判断（假设全局变量很少见或容易识别） —— 但是在 Python 中没有局部变量声明，所以必须查找类定义才能确定。 一些 C++ 和 Java 编码标准要求实例属性具有 <code class="docutils literal notranslate"><span class="pre">m_</span></code> 前缀，因此这种显式性在这些语言中仍然有用。</p>
-<p>其次，这意味着如果要显式引用或从特定类调用该方法，不需要特殊语法。 在 C++ 中，如果你想使用在派生类中重写基类中的方法，你必须使用 <code class="docutils literal notranslate"><span class="pre">::</span></code> 运算符 -- 在 Python 中你可以编写 <code class="docutils literal notranslate"><span class="pre">baseclass.methodname(self,</span> <span class="pre">&lt;argument</span> <span class="pre">list&gt;)</span></code>。 这对于 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 方法非常有用，特别是在派生类方法想要扩展同名的基类方法，而必须以某种方式调用基类方法时。</p>
+<p>其次，这意味着如果要显式引用或从特定类调用该方法，不需要特殊语法。 在 C++ 中，如果你想使用在派生类中重写基类中的方法，你必须使用 <code class="docutils literal notranslate"><span class="pre">::</span></code> 运算符 – 在 Python 中你可以编写 <code class="docutils literal notranslate"><span class="pre">baseclass.methodname(self,</span> <span class="pre">&lt;argument</span> <span class="pre">list&gt;)</span></code>。 这对于 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 方法非常有用，特别是在派生类方法想要扩展同名的基类方法，而必须以某种方式调用基类方法时。</p>
 <p>最后，它解决了变量赋值的语法问题：为了 Python 中的局部变量（根据定义！）在函数体中赋值的那些变量（并且没有明确声明为全局）赋值，就必须以某种方式告诉解释器一个赋值是为了分配一个实例变量而不是一个局部变量，它最好是通过语法实现的（出于效率原因）。 C++ 通过声明来做到这一点，但是 Python 没有声明，仅仅为了这个目的而引入它们会很可惜。 使用显式的 <code class="docutils literal notranslate"><span class="pre">self.var</span></code> 很好地解决了这个问题。 类似地，对于使用实例变量，必须编写 <code class="docutils literal notranslate"><span class="pre">self.var</span></code> 意味着对方法内部的非限定名称的引用不必搜索实例的目录。 换句话说，局部变量和实例变量存在于两个不同的命名空间中，您需要告诉 Python 使用哪个命名空间。</p>
 </section>
 <section id="why-can-t-i-use-an-assignment-in-an-expression">
@@ -282,13 +288,13 @@
    <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0572"><strong>PEP 572</strong></a> 了解详情。</p>
+<p>请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0572/"><strong>PEP 572</strong></a> 了解详情。</p>
 </section>
 <section id="why-does-python-use-methods-for-some-functionality-e-g-list-index-but-functions-for-other-e-g-len-list">
 <h2><a class="toc-backref" href="#id10">为什么Python对某些功能（例如list.index()）使用方法来实现，而其他功能（例如len(List)）使用函数实现？</a><a class="headerlink" href="#why-does-python-use-methods-for-some-functionality-e-g-list-index-but-functions-for-other-e-g-len-list" title="永久链接至标题">¶</a></h2>
 <p>正如Guido所说：</p>
 <blockquote>
-<div><p>(a) 对于某些操作，前缀表示法比后缀更容易阅读 -- 前缀（和中缀！）运算在数学中有着悠久的传统，就像在视觉上帮助数学家思考问题的记法。比较一下我们将 x*(a+b) 这样的公式改写为 x*a+x*b 的容易程度，以及使用原始OO符号做相同事情的笨拙程度。</p>
+<div><p>(a) 对于某些操作，前缀表示法比后缀更容易阅读 – 前缀（和中缀！）运算在数学中有着悠久的传统，就像在视觉上帮助数学家思考问题的记法。比较一下我们将 x*(a+b) 这样的公式改写为 x*a+x*b 的容易程度，以及使用原始OO符号做相同事情的笨拙程度。</p>
 <p>(b)  当读到写有len(X)的代码时，就知道它要求的是某件东西的长度。这告诉我们两件事：结果是一个整数，参数是某种容器。相反，当阅读x.len()时，必须已经知道x是某种实现接口的容器，或者是从具有标准len()的类继承的容器。当没有实现映射的类有get()或key()方法，或者不是文件的类有write()方法时，我们偶尔会感到困惑。</p>
 <p class="attribution">—<a class="reference external" href="https://mail.python.org/pipermail/python-3000/2006-November/004643.html">https://mail.python.org/pipermail/python-3000/2006-November/004643.html</a></p>
 </div></blockquote>
@@ -364,11 +370,14 @@
 <section id="why-can-t-lambda-expressions-contain-statements">
 <h2><a class="toc-backref" href="#id15">为什么lambda表达式不能包含语句？</a><a class="headerlink" href="#why-can-t-lambda-expressions-contain-statements" title="永久链接至标题">¶</a></h2>
 <p>Python的 lambda表达式不能包含语句，因为Python的语法框架不能处理嵌套在表达式内部的语句。然而，在Python中，这并不是一个严重的问题。与其他语言中添加功能的lambda表单不同，Python的 lambdas只是一种速记符号，如果您懒得定义函数的话。</p>
-<p>函数已经是Python中的第一类对象，可以在本地范围内声明。 因此，使用lambda而不是本地定义的函数的唯一优点是你不需要为函数创建一个名称 -- 这只是一个分配了函数对象(与lambda表达式生成的对象类型完全相同)的局部变量！</p>
+<p>函数已经是Python中的第一类对象，可以在本地范围内声明。 因此，使用lambda而不是本地定义的函数的唯一优点是你不需要为函数创建一个名称 – 这只是一个分配了函数对象(与lambda表达式生成的对象类型完全相同)的局部变量！</p>
 </section>
 <section id="can-python-be-compiled-to-machine-code-c-or-some-other-language">
 <h2><a class="toc-backref" href="#id16">可以将Python编译为机器代码，C或其他语言吗？</a><a class="headerlink" href="#can-python-be-compiled-to-machine-code-c-or-some-other-language" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="http://cython.org/">Cython</a> 将带有可选注释的Python修改版本编译到C扩展中。 <a class="reference external" href="http://www.nuitka.net/">Nuitka</a> 是一个将Python编译成 C++ 代码的新兴编译器，旨在支持完整的Python语言。要编译成Java，可以考虑 <a class="reference external" href="https://voc.readthedocs.io">VOC</a> 。</p>
+<p><a class="reference external" href="http://cython.org/">Cython</a> compiles a modified version of Python with
+optional annotations into C extensions.  <a class="reference external" href="http://www.nuitka.net/">Nuitka</a> is
+an up-and-coming compiler of Python into C++ code, aiming to support the full
+Python language.</p>
 </section>
 <section id="how-does-python-manage-memory">
 <h2><a class="toc-backref" href="#id17">Python如何管理内存？</a><a class="headerlink" href="#how-does-python-manage-memory" title="永久链接至标题">¶</a></h2>
@@ -413,7 +422,7 @@
 <section id="how-are-dictionaries-implemented-in-cpython">
 <h2><a class="toc-backref" href="#id22">字典是如何在CPython中实现的？</a><a class="headerlink" href="#how-are-dictionaries-implemented-in-cpython" title="永久链接至标题">¶</a></h2>
 <p>CPython的字典实现为可调整大小的哈希表。与B-树相比，这在大多数情况下为查找（目前最常见的操作）提供了更好的性能，并且实现更简单。</p>
-<p>字典的工作方式是使用 <a class="reference internal" href="../library/functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> 内置函数计算字典中存储的每个键的hash代码。hash代码根据键和每个进程的种子而变化很大；例如，&quot;Python&quot; 的hash值为-539294296，而&quot;python&quot;(一个按位不同的字符串)的hash值为1142331976。然后，hash代码用于计算内部数组中将存储该值的位置。假设您存储的键都具有不同的hash值，这意味着字典需要恒定的时间 -- O(1)，用Big-O表示法 -- 来检索一个键。</p>
+<p>字典的工作方式是使用 <a class="reference internal" href="../library/functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> 内置函数计算字典中存储的每个键的hash代码。hash代码根据键和每个进程的种子而变化很大；例如，”Python” 的hash值为-539294296，而”python”(一个按位不同的字符串)的hash值为1142331976。然后，hash代码用于计算内部数组中将存储该值的位置。假设您存储的键都具有不同的hash值，这意味着字典需要恒定的时间 – O(1)，用Big-O表示法 – 来检索一个键。</p>
 </section>
 <section id="why-must-dictionary-keys-be-immutable">
 <h2><a class="toc-backref" href="#id23">为什么字典key必须是不可变的？</a><a class="headerlink" href="#why-must-dictionary-keys-be-immutable" title="永久链接至标题">¶</a></h2>
@@ -507,14 +516,14 @@
 </section>
 <section id="why-doesn-t-python-have-a-with-statement-for-attribute-assignments">
 <h2><a class="toc-backref" href="#id28">为什么Python没有属性赋值的“with”语句？</a><a class="headerlink" href="#why-doesn-t-python-have-a-with-statement-for-attribute-assignments" title="永久链接至标题">¶</a></h2>
-<p>Python 具有 'with' 语句，它能将一个代码块的执行包装起来，在进入和退出代码块时调用特定的代码。 有些语言具有这样的结构:</p>
+<p>Python 具有 ‘with’ 语句，它能将一个代码块的执行包装起来，在进入和退出代码块时调用特定的代码。 有些语言具有这样的结构:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">obj</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>               <span class="c1"># equivalent to obj.a = 1</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1"># obj.total = obj.total + 1</span>
 </pre></div>
 </div>
 <p>在Python中，这样的结构是不明确的。</p>
-<p>其他语言，如ObjectPascal、Delphi和C++ 使用静态类型，因此可以毫不含糊地知道分配给什么成员。这是静态类型的要点 -- 编译器 <em>总是</em> 在编译时知道每个变量的作用域。</p>
+<p>其他语言，如ObjectPascal、Delphi和C++ 使用静态类型，因此可以毫不含糊地知道分配给什么成员。这是静态类型的要点 – 编译器 <em>总是</em> 在编译时知道每个变量的作用域。</p>
 <p>Python使用动态类型。事先不可能知道在运行时引用哪个属性。可以动态地在对象中添加或删除成员属性。这使得无法通过简单的阅读就知道引用的是什么属性：局部属性、全局属性还是成员属性？</p>
 <p>例如，采用以下不完整的代码段:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
@@ -522,8 +531,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>该代码段假设 &quot;a&quot; 必须有一个名为 &quot;x&quot; 的成员属性。然而，Python中并没有告诉解释器这一点。假设 &quot;a&quot; 是整数，会发生什么？如果有一个名为 &quot;x&quot; 的全局变量，它是否会在with块中使用？如您所见，Python的动态特性使得这样的选择更加困难。</p>
-<p>然而，Python 可以通过赋值轻松实现 &quot;with&quot; 和类似语言特性（减少代码量）的主要好处。代替:</p>
+<p>该代码段假设 “a” 必须有一个名为 “x” 的成员属性。然而，Python中并没有告诉解释器这一点。假设 “a” 是整数，会发生什么？如果有一个名为 “x” 的全局变量，它是否会在with块中使用？如您所见，Python的动态特性使得这样的选择更加困难。</p>
+<p>然而，Python 可以通过赋值轻松实现 “with” 和类似语言特性（减少代码量）的主要好处。代替:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">21</span>
 <span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">63</span>
@@ -543,7 +552,7 @@
 <p>For technical reasons, a generator used directly as a context manager
 would not work correctly.  When, as is most common, a generator is used as
 an iterator run to completion, no closing is needed.  When it is, wrap
-it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
+it as “contextlib.closing(generator)” in the ‘with’ statement.</p>
 </section>
 <section id="why-are-colons-required-for-the-if-while-def-class-statements">
 <h2><a class="toc-backref" href="#id30">为什么 if/while/def/class语句需要冒号？</a><a class="headerlink" href="#why-are-colons-required-for-the-if-while-def-class-statements" title="永久链接至标题">¶</a></h2>
@@ -582,7 +591,7 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
 <span class="p">]</span>
 </pre></div>
 </div>
-<p>这个列表看起来有四个元素，但实际上包含三个 : &quot;fee&quot;, &quot;fiefoo&quot; 和 &quot;fum&quot; 。总是加上逗号可以避免这个错误的来源。</p>
+<p>这个列表看起来有四个元素，但实际上包含三个 : “fee”, “fiefoo” 和 “fum” 。总是加上逗号可以避免这个错误的来源。</p>
 <p>允许尾随逗号也可以使编程代码更容易生成。</p>
 </section>
 </section>
@@ -594,8 +603,9 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">设计和历史常见问题</a><ul>
 <li><a class="reference internal" href="#why-does-python-use-indentation-for-grouping-of-statements">为什么Python使用缩进来分组语句？</a></li>
 <li><a class="reference internal" href="#why-am-i-getting-strange-results-with-simple-arithmetic-operations">为什么简单的算术运算得到奇怪的结果？</a></li>
@@ -629,12 +639,17 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="programming.html"
-                        title="上一章">编程常见问题</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="library.html"
-                        title="下一章">代码库和插件 FAQ</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="programming.html"
+                          title="上一章">编程常见问题</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="library.html"
+                          title="下一章">代码库和插件 FAQ</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -676,7 +691,7 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常见问题</a> &#187;</li>
@@ -704,7 +719,7 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -712,11 +727,11 @@ it as &quot;contextlib.closing(generator)&quot; in the 'with' statement.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

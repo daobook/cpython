@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>netrc --- netrc 文件处理 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>netrc — netrc 文件处理 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="xdrlib --- 编码与解码 XDR 数据" href="xdrlib.html" />
-    <link rel="prev" title="configparser --- 配置文件解析器" href="configparser.html" />
+    <link rel="next" title="plistlib — 生成与解析 Apple .plist 文件" href="plistlib.html" />
+    <link rel="prev" title="tomllib — Parse TOML files" href="tomllib.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/netrc.html" />
     
       
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> — netrc 文件处理</a><ul>
 <li><a class="reference internal" href="#netrc-objects">netrc 对象</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="configparser.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="xdrlib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xdrlib</span></code> --- 编码与解码 XDR 数据</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="tomllib.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tomllib</span></code> — Parse TOML files</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="plistlib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plistlib</span></code> — 生成与解析 Apple <code class="docutils literal notranslate"><span class="pre">.plist</span></code> 文件</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -110,10 +116,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="xdrlib.html" title="xdrlib --- 编码与解码 XDR 数据"
+          <a href="plistlib.html" title="plistlib — 生成与解析 Apple .plist 文件"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="configparser.html" title="configparser --- 配置文件解析器"
+          <a href="tomllib.html" title="tomllib — Parse TOML files"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -126,12 +132,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fileformats.html" accesskey="U">文件格式</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> — netrc 文件处理</a></li>
                 <li class="right">
                     
 
@@ -155,14 +161,14 @@
           <div class="body" role="main">
             
   <section id="module-netrc">
-<span id="netrc-netrc-file-processing"></span><h1><a class="reference internal" href="#module-netrc" title="netrc: Loading of .netrc files."><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code></a> --- netrc 文件处理<a class="headerlink" href="#module-netrc" title="永久链接至标题">¶</a></h1>
+<span id="netrc-netrc-file-processing"></span><h1><a class="reference internal" href="#module-netrc" title="netrc: Loading of .netrc files."><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code></a> — netrc 文件处理<a class="headerlink" href="#module-netrc" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/netrc.py">Lib/netrc.py</a></p>
 <hr class="docutils" />
 <p><a class="reference internal" href="#netrc.netrc" title="netrc.netrc"><code class="xref py py-class docutils literal notranslate"><span class="pre">netrc</span></code></a> 类解析并封装了 Unix 的 <strong class="program">ftp</strong> 程序和其他 FTP 客户端所使用的 netrc 文件格式。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="netrc.netrc">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">netrc</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">file</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#netrc.netrc" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#netrc.netrc" title="netrc.netrc"><code class="xref py py-class docutils literal notranslate"><span class="pre">netrc</span></code></a> 的实例或其子类的实例会被用来封装来自 netrc 文件的数据。 如果有初始化参数，它将指明要解析的文件。 如果未给出参数，则位于用户家目录的 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 文件 -- 即 <a class="reference internal" href="os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> 所确定的文件 -- 将会被读取。 在其他情况下，则将引发 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> 异常。 解析错误将引发 <a class="reference internal" href="#netrc.NetrcParseError" title="netrc.NetrcParseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NetrcParseError</span></code></a> 并附带诊断信息，包括文件名、行号以及终止令牌。 如果在 POSIX 系统上未指明参数，则当 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 文件中有密码时，如果文件归属或权限不安全（归属的用户不是运行进程的用户，或者可供任何其他用户读取或写入）将引发 <a class="reference internal" href="#netrc.NetrcParseError" title="netrc.NetrcParseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NetrcParseError</span></code></a>。 这实现了与 ftp 和其他使用 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 的程序同等的安全行为。</p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">netrc</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#netrc.netrc" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference internal" href="#netrc.netrc" title="netrc.netrc"><code class="xref py py-class docutils literal notranslate"><span class="pre">netrc</span></code></a> 的实例或其子类的实例会被用来封装来自 netrc 文件的数据。 如果有初始化参数，它将指明要解析的文件。 如果未给出参数，则位于用户家目录的 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 文件 – 即 <a class="reference internal" href="os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a> 所确定的文件 – 将会被读取。 在其他情况下，则将引发 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> 异常。 解析错误将引发 <a class="reference internal" href="#netrc.NetrcParseError" title="netrc.NetrcParseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NetrcParseError</span></code></a> 并附带诊断信息，包括文件名、行号以及终止令牌。 如果在 POSIX 系统上未指明参数，则当 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 文件中有密码时，如果文件归属或权限不安全（归属的用户不是运行进程的用户，或者可供任何其他用户读取或写入）将引发 <a class="reference internal" href="#netrc.NetrcParseError" title="netrc.NetrcParseError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NetrcParseError</span></code></a>。 这实现了与 ftp 和其他使用 <code class="file docutils literal notranslate"><span class="pre">.netrc</span></code> 的程序同等的安全行为。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>添加了 POSIX 权限检查。</p>
 </div>
@@ -173,15 +179,15 @@
 <p><span class="versionmodified changed">在 3.10 版更改: </span><a class="reference internal" href="#module-netrc" title="netrc: Loading of .netrc files."><code class="xref py py-class docutils literal notranslate"><span class="pre">netrc</span></code></a> try UTF-8 encoding before using locale specific
 encoding.
 The entry in the netrc file no longer needs to contain all tokens.  The missing
-tokens' value default to an empty string.  All the tokens and their values now
+tokens’ value default to an empty string.  All the tokens and their values now
 can contain arbitrary characters, like whitespace and non-ASCII characters.
-If the login name is anonymous, it won't trigger the security check.</p>
+If the login name is anonymous, it won’t trigger the security check.</p>
 </div>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="netrc.NetrcParseError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">NetrcParseError</span></span><a class="headerlink" href="#netrc.NetrcParseError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">NetrcParseError</span></span><a class="headerlink" href="#netrc.NetrcParseError" title="永久链接至目标">¶</a></dt>
 <dd><p>当在源文本中遇到语法错误时由 <a class="reference internal" href="#netrc.netrc" title="netrc.netrc"><code class="xref py py-class docutils literal notranslate"><span class="pre">netrc</span></code></a> 类引发的异常。 此异常的实例提供了三个有用属性:  <code class="xref py py-attr docutils literal notranslate"><span class="pre">msg</span></code> 为错误的文本说明，<code class="xref py py-attr docutils literal notranslate"><span class="pre">filename</span></code> 为源文件的名称，而 <code class="xref py py-attr docutils literal notranslate"><span class="pre">lineno</span></code> 给出了错误所在的行号。</p>
 </dd></dl>
 
@@ -191,7 +197,7 @@ If the login name is anonymous, it won't trigger the security check.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="netrc.netrc.authenticators">
 <span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">authenticators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netrc.netrc.authenticators" title="永久链接至目标">¶</a></dt>
-<dd><p>针对 <em>host</em> 的身份验证者返回一个 3 元组 <code class="docutils literal notranslate"><span class="pre">(login,</span> <span class="pre">account,</span> <span class="pre">password)</span></code>。 如果 netrc 文件不包含针对给定主机的条目，则返回关联到 'default' 条目的元组。 如果匹配的主机或默认条目均不可用，则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<dd><p>针对 <em>host</em> 的身份验证者返回一个 3 元组 <code class="docutils literal notranslate"><span class="pre">(login,</span> <span class="pre">account,</span> <span class="pre">password)</span></code>。 如果 netrc 文件不包含针对给定主机的条目，则返回关联到 ‘default’ 条目的元组。 如果匹配的主机或默认条目均不可用，则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 </dd></dl>
 
 <dl class="py method">
@@ -204,7 +210,7 @@ If the login name is anonymous, it won't trigger the security check.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="netrc.netrc.hosts">
 <span class="sig-prename descclassname"><span class="pre">netrc.</span></span><span class="sig-name descname"><span class="pre">hosts</span></span><a class="headerlink" href="#netrc.netrc.hosts" title="永久链接至目标">¶</a></dt>
-<dd><p>将主机名映射到 <code class="docutils literal notranslate"><span class="pre">(login,</span> <span class="pre">account,</span> <span class="pre">password)</span></code> 元组的字典。 如果存在 'default' 条目，则会表示为使用该名称的伪主机。</p>
+<dd><p>将主机名映射到 <code class="docutils literal notranslate"><span class="pre">(login,</span> <span class="pre">account,</span> <span class="pre">password)</span></code> 元组的字典。 如果存在 ‘default’ 条目，则会表示为使用该名称的伪主机。</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -223,20 +229,26 @@ If the login name is anonymous, it won't trigger the security check.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> — netrc 文件处理</a><ul>
 <li><a class="reference internal" href="#netrc-objects">netrc 对象</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="configparser.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="xdrlib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xdrlib</span></code> --- 编码与解码 XDR 数据</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="tomllib.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tomllib</span></code> — Parse TOML files</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="plistlib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plistlib</span></code> — 生成与解析 Apple <code class="docutils literal notranslate"><span class="pre">.plist</span></code> 文件</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -262,10 +274,10 @@ If the login name is anonymous, it won't trigger the security check.</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="xdrlib.html" title="xdrlib --- 编码与解码 XDR 数据"
+          <a href="plistlib.html" title="plistlib — 生成与解析 Apple .plist 文件"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="configparser.html" title="configparser --- 配置文件解析器"
+          <a href="tomllib.html" title="tomllib — Parse TOML files"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -278,12 +290,12 @@ If the login name is anonymous, it won't trigger the security check.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fileformats.html" >文件格式</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> — netrc 文件处理</a></li>
                 <li class="right">
                     
 
@@ -307,7 +319,7 @@ If the login name is anonymous, it won't trigger the security check.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -315,11 +327,11 @@ If the login name is anonymous, it won't trigger the security check.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

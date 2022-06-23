@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>15. 浮点算术：争议和限制 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15. 浮点算术：争议和限制 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">15. 浮点算术：争议和限制</a><ul>
 <li><a class="reference internal" href="#representation-error">15.1. 表示性错误</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="interactive.html"
-                        title="上一章"><span class="section-number">14. </span>交互式编辑和编辑历史</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="appendix.html"
-                        title="下一章"><span class="section-number">16. </span>附录</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="interactive.html"
+                          title="上一章"><span class="section-number">14. </span>交互式编辑和编辑历史</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="appendix.html"
+                          title="下一章"><span class="section-number">16. </span>附录</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -126,7 +132,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 教程</a> &#187;</li>
@@ -222,7 +228,7 @@ and the second in base 2.</p>
 </pre></div>
 </div>
 <p>Binary floating-point arithmetic holds many surprises like this.  The problem
-with &quot;0.1&quot; is explained in precise detail below, in the &quot;Representation Error&quot;
+with “0.1” is explained in precise detail below, in the “Representation Error”
 section.  See <a class="reference external" href="https://www.lahey.com/float.htm">The Perils of Floating Point</a>
 for a more complete account of other common surprises.</p>
 <p>正如那篇文章的结尾所言，“对此问题并无简单的答案。” 但是也不必过于担心浮点数的问题！ Python 浮点运算中的错误是从浮点运算硬件继承而来，而在大多数机器上每次浮点运算得到的 2**53 数码位都会被作为 1 个整体来处理。 这对大多数任务来说都已足够，但你确实需要记住它并非十进制算术，且每次浮点运算都可能会导致新的舍入错误。</p>
@@ -261,7 +267,7 @@ for a more complete account of other common surprises.</p>
 </div>
 <section id="representation-error">
 <span id="tut-fp-error"></span><h2><span class="section-number">15.1. </span>表示性错误<a class="headerlink" href="#representation-error" title="永久链接至标题">¶</a></h2>
-<p>本小节将详细解释 &quot;0.1&quot; 的例子，并说明你可以怎样亲自对此类情况进行精确分析。 假定前提是已基本熟悉二进制浮点表示法。</p>
+<p>本小节将详细解释 “0.1” 的例子，并说明你可以怎样亲自对此类情况进行精确分析。 假定前提是已基本熟悉二进制浮点表示法。</p>
 <p><em class="dfn">表示性错误</em> 是指某些（其实是大多数）十进制小数无法以二进制（以 2 为基数的计数制）精确表示这一事实造成的错误。 这就是为什么 Python（或者 Perl、C、C++、Java、Fortran 以及许多其他语言）经常不会显示你所期待的精确十进制数值的主要原因。</p>
 <p>为什么会这样？ 1/10 是无法用二进制小数精确表示的。 目前（2000年11月）几乎所有使用 IEEE-754 浮点运算标准的机器以及几乎所有系统平台都会将 Python 浮点数映射为 IEEE-754 “双精度类型”。 754 双精度类型包含 53 位精度，因此在输入时，计算会尽量将 0.1 转换为以 <em>J</em>/2**<em>N</em> 形式所能表示的最接近分数，其中 <em>J</em> 为恰好包含 53 个二进制位的整数。 重新将</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="mi">10</span> <span class="o">~=</span> <span class="n">J</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span><span class="p">)</span>
@@ -338,20 +344,26 @@ for a more complete account of other common surprises.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">15. 浮点算术：争议和限制</a><ul>
 <li><a class="reference internal" href="#representation-error">15.1. 表示性错误</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="interactive.html"
-                        title="上一章"><span class="section-number">14. </span>交互式编辑和编辑历史</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="appendix.html"
-                        title="下一章"><span class="section-number">16. </span>附录</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="interactive.html"
+                          title="上一章"><span class="section-number">14. </span>交互式编辑和编辑历史</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="appendix.html"
+                          title="下一章"><span class="section-number">16. </span>附录</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -393,7 +405,7 @@ for a more complete account of other common surprises.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 教程</a> &#187;</li>
@@ -421,7 +433,7 @@ for a more complete account of other common surprises.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -429,11 +441,11 @@ for a more complete account of other common surprises.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

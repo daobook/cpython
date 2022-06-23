@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>logging --- Python 的日志记录工具 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>logging — Python 的日志记录工具 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="logging.config --- 日志记录配置" href="logging.config.html" />
-    <link rel="prev" title="getopt --- C 风格的命令行选项解析器" href="getopt.html" />
+    <link rel="next" title="logging.config — 日志记录配置" href="logging.config.html" />
+    <link rel="prev" title="getopt — C 风格的命令行选项解析器" href="getopt.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/logging.html" />
     
       
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> --- Python 的日志记录工具</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> — Python 的日志记录工具</a><ul>
 <li><a class="reference internal" href="#logger-objects">记录器对象</a></li>
 <li><a class="reference internal" href="#logging-levels">日志级别</a></li>
 <li><a class="reference internal" href="#handler-objects">处理器对象</a></li>
@@ -89,12 +90,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="getopt.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">getopt</span></code> --- C 风格的命令行选项解析器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="logging.config.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code> --- 日志记录配置</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="getopt.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">getopt</span></code> — C 风格的命令行选项解析器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="logging.config.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code> — 日志记录配置</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -121,10 +127,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="logging.config.html" title="logging.config --- 日志记录配置"
+          <a href="logging.config.html" title="logging.config — 日志记录配置"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="getopt.html" title="getopt --- C 风格的命令行选项解析器"
+          <a href="getopt.html" title="getopt — C 风格的命令行选项解析器"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -137,12 +143,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">通用操作系统服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> --- Python 的日志记录工具</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> — Python 的日志记录工具</a></li>
                 <li class="right">
                     
 
@@ -166,9 +172,9 @@
           <div class="body" role="main">
             
   <section id="module-logging">
-<span id="logging-logging-facility-for-python"></span><h1><a class="reference internal" href="#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> --- Python 的日志记录工具<a class="headerlink" href="#module-logging" title="永久链接至标题">¶</a></h1>
+<span id="logging-logging-facility-for-python"></span><h1><a class="reference internal" href="#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> — Python 的日志记录工具<a class="headerlink" href="#module-logging" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/logging/__init__.py">Lib/logging/__init__.py</a></p>
-<aside class="sidebar" id="index-0">
+<aside class="sidebar">
 <p class="sidebar-title">Important</p>
 <p>此页面仅包含 API 参考信息。教程信息和更多高级用法的讨论，请参阅</p>
 <ul class="simple">
@@ -180,7 +186,15 @@
 <hr class="docutils" />
 <p>这个模块为应用与库实现了灵活的事件日志系统的函数与类。</p>
 <p>使用标准库提供的 logging API 最主要的好处是，所有的 Python 模块都可能参与日志输出，包括你自己的日志消息和第三方模块的日志消息。</p>
-<p>这个模块提供许多强大而灵活的功能。如果你对 logging 不太熟悉的话， 掌握它最好的方式就是查看它对应的教程（详见右侧的链接）。</p>
+<p>The simplest example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import logging
+&gt;&gt;&gt; logging.warning(&#39;Watch out!&#39;)
+WARNING:root:Watch out!
+</pre></div>
+</div>
+<p>The module provides a lot of functionality and flexibility.  If you are
+unfamiliar with logging, the best way to get to grips with it is to view the
+tutorials (<strong>see the links above and on the right</strong>).</p>
 <p>该模块定义的基础类和函数都列在下面。</p>
 <ul class="simple">
 <li><p>记录器暴露了应用程序代码直接使用的接口。</p></li>
@@ -194,7 +208,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">name</span></code> 一般是句点分割的层级值, 像``foo.bar.baz`` (尽管也可以只是普通的 <code class="docutils literal notranslate"><span class="pre">foo</span></code>)。层次结构列表中位于下方的记录器是列表中较高位置的记录器的子级。例如，有个名叫 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 的记录器，而名字是 <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code>，<code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>，和 <code class="docutils literal notranslate"><span class="pre">foo.bam</span></code> 的记录器都是 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 的子级。记录器的名字分级类似 Python 包的层级，如果您使用建议的结构 <code class="docutils literal notranslate"><span class="pre">logging.getLogger(__name__)</span></code> 在每个模块的基础上组织记录器，则与之完全相同。这是因为在模块里，<code class="docutils literal notranslate"><span class="pre">__name__</span></code> 是该模块在 Python 包命名空间中的名字。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.Logger">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><a class="headerlink" href="#logging.Logger" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Logger</span></span><a class="headerlink" href="#logging.Logger" title="永久链接至目标">¶</a></dt>
 <dd><dl class="py attribute">
 <dt class="sig sig-object py" id="logging.Logger.propagate">
 <span class="sig-name descname"><span class="pre">propagate</span></span><a class="headerlink" href="#logging.Logger.propagate" title="永久链接至目标">¶</a></dt>
@@ -202,7 +216,7 @@
 <p>如果为假，记录消息将不会传递给当前记录器的祖先记录器的处理器。</p>
 <p>Spelling it out with an example: If the propagate attribute of the logger named
 <code class="docutils literal notranslate"><span class="pre">A.B.C</span></code> evaluates to true, any event logged to <code class="docutils literal notranslate"><span class="pre">A.B.C</span></code> via a method call such as
-<code class="docutils literal notranslate"><span class="pre">logging.getLogger('A.B.C').error(...)</span></code> will [subject to passing that logger's
+<code class="docutils literal notranslate"><span class="pre">logging.getLogger('A.B.C').error(...)</span></code> will [subject to passing that logger’s
 level and filter settings] be passed in turn to any handlers attached to loggers
 named <code class="docutils literal notranslate"><span class="pre">A.B</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code> and the root logger, after first being passed to any handlers
 attached to <code class="docutils literal notranslate"><span class="pre">A.B.C</span></code>. If any logger in the chain <code class="docutils literal notranslate"><span class="pre">A.B.C</span></code>, <code class="docutils literal notranslate"><span class="pre">A.B</span></code>, <code class="docutils literal notranslate"><span class="pre">A</span></code> has its
@@ -210,7 +224,7 @@ attached to <code class="docutils literal notranslate"><span class="pre">A.B.C</
 are offered the event to handle, and propagation stops at that point.</p>
 <p>构造器将这个属性初始化为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果你将一个处理器附加到一个记录器 <em>和</em> 其一个或多个祖先记录器，它可能发出多次相同的记录。通常，您不需要将一个处理器附加到一个以上的记录器上 —— 如果您将它附加到记录器层次结构中最高的适当记录器上，则它将看到所有后代记录器记录的所有事件，前提是它们的传播设置保留为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。一种常见的方案是仅将处理器附加到根记录器，通过传播来处理其余部分。</p>
 </div>
 </dd></dl>
@@ -225,7 +239,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p>如果搜索到达根记录器，并且其级别为 NOTSET，则将处理所有消息。否则，将使用根记录器的级别作为有效级别。</p>
 <p>参见 <a class="reference internal" href="#levels"><span class="std std-ref">日志级别</span></a> 级别列表。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span>现在 <em>level</em> 参数可以接受形如 'INFO' 的级别字符串表示形式，以代替形如 <code class="xref py py-const docutils literal notranslate"><span class="pre">INFO</span></code> 的整数常量。 但是请注意，级别在内部存储为整数，并且 <a class="reference internal" href="#logging.Logger.getEffectiveLevel" title="logging.Logger.getEffectiveLevel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getEffectiveLevel()</span></code></a> 和 <a class="reference internal" href="#logging.Logger.isEnabledFor" title="logging.Logger.isEnabledFor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isEnabledFor()</span></code></a> 等方法的传入/返回值也为整数。</p>
+<p><span class="versionmodified changed">在 3.2 版更改: </span>现在 <em>level</em> 参数可以接受形如 ‘INFO’ 的级别字符串表示形式，以代替形如 <code class="xref py py-const docutils literal notranslate"><span class="pre">INFO</span></code> 的整数常量。 但是请注意，级别在内部存储为整数，并且 <a class="reference internal" href="#logging.Logger.getEffectiveLevel" title="logging.Logger.getEffectiveLevel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getEffectiveLevel()</span></code></a> 和 <a class="reference internal" href="#logging.Logger.isEnabledFor" title="logging.Logger.isEnabledFor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">isEnabledFor()</span></code></a> 等方法的传入/返回值也为整数。</p>
 </div>
 </dd></dl>
 
@@ -278,6 +292,9 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p><em>extra</em> 中传入的字典的键不应与日志系统使用的键冲突。（有关日志系统使用哪些键的更多信息，请参见 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 的文档。）</p>
 <p>如果在已记录的消息中使用这些属性，则需要格外小心。例如，在上面的示例中，<a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 已设置了格式字符串，其在 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 的属性字典中键值为 “clientip” 和 “user”。如果缺少这些内容，则将不会记录该消息，因为会引发字符串格式化异常。因此，在这种情况下，您始终需要使用 <em>extra</em> 字典传递这些键。</p>
 <p>尽管这可能很烦人，但此功能旨在用于特殊情况，例如在多个上下文中执行相同代码的多线程服务器，并且出现的有趣条件取决于此上下文（例如在上面的示例中就是远程客户端IP地址和已验证用户名）。在这种情况下，很可能将专门的 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 与特定的 <a class="reference internal" href="#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> 一起使用。</p>
+<p>If no handler is attached to this logger (or any of its ancestors,
+taking into account the relevant <a class="reference internal" href="#logging.Logger.propagate" title="logging.Logger.propagate"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Logger.propagate</span></code></a> attributes),
+the message will be sent to the handler set on <a class="reference internal" href="#logging.lastResort" title="logging.lastResort"><code class="xref py py-attr docutils literal notranslate"><span class="pre">lastResort</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>增加了 <em>stack_info</em> 参数。</p>
 </div>
@@ -300,7 +317,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Logger.warning" title="永久链接至目标">¶</a></dt>
 <dd><p>在此记录器上记录 <code class="xref py py-const docutils literal notranslate"><span class="pre">WARNING</span></code> 级别的消息。参数解释同 <a class="reference internal" href="#logging.debug" title="logging.debug"><code class="xref py py-meth docutils literal notranslate"><span class="pre">debug()</span></code></a>。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>有一个功能上与 <code class="docutils literal notranslate"><span class="pre">warning</span></code> 一致的方法 <code class="docutils literal notranslate"><span class="pre">warn</span></code>。由于 <code class="docutils literal notranslate"><span class="pre">warn</span></code> 已被弃用，请不要使用它 —— 改为使用 <code class="docutils literal notranslate"><span class="pre">warning</span></code>。</p>
 </div>
 </dd></dl>
@@ -433,7 +450,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p>Handler 有以下属性和方法。注意不要直接实例化 <a class="reference internal" href="#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> ；这个类用来派生其他更有用的子类。但是，子类的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 方法需要调用 <a class="reference internal" href="#logging.Handler.__init__" title="logging.Handler.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Handler.__init__()</span></code></a> 。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.Handler">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Handler</span></span><a class="headerlink" href="#logging.Handler" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Handler</span></span><a class="headerlink" href="#logging.Handler" title="永久链接至目标">¶</a></dt>
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="logging.Handler.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">NOTSET</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Handler.__init__" title="永久链接至目标">¶</a></dt>
@@ -464,7 +481,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dd><p>给处理器设置阈值为 <em>level</em> 。日志级别小于 <em>level</em> 将被忽略。创建处理器时，日志级别被设置为 <code class="xref py py-const docutils literal notranslate"><span class="pre">NOTSET</span></code> （所有的消息都会被处理）。</p>
 <p>参见 <a class="reference internal" href="#levels"><span class="std std-ref">日志级别</span></a> 级别列表。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span><em>level</em> 形参现在接受像 'INFO' 这样的字符串形式的级别表达方式，也可以使用像 <code class="xref py py-const docutils literal notranslate"><span class="pre">INFO</span></code> 这样的整数常量。</p>
+<p><span class="versionmodified changed">在 3.2 版更改: </span><em>level</em> 形参现在接受像 ‘INFO’ 这样的字符串形式的级别表达方式，也可以使用像 <code class="xref py py-const docutils literal notranslate"><span class="pre">INFO</span></code> 这样的整数常量。</p>
 </div>
 </dd></dl>
 
@@ -539,9 +556,9 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p><a class="reference internal" href="#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a> 一节中给出了 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 中有用的映射键。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.Formatter">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Formatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Formatter" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Formatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Formatter" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 类的新实例。实例将使用整个消息的格式字符串以及消息的日期/时间部分的格式字符串进行初始化。如果未指定 <em>fmt</em> ，则使用 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code>。如果未指定 <em>datefmt</em>，则使用  <a class="reference internal" href="#logging.Formatter.formatTime" title="logging.Formatter.formatTime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatTime()</span></code></a> 文档中描述的格式。</p>
-<p><em>style</em> 形参可以是 '%', '{' 或 '$' 之一，它决定格式字符串将如何与数据进行合并：使用 %-formatting, <a class="reference internal" href="stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> 或是 <a class="reference internal" href="string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>。 这仅适用于格式字符串 <em>fmt</em> (例如 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">{message}</span></code>)，不适用于传递给 <code class="docutils literal notranslate"><span class="pre">Logger.debug</span></code> 的实际日志消息等；请参阅 <a class="reference internal" href="../howto/logging-cookbook.html#formatting-styles"><span class="std std-ref">生效于整个应用程序的格式化样式</span></a> 了解有关在日志消息中使用 {- 和 $-formatting 的更多详情。</p>
+<p><em>style</em> 形参可以是 ‘%’, ‘{’ 或 ‘$’ 之一，它决定格式字符串将如何与数据进行合并：使用 %-formatting, <a class="reference internal" href="stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> 或是 <a class="reference internal" href="string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>。 这仅适用于格式字符串 <em>fmt</em> (例如 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">{message}</span></code>)，不适用于传递给 <code class="docutils literal notranslate"><span class="pre">Logger.debug</span></code> 的实际日志消息等；请参阅 <a class="reference internal" href="../howto/logging-cookbook.html#formatting-styles"><span class="std std-ref">生效于整个应用程序的格式化样式</span></a> 了解有关在日志消息中使用 {- 和 $-formatting 的更多详情。</p>
 <p><em>defaults</em> 形参可以是一个包含在自定义字段中使用的默认值的字典。 例如: <code class="docutils literal notranslate"><span class="pre">logging.Formatter('%(ip)s</span> <span class="pre">%(message)s',</span> <span class="pre">defaults={&quot;ip&quot;:</span> <span class="pre">None})</span></code></p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>加入了 <em>style</em>  形参。</p>
@@ -562,10 +579,10 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.Formatter.formatTime">
 <span class="sig-name descname"><span class="pre">formatTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Formatter.formatTime" title="永久链接至目标">¶</a></dt>
-<dd><p>此方法应由想要使用格式化时间的格式器中的 <a class="reference internal" href="functions.html#format" title="format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> 调用。可以在格式器中重写此方法以提供任何特定要求，但是基本行为如下：如果指定了 <em>datefmt</em> （字符串），则将其用于 <a class="reference internal" href="time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a> 来格式化记录的创建时间。否则，使用格式 '%Y-%m-%d %H:%M:%S,uuu'，其中 uuu 部分是毫秒值，其他字母根据 <a class="reference internal" href="time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a> 文档。这种时间格式的示例为 <code class="docutils literal notranslate"><span class="pre">2003-01-23</span> <span class="pre">00:29:50,411</span></code>。返回结果字符串。</p>
+<dd><p>此方法应由想要使用格式化时间的格式器中的 <a class="reference internal" href="functions.html#format" title="format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> 调用。可以在格式器中重写此方法以提供任何特定要求，但是基本行为如下：如果指定了 <em>datefmt</em> （字符串），则将其用于 <a class="reference internal" href="time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a> 来格式化记录的创建时间。否则，使用格式 ‘%Y-%m-%d %H:%M:%S,uuu’，其中 uuu 部分是毫秒值，其他字母根据 <a class="reference internal" href="time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a> 文档。这种时间格式的示例为 <code class="docutils literal notranslate"><span class="pre">2003-01-23</span> <span class="pre">00:29:50,411</span></code>。返回结果字符串。</p>
 <p>此函数使用一个用户可配置函数将创建时间转换为元组。 默认情况下，使用 <a class="reference internal" href="time.html#time.localtime" title="time.localtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.localtime()</span></code></a>；要为特定格式化程序实例更改此项，请将实例的 <code class="docutils literal notranslate"><span class="pre">converter</span></code> 属性设为具有与 <a class="reference internal" href="time.html#time.localtime" title="time.localtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.localtime()</span></code></a> 或 <a class="reference internal" href="time.html#time.gmtime" title="time.gmtime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.gmtime()</span></code></a> 相同签名的函数。 要为所有格式化程序更改此项，例如当你希望所有日志时间都显示为 GMT，请在 <code class="docutils literal notranslate"><span class="pre">Formatter</span></code> 类中设置 <code class="docutils literal notranslate"><span class="pre">converter</span></code> 属性。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>在之前版本中，默认格式是被硬编码的，例如这个例子: <code class="docutils literal notranslate"><span class="pre">2010-09-06</span> <span class="pre">22:38:15,292</span></code> 其中逗号之前的部分由 strptime 格式字符串 (<code class="docutils literal notranslate"><span class="pre">'%Y-%m-%d</span> <span class="pre">%H:%M:%S'</span></code>) 处理，而逗号之后的部分为毫秒值。 因为 strptime 没有表示毫秒的占位符，毫秒值使用了另外的格式字符串来添加 <code class="docutils literal notranslate"><span class="pre">'%s,%03d'</span></code> --- 这两个格式字符串代码都是硬编码在该方法中的。 经过修改，这些字符串被定义为类层级的属性，当需要时可以在实例层级上被重载。 属性的名称为 <code class="docutils literal notranslate"><span class="pre">default_time_format</span></code> (用于 strptime 格式字符串) 和 <code class="docutils literal notranslate"><span class="pre">default_msec_format</span></code> (用于添加毫秒值)。</p>
+<p><span class="versionmodified changed">在 3.3 版更改: </span>在之前版本中，默认格式是被硬编码的，例如这个例子: <code class="docutils literal notranslate"><span class="pre">2010-09-06</span> <span class="pre">22:38:15,292</span></code> 其中逗号之前的部分由 strptime 格式字符串 (<code class="docutils literal notranslate"><span class="pre">'%Y-%m-%d</span> <span class="pre">%H:%M:%S'</span></code>) 处理，而逗号之后的部分为毫秒值。 因为 strptime 没有表示毫秒的占位符，毫秒值使用了另外的格式字符串来添加 <code class="docutils literal notranslate"><span class="pre">'%s,%03d'</span></code> — 这两个格式字符串代码都是硬编码在该方法中的。 经过修改，这些字符串被定义为类层级的属性，当需要时可以在实例层级上被重载。 属性的名称为 <code class="docutils literal notranslate"><span class="pre">default_time_format</span></code> (用于 strptime 格式字符串) 和 <code class="docutils literal notranslate"><span class="pre">default_msec_format</span></code> (用于添加毫秒值)。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.9 版更改: </span><code class="docutils literal notranslate"><span class="pre">default_msec_format</span></code> 可以为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
@@ -589,15 +606,18 @@ are offered the event to handle, and propagation stops at that point.</p>
 </section>
 <section id="filter-objects">
 <span id="filter"></span><h2>过滤器对象<a class="headerlink" href="#filter-objects" title="永久链接至标题">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Filters</span></code> 可被 <code class="docutils literal notranslate"><span class="pre">Handlers</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Loggers</span></code> 用来实现比按层级提供更复杂的过滤操作。 基本过滤器类只允许低于日志记录器层级结构中低于特定层级的事件。 例如，一个用 'A.B' 初始化的过滤器将允许 'A.B', 'A.B.C', 'A.B.C.D', 'A.B.D' 等日志记录器所记录的事件。 但 'A.BB', 'B.A.B' 等则不允许。 如果用空字符串初始化，则所有事件都会通过。</p>
+<p><code class="docutils literal notranslate"><span class="pre">Filters</span></code> 可被 <code class="docutils literal notranslate"><span class="pre">Handlers</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Loggers</span></code> 用来实现比按层级提供更复杂的过滤操作。 基本过滤器类只允许低于日志记录器层级结构中低于特定层级的事件。 例如，一个用 ‘A.B’ 初始化的过滤器将允许 ‘A.B’, ‘A.B.C’, ‘A.B.C.D’, ‘A.B.D’ 等日志记录器所记录的事件。 但 ‘A.BB’, ‘B.A.B’ 等则不允许。 如果用空字符串初始化，则所有事件都会通过。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.Filter">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Filter" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Filter" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.Filter" title="logging.Filter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Filter</span></code></a> 类的实例。 如果指定了 <em>name</em>，则它将被用来为日志记录器命名，该类及其子类将通过该过滤器允许指定事件通过。 如果 <em>name</em> 为空字符串，则允许所有事件通过。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.Filter.filter">
 <span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Filter.filter" title="永久链接至目标">¶</a></dt>
-<dd><p>是否要记录指定的记录？返回零表示否，非零表示是。如果认为合适，则可以通过此方法就地修改记录。</p>
+<dd><p>Is the specified record to be logged? Returns falsy for no, truthy for
+yes. Filters can either modify log records in-place or return a completely
+different record instance which will replace the original
+log record in any future processing of the event.</p>
 </dd></dl>
 
 </dd></dl>
@@ -607,6 +627,12 @@ are offered the event to handle, and propagation stops at that point.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>你不需要创建专门的 <code class="docutils literal notranslate"><span class="pre">Filter</span></code> 类，或使用具有 <code class="docutils literal notranslate"><span class="pre">filter</span></code> 方法的其他类：你可以使用一个函数（或其他可调用对象）作为过滤器。 过滤逻辑将检查过滤器对象是否具有 <code class="docutils literal notranslate"><span class="pre">filter</span></code> 属性：如果有，就会将它当作是 <code class="docutils literal notranslate"><span class="pre">Filter</span></code> 并调用它的 <a class="reference internal" href="#logging.Filter.filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> 方法。 在其他情况下，则会将它当作是可调用对象并将记录作为唯一的形参进行调用。 返回值应当与 <a class="reference internal" href="#logging.Filter.filter" title="logging.Filter.filter"><code class="xref py py-meth docutils literal notranslate"><span class="pre">filter()</span></code></a> 的返回值相一致。</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>You can now return a <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> instance from filters to replace
+the log record rather than modifying it in place. This allows filters attached to
+a <a class="reference internal" href="#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> to modify the log record before it is emitted, without
+having side effects on other handlers.</p>
+</div>
 <p>尽管过滤器主要被用来构造比层级更复杂的规则以过滤记录，但它们可以查看由它们关联的处理器或记录器所处理的每条记录：当你想要执行统计特定记录器或处理器共处理了多少条记录，或是在所处理的 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 中添加、修改或移除属性这样的任务时该特性将很有用处。 显然改变 LogRecord 时需要相当小心，但将上下文信息注入日志确实是被允许的 (参见 <a class="reference internal" href="../howto/logging-cookbook.html#filters-contextual"><span class="std std-ref">使用过滤器传递上下文信息</span></a>)。</p>
 </section>
 <section id="logrecord-objects">
@@ -614,21 +640,21 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p><a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 实例是每当有日志被记录时由 <a class="reference internal" href="#logging.Logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> 自动创建的，并且可通过 <a class="reference internal" href="#logging.makeLogRecord" title="logging.makeLogRecord"><code class="xref py py-func docutils literal notranslate"><span class="pre">makeLogRecord()</span></code></a> 手动创建（例如根据从网络接收的已封存事件创建）。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.LogRecord">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">LogRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LogRecord" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">LogRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LogRecord" title="永久链接至目标">¶</a></dt>
 <dd><p>包含与被记录的事件相关的所有信息。</p>
 <p>主要信息是在 <code class="xref py py-attr docutils literal notranslate"><span class="pre">msg</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">args</span></code> 中传递的，它们使用 <code class="docutils literal notranslate"><span class="pre">msg</span> <span class="pre">%</span> <span class="pre">args</span></code> 组合到一起以创建记录的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code> 字段。</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> -- 用于记录由此 LogRecord 所表示事件的记录器名称。 请注意此名称将始终为该值，即使它可能是由附加到不同（祖先）日志记录器的处理器所发出的。</p></li>
-<li><p><strong>level</strong> -- 以数字表示的日志记录事件层级（如 DEBUG, INFO 等）。 请注意这会转换为 LogRecord 的 <em>两个</em> 属性: <code class="docutils literal notranslate"><span class="pre">levelno</span></code> 为数字值而 <code class="docutils literal notranslate"><span class="pre">levelname</span></code> 为对应的层级名称。</p></li>
-<li><p><strong>pathname</strong> -- 进行日志记录调用的文件的完整路径名。</p></li>
-<li><p><strong>lineno</strong> -- 记录调用所在源文件中的行号。</p></li>
-<li><p><strong>msg</strong> -- 事件描述消息，可能为带有可变数据占位符的格式字符串。</p></li>
-<li><p><strong>args</strong> -- 要合并到 <em>msg</em> 参数以获得事件描述的可变数据。</p></li>
-<li><p><strong>exc_info</strong> -- 包含当前异常信息的异常元组，或者如果没有可用异常信息则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p></li>
-<li><p><strong>func</strong> -- 发起调用日志记录调用的函数或方法名称。</p></li>
-<li><p><strong>sinfo</strong> -- 一个文本字符串，表示当前线程中从堆栈底部直到日志记录调用的堆栈信息。</p></li>
+<li><p><strong>name</strong> – 用于记录由此 LogRecord 所表示事件的记录器名称。 请注意此名称将始终为该值，即使它可能是由附加到不同（祖先）日志记录器的处理器所发出的。</p></li>
+<li><p><strong>level</strong> – 以数字表示的日志记录事件层级（如 DEBUG, INFO 等）。 请注意这会转换为 LogRecord 的 <em>两个</em> 属性: <code class="docutils literal notranslate"><span class="pre">levelno</span></code> 为数字值而 <code class="docutils literal notranslate"><span class="pre">levelname</span></code> 为对应的层级名称。</p></li>
+<li><p><strong>pathname</strong> – 进行日志记录调用的文件的完整路径名。</p></li>
+<li><p><strong>lineno</strong> – 记录调用所在源文件中的行号。</p></li>
+<li><p><strong>msg</strong> – 事件描述消息，可能为带有可变数据占位符的格式字符串。</p></li>
+<li><p><strong>args</strong> – 要合并到 <em>msg</em> 参数以获得事件描述的可变数据。</p></li>
+<li><p><strong>exc_info</strong> – 包含当前异常信息的异常元组，或者如果没有可用异常信息则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p></li>
+<li><p><strong>func</strong> – 发起调用日志记录调用的函数或方法名称。</p></li>
+<li><p><strong>sinfo</strong> – 一个文本字符串，表示当前线程中从堆栈底部直到日志记录调用的堆栈信息。</p></li>
 </ul>
 </dd>
 </dl>
@@ -680,7 +706,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 </tr>
 <tr class="row-odd"><td><p>asctime</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">%(asctime)s</span></code></p></td>
-<td><p>表示 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 何时被创建的供人查看时间值。 默认形式为 '2003-07-08 16:49:45,896' （逗号之后的数字为时间的毫秒部分）。</p></td>
+<td><p>表示 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 何时被创建的供人查看时间值。 默认形式为 ‘2003-07-08 16:49:45,896’ （逗号之后的数字为时间的毫秒部分）。</p></td>
 </tr>
 <tr class="row-even"><td><p>created</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">%(created)f</span></code></p></td>
@@ -714,7 +740,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">%(message)s</span></code></p></td>
 <td><p>记入日志的消息，即 <code class="docutils literal notranslate"><span class="pre">msg</span> <span class="pre">%</span> <span class="pre">args</span></code> 的结果。 这是在发起调用 <a class="reference internal" href="#logging.Formatter.format" title="logging.Formatter.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Formatter.format()</span></code></a> 时设置的。</p></td>
 </tr>
-<tr class="row-even"><td><p>module -- 模块</p></td>
+<tr class="row-even"><td><p>module – 模块</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">%(module)s</span></code></p></td>
 <td><p>模块 (<code class="docutils literal notranslate"><span class="pre">filename</span></code> 的名称部分)。</p></td>
 </tr>
@@ -758,10 +784,17 @@ are offered the event to handle, and propagation stops at that point.</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">%(threadName)s</span></code></p></td>
 <td><p>线程名（如果可用）</p></td>
 </tr>
+<tr class="row-odd"><td><p>taskName</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">%(taskName)s</span></code></p></td>
+<td><p><a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncio.Task</span></code></a> name (if available).</p></td>
+</tr>
 </tbody>
 </table>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.1 版更改: </span>添加了 <em>processName</em></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span><em>taskName</em> was added.</p>
 </div>
 </section>
 <section id="loggeradapter-objects">
@@ -769,12 +802,12 @@ are offered the event to handle, and propagation stops at that point.</p>
 <p><a class="reference internal" href="#logging.LoggerAdapter" title="logging.LoggerAdapter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerAdapter</span></code></a> 实例会被用来方便地将上下文信息传入日志记录调用。 要获取用法示例，请参阅 <a class="reference internal" href="../howto/logging-cookbook.html#context-info"><span class="std std-ref">添加上下文信息到你的日志记录输出</span></a> 部分。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.LoggerAdapter">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">LoggerAdapter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LoggerAdapter" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">LoggerAdapter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LoggerAdapter" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.LoggerAdapter" title="logging.LoggerAdapter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggerAdapter</span></code></a> 的实例，该实例的初始化使用了下层的 <a class="reference internal" href="#logging.Logger" title="logging.Logger"><code class="xref py py-class docutils literal notranslate"><span class="pre">Logger</span></code></a> 实例和一个字典类对象。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.LoggerAdapter.process">
 <span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LoggerAdapter.process" title="永久链接至目标">¶</a></dt>
-<dd><p>修改传递给日志记录调用的消息和/或关键字参数以便插入上下文信息。 此实现接受以 <em>extra</em> 形式传给构造器的对象并使用 'extra' 键名将其加入 <em>kwargs</em>。 返回值为一个 (<em>msg</em>, <em>kwargs</em>) 元组，其包含（可能经过修改的）传入参数。</p>
+<dd><p>修改传递给日志记录调用的消息和/或关键字参数以便插入上下文信息。 此实现接受以 <em>extra</em> 形式传给构造器的对象并使用 ‘extra’ 键名将其加入 <em>kwargs</em>。 返回值为一个 (<em>msg</em>, <em>kwargs</em>) 元组，其包含（可能经过修改的）传入参数。</p>
 </dd></dl>
 
 </dd></dl>
@@ -798,7 +831,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="logging.getLogger">
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">getLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.getLogger" title="永久链接至目标">¶</a></dt>
-<dd><p>返回具有指定 name 的日志记录器，或者当 name 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 时返回层级结构中的根日志记录器。 如果指定了 name，它通常是以点号分隔的带层级结构的名称，如 <em>'a'</em>、<em>'a.b'</em> 或 <em>'a.b.c.d'</em>。 这些名称的选择完全取决于使用 logging 的开发者。</p>
+<dd><p>返回具有指定 name 的日志记录器，或者当 name 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 时返回层级结构中的根日志记录器。 如果指定了 name，它通常是以点号分隔的带层级结构的名称，如 <em>‘a’</em>、<em>’a.b’</em> 或 <em>‘a.b.c.d’</em>。 这些名称的选择完全取决于使用 logging 的开发者。</p>
 <p>所有用给定的 name 对该函数的调用都将返回相同的日志记录器实例。 这意味着日志记录器实例不需要在应用的各部分间传递。</p>
 </dd></dl>
 
@@ -845,8 +878,11 @@ are offered the event to handle, and propagation stops at that point.</p>
 </pre></div>
 </div>
 <p><em>extra</em> 中传入的字典的键不应与日志系统使用的键冲突。（有关日志系统使用哪些键的更多信息，请参见 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 的文档。）</p>
-<p>如果你选择在已记录的消息中使用这些属性，则需要格外小心。 例如在上面的示例中，<a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 已设置了格式字符串，其在 LogRecord 的属性字典中应有 'clientip' 和 'user'。 如果缺少这些属性，消息将不被记录，因为会引发字符串格式化异常，你始终需要传入带有这些键的 <em>extra</em> 字典。</p>
+<p>如果你选择在已记录的消息中使用这些属性，则需要格外小心。 例如在上面的示例中，<a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 已设置了格式字符串，其在 LogRecord 的属性字典中应有 ‘clientip’ 和 ‘user’。 如果缺少这些属性，消息将不被记录，因为会引发字符串格式化异常，你始终需要传入带有这些键的 <em>extra</em> 字典。</p>
 <p>尽管这可能很烦人，但此功能旨在用于特殊情况，例如在多个上下文中执行相同代码的多线程服务器，并且出现的有趣条件取决于此上下文（例如在上面的示例中就是远程客户端IP地址和已验证用户名）。在这种情况下，很可能将专门的 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 与特定的 <a class="reference internal" href="#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> 一起使用。</p>
+<p>This function (as well as <a class="reference internal" href="#logging.info" title="logging.info"><code class="xref py py-func docutils literal notranslate"><span class="pre">info()</span></code></a>, <a class="reference internal" href="#logging.warning" title="logging.warning"><code class="xref py py-func docutils literal notranslate"><span class="pre">warning()</span></code></a>, <a class="reference internal" href="#logging.error" title="logging.error"><code class="xref py py-func docutils literal notranslate"><span class="pre">error()</span></code></a> and
+<a class="reference internal" href="#logging.critical" title="logging.critical"><code class="xref py py-func docutils literal notranslate"><span class="pre">critical()</span></code></a>) will call <a class="reference internal" href="#logging.basicConfig" title="logging.basicConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">basicConfig()</span></code></a> if the root logger doesn’t
+have any handler attached.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>增加了 <em>stack_info</em> 参数。</p>
 </div>
@@ -863,7 +899,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.warning" title="永久链接至目标">¶</a></dt>
 <dd><p>在根日志记录器上记录一条 <code class="xref py py-const docutils literal notranslate"><span class="pre">WARNING</span></code> 级别的消息。 参数解释同 <a class="reference internal" href="#logging.debug" title="logging.debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">debug()</span></code></a>。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>有一个已过时方法 <code class="docutils literal notranslate"><span class="pre">warn</span></code> 其功能与 <code class="docutils literal notranslate"><span class="pre">warning</span></code> 一致。 由于 <code class="docutils literal notranslate"><span class="pre">warn</span></code> 已被弃用，请不要使用它 —— 而是改用 <code class="docutils literal notranslate"><span class="pre">warning</span></code>。</p>
 </div>
 </dd></dl>
@@ -890,10 +926,6 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dt class="sig sig-object py" id="logging.log">
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.log" title="永久链接至目标">¶</a></dt>
 <dd><p>在根日志记录器上记录一条 <em>level</em> 级别的消息。 其他参数解释同 <a class="reference internal" href="#logging.debug" title="logging.debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">debug()</span></code></a>。</p>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>上述模块级的便捷函数均委托给根日志记录器，它们会调用 <a class="reference internal" href="#logging.basicConfig" title="logging.basicConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">basicConfig()</span></code></a> 以确保至少有一个处理器可用。 因此，在 Python 2.7.1 和 3.2 之前的版本中，除非线程启动 <em>之前</em> 已向根日志记录器添加了至少一个处理器，它们 <em>不应</em> 在线程中使用。 在较早的 Python 版本中，由于 <a class="reference internal" href="#logging.basicConfig" title="logging.basicConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">basicConfig()</span></code></a> 中存在线程安全性的不足，这（在少数情况下）可能导致处理器被多次加入根日志记录器，这会导致同一事件出现多条消息。</p>
-</div>
 </dd></dl>
 
 <dl class="py function">
@@ -902,7 +934,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dd><p>为所有日志记录器提供重载的级别 <em>level</em>，其优先级高于日志记录器自己的级别。 当需要临时限制整个应用程序中的日志记录输出时，此功能会很有用。 它的效果是禁用所有重要程度为 <em>level</em> 及以下的日志记录调用，因此如果你附带 INFO 值调用它，则所有 INFO 和 DEBUG 事件就会被丢弃，而重要程度为 WARNING 以及上的事件将根据日志记录器的当前有效级别来处理。 如果 <code class="docutils literal notranslate"><span class="pre">logging.disable(logging.NOTSET)</span></code> 被调用，它将移除这个重载的级别，因此日志记录输出会再次取决于单个日志记录器的有效级别。</p>
 <p>请注意如果你定义了任何高于 <code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code> 的自定义日志级别（并不建议这样做），你就将无法沿用 <em>level</em> 形参的默认值，而必须显式地提供适当的值。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span><em>level</em> 形参默认级别为 <code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code>。 请参阅 <a class="reference external" href="https://bugs.python.org/issue28524">bpo-28524</a> 了解此项改变的更多细节。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span><em>level</em> 形参默认级别为 <code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code>。 请参阅 <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=28524">bpo-28524</a> 了解此项改变的更多细节。</p>
 </div>
 </dd></dl>
 
@@ -911,7 +943,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">addLevelName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levelName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.addLevelName" title="永久链接至目标">¶</a></dt>
 <dd><p>在一个内部字典中关联级别 <em>level</em> 与文本 <em>levelName</em>，该字典会被用来将数字级别映射为文本表示形式，例如在 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 格式化消息的时候。 此函数也可被用来定义你自己的级别。 唯一的限制是自定义的所有级别必须使用此函数来注册，级别值必须为正整数并且其应随严重程度而递增。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>如果你考虑要定义你自己的级别，请参阅 <a class="reference internal" href="../howto/logging.html#custom-levels"><span class="std std-ref">自定义级别</span></a> 部分。</p>
 </div>
 </dd></dl>
@@ -920,7 +952,7 @@ are offered the event to handle, and propagation stops at that point.</p>
 <dt class="sig sig-object py" id="logging.getLevelNamesMapping">
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">getLevelNamesMapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#logging.getLevelNamesMapping" title="永久链接至目标">¶</a></dt>
 <dd><p>Returns a mapping from level names to their corresponding logging levels. For example, the
-string &quot;CRITICAL&quot; maps to <code class="xref py py-const docutils literal notranslate"><span class="pre">CRITICAL</span></code>. The returned mapping is copied from an internal
+string “CRITICAL” maps to <code class="xref py py-const docutils literal notranslate"><span class="pre">CRITICAL</span></code>. The returned mapping is copied from an internal
 mapping on each call to this function.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
@@ -932,14 +964,33 @@ mapping on each call to this function.</p>
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">getLevelName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.getLevelName" title="永久链接至目标">¶</a></dt>
 <dd><p>返回日志记录级别 <em>level</em> 的字符串表示。</p>
 <p>如果 <em>level</em> 为预定义的级别 <code class="xref py py-const docutils literal notranslate"><span class="pre">CRITICAL</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">ERROR</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">WARNING</span></code>, <code class="xref py py-const docutils literal notranslate"><span class="pre">INFO</span></code> 或 <code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG</span></code> 之一则你会得到相应的字符串。 如果你使用 <a class="reference internal" href="#logging.addLevelName" title="logging.addLevelName"><code class="xref py py-func docutils literal notranslate"><span class="pre">addLevelName()</span></code></a> 将级别关联到名称则返回你为 <em>level</em> 所关联的名称。 如果传入了与已定义级别相对应的数字值，则返回对应的字符串表示。</p>
-<p><em>level</em> 形参也接受级别的字符串表示例如 'INFO'。 在这种情况下，此函数将返回级别所对应的数字值。</p>
-<p>如果未传入可匹配的数字或字符串值，则返回字符串 'Level %s' % level。</p>
+<p><em>level</em> 形参也接受级别的字符串表示例如 ‘INFO’。 在这种情况下，此函数将返回级别所对应的数字值。</p>
+<p>如果未传入可匹配的数字或字符串值，则返回字符串 ‘Level %s’ % level。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>级别在内部以整数表示（因为它们在日志记录逻辑中需要进行比较）。 此函数被用于在整数级别与通过 <code class="docutils literal notranslate"><span class="pre">%(levelname)s</span></code> 格式描述符方式在格式化日志输出中显示的级别名称之间进行相互的转换 (参见 <a class="reference internal" href="#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a>)。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>在早于 3.4 的 Python 版本中，此函数也可传入一个字符串形式的级别名称，并将返回对应的级别数字值。 此未记入文档的行为被视为是一个错误，并在 Python 3.4 中被移除，但又在 3.4.2 中被恢复以保持向下兼容性。</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="logging.getHandlerByName">
+<span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">getHandlerByName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.getHandlerByName" title="永久链接至目标">¶</a></dt>
+<dd><p>Returns a handler with the specified <em>name</em>, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no handler
+with that name.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="logging.getHandlerNames">
+<span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">getHandlerNames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#logging.getHandlerNames" title="永久链接至目标">¶</a></dt>
+<dd><p>Returns an immutable set of all known handler names.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -955,7 +1006,7 @@ mapping on each call to this function.</p>
 <dd><p>通过使用默认的 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 创建一个 <a class="reference internal" href="logging.handlers.html#logging.StreamHandler" title="logging.StreamHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></a> 并将其加入根日志记录器来为日志记录系统执行基本配置。 如果没有为根日志记录器定义处理器则 <a class="reference internal" href="#logging.debug" title="logging.debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">debug()</span></code></a>, <a class="reference internal" href="#logging.info" title="logging.info"><code class="xref py py-func docutils literal notranslate"><span class="pre">info()</span></code></a>, <a class="reference internal" href="#logging.warning" title="logging.warning"><code class="xref py py-func docutils literal notranslate"><span class="pre">warning()</span></code></a>, <a class="reference internal" href="#logging.error" title="logging.error"><code class="xref py py-func docutils literal notranslate"><span class="pre">error()</span></code></a> 和 <a class="reference internal" href="#logging.critical" title="logging.critical"><code class="xref py py-func docutils literal notranslate"><span class="pre">critical()</span></code></a> 等函数将自动调用 <a class="reference internal" href="#logging.basicConfig" title="logging.basicConfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">basicConfig()</span></code></a>。</p>
 <p>如果根日志记录器已配置了处理器则此函数将不执行任何操作，除非关键字参数 <em>force</em> 被设为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>此函数应当在其他线程启动之前从主线程被调用。 在 2.7.1 和 3.2 之前的 Python 版本中，如果此函数从多个线程被调用，一个处理器（在极少的情况下）有可能被多次加入根日志记录器，导致非预期的结果例如日志中的消息出现重复。</p>
 </div>
 <p>支持以下关键字参数。</p>
@@ -1001,7 +1052,7 @@ mapping on each call to this function.</p>
 <td><p>如果此关键字参数与 <em>filename</em> 一同被指定，则其值会在创建 <a class="reference internal" href="logging.handlers.html#logging.FileHandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> 时被使用，因而也会在打开输出文件时被使用。</p></td>
 </tr>
 <tr class="row-even"><td><p><em>errors</em></p></td>
-<td><p>如果此关键字参数与 <em>filename</em> 一同被指定，则其值会在创建 <a class="reference internal" href="logging.handlers.html#logging.FileHandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> 时被使用，因而也会在打开输出文件时被使用。 如果未指定，则会使用值 'backslashreplace'。 请注意如果指定为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，它将被原样传给 <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>，这意味着它将会当作传入 'errors' 一样处理。</p></td>
+<td><p>如果此关键字参数与 <em>filename</em> 一同被指定，则其值会在创建 <a class="reference internal" href="logging.handlers.html#logging.FileHandler" title="logging.FileHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileHandler</span></code></a> 时被使用，因而也会在打开输出文件时被使用。 如果未指定，则会使用值 ‘backslashreplace’。 请注意如果指定为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，它将被原样传给 <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>，这意味着它将会当作传入 ‘errors’ 一样处理。</p></td>
 </tr>
 </tbody>
 </table>
@@ -1038,7 +1089,7 @@ mapping on each call to this function.</p>
 <dd><p>设置一个用来创建 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 的可调用对象。</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
-<dd class="field-odd"><p><strong>factory</strong> -- 用来实例化日志记录的工厂可调用对象。</p>
+<dd class="field-odd"><p><strong>factory</strong> – 用来实例化日志记录的工厂可调用对象。</p>
 </dd>
 </dl>
 <div class="versionadded">
@@ -1088,7 +1139,7 @@ mapping on each call to this function.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="logging.lastResort">
 <span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">lastResort</span></span><a class="headerlink" href="#logging.lastResort" title="永久链接至目标">¶</a></dt>
-<dd><p>通过此属性提供的“最后处理者”。 这是一个以 <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> 级别写入到 <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code> 的 <a class="reference internal" href="logging.handlers.html#logging.StreamHandler" title="logging.StreamHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></a>，用于在没有任何日志记录配置的情况下处理日志记录事件。 最终结果就是将消息打印到 <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code>，这会替代先前形式为 &quot;no handlers could be found for logger XYZ&quot; 的错误消息。 如果出于某种原因你需要先前的行为，可将 <code class="docutils literal notranslate"><span class="pre">lastResort</span></code> 设为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<dd><p>通过此属性提供的“最后处理者”。 这是一个以 <code class="docutils literal notranslate"><span class="pre">WARNING</span></code> 级别写入到 <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code> 的 <a class="reference internal" href="logging.handlers.html#logging.StreamHandler" title="logging.StreamHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamHandler</span></code></a>，用于在没有任何日志记录配置的情况下处理日志记录事件。 最终结果就是将消息打印到 <code class="docutils literal notranslate"><span class="pre">sys.stderr</span></code>，这会替代先前形式为 “no handlers could be found for logger XYZ” 的错误消息。 如果出于某种原因你需要先前的行为，可将 <code class="docutils literal notranslate"><span class="pre">lastResort</span></code> 设为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
 </div>
@@ -1113,7 +1164,7 @@ mapping on each call to this function.</p>
 </dd>
 <dt><a class="reference internal" href="logging.handlers.html#module-logging.handlers" title="logging.handlers: Handlers for the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.handlers</span></code></a> 模块</dt><dd><p>日志记录模块附带的有用处理器。</p>
 </dd>
-<dt><span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0282"><strong>PEP 282</strong></a> - Logging 系统</dt><dd><p>该提案描述了Python标准库中包含的这个特性。</p>
+<dt><span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0282/"><strong>PEP 282</strong></a> - Logging 系统</dt><dd><p>该提案描述了Python标准库中包含的这个特性。</p>
 </dd>
 <dt><a class="reference external" href="https://old.red-dove.com/python_logging.html">Original Python logging package</a></dt><dd><p>这是该 <a class="reference internal" href="#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> 包的原始来源。该站点提供的软件包版本适用于 Python 1.5.2、2.1.x 和 2.2.x，它们不被 <a class="reference internal" href="#module-logging" title="logging: Flexible event logging system for applications."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code></a> 包含在标准库中。</p>
 </dd>
@@ -1129,9 +1180,10 @@ mapping on each call to this function.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> --- Python 的日志记录工具</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> — Python 的日志记录工具</a><ul>
 <li><a class="reference internal" href="#logger-objects">记录器对象</a></li>
 <li><a class="reference internal" href="#logging-levels">日志级别</a></li>
 <li><a class="reference internal" href="#handler-objects">处理器对象</a></li>
@@ -1148,12 +1200,17 @@ mapping on each call to this function.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="getopt.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">getopt</span></code> --- C 风格的命令行选项解析器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="logging.config.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code> --- 日志记录配置</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="getopt.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">getopt</span></code> — C 风格的命令行选项解析器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="logging.config.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.config</span></code> — 日志记录配置</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1179,10 +1236,10 @@ mapping on each call to this function.</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="logging.config.html" title="logging.config --- 日志记录配置"
+          <a href="logging.config.html" title="logging.config — 日志记录配置"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="getopt.html" title="getopt --- C 风格的命令行选项解析器"
+          <a href="getopt.html" title="getopt — C 风格的命令行选项解析器"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -1195,12 +1252,12 @@ mapping on each call to this function.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >通用操作系统服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> --- Python 的日志记录工具</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> — Python 的日志记录工具</a></li>
                 <li class="right">
                     
 
@@ -1224,7 +1281,7 @@ mapping on each call to this function.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1232,11 +1289,11 @@ mapping on each call to this function.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

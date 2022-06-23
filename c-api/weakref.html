@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>弱引用对象 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弱引用对象 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="memoryview.html"
-                        title="上一章">MemoryView 对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="capsule.html"
-                        title="下一章">Capsule 对象</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="memoryview.html"
+                          title="上一章">MemoryView 对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="capsule.html"
+                          title="下一章">Capsule 对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -184,7 +188,7 @@
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyWeakref_GetObject</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ref</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyWeakref_GetObject" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: Borrowed reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回弱引用对象 ref 的被引用对象。如果被引用对象不再存在，则返回 <code class="xref py py-const docutils literal notranslate"><span class="pre">Py_None</span></code>。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>该函数返回被引用对象的一个 <a class="reference internal" href="../glossary.html#term-borrowed-reference"><span class="xref std std-term">borrowed reference</span></a>。 这意味着应该总是在该对象上调用 <a class="reference internal" href="refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a>，除非是当它在借入引用的最后一次被使用之前无法被销毁的时候。</p>
 </div>
 </dd></dl>
@@ -192,7 +196,7 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyWeakref_GET_OBJECT">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyWeakref_GET_OBJECT</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">ref</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyWeakref_GET_OBJECT" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: Borrowed reference.</em><p>类似 <a class="reference internal" href="#c.PyWeakref_GetObject" title="PyWeakref_GetObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyWeakref_GetObject()</span></code></a>，但实现为一个不做类型检查的宏。</p>
+<dd><em class="refcount">Return value: Borrowed reference.</em><p>Similar to <a class="reference internal" href="#c.PyWeakref_GetObject" title="PyWeakref_GetObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyWeakref_GetObject()</span></code></a>, but does no error checking.</p>
 </dd></dl>
 
 </section>
@@ -204,12 +208,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="memoryview.html"
-                        title="上一章">MemoryView 对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="capsule.html"
-                        title="下一章">Capsule 对象</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="memoryview.html"
+                          title="上一章">MemoryView 对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="capsule.html"
+                          title="下一章">Capsule 对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -251,7 +259,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -280,7 +288,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -288,11 +296,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>队列集 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列集 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">队列集</a><ul>
 <li><a class="reference internal" href="#queue">Queue</a></li>
 <li><a class="reference internal" href="#priority-queue">优先级队列</a></li>
@@ -82,12 +83,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="asyncio-subprocess.html"
-                        title="上一章">子进程集</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="asyncio-exceptions.html"
-                        title="下一章">异常</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="asyncio-subprocess.html"
+                          title="上一章">子进程集</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="asyncio-exceptions.html"
+                          title="下一章">异常</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -130,12 +136,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >网络和进程间通信</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="asyncio.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> --- 异步 I/O</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="asyncio.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — 异步 I/O</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">队列集</a></li>
                 <li class="right">
                     
@@ -170,7 +176,7 @@
 <h2>Queue<a class="headerlink" href="#queue" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="asyncio.Queue">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">Queue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Queue" title="永久链接至目标">¶</a></dt>
 <dd><p>先进，先出（FIFO）队列</p>
 <p>如果 <em>maxsize</em> 小于等于零，则队列尺寸是无限的。如果是大于 <code class="docutils literal notranslate"><span class="pre">0</span></code> 的整数，则当队列达到 <em>maxsize</em> 时， <code class="docutils literal notranslate"><span class="pre">await</span> <span class="pre">put()</span></code> 将阻塞至某个元素被 <a class="reference internal" href="#asyncio.Queue.get" title="asyncio.Queue.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> 取出。</p>
 <p>不像标准库中的并发型 <a class="reference internal" href="queue.html#module-queue" title="queue: A synchronized queue class."><code class="xref py py-mod docutils literal notranslate"><span class="pre">queue</span></code></a> ，队列的尺寸一直是已知的，可以通过调用 <a class="reference internal" href="#asyncio.Queue.qsize" title="asyncio.Queue.qsize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">qsize()</span></code></a> 方法返回。</p>
@@ -251,7 +257,7 @@
 <h2>优先级队列<a class="headerlink" href="#priority-queue" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="asyncio.PriorityQueue">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">PriorityQueue</span></span><a class="headerlink" href="#asyncio.PriorityQueue" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">PriorityQueue</span></span><a class="headerlink" href="#asyncio.PriorityQueue" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#asyncio.Queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a> 的变体；按优先级顺序取出条目 (最小的先取出)。</p>
 <p>条目通常是 <code class="docutils literal notranslate"><span class="pre">(priority_number,</span> <span class="pre">data)</span></code> 形式的元组。</p>
 </dd></dl>
@@ -261,7 +267,7 @@
 <h2>后进先出队列<a class="headerlink" href="#lifo-queue" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="asyncio.LifoQueue">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">LifoQueue</span></span><a class="headerlink" href="#asyncio.LifoQueue" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">LifoQueue</span></span><a class="headerlink" href="#asyncio.LifoQueue" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#asyncio.Queue" title="asyncio.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">Queue</span></code></a> 的变体，先取出最近添加的条目（后进，先出）。</p>
 </dd></dl>
 
@@ -270,13 +276,13 @@
 <h2>异常<a class="headerlink" href="#exceptions" title="永久链接至标题">¶</a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="asyncio.QueueEmpty">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">QueueEmpty</span></span><a class="headerlink" href="#asyncio.QueueEmpty" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">QueueEmpty</span></span><a class="headerlink" href="#asyncio.QueueEmpty" title="永久链接至目标">¶</a></dt>
 <dd><p>当队列为空的时候，调用 <a class="reference internal" href="#asyncio.Queue.get_nowait" title="asyncio.Queue.get_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_nowait()</span></code></a> 方法而引发这个异常。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="asyncio.QueueFull">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">QueueFull</span></span><a class="headerlink" href="#asyncio.QueueFull" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">QueueFull</span></span><a class="headerlink" href="#asyncio.QueueFull" title="永久链接至目标">¶</a></dt>
 <dd><p>当队列中条目数量已经达到它的 <em>maxsize</em> 的时候，调用 <a class="reference internal" href="#asyncio.Queue.put_nowait" title="asyncio.Queue.put_nowait"><code class="xref py py-meth docutils literal notranslate"><span class="pre">put_nowait()</span></code></a> 方法而引发的异常。</p>
 </dd></dl>
 
@@ -349,8 +355,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">队列集</a><ul>
 <li><a class="reference internal" href="#queue">Queue</a></li>
 <li><a class="reference internal" href="#priority-queue">优先级队列</a></li>
@@ -361,12 +368,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="asyncio-subprocess.html"
-                        title="上一章">子进程集</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="asyncio-exceptions.html"
-                        title="下一章">异常</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="asyncio-subprocess.html"
+                          title="上一章">子进程集</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="asyncio-exceptions.html"
+                          title="下一章">异常</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -408,12 +420,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="ipc.html" >网络和进程间通信</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="asyncio.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> --- 异步 I/O</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="asyncio.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code> — 异步 I/O</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">队列集</a></li>
                 <li class="right">
                     
@@ -438,7 +450,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -446,11 +458,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>排序指南 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序指南 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">排序指南</a><ul>
 <li><a class="reference internal" href="#sorting-basics">基本排序</a></li>
 <li><a class="reference internal" href="#key-functions">关键函数</a></li>
@@ -80,17 +81,22 @@
 <li><a class="reference internal" href="#sort-stability-and-complex-sorts">排序稳定性和排序复杂度</a></li>
 <li><a class="reference internal" href="#the-old-way-using-decorate-sort-undecorate">使用装饰-排序-去装饰的旧方法</a></li>
 <li><a class="reference internal" href="#the-old-way-using-the-cmp-parameter">使用 <em>cmp</em> 参数的旧方法</a></li>
-<li><a class="reference internal" href="#odd-and-ends">其它</a></li>
+<li><a class="reference internal" href="#odds-and-ends">Odds and Ends</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sockets.html"
-                        title="上一章">套接字编程指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="unicode.html"
-                        title="下一章">Unicode 指南</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sockets.html"
+                          title="上一章">套接字编程指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="unicode.html"
+                          title="下一章">Unicode 指南</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -133,7 +139,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -360,8 +366,8 @@
 </div>
 <p>在 Python 3.2 中， <a class="reference internal" href="../library/functools.html#functools.cmp_to_key" title="functools.cmp_to_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">functools.cmp_to_key()</span></code></a> 函数被添加到标准库中的 <a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> 模块中。</p>
 </section>
-<section id="odd-and-ends">
-<h2>其它<a class="headerlink" href="#odd-and-ends" title="永久链接至标题">¶</a></h2>
+<section id="odds-and-ends">
+<h2>Odds and Ends<a class="headerlink" href="#odds-and-ends" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>对于区域相关的排序，请使用 <a class="reference internal" href="../library/locale.html#locale.strxfrm" title="locale.strxfrm"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.strxfrm()</span></code></a> 作为键函数，或者 <a class="reference internal" href="../library/locale.html#locale.strcoll" title="locale.strcoll"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.strcoll()</span></code></a> 作为比较函数。</p></li>
 <li><p><em>reverse</em> 参数仍然保持排序稳定性（因此具有相等键的记录保留原始顺序）。 有趣的是，通过使用内置的 <a class="reference internal" href="../library/functions.html#reversed" title="reversed"><code class="xref py py-func docutils literal notranslate"><span class="pre">reversed()</span></code></a> 函数两次，可以在没有参数的情况下模拟该效果：</p>
@@ -374,12 +380,16 @@
 </pre></div>
 </div>
 </li>
-<li><p>当在两个对象之间进行比较时，会确保排序例程使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code>。 因此，通过定义 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code> 方法可以很容易地为类添加一个标准排序:</p>
+<li><p>The sort routines use <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> when making comparisons
+between two objects. So, it is easy to add a standard sort order to a class by
+defining an <code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code> method:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Student</span><span class="o">.</span><span class="fm">__lt__</span> <span class="o">=</span> <span class="k">lambda</span> <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">student_objects</span><span class="p">)</span>
 <span class="go">[(&#39;dave&#39;, &#39;B&#39;, 10), (&#39;jane&#39;, &#39;B&#39;, 12), (&#39;john&#39;, &#39;A&#39;, 15)]</span>
 </pre></div>
 </div>
+<p>However, note that <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> can fall back to using <code class="xref py py-meth docutils literal notranslate"><span class="pre">__gt__()</span></code> if
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__lt__()</span></code> is not implemented (see <a class="reference internal" href="../reference/datamodel.html#object.__lt__" title="object.__lt__"><code class="xref py py-func docutils literal notranslate"><span class="pre">object.__lt__()</span></code></a>).</p>
 </li>
 <li><p>键函数不需要直接依赖于被排序的对象。键函数还可以访问外部资源。例如，如果学生成绩存储在字典中，则可以使用它们对单独的学生姓名列表进行排序：</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">students</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dave&#39;</span><span class="p">,</span> <span class="s1">&#39;john&#39;</span><span class="p">,</span> <span class="s1">&#39;jane&#39;</span><span class="p">]</span>
@@ -400,8 +410,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">排序指南</a><ul>
 <li><a class="reference internal" href="#sorting-basics">基本排序</a></li>
 <li><a class="reference internal" href="#key-functions">关键函数</a></li>
@@ -410,17 +421,22 @@
 <li><a class="reference internal" href="#sort-stability-and-complex-sorts">排序稳定性和排序复杂度</a></li>
 <li><a class="reference internal" href="#the-old-way-using-decorate-sort-undecorate">使用装饰-排序-去装饰的旧方法</a></li>
 <li><a class="reference internal" href="#the-old-way-using-the-cmp-parameter">使用 <em>cmp</em> 参数的旧方法</a></li>
-<li><a class="reference internal" href="#odd-and-ends">其它</a></li>
+<li><a class="reference internal" href="#odds-and-ends">Odds and Ends</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sockets.html"
-                        title="上一章">套接字编程指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="unicode.html"
-                        title="下一章">Unicode 指南</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sockets.html"
+                          title="上一章">套接字编程指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="unicode.html"
+                          title="下一章">Unicode 指南</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -462,7 +478,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -490,7 +506,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -498,11 +514,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

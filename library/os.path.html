@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>os.path --- 常用路径操作 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>os.path — 常用路径操作 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="fileinput --- 迭代来自多个输入流的行" href="fileinput.html" />
-    <link rel="prev" title="pathlib --- 面向对象的文件系统路径" href="pathlib.html" />
+    <link rel="next" title="fileinput — 迭代来自多个输入流的行" href="fileinput.html" />
+    <link rel="prev" title="pathlib — 面向对象的文件系统路径" href="pathlib.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/os.path.html" />
     
       
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pathlib.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="fileinput.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> --- 迭代来自多个输入流的行</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pathlib.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="fileinput.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> — 迭代来自多个输入流的行</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -102,10 +106,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="fileinput.html" title="fileinput --- 迭代来自多个输入流的行"
+          <a href="fileinput.html" title="fileinput — 迭代来自多个输入流的行"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="pathlib.html" title="pathlib --- 面向对象的文件系统路径"
+          <a href="pathlib.html" title="pathlib — 面向对象的文件系统路径"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" accesskey="U">文件和目录访问</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> --- 常用路径操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> — 常用路径操作</a></li>
                 <li class="right">
                     
 
@@ -147,21 +151,25 @@
           <div class="body" role="main">
             
   <section id="module-os.path">
-<span id="os-path-common-pathname-manipulations"></span><h1><a class="reference internal" href="#module-os.path" title="os.path: Operations on pathnames."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code></a> --- 常用路径操作<a class="headerlink" href="#module-os.path" title="永久链接至标题">¶</a></h1>
-<p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/posixpath.py">Lib/posixpath.py</a> （用于 POSIX）和 <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/ntpath.py">Lib/ntpath.py</a> （用于 Windows NT）</p>
+<span id="os-path-common-pathname-manipulations"></span><h1><a class="reference internal" href="#module-os.path" title="os.path: Operations on pathnames."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code></a> — 常用路径操作<a class="headerlink" href="#module-os.path" title="永久链接至标题">¶</a></h1>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/posixpath.py">Lib/posixpath.py</a> (for POSIX) and
+<a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/ntpath.py">Lib/ntpath.py</a> (for Windows).</p>
 <hr class="docutils" id="index-0" />
-<p>该模块在路径名上实现了一些有用的功能：如需读取或写入文件，请参见 <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a> ；有关访问文件系统的信息，请参见 <a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> 模块。路径参数可以字符串或字节形式传递。我们鼓励应用程序将文件名表示为（Unicode）字符串。不幸的是，某些文件名在Unix上可能无法用字符串表示，因此在Unix上平台上需要支持任意文件名的应用程序，应使用字节对象来表示路径名。反之亦然，在Windows平台上仅使用字节对象，不能表示的所有文件名（以标准 <code class="docutils literal notranslate"><span class="pre">mbcs</span></code> 编码），因此Windows应用程序应使用字符串对象来访问所有文件。</p>
+<p>This module implements some useful functions on pathnames. To read or write
+files see <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>, and for accessing the filesystem see the <a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a>
+module. The path parameters can be passed as strings, or bytes, or any object
+implementing the <a class="reference internal" href="os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> protocol.</p>
 <p>与unix shell不同，Python不执行任何 <em>自动</em> 路径扩展。当应用程序需要类似shell的路径扩展时，可以显式调用诸如 <a class="reference internal" href="#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">expanduser()</span></code></a> 和 <a class="reference internal" href="#os.path.expandvars" title="os.path.expandvars"><code class="xref py py-func docutils literal notranslate"><span class="pre">expandvars()</span></code></a> 之类的函数。 （另请参见 <a class="reference internal" href="glob.html#module-glob" title="glob: Unix shell style pathname pattern expansion."><code class="xref py py-mod docutils literal notranslate"><span class="pre">glob</span></code></a> 模块。）</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <p><a class="reference internal" href="pathlib.html#module-pathlib" title="pathlib: Object-oriented filesystem paths"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code></a> 模块提供高级路径对象。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>所有这些函数都仅接受字节或字符串对象作为其参数。如果返回路径或文件名，则结果是相同类型的对象。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>由于不同的操作系统具有不同的路径名称约定，因此标准库中有此模块的几个版本。<a class="reference internal" href="#module-os.path" title="os.path: Operations on pathnames."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code></a> 模块始终是适合 Python 运行的操作系统的路径模块，因此可用于本地路径。但是，如果操作的路径 <em>总是</em> 以一种不同的格式显示，那么也可以分别导入和使用各个模块。它们都具有相同的接口：</p>
 <ul class="simple">
 <li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">posixpath</span></code> 用于Unix 样式的路径</p></li>
@@ -207,7 +215,7 @@
 <span class="sig-prename descclassname"><span class="pre">os.path.</span></span><span class="sig-name descname"><span class="pre">commonprefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#os.path.commonprefix" title="永久链接至目标">¶</a></dt>
 <dd><p>接受包含多个路径的 <em>列表</em>，返回所有路径的最长公共前缀（逐字符比较）。如果 <em>列表</em> 为空，则返回空字符串 (<code class="docutils literal notranslate"><span class="pre">''</span></code>)。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>此函数是逐字符比较，因此可能返回无效路径。要获取有效路径，参见 <a class="reference internal" href="#os.path.commonpath" title="os.path.commonpath"><code class="xref py py-func docutils literal notranslate"><span class="pre">commonpath()</span></code></a>。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">commonprefix</span><span class="p">([</span><span class="s1">&#39;/usr/lib&#39;</span><span class="p">,</span> <span class="s1">&#39;/usr/local/lib&#39;</span><span class="p">])</span>
 <span class="go">&#39;/usr/l&#39;</span>
@@ -384,7 +392,7 @@
 <div><p>通过折叠多余的分隔符和对上级目录的引用来标准化路径名，所以 <code class="docutils literal notranslate"><span class="pre">A//B</span></code>、<code class="docutils literal notranslate"><span class="pre">A/B/</span></code>、<code class="docutils literal notranslate"><span class="pre">A/./B</span></code> 和 <code class="docutils literal notranslate"><span class="pre">A/foo/../B</span></code> 都会转换成 <code class="docutils literal notranslate"><span class="pre">A/B</span></code>。这个字符串操作可能会改变带有符号链接的路径的含义。在 Windows 上，本方法将正斜杠转换为反斜杠。要规范大小写，请使用 <a class="reference internal" href="#os.path.normcase" title="os.path.normcase"><code class="xref py py-func docutils literal notranslate"><span class="pre">normcase()</span></code></a>。</p>
 </div></blockquote>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <blockquote>
 <div><p>在 POSIX 系统上，根据 <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_13">IEEE Std 1003.1 2013 Edition; 4.13 Pathname Resolution</a>，如果一个路径名称以两个斜杠开始，则开始字符之后的第一个部分将以具体实现所定义的方式来解读，但是超过两个开始字符则将被视为单个字符。</p>
 </div></blockquote>
@@ -400,7 +408,7 @@
 <dd><p>返回指定文件的规范路径，消除路径中存在的任何符号链接（如果操作系统支持）。</p>
 <p>如果一个路径不存在或是遇到了符号链接循环，并且 <em>strict</em> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，则会引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。 如果 <em>strict</em> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code>，则会尽可能地解析路径并添加结果而不检查路径是否存在。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这个函数会模拟操作系统生成规范路径的过程，Windows 与 UNIX 的这个过程在处理链接和后续路径组成部分的交互方式上有所差异。</p>
 <p>操作系统 API 会根据需要来规范化路径，因此通常不需要调用此函数。</p>
 </div>
@@ -487,7 +495,8 @@
 <span class="go">(&quot;c:&quot;, &quot;/dir&quot;)</span>
 </pre></div>
 </div>
-<p>如果路径 path 包含 UNC 路径，则 drive 将包含主机名和 share，直至第四个分隔符但不包括该分隔符:</p>
+<p>If the path contains a UNC path, drive will contain the host name
+and share:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">splitdrive</span><span class="p">(</span><span class="s2">&quot;//host/computer/dir&quot;</span><span class="p">)</span>
 <span class="go">(&quot;//host/computer&quot;, &quot;/dir&quot;)</span>
 </pre></div>
@@ -541,12 +550,16 @@ be part of the root:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pathlib.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> --- 面向对象的文件系统路径</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="fileinput.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> --- 迭代来自多个输入流的行</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pathlib.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code> — 面向对象的文件系统路径</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="fileinput.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fileinput</span></code> — 迭代来自多个输入流的行</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -572,10 +585,10 @@ be part of the root:</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="fileinput.html" title="fileinput --- 迭代来自多个输入流的行"
+          <a href="fileinput.html" title="fileinput — 迭代来自多个输入流的行"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="pathlib.html" title="pathlib --- 面向对象的文件系统路径"
+          <a href="pathlib.html" title="pathlib — 面向对象的文件系统路径"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -588,12 +601,12 @@ be part of the root:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="filesys.html" >文件和目录访问</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> --- 常用路径操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">os.path</span></code> — 常用路径操作</a></li>
                 <li class="right">
                     
 
@@ -617,7 +630,7 @@ be part of the root:</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -625,11 +638,11 @@ be part of the root:</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

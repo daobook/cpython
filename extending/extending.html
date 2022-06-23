@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>1. 使用 C 或 C++ 扩展 Python &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. 使用 C 或 C++ 扩展 Python &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">1. 使用 C 或 C++ 扩展 Python</a><ul>
 <li><a class="reference internal" href="#a-simple-example">1.1. 一个简单的例子</a></li>
 <li><a class="reference internal" href="#intermezzo-errors-and-exceptions">1.2. 关于错误和异常</a></li>
@@ -95,12 +96,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="index.html"
-                        title="上一章">扩展和嵌入 Python 解释器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="newtypes_tutorial.html"
-                        title="下一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">扩展和嵌入 Python 解释器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="newtypes_tutorial.html"
+                          title="下一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -143,7 +149,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">扩展和嵌入 Python 解释器</a> &#187;</li>
@@ -176,12 +182,12 @@
 <p>为了支持扩展，Python API（应用程序编程接口）定义了一系列函数、宏和变量，可以访问 Python 运行时系统的大部分内容。Python 的 API 可以通过在一个 C 源文件中引用 <code class="docutils literal notranslate"><span class="pre">&quot;Python.h&quot;</span></code> 头文件来使用。</p>
 <p>扩展模块的编写方式取决与你的目的以及系统设置；下面章节会详细介绍。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>C扩展接口特指CPython，扩展模块无法在其他Python实现上工作。在大多数情况下，应该避免写C扩展，来保持可移植性。举个例子，如果你的用例调用了C库或系统调用，你应该考虑使用 <a class="reference internal" href="../library/ctypes.html#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 模块或 <a class="reference external" href="https://cffi.readthedocs.io/">cffi</a> 库，而不是自己写C代码。这些模块允许你写Python代码来接口C代码，而且可移植性更好。不知为何编译失败了。</p>
 </div>
 <section id="a-simple-example">
 <span id="extending-simpleexample"></span><h2><span class="section-number">1.1. </span>一个简单的例子<a class="headerlink" href="#a-simple-example" title="永久链接至标题">¶</a></h2>
-<p>让我们创建一个扩展模块 <code class="docutils literal notranslate"><span class="pre">spam</span></code> (Monty Python 粉丝最喜欢的食物...) 并且想要创建对应 C 库函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">system()</span></code> <a class="footnote-reference brackets" href="#id5" id="id1">1</a> 的 Python 接口。 这个函数接受一个以 null 结尾的字符串参数并返回一个整数。 我们希望可以在 Python 中以如下方式调用此函数:</p>
+<p>让我们创建一个扩展模块 <code class="docutils literal notranslate"><span class="pre">spam</span></code> (Monty Python 粉丝最喜欢的食物…) 并且想要创建对应 C 库函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">system()</span></code> <a class="footnote-reference brackets" href="#id5" id="id1">1</a> 的 Python 接口。 这个函数接受一个以 null 结尾的字符串参数并返回一个整数。 我们希望可以在 Python 中以如下方式调用此函数:</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">spam</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">status</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;ls -l&quot;</span><span class="p">)</span>
 </pre></div>
@@ -194,7 +200,7 @@
 </div>
 <p>这会导入 Python API（如果你喜欢，你可以在这里添加描述模块目标和版权信息的注释)。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>由于 Python 可能会定义一些能在某些系统上影响标准头文件的预处理器定义，因此在包含任何标准头文件之前，你 <em>必须</em> 先包含 <code class="file docutils literal notranslate"><span class="pre">Python.h</span></code>。</p>
 <p>推荐总是在 <code class="docutils literal notranslate"><span class="pre">Python.h</span></code> 前定义 <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_CLEAN</span></code> 。查看 <a class="reference internal" href="#parsetuple"><span class="std std-ref">提取扩展函数的参数</span></a> 来了解这个宏的更多内容。</p>
 </div>
@@ -215,7 +221,7 @@
 </div>
 <p>有个直接翻译参数列表的方法(举个例子，单独的 <code class="docutils literal notranslate"><span class="pre">&quot;ls</span> <span class="pre">-l&quot;</span></code> )到要传递给C函数的参数。C函数总是有两个参数，通常名字是 <em>self</em> 和 <em>args</em> 。</p>
 <p>对模块级函数， <em>self</em> 参数指向模块对象；对于方法则指向对象实例。</p>
-<p><em>args</em> 参数是指向一个 Python 的 tuple 对象的指针，其中包含参数。 每个 tuple 项对应一个调用参数。 这些参数也全都是 Python 对象 --- 要在我们的 C 函数中使用它们就需要先将其转换为 C 值。 Python API 中的函数 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 会检查参数类型并将其转换为 C 值。 它使用模板字符串确定需要的参数类型以及存储被转换的值的 C 变量类型。 细节将稍后说明。</p>
+<p><em>args</em> 参数是指向一个 Python 的 tuple 对象的指针，其中包含参数。 每个 tuple 项对应一个调用参数。 这些参数也全都是 Python 对象 — 要在我们的 C 函数中使用它们就需要先将其转换为 C 值。 Python API 中的函数 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 会检查参数类型并将其转换为 C 值。 它使用模板字符串确定需要的参数类型以及存储被转换的值的 C 变量类型。 细节将稍后说明。</p>
 <p><a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 在所有参数都有正确类型且组成部分按顺序放在传递进来的地址里时，返回真(非零)。其在传入无效参数时返回假(零)。在后续例子里，还会抛出特定异常，使得调用的函数可以理解返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (也就是例子里所见)。</p>
 </section>
 <section id="intermezzo-errors-and-exceptions">
@@ -223,7 +229,7 @@
 <p>An important convention throughout the Python interpreter is the following: when
 a function fails, it should set an exception condition and return an error value
 (usually <code class="docutils literal notranslate"><span class="pre">-1</span></code> or a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pointer).  Exception information is stored in
-three members of the interpreter's thread state.  These are <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if
+three members of the interpreter’s thread state.  These are <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if
 there is no exception.  Otherwise they are the C equivalents of the members
 of the Python tuple returned by <a class="reference internal" href="../library/sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a>.  These are the
 exception type, exception instance, and a traceback object.  It is important
@@ -232,13 +238,13 @@ to know about them to understand how errors are passed around.</p>
 <p>最常用的就是 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_SetString" title="PyErr_SetString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetString()</span></code></a>。 其参数是异常对象和 C 字符串。 异常对象一般是像 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_ZeroDivisionError</span></code> 这样的预定义对象。 C 字符串指明异常原因，并被转换为一个 Python 字符串对象存储为异常的“关联值”。</p>
 <p>另一个有用的函数是 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_SetFromErrno" title="PyErr_SetFromErrno"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetFromErrno()</span></code></a> ，仅接受一个异常对象，异常描述包含在全局变量 <code class="xref c c-data docutils literal notranslate"><span class="pre">errno</span></code> 中。最通用的函数还是 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_SetObject" title="PyErr_SetObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_SetObject()</span></code></a> ，包含两个参数，分别为异常对象和异常描述。你不需要使用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 来增加传递到其他函数的参数对象的引用计数。</p>
 <p>你可以通过 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a> 在不造成破坏的情况下检测是否设置了异常。 这将返回当前异常对象，或者如果未发生异常则返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 你通常不需要调用 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a> 来查看函数调用中是否发生了错误，因为你应该能从返回值中看出来。</p>
-<p>当一个函数 <em>f</em> 调用另一个函数 <em>g</em> 时检测到后者出错了，<em>f</em> 应当自己返回一个错误值 (通常为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 或 <code class="docutils literal notranslate"><span class="pre">-1</span></code>)。 它 <em>不应该</em> 调用某个 <span class="xref c c-texpr"><span class="n">PyErr_</span><span class="p">*</span></span> 函数 --- 这类函数已经被 <em>g</em> 调用过了。 <em>f</em> 的调用者随后也应当返回一个错误来提示 <em>它的</em> 调用者，同样 <em>不应该</em> 调用 <span class="xref c c-texpr"><span class="n">PyErr_</span><span class="p">*</span></span>，依此类推 --- 错误的最详细原因已经由首先检测到它的函数报告了。 一旦这个错误到达 Python 解释器的主循环，它会中止当前执行的 Python 代码并尝试找出由 Python 程序员所指定的异常处理程序。</p>
+<p>当一个函数 <em>f</em> 调用另一个函数 <em>g</em> 时检测到后者出错了，<em>f</em> 应当自己返回一个错误值 (通常为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 或 <code class="docutils literal notranslate"><span class="pre">-1</span></code>)。 它 <em>不应该</em> 调用某个 <span class="xref c c-texpr"><span class="n">PyErr_</span><span class="p">*</span></span> 函数 — 这类函数已经被 <em>g</em> 调用过了。 <em>f</em> 的调用者随后也应当返回一个错误来提示 <em>它的</em> 调用者，同样 <em>不应该</em> 调用 <span class="xref c c-texpr"><span class="n">PyErr_</span><span class="p">*</span></span>，依此类推 — 错误的最详细原因已经由首先检测到它的函数报告了。 一旦这个错误到达 Python 解释器的主循环，它会中止当前执行的 Python 代码并尝试找出由 Python 程序员所指定的异常处理程序。</p>
 <p>（在某些情况下，当模块确实能够通过调用其它 <span class="xref c c-texpr"><span class="n">PyErr_</span><span class="p">*</span></span> 函数给出更加详细的错误消息，并且在这些情况是可以这样做的。 但是按照一般规则，这是不必要的，并可能导致有关错误原因的信息丢失：大多数操作会由于种种原因而失败。）</p>
 <p>想要忽略由一个失败的函数调用所设置的异常，异常条件必须通过调用 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_Clear" title="PyErr_Clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Clear()</span></code></a> 显式地被清除。 C 代码应当调用 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_Clear" title="PyErr_Clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Clear()</span></code></a> 的唯一情况是如果它不想将错误传给解释器而是想完全由自己来处理它（可能是尝试其他方法，或是假装没有出错）。</p>
 <p>每次失败的 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 调用必须转换为一个异常。 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> (或 <code class="xref c c-func docutils literal notranslate"><span class="pre">realloc()</span></code> )的直接调用者必须调用 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_NoMemory" title="PyErr_NoMemory"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_NoMemory()</span></code></a> 来返回错误来提示。所有对象创建函数(例如 <a class="reference internal" href="../c-api/long.html#c.PyLong_FromLong" title="PyLong_FromLong"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyLong_FromLong()</span></code></a> )已经这么做了，所以这个提示仅用于直接调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 的情况。</p>
 <p>还要注意的是，除了 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 等重要的例外，返回整数状态码的函数通常都是返回正值或零来表示成功，而以 <code class="docutils literal notranslate"><span class="pre">-1</span></code> 表示失败，如同 Unix 系统调用一样。</p>
 <p>最后，当你返回一个错误指示器时要注意清理垃圾（通过为你已经创建的对象执行 <a class="reference internal" href="../c-api/refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> 或 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 调用）！</p>
-<p>选择引发哪个异常完全取决于你的喜好。 所有内置的 Python 异常都有对应的预声明 C 对象，例如 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_ZeroDivisionError</span></code>，你可以直接使用它们。 当然，你应当明智地选择异常 --- 不要使用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_TypeError</span></code> 来表示一个文件无法被打开 (那大概应该用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_IOError</span></code>)。 如果参数列表有问题，<a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 函数通常会引发 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_TypeError</span></code>。 如果你想要一个参数的值必须处于特定范围之内或必须满足其他条件，则适宜使用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_ValueError</span></code>。</p>
+<p>选择引发哪个异常完全取决于你的喜好。 所有内置的 Python 异常都有对应的预声明 C 对象，例如 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_ZeroDivisionError</span></code>，你可以直接使用它们。 当然，你应当明智地选择异常 — 不要使用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_TypeError</span></code> 来表示一个文件无法被打开 (那大概应该用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_IOError</span></code>)。 如果参数列表有问题，<a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 函数通常会引发 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_TypeError</span></code>。 如果你想要一个参数的值必须处于特定范围之内或必须满足其他条件，则适宜使用 <code class="xref c c-data docutils literal notranslate"><span class="pre">PyExc_ValueError</span></code>。</p>
 <p>你也可以为你的模块定义一个唯一的新异常。需要在文件前部声明一个静态对象变量，如:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">SpamError</span><span class="p">;</span><span class="w"></span>
 </pre></div>
@@ -314,7 +320,7 @@ to know about them to understand how errors are passed around.</p>
 </section>
 <section id="the-module-s-method-table-and-initialization-function">
 <span id="methodtable"></span><h2><span class="section-number">1.4. </span>模块方法表和初始化函数<a class="headerlink" href="#the-module-s-method-table-and-initialization-function" title="永久链接至标题">¶</a></h2>
-<p>为了展示 <code class="xref c c-func docutils literal notranslate"><span class="pre">spam_system()</span></code> 如何被Python程序调用。把函数声明为可以被Python调用，需要先定义一个方法表 &quot;method table&quot; 。</p>
+<p>为了展示 <code class="xref c c-func docutils literal notranslate"><span class="pre">spam_system()</span></code> 如何被Python程序调用。把函数声明为可以被Python调用，需要先定义一个方法表 “method table” 。</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyMethodDef</span><span class="w"> </span><span class="n">SpamMethods</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="p">...</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="s">&quot;system&quot;</span><span class="p">,</span><span class="w">  </span><span class="n">spam_system</span><span class="p">,</span><span class="w"> </span><span class="n">METH_VARARGS</span><span class="p">,</span><span class="w"></span>
@@ -388,13 +394,13 @@ to know about them to understand how errors are passed around.</p>
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>要从 <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code> 删除实体或导入已编译模块到一个进程里的多个解释器(或使用 <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code> 而没用 <code class="xref c c-func docutils literal notranslate"><span class="pre">exec()</span></code> )会在一些扩展模块上产生错误。扩展模块作者可以在初始化内部数据结构时给出警告。</p>
 </div>
 <p>更多关于模块的现实的例子包含在Python源码包的 <code class="file docutils literal notranslate"><span class="pre">Modules/xxmodule.c</span></code> 中。这些文件可以用作你的代码模板，或者学习。脚本 modulator.py 包含在源码发行版或Windows安装中，提供了一个简单的GUI，用来声明需要实现的函数和对象，并且可以生成供填入的模板。脚本在 Tools/modulator/ 目录。查看README以了解用法。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>不像我们的 <code class="docutils literal notranslate"><span class="pre">spam</span></code> 例子， <code class="docutils literal notranslate"><span class="pre">xxmodule</span></code> 使用了 <em>多阶段初始化</em> (Python3.5开始引入)， <code class="docutils literal notranslate"><span class="pre">PyInit_spam</span></code> 会返回一个 PyModuleDef 结构体，然后创建的模块放到导入机制。细节参考 <span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0489"><strong>PEP 489</strong></a> 的多阶段初始化。</p>
+<p class="admonition-title">备注</p>
+<p>不像我们的 <code class="docutils literal notranslate"><span class="pre">spam</span></code> 例子， <code class="docutils literal notranslate"><span class="pre">xxmodule</span></code> 使用了 <em>多阶段初始化</em> (Python3.5开始引入)， <code class="docutils literal notranslate"><span class="pre">PyInit_spam</span></code> 会返回一个 PyModuleDef 结构体，然后创建的模块放到导入机制。细节参考 <span class="target" id="index-6"></span><a class="pep reference external" href="https://peps.python.org/pep-0489/"><strong>PEP 489</strong></a> 的多阶段初始化。</p>
 </div>
 </section>
 <section id="compilation-and-linkage">
@@ -404,7 +410,7 @@ to know about them to understand how errors are passed around.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>spam spammodule.o
 </pre></div>
 </div>
-<p>然后在顶层目录运行 <strong class="program">make</strong> 来重新构建解释器。你也可以在 <code class="file docutils literal notranslate"><span class="pre">Modules/</span></code> 子目录使用 <strong class="program">make</strong>，但是你必须先重建 <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> 文件，然后运行 '<strong class="program">make</strong> Makefile' 命令。（你每次修改 <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> 文件都需要这样操作。）</p>
+<p>然后在顶层目录运行 <strong class="program">make</strong> 来重新构建解释器。你也可以在 <code class="file docutils literal notranslate"><span class="pre">Modules/</span></code> 子目录使用 <strong class="program">make</strong>，但是你必须先重建 <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> 文件，然后运行 ‘<strong class="program">make</strong> Makefile’ 命令。（你每次修改 <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> 文件都需要这样操作。）</p>
 <p>如果你的模块需要额外的链接，这些内容可以列出在配置文件里，举个实例：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>spam spammodule.o -lX11
 </pre></div>
@@ -454,7 +460,7 @@ to know about them to understand how errors are passed around.</p>
 <span class="n">Py_DECREF</span><span class="p">(</span><span class="n">arglist</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 返回Python对象指针，这也是Python函数的返回值。 <a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 是一个对其参数 &quot;引用计数无关&quot; 的函数。例子中新的元组创建用于参数列表，并且在  <a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 之后立即使用了 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 。</p>
+<p><a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 返回Python对象指针，这也是Python函数的返回值。 <a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 是一个对其参数 “引用计数无关” 的函数。例子中新的元组创建用于参数列表，并且在  <a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 之后立即使用了 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 。</p>
 <p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_CallObject()</span></code> 的返回值总是“新”的：要么是一个新建的对象；要么是已有对象，但增加了引用计数。所以除非你想把结果保存在全局变量中，你需要对这个值使用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a>，即使你对里面的内容（特别！）不感兴趣。</p>
 <p>但是在你这么做之前，很重要的一点是检查返回值不是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 如果是的话，Python 函数会终止并引发异常。 如果调用 <a class="reference internal" href="../c-api/call.html#c.PyObject_CallObject" title="PyObject_CallObject"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallObject()</span></code></a> 的 C 代码是在 Python 中发起调用的，它应当立即返回一个错误来告知其 Python 调用者，以便解释器能打印栈回溯信息，或者让调用方 Python 代码能处理该异常。 如果这无法做到或不合本意，则应当通过调用 <a class="reference internal" href="../c-api/exceptions.html#c.PyErr_Clear" title="PyErr_Clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Clear()</span></code></a> 来清除异常。 例如:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"></span>
@@ -567,7 +573,7 @@ to know about them to understand how errors are passed around.</p>
 </div>
 <p><em>arg</em> 与 <em>format</em> 形参与 <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> 函数所定义的一致。 <em>kwdict</em> 形参是作为第三个参数从 Python 运行时接收的关键字字典。 <em>kwlist</em> 形参是以 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 结尾的字符串列表，它被用来标识形参；名称从左至右与来自 <em>format</em> 的类型信息相匹配。 如果执行成功，<a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTupleAndKeywords" title="PyArg_ParseTupleAndKeywords"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTupleAndKeywords()</span></code></a> 会返回真值，否则返回假值并引发一个适当的异常。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>嵌套的元组在使用关键字参数时无法生效，不在 <em>kwlist</em> 中的关键字参数会导致 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> 异常。</p>
 </div>
 <p id="index-4">如下例子是使用关键字参数的例子模块，作者是 Geoff Philbrick (<a class="reference external" href="mailto:philbrick&#37;&#52;&#48;hks&#46;com">philbrick<span>&#64;</span>hks<span>&#46;</span>com</a>):</p>
@@ -656,13 +662,13 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 <p>每个由 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 分配的内存块，最终都要由 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 退回到可用内存池里面去。而调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 的时机非常重要，如果一个内存块忘了 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 则会导致内存泄漏，这块内存在程序结束前将无法重新使用。这叫做 <em class="dfn">内存泄漏</em> 。而如果对同一内存块 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 了以后，另外一个指针再次访问，则再次使用 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 复用这块内存会导致冲突。这叫做 <em class="dfn">野指针</em> 。等同于使用未初始化的数据，core dump，错误结果，神秘的崩溃等。</p>
 <p>内存泄露往往发生在一些并不常见的代码流程上面。比如一个函数申请了内存以后，做了些计算，然后释放内存块。现在一些对函数的修改可能增加对计算的测试并检测错误条件，然后过早的从函数返回了。这很容易忘记在退出前释放内存，特别是后期修改的代码。这种内存泄漏，一旦引入，通常很长时间都难以检测到，错误退出被调用的频度较低，而现代电脑又有非常巨大的虚拟内存，所以泄漏仅在长期运行或频繁调用泄漏函数时才会变得明显。因此，有必要避免内存泄漏，通过代码规范会策略来最小化此类错误。</p>
 <p>Python通过 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 和 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 包含大量的内存分配和释放，同样需要避免内存泄漏和野指针。他选择的方法就是 <em class="dfn">引用计数</em> 。其原理比较简单：每个对象都包含一个计数器，计数器的增减与对象引用的增减直接相关，当引用计数为0时，表示对象已经没有存在的意义了，对象就可以删除了。</p>
-<p>另一个叫法是 <em class="dfn">自动垃圾回收</em> 。(有时引用计数也被看作是垃圾回收策略，于是这里的&quot;自动&quot;用以区分两者)。自动垃圾回收的优点是用户不需要明确的调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 。(另一个优点是改善速度或内存使用，然而这并不难)。缺点是对C，没有可移植的自动垃圾回收器，而引用计数则可以可移植的实现(只要 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 和 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 函数是可用的，这也是C标准担保的)。也许以后有一天会出现可移植的自动垃圾回收器，但在此前我们必须与引用计数一起工作。</p>
+<p>另一个叫法是 <em class="dfn">自动垃圾回收</em> 。(有时引用计数也被看作是垃圾回收策略，于是这里的”自动”用以区分两者)。自动垃圾回收的优点是用户不需要明确的调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 。(另一个优点是改善速度或内存使用，然而这并不难)。缺点是对C，没有可移植的自动垃圾回收器，而引用计数则可以可移植的实现(只要 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 和 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> 函数是可用的，这也是C标准担保的)。也许以后有一天会出现可移植的自动垃圾回收器，但在此前我们必须与引用计数一起工作。</p>
 <p>Python使用传统的引用计数实现，也提供了循环监测器，用以检测引用循环。这使得应用无需担心直接或间接的创建了循环引用，这是引用计数垃圾收集的一个弱点。引用循环是对象(可能直接)的引用了本身，所以循环中的每个对象的引用计数都不是0。典型的引用计数实现无法回收处于引用循环中的对象，或者被循环所引用的对象，哪怕没有循环以外的引用了。</p>
 <p>循环检测器能够检测垃圾回收循环并能回收它们。 <a class="reference internal" href="../library/gc.html#module-gc" title="gc: Interface to the cycle-detecting garbage collector."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code></a> 模块提供了一种运行该检测器的方式 (<a class="reference internal" href="../library/gc.html#gc.collect" title="gc.collect"><code class="xref py py-func docutils literal notranslate"><span class="pre">collect()</span></code></a> 函数)，以及多个配置接口和在运行时禁用该检测器的功能。</p>
 <section id="reference-counting-in-python">
 <span id="refcountsinpython"></span><h3><span class="section-number">1.10.1. </span>Python中的引用计数<a class="headerlink" href="#reference-counting-in-python" title="永久链接至标题">¶</a></h3>
 <p>有两个宏 <code class="docutils literal notranslate"><span class="pre">Py_INCREF(x)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Py_DECREF(x)</span></code> ，会处理引用计数的增减。 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 也会在引用计数到达0时释放对象。为了灵活，并不会直接调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">free()</span></code> ，而是通过对象的 <em class="dfn">类型对象</em> 的函数指针来调用。为了这个目的(或其他的)，每个对象同时包含一个指向自身类型对象的指针。</p>
-<p>最大的问题依旧：何时使用 <code class="docutils literal notranslate"><span class="pre">Py_INCREF(x)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Py_DECREF(x)</span></code> ？我们首先引入一些概念。没有人&quot;拥有&quot;一个对象，你可以 <em class="dfn">拥有一个引用</em> 到一个对象。一个对象的引用计数定义为拥有引用的数量。引用的拥有者有责任调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> ，在引用不再需要时。引用的拥有关系可以被传递。有三种办法来处置拥有的引用：传递、存储、调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 。忘记处置一个拥有的引用会导致内存泄漏。</p>
+<p>最大的问题依旧：何时使用 <code class="docutils literal notranslate"><span class="pre">Py_INCREF(x)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Py_DECREF(x)</span></code> ？我们首先引入一些概念。没有人”拥有”一个对象，你可以 <em class="dfn">拥有一个引用</em> 到一个对象。一个对象的引用计数定义为拥有引用的数量。引用的拥有者有责任调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> ，在引用不再需要时。引用的拥有关系可以被传递。有三种办法来处置拥有的引用：传递、存储、调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 。忘记处置一个拥有的引用会导致内存泄漏。</p>
 <p>还可以 <em class="dfn">借用</em> <a class="footnote-reference brackets" href="#id6" id="id2">2</a> 一个对象的引用。借用的引用不应该调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 。借用者必须确保不能持有对象超过拥有者借出的时间。在拥有者处置对象后使用借用的引用是有风险的，应该完全避免 <a class="footnote-reference brackets" href="#id7" id="id3">3</a> 。</p>
 <p>借用相对于引用的优点是你无需担心整条路径上代码的引用，或者说，通过借用你无需担心内存泄漏的风险。借用的缺点是一些看起来正确代码上的借用可能会在拥有者处置后使用对象。</p>
 <p>借用可以变为拥有引用，通过调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 。这不会影响已经借出的拥有者的状态。这回创建一个新的拥有引用，并给予完全的拥有者责任(新的拥有者必须恰当的处置引用，就像之前的拥有者那样)。</p>
@@ -673,9 +679,9 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 <p>大多数函数返回一个对象的引用，并传递引用拥有关系。通常，所有创建对象的函数，例如 <a class="reference internal" href="../c-api/long.html#c.PyLong_FromLong" title="PyLong_FromLong"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyLong_FromLong()</span></code></a> 和 <a class="reference internal" href="../c-api/arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a> ，会传递拥有关系给接收者。即便是对象不是真正新的，你仍然可以获得对象的新引用。一个实例是 <a class="reference internal" href="../c-api/long.html#c.PyLong_FromLong" title="PyLong_FromLong"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyLong_FromLong()</span></code></a> 维护了一个流行值的缓存，并可以返回已缓存项目的新引用。</p>
 <p>很多另一个对象提取对象的函数，也会传递引用关系，例如 <a class="reference internal" href="../c-api/object.html#c.PyObject_GetAttrString" title="PyObject_GetAttrString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetAttrString()</span></code></a> 。这里的情况不够清晰，一些不太常用的例程是例外的 <a class="reference internal" href="../c-api/tuple.html#c.PyTuple_GetItem" title="PyTuple_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyTuple_GetItem()</span></code></a> ， <a class="reference internal" href="../c-api/list.html#c.PyList_GetItem" title="PyList_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_GetItem()</span></code></a> ， <a class="reference internal" href="../c-api/dict.html#c.PyDict_GetItem" title="PyDict_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyDict_GetItem()</span></code></a> ， <a class="reference internal" href="../c-api/dict.html#c.PyDict_GetItemString" title="PyDict_GetItemString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyDict_GetItemString()</span></code></a> 都是返回从元组、列表、字典里借用的引用。</p>
 <p>函数 <a class="reference internal" href="../c-api/import.html#c.PyImport_AddModule" title="PyImport_AddModule"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_AddModule()</span></code></a> 也会返回借用的引用，哪怕可能会返回创建的对象：这个可能因为一个拥有的引用对象是存储在 <code class="docutils literal notranslate"><span class="pre">sys.modules</span></code> 里。</p>
-<p>当你传递一个对象引用到另一个函数时，通常函数是借用出去的。如果需要存储，就使用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 来变成独立的拥有者。这个规则有两个重要的例外： <a class="reference internal" href="../c-api/tuple.html#c.PyTuple_SetItem" title="PyTuple_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyTuple_SetItem()</span></code></a> 和 <a class="reference internal" href="../c-api/list.html#c.PyList_SetItem" title="PyList_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_SetItem()</span></code></a> 。这些函数接受传递来的引用关系，哪怕会失败！(注意 <a class="reference internal" href="../c-api/dict.html#c.PyDict_SetItem" title="PyDict_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyDict_SetItem()</span></code></a> 及其同类不会接受引用关系，他们是&quot;正常的&quot;)。</p>
+<p>当你传递一个对象引用到另一个函数时，通常函数是借用出去的。如果需要存储，就使用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 来变成独立的拥有者。这个规则有两个重要的例外： <a class="reference internal" href="../c-api/tuple.html#c.PyTuple_SetItem" title="PyTuple_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyTuple_SetItem()</span></code></a> 和 <a class="reference internal" href="../c-api/list.html#c.PyList_SetItem" title="PyList_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_SetItem()</span></code></a> 。这些函数接受传递来的引用关系，哪怕会失败！(注意 <a class="reference internal" href="../c-api/dict.html#c.PyDict_SetItem" title="PyDict_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyDict_SetItem()</span></code></a> 及其同类不会接受引用关系，他们是”正常的”)。</p>
 <p>当一个C函数被Python调用时，会从调用方传来的参数借用引用。调用者拥有对象的引用，所以借用的引用生命周期可以保证到函数返回。只要当借用的引用需要存储或传递时，就必须转换为拥有的引用，通过调用 <a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 。</p>
-<p>Python调用从C函数返回的对象引用时必须是拥有的引用---拥有关系被从函数传递给调用者。</p>
+<p>Python调用从C函数返回的对象引用时必须是拥有的引用—拥有关系被从函数传递给调用者。</p>
 </section>
 <section id="thin-ice">
 <span id="thinice"></span><h3><span class="section-number">1.10.3. </span>危险的薄冰<a class="headerlink" href="#thin-ice" title="永久链接至标题">¶</a></h3>
@@ -723,11 +729,11 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 </section>
 <section id="null-pointers">
 <span id="nullpointers"></span><h3><span class="section-number">1.10.4. </span>NULL指针<a class="headerlink" href="#null-pointers" title="永久链接至标题">¶</a></h3>
-<p>通常，接受对象引用作为参数的函数不希望你传给它们 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针，并且当你这样做时将会转储核心（或在以后导致核心转储）。 返回对象引用的函数通常只在要指明发生了异常时才返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 不检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 参数的原因在于这些函数经常要将它们所接收的对象传给其他函数 --- 如果每个函数都检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，将会导致大量的冗余检测而使代码运行得更缓慢。</p>
+<p>通常，接受对象引用作为参数的函数不希望你传给它们 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针，并且当你这样做时将会转储核心（或在以后导致核心转储）。 返回对象引用的函数通常只在要指明发生了异常时才返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 不检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 参数的原因在于这些函数经常要将它们所接收的对象传给其他函数 — 如果每个函数都检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，将会导致大量的冗余检测而使代码运行得更缓慢。</p>
 <p>更好的做法是仅在“源头”上检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，即在接收到一个可能为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 的指针，例如来自 <code class="xref c c-func docutils literal notranslate"><span class="pre">malloc()</span></code> 或是一个可能引发异常的函数的时候。</p>
-<p><a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 和 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 等宏不会检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针 --- 但是，它们的变种 <a class="reference internal" href="../c-api/refcounting.html#c.Py_XINCREF" title="Py_XINCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XINCREF()</span></code></a> 和 <a class="reference internal" href="../c-api/refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> 则会检测。</p>
-<p>用于检测特定对象类型的宏 (<code class="docutils literal notranslate"><span class="pre">Pytype_Check()</span></code>) 不会检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针 --- 同样地，有大量代码会连续调用这些宏来测试一个对象是否为几种不同预期类型之一，这将会生成冗余的测试。 不存在带有 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 检测的变体。</p>
-<p>C 函数调用机制会保证传给 C 函数的参数列表 (本示例中为 <code class="docutils literal notranslate"><span class="pre">args</span></code>) 绝不会为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> --- 实际上它会保证其总是为一个元组 <a class="footnote-reference brackets" href="#id8" id="id4">4</a>。</p>
+<p><a class="reference internal" href="../c-api/refcounting.html#c.Py_INCREF" title="Py_INCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_INCREF()</span></code></a> 和 <a class="reference internal" href="../c-api/refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> 等宏不会检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针 — 但是，它们的变种 <a class="reference internal" href="../c-api/refcounting.html#c.Py_XINCREF" title="Py_XINCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XINCREF()</span></code></a> 和 <a class="reference internal" href="../c-api/refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> 则会检测。</p>
+<p>用于检测特定对象类型的宏 (<code class="docutils literal notranslate"><span class="pre">Pytype_Check()</span></code>) 不会检测 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针 — 同样地，有大量代码会连续调用这些宏来测试一个对象是否为几种不同预期类型之一，这将会生成冗余的测试。 不存在带有 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 检测的变体。</p>
+<p>C 函数调用机制会保证传给 C 函数的参数列表 (本示例中为 <code class="docutils literal notranslate"><span class="pre">args</span></code>) 绝不会为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> — 实际上它会保证其总是为一个元组 <a class="footnote-reference brackets" href="#id8" id="id4">4</a>。</p>
 <p>任何时候将 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 指针“泄露”给 Python 用户都会是个严重的错误。</p>
 </section>
 </section>
@@ -737,7 +743,7 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 </section>
 <section id="providing-a-c-api-for-an-extension-module">
 <span id="using-capsules"></span><h2><span class="section-number">1.12. </span>给扩展模块提供C API<a class="headerlink" href="#providing-a-c-api-for-an-extension-module" title="永久链接至标题">¶</a></h2>
-<p>很多扩展模块提供了新的函数和类型供Python使用，但有时扩展模块里的代码也可以被其他扩展模块使用。例如，一个扩展模块可以实现一个类型 &quot;collection&quot; 看起来是没有顺序的。就像是Python列表类型，拥有C API允许扩展模块来创建和维护列表，这个新的集合类型可以有一堆C函数用于给其他扩展模块直接使用。</p>
+<p>很多扩展模块提供了新的函数和类型供Python使用，但有时扩展模块里的代码也可以被其他扩展模块使用。例如，一个扩展模块可以实现一个类型 “collection” 看起来是没有顺序的。就像是Python列表类型，拥有C API允许扩展模块来创建和维护列表，这个新的集合类型可以有一堆C函数用于给其他扩展模块直接使用。</p>
 <p>开始看起来很简单：只需要编写函数(无需声明为 <code class="docutils literal notranslate"><span class="pre">static</span></code> )，提供恰当的头文件，以及C API的文档。实际上在所有扩展模块都是静态链接到Python解释器时也是可以正常工作的。当模块以共享库链接时，一个模块中的符号定义对另一个模块不可见。可见的细节依赖于操作系统，一些系统的Python解释器使用全局命名空间(例如Windows)，有些则在链接时需要一个严格的已导入符号列表(一个例子是AIX)，或者提供可选的不同策略(如Unix系列)。即便是符号是全局可见的，你要调用的模块也可能尚未加载。</p>
 <p>可移植性需要不能对符号可见性做任何假设。这意味着扩展模块里的所有符号都应该声明为 <code class="docutils literal notranslate"><span class="pre">static</span></code> ，除了模块的初始化函数，来避免与其他扩展模块的命名冲突(在段落 <a class="reference internal" href="#methodtable"><span class="std std-ref">模块方法表和初始化函数</span></a> 中讨论) 。这意味着符号应该 <em>必须</em> 通过其他导出方式来供其他扩展模块访问。</p>
 <p>Python提供了一个特别的机制来传递C级别信息(指针)，从一个扩展模块到另一个：Capsules。一个Capsule是一个Python数据类型，会保存指针( <span class="xref c c-texpr"><span class="kt">void</span><span class="p">*</span></span> )。Capsule只能通过其C API来创建和访问，但可以像其他Python对象一样的传递。通常，我们可以指定一个扩展模块命名空间的名字。其他扩展模块可以导入这个模块，获取这个名字的值，然后从Capsule获取指针。</p>
@@ -749,7 +755,7 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 </div>
 <p>便利函数 <a class="reference internal" href="../c-api/capsule.html#c.PyCapsule_Import" title="PyCapsule_Import"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyCapsule_Import()</span></code></a> 可以方便的载入通过Capsule提供的C API，仅在Capsule的名字匹配时。这个行为为C API用户提供了高度的确定性来载入正确的C API。</p>
 <p>如下例子展示了将大部分负担交由导出模块作者的方法，适用于常用的库模块。其会存储所有C API指针(例子里只有一个)在 <span class="xref c c-texpr"><span class="kt">void</span></span> 指针的数组里，并使其值变为Capsule。对应的模块头文件提供了宏来管理导入模块和获取C API指针；客户端模块只需要在访问C API前调用这个宏即可。</p>
-<p>导出的模块修改自 <code class="xref py py-mod docutils literal notranslate"><span class="pre">spam</span></code> 模块，来自 <a class="reference internal" href="#extending-simpleexample"><span class="std std-ref">一个简单的例子</span></a> 段落。函数 <code class="xref py py-func docutils literal notranslate"><span class="pre">spam.system()</span></code> 不会直接调用C库函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">system()</span></code> ，但一个函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">PySpam_System()</span></code> 会负责调用，当然现实中会更复杂些(例如添加 &quot;spam&quot; 到每个命令)。函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">PySpam_System()</span></code> 也会导出给其他扩展模块。</p>
+<p>导出的模块修改自 <code class="xref py py-mod docutils literal notranslate"><span class="pre">spam</span></code> 模块，来自 <a class="reference internal" href="#extending-simpleexample"><span class="std std-ref">一个简单的例子</span></a> 段落。函数 <code class="xref py py-func docutils literal notranslate"><span class="pre">spam.system()</span></code> 不会直接调用C库函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">system()</span></code> ，但一个函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">PySpam_System()</span></code> 会负责调用，当然现实中会更复杂些(例如添加 “spam” 到每个命令)。函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">PySpam_System()</span></code> 也会导出给其他扩展模块。</p>
 <p>函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">PySpam_System()</span></code> 是个纯C函数，声明 <code class="docutils literal notranslate"><span class="pre">static</span></code> 就像其他地方那样:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"></span>
 <span class="nf">PySpam_System</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">command</span><span class="p">)</span><span class="w"></span>
@@ -884,13 +890,13 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 <dd><p>这个函数的接口已经在标准模块 <a class="reference internal" href="../library/os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a> 里了，这里作为一个简单而直接的例子。</p>
 </dd>
 <dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>术语&quot;借用&quot;一个引用是不完全正确的：拥有者仍然有引用的拷贝。</p>
+<dd><p>术语”借用”一个引用是不完全正确的：拥有者仍然有引用的拷贝。</p>
 </dd>
 <dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
 <dd><p>检查引用计数至少为1 <strong>没有用</strong> ，引用计数本身可以在已经释放的内存里，并有可能被其他对象所用。</p>
 </dd>
 <dt class="label" id="id8"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p>当你使用 &quot;旧式&quot; 风格调用约定时，这些保证不成立，尽管这依旧存在于很多旧代码中。</p>
+<dd><p>当你使用 “旧式” 风格调用约定时，这些保证不成立，尽管这依旧存在于很多旧代码中。</p>
 </dd>
 </dl>
 </section>
@@ -903,8 +909,9 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">1. 使用 C 或 C++ 扩展 Python</a><ul>
 <li><a class="reference internal" href="#a-simple-example">1.1. 一个简单的例子</a></li>
 <li><a class="reference internal" href="#intermezzo-errors-and-exceptions">1.2. 关于错误和异常</a></li>
@@ -928,12 +935,17 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="index.html"
-                        title="上一章">扩展和嵌入 Python 解释器</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="newtypes_tutorial.html"
-                        title="下一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">扩展和嵌入 Python 解释器</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="newtypes_tutorial.html"
+                          title="下一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -975,7 +987,7 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >扩展和嵌入 Python 解释器</a> &#187;</li>
@@ -1003,7 +1015,7 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1011,11 +1023,11 @@ Py_BuildValue(&quot;((ii)(ii)) (ii)&quot;,
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

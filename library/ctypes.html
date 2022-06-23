@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>ctypes --- Python 的外部函数库 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ctypes — Python 的外部函数库 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
     <link rel="next" title="并发执行" href="concurrency.html" />
-    <link rel="prev" title="errno --- 标准 errno 系统符号" href="errno.html" />
+    <link rel="prev" title="errno — 标准 errno 系统符号" href="errno.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/ctypes.html" />
     
       
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> --- Python 的外部函数库</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — Python 的外部函数库</a><ul>
 <li><a class="reference internal" href="#ctypes-tutorial">ctypes 教程</a><ul>
 <li><a class="reference internal" href="#loading-dynamic-link-libraries">载入动态连接库</a></li>
 <li><a class="reference internal" href="#accessing-functions-from-loaded-dlls">操作导入的动态链接库中的函数</a></li>
@@ -112,12 +113,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="errno.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errno</span></code> --- 标准 errno 系统符号</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="concurrency.html"
-                        title="下一章">并发执行</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="errno.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errno</span></code> — 标准 errno 系统符号</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="concurrency.html"
+                          title="下一章">并发执行</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -147,7 +153,7 @@
           <a href="concurrency.html" title="并发执行"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="errno.html" title="errno --- 标准 errno 系统符号"
+          <a href="errno.html" title="errno — 标准 errno 系统符号"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -160,12 +166,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" accesskey="U">通用操作系统服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> --- Python 的外部函数库</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — Python 的外部函数库</a></li>
                 <li class="right">
                     
 
@@ -189,7 +195,7 @@
           <div class="body" role="main">
             
   <section id="module-ctypes">
-<span id="ctypes-a-foreign-function-library-for-python"></span><h1><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> --- Python 的外部函数库<a class="headerlink" href="#module-ctypes" title="永久链接至标题">¶</a></h1>
+<span id="ctypes-a-foreign-function-library-for-python"></span><h1><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> — Python 的外部函数库<a class="headerlink" href="#module-ctypes" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 是 Python 的外部函数库。它提供了与 C 兼容的数据类型，并允许调用 DLL 或共享库中的函数。可使用该模块以纯 Python 形式对这些库进行封装。</p>
 <section id="ctypes-tutorial">
@@ -197,7 +203,7 @@
 <p>Note: The code samples in this tutorial use <a class="reference internal" href="doctest.html#module-doctest" title="doctest: Test pieces of code within docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code></a> to make sure that
 they actually work.  Since some code samples behave differently under Linux,
 Windows, or macOS, they contain doctest directives in comments.</p>
-<p>注意：部分示例代码引用了 ctypes <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> 类型。在 <code class="docutils literal notranslate"><span class="pre">sizeof(long)</span> <span class="pre">==</span> <span class="pre">sizeof(int)</span></code> 的平台上此类型是 <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> 的一个别名。所以，在程序输出 <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> 而不是你期望的 <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> 时不必感到迷惑 --- 它们实际上是同一种类型。</p>
+<p>注意：部分示例代码引用了 ctypes <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> 类型。在 <code class="docutils literal notranslate"><span class="pre">sizeof(long)</span> <span class="pre">==</span> <span class="pre">sizeof(int)</span></code> 的平台上此类型是 <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> 的一个别名。所以，在程序输出 <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> 而不是你期望的 <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> 时不必感到迷惑 — 它们实际上是同一种类型。</p>
 <section id="loading-dynamic-link-libraries">
 <span id="ctypes-loading-dynamic-link-libraries"></span><h3>载入动态连接库<a class="headerlink" href="#loading-dynamic-link-libraries" title="永久链接至标题">¶</a></h3>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 导出了 <em>cdll</em> 对象，在 Windows 系统中还导出了 <em>windll</em> 和 <em>oledll</em> 对象用于载入动态连接库。</p>
@@ -217,7 +223,7 @@ Windows, or macOS, they contain doctest directives in comments.</p>
 </div>
 <p>Windows 会自动添加通常的 <code class="docutils literal notranslate"><span class="pre">.dll</span></code> 文件扩展名。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>通过 <code class="docutils literal notranslate"><span class="pre">cdll.msvcrt</span></code> 调用的标准 C 函数，可能会导致调用一个过时的，与当前 Python 所不兼容的函数。因此，请尽量使用标准的 Python 函数，而不要使用 <code class="docutils literal notranslate"><span class="pre">msvcrt</span></code> 模块。</p>
 </div>
 <p>在 Linux 下，必须使用 <em>包含</em> 文件扩展名的文件名来导入共享库。因此不能简单使用对象属性的方式来导入库。因此，你可以使用方法 <code class="xref py py-meth docutils literal notranslate"><span class="pre">LoadLibrary()</span></code>，或构造 CDLL 对象来导入库。</p>
@@ -385,7 +391,7 @@ Windows, or macOS, they contain doctest directives in comments.</p>
 <td><p>int</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#ctypes.c_ssize_t" title="ctypes.c_ssize_t"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_ssize_t</span></code></a></p></td>
-<td><p><code class="xref c c-type docutils literal notranslate"><span class="pre">ssize_t</span></code> 或 <code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></p></td>
+<td><p><code class="xref c c-type docutils literal notranslate"><span class="pre">ssize_t</span></code> 或 <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a></p></td>
 <td><p>int</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ctypes.c_float" title="ctypes.c_float"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_float</span></code></a></p></td>
@@ -669,7 +675,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<div class="admonition warning" id="ctypes-structureunion-alignment-byte-order">
+<div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 不支持带位域的结构体、联合以值的方式传给函数。这可能在 32 位 x86 平台上可以正常工作，但是对于一般情况，这种行为是未定义的。带位域的结构体、联合应该总是通过指针传递给函数。</p>
 </div>
@@ -677,7 +683,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 <section id="structure-union-alignment-and-byte-order">
 <h3>结构体/联合字段对齐及字节顺序<a class="headerlink" href="#structure-union-alignment-and-byte-order" title="永久链接至标题">¶</a></h3>
 <p>默认情况下，结构体和联合的字段与 C 的字节对齐是一样的。也可以在定义子类的时候指定类的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">_pack_</span></code> 属性来覆盖这种行为。 它必须设置为一个正整数，表示字段的最大对齐字节。这和 MSVC 中的 <code class="docutils literal notranslate"><span class="pre">#pragma</span> <span class="pre">pack(n)</span></code> 功能一样。</p>
-<p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 中的结构体和联合使用的是本地字节序。要使用非本地字节序，可以使用 <a class="reference internal" href="#ctypes.BigEndianStructure" title="ctypes.BigEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.LittleEndianStructure" title="ctypes.LittleEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianStructure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianUnion</span></code>, and <code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianUnion</span></code> 作为基类。这些类不能包含指针字段。</p>
+<p><a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 中的结构体和联合使用的是本地字节序。要使用非本地字节序，可以使用 <a class="reference internal" href="#ctypes.BigEndianStructure" title="ctypes.BigEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.LittleEndianStructure" title="ctypes.LittleEndianStructure"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianStructure</span></code></a>, <a class="reference internal" href="#ctypes.BigEndianUnion" title="ctypes.BigEndianUnion"><code class="xref py py-class docutils literal notranslate"><span class="pre">BigEndianUnion</span></code></a>, and <a class="reference internal" href="#ctypes.LittleEndianUnion" title="ctypes.LittleEndianUnion"><code class="xref py py-class docutils literal notranslate"><span class="pre">LittleEndianUnion</span></code></a> 作为基类。这些类不能包含指针字段。</p>
 </section>
 <section id="bit-fields-in-structures-and-unions">
 <span id="ctypes-bit-fields-in-structures-unions"></span><h3>结构体和联合中的位域<a class="headerlink" href="#bit-fields-in-structures-and-unions" title="永久链接至标题">¶</a></h3>
@@ -994,7 +1000,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>请确保你维持的 <a class="reference internal" href="#ctypes.CFUNCTYPE" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> 对象的引用周期与它们在 C 代码中的使用期一样长。 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 不会确保这一点，如果不这样做，它们可能会被垃圾回收，导致程序在执行回调函数时发生崩溃。</p>
 <p>注意，如果回调函数在Python之外的另外一个线程使用(比如，外部代码调用这个回调函数)， ctypes 会在每一次调用上创建一个虚拟 Python 线程。这个行为在大多数情况下是合理的，但也意味着如果有数据使用 <a class="reference internal" href="threading.html#threading.local" title="threading.local"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.local</span></code></a> 方式存储，将无法访问，就算它们是在同一个 C 线程中调用的 。</p>
 </div>
@@ -1091,7 +1097,7 @@ block containing unicode characters of the C type <code class="xref c c-type doc
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>使用  <a class="reference internal" href="#ctypes.c_char_p" title="ctypes.c_char_p"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_char_p</span></code></a>  实例化的对象只能将其值设置为 bytes 或者整数。</p>
 </div>
 <p>为什么这里打印了 <code class="docutils literal notranslate"><span class="pre">False</span></code> ？ ctypes 实例是一些内存块加上一些用于访问这些内存块的 <a class="reference internal" href="../glossary.html#term-descriptor"><span class="xref std std-term">descriptor</span></a> 组成。将 Python 对象存储在内存块并不会存储对象本身，而是存储了对象的 <code class="docutils literal notranslate"><span class="pre">内容</span></code> 。每次访问对象的内容都会构造一个新的 Python 对象。</p>
@@ -1187,18 +1193,18 @@ to locate the library, and returns a full pathname if successful:</p>
 <p>有很多方式可以将动态链接库加载到 Python 进程。其中之一是实例化以下类的其中一个:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.CDLL">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">CDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.CDLL" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">CDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.CDLL" title="永久链接至目标">¶</a></dt>
 <dd><p>此类的实例即已加载的动态链接库。库中的函数使用标准 C 调用约定，并假定返回 <span class="xref c c-texpr"><span class="kt">int</span></span> 。</p>
-<p>在 Windows 上创建 <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> 实例可能会失败，即使 DLL 名称确实存在。 当某个被加载 DLL 所依赖的 DLL 未找到时，将引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 错误并附带消息 <em>&quot;[WinError 126] The specified module could not be found&quot;.</em> 此错误消息不包含缺失 DLL 的名称，因为 Windows API 并不会返回此类信息，这使得此错误难以诊断。 要解决此错误并确定是哪一个 DLL 未找到，你需要找出所依赖的 DLL 列表并使用 Windows 调试与跟踪工具确定是哪一个未找到。</p>
+<p>在 Windows 上创建 <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> 实例可能会失败，即使 DLL 名称确实存在。 当某个被加载 DLL 所依赖的 DLL 未找到时，将引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 错误并附带消息 <em>“[WinError 126] The specified module could not be found”.</em> 此错误消息不包含缺失 DLL 的名称，因为 Windows API 并不会返回此类信息，这使得此错误难以诊断。 要解决此错误并确定是哪一个 DLL 未找到，你需要找出所依赖的 DLL 列表并使用 Windows 调试与跟踪工具确定是哪一个未找到。</p>
 </dd></dl>
 
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><a class="reference external" href="https://docs.microsoft.com/cpp/build/reference/dependents">Microsoft DUMPBIN 工具</a> -- 一个用于查找 DLL 依赖的工具。</p>
+<p><a class="reference external" href="https://docs.microsoft.com/cpp/build/reference/dependents">Microsoft DUMPBIN 工具</a> – 一个用于查找 DLL 依赖的工具。</p>
 </div>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.OleDLL">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">OleDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.OleDLL" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">OleDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.OleDLL" title="永久链接至目标">¶</a></dt>
 <dd><p>仅 Windows : 此类的实例即加载好的动态链接库，其中的函数使用 <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> 调用约定，并且假定返回 windows 指定的 <a class="reference internal" href="#ctypes.HRESULT" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a> 返回码。 <a class="reference internal" href="#ctypes.HRESULT" title="ctypes.HRESULT"><code class="xref py py-class docutils literal notranslate"><span class="pre">HRESULT</span></code></a> 的值包含的信息说明函数调用成功还是失败，以及额外错误码。 如果返回值表示失败，会自动抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">OSError</span></code></a> 异常。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>以前是引发 <a class="reference internal" href="exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a>。</p>
@@ -1207,15 +1213,14 @@ to locate the library, and returns a full pathname if successful:</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.WinDLL">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">WinDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WinDLL" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">WinDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">winmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WinDLL" title="永久链接至目标">¶</a></dt>
 <dd><p>仅 Windows: 此类的实例即加载好的动态链接库，其中的函数使用 <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> 调用约定，并假定默认返回 <span class="xref c c-texpr"><span class="kt">int</span></span> 。</p>
-<p>在 Windows CE 上，只能使用 stdcall 调用约定，为了方便， <a class="reference internal" href="#ctypes.WinDLL" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> 和 <a class="reference internal" href="#ctypes.OleDLL" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> 在这个平台上都使用标准调用约定。</p>
 </dd></dl>
 
 <p>调用动态库导出的函数之前，Python会释放 <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">global interpreter lock</span></a> ，并在调用后重新获取。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.PyDLL">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">PyDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.PyDLL" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">PyDLL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DEFAULT_MODE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.PyDLL" title="永久链接至目标">¶</a></dt>
 <dd><p>这个类实例的行为与 <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a> 类似，只不过 <em>不会</em> 在调用函数的时候释放 GIL 锁，且调用结束后会检查 Python 错误码。 如果错误码被设置，会抛出一个 Python 异常。</p>
 <p>所以，它只在直接调用 Python C 接口函数的时候有用。</p>
 </dd></dl>
@@ -1275,7 +1280,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <p>共享库也可以通用使用一个预制对象来加载，这种对象是 <a class="reference internal" href="#ctypes.LibraryLoader" title="ctypes.LibraryLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibraryLoader</span></code></a> 类的实例，具体做法或是通过调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">LoadLibrary()</span></code> 方法，或是通过将库作为加载器实例的属性来提取。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.LibraryLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">LibraryLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dlltype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LibraryLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">LibraryLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dlltype</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LibraryLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>加载共享库的类。 <em>dlltype</em> 应当为 <a class="reference internal" href="#ctypes.CDLL" title="ctypes.CDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">CDLL</span></code></a>, <a class="reference internal" href="#ctypes.PyDLL" title="ctypes.PyDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyDLL</span></code></a>, <a class="reference internal" href="#ctypes.WinDLL" title="ctypes.WinDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">WinDLL</span></code></a> 或 <a class="reference internal" href="#ctypes.OleDLL" title="ctypes.OleDLL"><code class="xref py py-class docutils literal notranslate"><span class="pre">OleDLL</span></code></a> 类型之一。</p>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code> 具有特殊的行为：它允许通过将一个共享库作为库加载器实例的属性进行访问来加载它。 加载结果将被缓存，因此重复的属性访问每次都会返回相同的库。</p>
 <dl class="py method">
@@ -1327,7 +1332,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <p>正如之前小节的说明，外部函数可作为被加载共享库的属性来访问。 用此方式创建的函数对象默认接受任意数量的参数，接受任意 ctypes 数据实例作为参数，并且返回库加载器所指定的默认结果类型。 它们是一个私有类的实例:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes._FuncPtr">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_FuncPtr</span></span><a class="headerlink" href="#ctypes._FuncPtr" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_FuncPtr</span></span><a class="headerlink" href="#ctypes._FuncPtr" title="永久链接至目标">¶</a></dt>
 <dd><p>C 可调用外部函数的基类。</p>
 <p>外部函数的实例也是兼容 C 的数据类型；它们代表 C 函数指针。</p>
 <p>此行为可通过对外部函数对象的特殊属性赋值来自定义。</p>
@@ -1365,7 +1370,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="ctypes.ArgumentError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">ArgumentError</span></span><a class="headerlink" href="#ctypes.ArgumentError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">ArgumentError</span></span><a class="headerlink" href="#ctypes.ArgumentError" title="永久链接至目标">¶</a></dt>
 <dd><p>此异常会在外部函数无法对某个传入参数执行转换时被引发。</p>
 </dd></dl>
 
@@ -1384,7 +1389,10 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ctypes.WINFUNCTYPE">
 <span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">WINFUNCTYPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">restype</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">argtypes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_errno</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_last_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.WINFUNCTYPE" title="永久链接至目标">¶</a></dt>
-<dd><p>仅限 Windows only：返回的函数原型会创建使用 <code class="docutils literal notranslate"><span class="pre">stdcall</span></code> 调用约定的函数，但在 Windows CE 上 <a class="reference internal" href="#ctypes.WINFUNCTYPE" title="ctypes.WINFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">WINFUNCTYPE()</span></code></a> 则会与 <a class="reference internal" href="#ctypes.CFUNCTYPE" title="ctypes.CFUNCTYPE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CFUNCTYPE()</span></code></a> 相同。 该函数在调用过程中将释放 GIL。 <em>use_errno</em> 和 <em>use_last_error</em> 具有与前面相同的含义。</p>
+<dd><p>Windows only: The returned function prototype creates functions that use the
+<code class="docutils literal notranslate"><span class="pre">stdcall</span></code> calling convention.  The function will
+release the GIL during the call.  <em>use_errno</em> and <em>use_last_error</em> have the
+same meaning as above.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1409,13 +1417,13 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">prototype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">func_spec</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">paramflags</span></em><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">prototype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_spec</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">paramflags</span></span></em><span class="optional">]</span><span class="sig-paren">)</span></dt>
 <dd><p>返回由一个共享库导出的外部函数。 <em>func_spec</em> 必须为一个 2 元组 <code class="docutils literal notranslate"><span class="pre">(name_or_ordinal,</span> <span class="pre">library)</span></code>。 第一项是字符串形式的所导出函数名称，或小整数形式的所导出函数序号。 第二项是该共享库实例。</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">prototype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">vtbl_index</span></em>, <em class="sig-param"><span class="pre">name</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">paramflags</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">iid</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
+<span class="sig-name descname"><span class="pre">prototype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vtbl_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">paramflags</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">iid</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span></dt>
 <dd><p>返回将调用一个 COM 方法的外部函数。 <em>vtbl_index</em> 虚拟函数表中的索引。 <em>name</em> 是 COM 方法的名称。 <em>iid</em> 是可选的指向接口标识符的指针，它被用于扩展的错误报告。</p>
 <p>COM 方法使用特殊的调用约定：除了在 <code class="xref py py-attr docutils literal notranslate"><span class="pre">argtypes</span></code> 元组中指定的形参，它们还要求一个指向 COM 接口的指针作为第一个参数。</p>
 </dd></dl>
@@ -1516,7 +1524,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ctypes.byref">
-<span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">byref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">obj</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">offset</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.byref" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">byref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.byref" title="永久链接至目标">¶</a></dt>
 <dd><p>返回指向 <em>obj</em> 的轻量指针，该对象必须为一个 ctypes 类型的实例。 <em>offset</em> 默认值为零，且必须为一个将被添加到内部指针值的整数。</p>
 <p><code class="docutils literal notranslate"><span class="pre">byref(obj,</span> <span class="pre">offset)</span></code> 对应于这段 C 代码:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">(((</span><span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">)</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span>
@@ -1577,7 +1585,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ctypes.FormatError">
-<span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">FormatError</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">code</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.FormatError" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">FormatError</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.FormatError" title="永久链接至目标">¶</a></dt>
 <dd><p>仅限 Windows：返回错误码 <em>code</em> 的文本描述。 如果未指定错误码，则会通过调用 Windows api 函数 GetLastError 来获得最新的错误码。</p>
 </dd></dl>
 
@@ -1680,19 +1688,19 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <span id="ctypes-data-types"></span><h3>数据类型<a class="headerlink" href="#data-types" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes._CData">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_CData</span></span><a class="headerlink" href="#ctypes._CData" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_CData</span></span><a class="headerlink" href="#ctypes._CData" title="永久链接至目标">¶</a></dt>
 <dd><p>这个非公有类是所有 ctypes 数据类型的共同基类。 另外，所有 ctypes 类型的实例都包含一个存放 C 兼容数据的内存块；该内存块的地址可由 <a class="reference internal" href="#ctypes.addressof" title="ctypes.addressof"><code class="xref py py-func docutils literal notranslate"><span class="pre">addressof()</span></code></a> 辅助函数返回。 还有一个实例变量被公开为 <a class="reference internal" href="#ctypes._CData._objects" title="ctypes._CData._objects"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_objects</span></code></a>；此变量包含其他在内存块包含指针的情况下需要保持存活的 Python 对象。</p>
 <p>ctypes 数据类型的通用方法，它们都是类方法（严谨地说，它们是 <a class="reference internal" href="../glossary.html#term-metaclass"><span class="xref std std-term">metaclass</span></a> 的方法）:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ctypes._CData.from_buffer">
-<span class="sig-name descname"><span class="pre">from_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">offset</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">from_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer" title="永久链接至目标">¶</a></dt>
 <dd><p>此方法返回一个共享 <em>source</em> 对象缓冲区的 ctypes 实例。 <em>source</em> 对象必须支持可写缓冲区接口。 可选的 <em>offset</em> 形参指定以字节表示的源缓冲区内偏移量；默认值为零。 如果源缓冲区不够大则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">ctypes.cdata/buffer</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">pointer</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">offset</span></code>。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ctypes._CData.from_buffer_copy">
-<span class="sig-name descname"><span class="pre">from_buffer_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">offset</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer_copy" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">from_buffer_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#ctypes._CData.from_buffer_copy" title="永久链接至目标">¶</a></dt>
 <dd><p>此方法创建一个 ctypes 实例，从 <em>source</em> 对象缓冲区拷贝缓冲区，该对象必须是可读的。 可选的 <em>offset</em> 形参指定以字节表示的源缓冲区内偏移量；默认值为零。 如果源缓冲区不够大则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">ctypes.cdata/buffer</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">pointer</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>, <code class="docutils literal notranslate"><span class="pre">offset</span></code>。</p>
 </dd></dl>
@@ -1743,7 +1751,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <span id="id1"></span><h3>基础数据类型<a class="headerlink" href="#ctypes-fundamental-data-types-2" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes._SimpleCData">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_SimpleCData</span></span><a class="headerlink" href="#ctypes._SimpleCData" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_SimpleCData</span></span><a class="headerlink" href="#ctypes._SimpleCData" title="永久链接至目标">¶</a></dt>
 <dd><p>这个非公有类是所有基本 ctypes 数据类型的基类。 它在这里被提及是因为它包含基本 ctypes 数据类型共有的属性。 <a class="reference internal" href="#ctypes._SimpleCData" title="ctypes._SimpleCData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_SimpleCData</span></code></a> 是 <a class="reference internal" href="#ctypes._CData" title="ctypes._CData"><code class="xref py py-class docutils literal notranslate"><span class="pre">_CData</span></code></a> 的子类，因此继承了其方法和属性。 非指针及不包含指针的 ctypes 数据类型现在将可以被封存。</p>
 <p>实例拥有一个属性:</p>
 <dl class="py attribute">
@@ -1760,97 +1768,97 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <p>这些是基本 ctypes 数据类型:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_byte">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_byte</span></span><a class="headerlink" href="#ctypes.c_byte" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_byte</span></span><a class="headerlink" href="#ctypes.c_byte" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">char</span></span> 数据类型，并将值解读为一个小整数。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_char">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_char</span></span><a class="headerlink" href="#ctypes.c_char" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_char</span></span><a class="headerlink" href="#ctypes.c_char" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">char</span></span> 数据类型，并将值解读为单个字符。 该构造器接受一个可选的字符串初始化器，字符串的长度必须恰好为一个字符。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_char_p">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_char_p</span></span><a class="headerlink" href="#ctypes.c_char_p" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_char_p</span></span><a class="headerlink" href="#ctypes.c_char_p" title="永久链接至目标">¶</a></dt>
 <dd><p>当指向一个以零为结束符的字符串时代表 C <span class="xref c c-texpr"><span class="kt">char</span><span class="p">*</span></span> 数据类型。 对于通用字符指针来说也可能指向二进制数据，必须要使用 <code class="docutils literal notranslate"><span class="pre">POINTER(c_char)</span></code>。 该构造器接受一个整数地址，或者一个字节串对象。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_double">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_double</span></span><a class="headerlink" href="#ctypes.c_double" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_double</span></span><a class="headerlink" href="#ctypes.c_double" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">double</span></span> 数据类型。 该构造器接受一个可选的浮点数初始化器。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_longdouble">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_longdouble</span></span><a class="headerlink" href="#ctypes.c_longdouble" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_longdouble</span></span><a class="headerlink" href="#ctypes.c_longdouble" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">long</span><span class="w"> </span><span class="kt">double</span></span> 数据类型。 该构造器接受一个可选的浮点数初始化器。 在 <code class="docutils literal notranslate"><span class="pre">sizeof(long</span> <span class="pre">double)</span> <span class="pre">==</span> <span class="pre">sizeof(double)</span></code> 的平台上它是 <a class="reference internal" href="#ctypes.c_double" title="ctypes.c_double"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_double</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_float">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_float</span></span><a class="headerlink" href="#ctypes.c_float" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_float</span></span><a class="headerlink" href="#ctypes.c_float" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">float</span></span> 数据类型。 该构造器接受一个可选的浮点数初始化器。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_int">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int</span></span><a class="headerlink" href="#ctypes.c_int" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int</span></span><a class="headerlink" href="#ctypes.c_int" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。 在 <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span> <span class="pre">==</span> <span class="pre">sizeof(long)</span></code> 的平台上它是 <a class="reference internal" href="#ctypes.c_long" title="ctypes.c_long"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_long</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_int8">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int8</span></span><a class="headerlink" href="#ctypes.c_int8" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int8</span></span><a class="headerlink" href="#ctypes.c_int8" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 8 位 <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_byte" title="ctypes.c_byte"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_byte</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_int16">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int16</span></span><a class="headerlink" href="#ctypes.c_int16" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int16</span></span><a class="headerlink" href="#ctypes.c_int16" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 16 位 <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_short" title="ctypes.c_short"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_short</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_int32">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int32</span></span><a class="headerlink" href="#ctypes.c_int32" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int32</span></span><a class="headerlink" href="#ctypes.c_int32" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 32 位 <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_int" title="ctypes.c_int"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_int</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_int64">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int64</span></span><a class="headerlink" href="#ctypes.c_int64" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_int64</span></span><a class="headerlink" href="#ctypes.c_int64" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 64 位 <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_longlong" title="ctypes.c_longlong"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_longlong</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_long">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_long</span></span><a class="headerlink" href="#ctypes.c_long" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_long</span></span><a class="headerlink" href="#ctypes.c_long" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_longlong">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_longlong</span></span><a class="headerlink" href="#ctypes.c_longlong" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_longlong</span></span><a class="headerlink" href="#ctypes.c_longlong" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_short">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_short</span></span><a class="headerlink" href="#ctypes.c_short" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_short</span></span><a class="headerlink" href="#ctypes.c_short" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">signed</span><span class="w"> </span><span class="kt">short</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_size_t">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_size_t</span></span><a class="headerlink" href="#ctypes.c_size_t" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_size_t</span></span><a class="headerlink" href="#ctypes.c_size_t" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <code class="xref c c-type docutils literal notranslate"><span class="pre">size_t</span></code> 数据类型。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_ssize_t">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ssize_t</span></span><a class="headerlink" href="#ctypes.c_ssize_t" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ssize_t</span></span><a class="headerlink" href="#ctypes.c_ssize_t" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <code class="xref c c-type docutils literal notranslate"><span class="pre">ssize_t</span></code> 数据类型。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
@@ -1859,91 +1867,91 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_ubyte">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ubyte</span></span><a class="headerlink" href="#ctypes.c_ubyte" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ubyte</span></span><a class="headerlink" href="#ctypes.c_ubyte" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span></span> 数据类型，它将值解读为一个小整数。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_uint">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint</span></span><a class="headerlink" href="#ctypes.c_uint" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint</span></span><a class="headerlink" href="#ctypes.c_uint" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。 在 <code class="docutils literal notranslate"><span class="pre">sizeof(int)</span> <span class="pre">==</span> <span class="pre">sizeof(long)</span></code> 的平台上它是 <a class="reference internal" href="#ctypes.c_ulong" title="ctypes.c_ulong"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_ulong</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_uint8">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint8</span></span><a class="headerlink" href="#ctypes.c_uint8" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint8</span></span><a class="headerlink" href="#ctypes.c_uint8" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 8 位 <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_ubyte" title="ctypes.c_ubyte"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_ubyte</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_uint16">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint16</span></span><a class="headerlink" href="#ctypes.c_uint16" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint16</span></span><a class="headerlink" href="#ctypes.c_uint16" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 16 位 <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_ushort" title="ctypes.c_ushort"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_ushort</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_uint32">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint32</span></span><a class="headerlink" href="#ctypes.c_uint32" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint32</span></span><a class="headerlink" href="#ctypes.c_uint32" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 32 位 <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_uint" title="ctypes.c_uint"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_uint</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_uint64">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint64</span></span><a class="headerlink" href="#ctypes.c_uint64" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_uint64</span></span><a class="headerlink" href="#ctypes.c_uint64" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C 64 位 <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span></span> 数据类型。 通常是 <a class="reference internal" href="#ctypes.c_ulonglong" title="ctypes.c_ulonglong"><code class="xref py py-class docutils literal notranslate"><span class="pre">c_ulonglong</span></code></a> 的一个别名。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_ulong">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ulong</span></span><a class="headerlink" href="#ctypes.c_ulong" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ulong</span></span><a class="headerlink" href="#ctypes.c_ulong" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_ulonglong">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ulonglong</span></span><a class="headerlink" href="#ctypes.c_ulonglong" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ulonglong</span></span><a class="headerlink" href="#ctypes.c_ulonglong" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_ushort">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ushort</span></span><a class="headerlink" href="#ctypes.c_ushort" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_ushort</span></span><a class="headerlink" href="#ctypes.c_ushort" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span></span> 数据类型。 该构造器接受一个可选的整数初始化器；不会执行溢出检查。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_void_p">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_void_p</span></span><a class="headerlink" href="#ctypes.c_void_p" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_void_p</span></span><a class="headerlink" href="#ctypes.c_void_p" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">void</span><span class="p">*</span></span> 类型。 该值被表示为整数形式。 该构造器接受一个可选的整数初始化器。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_wchar">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_wchar</span></span><a class="headerlink" href="#ctypes.c_wchar" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_wchar</span></span><a class="headerlink" href="#ctypes.c_wchar" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> 数据类型，并将值解读为一单个字符的 unicode 字符串。 该构造器接受一个可选的字符串初始化器，字符串的长度必须恰好为一个字符。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_wchar_p">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_wchar_p</span></span><a class="headerlink" href="#ctypes.c_wchar_p" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_wchar_p</span></span><a class="headerlink" href="#ctypes.c_wchar_p" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span> 数据类型，它必须为指向以零为结束符的宽字符串的指针。 该构造器接受一个整数地址或者一个字符串。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.c_bool">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_bool</span></span><a class="headerlink" href="#ctypes.c_bool" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">c_bool</span></span><a class="headerlink" href="#ctypes.c_bool" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><span class="kt">bool</span></span> 数据类型 (更准确地说是 C99 <span class="xref c c-texpr"><span class="kt">_Bool</span></span>)。 它的值可以为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 或 <code class="docutils literal notranslate"><span class="pre">False</span></code>，并且该构造器接受任何具有逻辑值的对象。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.HRESULT">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">HRESULT</span></span><a class="headerlink" href="#ctypes.HRESULT" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">HRESULT</span></span><a class="headerlink" href="#ctypes.HRESULT" title="永久链接至目标">¶</a></dt>
 <dd><p>Windows 专属：代表一个 <code class="xref c c-type docutils literal notranslate"><span class="pre">HRESULT</span></code> 值，它包含某个函数或方法调用的成功或错误信息。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.py_object">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">py_object</span></span><a class="headerlink" href="#ctypes.py_object" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">py_object</span></span><a class="headerlink" href="#ctypes.py_object" title="永久链接至目标">¶</a></dt>
 <dd><p>代表 C <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 数据类型。 不带参数地调用此构造器将创建一个 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 指针。</p>
 </dd></dl>
 
@@ -1953,26 +1961,45 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <span id="ctypes-structured-data-types"></span><h3>结构化数据类型<a class="headerlink" href="#structured-data-types" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.Union">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Union" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Union" title="永久链接至目标">¶</a></dt>
 <dd><p>本机字节序的联合所对应的抽象基类。</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="ctypes.BigEndianUnion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">BigEndianUnion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.BigEndianUnion" title="永久链接至目标">¶</a></dt>
+<dd><p>Abstract base class for unions in <em>big endian</em> byte order.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="ctypes.LittleEndianUnion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">LittleEndianUnion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LittleEndianUnion" title="永久链接至目标">¶</a></dt>
+<dd><p>Abstract base class for unions in <em>little endian</em> byte order.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="ctypes.BigEndianStructure">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">BigEndianStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.BigEndianStructure" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">BigEndianStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.BigEndianStructure" title="永久链接至目标">¶</a></dt>
 <dd><p><em>大端</em> 字节序的结构体所对应的抽象基类。</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.LittleEndianStructure">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">LittleEndianStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LittleEndianStructure" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">LittleEndianStructure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.LittleEndianStructure" title="永久链接至目标">¶</a></dt>
 <dd><p><em>小端</em> 字节序的结构体所对应的抽象基类。</p>
 </dd></dl>
 
-<p>非本机字节序的结构体不能包含指针类型字段，或任何其他包含指针类型字段的数据类型。</p>
+<p>Structures and unions with non-native byte order cannot contain pointer type
+fields, or any other data types containing pointer type fields.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.Structure">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Structure" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Structure" title="永久链接至目标">¶</a></dt>
 <dd><p><em>本机</em> 字节序的结构体所对应的抽象基类。</p>
 <p>实际的结构体和联合类型必须通过子类化这些类型之一来创建，并且至少要定义一个 <a class="reference internal" href="#ctypes.Structure._fields_" title="ctypes.Structure._fields_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_fields_</span></code></a> 类变量。 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 将创建 <a class="reference internal" href="../glossary.html#term-descriptor"><span class="xref std std-term">descriptor</span></a>，它允许通过直接属性访问来读取和写入字段。 这些是</p>
 <dl class="py attribute">
@@ -2034,9 +2061,14 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <span id="ctypes-arrays-pointers"></span><h3>数组与指针<a class="headerlink" href="#arrays-and-pointers" title="永久链接至标题">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes.Array">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Array" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ctypes.Array" title="永久链接至目标">¶</a></dt>
 <dd><p>数组的抽象基类。</p>
-<p>创建实际数组类型的推荐方式是通过将任意 <a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> 类型与一个正整数相乘。 作为替代方式，你也可以子类化这个类型并定义 <a class="reference internal" href="#ctypes.Array._length_" title="ctypes.Array._length_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_length_</span></code></a> 和 <a class="reference internal" href="#ctypes.Array._type_" title="ctypes.Array._type_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_type_</span></code></a> 类变量。 数组元素可使用标准的抽取和切片方式来读写；对于切片读取，结果对象本身 <em>并非</em> 一个 <a class="reference internal" href="#ctypes.Array" title="ctypes.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>。</p>
+<p>The recommended way to create concrete array types is by multiplying any
+<a class="reference internal" href="#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> data type with a non-negative integer.  Alternatively, you can subclass
+this type and define <a class="reference internal" href="#ctypes.Array._length_" title="ctypes.Array._length_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_length_</span></code></a> and <a class="reference internal" href="#ctypes.Array._type_" title="ctypes.Array._type_"><code class="xref py py-attr docutils literal notranslate"><span class="pre">_type_</span></code></a> class variables.
+Array elements can be read and written using standard
+subscript and slice accesses; for slice reads, the resulting object is
+<em>not</em> itself an <a class="reference internal" href="#ctypes.Array" title="ctypes.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a>.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ctypes.Array._length_">
 <span class="sig-name descname"><span class="pre">_length_</span></span><a class="headerlink" href="#ctypes.Array._length_" title="永久链接至目标">¶</a></dt>
@@ -2054,7 +2086,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ctypes._Pointer">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_Pointer</span></span><a class="headerlink" href="#ctypes._Pointer" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ctypes.</span></span><span class="sig-name descname"><span class="pre">_Pointer</span></span><a class="headerlink" href="#ctypes._Pointer" title="永久链接至目标">¶</a></dt>
 <dd><p>私有对象，指针的抽象基类。</p>
 <p>实际的指针类型是通过调用 <a class="reference internal" href="#ctypes.POINTER" title="ctypes.POINTER"><code class="xref py py-func docutils literal notranslate"><span class="pre">POINTER()</span></code></a> 并附带其将指向的类型来创建的；这会由 <a class="reference internal" href="#ctypes.pointer" title="ctypes.pointer"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointer()</span></code></a> 自动完成。</p>
 <p>如果一个指针指向的是数组，则其元素可使用标准的抽取和切片方式来读写。 指针对象没有长度，因此 <a class="reference internal" href="functions.html#len" title="len"><code class="xref py py-func docutils literal notranslate"><span class="pre">len()</span></code></a> 将引发 <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>。 抽取负值将会从指针 <em>之前</em> 的内存中读取（与 C 一样），并且超出范围的抽取将可能因非法访问而导致崩溃（视你的运气而定）。</p>
@@ -2083,9 +2115,10 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> --- Python 的外部函数库</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — Python 的外部函数库</a><ul>
 <li><a class="reference internal" href="#ctypes-tutorial">ctypes 教程</a><ul>
 <li><a class="reference internal" href="#loading-dynamic-link-libraries">载入动态连接库</a></li>
 <li><a class="reference internal" href="#accessing-functions-from-loaded-dlls">操作导入的动态链接库中的函数</a></li>
@@ -2125,12 +2158,17 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="errno.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errno</span></code> --- 标准 errno 系统符号</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="concurrency.html"
-                        title="下一章">并发执行</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="errno.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">errno</span></code> — 标准 errno 系统符号</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="concurrency.html"
+                          title="下一章">并发执行</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -2159,7 +2197,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
           <a href="concurrency.html" title="并发执行"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="errno.html" title="errno --- 标准 errno 系统符号"
+          <a href="errno.html" title="errno — 标准 errno 系统符号"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -2172,12 +2210,12 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="allos.html" >通用操作系统服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> --- Python 的外部函数库</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code> — Python 的外部函数库</a></li>
                 <li class="right">
                     
 
@@ -2201,7 +2239,7 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -2209,11 +2247,11 @@ is the same as <em>RTLD_GLOBAL</em>.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

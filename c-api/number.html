@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>数字协议 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字协议 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="call.html"
-                        title="上一章">调用协议</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="sequence.html"
-                        title="下一章">序列协议</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="call.html"
+                          title="上一章">调用协议</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="sequence.html"
+                          title="下一章">序列协议</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -187,13 +191,18 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_FloorDivide">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_FloorDivide</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_FloorDivide" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回 <em>o1</em> 除以 <em>o2</em> 的向下取整后的结果，如果失败，返回  <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。等价于“传统”的整数除法。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the floor of <em>o1</em> divided by <em>o2</em>, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  This is
+the equivalent of the Python expression <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">//</span> <span class="pre">o2</span></code>.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_TrueDivide">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_TrueDivide</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_TrueDivide" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回 <em>o1</em> 除以 <em>o2</em> 的一个合理的近似值，如果失败，返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。结果是近似的，因为二进制浮点数是一个近似值，不可能以2为基数来表示出所有实数。这个函数返回两个整数相除得到的浮点数。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a reasonable approximation for the mathematical value of <em>o1</em> divided by
+<em>o2</em>, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  The return value is “approximate” because binary
+floating point numbers are approximate; it is not possible to represent all real
+numbers in base two.  This function can return a floating point value when
+passed two integers.  This is the equivalent of the Python expression <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">/</span> <span class="pre">o2</span></code>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -304,7 +313,12 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_InPlaceTrueDivide">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_InPlaceTrueDivide</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_InPlaceTrueDivide" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回 <em>o1</em> 除以 <em>o2</em> 的一个合理的近似值，如果失败，返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。结果是近似的，因为二进制浮点数是一个近似值，不可能以2为基数来表示出所有实数。这个函数返回两个整数相除得到的浮点数。当 <em>o1</em> 支持时，这个运算直接使用它储存结果。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a reasonable approximation for the mathematical value of <em>o1</em> divided by
+<em>o2</em>, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.  The return value is “approximate” because binary
+floating point numbers are approximate; it is not possible to represent all real
+numbers in base two.  This function can return a floating point value when
+passed two integers.  The operation is done <em>in-place</em> when <em>o1</em> supports it.
+This is the equivalent of the Python statement <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">/=</span> <span class="pre">o2</span></code>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -334,19 +348,19 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_InPlaceAnd">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_InPlaceAnd</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_InPlaceAnd" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> &quot;按位与&quot; 的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价与 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">&amp;=</span> <span class="pre">o2</span></code>。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> “按位与” 的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价与 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">&amp;=</span> <span class="pre">o2</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_InPlaceXor">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_InPlaceXor</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_InPlaceXor" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> &quot;按位异或的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价与 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">^=</span> <span class="pre">o2</span></code>。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> “按位异或的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价与 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">^=</span> <span class="pre">o2</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_InPlaceOr">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_InPlaceOr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o1</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o2</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_InPlaceOr" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> &quot;按位或&quot; 的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价于 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">|=</span> <span class="pre">o2</span></code>。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>成功时返回 <em>o1</em> 和 <em>o2</em> “按位或” 的结果，失败时返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 在 <em>o1</em> 支持的前提下该操作将 <em>原地</em> 执行。 等价于 Python 语句 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">|=</span> <span class="pre">o2</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
@@ -378,15 +392,23 @@
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyNumber_AsSsize_t">
-<span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_AsSsize_t</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">exc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_AsSsize_t" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>如果 <em>o</em> 是一个整数类型的解释型，返回 <em>o</em> 转换成一个 Py_ssize_t 值项后的结果。如果调用失败，返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code> 并引发异常。</p>
-<p>如果 <em>o</em> 可以被转换为 Python int 类型但尝试转换为 Py_ssize_t 值则会引发 <a class="reference internal" href="../library/exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>，这时 <em>exc</em> 参数为将被引发的异常类型 (通常是 <a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> 或 <a class="reference internal" href="../library/exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>)。 如果 <em>exc</em> 为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，则异常会被清除并且值会被裁剪为负整数 <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_MIN</span></code> 或正整数 <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_MAX</span></code>。</p>
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyNumber_AsSsize_t</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">exc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyNumber_AsSsize_t" title="永久链接至目标">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Returns <em>o</em> converted to a <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a> value if <em>o</em> can be interpreted as an
+integer.  If the call fails, an exception is raised and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned.</p>
+<p>If <em>o</em> can be converted to a Python int but the attempt to
+convert to a <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a> value would raise an <a class="reference internal" href="../library/exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>, then the
+<em>exc</em> argument is the type of exception that will be raised (usually
+<a class="reference internal" href="../library/exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> or <a class="reference internal" href="../library/exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>).  If <em>exc</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, then the
+exception is cleared and the value is clipped to <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_MIN</span></code> for a negative
+integer or <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_MAX</span></code> for a positive integer.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyIndex_Check">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyIndex_Check</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyIndex_Check" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.8.</em><p>如果 <em>o</em> 是一个索引整数（存有 nb_index 位置并有 tp_as_number 填入其中）则返回 <code class="docutils literal notranslate"><span class="pre">1</span></code>，否则返回 <code class="docutils literal notranslate"><span class="pre">0</span></code> 。这个函数不会调用失败。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.8.</em><p>Returns <code class="docutils literal notranslate"><span class="pre">1</span></code> if <em>o</em> is an index integer (has the <code class="docutils literal notranslate"><span class="pre">nb_index</span></code> slot of the
+<code class="docutils literal notranslate"><span class="pre">tp_as_number</span></code> structure filled in), and <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.
+This function always succeeds.</p>
 </dd></dl>
 
 </section>
@@ -398,12 +420,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="call.html"
-                        title="上一章">调用协议</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="sequence.html"
-                        title="下一章">序列协议</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="call.html"
+                          title="上一章">调用协议</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="sequence.html"
+                          title="下一章">序列协议</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -445,7 +471,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -474,7 +500,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -482,11 +508,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

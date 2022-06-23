@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Python 开发模式 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 开发模式 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="doctest --- 测试交互性的Python示例" href="doctest.html" />
-    <link rel="prev" title="pydoc --- 文档生成器和在线帮助系统" href="pydoc.html" />
+    <link rel="next" title="doctest — 测试交互性的Python示例" href="doctest.html" />
+    <link rel="prev" title="pydoc — 文档生成器和在线帮助系统" href="pydoc.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/devmode.html" />
     
       
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Python 开发模式</a></li>
 <li><a class="reference internal" href="#effects-of-the-python-development-mode">Effects of the Python Development Mode</a></li>
 <li><a class="reference internal" href="#resourcewarning-example">ResourceWarning Example</a></li>
 <li><a class="reference internal" href="#bad-file-descriptor-error-example">Bad file descriptor error example</a></li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pydoc.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pydoc</span></code> --- 文档生成器和在线帮助系统</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="doctest.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code> --- 测试交互性的Python示例</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pydoc.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pydoc</span></code> — 文档生成器和在线帮助系统</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="doctest.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code> — 测试交互性的Python示例</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -110,10 +116,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="doctest.html" title="doctest --- 测试交互性的Python示例"
+          <a href="doctest.html" title="doctest — 测试交互性的Python示例"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="pydoc.html" title="pydoc --- 文档生成器和在线帮助系统"
+          <a href="pydoc.html" title="pydoc — 文档生成器和在线帮助系统"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -126,7 +132,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -318,8 +324,8 @@ application more deterministic and more reliable.</p>
 <span class="go">import os</span>
 </pre></div>
 </div>
-<p>The Python Development Mode shows a <a class="reference internal" href="exceptions.html#ResourceWarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> and logs a &quot;Bad file
-descriptor&quot; error when finalizing the file object:</p>
+<p>The Python Development Mode shows a <a class="reference internal" href="exceptions.html#ResourceWarning" title="ResourceWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ResourceWarning</span></code></a> and logs a “Bad file
+descriptor” error when finalizing the file object:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python3 script.py
 <span class="go">import os</span>
 <span class="go">script.py:10: ResourceWarning: unclosed file &lt;_io.TextIOWrapper name=&#39;script.py&#39; mode=&#39;r&#39; encoding=&#39;UTF-8&#39;&gt;</span>
@@ -335,7 +341,7 @@ descriptor&quot; error when finalizing the file object:</p>
 <p><code class="docutils literal notranslate"><span class="pre">os.close(fp.fileno())</span></code> closes the file descriptor. When the file object
 finalizer tries to close the file descriptor again, it fails with the <code class="docutils literal notranslate"><span class="pre">Bad</span>
 <span class="pre">file</span> <span class="pre">descriptor</span></code> error. A file descriptor must be closed only once. In the
-worst case scenario, closing it twice can lead to a crash (see <a class="reference external" href="https://bugs.python.org/issue18748">bpo-18748</a>
+worst case scenario, closing it twice can lead to a crash (see <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=18748">bpo-18748</a>
 for an example).</p>
 <p>The fix is to remove the <code class="docutils literal notranslate"><span class="pre">os.close(fp.fileno())</span></code> line, or open the file with
 <code class="docutils literal notranslate"><span class="pre">closefd=False</span></code>.</p>
@@ -348,20 +354,26 @@ for an example).</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Python 开发模式</a></li>
 <li><a class="reference internal" href="#effects-of-the-python-development-mode">Effects of the Python Development Mode</a></li>
 <li><a class="reference internal" href="#resourcewarning-example">ResourceWarning Example</a></li>
 <li><a class="reference internal" href="#bad-file-descriptor-error-example">Bad file descriptor error example</a></li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="pydoc.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pydoc</span></code> --- 文档生成器和在线帮助系统</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="doctest.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code> --- 测试交互性的Python示例</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pydoc.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pydoc</span></code> — 文档生成器和在线帮助系统</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="doctest.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code> — 测试交互性的Python示例</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -387,10 +399,10 @@ for an example).</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="doctest.html" title="doctest --- 测试交互性的Python示例"
+          <a href="doctest.html" title="doctest — 测试交互性的Python示例"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="pydoc.html" title="pydoc --- 文档生成器和在线帮助系统"
+          <a href="pydoc.html" title="pydoc — 文档生成器和在线帮助系统"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -403,7 +415,7 @@ for an example).</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -432,7 +444,7 @@ for an example).</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -440,11 +452,11 @@ for an example).</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

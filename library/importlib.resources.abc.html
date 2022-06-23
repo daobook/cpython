@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>&lt;no title&gt; &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -104,7 +104,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li>
@@ -132,7 +132,7 @@
             
   <dl class="py class">
 <dt class="sig sig-object py" id="ResourceReader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ResourceReader</span></span><a class="headerlink" href="#ResourceReader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResourceReader</span></span><a class="headerlink" href="#ResourceReader" title="永久链接至目标">¶</a></dt>
 <dd><p><em>Superseded by TraversableResources</em></p>
 <p>An <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">abstract base class</span></a> to provide the ability to read
 <em>resources</em>.</p>
@@ -148,14 +148,14 @@ expected to be a <a class="reference internal" href="../glossary.html#term-path-
 conceptually just a file name. This means that no subdirectory
 paths should be included in the <em>resource</em> argument. This is
 because the location of the package the reader is for, acts as the
-&quot;directory&quot;. Hence the metaphor for directories and file
+“directory”. Hence the metaphor for directories and file
 names is packages and resources, respectively. This is also why
 instances of this class are expected to directly correlate to
 a specific package (instead of potentially representing multiple
 packages or a module).</p>
 <p>Loaders that wish to support resource reading are expected to
 provide a method called <code class="docutils literal notranslate"><span class="pre">get_resource_reader(fullname)</span></code> which
-returns an object implementing this ABC's interface. If the module
+returns an object implementing this ABC’s interface. If the module
 specified by fullname is not a package, this method should return
 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>. An object compatible with this ABC should only be
 returned when the specified module is a package.</p>
@@ -208,9 +208,9 @@ directly.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ResourceLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ResourceLoader</span></span><a class="headerlink" href="#ResourceLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ResourceLoader</span></span><a class="headerlink" href="#ResourceLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class for a <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> which implements the optional
-<span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0302"><strong>PEP 302</strong></a> protocol for loading arbitrary resources from the storage
+<span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> protocol for loading arbitrary resources from the storage
 back-end.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.7 版后已移除: </span>This ABC is deprecated in favour of supporting resource loading
@@ -224,8 +224,8 @@ Loaders that have a file-like storage back-end
 that allows storing arbitrary data
 can implement this abstract method to give direct access
 to the data stored. <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> is to be raised if the <em>path</em> cannot
-be found. The <em>path</em> is expected to be constructed using a module's
-<a class="reference internal" href="../reference/import.html#file__" title="__file__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__file__</span></code></a> attribute or an item from a package's <a class="reference internal" href="../reference/import.html#path__" title="__path__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__path__</span></code></a>.</p>
+be found. The <em>path</em> is expected to be constructed using a module’s
+<a class="reference internal" href="../reference/import.html#file__" title="__file__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__file__</span></code></a> attribute or an item from a package’s <a class="reference internal" href="../reference/import.html#path__" title="__path__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__path__</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>Raises <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> instead of <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>.</p>
 </div>
@@ -235,9 +235,9 @@ be found. The <em>path</em> is expected to be constructed using a module's
 
 <dl class="py class">
 <dt class="sig sig-object py" id="InspectLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InspectLoader</span></span><a class="headerlink" href="#InspectLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InspectLoader</span></span><a class="headerlink" href="#InspectLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class for a <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> which implements the optional
-<span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0302"><strong>PEP 302</strong></a> protocol for loaders that inspect modules.</p>
+<span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> protocol for loaders that inspect modules.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="InspectLoader.get_code">
 <span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#InspectLoader.get_code" title="永久链接至目标">¶</a></dt>
@@ -246,7 +246,7 @@ have a code object (as would be the case, for example, for a built-in
 module).  Raise an <a class="reference internal" href="exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> if loader cannot find the
 requested module.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>While the method has a default implementation, it is suggested that
 it be overridden if possible for performance.</p>
 </div>
@@ -281,11 +281,11 @@ false value otherwise. <a class="reference internal" href="exceptions.html#Impor
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InspectLoader.source_to_code">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">source_to_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;string&gt;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#InspectLoader.source_to_code" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">source_to_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;string&gt;'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#InspectLoader.source_to_code" title="永久链接至目标">¶</a></dt>
 <dd><p>Create a code object from Python source.</p>
 <p>The <em>data</em> argument can be whatever the <a class="reference internal" href="functions.html#compile" title="compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> function
 supports (i.e. string or bytes). The <em>path</em> argument should be
-the &quot;path&quot; to where the source code originated from, which can be an
+the “path” to where the source code originated from, which can be an
 abstract concept (e.g. location in a zip file).</p>
 <p>With the subsequent code object one can execute it in a module by
 running <code class="docutils literal notranslate"><span class="pre">exec(code,</span> <span class="pre">module.__dict__)</span></code>.</p>
@@ -319,10 +319,10 @@ running <code class="docutils literal notranslate"><span class="pre">exec(code,<
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ExecutionLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">ExecutionLoader</span></span><a class="headerlink" href="#ExecutionLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ExecutionLoader</span></span><a class="headerlink" href="#ExecutionLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class which inherits from <a class="reference internal" href="#InspectLoader" title="InspectLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">InspectLoader</span></code></a> that,
 when implemented, helps a module to be executed as a script. The ABC
-represents an optional <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0302"><strong>PEP 302</strong></a> protocol.</p>
+represents an optional <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ExecutionLoader.get_filename">
 <em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ExecutionLoader.get_filename" title="永久链接至目标">¶</a></dt>
@@ -341,7 +341,7 @@ module.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="FileLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">FileLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class which inherits from <a class="reference internal" href="#ResourceLoader" title="ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> and
 <a class="reference internal" href="#ExecutionLoader" title="ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>, providing concrete implementations of
 <a class="reference internal" href="#ResourceLoader.get_data" title="ResourceLoader.get_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceLoader.get_data()</span></code></a> and <a class="reference internal" href="#ExecutionLoader.get_filename" title="ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a>.</p>
@@ -365,7 +365,7 @@ to handle. The <em>path</em> argument is the path to the file for the module.</p
 <dl class="py method">
 <dt class="sig sig-object py" id="FileLoader.load_module">
 <span class="sig-name descname"><span class="pre">load_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileLoader.load_module" title="永久链接至目标">¶</a></dt>
-<dd><p>Calls super's <code class="docutils literal notranslate"><span class="pre">load_module()</span></code>.</p>
+<dd><p>Calls super’s <code class="docutils literal notranslate"><span class="pre">load_module()</span></code>.</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.4 版后已移除: </span>Use <code class="xref py py-meth docutils literal notranslate"><span class="pre">Loader.exec_module()</span></code> instead.</p>
 </div>
@@ -387,7 +387,7 @@ to handle. The <em>path</em> argument is the path to the file for the module.</p
 
 <dl class="py class">
 <dt class="sig sig-object py" id="SourceLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">SourceLoader</span></span><a class="headerlink" href="#SourceLoader" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SourceLoader</span></span><a class="headerlink" href="#SourceLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class for implementing source (and optionally bytecode)
 file loading. The class inherits from both <a class="reference internal" href="#ResourceLoader" title="ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> and
 <a class="reference internal" href="#ExecutionLoader" title="ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>, requiring the implementation of:</p>
@@ -406,7 +406,7 @@ raise <a class="reference internal" href="exceptions.html#NotImplementedError" t
 only work with source code. Implementing the methods allows the loader to
 work with source <em>and</em> bytecode files; it does not allow for <em>sourceless</em>
 loading where only bytecode is provided.  Bytecode files are an
-optimization to speed up loading by removing the parsing step of Python's
+optimization to speed up loading by removing the parsing step of Python’s
 compiler, and so no bytecode-specific API is exposed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="SourceLoader.path_stats">
@@ -434,7 +434,7 @@ extensions. If the path cannot be handled, <a class="reference internal" href="e
 <dd><p>Optional abstract method which returns the modification time for the
 specified path.</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.3 版后已移除: </span>This method is deprecated in favour of <a class="reference internal" href="#SourceLoader.path_stats" title="SourceLoader.path_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_stats()</span></code></a>.  You don't
+<p><span class="versionmodified deprecated">3.3 版后已移除: </span>This method is deprecated in favour of <a class="reference internal" href="#SourceLoader.path_stats" title="SourceLoader.path_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_stats()</span></code></a>.  You don’t
 have to implement it, but it is still available for compatibility
 purposes. Raise <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> if the path cannot be handled.</p>
 </div>
@@ -501,7 +501,7 @@ itself does not end in <code class="docutils literal notranslate"><span class="p
 
 <dl class="py class">
 <dt class="sig sig-object py" id="Traversable">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Traversable</span></span><a class="headerlink" href="#Traversable" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Traversable</span></span><a class="headerlink" href="#Traversable" title="永久链接至目标">¶</a></dt>
 <dd><p>An object with a subset of pathlib.Path methods suitable for
 traversing directories and opening files.</p>
 <div class="versionadded">
@@ -546,7 +546,7 @@ traversing directories and opening files.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="Traversable.open">
 <em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Traversable.open" title="永久链接至目标">¶</a></dt>
-<dd><p><em>mode</em> may be 'r' or 'rb' to open as text or binary. Return a handle
+<dd><p><em>mode</em> may be ‘r’ or ‘rb’ to open as text or binary. Return a handle
 suitable for reading (same as <a class="reference internal" href="pathlib.html#pathlib.Path.open" title="pathlib.Path.open"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pathlib.Path.open</span></code></a>).</p>
 <p>When opening as text, accepts encoding parameters such as those
 accepted by <a class="reference internal" href="io.html#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-attr docutils literal notranslate"><span class="pre">io.TextIOWrapper</span></code></a>.</p>
@@ -568,11 +568,11 @@ accepted by <a class="reference internal" href="io.html#io.TextIOWrapper" title=
 
 <dl class="py class">
 <dt class="sig sig-object py" id="TraversableResources">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">TraversableResources</span></span><a class="headerlink" href="#TraversableResources" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TraversableResources</span></span><a class="headerlink" href="#TraversableResources" title="永久链接至目标">¶</a></dt>
 <dd><p>An abstract base class for resource readers capable of serving
 the <a class="reference internal" href="importlib.resources.html#importlib.resources.files" title="importlib.resources.files"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.resources.files()</span></code></a> interface. Subclasses
 <a class="reference internal" href="importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a> and provides
-concrete implementations of the <a class="reference internal" href="importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>'s
+concrete implementations of the <a class="reference internal" href="importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>’s
 abstract methods. Therefore, any loader supplying
 <code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.TraversableReader</span></code> also supplies ResourceReader.</p>
 <p>Loaders that wish to support resource reading are expected to
@@ -632,7 +632,7 @@ package.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li>
@@ -659,7 +659,7 @@ package.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -667,11 +667,11 @@ package.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

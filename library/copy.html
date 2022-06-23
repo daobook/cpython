@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>copy --- 浅层 (shallow) 和深层 (deep) 复制操作 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>copy — 浅层 (shallow) 和深层 (deep) 复制操作 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="pprint --- 数据美化输出" href="pprint.html" />
-    <link rel="prev" title="types --- 动态类型创建和内置类型名称" href="types.html" />
+    <link rel="next" title="pprint — 数据美化输出" href="pprint.html" />
+    <link rel="prev" title="types — 动态类型创建和内置类型名称" href="types.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/copy.html" />
     
       
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="types.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> --- 动态类型创建和内置类型名称</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="pprint.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> --- 数据美化输出</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="types.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> — 动态类型创建和内置类型名称</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="pprint.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — 数据美化输出</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -102,10 +106,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="pprint.html" title="pprint --- 数据美化输出"
+          <a href="pprint.html" title="pprint — 数据美化输出"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="types.html" title="types --- 动态类型创建和内置类型名称"
+          <a href="types.html" title="types — 动态类型创建和内置类型名称"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" accesskey="U">数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code> --- 浅层 (shallow) 和深层 (deep) 复制操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code> — 浅层 (shallow) 和深层 (deep) 复制操作</a></li>
                 <li class="right">
                     
 
@@ -147,7 +151,7 @@
           <div class="body" role="main">
             
   <section id="module-copy">
-<span id="copy-shallow-and-deep-copy-operations"></span><h1><a class="reference internal" href="#module-copy" title="copy: Shallow and deep copy operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code></a> --- 浅层 (shallow) 和深层 (deep) 复制操作<a class="headerlink" href="#module-copy" title="永久链接至标题">¶</a></h1>
+<span id="copy-shallow-and-deep-copy-operations"></span><h1><a class="reference internal" href="#module-copy" title="copy: Shallow and deep copy operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code></a> — 浅层 (shallow) 和深层 (deep) 复制操作<a class="headerlink" href="#module-copy" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/copy.py">Lib/copy.py</a></p>
 <hr class="docutils" />
 <p>Python 的赋值语句不复制对象，而是创建目标和对象的绑定关系。对于自身可变，或包含可变项的集合，有时要生成副本用于改变操作，而不必改变原始对象。本模块提供了通用的浅层复制和深层复制操作，（如下所述）。</p>
@@ -160,13 +164,13 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="copy.deepcopy">
-<span class="sig-prename descclassname"><span class="pre">copy.</span></span><span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">x</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">memo</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#copy.deepcopy" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">copy.</span></span><span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">memo</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#copy.deepcopy" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <em>x</em> 的深层复制。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="copy.Error">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">copy.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#copy.Error" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">copy.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#copy.Error" title="永久链接至目标">¶</a></dt>
 <dd><p>针对模块特定错误引发。</p>
 </dd></dl>
 
@@ -182,11 +186,11 @@
 </ul>
 <p><a class="reference internal" href="#copy.deepcopy" title="copy.deepcopy"><code class="xref py py-func docutils literal notranslate"><span class="pre">deepcopy()</span></code></a> 函数用以下方式避免了这些问题：</p>
 <ul class="simple">
-<li><p>保留在当前复制过程中已复制的对象的 &quot;备忘录&quot; （<code class="docutils literal notranslate"><span class="pre">memo</span></code>） 字典；以及</p></li>
+<li><p>保留在当前复制过程中已复制的对象的 “备忘录” （<code class="docutils literal notranslate"><span class="pre">memo</span></code>） 字典；以及</p></li>
 <li><p>允许用户定义的类重载复制操作或复制的组件集合。</p></li>
 </ul>
 <p>This module does not copy types like module, method, stack trace, stack frame,
-file, socket, window, or any similar types.  It does &quot;copy&quot; functions and
+file, socket, window, or any similar types.  It does “copy” functions and
 classes (shallow and deeply), by returning the original object unchanged; this
 is compatible with the way these are treated by the <a class="reference internal" href="pickle.html#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> module.</p>
 <p>制作字典的浅层复制可以使用 <a class="reference internal" href="stdtypes.html#dict.copy" title="dict.copy"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dict.copy()</span></code></a> 方法，而制作列表的浅层复制可以通过赋值整个列表的切片完成，例如，<code class="docutils literal notranslate"><span class="pre">copied_list</span> <span class="pre">=</span> <span class="pre">original_list[:]</span></code>。</p>
@@ -208,12 +212,16 @@ is compatible with the way these are treated by the <a class="reference internal
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="types.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> --- 动态类型创建和内置类型名称</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="pprint.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> --- 数据美化输出</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="types.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">types</span></code> — 动态类型创建和内置类型名称</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="pprint.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pprint</span></code> — 数据美化输出</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -239,10 +247,10 @@ is compatible with the way these are treated by the <a class="reference internal
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="pprint.html" title="pprint --- 数据美化输出"
+          <a href="pprint.html" title="pprint — 数据美化输出"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="types.html" title="types --- 动态类型创建和内置类型名称"
+          <a href="types.html" title="types — 动态类型创建和内置类型名称"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -255,12 +263,12 @@ is compatible with the way these are treated by the <a class="reference internal
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="datatypes.html" >数据类型</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code> --- 浅层 (shallow) 和深层 (deep) 复制操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">copy</span></code> — 浅层 (shallow) 和深层 (deep) 复制操作</a></li>
                 <li class="right">
                     
 
@@ -284,7 +292,7 @@ is compatible with the way these are treated by the <a class="reference internal
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -292,11 +300,11 @@ is compatible with the way these are treated by the <a class="reference internal
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

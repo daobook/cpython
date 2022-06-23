@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>configparser --- 配置文件解析器 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>configparser — 配置文件解析器 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="netrc --- netrc 文件处理" href="netrc.html" />
-    <link rel="prev" title="csv --- CSV 文件读写" href="csv.html" />
+    <link rel="next" title="tomllib — Parse TOML files" href="tomllib.html" />
+    <link rel="prev" title="csv — CSV 文件读写" href="csv.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/configparser.html" />
     
       
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> — 配置文件解析器</a><ul>
 <li><a class="reference internal" href="#quick-start">快速起步</a></li>
 <li><a class="reference internal" href="#supported-datatypes">支持的数据类型</a></li>
 <li><a class="reference internal" href="#fallback-values">回退值</a></li>
@@ -88,12 +89,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="csv.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code> --- CSV 文件读写</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="netrc.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="csv.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code> — CSV 文件读写</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tomllib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tomllib</span></code> — Parse TOML files</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -120,10 +126,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="netrc.html" title="netrc --- netrc 文件处理"
+          <a href="tomllib.html" title="tomllib — Parse TOML files"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="csv.html" title="csv --- CSV 文件读写"
+          <a href="csv.html" title="csv — CSV 文件读写"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -136,12 +142,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fileformats.html" accesskey="U">文件格式</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> — 配置文件解析器</a></li>
                 <li class="right">
                     
 
@@ -165,12 +171,12 @@
           <div class="body" role="main">
             
   <section id="module-configparser">
-<span id="configparser-configuration-file-parser"></span><h1><a class="reference internal" href="#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> --- 配置文件解析器<a class="headerlink" href="#module-configparser" title="永久链接至标题">¶</a></h1>
+<span id="configparser-configuration-file-parser"></span><h1><a class="reference internal" href="#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> — 配置文件解析器<a class="headerlink" href="#module-configparser" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/configparser.py">Lib/configparser.py</a></p>
 <hr class="docutils" id="index-0" />
 <p>此模块提供了它实现一种基本配置语言 <a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 类，这种语言所提供的结构与 Microsoft Windows INI 文件的类似。 你可以使用这种语言来编写能够由最终用户来自定义的 Python 程序。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这个库 <em>并不</em> 能够解析或写入在 Windows Registry 扩展版本 INI 语法中所使用的值-类型前缀。</p>
 </div>
 <div class="admonition seealso">
@@ -332,9 +338,9 @@ default <a class="footnote-reference brackets" href="#id15" id="id5">1</a>).  By
 Values can be omitted if the parser is configured to allow it <a class="footnote-reference brackets" href="#id15" id="id7">1</a>,
 in which case the key/value delimiter may also be left
 out.  Values can also span multiple lines, as long as they are indented deeper
-than the first line of the value.  Depending on the parser's mode, blank lines
+than the first line of the value.  Depending on the parser’s mode, blank lines
 may be treated as parts of multiline values or ignored.</p>
-<p>By default,  a valid section name can be any string that does not contain '\n' or ']'.
+<p>By default,  a valid section name can be any string that does not contain ‘\n’ or ‘]’.
 To change this, see <a class="reference internal" href="#configparser.ConfigParser.SECTCRE" title="configparser.ConfigParser.SECTCRE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ConfigParser.SECTCRE</span></code></a>.</p>
 <p>配置文件可以包含注释，要带有指定字符前缀 (默认为 <code class="docutils literal notranslate"><span class="pre">#</span></code> 和 <code class="docutils literal notranslate"><span class="pre">;</span></code> <a class="footnote-reference brackets" href="#id15" id="id8">1</a>)。 注释可以单独出现于原本的空白行，并可使用缩进。 <a class="footnote-reference brackets" href="#id15" id="id9">1</a></p>
 <p>例如:</p>
@@ -387,7 +393,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <p>在核心功能之上，<a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 还支持插值。 这意味着值可以在被 <code class="docutils literal notranslate"><span class="pre">get()</span></code> 调用返回之前进行预处理。</p>
 <span class="target" id="index-1"></span><dl class="py class">
 <dt class="sig sig-object py" id="configparser.BasicInterpolation">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">BasicInterpolation</span></span><a class="headerlink" href="#configparser.BasicInterpolation" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">BasicInterpolation</span></span><a class="headerlink" href="#configparser.BasicInterpolation" title="永久链接至目标">¶</a></dt>
 <dd><p>默认实现由 <a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 来使用。 它允许值包含引用了相同小节中其他值或者特殊的默认小节中的值的格式字符串 <a class="footnote-reference brackets" href="#id15" id="id10">1</a>。 额外的默认值可以在初始化时提供。</p>
 <p>例如:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span><span class="w"></span>
@@ -396,7 +402,8 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <span class="na">my_pictures: %(my_dir)s/Pictures</span><span class="w"></span>
 
 <span class="k">[Escape]</span><span class="w"></span>
-<span class="na">gain: 80%%  # use a %% to escape the % sign (% is the only character that needs to be escaped)</span><span class="w"></span>
+<span class="c1"># use a %% to escape the % sign (% is the only character that needs to be escaped):</span><span class="w"></span>
+<span class="na">gain: 80%%</span><span class="w"></span>
 </pre></div>
 </div>
 <p>在上面的例子里，<a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> 的 <em>interpolation</em> 设为 <code class="docutils literal notranslate"><span class="pre">BasicInterpolation()</span></code>，这会将 <code class="docutils literal notranslate"><span class="pre">%(home_dir)s</span></code> 求解为 <code class="docutils literal notranslate"><span class="pre">home_dir</span></code> 的值 (在这里是 <code class="docutils literal notranslate"><span class="pre">/Users</span></code>)。 <code class="docutils literal notranslate"><span class="pre">%(my_dir)s</span></code> 的将被实际求解为 <code class="docutils literal notranslate"><span class="pre">/Users/lumberjack</span></code>。 所有插值都是按需进行的，这样引用链中使用的键不必以任何特定顺序在配置文件中指明。</p>
@@ -405,7 +412,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 
 <span class="target" id="index-2"></span><dl class="py class">
 <dt class="sig sig-object py" id="configparser.ExtendedInterpolation">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ExtendedInterpolation</span></span><a class="headerlink" href="#configparser.ExtendedInterpolation" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ExtendedInterpolation</span></span><a class="headerlink" href="#configparser.ExtendedInterpolation" title="永久链接至目标">¶</a></dt>
 <dd><p>一个用于插值的替代处理程序实现了更高级的语法，它被用于 <code class="docutils literal notranslate"><span class="pre">zc.buildout</span></code> 中的实例。 扩展插值使用 <code class="docutils literal notranslate"><span class="pre">${section:option}</span></code> 来表示来自外部小节的值。 插值可以跨越多个层级。 为了方便使用，<code class="docutils literal notranslate"><span class="pre">section:</span></code> 部分可被省略，插值会默认作用于当前小节（可能会从特殊小节获取默认值）。</p>
 <p>例如，上面使用基本插值描述的配置，使用扩展插值将是这个样子:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Paths]</span><span class="w"></span>
@@ -414,7 +421,8 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <span class="na">my_pictures: ${my_dir}/Pictures</span><span class="w"></span>
 
 <span class="k">[Escape]</span><span class="w"></span>
-<span class="na">cost: $$80  # use a $$ to escape the $ sign ($ is the only character that needs to be escaped)</span><span class="w"></span>
+<span class="c1"># use a $$ to escape the $ sign ($ is the only character that needs to be escaped):</span><span class="w"></span>
+<span class="na">cost: $$80</span><span class="w"></span>
 </pre></div>
 </div>
 <p>来自其他小节的值也可以被获取:</p>
@@ -656,7 +664,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>optionxform 函数会将选项名称转换为规范形式。 这应该是一个幂等函数：如果名称已经为规范形式，则应不加修改地将其返回。</p>
 </div>
 </dd></dl>
@@ -685,7 +693,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>虽然 ConfigParser 对象也使用 <code class="docutils literal notranslate"><span class="pre">OPTCRE</span></code> 属性来识别选项行，但并不推荐重载它，因为这会与构造器选项 <em>allow_no_value</em> 和 <em>delimiters</em> 产生冲突。</p>
 </div>
 </dd></dl>
@@ -786,7 +794,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <span id="id12"></span><h2>ConfigParser 对象<a class="headerlink" href="#configparser-objects" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="configparser.ConfigParser">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ConfigParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_no_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('=',</span> <span class="pre">':')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment_prefixes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('#',</span> <span class="pre">';')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_comment_prefixes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_lines_in_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">configparser.DEFAULTSECT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">BasicInterpolation()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ConfigParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_no_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('=',</span> <span class="pre">':')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment_prefixes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('#',</span> <span class="pre">';')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_comment_prefixes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_lines_in_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_section</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">configparser.DEFAULTSECT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">BasicInterpolation()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser" title="永久链接至目标">¶</a></dt>
 <dd><p>主配置解析器。 当给定 <em>defaults</em> 时，它会被初始化为包含固有默认值的字典。 当给定 <em>dict_type</em> 时，它将被用来创建包含节、节中的选项以及默认值的字典。</p>
 <p>当给定 <em>delimiters</em> 时，它会被用作分隔键与值的子字符串的集合。 当给定 <em>comment_prefixes</em> 时，它将被用作在否则为空行的注释的前缀子字符串的集合。 注释可以被缩进。 当给定 <em>inline_comment_prefixes</em> 时，它将被用作非空行的注释的前缀子字符串的集合。</p>
 <p>当 <em>strict</em> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code> (默认值) 时，解析器在从单个源（文件、字符串或字典）读取时将不允许任何节或选项出现重复，否则会引发 <a class="reference internal" href="#configparser.DuplicateSectionError" title="configparser.DuplicateSectionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateSectionError</span></code></a> 或 <a class="reference internal" href="#configparser.DuplicateOptionError" title="configparser.DuplicateOptionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateOptionError</span></code></a>。 当 <em>empty_lines_in_values</em> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code> (默认值: <code class="docutils literal notranslate"><span class="pre">True</span></code>) 时，每个空行均表示一个选项的结束。 在其他情况下，一个多行选项内部的空行会被保留为值的一部分。 当 <em>allow_no_value</em> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code> (默认值: <code class="docutils literal notranslate"><span class="pre">False</span></code>) 时，将接受没有值的选项；此种选项的值将为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 并且它们会以不带末尾分隔符的形式被序列化。</p>
@@ -879,7 +887,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <dd><p>从 <em>f</em> 读取并解析配置数据，它必须是一个产生 Unicode 字符串的可迭代对象（例如以文本模式打开的文件）。</p>
 <p>可选参数 <em>source</em> 指定要读取的文件名称。 如果未给出并且 <em>f</em> 具有 <code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code> 属性，则该属性会被用作 <em>source</em>；默认值为 <code class="docutils literal notranslate"><span class="pre">'&lt;???&gt;'</span></code>。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.2 新版功能: </span>替代 <a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a>。</p>
+<p><span class="versionmodified added">3.2 新版功能: </span>替代 <code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code>。</p>
 </div>
 </dd></dl>
 
@@ -906,7 +914,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 
 <dl class="py method">
 <dt class="sig sig-object py" id="configparser.ConfigParser.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">section</span></em>, <em class="sig-param"><span class="pre">option</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">raw=False</span></em>, <em class="sig-param"><span class="pre">vars=None</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">fallback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.get" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.get" title="永久链接至目标">¶</a></dt>
 <dd><p>获取指定名称的 <em>section</em> 的一个 <em>option</em> 的值。 如果提供了 <em>vars</em>，则它必须为一个字典。 <em>option</em> 的查找顺序为 <em>vars*（如果有提供）、*section</em> 以及 <em>DEFAULTSECT</em>。 如果未找到该键并且提供了 <em>fallback</em>，则它会被用作回退值。 可以提供 <code class="docutils literal notranslate"><span class="pre">None</span></code> 作为 <em>fallback</em> 值。</p>
 <p>所有 <code class="docutils literal notranslate"><span class="pre">'%'</span></code> 插值会在返回值中被展开，除非 <em>raw</em> 参数为真值。 插值键所使用的值会按与选项相同的方式来查找。</p>
 <div class="versionchanged">
@@ -916,19 +924,19 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 
 <dl class="py method">
 <dt class="sig sig-object py" id="configparser.ConfigParser.getint">
-<span class="sig-name descname"><span class="pre">getint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">section</span></em>, <em class="sig-param"><span class="pre">option</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">raw=False</span></em>, <em class="sig-param"><span class="pre">vars=None</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">fallback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getint" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getint" title="永久链接至目标">¶</a></dt>
 <dd><p>将在指定 <em>section</em> 中的 <em>option</em> 强制转换为整数的便捷方法。 参见 <a class="reference internal" href="#configparser.ConfigParser.get" title="configparser.ConfigParser.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> 获取对于 <em>raw</em>, <em>vars</em> 和 <em>fallback</em> 的解释。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="configparser.ConfigParser.getfloat">
-<span class="sig-name descname"><span class="pre">getfloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">section</span></em>, <em class="sig-param"><span class="pre">option</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">raw=False</span></em>, <em class="sig-param"><span class="pre">vars=None</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">fallback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getfloat" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getfloat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getfloat" title="永久链接至目标">¶</a></dt>
 <dd><p>将在指定 <em>section</em> 中的 <em>option</em> 强制转换为浮点数的便捷方法。 参见 <a class="reference internal" href="#configparser.ConfigParser.get" title="configparser.ConfigParser.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> 获取对于 <em>raw</em>, <em>vars</em> 和 <em>fallback</em> 的解释。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="configparser.ConfigParser.getboolean">
-<span class="sig-name descname"><span class="pre">getboolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">section</span></em>, <em class="sig-param"><span class="pre">option</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">raw=False</span></em>, <em class="sig-param"><span class="pre">vars=None</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">fallback</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getboolean" title="永久链接至目标">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getboolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">section</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars=None</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">fallback</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.getboolean" title="永久链接至目标">¶</a></dt>
 <dd><p>将在指定 <em>section</em> 中的 <em>option</em> 强制转换为布尔值的便捷方法。 请注意选项所接受的值为 <code class="docutils literal notranslate"><span class="pre">'1'</span></code>, <code class="docutils literal notranslate"><span class="pre">'yes'</span></code>, <code class="docutils literal notranslate"><span class="pre">'true'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'on'</span></code>，它们会使得此方法返回 <code class="docutils literal notranslate"><span class="pre">True</span></code>，以及 <code class="docutils literal notranslate"><span class="pre">'0'</span></code>, <code class="docutils literal notranslate"><span class="pre">'no'</span></code>, <code class="docutils literal notranslate"><span class="pre">'false'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'off'</span></code>，它们会使得此方法返回 <code class="docutils literal notranslate"><span class="pre">False</span></code>。 这些字符串值会以对大小写不敏感的方式被检测。 任何其他值都将导致引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。 参见 <a class="reference internal" href="#configparser.ConfigParser.get" title="configparser.ConfigParser.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a> 获取对于 <em>raw</em>, <em>vars</em> 和 <em>fallback</em> 的解释。</p>
 </dd></dl>
 
@@ -957,7 +965,7 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 </dd></dl>
 
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>原始配置文件中的注释在写回配置时不会被保留。 具体哪些会被当作注释，取决于为 <em>comment_prefix</em> 和 <em>inline_comment_prefix</em> 所指定的值。</p>
 </div>
 <dl class="py method">
@@ -984,29 +992,6 @@ To change this, see <a class="reference internal" href="#configparser.ConfigPars
 <p>请注意当读取配置文件时，选项名称两边的空格将在调用 <a class="reference internal" href="#configparser.ConfigParser.optionxform" title="configparser.ConfigParser.optionxform"><code class="xref py py-meth docutils literal notranslate"><span class="pre">optionxform()</span></code></a> 之前被去除。</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="configparser.ConfigParser.readfp">
-<span class="sig-name descname"><span class="pre">readfp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#configparser.ConfigParser.readfp" title="永久链接至目标">¶</a></dt>
-<dd><div class="deprecated">
-<p><span class="versionmodified deprecated">3.2 版后已移除: </span>Use <a class="reference internal" href="#configparser.ConfigParser.read_file" title="configparser.ConfigParser.read_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_file()</span></code></a> instead.</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span><a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a> now iterates on <em>fp</em> instead of calling <code class="docutils literal notranslate"><span class="pre">fp.readline()</span></code>.</p>
-</div>
-<p>For existing code calling <a class="reference internal" href="#configparser.ConfigParser.readfp" title="configparser.ConfigParser.readfp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">readfp()</span></code></a> with arguments which don't
-support iteration, the following generator may be used as a wrapper
-around the file-like object:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">readline_generator</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
-    <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="k">while</span> <span class="n">line</span><span class="p">:</span>
-        <span class="k">yield</span> <span class="n">line</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Instead of <code class="docutils literal notranslate"><span class="pre">parser.readfp(fp)</span></code> use
-<code class="docutils literal notranslate"><span class="pre">parser.read_file(readline_generator(fp))</span></code>.</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py data">
@@ -1020,13 +1005,13 @@ around the file-like object:</p>
 <span id="id14"></span><h2>RawConfigParser 对象<a class="headerlink" href="#rawconfigparser-objects" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="configparser.RawConfigParser">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">RawConfigParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">defaults=None</span></em>, <em class="sig-param"><span class="pre">dict_type=dict</span></em>, <em class="sig-param"><span class="pre">allow_no_value=False</span></em>, <em class="sig-param"><span class="pre">*</span></em>, <em class="sig-param"><span class="pre">delimiters=('='</span></em>, <em class="sig-param"><span class="pre">':')</span></em>, <em class="sig-param"><span class="pre">comment_prefixes=('#'</span></em>, <em class="sig-param"><span class="pre">';')</span></em>, <em class="sig-param"><span class="pre">inline_comment_prefixes=None</span></em>, <em class="sig-param"><span class="pre">strict=True</span></em>, <em class="sig-param"><span class="pre">empty_lines_in_values=True</span></em>, <em class="sig-param"><span class="pre">default_section=configparser.DEFAULTSECT</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">interpolation</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.RawConfigParser" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">RawConfigParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">defaults=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_type=dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_no_value=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiters=('='</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">':')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment_prefixes=('#'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">';')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_comment_prefixes=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_lines_in_values=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_section=configparser.DEFAULTSECT</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#configparser.RawConfigParser" title="永久链接至目标">¶</a></dt>
 <dd><p>旧式 <a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a>。 它默认禁用插值并且允许通过不安全的 <code class="docutils literal notranslate"><span class="pre">add_section</span></code> 和 <code class="docutils literal notranslate"><span class="pre">set</span></code> 方法以及旧式 <code class="docutils literal notranslate"><span class="pre">defaults=</span></code> 关键字参数处理来设置非字符串的节名、选项名和值。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>默认的 <em>dict_type</em> 为 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>，因为它现在会保留插入顺序。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>考虑改用 <a class="reference internal" href="#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a>，它会检查内部保存的值的类型。 如果你不想要插值，你可以使用 <code class="docutils literal notranslate"><span class="pre">ConfigParser(interpolation=None)</span></code>。</p>
 </div>
 <dl class="py method">
@@ -1050,19 +1035,19 @@ around the file-like object:</p>
 <h2>异常<a class="headerlink" href="#exceptions" title="永久链接至标题">¶</a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.Error">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#configparser.Error" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">Error</span></span><a class="headerlink" href="#configparser.Error" title="永久链接至目标">¶</a></dt>
 <dd><p>所有其他 <a class="reference internal" href="#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> 异常的基类。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.NoSectionError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">NoSectionError</span></span><a class="headerlink" href="#configparser.NoSectionError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">NoSectionError</span></span><a class="headerlink" href="#configparser.NoSectionError" title="永久链接至目标">¶</a></dt>
 <dd><p>当找不到指定节时引发的异常。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.DuplicateSectionError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">DuplicateSectionError</span></span><a class="headerlink" href="#configparser.DuplicateSectionError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">DuplicateSectionError</span></span><a class="headerlink" href="#configparser.DuplicateSectionError" title="永久链接至目标">¶</a></dt>
 <dd><p>当调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">add_section()</span></code> 时传入已存在的节名称，或者在严格解析器中当单个输入文件、字符串或字典内出现重复的节时引发的异常。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能: </span>将可选的 <code class="docutils literal notranslate"><span class="pre">source</span></code> 和 <code class="docutils literal notranslate"><span class="pre">lineno</span></code> 属性和参数添加到 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>。</p>
@@ -1071,55 +1056,56 @@ around the file-like object:</p>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.DuplicateOptionError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">DuplicateOptionError</span></span><a class="headerlink" href="#configparser.DuplicateOptionError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">DuplicateOptionError</span></span><a class="headerlink" href="#configparser.DuplicateOptionError" title="永久链接至目标">¶</a></dt>
 <dd><p>当单个选项在从单个文件、字符串或字典读取时出现两次时引发的异常。 这会捕获拼写错误和大小写敏感相关的错误，例如一个字典可能包含两个键分别代表同一个大小写不敏感的配置键。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.NoOptionError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">NoOptionError</span></span><a class="headerlink" href="#configparser.NoOptionError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">NoOptionError</span></span><a class="headerlink" href="#configparser.NoOptionError" title="永久链接至目标">¶</a></dt>
 <dd><p>当指定的选项未在指定的节中被找到时引发的异常。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.InterpolationError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationError</span></span><a class="headerlink" href="#configparser.InterpolationError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationError</span></span><a class="headerlink" href="#configparser.InterpolationError" title="永久链接至目标">¶</a></dt>
 <dd><p>当执行字符串插值发生问题时所引发的异常的基类。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.InterpolationDepthError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationDepthError</span></span><a class="headerlink" href="#configparser.InterpolationDepthError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationDepthError</span></span><a class="headerlink" href="#configparser.InterpolationDepthError" title="永久链接至目标">¶</a></dt>
 <dd><p>当字符串插值由于迭代次数超出 <a class="reference internal" href="#configparser.MAX_INTERPOLATION_DEPTH" title="configparser.MAX_INTERPOLATION_DEPTH"><code class="xref py py-const docutils literal notranslate"><span class="pre">MAX_INTERPOLATION_DEPTH</span></code></a> 而无法完成所引发的异常。 为 <a class="reference internal" href="#configparser.InterpolationError" title="configparser.InterpolationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterpolationError</span></code></a> 的子类。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.InterpolationMissingOptionError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationMissingOptionError</span></span><a class="headerlink" href="#configparser.InterpolationMissingOptionError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationMissingOptionError</span></span><a class="headerlink" href="#configparser.InterpolationMissingOptionError" title="永久链接至目标">¶</a></dt>
 <dd><p>当从某个值引用的选项并不存在时引发的异常。 为 <a class="reference internal" href="#configparser.InterpolationError" title="configparser.InterpolationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterpolationError</span></code></a> 的子类。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.InterpolationSyntaxError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationSyntaxError</span></span><a class="headerlink" href="#configparser.InterpolationSyntaxError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">InterpolationSyntaxError</span></span><a class="headerlink" href="#configparser.InterpolationSyntaxError" title="永久链接至目标">¶</a></dt>
 <dd><p>当将要执行替换的源文本不符合要求的语法时引发的异常。 为 <a class="reference internal" href="#configparser.InterpolationError" title="configparser.InterpolationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterpolationError</span></code></a> 的子类。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.MissingSectionHeaderError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">MissingSectionHeaderError</span></span><a class="headerlink" href="#configparser.MissingSectionHeaderError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">MissingSectionHeaderError</span></span><a class="headerlink" href="#configparser.MissingSectionHeaderError" title="永久链接至目标">¶</a></dt>
 <dd><p>当尝试解析一个不带节标头的文件时引发的异常。</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="configparser.ParsingError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ParsingError</span></span><a class="headerlink" href="#configparser.ParsingError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">configparser.</span></span><span class="sig-name descname"><span class="pre">ParsingError</span></span><a class="headerlink" href="#configparser.ParsingError" title="永久链接至目标">¶</a></dt>
 <dd><p>当尝试解析一个文件而发生错误时引发的异常。</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span><code class="docutils literal notranslate"><span class="pre">filename</span></code> 属性和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 参数被重命名为 <code class="docutils literal notranslate"><span class="pre">source</span></code> 以保持一致性。</p>
-</div>
 </dd></dl>
 
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The <code class="docutils literal notranslate"><span class="pre">filename</span></code> attribute and <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> constructor argument were
+removed.  They have been available using the name <code class="docutils literal notranslate"><span class="pre">source</span></code> since 3.2.</p>
+</div>
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id15"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>,<a href="#id5">5</a>,<a href="#id6">6</a>,<a href="#id7">7</a>,<a href="#id8">8</a>,<a href="#id9">9</a>,<a href="#id10">10</a>,<a href="#id11">11</a>)</span></dt>
@@ -1136,9 +1122,10 @@ around the file-like object:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> — 配置文件解析器</a><ul>
 <li><a class="reference internal" href="#quick-start">快速起步</a></li>
 <li><a class="reference internal" href="#supported-datatypes">支持的数据类型</a></li>
 <li><a class="reference internal" href="#fallback-values">回退值</a></li>
@@ -1154,12 +1141,17 @@ around the file-like object:</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="csv.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code> --- CSV 文件读写</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="netrc.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">netrc</span></code> --- netrc 文件处理</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="csv.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">csv</span></code> — CSV 文件读写</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tomllib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tomllib</span></code> — Parse TOML files</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1185,10 +1177,10 @@ around the file-like object:</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="netrc.html" title="netrc --- netrc 文件处理"
+          <a href="tomllib.html" title="tomllib — Parse TOML files"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="csv.html" title="csv --- CSV 文件读写"
+          <a href="csv.html" title="csv — CSV 文件读写"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -1201,12 +1193,12 @@ around the file-like object:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fileformats.html" >文件格式</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> --- 配置文件解析器</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code> — 配置文件解析器</a></li>
                 <li class="right">
                     
 
@@ -1230,7 +1222,7 @@ around the file-like object:</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1238,11 +1230,11 @@ around the file-like object:</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

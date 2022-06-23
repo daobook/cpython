@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>具体的对象层 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>具体的对象层 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">具体的对象层</a><ul>
 <li><a class="reference internal" href="#fundamental-objects">基本对象</a></li>
 <li><a class="reference internal" href="#numeric-objects">数值对象</a></li>
@@ -83,12 +84,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="objbuffer.html"
-                        title="上一章">旧缓冲协议</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="type.html"
-                        title="下一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="objbuffer.html"
+                          title="上一章">旧缓冲协议</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="type.html"
+                          title="下一章">类型对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -131,7 +137,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API 参考手册</a> &#187;</li>
@@ -184,7 +190,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="long.html">整数型对象</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bool.html">布尔对象</a></li>
-<li class="toctree-l1"><a class="reference internal" href="float.html">浮点数对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="float.html">浮点数对象</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="float.html#pack-and-unpack-functions">Pack and Unpack functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="float.html#pack-functions">Pack functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="float.html#unpack-functions">Unpack functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="complex.html">复数对象</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="complex.html#complex-numbers-as-c-structures">表示复数的C结构体</a></li>
 <li class="toctree-l2"><a class="reference internal" href="complex.html#complex-numbers-as-python-objects">表示复数的Python对象</a></li>
@@ -210,7 +221,6 @@
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#unicode-type">Unicode类型</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#unicode-character-properties">Unicode字符属性</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#creating-and-accessing-unicode-strings">Creating and accessing Unicode strings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="unicode.html#deprecated-py-unicode-apis">Deprecated Py_UNICODE APIs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#locale-encoding">Locale Encoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#file-system-encoding">File System Encoding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="unicode.html#wchar-t-support">wchar_t Support</a></li>
@@ -284,6 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="memoryview.html">MemoryView 对象</a></li>
 <li class="toctree-l1"><a class="reference internal" href="weakref.html">弱引用对象</a></li>
 <li class="toctree-l1"><a class="reference internal" href="capsule.html">Capsule 对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frame.html">Frame Objects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gen.html">生成器对象</a></li>
 <li class="toctree-l1"><a class="reference internal" href="coro.html">协程对象</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contextvars.html">上下文变量对象</a></li>
@@ -301,8 +312,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">具体的对象层</a><ul>
 <li><a class="reference internal" href="#fundamental-objects">基本对象</a></li>
 <li><a class="reference internal" href="#numeric-objects">数值对象</a></li>
@@ -314,12 +326,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="objbuffer.html"
-                        title="上一章">旧缓冲协议</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="type.html"
-                        title="下一章">类型对象</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="objbuffer.html"
+                          title="上一章">旧缓冲协议</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="type.html"
+                          title="下一章">类型对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -361,7 +378,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -389,7 +406,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -397,11 +414,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

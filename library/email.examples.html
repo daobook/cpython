@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>email: 示例 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>email: 示例 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="email.contentmanager.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.contentmanager</span></code>: 管理 MIME 内容</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="email.compat32-message.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.message.Message</span></code>: 使用 <code class="xref py py-data docutils literal notranslate"><span class="pre">compat32</span></code> API 来表示电子邮件消息</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="email.contentmanager.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.contentmanager</span></code>: 管理 MIME 内容</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="email.compat32-message.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.message.Message</span></code>: 使用 <code class="xref py py-data docutils literal notranslate"><span class="pre">compat32</span></code> API 来表示电子邮件消息</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="netdata.html" >互联网数据处理</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="email.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> --- 电子邮件与 MIME 处理包</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="email.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> — 电子邮件与 MIME 处理包</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code>: 示例</a></li>
                 <li class="right">
                     
@@ -175,9 +179,10 @@
 <span class="n">s</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>解析 <span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc822.html"><strong>RFC 822</strong></a> 标题可以通过使用 <a class="reference internal" href="email.parser.html#module-email.parser" title="email.parser: Parse flat text email messages to produce a message object structure."><code class="xref py py-mod docutils literal notranslate"><span class="pre">parser</span></code></a> 模块中的类来轻松完成：</p>
+<p>解析 <span class="target" id="index-2"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc822.html"><strong>RFC 822</strong></a> 标题可以通过使用 <a class="reference internal" href="email.parser.html#module-email.parser" title="email.parser: Parse flat text email messages to produce a message object structure."><code class="xref py py-mod docutils literal notranslate"><span class="pre">parser</span></code></a> 模块中的类来轻松完成：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the email modules we&#39;ll need</span>
-<span class="kn">from</span> <span class="nn">email.parser</span> <span class="kn">import</span> <span class="n">BytesParser</span><span class="p">,</span> <span class="n">Parser</span>
+<span class="c1">#from email.parser import BytesParser</span>
+<span class="kn">from</span> <span class="nn">email.parser</span> <span class="kn">import</span> <span class="n">Parser</span>
 <span class="kn">from</span> <span class="nn">email.policy</span> <span class="kn">import</span> <span class="n">default</span>
 
 <span class="c1"># If the e-mail headers are in a file, uncomment these two lines:</span>
@@ -203,13 +208,10 @@
 </pre></div>
 </div>
 <p>以下是如何发送包含可能在目录中的一系列家庭照片的MIME消息示例：</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import smtplib for the actual sending function</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import smtplib for the actual sending function.</span>
 <span class="kn">import</span> <span class="nn">smtplib</span>
 
-<span class="c1"># And imghdr to find the types of our images</span>
-<span class="kn">import</span> <span class="nn">imghdr</span>
-
-<span class="c1"># Here are the email package modules we&#39;ll need</span>
+<span class="c1"># Here are the email package modules we&#39;ll need.</span>
 <span class="kn">from</span> <span class="nn">email.message</span> <span class="kn">import</span> <span class="n">EmailMessage</span>
 
 <span class="c1"># Create the container email message.</span>
@@ -221,13 +223,13 @@
 <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">family</span><span class="p">)</span>
 <span class="n">msg</span><span class="o">.</span><span class="n">preamble</span> <span class="o">=</span> <span class="s1">&#39;You will not see this in a MIME-aware mail reader.</span><span class="se">\n</span><span class="s1">&#39;</span>
 
-<span class="c1"># Open the files in binary mode.  Use imghdr to figure out the</span>
-<span class="c1"># MIME subtype for each specific image.</span>
+<span class="c1"># Open the files in binary mode.  You can also omit the subtype</span>
+<span class="c1"># if you want MIMEImage to guess it.</span>
 <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">pngfiles</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
         <span class="n">img_data</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="n">msg</span><span class="o">.</span><span class="n">add_attachment</span><span class="p">(</span><span class="n">img_data</span><span class="p">,</span> <span class="n">maintype</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                                 <span class="n">subtype</span><span class="o">=</span><span class="n">imghdr</span><span class="o">.</span><span class="n">what</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">img_data</span><span class="p">))</span>
+                                 <span class="n">subtype</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
 
 <span class="c1"># Send the email via our own SMTP server.</span>
 <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
@@ -532,12 +534,16 @@ Cela ressemble à un excellent recipie[1] déjeuner.
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="email.contentmanager.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.contentmanager</span></code>: 管理 MIME 内容</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="email.compat32-message.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.message.Message</span></code>: 使用 <code class="xref py py-data docutils literal notranslate"><span class="pre">compat32</span></code> API 来表示电子邮件消息</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="email.contentmanager.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.contentmanager</span></code>: 管理 MIME 内容</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="email.compat32-message.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">email.message.Message</span></code>: 使用 <code class="xref py py-data docutils literal notranslate"><span class="pre">compat32</span></code> API 来表示电子邮件消息</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -579,12 +585,12 @@ Cela ressemble à un excellent recipie[1] déjeuner.
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="netdata.html" >互联网数据处理</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="email.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> --- 电子邮件与 MIME 处理包</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="email.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code> — 电子邮件与 MIME 处理包</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">email</span></code>: 示例</a></li>
                 <li class="right">
                     
@@ -609,7 +615,7 @@ Cela ressemble à un excellent recipie[1] déjeuner.
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -617,11 +623,11 @@ Cela ressemble à un excellent recipie[1] déjeuner.
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

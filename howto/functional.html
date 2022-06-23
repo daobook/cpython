@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>函数式编程指引 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数式编程指引 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">函数式编程指引</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a><ul>
 <li><a class="reference internal" href="#formal-provability">形式证明</a></li>
@@ -114,12 +115,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="enum.html"
-                        title="上一章">Enum HOWTO</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="logging.html"
-                        title="下一章">日志常用指引</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="enum.html"
+                          title="上一章">Enum HOWTO</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="logging.html"
+                          title="下一章">日志常用指引</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -162,7 +168,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -212,8 +218,8 @@
 </ul>
 <p>一些语言的设计者选择强调一种特定的编程方式。 这通常会让以不同的方式来编写程序变得困难。其他多范式语言则支持几种不同的编程方式。Lisp，C++ 和 Python 都是多范式语言；使用这些语言，你可以编写主要为过程式，面向对象或者函数式的程序和函数库。在大型程序中，不同的部分可能会采用不同的方式编写；比如 GUI 可能是面向对象的而处理逻辑则是过程式或者函数式。</p>
 <p>在函数式程序里，输入会流经一系列函数。每个函数接受输入并输出结果。函数式风格反对使用带有副作用的函数，这些副作用会修改内部状态，或者引起一些无法体现在函数的返回值中的变化。完全不产生副作用的函数被称作“纯函数”。消除副作用意味着不能使用随程序运行而更新的数据结构；每个函数的输出必须只依赖于输入。</p>
-<p>Some languages are very strict about purity and don't even have assignment
-statements such as <code class="docutils literal notranslate"><span class="pre">a=3</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>, but it's difficult to avoid all
+<p>Some languages are very strict about purity and don’t even have assignment
+statements such as <code class="docutils literal notranslate"><span class="pre">a=3</span></code> or <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">=</span> <span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>, but it’s difficult to avoid all
 side effects, such as printing to the screen or writing to a disk file. Another
 example is a call to the <a class="reference internal" href="../library/functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> or <a class="reference internal" href="../library/time.html#time.sleep" title="time.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.sleep()</span></code></a> function, neither
 of which returns a useful value. Both are called only for their side effects
@@ -231,7 +237,7 @@ of sending some text to the screen or pausing execution for a second.</p>
 <h3>形式证明<a class="headerlink" href="#formal-provability" title="永久链接至标题">¶</a></h3>
 <p>一个理论上的优点是，构造数学证明来说明函数式程序是正确的相对更容易些。</p>
 <p>很长时间，研究者们对寻找证明程序正确的数学方法都很感兴趣。这和通过大量输入来测试，并得出程序的输出基本正确，或者阅读一个程序的源代码然后得出代码看起来没问题不同；相反，这里的目标是一个严格的证明，证明程序对所有可能的输入都能给出正确的结果。</p>
-<p>证明程序正确性所用到的技术是写出 <strong>不变量</strong>，也就是对于输入数据和程序中的变量永远为真的特性。然后对每行代码，你说明这行代码执行前的不变量 X 和 Y 以及执行后稍有不同的不变量 X' 和 Y' 为真。如此一直到程序结束，这时候在程序的输出上，不变量应该会与期望的状态一致。</p>
+<p>证明程序正确性所用到的技术是写出 <strong>不变量</strong>，也就是对于输入数据和程序中的变量永远为真的特性。然后对每行代码，你说明这行代码执行前的不变量 X 和 Y 以及执行后稍有不同的不变量 X’ 和 Y’ 为真。如此一直到程序结束，这时候在程序的输出上，不变量应该会与期望的状态一致。</p>
 <p>函数式编程之所以要消除赋值，是因为赋值在这个技术中难以处理；赋值可能会破坏赋值前为真的不变量，却并不产生任何可以传递下去的新的不变量。</p>
 <p>不幸的是，证明程序的正确性很大程度上是经验性质的，而且和 Python 软件无关。即使是微不足道的程序都需要几页长的证明；一个中等复杂的程序的正确性证明会非常庞大，而且，极少甚至没有你日常所使用的程序（Python 解释器，XML 解析器，浏览器）的正确性能够被证明。即使你写出或者生成一个证明，验证证明也会是一个问题；里面可能出了差错，而你错误地相信你证明了程序的正确性。</p>
 </section>
@@ -347,7 +353,7 @@ of sending some text to the screen or pausing execution for a second.</p>
 <section id="generator-expressions-and-list-comprehensions">
 <h2>生成器表达式和列表推导式<a class="headerlink" href="#generator-expressions-and-list-comprehensions" title="永久链接至标题">¶</a></h2>
 <p>迭代器的输出有两个很常见的使用方式，1) 对每一个元素执行操作，2) 选择一个符合条件的元素子集。比如，给定一个字符串列表，你可能想去掉每个字符串尾部的空白字符，或是选出所有包含给定子串的字符串。</p>
-<p>列表推导式和生成器表达时（简写：&quot;listcomps&quot; 和 &quot;genexps&quot;）让这些操作更加简明，这个形式借鉴自函数式程序语言 Haskell（<a class="reference external" href="https://www.haskell.org/">https://www.haskell.org/</a>）。你可以用以下代码去掉一个字符串流中的所有空白字符:</p>
+<p>列表推导式和生成器表达时（简写：”listcomps” 和 “genexps”）让这些操作更加简明，这个形式借鉴自函数式程序语言 Haskell（<a class="reference external" href="https://www.haskell.org/">https://www.haskell.org/</a>）。你可以用以下代码去掉一个字符串流中的所有空白字符:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;  line 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;line 2  </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 
 <span class="c1"># Generator expression -- returns iterator</span>
@@ -363,7 +369,7 @@ of sending some text to the screen or pausing execution for a second.</p>
 </pre></div>
 </div>
 <p>通过列表推导式，你会获得一个 Python 列表；<code class="docutils literal notranslate"><span class="pre">stripped_list</span></code> 就是一个包含所有结果行的列表，并不是迭代器。 生成器表达式会返回一个迭代器，它在必要的时候计算结果，避免一次性生成所有的值。 这意味着，如果迭代器返回一个无限数据流或者大量的数据，列表推导式就不太好用了。 这种情况下生成器表达式会更受青睐。</p>
-<p>生成器表达式两边使用圆括号 (&quot;()&quot;) ，而列表推导式则使用方括号 (&quot;[]&quot;)。生成器表达式的形式为:</p>
+<p>生成器表达式两边使用圆括号 (“()”) ，而列表推导式则使用方括号 (“[]”)。生成器表达式的形式为:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span> <span class="n">expression</span> <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">sequence1</span>
              <span class="k">if</span> <span class="n">condition1</span>
              <span class="k">for</span> <span class="n">expr2</span> <span class="ow">in</span> <span class="n">sequence2</span>
@@ -468,7 +474,7 @@ of sending some text to the screen or pausing execution for a second.</p>
 </pre></div>
 </div>
 <p>我建议你在处理 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式返回值的时候， <strong>总是</strong> 两边写上括号，就像上面的例子一样。括号并不总是必须的，但是比起记住什么时候需要括号，写出来会更容易一点。</p>
-<p>（<span class="target" id="index-5"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a> 解释了具体的规则，也就是 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式必须括起来，除非是出现在最顶级的赋值表达式的右边。这意味着你可以写 <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">yield</span> <span class="pre">i</span></code>，但是必须在操作的时候加上括号，就像``val = (yield i) + 12``）</p>
+<p>（<span class="target" id="index-5"></span><a class="pep reference external" href="https://peps.python.org/pep-0342/"><strong>PEP 342</strong></a> 解释了具体的规则，也就是 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式必须括起来，除非是出现在最顶级的赋值表达式的右边。这意味着你可以写 <code class="docutils literal notranslate"><span class="pre">val</span> <span class="pre">=</span> <span class="pre">yield</span> <span class="pre">i</span></code>，但是必须在操作的时候加上括号，就像``val = (yield i) + 12``）</p>
 <p>可以调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">send(value)()</span></code> &lt;generator.send&gt; 方法向生成器发送值。这个方法会恢复执行生成器的代码，然后 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式返回特定的值。如果调用普通的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__next__`方法，``yield`()</span></code> 会返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>这里有一个简单的每次加1的计数器，并允许改变内部计数器的值。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">counter</span><span class="p">(</span><span class="n">maximum</span><span class="p">):</span>
@@ -502,7 +508,9 @@ of sending some text to the screen or pausing execution for a second.</p>
 <p>因为 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 很多时候会返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>，所以你应该总是检查这个情况。不要在表达式中使用 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 的值，除非你确定 <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> 是唯一的用来恢复你的生成器函数的方法。</p>
 <p>除了 <a class="reference internal" href="../reference/expressions.html#generator.send" title="generator.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> 之外，生成器还有两个其他的方法:</p>
 <ul>
-<li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(type,</span> <span class="pre">value=None,</span> <span class="pre">traceback=None)</span></code></a> 用于在生成器内部抛出异常；这个异常会在生成器暂停执行的时候由 <code class="docutils literal notranslate"><span class="pre">yield</span></code> 表达式抛出。</p></li>
+<li><p><a class="reference internal" href="../reference/expressions.html#generator.throw" title="generator.throw"><code class="xref py py-meth docutils literal notranslate"><span class="pre">throw(value)</span></code></a> is used to
+raise an exception inside the generator; the exception is raised by the
+<code class="docutils literal notranslate"><span class="pre">yield</span></code> expression where the generator’s execution is paused.</p></li>
 <li><p><a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generator.close()</span></code></a> 会在生成器内部抛出 <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> 异常来结束迭代。当接收到这个异常时，生成器的代码会抛出 <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> 或者 <a class="reference internal" href="../library/exceptions.html#StopIteration" title="StopIteration"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StopIteration</span></code></a>；捕捉这个异常作其他处理是非法的，并会出发 <a class="reference internal" href="../library/exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>。<a class="reference internal" href="../reference/expressions.html#generator.close" title="generator.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> 也会在 Python 垃圾回收器回收生成器的时候调用。</p>
 <p>如果你要在 <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a> 发生的时候清理代码，我建议使用 <code class="docutils literal notranslate"><span class="pre">try:</span> <span class="pre">...</span> <span class="pre">finally:</span></code> 组合来代替 <a class="reference internal" href="../library/exceptions.html#GeneratorExit" title="GeneratorExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GeneratorExit</span></code></a>。</p>
 </li>
@@ -740,7 +748,7 @@ of sending some text to the screen or pausing execution for a second.</p>
   <span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>同一个元组 <code class="docutils literal notranslate"><span class="pre">('a',</span> <span class="pre">'a',</span> <span class="pre">'b')</span></code> 出现了两次，但是两个 'a' 字符来自不同的位置。</p>
+<p>同一个元组 <code class="docutils literal notranslate"><span class="pre">('a',</span> <span class="pre">'a',</span> <span class="pre">'b')</span></code> 出现了两次，但是两个 ‘a’ 字符来自不同的位置。</p>
 <p><a class="reference internal" href="../library/itertools.html#itertools.combinations_with_replacement" title="itertools.combinations_with_replacement"><code class="xref py py-func docutils literal notranslate"><span class="pre">itertools.combinations_with_replacement(iterable,</span> <span class="pre">r)</span></code></a> 函数放松了一个不同的限制：元组中的元素可以重复。从概念讲，为每个元组第一个位置选取一个元素，然后在选择第二个元素前替换掉它。:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations_with_replacement</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=&gt;</span>
   <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
@@ -846,7 +854,7 @@ of sending some text to the screen or pausing execution for a second.</p>
 <p>前面已经提到了 <a class="reference internal" href="../library/operator.html#module-operator" title="operator: Functions corresponding to the standard operators."><code class="xref py py-mod docutils literal notranslate"><span class="pre">operator</span></code></a> 模块。它包含一系列对应于 Python 操作符的函数。在函数式风格的代码中，这些函数通常很有用，可以帮你省下不少时间，避免写一些琐碎的仅仅执行一个简单操作的函数。</p>
 <p>这个模块里的一些函数：</p>
 <ul class="simple">
-<li><p>数学运算： <code class="docutils literal notranslate"><span class="pre">add()</span></code>，<code class="docutils literal notranslate"><span class="pre">sub()</span></code>，<code class="docutils literal notranslate"><span class="pre">mul()</span></code>，<code class="docutils literal notranslate"><span class="pre">floordiv()</span></code>，<code class="docutils literal notranslate"><span class="pre">abs()</span></code>， ...</p></li>
+<li><p>数学运算： <code class="docutils literal notranslate"><span class="pre">add()</span></code>，<code class="docutils literal notranslate"><span class="pre">sub()</span></code>，<code class="docutils literal notranslate"><span class="pre">mul()</span></code>，<code class="docutils literal notranslate"><span class="pre">floordiv()</span></code>，<code class="docutils literal notranslate"><span class="pre">abs()</span></code>， …</p></li>
 <li><p>逻辑运算： <code class="docutils literal notranslate"><span class="pre">not_()</span></code>，<code class="docutils literal notranslate"><span class="pre">truth()</span></code>。</p></li>
 <li><p>位运算： <code class="docutils literal notranslate"><span class="pre">and_()</span></code>，<code class="docutils literal notranslate"><span class="pre">or_()</span></code>，<code class="docutils literal notranslate"><span class="pre">invert()</span></code>。</p></li>
 <li><p>比较： <code class="docutils literal notranslate"><span class="pre">eq()</span></code>，<code class="docutils literal notranslate"><span class="pre">ne()</span></code>，<code class="docutils literal notranslate"><span class="pre">lt()</span></code>，<code class="docutils literal notranslate"><span class="pre">le()</span></code>，<code class="docutils literal notranslate"><span class="pre">gt()</span></code>，和 <code class="docutils literal notranslate"><span class="pre">ge()</span></code>。</p></li>
@@ -941,8 +949,8 @@ of sending some text to the screen or pausing execution for a second.</p>
 <p><a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> 模块文档。</p>
 <p><a class="reference internal" href="../library/functools.html#module-functools" title="functools: Higher-order functions and operations on callable objects."><code class="xref py py-mod docutils literal notranslate"><span class="pre">functools</span></code></a> 模块文档。</p>
 <p><a class="reference internal" href="../library/operator.html#module-operator" title="operator: Functions corresponding to the standard operators."><code class="xref py py-mod docutils literal notranslate"><span class="pre">operator</span></code></a> 模块文档。</p>
-<p><span class="target" id="index-1"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0289"><strong>PEP 289</strong></a>: &quot;Generator Expressions&quot;</p>
-<p><span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0342"><strong>PEP 342</strong></a>: &quot;Coroutines via Enhanced Generators&quot; 描述了 Python 2.5 中新的生成器特性。</p>
+<p><span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0289/"><strong>PEP 289</strong></a>: “Generator Expressions”</p>
+<p><span class="target" id="index-6"></span><a class="pep reference external" href="https://peps.python.org/pep-0342/"><strong>PEP 342</strong></a>: “Coroutines via Enhanced Generators” 描述了 Python 2.5 中新的生成器特性。</p>
 </section>
 </section>
 </section>
@@ -954,8 +962,9 @@ of sending some text to the screen or pausing execution for a second.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">函数式编程指引</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a><ul>
 <li><a class="reference internal" href="#formal-provability">形式证明</a></li>
@@ -998,12 +1007,17 @@ of sending some text to the screen or pausing execution for a second.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="enum.html"
-                        title="上一章">Enum HOWTO</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="logging.html"
-                        title="下一章">日志常用指引</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="enum.html"
+                          title="上一章">Enum HOWTO</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="logging.html"
+                          title="下一章">日志常用指引</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1045,7 +1059,7 @@ of sending some text to the screen or pausing execution for a second.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -1073,7 +1087,7 @@ of sending some text to the screen or pausing execution for a second.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1081,11 +1095,11 @@ of sending some text to the screen or pausing execution for a second.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

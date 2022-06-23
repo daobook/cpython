@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Unicode 指南 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode 指南 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Unicode 指南</a><ul>
 <li><a class="reference internal" href="#introduction-to-unicode">Unicode 概述</a><ul>
 <li><a class="reference internal" href="#definitions">定义</a></li>
@@ -104,12 +105,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sorting.html"
-                        title="上一章">排序指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="urllib2.html"
-                        title="下一章">如何利用 urllib 包获取网络资源</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sorting.html"
+                          title="上一章">排序指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="urllib2.html"
+                          title="下一章">如何利用 urllib 包获取网络资源</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -152,7 +158,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -213,7 +219,7 @@
 ...
 </pre></div>
 </div>
-<p>严格地说，上述定义暗示了以下说法是没有意义的：“这是字符 <code class="docutils literal notranslate"><span class="pre">U+265E</span></code>”。<code class="docutils literal notranslate"><span class="pre">U+265E</span></code> 只是一个码位，代表某个特定的字符；这里它代表了字符 “国际象棋黑骑士” '♞'。在非正式的上下文中，有时会忽略码位和字符的区别。</p>
+<p>严格地说，上述定义暗示了以下说法是没有意义的：“这是字符 <code class="docutils literal notranslate"><span class="pre">U+265E</span></code>”。<code class="docutils literal notranslate"><span class="pre">U+265E</span></code> 只是一个码位，代表某个特定的字符；这里它代表了字符 “国际象棋黑骑士” ‘♞’。在非正式的上下文中，有时会忽略码位和字符的区别。</p>
 <p>一个字符在屏幕或纸上被表示为一组图形元素，被称为 <strong>字形（glyph）</strong> 。比如，大写字母 A 的字形，是两笔斜线和一笔横线，而具体的细节取决于所使用的字体。大部分 Python 代码不必担心字形，找到正确的显示字形通常是交给 GUI 工具包或终端的字体渲染程序来完成。</p>
 </section>
 <section id="encodings">
@@ -232,7 +238,7 @@
 <li><p>与现有的 C 函数（如 <code class="docutils literal notranslate"><span class="pre">strlen()</span></code> ）不兼容，因此需要采用一套新的宽字符串函数。</p></li>
 </ol>
 <p>因此这种编码用得不多，人们转而选择其他更高效、更方便的编码，比如 UTF-8。</p>
-<p>UTF-8 是最常用的编码之一，Python 往往默认会采用它。UTF 代表“Unicode Transformation Format”，'8' 表示编码采用 8 位数。（UTF-16 和 UTF-32 编码也是存在的，但其使用频率不如 UTF-8。）UTF-8 的规则如下：</p>
+<p>UTF-8 是最常用的编码之一，Python 往往默认会采用它。UTF 代表“Unicode Transformation Format”，’8’ 表示编码采用 8 位数。（UTF-16 和 UTF-32 编码也是存在的，但其使用频率不如 UTF-8。）UTF-8 的规则如下：</p>
 <ol class="arabic simple">
 <li><p>如果码位 &lt; 128，则直接用对应的字节值表示。</p></li>
 <li><p>如果码位  &gt;= 128，则转换为 2、3、4 个字节的序列，每个字节值都位于 128 和 255 之间。</p></li>
@@ -261,7 +267,7 @@
 <p>现在您已经了解了 Unicode 的基础知识，可以看下 Python 的 Unicode 特性。</p>
 <section id="the-string-type">
 <h3>字符串类型<a class="headerlink" href="#the-string-type" title="永久链接至标题">¶</a></h3>
-<p>从 Python 3.0 开始， <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 类型包含了 Unicode 字符，这意味着用``&quot;unicode rocks!&quot;<code class="docutils literal notranslate"><span class="pre">、</span></code>'unicode rocks!'`` 或三重引号字符串语法创建的任何字符串都会存储为 Unicode。</p>
+<p>从 Python 3.0 开始， <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 类型包含了 Unicode 字符，这意味着用``”unicode rocks!”<code class="docutils literal notranslate"><span class="pre">、</span></code>’unicode rocks!’`` 或三重引号字符串语法创建的任何字符串都会存储为 Unicode。</p>
 <p>Python 源代码的默认编码是 UTF-8，因此可以直接在字符串中包含 Unicode 字符：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/tmp/input.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -359,7 +365,7 @@
 </pre></div>
 </div>
 <p>上述语法的灵感来自于 Emacs 用于指定文件局部变量的符号。Emacs 支持许多不同的变量，但 Python 仅支持“编码”。 <code class="docutils literal notranslate"><span class="pre">-*-</span></code> 符号向 Emacs 标明该注释是特殊的；这对 Python 没有什么意义，只是一种约定。Python 会在注释中查找 <code class="docutils literal notranslate"><span class="pre">coding:</span> <span class="pre">name</span></code> 或 <code class="docutils literal notranslate"><span class="pre">coding=name</span></code> 。</p>
-<p>如果没有这种注释，则默认编码将会是前面提到的 UTF-8。更多信息请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0263"><strong>PEP 263</strong></a> 。</p>
+<p>如果没有这种注释，则默认编码将会是前面提到的 UTF-8。更多信息请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0263/"><strong>PEP 263</strong></a> 。</p>
 </section>
 <section id="unicode-properties">
 <h3>Unicode属性<a class="headerlink" href="#unicode-properties" title="永久链接至标题">¶</a></h3>
@@ -451,7 +457,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">()))</span>
 </pre></div>
 </div>
-<p>执行时，<code class="docutils literal notranslate"><span class="pre">\d+</span></code> 将匹配上泰语数字并打印出来。如果向  <a class="reference internal" href="../library/re.html#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 提供的是 <a class="reference internal" href="../library/re.html#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> 标志，<code class="docutils literal notranslate"><span class="pre">\d+</span></code> 则会匹配子串 &quot;57&quot;。</p>
+<p>执行时，<code class="docutils literal notranslate"><span class="pre">\d+</span></code> 将匹配上泰语数字并打印出来。如果向  <a class="reference internal" href="../library/re.html#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">compile()</span></code></a> 提供的是 <a class="reference internal" href="../library/re.html#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> 标志，<code class="docutils literal notranslate"><span class="pre">\d+</span></code> 则会匹配子串 “57”。</p>
 <p>类似地，<code class="docutils literal notranslate"><span class="pre">\w</span></code>  将匹配多种 Unicode 字符，但对于字节串则只会匹配 <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code> ，如果指定 <a class="reference internal" href="../library/re.html#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a>， <code class="docutils literal notranslate"><span class="pre">\s</span> <span class="pre">``</span> <span class="pre">将匹配</span> <span class="pre">Unicode</span> <span class="pre">空白符或</span> <span class="pre">``[</span> <span class="pre">\t\n\r\f\v]</span></code>。</p>
 </section>
 <section id="id2">
@@ -461,7 +467,7 @@
 <li><p><a class="reference external" href="http://python-notes.curiousefficiency.org/en/latest/python3/text_file_processing.html">用 Python 3 处理文本文件</a> ，作者 Nick Coghlan。</p></li>
 <li><p><a class="reference external" href="https://nedbatchelder.com/text/unipain.html">实用的 Unicode</a>，Ned Batchelder 在 PyCon 2012 上的演示。</p></li>
 </ul>
-<p><a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 类型在 Python 库参考文档 <a class="reference internal" href="../library/stdtypes.html#textseq"><span class="std std-ref">文本序列类型 --- str</span></a> 中有介绍。</p>
+<p><a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 类型在 Python 库参考文档 <a class="reference internal" href="../library/stdtypes.html#textseq"><span class="std std-ref">文本序列类型 — str</span></a> 中有介绍。</p>
 <p><a class="reference internal" href="../library/unicodedata.html#module-unicodedata" title="unicodedata: Access the Unicode Database."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unicodedata</span></code></a> 模块的文档</p>
 <p><a class="reference internal" href="../library/codecs.html#module-codecs" title="codecs: Encode and decode data and streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">codecs</span></code></a> 模块的文档</p>
 <p>Marc-André Lemburg 在 EuroPython 2002 上做了一个题为“Python 和 Unicode”（PDF 幻灯片）&lt;<a class="reference external" href="https://downloads.egenix.com/python/Unicode-EPC2002-Talk.pdf">https://downloads.egenix.com/python/Unicode-EPC2002-Talk.pdf</a>&gt;`_ 的演示文稿。该幻灯片很好地概括了 Python 2 的 Unicode 功能设计（其中 Unicode 字符串类型称为 <code class="docutils literal notranslate"><span class="pre">unicode</span></code>，文字以 <code class="docutils literal notranslate"><span class="pre">u</span></code> 开头）。</p>
@@ -578,8 +584,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Unicode 指南</a><ul>
 <li><a class="reference internal" href="#introduction-to-unicode">Unicode 概述</a><ul>
 <li><a class="reference internal" href="#definitions">定义</a></li>
@@ -612,12 +619,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="sorting.html"
-                        title="上一章">排序指南</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="urllib2.html"
-                        title="下一章">如何利用 urllib 包获取网络资源</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="sorting.html"
+                          title="上一章">排序指南</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="urllib2.html"
+                          title="下一章">如何利用 urllib 包获取网络资源</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -659,7 +671,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -687,7 +699,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -695,11 +707,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

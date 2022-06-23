@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Function 对象 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function 对象 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="set.html"
-                        title="上一章">集合对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="method.html"
-                        title="下一章">实例方法对象</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="set.html"
+                          title="上一章">集合对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="method.html"
+                          title="下一章">实例方法对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -171,19 +175,19 @@
 <dt class="sig sig-object c" id="c.PyFunction_New">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyFunction_New</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">code</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">globals</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFunction_New" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: New reference.</em><p>返回与代码对象 <em>code</em> 关联的新函数对象。 <em>globals</em> 必须是一个字典，该函数可以访问全局变量。</p>
-<p>The function's docstring and name are retrieved from the code object. <em>__module__</em>
+<p>The function’s docstring and name are retrieved from the code object. <em>__module__</em>
 is retrieved from <em>globals</em>. The argument defaults, annotations and closure are
-set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. <em>__qualname__</em> is set to the same value as the code object's
+set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. <em>__qualname__</em> is set to the same value as the code object’s
 <code class="docutils literal notranslate"><span class="pre">co_qualname</span></code> field.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyFunction_NewWithQualName">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyFunction_NewWithQualName</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">code</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">globals</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">qualname</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFunction_NewWithQualName" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>As <a class="reference internal" href="#c.PyFunction_New" title="PyFunction_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFunction_New()</span></code></a>, but also allows setting the function object's
+<dd><em class="refcount">Return value: New reference.</em><p>As <a class="reference internal" href="#c.PyFunction_New" title="PyFunction_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFunction_New()</span></code></a>, but also allows setting the function object’s
 <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> attribute.  <em>qualname</em> should be a unicode object or <code class="docutils literal notranslate"><span class="pre">NULL</span></code>;
 if <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, the <code class="docutils literal notranslate"><span class="pre">__qualname__</span></code> attribute is set to the same value as the
-code object's <code class="docutils literal notranslate"><span class="pre">co_qualname</span></code> field.</p>
+code object’s <code class="docutils literal notranslate"><span class="pre">co_qualname</span></code> field.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -256,12 +260,16 @@ code object's <code class="docutils literal notranslate"><span class="pre">co_qu
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="set.html"
-                        title="上一章">集合对象</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="method.html"
-                        title="下一章">实例方法对象</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="set.html"
+                          title="上一章">集合对象</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="method.html"
+                          title="下一章">实例方法对象</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -303,7 +311,7 @@ code object's <code class="docutils literal notranslate"><span class="pre">co_qu
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -332,7 +340,7 @@ code object's <code class="docutils literal notranslate"><span class="pre">co_qu
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -340,11 +348,11 @@ code object's <code class="docutils literal notranslate"><span class="pre">co_qu
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

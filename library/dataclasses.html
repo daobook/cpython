@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>dataclasses --- 数据类 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dataclasses — 数据类 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,13 +20,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="contextlib --- 为 with语句上下文提供的工具" href="contextlib.html" />
+    <link rel="next" title="contextlib — 为 with语句上下文提供的工具" href="contextlib.html" />
     <link rel="prev" title="warnings —— 警告信息的控制" href="warnings.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/dataclasses.html" />
     
@@ -70,9 +70,10 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> --- 数据类</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> — 数据类</a><ul>
 <li><a class="reference internal" href="#module-contents">模块内容</a></li>
 <li><a class="reference internal" href="#post-init-processing">初始化后处理</a></li>
 <li><a class="reference internal" href="#class-variables">类变量</a></li>
@@ -86,12 +87,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="warnings.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code> —— 警告信息的控制</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="contextlib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> --- 为 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>语句上下文提供的工具</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="warnings.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code> —— 警告信息的控制</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="contextlib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — 为 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>语句上下文提供的工具</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +124,7 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="contextlib.html" title="contextlib --- 为 with语句上下文提供的工具"
+          <a href="contextlib.html" title="contextlib — 为 with语句上下文提供的工具"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="warnings.html" title="warnings —— 警告信息的控制"
@@ -134,12 +140,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" accesskey="U">Python运行时服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> --- 数据类</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> — 数据类</a></li>
                 <li class="right">
                     
 
@@ -163,11 +169,11 @@
           <div class="body" role="main">
             
   <section id="module-dataclasses">
-<span id="dataclasses-data-classes"></span><h1><a class="reference internal" href="#module-dataclasses" title="dataclasses: Generate special methods on user-defined classes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code></a> --- 数据类<a class="headerlink" href="#module-dataclasses" title="永久链接至标题">¶</a></h1>
+<span id="dataclasses-data-classes"></span><h1><a class="reference internal" href="#module-dataclasses" title="dataclasses: Generate special methods on user-defined classes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code></a> — 数据类<a class="headerlink" href="#module-dataclasses" title="永久链接至标题">¶</a></h1>
 <p><strong>源码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/dataclasses.py">Lib/dataclasses.py</a></p>
 <hr class="docutils" />
-<p>这个模块提供了一个装饰器和一些函数，用于自动添加生成的 <a class="reference internal" href="../glossary.html#term-special-method"><span class="xref std std-term">special method</span></a>，例如 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> 到用户定义的类。 它最初描述于 <span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0557"><strong>PEP 557</strong></a> 。</p>
-<p>在这些生成的方法中使用的成员变量是使用 <span class="target" id="index-7"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a> 类型标注来定义的。 例如以下代码:</p>
+<p>这个模块提供了一个装饰器和一些函数，用于自动添加生成的 <a class="reference internal" href="../glossary.html#term-special-method"><span class="xref std std-term">special method</span></a>，例如 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> 到用户定义的类。 它最初描述于 <span class="target" id="index-6"></span><a class="pep reference external" href="https://peps.python.org/pep-0557/"><strong>PEP 557</strong></a> 。</p>
+<p>在这些生成的方法中使用的成员变量是使用 <span class="target" id="index-7"></span><a class="pep reference external" href="https://peps.python.org/pep-0526/"><strong>PEP 526</strong></a> 类型标注来定义的。 例如以下代码:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="nd">@dataclass</span>
@@ -196,7 +202,7 @@
 <h2>模块内容<a class="headerlink" href="#module-contents" title="永久链接至标题">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="dataclasses.dataclass">
-<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unsafe_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kw_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataclasses.dataclass" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unsafe_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kw_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weakref_slot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataclasses.dataclass" title="永久链接至目标">¶</a></dt>
 <dd><p>这个函数是 <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a> ，用于将生成的 <a class="reference internal" href="../glossary.html#term-special-method"><span class="xref std std-term">special method</span></a> 添加到类中，如下所述。</p>
 <p><a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 装饰器会检查类以查找 <code class="docutils literal notranslate"><span class="pre">field</span></code>。 <code class="docutils literal notranslate"><span class="pre">field</span></code> 被定义为具有 <a class="reference internal" href="../glossary.html#term-variable-annotation"><span class="xref std std-term">类型标注</span></a> 的类变量。 除了下面描述的两个例外，在 <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 中没有什么东西会去检查在变量标注中所指定的类型。</p>
 <p>所有生成的方法中的字段顺序是它们在类定义中出现的顺序。</p>
@@ -210,7 +216,7 @@
 <span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
     <span class="o">...</span>
 
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">match_args</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kw_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unsafe_hash</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">match_args</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kw_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">weakref_slot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
    <span class="o">...</span>
 </pre></div>
@@ -258,6 +264,26 @@
 <blockquote>
 <div><div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>If a field name is already included in the <code class="docutils literal notranslate"><span class="pre">__slots__</span></code>
+of a base class, it will not be included in the generated <code class="docutils literal notranslate"><span class="pre">__slots__</span></code>
+to prevent <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#notes-on-using-slots">overriding them</a>.
+Therefore, do not use <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> to retrieve the field names of a
+dataclass. Use <a class="reference internal" href="#dataclasses.fields" title="dataclasses.fields"><code class="xref py py-func docutils literal notranslate"><span class="pre">fields()</span></code></a> instead.
+To be able to determine inherited slots,
+base class <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> may be any iterable, but <em>not</em> an iterator.</p>
+</div>
+</div></blockquote>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">weakref_slot</span></code>: If true (the default is <code class="docutils literal notranslate"><span class="pre">False</span></code>), add a slot
+named “__weakref__”, which is required to make an instance
+weakref-able.  It is an error to specify <code class="docutils literal notranslate"><span class="pre">weakref_slot=True</span></code>
+without also specifying <code class="docutils literal notranslate"><span class="pre">slots=True</span></code>.</p></li>
+</ul>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </div></blockquote>
 <p><code class="docutils literal notranslate"><span class="pre">field</span></code>s 可以选择使用普通的 Python 语法指定默认值:</p>
@@ -319,7 +345,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="dataclasses.Field">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">Field</span></span><a class="headerlink" href="#dataclasses.Field" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">Field</span></span><a class="headerlink" href="#dataclasses.Field" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#dataclasses.Field" title="dataclasses.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> 对象描述每个定义的字段。这些对象在内部创建，并由 <a class="reference internal" href="#dataclasses.fields" title="dataclasses.fields"><code class="xref py py-func docutils literal notranslate"><span class="pre">fields()</span></code></a> 模块级方法返回（见下文）。用户永远不应该直接实例化 <a class="reference internal" href="#dataclasses.Field" title="dataclasses.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> 对象。 其有文档的属性是：</p>
 <blockquote>
 <div><ul class="simple">
@@ -393,8 +419,16 @@ instance.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="dataclasses.make_dataclass">
-<span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">make_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unsafe_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kw_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataclasses.make_dataclass" title="永久链接至目标">¶</a></dt>
-<dd><p>新建一个名为 <code class="docutils literal notranslate"><span class="pre">cls_name</span></code> 的数据库，其字段在 <code class="docutils literal notranslate"><span class="pre">fields</span></code> 中定义，基类在 <code class="docutils literal notranslate"><span class="pre">bases</span></code> 中给出，并使用在 <code class="docutils literal notranslate"><span class="pre">namespace</span></code> 中给出的命名空间进行初始化。 <code class="docutils literal notranslate"><span class="pre">fields</span></code> 是一个可迭代对象，其中的每个元素均为 <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">type)</span></code> 或 <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">type,</span> <span class="pre">Field)</span></code>。 如果只提供了 <code class="docutils literal notranslate"><span class="pre">name</span></code>，则 <code class="docutils literal notranslate"><span class="pre">typing.Any</span></code> 会被用作 <code class="docutils literal notranslate"><span class="pre">type</span></code>。 <code class="docutils literal notranslate"><span class="pre">init</span></code>, <code class="docutils literal notranslate"><span class="pre">repr</span></code>, <code class="docutils literal notranslate"><span class="pre">eq</span></code>, <code class="docutils literal notranslate"><span class="pre">order</span></code>, <code class="docutils literal notranslate"><span class="pre">unsafe_hash</span></code>, <code class="docutils literal notranslate"><span class="pre">frozen</span></code>, <code class="docutils literal notranslate"><span class="pre">match_args</span></code>, <code class="docutils literal notranslate"><span class="pre">kw_only</span></code> 和  <code class="docutils literal notranslate"><span class="pre">slots</span></code> 等值与它们在 <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 中的含义相同。</p>
+<span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">make_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unsafe_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kw_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weakref_slot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#dataclasses.make_dataclass" title="永久链接至目标">¶</a></dt>
+<dd><p>Creates a new dataclass with name <code class="docutils literal notranslate"><span class="pre">cls_name</span></code>, fields as defined
+in <code class="docutils literal notranslate"><span class="pre">fields</span></code>, base classes as given in <code class="docutils literal notranslate"><span class="pre">bases</span></code>, and initialized
+with a namespace as given in <code class="docutils literal notranslate"><span class="pre">namespace</span></code>.  <code class="docutils literal notranslate"><span class="pre">fields</span></code> is an
+iterable whose elements are each either <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">type)</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">type,</span> <span class="pre">Field)</span></code>.  If just <code class="docutils literal notranslate"><span class="pre">name</span></code> is supplied,
+<code class="docutils literal notranslate"><span class="pre">typing.Any</span></code> is used for <code class="docutils literal notranslate"><span class="pre">type</span></code>.  The values of <code class="docutils literal notranslate"><span class="pre">init</span></code>,
+<code class="docutils literal notranslate"><span class="pre">repr</span></code>, <code class="docutils literal notranslate"><span class="pre">eq</span></code>, <code class="docutils literal notranslate"><span class="pre">order</span></code>, <code class="docutils literal notranslate"><span class="pre">unsafe_hash</span></code>, <code class="docutils literal notranslate"><span class="pre">frozen</span></code>,
+<code class="docutils literal notranslate"><span class="pre">match_args</span></code>, <code class="docutils literal notranslate"><span class="pre">kw_only</span></code>, <code class="docutils literal notranslate"><span class="pre">slots</span></code>, and <code class="docutils literal notranslate"><span class="pre">weakref_slot</span></code> have
+the same meaning as they do in <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a>.</p>
 <p>此函数不是严格要求的，因为用于任何创建带有 <code class="docutils literal notranslate"><span class="pre">__annotations__</span></code> 的新类的 Python 机制都可以应用 <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 函数将该类转换为数据类。提供此功能是为了方便。例如:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">make_dataclass</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span>
                    <span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
@@ -469,7 +503,7 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="dataclasses.FrozenInstanceError">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">FrozenInstanceError</span></span><a class="headerlink" href="#dataclasses.FrozenInstanceError" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dataclasses.</span></span><span class="sig-name descname"><span class="pre">FrozenInstanceError</span></span><a class="headerlink" href="#dataclasses.FrozenInstanceError" title="永久链接至目标">¶</a></dt>
 <dd><p>在使用 <code class="docutils literal notranslate"><span class="pre">frozen=True</span></code> 定义的数据类上调用隐式定义的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code> 或 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__delattr__()</span></code> 时引发。 这是 <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> 的一个子类。</p>
 </dd></dl>
 
@@ -507,7 +541,7 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
 </section>
 <section id="class-variables">
 <h2>类变量<a class="headerlink" href="#class-variables" title="永久链接至标题">¶</a></h2>
-<p>两个地方 <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 实际检查字段类型的之一是确定字段是否是如 <span class="target" id="index-8"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0526"><strong>PEP 526</strong></a> 所定义的类变量。它通过检查字段的类型是否为 <code class="docutils literal notranslate"><span class="pre">typing.ClassVar</span></code> 来完成此操作。如果一个字段是一个 <code class="docutils literal notranslate"><span class="pre">ClassVar</span></code> ，它将被排除在考虑范围之外，并被数据类机制忽略。这样的 <code class="docutils literal notranslate"><span class="pre">ClassVar</span></code> 伪字段不会由模块级的 <a class="reference internal" href="#dataclasses.fields" title="dataclasses.fields"><code class="xref py py-func docutils literal notranslate"><span class="pre">fields()</span></code></a> 函数返回。</p>
+<p>两个地方 <a class="reference internal" href="#dataclasses.dataclass" title="dataclasses.dataclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">dataclass()</span></code></a> 实际检查字段类型的之一是确定字段是否是如 <span class="target" id="index-8"></span><a class="pep reference external" href="https://peps.python.org/pep-0526/"><strong>PEP 526</strong></a> 所定义的类变量。它通过检查字段的类型是否为 <code class="docutils literal notranslate"><span class="pre">typing.ClassVar</span></code> 来完成此操作。如果一个字段是一个 <code class="docutils literal notranslate"><span class="pre">ClassVar</span></code> ，它将被排除在考虑范围之外，并被数据类机制忽略。这样的 <code class="docutils literal notranslate"><span class="pre">ClassVar</span></code> 伪字段不会由模块级的 <a class="reference internal" href="#dataclasses.fields" title="dataclasses.fields"><code class="xref py py-func docutils literal notranslate"><span class="pre">fields()</span></code></a> 函数返回。</p>
 </section>
 <section id="init-only-variables">
 <h2>仅初始化变量<a class="headerlink" href="#init-only-variables" title="永久链接至标题">¶</a></h2>
@@ -643,9 +677,10 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> --- 数据类</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> — 数据类</a><ul>
 <li><a class="reference internal" href="#module-contents">模块内容</a></li>
 <li><a class="reference internal" href="#post-init-processing">初始化后处理</a></li>
 <li><a class="reference internal" href="#class-variables">类变量</a></li>
@@ -659,12 +694,17 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="warnings.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code> —— 警告信息的控制</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="contextlib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> --- 为 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>语句上下文提供的工具</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="warnings.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code> —— 警告信息的控制</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="contextlib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextlib</span></code> — 为 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code>语句上下文提供的工具</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -690,7 +730,7 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="contextlib.html" title="contextlib --- 为 with语句上下文提供的工具"
+          <a href="contextlib.html" title="contextlib — 为 with语句上下文提供的工具"
              >下一页</a> |</li>
         <li class="right" >
           <a href="warnings.html" title="warnings —— 警告信息的控制"
@@ -706,12 +746,12 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="python.html" >Python运行时服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> --- 数据类</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">dataclasses</span></code> — 数据类</a></li>
                 <li class="right">
                     
 
@@ -735,7 +775,7 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -743,11 +783,11 @@ specify fields, raises <a class="reference internal" href="exceptions.html#TypeE
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

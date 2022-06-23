@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>trace —— 跟踪 Python 语句的执行 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>trace —— 跟踪 Python 语句的执行 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="tracemalloc --- 跟踪内存分配" href="tracemalloc.html" />
-    <link rel="prev" title="timeit --- 测量小代码片段的执行时间" href="timeit.html" />
+    <link rel="next" title="tracemalloc — 跟踪内存分配" href="tracemalloc.html" />
+    <link rel="prev" title="timeit — 测量小代码片段的执行时间" href="timeit.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/trace.html" />
     
       
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trace</span></code> —— 跟踪 Python 语句的执行</a><ul>
 <li><a class="reference internal" href="#command-line-usage">命令行用法</a><ul>
 <li><a class="reference internal" href="#main-options">主要的可选参数</a></li>
@@ -84,12 +85,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="timeit.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">timeit</span></code> --- 测量小代码片段的执行时间</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="tracemalloc.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> --- 跟踪内存分配</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="timeit.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">timeit</span></code> — 测量小代码片段的执行时间</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tracemalloc.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> — 跟踪内存分配</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -116,10 +122,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="tracemalloc.html" title="tracemalloc --- 跟踪内存分配"
+          <a href="tracemalloc.html" title="tracemalloc — 跟踪内存分配"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="timeit.html" title="timeit --- 测量小代码片段的执行时间"
+          <a href="timeit.html" title="timeit — 测量小代码片段的执行时间"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -132,7 +138,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -288,7 +294,7 @@
 <span id="trace-api"></span><h2>编程接口<a class="headerlink" href="#programmatic-interface" title="永久链接至标题">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="trace.Trace">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">trace.</span></span><span class="sig-name descname"><span class="pre">Trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countfuncs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countcallers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoremods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoredirs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trace.Trace" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trace.</span></span><span class="sig-name descname"><span class="pre">Trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countfuncs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countcallers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoremods</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignoredirs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#trace.Trace" title="永久链接至目标">¶</a></dt>
 <dd><p>创建一个对象来跟踪单个语句或表达式的执行。所有参数均为选填。 <em>count</em> 可对行号计数。 <em>trace</em> 启用单行执行跟踪。 <em>countfuncs</em> 可列出运行过程中调用的函数。 <em>countcallers</em> 可跟踪调用关系。 <em>ignoremods</em> 是要忽略的模块或包的列表。<em>ignoredirs</em> 是要忽略的模块或包的目录列表。 <em>infile</em> 是个文件名，从该文件中读取存储的计数信息。 <em>outfile</em> 是用来写入最新计数信息的文件名。 <em>timing</em> 可以显示相对于跟踪开始时间的时间戳。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trace.Trace.run">
@@ -318,7 +324,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="trace.CoverageResults">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">trace.</span></span><span class="sig-name descname"><span class="pre">CoverageResults</span></span><a class="headerlink" href="#trace.CoverageResults" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">trace.</span></span><span class="sig-name descname"><span class="pre">CoverageResults</span></span><a class="headerlink" href="#trace.CoverageResults" title="永久链接至目标">¶</a></dt>
 <dd><p>存放代码覆盖结果的容器，由 <a class="reference internal" href="#trace.Trace.results" title="trace.Trace.results"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Trace.results()</span></code></a> 创建。用户不应直接去创建。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="trace.CoverageResults.update">
@@ -363,8 +369,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trace</span></code> —— 跟踪 Python 语句的执行</a><ul>
 <li><a class="reference internal" href="#command-line-usage">命令行用法</a><ul>
 <li><a class="reference internal" href="#main-options">主要的可选参数</a></li>
@@ -377,12 +384,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="timeit.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">timeit</span></code> --- 测量小代码片段的执行时间</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="tracemalloc.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> --- 跟踪内存分配</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="timeit.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">timeit</span></code> — 测量小代码片段的执行时间</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="tracemalloc.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tracemalloc</span></code> — 跟踪内存分配</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -408,10 +420,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="tracemalloc.html" title="tracemalloc --- 跟踪内存分配"
+          <a href="tracemalloc.html" title="tracemalloc — 跟踪内存分配"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="timeit.html" title="timeit --- 测量小代码片段的执行时间"
+          <a href="timeit.html" title="timeit — 测量小代码片段的执行时间"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -424,7 +436,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -453,7 +465,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -461,11 +473,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

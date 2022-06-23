@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>re --- 正则表达式操作 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>re — 正则表达式操作 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="difflib --- 计算差异的辅助工具" href="difflib.html" />
-    <link rel="prev" title="string --- 常见的字符串操作" href="string.html" />
+    <link rel="next" title="difflib — 计算差异的辅助工具" href="difflib.html" />
+    <link rel="prev" title="string — 常见的字符串操作" href="string.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/re.html" />
     
       
@@ -70,11 +70,17 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> --- 正则表达式操作</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> — 正则表达式操作</a><ul>
 <li><a class="reference internal" href="#regular-expression-syntax">正则表达式语法</a></li>
-<li><a class="reference internal" href="#module-contents">模块内容</a></li>
+<li><a class="reference internal" href="#module-contents">模块内容</a><ul>
+<li><a class="reference internal" href="#flags">Flags</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#regular-expression-objects">正则表达式对象 （正则对象）</a></li>
 <li><a class="reference internal" href="#match-objects">匹配对象</a></li>
 <li><a class="reference internal" href="#regular-expression-examples">正则表达式例子</a><ul>
@@ -93,12 +99,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="string.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">string</span></code> --- 常见的字符串操作</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="difflib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">difflib</span></code> --- 计算差异的辅助工具</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="string.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">string</span></code> — 常见的字符串操作</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="difflib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">difflib</span></code> — 计算差异的辅助工具</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -125,10 +136,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="difflib.html" title="difflib --- 计算差异的辅助工具"
+          <a href="difflib.html" title="difflib — 计算差异的辅助工具"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="string.html" title="string --- 常见的字符串操作"
+          <a href="string.html" title="string — 常见的字符串操作"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -141,12 +152,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="text.html" accesskey="U">文本处理服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> --- 正则表达式操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> — 正则表达式操作</a></li>
                 <li class="right">
                     
 
@@ -170,8 +181,8 @@
           <div class="body" role="main">
             
   <section id="module-re">
-<span id="re-regular-expression-operations"></span><h1><a class="reference internal" href="#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> --- 正则表达式操作<a class="headerlink" href="#module-re" title="永久链接至标题">¶</a></h1>
-<p><strong>源代码:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/re.py">Lib/re.py</a></p>
+<span id="re-regular-expression-operations"></span><h1><a class="reference internal" href="#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> — 正则表达式操作<a class="headerlink" href="#module-re" title="永久链接至标题">¶</a></h1>
+<p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/re/">Lib/re/</a></p>
 <hr class="docutils" />
 <p>本模块提供了与 Perl 语言类似的正则表达式匹配操作。</p>
 <p>模式和被搜索的字符串既可以是 Unicode 字符串 (<a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) ，也可以是8位字节串 (<a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>)。 但是，Unicode 字符串与 8 位字节串不能混用：也就是说，不能用字节串模式匹配 Unicode 字符串，反之亦然；同理，替换操作时，替换字符串的类型也必须与所用的模式和搜索字符串的类型一致。</p>
@@ -189,7 +200,11 @@
 <p>以下是正则表达式格式的简要说明。更详细的信息和演示，参考  <a class="reference internal" href="../howto/regex.html#regex-howto"><span class="std std-ref">正则表达式HOWTO</span></a>。</p>
 <p>正则表达式可以包含普通或者特殊字符。绝大部分普通字符，比如 <code class="docutils literal notranslate"><span class="pre">'A'</span></code>, <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, 或者 <code class="docutils literal notranslate"><span class="pre">'0'</span></code>，都是最简单的正则表达式。它们就匹配自身。你可以拼接普通字符，所以 <code class="docutils literal notranslate"><span class="pre">last</span></code> 匹配字符串 <code class="docutils literal notranslate"><span class="pre">'last'</span></code>.  （在这一节的其他部分，我们将用 <code class="docutils literal notranslate"><span class="pre">this</span> <span class="pre">special</span> <span class="pre">style</span></code> 这种方式表示正则表达式，通常不带引号，要匹配的字符串用 <code class="docutils literal notranslate"><span class="pre">'in</span> <span class="pre">single</span> <span class="pre">quotes'</span></code> ，单引号形式。）</p>
 <p>有些字符，比如 <code class="docutils literal notranslate"><span class="pre">'|'</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">'('</span></code>，属于特殊字符。 特殊字符既可以表示它的普通含义， 也可以影响它旁边的正则表达式的解释。</p>
-<p>重复修饰符 (<code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, <code class="docutils literal notranslate"><span class="pre">{m,n}</span></code>, 等) 不能直接嵌套。这样避免了非贪婪后缀 <code class="docutils literal notranslate"><span class="pre">?</span></code> 修饰符，和其他实现中的修饰符产生的多义性。要应用一个内层重复嵌套，可以使用括号。 比如，表达式 <code class="docutils literal notranslate"><span class="pre">(?:a{6})*</span></code> 匹配6个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> 字符重复任意次数。</p>
+<p>Repetition operators or quantifiers (<code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">?</span></code>, <code class="docutils literal notranslate"><span class="pre">{m,n}</span></code>, etc) cannot be
+directly nested. This avoids ambiguity with the non-greedy modifier suffix
+<code class="docutils literal notranslate"><span class="pre">?</span></code>, and with other modifiers in other implementations. To apply a second
+repetition to an inner repetition, parentheses may be used. For example,
+the expression <code class="docutils literal notranslate"><span class="pre">(?:a{6})*</span></code> matches any multiple of six <code class="docutils literal notranslate"><span class="pre">'a'</span></code> characters.</p>
 <p>特殊字符有：</p>
 <dl class="simple" id="index-0">
 <dt><code class="docutils literal notranslate"><span class="pre">.</span></code></dt><dd><p>(点) 在默认模式，匹配除了换行的任意字符。如果指定了标签 <a class="reference internal" href="#re.DOTALL" title="re.DOTALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">DOTALL</span></code></a> ，它将匹配包括换行符的任意字符。</p>
@@ -200,7 +215,7 @@
 </dd>
 </dl>
 <dl class="simple" id="index-2">
-<dt><code class="docutils literal notranslate"><span class="pre">$</span></code></dt><dd><p>匹配字符串尾或者在字符串尾的换行符的前一个字符，在 <a class="reference internal" href="#re.MULTILINE" title="re.MULTILINE"><code class="xref py py-const docutils literal notranslate"><span class="pre">MULTILINE</span></code></a> 模式下也会匹配换行符之前的文本。 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 匹配 'foo' 和 'foobar'，但正则表达式 <code class="docutils literal notranslate"><span class="pre">foo$</span></code> 只匹配 'foo'。 更有趣的是，在 <code class="docutils literal notranslate"><span class="pre">'foo1\nfoo2\n'</span></code> 中搜索 <code class="docutils literal notranslate"><span class="pre">foo.$</span></code>，通常匹配  'foo2'，但在 <a class="reference internal" href="#re.MULTILINE" title="re.MULTILINE"><code class="xref py py-const docutils literal notranslate"><span class="pre">MULTILINE</span></code></a> 模式下可以匹配到 'foo1'；在 <code class="docutils literal notranslate"><span class="pre">'foo\n'</span></code> 中搜索 <code class="docutils literal notranslate"><span class="pre">$</span></code> 会找到两个（空的）匹配：一个在换行符之前，一个在字符串的末尾。</p>
+<dt><code class="docutils literal notranslate"><span class="pre">$</span></code></dt><dd><p>匹配字符串尾或者在字符串尾的换行符的前一个字符，在 <a class="reference internal" href="#re.MULTILINE" title="re.MULTILINE"><code class="xref py py-const docutils literal notranslate"><span class="pre">MULTILINE</span></code></a> 模式下也会匹配换行符之前的文本。 <code class="docutils literal notranslate"><span class="pre">foo</span></code> 匹配 ‘foo’ 和 ‘foobar’，但正则表达式 <code class="docutils literal notranslate"><span class="pre">foo$</span></code> 只匹配 ‘foo’。 更有趣的是，在 <code class="docutils literal notranslate"><span class="pre">'foo1\nfoo2\n'</span></code> 中搜索 <code class="docutils literal notranslate"><span class="pre">foo.$</span></code>，通常匹配  ‘foo2’，但在 <a class="reference internal" href="#re.MULTILINE" title="re.MULTILINE"><code class="xref py py-const docutils literal notranslate"><span class="pre">MULTILINE</span></code></a> 模式下可以匹配到 ‘foo1’；在 <code class="docutils literal notranslate"><span class="pre">'foo\n'</span></code> 中搜索 <code class="docutils literal notranslate"><span class="pre">$</span></code> 会找到两个（空的）匹配：一个在换行符之前，一个在字符串的末尾。</p>
 </dd>
 </dl>
 <dl class="simple" id="index-3">
@@ -216,35 +231,83 @@
 </dd>
 </dl>
 <dl class="simple" id="index-6">
-<dt><code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">+?</span></code>, <code class="docutils literal notranslate"><span class="pre">??</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">'*'</span></code>, <code class="docutils literal notranslate"><span class="pre">'+'</span></code>，和 <code class="docutils literal notranslate"><span class="pre">'?'</span></code> 修饰符都是 <em class="dfn">贪婪的</em>；它们在字符串进行尽可能多的匹配。有时候并不需要这种行为。如果正则式 <code class="docutils literal notranslate"><span class="pre">&lt;.*&gt;</span></code> 希望找到 <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;</span> <span class="pre">b</span> <span class="pre">&lt;c&gt;'</span></code>，它将会匹配整个字符串，而不仅是 <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;'</span></code>。在修饰符之后添加 <code class="docutils literal notranslate"><span class="pre">?</span></code> 将使样式以 <em class="dfn">非贪婪`方式或者 :dfn:`最小</em> 方式进行匹配； 尽量 <em>少</em> 的字符将会被匹配。 使用正则式 <code class="docutils literal notranslate"><span class="pre">&lt;.*?&gt;</span></code> 将会仅仅匹配 <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;'</span></code>。</p>
+<dt><code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">+?</span></code>, <code class="docutils literal notranslate"><span class="pre">??</span></code></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">'*'</span></code>, <code class="docutils literal notranslate"><span class="pre">'+'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'?'</span></code> quantifiers are all <em class="dfn">greedy</em>; they match
+as much text as possible.  Sometimes this behaviour isn’t desired; if the RE
+<code class="docutils literal notranslate"><span class="pre">&lt;.*&gt;</span></code> is matched against <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;</span> <span class="pre">b</span> <span class="pre">&lt;c&gt;'</span></code>, it will match the entire
+string, and not just <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;'</span></code>.  Adding <code class="docutils literal notranslate"><span class="pre">?</span></code> after the quantifier makes it
+perform the match in <em class="dfn">non-greedy</em> or <em class="dfn">minimal</em> fashion; as <em>few</em>
+characters as possible will be matched.  Using the RE <code class="docutils literal notranslate"><span class="pre">&lt;.*?&gt;</span></code> will match
+only <code class="docutils literal notranslate"><span class="pre">'&lt;a&gt;'</span></code>.</p>
 </dd>
 </dl>
-<dl class="simple" id="index-7">
+<dl id="index-7">
+<dt><code class="docutils literal notranslate"><span class="pre">*+</span></code>, <code class="docutils literal notranslate"><span class="pre">++</span></code>, <code class="docutils literal notranslate"><span class="pre">?+</span></code></dt><dd><p>Like the <code class="docutils literal notranslate"><span class="pre">'*'</span></code>, <code class="docutils literal notranslate"><span class="pre">'+'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'?'</span></code> quantifiers, those where <code class="docutils literal notranslate"><span class="pre">'+'</span></code> is
+appended also match as many times as possible.
+However, unlike the true greedy quantifiers, these do not allow
+back-tracking when the expression following it fails to match.
+These are known as <em class="dfn">possessive</em> quantifiers.
+For example, <code class="docutils literal notranslate"><span class="pre">a*a</span></code> will match <code class="docutils literal notranslate"><span class="pre">'aaaa'</span></code> because the <code class="docutils literal notranslate"><span class="pre">a*</span></code> will match
+all 4 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>s, but, when the final <code class="docutils literal notranslate"><span class="pre">'a'</span></code> is encountered, the
+expression is backtracked so that in the end the <code class="docutils literal notranslate"><span class="pre">a*</span></code> ends up matching
+3 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>s total, and the fourth <code class="docutils literal notranslate"><span class="pre">'a'</span></code> is matched by the final <code class="docutils literal notranslate"><span class="pre">'a'</span></code>.
+However, when <code class="docutils literal notranslate"><span class="pre">a*+a</span></code> is used to match <code class="docutils literal notranslate"><span class="pre">'aaaa'</span></code>, the <code class="docutils literal notranslate"><span class="pre">a*+</span></code> will
+match all 4 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, but when the final <code class="docutils literal notranslate"><span class="pre">'a'</span></code> fails to find any more
+characters to match, the expression cannot be backtracked and will thus
+fail to match.
+<code class="docutils literal notranslate"><span class="pre">x*+</span></code>, <code class="docutils literal notranslate"><span class="pre">x++</span></code> and <code class="docutils literal notranslate"><span class="pre">x?+</span></code> are equivalent to <code class="docutils literal notranslate"><span class="pre">(?&gt;x*)</span></code>, <code class="docutils literal notranslate"><span class="pre">(?&gt;x+)</span></code>
+and <code class="docutils literal notranslate"><span class="pre">(?&gt;x?)</span></code> correspondingly.</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+<dl id="index-8">
 <dt><code class="docutils literal notranslate"><span class="pre">{m}</span></code></dt><dd><p>对其之前的正则式指定匹配 <em>m</em> 个重复；少于 <em>m</em> 的话就会导致匹配失败。比如， <code class="docutils literal notranslate"><span class="pre">a{6}</span></code> 将匹配6个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> , 但是不能是5个。</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">{m,n}</span></code></dt><dd><p>对正则式进行 <em>m</em> 到 <em>n</em> 次匹配，在 <em>m</em> 和 <em>n</em> 之间取尽量多。 比如，<code class="docutils literal notranslate"><span class="pre">a{3,5}</span></code> 将匹配 3 到 5个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>。忽略 <em>m</em> 意为指定下界为0，忽略 <em>n</em> 指定上界为无限次。 比如 <code class="docutils literal notranslate"><span class="pre">a{4,}b</span></code> 将匹配 <code class="docutils literal notranslate"><span class="pre">'aaaab'</span></code> 或者1000个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> 尾随一个 <code class="docutils literal notranslate"><span class="pre">'b'</span></code>，但不能匹配 <code class="docutils literal notranslate"><span class="pre">'aaab'</span></code>。逗号不能省略，否则无法辨别修饰符应该忽略哪个边界。</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">{m,n}?</span></code></dt><dd><p>前一个修饰符的非贪婪模式，只匹配尽量少的字符次数。比如，对于 <code class="docutils literal notranslate"><span class="pre">'aaaaaa'</span></code>， <code class="docutils literal notranslate"><span class="pre">a{3,5}</span></code> 匹配 5个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> ，而 <code class="docutils literal notranslate"><span class="pre">a{3,5}?</span></code> 只匹配3个 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>。</p>
+<dt><code class="docutils literal notranslate"><span class="pre">{m,n}?</span></code></dt><dd><p>Causes the resulting RE to match from <em>m</em> to <em>n</em> repetitions of the preceding
+RE, attempting to match as <em>few</em> repetitions as possible.  This is the
+non-greedy version of the previous quantifier.  For example, on the
+6-character string <code class="docutils literal notranslate"><span class="pre">'aaaaaa'</span></code>, <code class="docutils literal notranslate"><span class="pre">a{3,5}</span></code> will match 5 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> characters,
+while <code class="docutils literal notranslate"><span class="pre">a{3,5}?</span></code> will only match 3 characters.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{m,n}+</span></code></dt><dd><p>Causes the resulting RE to match from <em>m</em> to <em>n</em> repetitions of the
+preceding RE, attempting to match as many repetitions as possible
+<em>without</em> establishing any backtracking points.
+This is the possessive version of the quantifier above.
+For example, on the 6-character string <code class="docutils literal notranslate"><span class="pre">'aaaaaa'</span></code>, <code class="docutils literal notranslate"><span class="pre">a{3,5}+aa</span></code>
+attempt to match 5 <code class="docutils literal notranslate"><span class="pre">'a'</span></code> characters, then, requiring 2 more <code class="docutils literal notranslate"><span class="pre">'a'</span></code>s,
+will need more characters than available and thus fail, while
+<code class="docutils literal notranslate"><span class="pre">a{3,5}aa</span></code> will match with <code class="docutils literal notranslate"><span class="pre">a{3,5}</span></code> capturing 5, then 4 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>s
+by backtracking and then the final 2 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>s are matched by the final
+<code class="docutils literal notranslate"><span class="pre">aa</span></code> in the pattern.
+<code class="docutils literal notranslate"><span class="pre">x{m,n}+</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">(?&gt;x{m,n})</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
 </dd>
 </dl>
-<dl id="index-8">
+<dl id="index-9">
 <dt><code class="docutils literal notranslate"><span class="pre">\</span></code></dt><dd><p>转义特殊字符（允许你匹配 <code class="docutils literal notranslate"><span class="pre">'*'</span></code>, <code class="docutils literal notranslate"><span class="pre">'?'</span></code>, 或者此类其他），或者表示一个特殊序列；特殊序列之后进行讨论。</p>
 <p>如果你没有使用原始字符串（ <code class="docutils literal notranslate"><span class="pre">r'raw'</span></code> ）来表达样式，要牢记Python也使用反斜杠作为转义序列；如果转义序列不被Python的分析器识别，反斜杠和字符才能出现在字符串中。如果Python可以识别这个序列，那么反斜杠就应该重复两次。这将导致理解障碍，所以高度推荐，就算是最简单的表达式，也要使用原始字符串。</p>
 </dd>
 </dl>
-<dl id="index-9">
+<dl id="index-10">
 <dt><code class="docutils literal notranslate"><span class="pre">[]</span></code></dt><dd><p>用于表示一个字符集合。在一个集合中：</p>
 <ul class="simple">
 <li><p>字符可以单独列出，比如 <code class="docutils literal notranslate"><span class="pre">[amk]</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>， <code class="docutils literal notranslate"><span class="pre">'m'</span></code>， 或者 <code class="docutils literal notranslate"><span class="pre">'k'</span></code>。</p></li>
 </ul>
-<ul class="simple" id="index-10">
+<ul class="simple" id="index-11">
 <li><p>可以表示字符范围，通过用 <code class="docutils literal notranslate"><span class="pre">'-'</span></code> 将两个字符连起来。比如 <code class="docutils literal notranslate"><span class="pre">[a-z]</span></code> 将匹配任何小写ASCII字符， <code class="docutils literal notranslate"><span class="pre">[0-5][0-9]</span></code> 将匹配从 <code class="docutils literal notranslate"><span class="pre">00</span></code> 到 <code class="docutils literal notranslate"><span class="pre">59</span></code> 的两位数字， <code class="docutils literal notranslate"><span class="pre">[0-9A-Fa-f]</span></code> 将匹配任何十六进制数位。 如果 <code class="docutils literal notranslate"><span class="pre">-</span></code> 进行了转义 （比如 <code class="docutils literal notranslate"><span class="pre">[a\-z]</span></code>）或者它的位置在首位或者末尾（如 <code class="docutils literal notranslate"><span class="pre">[-a]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">[a-]</span></code>），它就只表示普通字符 <code class="docutils literal notranslate"><span class="pre">'-'</span></code>。</p></li>
 <li><p>特殊字符在集合中，失去它的特殊含义。比如 <code class="docutils literal notranslate"><span class="pre">[(+*)]</span></code> 只会匹配这几个文法字符 <code class="docutils literal notranslate"><span class="pre">'('</span></code>, <code class="docutils literal notranslate"><span class="pre">'+'</span></code>, <code class="docutils literal notranslate"><span class="pre">'*'</span></code>, or <code class="docutils literal notranslate"><span class="pre">')'</span></code>。</p></li>
 </ul>
-<ul class="simple" id="index-11">
+<ul class="simple" id="index-12">
 <li><p>字符类如 <code class="docutils literal notranslate"><span class="pre">\w</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">\S</span></code> (如下定义) 在集合内可以接受，它们可以匹配的字符由 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 或者 <a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">LOCALE</span></code></a> 模式决定。</p></li>
 </ul>
-<ul class="simple" id="index-12">
+<ul class="simple" id="index-13">
 <li><p>不在集合范围内的字符可以通过 <em class="dfn">取反</em> 来进行匹配。如果集合首字符是 <code class="docutils literal notranslate"><span class="pre">'^'</span></code> ，所有 <em>不</em> 在集合内的字符将会被匹配，比如 <code class="docutils literal notranslate"><span class="pre">[^5]</span></code> 将匹配所有字符，除了 <code class="docutils literal notranslate"><span class="pre">'5'</span></code>， <code class="docutils literal notranslate"><span class="pre">[^^]</span></code> 将匹配所有字符，除了 <code class="docutils literal notranslate"><span class="pre">'^'</span></code>.  <code class="docutils literal notranslate"><span class="pre">^</span></code> 如果不在集合首位，就没有特殊含义。</p></li>
 <li><p>在集合内要匹配一个字符 <code class="docutils literal notranslate"><span class="pre">']'</span></code>，有两种方法，要么就在它之前加上反斜杠，要么就把它放到集合首位。比如， <code class="docutils literal notranslate"><span class="pre">[()[\]{}]</span></code> 和 <code class="docutils literal notranslate"><span class="pre">[]()[{}]</span></code> 都可以匹配括号。</p></li>
 </ul>
@@ -256,21 +319,24 @@
 </div>
 </dd>
 </dl>
-<dl class="simple" id="index-13">
+<dl class="simple" id="index-14">
 <dt><code class="docutils literal notranslate"><span class="pre">|</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">A|B</span></code>， <em>A</em> 和 <em>B</em> 可以是任意正则表达式，创建一个正则表达式，匹配 <em>A</em> 或者 <em>B</em>.  任意个正则表达式可以用 <code class="docutils literal notranslate"><span class="pre">'|'</span></code> 连接。它也可以在组合（见下列）内使用。扫描目标字符串时， <code class="docutils literal notranslate"><span class="pre">'|'</span></code> 分隔开的正则样式从左到右进行匹配。当一个样式完全匹配时，这个分支就被接受。意思就是，一旦 <em>A</em> 匹配成功， <em>B</em> 就不再进行匹配，即便它能产生一个更好的匹配。或者说，<code class="docutils literal notranslate"><span class="pre">'|'</span></code> 操作符绝不贪婪。  如果要匹配 <code class="docutils literal notranslate"><span class="pre">'|'</span></code> 字符，使用 <code class="docutils literal notranslate"><span class="pre">\|</span></code>， 或者把它包含在字符集里，比如 <code class="docutils literal notranslate"><span class="pre">[|]</span></code>.</p>
 </dd>
 </dl>
-<dl class="simple" id="index-14">
+<dl class="simple" id="index-15">
 <dt><code class="docutils literal notranslate"><span class="pre">(...)</span></code></dt><dd><p>（组合），匹配括号内的任意正则表达式，并标识出组合的开始和结尾。匹配完成后，组合的内容可以被获取，并可以在之后用  <code class="docutils literal notranslate"><span class="pre">\number</span></code> 转义序列进行再次匹配，之后进行详细说明。要匹配字符 <code class="docutils literal notranslate"><span class="pre">'('</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">')'</span></code>, 用 <code class="docutils literal notranslate"><span class="pre">\(</span></code> 或 <code class="docutils literal notranslate"><span class="pre">\)</span></code>, 或者把它们包含在字符集合里: <code class="docutils literal notranslate"><span class="pre">[(]</span></code>, <code class="docutils literal notranslate"><span class="pre">[)]</span></code>.</p>
 </dd>
 </dl>
-<dl class="simple" id="index-15">
+<dl id="index-16">
 <dt><code class="docutils literal notranslate"><span class="pre">(?…)</span></code></dt><dd><p>这是个扩展标记法 （一个 <code class="docutils literal notranslate"><span class="pre">'?'</span></code> 跟随 <code class="docutils literal notranslate"><span class="pre">'('</span></code> 并无含义）。  <code class="docutils literal notranslate"><span class="pre">'?'</span></code> 后面的第一个字符决定了这个构建采用什么样的语法。这种扩展通常并不创建新的组合； <code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;...)</span></code> 是唯一的例外。 以下是目前支持的扩展。</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">(?aiLmsux)</span></code></dt><dd><p>( <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'i'</span></code>, <code class="docutils literal notranslate"><span class="pre">'L'</span></code>, <code class="docutils literal notranslate"><span class="pre">'m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'u'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x'</span></code> 中的一个或多个) 这个组合匹配一个空字符串；这些字符对正则表达式设置以下标记 <a class="reference internal" href="#re.A" title="re.A"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.A</span></code></a> (只匹配ASCII字符), <a class="reference internal" href="#re.I" title="re.I"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.I</span></code></a> (忽略大小写), <a class="reference internal" href="#re.L" title="re.L"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.L</span></code></a> (语言依赖), <a class="reference internal" href="#re.M" title="re.M"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.M</span></code></a> (多行模式), <a class="reference internal" href="#re.S" title="re.S"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.S</span></code></a> (点dot匹配全部字符), <code class="xref py py-const docutils literal notranslate"><span class="pre">re.U</span></code> (Unicode匹配), and <a class="reference internal" href="#re.X" title="re.X"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.X</span></code></a> (冗长模式)。 (这些标记在 <a class="reference internal" href="#contents-of-module-re"><span class="std std-ref">模块内容</span></a> 中描述) 如果你想将这些标记包含在正则表达式中，这个方法就很有用，免去了在 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 中传递 <em>flag</em> 参数。标记应该在表达式字符串首位表示。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>This construction can only be used at the start of the expression.</p>
+</div>
 </dd>
 </dl>
-<dl id="index-16">
+<dl id="index-17">
 <dt><code class="docutils literal notranslate"><span class="pre">(?:…)</span></code></dt><dd><p>正则括号的非捕获版本。 匹配在括号内的任何正则表达式，但该分组所匹配的子字符串 <em>不能</em> 在执行匹配后被获取或是之后在模式中被引用。</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">(?aiLmsux-imsx:…)</span></code></dt><dd><p>(<code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'i'</span></code>, <code class="docutils literal notranslate"><span class="pre">'L'</span></code>, <code class="docutils literal notranslate"><span class="pre">'m'</span></code>, <code class="docutils literal notranslate"><span class="pre">'s'</span></code>, <code class="docutils literal notranslate"><span class="pre">'u'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x'</span></code> 中的0或者多个， 之后可选跟随 <code class="docutils literal notranslate"><span class="pre">'-'</span></code> 在后面跟随 <code class="docutils literal notranslate"><span class="pre">'i'</span></code> , <code class="docutils literal notranslate"><span class="pre">'m'</span></code> , <code class="docutils literal notranslate"><span class="pre">'s'</span></code> , <code class="docutils literal notranslate"><span class="pre">'x'</span></code> 中的一到多个 .) 这些字符为表达式的其中一部分 <em>设置</em> 或者 <em>去除</em> 相应标记 <a class="reference internal" href="#re.A" title="re.A"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.A</span></code></a> (只匹配ASCII), <a class="reference internal" href="#re.I" title="re.I"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.I</span></code></a> (忽略大小写), <a class="reference internal" href="#re.L" title="re.L"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.L</span></code></a> (语言依赖), <a class="reference internal" href="#re.M" title="re.M"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.M</span></code></a> (多行), <a class="reference internal" href="#re.S" title="re.S"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.S</span></code></a> (点匹配所有字符), <code class="xref py py-const docutils literal notranslate"><span class="pre">re.U</span></code> (Unicode匹配), and <a class="reference internal" href="#re.X" title="re.X"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.X</span></code></a> (冗长模式)。(标记描述在 <a class="reference internal" href="#contents-of-module-re"><span class="std std-ref">模块内容</span></a> .)</p>
@@ -282,9 +348,29 @@
 <p><span class="versionmodified changed">在 3.7 版更改: </span>符号 <code class="docutils literal notranslate"><span class="pre">'a'</span></code>, <code class="docutils literal notranslate"><span class="pre">'L'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'u'</span></code> 同样可以用在一个组合内。</p>
 </div>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">(?&gt;...)</span></code></dt><dd><p>Attempts to match <code class="docutils literal notranslate"><span class="pre">...</span></code> as if it was a separate regular expression, and
+if successful, continues to match the rest of the pattern following it.
+If the subsequent pattern fails to match, the stack can only be unwound
+to a point <em>before</em> the <code class="docutils literal notranslate"><span class="pre">(?&gt;...)</span></code> because once exited, the expression,
+known as an <em class="dfn">atomic group</em>, has thrown away all stack points within
+itself.
+Thus, <code class="docutils literal notranslate"><span class="pre">(?&gt;.*).</span></code> would never match anything because first the <code class="docutils literal notranslate"><span class="pre">.*</span></code>
+would match all characters possible, then, having nothing left to match,
+the final <code class="docutils literal notranslate"><span class="pre">.</span></code> would fail to match.
+Since there are no stack points saved in the Atomic Group, and there is
+no stack point before it, the entire expression would thus fail to match.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd>
 </dl>
-<dl id="index-17">
-<dt><code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;…)</span></code></dt><dd><p>（命名组合）类似正则组合，但是匹配到的子串组在外部是通过定义的 <em>name</em> 来获取的。组合名必须是有效的Python标识符，并且每个组合名只能用一个正则表达式定义，只能定义一次。一个符号组合同样是一个数字组合，就像这个组合没有被命名一样。</p>
+<dl id="index-18">
+<dt><code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;…)</span></code></dt><dd><p>Similar to regular parentheses, but the substring matched by the group is
+accessible via the symbolic group name <em>name</em>.  Group names must be valid
+Python identifiers, and in bytes patterns they must contain only characters
+in the ASCII range.  Each group name must be defined only once within a
+regular expression.  A symbolic group is also a numbered group, just as if
+the group were not named.</p>
 <p>命名组合可以在三种上下文中引用。如果样式是 <code class="docutils literal notranslate"><span class="pre">(?P&lt;quote&gt;['&quot;]).*?(?P=quote)</span></code> （也就是说，匹配单引号或者双引号括起来的字符串)：</p>
 <table class="docutils align-default">
 <colgroup>
@@ -292,7 +378,7 @@
 <col style="width: 47%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>引用组合 &quot;quote&quot; 的上下文</p></th>
+<tr class="row-odd"><th class="head"><p>引用组合 “quote” 的上下文</p></th>
 <th class="head"><p>引用方法</p></th>
 </tr>
 </thead>
@@ -321,25 +407,29 @@
 </tr>
 </tbody>
 </table>
-</dd>
-</dl>
-<dl class="simple" id="index-18">
-<dt><code class="docutils literal notranslate"><span class="pre">(?P=name)</span></code></dt><dd><p>反向引用一个命名组合；它匹配前面那个叫 <em>name</em> 的命名组中匹配到的串同样的字串。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>In bytes patterns group names must contain only characters in
+the ASCII range.</p>
+</div>
 </dd>
 </dl>
 <dl class="simple" id="index-19">
-<dt><code class="docutils literal notranslate"><span class="pre">(?#…)</span></code></dt><dd><p>注释；里面的内容会被忽略。</p>
+<dt><code class="docutils literal notranslate"><span class="pre">(?P=name)</span></code></dt><dd><p>反向引用一个命名组合；它匹配前面那个叫 <em>name</em> 的命名组中匹配到的串同样的字串。</p>
 </dd>
 </dl>
 <dl class="simple" id="index-20">
-<dt><code class="docutils literal notranslate"><span class="pre">(?=…)</span></code></dt><dd><p>匹配 <code class="docutils literal notranslate"><span class="pre">…</span></code> 的内容，但是并不消费样式的内容。这个叫做 <em class="dfn">lookahead assertion</em>。比如， <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">(?=Asimov)</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'Isaac</span> <span class="pre">'</span></code> 只有在后面是  <code class="docutils literal notranslate"><span class="pre">'Asimov'</span></code> 的时候。</p>
+<dt><code class="docutils literal notranslate"><span class="pre">(?#…)</span></code></dt><dd><p>注释；里面的内容会被忽略。</p>
 </dd>
 </dl>
 <dl class="simple" id="index-21">
+<dt><code class="docutils literal notranslate"><span class="pre">(?=…)</span></code></dt><dd><p>匹配 <code class="docutils literal notranslate"><span class="pre">…</span></code> 的内容，但是并不消费样式的内容。这个叫做 <em class="dfn">lookahead assertion</em>。比如， <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">(?=Asimov)</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'Isaac</span> <span class="pre">'</span></code> 只有在后面是  <code class="docutils literal notranslate"><span class="pre">'Asimov'</span></code> 的时候。</p>
+</dd>
+</dl>
+<dl class="simple" id="index-22">
 <dt><code class="docutils literal notranslate"><span class="pre">(?!…)</span></code></dt><dd><p>匹配 <code class="docutils literal notranslate"><span class="pre">…</span></code> 不符合的情况。这个叫 <em class="dfn">negative lookahead assertion</em> （前视取反）。比如说， <code class="docutils literal notranslate"><span class="pre">Isaac</span> <span class="pre">(?!Asimov)</span></code> 只有后面 <em>不</em> 是 <code class="docutils literal notranslate"><span class="pre">'Asimov'</span></code> 的时候才匹配 <code class="docutils literal notranslate"><span class="pre">'Isaac</span> <span class="pre">'</span></code> 。</p>
 </dd>
 </dl>
-<dl id="index-22">
+<dl id="index-23">
 <dt><code class="docutils literal notranslate"><span class="pre">(?&lt;=…)</span></code></dt><dd><p>匹配字符串的当前位置，它的前面匹配 <code class="docutils literal notranslate"><span class="pre">...</span></code> 的内容到当前位置。这叫 <em class="dfn">positive lookbehind assertion</em> （正向后视断定）。 <code class="docutils literal notranslate"><span class="pre">(?&lt;=abc)def</span></code> 会在 <code class="docutils literal notranslate"><span class="pre">'abcdef'</span></code> 中找到一个匹配，因为后视会往后看3个字符并检查是否包含匹配的样式。包含的匹配样式必须是定长的，意思就是 <code class="docutils literal notranslate"><span class="pre">abc</span></code> 或 <code class="docutils literal notranslate"><span class="pre">a|b</span></code> 是允许的，但是 <code class="docutils literal notranslate"><span class="pre">a*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">a{3,4}</span></code> 不可以。注意以 positive lookbehind assertions 开始的样式，如 <code class="docutils literal notranslate"><span class="pre">(?&lt;=abc)def</span></code> ，并不是从 a 开始搜索，而是从 d 往回看的。你可能更加愿意使用 <a class="reference internal" href="#re.search" title="re.search"><code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code></a> 函数，而不是 <a class="reference internal" href="#re.match" title="re.match"><code class="xref py py-func docutils literal notranslate"><span class="pre">match()</span></code></a> 函数：</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;(?&lt;=abc)def&#39;</span><span class="p">,</span> <span class="s1">&#39;abcdef&#39;</span><span class="p">)</span>
@@ -358,31 +448,34 @@
 </div>
 </dd>
 </dl>
-<dl class="simple" id="index-23">
+<dl id="index-24">
 <dt><code class="docutils literal notranslate"><span class="pre">(?&lt;!…)</span></code></dt><dd><p>匹配当前位置之前不是 <code class="docutils literal notranslate"><span class="pre">...</span></code> 的样式。这个叫 <em class="dfn">negative lookbehind assertion</em> （后视断定取非）。类似正向后视断定，包含的样式匹配必须是定长的。由 negative lookbehind assertion 开始的样式可以从字符串搜索开始的位置进行匹配。</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">(?(id/name)yes-pattern|no-pattern)</span></code></dt><dd><p>如果给定的  <em>id</em> 或 <em>name</em> 存在，将会尝试匹配 <code class="docutils literal notranslate"><span class="pre">yes-pattern</span></code> ，否则就尝试匹配 <code class="docutils literal notranslate"><span class="pre">no-pattern</span></code>，<code class="docutils literal notranslate"><span class="pre">no-pattern</span></code> 可选，也可以被忽略。比如， <code class="docutils literal notranslate"><span class="pre">(&lt;)?(\w+&#64;\w+(?:\.\w+)+)(?(1)&gt;|$)</span></code> 是一个email样式匹配，将匹配 <code class="docutils literal notranslate"><span class="pre">'&lt;user&#64;host.com&gt;'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'user&#64;host.com'</span></code> ，但不会匹配 <code class="docutils literal notranslate"><span class="pre">'&lt;user&#64;host.com'</span></code> ，也不会匹配 <code class="docutils literal notranslate"><span class="pre">'user&#64;host.com&gt;'</span></code>。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Group <em>id</em> can only contain ASCII digits.</p>
+</div>
 </dd>
 </dl>
 <p>由 <code class="docutils literal notranslate"><span class="pre">'\'</span></code> 和一个字符组成的特殊序列在以下列出。 如果普通字符不是ASCII数位或者ASCII字母，那么正则样式将匹配第二个字符。比如，<code class="docutils literal notranslate"><span class="pre">\$</span></code> 匹配字符 <code class="docutils literal notranslate"><span class="pre">'$'</span></code>.</p>
-<dl class="simple" id="index-24">
+<dl class="simple" id="index-25">
 <dt><code class="docutils literal notranslate"><span class="pre">\number</span></code></dt><dd><p>匹配数字代表的组合。每个括号是一个组合，组合从1开始编号。比如 <code class="docutils literal notranslate"><span class="pre">(.+)</span> <span class="pre">\1</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'the</span> <span class="pre">the'</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">'55</span> <span class="pre">55'</span></code>, 但不会匹配 <code class="docutils literal notranslate"><span class="pre">'thethe'</span></code> (注意组合后面的空格)。这个特殊序列只能用于匹配前面99个组合。如果  <em>number</em> 的第一个数位是0， 或者 <em>number</em> 是三个八进制数，它将不会被看作是一个组合，而是八进制的数字值。在 <code class="docutils literal notranslate"><span class="pre">'['</span></code> 和 <code class="docutils literal notranslate"><span class="pre">']'</span></code> 字符集合内，任何数字转义都被看作是字符。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-25">
+<dl class="simple" id="index-26">
 <dt><code class="docutils literal notranslate"><span class="pre">\A</span></code></dt><dd><p>只匹配字符串开始。</p>
 </dd>
 </dl>
-<dl id="index-26">
+<dl id="index-27">
 <dt><code class="docutils literal notranslate"><span class="pre">\b</span></code></dt><dd><p>匹配空字符串，但只在单词开始或结尾的位置。一个单词被定义为一个单词字符的序列。注意，通常 <code class="docutils literal notranslate"><span class="pre">\b</span></code> 定义为 <code class="docutils literal notranslate"><span class="pre">\w</span></code> 和 <code class="docutils literal notranslate"><span class="pre">\W</span></code> 字符之间，或者 <code class="docutils literal notranslate"><span class="pre">\w</span></code> 和字符串开始/结尾的边界， 意思就是 <code class="docutils literal notranslate"><span class="pre">r'\bfoo\b'</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'foo'</span></code>, <code class="docutils literal notranslate"><span class="pre">'foo.'</span></code>, <code class="docutils literal notranslate"><span class="pre">'(foo)'</span></code>, <code class="docutils literal notranslate"><span class="pre">'bar</span> <span class="pre">foo</span> <span class="pre">baz'</span></code> 但不匹配 <code class="docutils literal notranslate"><span class="pre">'foobar'</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">'foo3'</span></code>。</p>
 <p>默认情况下，Unicode字母和数字是在Unicode样式中使用的，但是可以用  <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标记来更改。如果 <a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">LOCALE</span></code></a> 标记被设置的话，词的边界是由当前语言区域设置决定的，<code class="docutils literal notranslate"><span class="pre">\b</span></code> 表示退格字符，以便与Python字符串文本兼容。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-27">
+<dl class="simple" id="index-28">
 <dt><code class="docutils literal notranslate"><span class="pre">\B</span></code></dt><dd><p>匹配空字符串，但 <em>不</em> 能在词的开头或者结尾。意思就是 <code class="docutils literal notranslate"><span class="pre">r'py\B'</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">'python'</span></code>, <code class="docutils literal notranslate"><span class="pre">'py3'</span></code>, <code class="docutils literal notranslate"><span class="pre">'py2'</span></code>, 但不匹配 <code class="docutils literal notranslate"><span class="pre">'py'</span></code>, <code class="docutils literal notranslate"><span class="pre">'py.'</span></code>, 或者 <code class="docutils literal notranslate"><span class="pre">'py!'</span></code>. <code class="docutils literal notranslate"><span class="pre">\B</span></code> 是 <code class="docutils literal notranslate"><span class="pre">\b</span></code> 的取非，所以Unicode样式的词语是由Unicode字母，数字或下划线构成的，虽然可以用 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标志来改变。如果使用了 <a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">LOCALE</span></code></a> 标志，则词的边界由当前语言区域设置。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-28">
+<dl class="simple" id="index-29">
 <dt><code class="docutils literal notranslate"><span class="pre">\d</span></code></dt><dd><dl class="simple">
 <dt>对于 Unicode (str) 样式：</dt><dd><p>匹配任何Unicode十进制数（就是在Unicode字符目录[Nd]里的字符）。这包括了 <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code> ，和很多其他的数字字符。如果设置了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标志，就只匹配 <code class="docutils literal notranslate"><span class="pre">[0-9]</span></code> 。</p>
 </dd>
@@ -391,11 +484,11 @@
 </dl>
 </dd>
 </dl>
-<dl class="simple" id="index-29">
+<dl class="simple" id="index-30">
 <dt><code class="docutils literal notranslate"><span class="pre">\D</span></code></dt><dd><p>匹配任何非十进制数字的字符。就是 <code class="docutils literal notranslate"><span class="pre">\d</span></code> 取非。 如果设置了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标志，就相当于 <code class="docutils literal notranslate"><span class="pre">[^0-9]</span></code> 。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-30">
+<dl class="simple" id="index-31">
 <dt><code class="docutils literal notranslate"><span class="pre">\s</span></code></dt><dd><dl class="simple">
 <dt>对于 Unicode (str) 样式：</dt><dd><p>匹配任何Unicode空白字符（包括 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">\t\n\r\f\v]</span></code> ，还有很多其他字符，比如不同语言排版规则约定的不换行空格）。如果 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 被设置，就只匹配 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">\t\n\r\f\v]</span></code> 。</p>
 </dd>
@@ -404,11 +497,11 @@
 </dl>
 </dd>
 </dl>
-<dl class="simple" id="index-31">
+<dl class="simple" id="index-32">
 <dt><code class="docutils literal notranslate"><span class="pre">\S</span></code></dt><dd><p>匹配任何非空白字符。就是 <code class="docutils literal notranslate"><span class="pre">\s</span></code> 取非。如果设置了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标志，就相当于 <code class="docutils literal notranslate"><span class="pre">[^</span> <span class="pre">\t\n\r\f\v]</span></code> 。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-32">
+<dl class="simple" id="index-33">
 <dt><code class="docutils literal notranslate"><span class="pre">\w</span></code></dt><dd><dl class="simple">
 <dt>对于 Unicode (str) 样式：</dt><dd><p>匹配Unicode词语的字符，包含了可以构成词语的绝大部分字符，也包括数字和下划线。如果设置了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标志，就只匹配 <code class="docutils literal notranslate"><span class="pre">[a-zA-Z0-9_]</span></code> 。</p>
 </dd>
@@ -417,15 +510,15 @@
 </dl>
 </dd>
 </dl>
-<dl class="simple" id="index-33">
+<dl class="simple" id="index-34">
 <dt><code class="docutils literal notranslate"><span class="pre">\W</span></code></dt><dd><p>匹配非单词字符的字符。这与 <code class="docutils literal notranslate"><span class="pre">\w</span></code> 正相反。如果使用了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 旗标，这就等价于 <code class="docutils literal notranslate"><span class="pre">[^a-zA-Z0-9_]</span></code>。如果使用了 <a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">LOCALE</span></code></a> 旗标，则会匹配当前区域中既非字母数字也非下划线的字符。</p>
 </dd>
 </dl>
-<dl class="simple" id="index-34">
+<dl class="simple" id="index-35">
 <dt><code class="docutils literal notranslate"><span class="pre">\Z</span></code></dt><dd><p>只匹配字符串尾。</p>
 </dd>
 </dl>
-<p id="index-35">绝大部分Python的标准转义字符也被正则表达式分析器支持。:</p>
+<p id="index-36">绝大部分Python的标准转义字符也被正则表达式分析器支持。:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span>\<span class="n">a</span>      \<span class="n">b</span>      \<span class="n">f</span>      \<span class="n">n</span>
 \<span class="n">N</span>      \<span class="n">r</span>      \<span class="n">t</span>      \<span class="n">u</span>
 \<span class="n">U</span>      \<span class="n">v</span>      \<span class="n">x</span>      \\
@@ -447,33 +540,14 @@
 <section id="module-contents">
 <span id="contents-of-module-re"></span><h2>模块内容<a class="headerlink" href="#module-contents" title="永久链接至标题">¶</a></h2>
 <p>模块定义了几个函数、常量，和一个异常。有些函数是编译后的正则表达式方法的简化版本（少了一些特性）。重要的应用程序大多会在使用前先编译正则表达式。</p>
+<section id="flags">
+<h3>Flags<a class="headerlink" href="#flags" title="永久链接至标题">¶</a></h3>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>标志常量现在是 <a class="reference internal" href="#re.RegexFlag" title="re.RegexFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegexFlag</span></code></a> 类的实例，这个类是 <a class="reference internal" href="enum.html#enum.IntFlag" title="enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> 的子类。</p>
 </div>
-<dl class="py function">
-<dt class="sig sig-object py" id="re.compile">
-<span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#re.compile" title="永久链接至目标">¶</a></dt>
-<dd><p>将正则表达式的样式编译为一个 <a class="reference internal" href="#re-objects"><span class="std std-ref">正则表达式对象</span></a>  （正则对象），可以用于匹配，通过这个对象的方法  <a class="reference internal" href="#re.Pattern.match" title="re.Pattern.match"><code class="xref py py-func docutils literal notranslate"><span class="pre">match()</span></code></a>, <a class="reference internal" href="#re.Pattern.search" title="re.Pattern.search"><code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code></a> 以及其他如下描述。</p>
-<p>这个表达式的行为可以通过指定 <em>标记</em> 的值来改变。值可以是以下任意变量，可以通过位的OR操作来结合（ <code class="docutils literal notranslate"><span class="pre">|</span></code> 操作符）。</p>
-<p>序列</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">prog</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">prog</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>等价于</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>如果需要多次使用这个正则表达式的话，使用 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 和保存这个正则对象以便复用，可以让程序更加高效。</p>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>通过 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 编译后的样式，和模块级的函数会被缓存， 所以少数的正则表达式使用无需考虑编译的问题。</p>
-</div>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="re.RegexFlag">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">RegexFlag</span></span><a class="headerlink" href="#re.RegexFlag" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">RegexFlag</span></span><a class="headerlink" href="#re.RegexFlag" title="永久链接至目标">¶</a></dt>
 <dd><p>An <a class="reference internal" href="enum.html#enum.IntFlag" title="enum.IntFlag"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntFlag</span></code></a> class containing the regex options listed below.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能: </span>- added to <code class="docutils literal notranslate"><span class="pre">__all__</span></code></p>
@@ -501,7 +575,7 @@
 <dt class="sig sig-object py" id="re.IGNORECASE">
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">IGNORECASE</span></span><a class="headerlink" href="#re.IGNORECASE" title="永久链接至目标">¶</a></dt>
 <dd><p>进行忽略大小写匹配；表达式如 <code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code> 也会匹配小写字符。Unicode匹配（比如 <code class="docutils literal notranslate"><span class="pre">Ü</span></code> 匹配 <code class="docutils literal notranslate"><span class="pre">ü</span></code>）同样有用，除非设置了 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> 标记来禁用非ASCII匹配。当前语言区域不会改变这个标记，除非设置了 <a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.LOCALE</span></code></a> 标记。这个相当于内联标记 <code class="docutils literal notranslate"><span class="pre">(?i)</span></code> 。</p>
-<p>注意，当设置了 <a class="reference internal" href="#re.IGNORECASE" title="re.IGNORECASE"><code class="xref py py-const docutils literal notranslate"><span class="pre">IGNORECASE</span></code></a> 标记，搜索Unicode样式 <code class="docutils literal notranslate"><span class="pre">[a-z]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code> 的结合时，它将会匹配52个ASCII字符和4个额外的非ASCII字符： 'İ' (U+0130, 拉丁大写的 I 带个点在上面), 'ı' (U+0131, 拉丁小写没有点的 I ), 'ſ' (U+017F, 拉丁小写长 s) and 'K' (U+212A, 开尔文符号).如果使用 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标记，就只匹配 'a' 到 'z' 和 'A' 到 'Z' 。</p>
+<p>注意，当设置了 <a class="reference internal" href="#re.IGNORECASE" title="re.IGNORECASE"><code class="xref py py-const docutils literal notranslate"><span class="pre">IGNORECASE</span></code></a> 标记，搜索Unicode样式 <code class="docutils literal notranslate"><span class="pre">[a-z]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">[A-Z]</span></code> 的结合时，它将会匹配52个ASCII字符和4个额外的非ASCII字符： ‘İ’ (U+0130, 拉丁大写的 I 带个点在上面), ‘ı’ (U+0131, 拉丁小写没有点的 I ), ‘ſ’ (U+017F, 拉丁小写长 s) and ‘K’ (U+212A, 开尔文符号).如果使用 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">ASCII</span></code></a> 标记，就只匹配 ‘a’ 到 ‘z’ 和 ‘A’ 到 ‘Z’ 。</p>
 </dd></dl>
 
 <dl class="py data">
@@ -509,7 +583,7 @@
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">L</span></span><a class="headerlink" href="#re.L" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="re.LOCALE">
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">LOCALE</span></span><a class="headerlink" href="#re.LOCALE" title="永久链接至目标">¶</a></dt>
-<dd><p>由当前语言区域决定 <code class="docutils literal notranslate"><span class="pre">\w</span></code>, <code class="docutils literal notranslate"><span class="pre">\W</span></code>, <code class="docutils literal notranslate"><span class="pre">\b</span></code>, <code class="docutils literal notranslate"><span class="pre">\B</span></code> 和大小写敏感匹配。这个标记只能对byte样式有效。这个标记不推荐使用，因为语言区域机制很不可靠，它一次只能处理一个 &quot;习惯”，而且只对8位字节有效。Unicode匹配在Python 3 里默认启用，并可以处理不同语言。 这个对应内联标记 <code class="docutils literal notranslate"><span class="pre">(?L)</span></code> 。</p>
+<dd><p>由当前语言区域决定 <code class="docutils literal notranslate"><span class="pre">\w</span></code>, <code class="docutils literal notranslate"><span class="pre">\W</span></code>, <code class="docutils literal notranslate"><span class="pre">\b</span></code>, <code class="docutils literal notranslate"><span class="pre">\B</span></code> 和大小写敏感匹配。这个标记只能对byte样式有效。这个标记不推荐使用，因为语言区域机制很不可靠，它一次只能处理一个 “习惯”，而且只对8位字节有效。Unicode匹配在Python 3 里默认启用，并可以处理不同语言。 这个对应内联标记 <code class="docutils literal notranslate"><span class="pre">(?L)</span></code> 。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span><a class="reference internal" href="#re.LOCALE" title="re.LOCALE"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.LOCALE</span></code></a> 只能用于byte样式，而且不能和 <a class="reference internal" href="#re.ASCII" title="re.ASCII"><code class="xref py py-const docutils literal notranslate"><span class="pre">re.ASCII</span></code></a> 一起用。</p>
 </div>
@@ -555,7 +629,7 @@ value:</p>
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#re.X" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="re.VERBOSE">
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">VERBOSE</span></span><a class="headerlink" href="#re.VERBOSE" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-36">这个标记允许你编写更具可读性更友好的正则表达式。通过分段和添加注释。空白符号会被忽略，除非在一个字符集合当中或者由反斜杠转义，或者在 <code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">(?:</span></code> or <code class="docutils literal notranslate"><span class="pre">(?P&lt;…&gt;</span></code> 分组之内。当一个行内有 <code class="docutils literal notranslate"><span class="pre">#</span></code> 不在字符集和转义序列，那么它之后的所有字符都是注释。</p>
+<dd><p id="index-37">这个标记允许你编写更具可读性更友好的正则表达式。通过分段和添加注释。空白符号会被忽略，除非在一个字符集合当中或者由反斜杠转义，或者在 <code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">(?:</span></code> or <code class="docutils literal notranslate"><span class="pre">(?P&lt;…&gt;</span></code> 分组之内。当一个行内有 <code class="docutils literal notranslate"><span class="pre">#</span></code> 不在字符集和转义序列，那么它之后的所有字符都是注释。</p>
 <p>意思就是下面两个正则表达式等价地匹配一个十进制数字：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;\d +  # the integral part</span>
 <span class="s2">                   \.    # the decimal point</span>
@@ -564,6 +638,30 @@ value:</p>
 </pre></div>
 </div>
 <p>对应内联标记 <code class="docutils literal notranslate"><span class="pre">(?x)</span></code> 。</p>
+</dd></dl>
+
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="永久链接至标题">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="re.compile">
+<span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#re.compile" title="永久链接至目标">¶</a></dt>
+<dd><p>将正则表达式的样式编译为一个 <a class="reference internal" href="#re-objects"><span class="std std-ref">正则表达式对象</span></a>  （正则对象），可以用于匹配，通过这个对象的方法  <a class="reference internal" href="#re.Pattern.match" title="re.Pattern.match"><code class="xref py py-func docutils literal notranslate"><span class="pre">match()</span></code></a>, <a class="reference internal" href="#re.Pattern.search" title="re.Pattern.search"><code class="xref py py-func docutils literal notranslate"><span class="pre">search()</span></code></a> 以及其他如下描述。</p>
+<p>这个表达式的行为可以通过指定 <em>标记</em> 的值来改变。值可以是以下任意变量，可以通过位的OR操作来结合（ <code class="docutils literal notranslate"><span class="pre">|</span></code> 操作符）。</p>
+<p>序列</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">prog</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">prog</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>等价于</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果需要多次使用这个正则表达式的话，使用 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 和保存这个正则对象以便复用，可以让程序更加高效。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>通过 <a class="reference internal" href="#re.compile" title="re.compile"><code class="xref py py-func docutils literal notranslate"><span class="pre">re.compile()</span></code></a> 编译后的样式，和模块级的函数会被缓存， 所以少数的正则表达式使用无需考虑编译的问题。</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -680,7 +778,7 @@ affect the form of the result.</p>
 </div>
 <p>样式可以是一个字符串或者一个 <a class="reference internal" href="#re-objects"><span class="std std-ref">样式对象</span></a> 。</p>
 <p>可选参数 <em>count</em> 是要替换的最大次数；<em>count</em> 必须是非负整数。如果省略这个参数或设为 0，所有的匹配都会被替换。 样式的空匹配仅在与前一个空匹配不相邻时才会被替换，所以  <code class="docutils literal notranslate"><span class="pre">sub('x*',</span> <span class="pre">'-',</span> <span class="pre">'abxd')</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">'-a-b--d-'</span></code> 。</p>
-<p id="index-37">在字符串类型的 <em>repl</em> 参数里，如上所述的转义和向后引用中，<code class="docutils literal notranslate"><span class="pre">\g&lt;name&gt;</span></code> 会使用命名组合 <code class="docutils literal notranslate"><span class="pre">name</span></code>，（在  <code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;…)</span></code> 语法中定义） <code class="docutils literal notranslate"><span class="pre">\g&lt;number&gt;</span></code> 会使用数字组；<code class="docutils literal notranslate"><span class="pre">\g&lt;2&gt;</span></code> 就是 <code class="docutils literal notranslate"><span class="pre">\2</span></code>，但它避免了二义性，如 <code class="docutils literal notranslate"><span class="pre">\g&lt;2&gt;0</span></code>。 <code class="docutils literal notranslate"><span class="pre">\20</span></code> 就会被解释为组20，而不是组2后面跟随一个字符 <code class="docutils literal notranslate"><span class="pre">'0'</span></code>。向后引用 <code class="docutils literal notranslate"><span class="pre">\g&lt;0&gt;</span></code> 把 <em>pattern</em> 作为一整个组进行引用。</p>
+<p id="index-38">在字符串类型的 <em>repl</em> 参数里，如上所述的转义和向后引用中，<code class="docutils literal notranslate"><span class="pre">\g&lt;name&gt;</span></code> 会使用命名组合 <code class="docutils literal notranslate"><span class="pre">name</span></code>，（在  <code class="docutils literal notranslate"><span class="pre">(?P&lt;name&gt;…)</span></code> 语法中定义） <code class="docutils literal notranslate"><span class="pre">\g&lt;number&gt;</span></code> 会使用数字组；<code class="docutils literal notranslate"><span class="pre">\g&lt;2&gt;</span></code> 就是 <code class="docutils literal notranslate"><span class="pre">\2</span></code>，但它避免了二义性，如 <code class="docutils literal notranslate"><span class="pre">\g&lt;2&gt;0</span></code>。 <code class="docutils literal notranslate"><span class="pre">\20</span></code> 就会被解释为组20，而不是组2后面跟随一个字符 <code class="docutils literal notranslate"><span class="pre">'0'</span></code>。向后引用 <code class="docutils literal notranslate"><span class="pre">\g&lt;0&gt;</span></code> 把 <em>pattern</em> 作为一整个组进行引用。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.1 版更改: </span>增加了可选标记参数。</p>
 </div>
@@ -695,6 +793,11 @@ affect the form of the result.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>样式中的空匹配相邻接时会被替换。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Group <em>id</em> can only contain ASCII digits.
+In bytes replacement strings group names must contain only characters
+in the ASCII range.</p>
 </div>
 </dd></dl>
 
@@ -747,9 +850,12 @@ affect the form of the result.</p>
 <dd><p>清除正则表达式的缓存。</p>
 </dd></dl>
 
+</section>
+<section id="exceptions">
+<h3>Exceptions<a class="headerlink" href="#exceptions" title="永久链接至标题">¶</a></h3>
 <dl class="py exception">
 <dt class="sig sig-object py" id="re.error">
-<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#re.error" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#re.error" title="永久链接至目标">¶</a></dt>
 <dd><p>当传递给函数的正则表达式不合法（比如括号不匹配），或者在编译或匹配过程中出现其他错误时，会引发异常。所给字符串不匹配所给模式不会引发异常。异常实例有以下附加属性：</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="re.error.msg">
@@ -787,12 +893,13 @@ affect the form of the result.</p>
 </dd></dl>
 
 </section>
+</section>
 <section id="regular-expression-objects">
 <span id="re-objects"></span><h2>正则表达式对象 （正则对象）<a class="headerlink" href="#regular-expression-objects" title="永久链接至标题">¶</a></h2>
 <p>编译后的正则表达式对象支持以下方法和属性：</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Pattern.search">
-<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">string</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">pos</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">endpos</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.search" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">endpos</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.search" title="永久链接至目标">¶</a></dt>
 <dd><p>扫描整个 <em>string</em> 寻找第一个匹配的位置， 并返回一个相应的 <a class="reference internal" href="#match-objects"><span class="std std-ref">匹配对象</span></a>。如果没有匹配，就返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> ；注意它和零长度匹配是不同的。</p>
 <p>可选的第二个参数 <em>pos</em> 给出了字符串中开始搜索的位置索引；默认为 <code class="docutils literal notranslate"><span class="pre">0</span></code>，它不完全等价于字符串切片； <code class="docutils literal notranslate"><span class="pre">'^'</span></code> 样式字符匹配字符串真正的开头，和换行符后面的第一个字符，但不会匹配索引规定开始的位置。</p>
 <p>可选参数 <em>endpos</em> 限定了字符串搜索的结束；它假定字符串长度到 <em>endpos</em> ， 所以只有从 <code class="docutils literal notranslate"><span class="pre">pos</span></code> 到 <code class="docutils literal notranslate"><span class="pre">endpos</span> <span class="pre">-</span> <span class="pre">1</span></code> 的字符会被匹配。如果 <em>endpos</em> 小于 <em>pos</em>，就不会有匹配产生；另外，如果 <em>rx</em> 是一个编译后的正则对象， <code class="docutils literal notranslate"><span class="pre">rx.search(string,</span> <span class="pre">0,</span> <span class="pre">50)</span></code> 等价于 <code class="docutils literal notranslate"><span class="pre">rx.search(string[:50],</span> <span class="pre">0)</span></code>。</p>
@@ -806,7 +913,7 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Pattern.match">
-<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">string</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">pos</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">endpos</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.match" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">endpos</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.match" title="永久链接至目标">¶</a></dt>
 <dd><p>如果 <em>string</em> 的 <em>开始位置</em> 能够找到这个正则样式的任意个匹配，就返回一个相应的 <a class="reference internal" href="#match-objects"><span class="std std-ref">匹配对象</span></a>。如果不匹配，就返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> ；注意它与零长度匹配是不同的。</p>
 <p>可选参数 <em>pos</em> 和 <em>endpos</em> 与 <a class="reference internal" href="#re.Pattern.search" title="re.Pattern.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> 含义相同。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
@@ -820,7 +927,7 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Pattern.fullmatch">
-<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">fullmatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">string</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">pos</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">endpos</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.fullmatch" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">fullmatch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">endpos</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.fullmatch" title="永久链接至目标">¶</a></dt>
 <dd><p>如果整个 <em>string</em> 匹配这个正则表达式，就返回一个相应的 <a class="reference internal" href="#match-objects"><span class="std std-ref">匹配对象</span></a> 。 否则就返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> ； 注意跟零长度匹配是不同的。</p>
 <p>可选参数 <em>pos</em> 和 <em>endpos</em> 与 <a class="reference internal" href="#re.Pattern.search" title="re.Pattern.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> 含义相同。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;o[gh]&quot;</span><span class="p">)</span>
@@ -843,13 +950,13 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Pattern.findall">
-<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">findall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">string</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">pos</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">endpos</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.findall" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">findall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">endpos</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.findall" title="永久链接至目标">¶</a></dt>
 <dd><p>类似函数 <a class="reference internal" href="#re.findall" title="re.findall"><code class="xref py py-func docutils literal notranslate"><span class="pre">findall()</span></code></a> ， 使用了编译后样式，但也可以接收可选参数 <em>pos</em> 和 <em>endpos</em> ，限制搜索范围，就像 <a class="reference internal" href="#re.search" title="re.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a>。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Pattern.finditer">
-<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">finditer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">string</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">pos</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">endpos</span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.finditer" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Pattern.</span></span><span class="sig-name descname"><span class="pre">finditer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">endpos</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Pattern.finditer" title="永久链接至目标">¶</a></dt>
 <dd><p>类似函数 <a class="reference internal" href="#re.finditer" title="re.finditer"><code class="xref py py-func docutils literal notranslate"><span class="pre">finditer()</span></code></a> ， 使用了编译后样式，但也可以接收可选参数 <em>pos</em> 和 <em>endpos</em> ，限制搜索范围，就像 <a class="reference internal" href="#re.search" title="re.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a>。</p>
 </dd></dl>
 
@@ -913,7 +1020,7 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Match.group">
-<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">group1</span></em>, <em class="sig-param"><span class="pre">...</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.group" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">group1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.group" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个或者多个匹配的子组。如果只有一个参数，结果就是一个字符串，如果有多个参数，结果就是一个元组（每个参数对应一个项），如果没有参数，组1默认到0（整个匹配都被返回）。 如果一个组N 参数值为 0，相应的返回值就是整个匹配字符串；如果它是一个范围 [1..99]，结果就是相应的括号组字符串。如果一个组号是负数，或者大于样式中定义的组数，就引发一个 <a class="reference internal" href="exceptions.html#IndexError" title="IndexError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndexError</span></code></a> 异常。如果一个组包含在样式的一部分，并被匹配多次，就返回最后一个匹配。:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\w+) (\w+)&quot;</span><span class="p">,</span> <span class="s2">&quot;Isaac Newton, physicist&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>       <span class="c1"># The entire match</span>
@@ -963,6 +1070,14 @@ affect the form of the result.</p>
 <span class="go">&#39;Newton&#39;</span>
 </pre></div>
 </div>
+<p>Named groups are supported as well:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;first_name&gt;\w+) (?P&lt;last_name&gt;\w+)&quot;</span><span class="p">,</span> <span class="s2">&quot;Isaac Newton&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;Isaac&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="p">[</span><span class="s1">&#39;last_name&#39;</span><span class="p">]</span>
+<span class="go">&#39;Newton&#39;</span>
+</pre></div>
+</div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能.</span></p>
 </div>
@@ -1001,9 +1116,9 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Match.start">
-<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">group</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.start" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.start" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="re.Match.end">
-<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">group</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.end" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.end" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <em>group</em> 匹配到的字串的开始和结束标号。<em>group</em> 默认为0（意思是整个匹配的子串）。如果  <em>group</em> 存在，但未产生匹配，就返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code> 。对于一个匹配对象 <em>m</em>， 和一个未参与匹配的组 <em>g</em> ，组 <em>g</em> (等价于 <code class="docutils literal notranslate"><span class="pre">m.group(g)</span></code>)产生的匹配是</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">g</span><span class="p">):</span><span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">g</span><span class="p">)]</span>
 </pre></div>
@@ -1020,7 +1135,7 @@ affect the form of the result.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="re.Match.span">
-<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">span</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">group</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.span" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">Match.</span></span><span class="sig-name descname"><span class="pre">span</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#re.Match.span" title="永久链接至目标">¶</a></dt>
 <dd><p>对于一个匹配 <em>m</em> ， 返回一个二元组 <code class="docutils literal notranslate"><span class="pre">(m.start(group),</span> <span class="pre">m.end(group))</span></code> 。 注意如果 <em>group</em> 没有在这个匹配中，就返回 <code class="docutils literal notranslate"><span class="pre">(-1,</span> <span class="pre">-1)</span></code> 。<em>group</em> 默认为0，就是整个匹配。</p>
 </dd></dl>
 
@@ -1075,7 +1190,7 @@ affect the form of the result.</p>
     <span class="k">return</span> <span class="s1">&#39;&lt;Match: </span><span class="si">%r</span><span class="s1">, groups=</span><span class="si">%r</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(),</span> <span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>假设你在写一个扑克程序，一个玩家的一手牌为五个字符的串，每个字符表示一张牌，&quot;a&quot; 就是 A, &quot;k&quot;  K， &quot;q&quot;  Q, &quot;j&quot; J, &quot;t&quot; 为 10, &quot;2&quot; 到 &quot;9&quot; 表示2 到 9。</p>
+<p>假设你在写一个扑克程序，一个玩家的一手牌为五个字符的串，每个字符表示一张牌，”a” 就是 A, “k”  K， “q”  Q, “j” J, “t” 为 10, “2” 到 “9” 表示2 到 9。</p>
 <p>要看给定的字符串是否有效，我们可以按照以下步骤</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">valid</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a2-9tjqk]</span><span class="si">{5}</span><span class="s2">$&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">displaymatch</span><span class="p">(</span><span class="n">valid</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;akt5q&quot;</span><span class="p">))</span>  <span class="c1"># Valid.</span>
@@ -1114,7 +1229,7 @@ affect the form of the result.</p>
 </section>
 <section id="simulating-scanf">
 <h3>模拟 scanf()<a class="headerlink" href="#simulating-scanf" title="永久链接至标题">¶</a></h3>
-<p id="index-38">Python 目前没有一个类似c函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 的替代品。正则表达式通常比 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 格式字符串要更强大一些，但也带来更多复杂性。下面的表格提供了 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 格式符和正则表达式大致相同的映射。</p>
+<p id="index-39">Python 目前没有一个类似c函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 的替代品。正则表达式通常比 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 格式字符串要更强大一些，但也带来更多复杂性。下面的表格提供了 <code class="xref c c-func docutils literal notranslate"><span class="pre">scanf()</span></code> 格式符和正则表达式大致相同的映射。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 42%" />
@@ -1363,7 +1478,7 @@ affect the form of the result.</p>
 </div>
 <dl class="citation">
 <dt class="label" id="frie09"><span class="brackets"><a class="fn-backref" href="#id1">Frie09</a></span></dt>
-<dd><p>Friedl, Jeffrey. Mastering Regular Expressions. 3rd ed., O'Reilly Media, 2009. 该书的第三版不再包含 Python，但第一版极详细地覆盖了正则表达式模式串的编写。</p>
+<dd><p>Friedl, Jeffrey. Mastering Regular Expressions. 3rd ed., O’Reilly Media, 2009. 该书的第三版不再包含 Python，但第一版极详细地覆盖了正则表达式模式串的编写。</p>
 </dd>
 </dl>
 </section>
@@ -1377,11 +1492,17 @@ affect the form of the result.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> --- 正则表达式操作</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> — 正则表达式操作</a><ul>
 <li><a class="reference internal" href="#regular-expression-syntax">正则表达式语法</a></li>
-<li><a class="reference internal" href="#module-contents">模块内容</a></li>
+<li><a class="reference internal" href="#module-contents">模块内容</a><ul>
+<li><a class="reference internal" href="#flags">Flags</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#regular-expression-objects">正则表达式对象 （正则对象）</a></li>
 <li><a class="reference internal" href="#match-objects">匹配对象</a></li>
 <li><a class="reference internal" href="#regular-expression-examples">正则表达式例子</a><ul>
@@ -1400,12 +1521,17 @@ affect the form of the result.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="string.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">string</span></code> --- 常见的字符串操作</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="difflib.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">difflib</span></code> --- 计算差异的辅助工具</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="string.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">string</span></code> — 常见的字符串操作</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="difflib.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">difflib</span></code> — 计算差异的辅助工具</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1431,10 +1557,10 @@ affect the form of the result.</p>
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="difflib.html" title="difflib --- 计算差异的辅助工具"
+          <a href="difflib.html" title="difflib — 计算差异的辅助工具"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="string.html" title="string --- 常见的字符串操作"
+          <a href="string.html" title="string — 常见的字符串操作"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -1447,12 +1573,12 @@ affect the form of the result.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="text.html" >文本处理服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> --- 正则表达式操作</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code> — 正则表达式操作</a></li>
                 <li class="right">
                     
 
@@ -1476,7 +1602,7 @@ affect the form of the result.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1484,11 +1610,11 @@ affect the form of the result.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

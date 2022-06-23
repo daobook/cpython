@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>用 Python 进行 Curses 编程 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用 Python 进行 Curses 编程 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">用 Python 进行 Curses 编程</a><ul>
 <li><a class="reference internal" href="#what-is-curses">curses 是什么？</a><ul>
 <li><a class="reference internal" href="#the-python-curses-module">Python 的 curses 模块</a></li>
@@ -89,12 +90,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="cporting.html"
-                        title="上一章">将扩展模块移植到 Python 3</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="descriptor.html"
-                        title="下一章">描述器使用指南</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="cporting.html"
+                          title="上一章">将扩展模块移植到 Python 3</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="descriptor.html"
+                          title="下一章">描述器使用指南</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -137,7 +143,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
@@ -182,9 +188,9 @@
 <h2>curses 是什么？<a class="headerlink" href="#what-is-curses" title="永久链接至标题">¶</a></h2>
 <p>curses 库为基于文本的终端提供了独立于终端的屏幕绘制和键盘处理功能；这些终端包括 VT100，Linux 控制台以及各种程序提供的模拟终端。显示终端支持各种控制代码以执行常见的操作，例如移动光标，滚动屏幕和擦除区域。不同的终端使用相差很大的代码，并且往往有自己的小怪癖。</p>
 <p>在普遍使用图形显示的世界中，人们可能会问“为什么自找要麻烦”？毕竟字符单元显示终端确实是一种过时的技术，但是在某些领域中，能够用它们做花哨的事情仍然很有价值。一个小众市场是在不运行 X server 的小型或嵌入式 Unix 上。另一个是在提供图形支持之前，可能需要运行的工具，例如操作系统安装程序和内核配置程序。</p>
-<p>curses 库提供了相当基础的功能，为程序员提供了包含多个非重叠文本窗口的显示的抽象。窗口的内容可以通过多种方式更改---添加文本，擦除文本，更改其外观---以及curses库将确定需要向终端发送哪些控制代码以产生正确的输出。 curses并没有提供诸多用户界面概念，例如按钮，复选框或对话框。如果需要这些功能，请考虑用户界面库，例如 <a class="reference external" href="https://pypi.org/project/urwid/">Urwid</a> 。</p>
+<p>curses 库提供了相当基础的功能，为程序员提供了包含多个非重叠文本窗口的显示的抽象。窗口的内容可以通过多种方式更改—添加文本，擦除文本，更改其外观—以及curses库将确定需要向终端发送哪些控制代码以产生正确的输出。 curses并没有提供诸多用户界面概念，例如按钮，复选框或对话框。如果需要这些功能，请考虑用户界面库，例如 <a class="reference external" href="https://pypi.org/project/urwid/">Urwid</a> 。</p>
 <p>curses 库最初是为BSD Unix 编写的。 后来 AT&amp;T 的Unix System V 版本加入了许多增强功能和新功能。如今BSD curses已不再维护，被ncurses取代，ncurses是 AT&amp;T 接口的开源实现。如果使用的是 Linux 或 FreeBSD 等开源Unix系统，则几乎肯定会使用ncurses。由于大多数当前的商业Unix版本都基于System V代码，因此这里描述的所有功能可能都可用。但是，某些专有Unix所带来的较早版本的curses可能无法支持所有功能。</p>
-<p>The Windows version of Python doesn't include the <a class="reference internal" href="../library/curses.html#module-curses" title="curses: An interface to the curses library, providing portable terminal handling. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses</span></code></a>
+<p>The Windows version of Python doesn’t include the <a class="reference internal" href="../library/curses.html#module-curses" title="curses: An interface to the curses library, providing portable terminal handling. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">curses</span></code></a>
 module.  A ported version called <a class="reference external" href="https://pypi.org/project/UniCurses">UniCurses</a> is available.</p>
 <section id="the-python-curses-module">
 <h3>Python 的 curses 模块<a class="headerlink" href="#the-python-curses-module" title="永久链接至标题">¶</a></h3>
@@ -240,7 +246,7 @@ module.  A ported version called <a class="reference external" href="https://pyp
 <span class="n">wrapper</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>函数 <a class="reference internal" href="../library/curses.html#curses.wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code></a> 接受一个可调用对象并首先进行上述初始化过程，在终端支持着色时还会初始化颜色。接着 <code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> 运行你提供的可调用对象。当该可调用对象返回时，<code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> 会还原终端到初始状态。该可调用对象会在 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a>...<a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 这样的结构内被调用，当它捕获到异常时，会先还原终端再重新引发这个异常。所以你的终端不会因为异常而被留在一个搞笑的状态，你也可以正常阅读异常消息和回溯信息。</p>
+<p>函数 <a class="reference internal" href="../library/curses.html#curses.wrapper" title="curses.wrapper"><code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code></a> 接受一个可调用对象并首先进行上述初始化过程，在终端支持着色时还会初始化颜色。接着 <code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> 运行你提供的可调用对象。当该可调用对象返回时，<code class="xref py py-func docutils literal notranslate"><span class="pre">wrapper()</span></code> 会还原终端到初始状态。该可调用对象会在 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a>…<a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 这样的结构内被调用，当它捕获到异常时，会先还原终端再重新引发这个异常。所以你的终端不会因为异常而被留在一个搞笑的状态，你也可以正常阅读异常消息和回溯信息。</p>
 </section>
 <section id="windows-and-pads">
 <h2>窗口和面板<a class="headerlink" href="#windows-and-pads" title="永久链接至标题">¶</a></h2>
@@ -311,7 +317,11 @@ module.  A ported version called <a class="reference external" href="https://pyp
 </tbody>
 </table>
 <p>属性允许以突出显示形态显示文本，比如加粗、下划线、反相或添加颜色。这些属性将来下一小节细说。</p>
-<p>方法 <a class="reference internal" href="../library/curses.html#curses.window.addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> 接受一个 Python 字符串或字节串作为用于显示的值。字节串的内容会被原样发送到终端。字符串会使用窗口的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">encoding</span></code> 属性值编码为字节，它默认为 <a class="reference internal" href="../library/locale.html#locale.getpreferredencoding" title="locale.getpreferredencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getpreferredencoding()</span></code></a> 返回的系统默认编码。</p>
+<p>The <a class="reference internal" href="../library/curses.html#curses.window.addstr" title="curses.window.addstr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addstr()</span></code></a> method takes a Python string or
+bytestring as the value to be displayed.  The contents of bytestrings
+are sent to the terminal as-is.  Strings are encoded to bytes using
+the value of the window’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">encoding</span></code> attribute; this defaults to
+the default system encoding as returned by <a class="reference internal" href="../library/locale.html#locale.getencoding" title="locale.getencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getencoding()</span></code></a>.</p>
 <p>方法 <a class="reference internal" href="../library/curses.html#curses.window.addch" title="curses.window.addch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">addch()</span></code></a> 接受一个字符，可以是长度为 1 的字符串，长度为 1 的字节串或者一个整数。</p>
 <p>对于特殊扩展字符有一些常量，这些常量是大于 255 的整数。比如，<code class="xref py py-const docutils literal notranslate"><span class="pre">ACS_PLMINUS</span></code> 是一个 “加减” 符号，<code class="xref py py-const docutils literal notranslate"><span class="pre">ACS_ULCORNER</span></code> 是一个框的左上角（方便绘制边界）。你也可以使用正确的 Unicode 字符。</p>
 <p>窗口会记住上次操作之后光标所在位置，所以如果你忽略 <em>y,x</em> 坐标，字符串和字符会出现在上次操作结束的位置。你也可以通过 <code class="docutils literal notranslate"><span class="pre">move(y,x)</span></code> 的方法来移动光标。因为一些终端始终会显示一个闪烁的光标，你可能会想要保证光标处于一些不会让人感到分心的位置。在看似随机的位置出现一个闪烁的光标会令人非常迷惑。</p>
@@ -437,8 +447,8 @@ module.  A ported version called <a class="reference external" href="https://pyp
 <li><p><a class="reference external" href="http://invisible-island.net/ncurses/ncurses-intro.html">使用 NCURSES 编写程序</a>: 一篇面向 C 程序员的详细教程。</p></li>
 <li><p>ncurses 手册主页 &lt;<a class="reference external" href="https://linux.die.net/man/3/ncurses">https://linux.die.net/man/3/ncurses</a>&gt;`_</p></li>
 <li><p>ncurses 常见问题 &lt;<a class="reference external" href="http://invisible-island.net/ncurses/ncurses.faq.html">http://invisible-island.net/ncurses/ncurses.faq.html</a>&gt;`_</p></li>
-<li><p><a class="reference external" href="https://www.youtube.com/watch?v=eN1eZtjLEnU">&quot;使用 curses... 请勿爆粗&quot;</a>: 一场有关使用 curses 或 Urwid 来控制终端的 PyCon 2013 演讲的视频。</p></li>
-<li><p><a class="reference external" href="http://www.pyvideo.org/video/1568/console-applications-with-urwid">&quot;使用 Urwid 的控制台应用程序&quot;</a>: 一场演示使用 Urwid 编写应用程序的 PyCon CA 2012 演讲的视频。</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=eN1eZtjLEnU">“使用 curses… 请勿爆粗”</a>: 一场有关使用 curses 或 Urwid 来控制终端的 PyCon 2013 演讲的视频。</p></li>
+<li><p><a class="reference external" href="http://www.pyvideo.org/video/1568/console-applications-with-urwid">“使用 Urwid 的控制台应用程序”</a>: 一场演示使用 Urwid 编写应用程序的 PyCon CA 2012 演讲的视频。</p></li>
 </ul>
 </section>
 </section>
@@ -450,8 +460,9 @@ module.  A ported version called <a class="reference external" href="https://pyp
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">用 Python 进行 Curses 编程</a><ul>
 <li><a class="reference internal" href="#what-is-curses">curses 是什么？</a><ul>
 <li><a class="reference internal" href="#the-python-curses-module">Python 的 curses 模块</a></li>
@@ -469,12 +480,17 @@ module.  A ported version called <a class="reference external" href="https://pyp
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="cporting.html"
-                        title="上一章">将扩展模块移植到 Python 3</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="descriptor.html"
-                        title="下一章">描述器使用指南</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="cporting.html"
+                          title="上一章">将扩展模块移植到 Python 3</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="descriptor.html"
+                          title="下一章">描述器使用指南</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -516,7 +532,7 @@ module.  A ported version called <a class="reference external" href="https://pyp
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
@@ -544,7 +560,7 @@ module.  A ported version called <a class="reference external" href="https://pyp
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -552,11 +568,11 @@ module.  A ported version called <a class="reference external" href="https://pyp
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

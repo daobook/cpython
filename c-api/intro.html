@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>概述 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概述 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">概述</a><ul>
 <li><a class="reference internal" href="#coding-standards">代码标准</a></li>
 <li><a class="reference internal" href="#include-files">包含文件</a></li>
@@ -91,12 +92,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="index.html"
-                        title="上一章">Python/C API 参考手册</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="stable.html"
-                        title="下一章">C API Stability</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">Python/C API 参考手册</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="stable.html"
+                          title="下一章">C API Stability</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -139,7 +145,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API 参考手册</a> &#187;</li>
@@ -173,7 +179,7 @@
 <p>许多 API 函数在你嵌入或是扩展 Python 这两种场景下都能发挥作用；此外，大多数嵌入 Python 的应用程序也需要提供自定义扩展，因此在尝试在实际应用中嵌入 Python 之前先熟悉编写扩展应该会是个好主意。</p>
 <section id="coding-standards">
 <h2>代码标准<a class="headerlink" href="#coding-standards" title="永久链接至标题">¶</a></h2>
-<p>如果你想要编写可包含于 CPython 的 C 代码，你 <strong>必须</strong> 遵循在 <span class="target" id="index-40"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0007"><strong>PEP 7</strong></a> 中定义的指导原则和标准。这些指导原则适用于任何你所要扩展的 Python 版本。在编写你自己的第三方扩展模块时可以不必遵循这些规范，除非你准备在日后向 Python 贡献这些模块。</p>
+<p>如果你想要编写可包含于 CPython 的 C 代码，你 <strong>必须</strong> 遵循在 <span class="target" id="index-40"></span><a class="pep reference external" href="https://peps.python.org/pep-0007/"><strong>PEP 7</strong></a> 中定义的指导原则和标准。这些指导原则适用于任何你所要扩展的 Python 版本。在编写你自己的第三方扩展模块时可以不必遵循这些规范，除非你准备在日后向 Python 贡献这些模块。</p>
 </section>
 <section id="include-files">
 <span id="api-includes"></span><h2>包含文件<a class="headerlink" href="#include-files" title="永久链接至标题">¶</a></h2>
@@ -184,13 +190,13 @@
 </div>
 <p>这意味着包含以下标准头文件：<code class="docutils literal notranslate"><span class="pre">&lt;stdio.h&gt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&lt;string.h&gt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&lt;errno.h&gt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&lt;limits.h&gt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&lt;assert.h&gt;</span></code> 和 <code class="docutils literal notranslate"><span class="pre">&lt;stdlib.h&gt;</span></code>（如果可用）。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>由于 Python 可能会定义一些能在某些系统上影响标准头文件的预处理器定义，因此在包含任何标准头文件之前，你 <em>必须</em> 先包含 <code class="file docutils literal notranslate"><span class="pre">Python.h</span></code>。</p>
 <p>推荐总是在 <code class="docutils literal notranslate"><span class="pre">Python.h</span></code> 前定义 <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_CLEAN</span></code> 。查看 <a class="reference internal" href="arg.html#arg-parsing"><span class="std std-ref">解析参数并构建值变量</span></a> 来了解这个宏的更多内容。</p>
 </div>
 <p>Python.h 所定义的全部用户可见名称（由包含的标准头文件所定义的除外）都带有前缀 <code class="docutils literal notranslate"><span class="pre">Py</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">_Py</span></code>。以 <code class="docutils literal notranslate"><span class="pre">_Py</span></code> 打头的名称是供 Python 实现内部使用的，不应被扩展编写者使用。结构成员名称没有保留前缀。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>用户代码永远不应该定义以 <code class="docutils literal notranslate"><span class="pre">Py</span></code> 或 <code class="docutils literal notranslate"><span class="pre">_Py</span></code> 开头的名称。这会使读者感到困惑，并危及用户代码对未来Python版本的可移植性，这些版本可能会定义以这些前缀之一开头的其他名称。</p>
 </div>
 <p>头文件通常会与 Python 一起安装。在 Unix 上，它们位于以下目录：<code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em><span class="pre">/include/pythonversion/</span></code> 和 <code class="file docutils literal notranslate"><em><span class="pre">exec_prefix</span></em><span class="pre">/include/pythonversion/</span></code>，其中 <span class="target" id="index-41"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">prefix</span></code> 和 <span class="target" id="index-42"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">exec_prefix</span></code> 是由向 Python 的 <strong class="program">configure</strong> 脚本传入的对应形参所定义，而 <em>version</em> 则为 <code class="docutils literal notranslate"><span class="pre">'%d.%d'</span> <span class="pre">%</span> <span class="pre">sys.version_info[:2]</span></code>。在 Windows 上，头文件安装于 <code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em><span class="pre">/include</span></code>，其中 <span class="target" id="index-43"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">prefix</span></code> 是向安装程序指定的安装目录。</p>
@@ -288,7 +294,7 @@ macro is defined), the <a class="reference internal" href="#c.Py_ALWAYS_INLINE" 
 <span class="sig-name descname"><span class="n"><span class="pre">Py_NO_INLINE</span></span></span><a class="headerlink" href="#c.Py_NO_INLINE" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Disable inlining on a function. For example, it reduces the C stack
 consumption: useful on LTO+PGO builds which heavily inline code (see
-<a class="reference external" href="https://bugs.python.org/issue33720">bpo-33720</a>).</p>
+<a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=33720">bpo-33720</a>).</p>
 <p>Usage:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Py_NO_INLINE</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">random</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 </pre></div>
@@ -332,7 +338,7 @@ consumption: useful on LTO+PGO builds which heavily inline code (see
 <dt class="sig sig-object c" id="c.PyDoc_STRVAR">
 <span class="sig-name descname"><span class="n"><span class="pre">PyDoc_STRVAR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">name</span></span>, <span class="n"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyDoc_STRVAR" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>创建一个可以在文档字符串中使用的，名字为 <code class="docutils literal notranslate"><span class="pre">name</span></code> 的变量。如果不和文档字符串一起构建 Python，该值将为空。</p>
-<p>如 <span class="target" id="index-46"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0007"><strong>PEP 7</strong></a> 所述，使用 <a class="reference internal" href="#c.PyDoc_STRVAR" title="PyDoc_STRVAR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyDoc_STRVAR</span></code></a> 作为文档字符串，以支持不和文档字符串一起构建 Python 的情况。</p>
+<p>如 <span class="target" id="index-46"></span><a class="pep reference external" href="https://peps.python.org/pep-0007/"><strong>PEP 7</strong></a> 所述，使用 <a class="reference internal" href="#c.PyDoc_STRVAR" title="PyDoc_STRVAR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyDoc_STRVAR</span></code></a> 作为文档字符串，以支持不和文档字符串一起构建 Python 的情况。</p>
 <p>示例:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PyDoc_STRVAR</span><span class="p">(</span><span class="n">pop_doc</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Remove and return the rightmost element.&quot;</span><span class="p">);</span><span class="w"></span>
 
@@ -349,7 +355,7 @@ consumption: useful on LTO+PGO builds which heavily inline code (see
 <dt class="sig sig-object c" id="c.PyDoc_STR">
 <span class="sig-name descname"><span class="n"><span class="pre">PyDoc_STR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">str</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyDoc_STR" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>为给定的字符串输入创建一个文档字符串，或者当文档字符串被禁用时，创建一个空字符串。</p>
-<p>如 <span class="target" id="index-47"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0007"><strong>PEP 7</strong></a> 所述，使用 <a class="reference internal" href="#c.PyDoc_STR" title="PyDoc_STR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyDoc_STR</span></code></a> 指定文档字符串，以支持不和文档字符串一起构建 Python 的情况。</p>
+<p>如 <span class="target" id="index-47"></span><a class="pep reference external" href="https://peps.python.org/pep-0007/"><strong>PEP 7</strong></a> 所述，使用 <a class="reference internal" href="#c.PyDoc_STR" title="PyDoc_STR"><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyDoc_STR</span></code></a> 指定文档字符串，以支持不和文档字符串一起构建 Python 的情况。</p>
 <p>示例:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">PyMethodDef</span><span class="w"> </span><span class="n">pysqlite_row_methods</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="s">&quot;keys&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">PyCFunction</span><span class="p">)</span><span class="n">pysqlite_row_keys</span><span class="p">,</span><span class="w"> </span><span class="n">METH_NOARGS</span><span class="p">,</span><span class="w"></span>
@@ -376,12 +382,12 @@ consumption: useful on LTO+PGO builds which heavily inline code (see
 <span id="api-refcountdetails"></span><h4>引用计数细节<a class="headerlink" href="#reference-count-details" title="永久链接至标题">¶</a></h4>
 <p>The reference count behavior of functions in the Python/C API is best  explained
 in terms of <em>ownership of references</em>.  Ownership pertains to references, never
-to objects (objects are not owned: they are always shared).  &quot;Owning a
-reference&quot; means being responsible for calling Py_DECREF on it when the
+to objects (objects are not owned: they are always shared).  “Owning a
+reference” means being responsible for calling Py_DECREF on it when the
 reference is no longer needed.  Ownership can also be transferred, meaning that
 the code that receives ownership of the reference then becomes responsible for
-eventually decref'ing it by calling <a class="reference internal" href="refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> or <a class="reference internal" href="refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a>
-when it's no longer needed---or passing on this responsibility (usually to its
+eventually decref’ing it by calling <a class="reference internal" href="refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a> or <a class="reference internal" href="refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a>
+when it’s no longer needed—or passing on this responsibility (usually to its
 caller). When a function passes ownership of a reference on to its caller, the
 caller is said to receive a <em>new</em> reference.  When no ownership is transferred,
 the caller is said to <em>borrow</em> the reference. Nothing needs to be done for a
@@ -417,7 +423,7 @@ since tuples are an immutable data type.  You should only use
 <p>Equivalent code for populating a list can be written using <a class="reference internal" href="list.html#c.PyList_New" title="PyList_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_New()</span></code></a>
 and <a class="reference internal" href="list.html#c.PyList_SetItem" title="PyList_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_SetItem()</span></code></a>.</p>
 <p>However, in practice, you will rarely use these ways of creating and populating
-a tuple or list.  There's a generic function, <a class="reference internal" href="arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a>, that can
+a tuple or list.  There’s a generic function, <a class="reference internal" href="arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a>, that can
 create most common objects from C values, directed by a <em class="dfn">format string</em>.
 For example, the above two blocks of code could be replaced by the following
 (which also takes care of the error checking):</p>
@@ -430,8 +436,8 @@ For example, the above two blocks of code could be replaced by the following
 <p>It is much more common to use <a class="reference internal" href="object.html#c.PyObject_SetItem" title="PyObject_SetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_SetItem()</span></code></a> and friends with items
 whose references you are only borrowing, like arguments that were passed in to
 the function you are writing.  In that case, their behaviour regarding reference
-counts is much saner, since you don't have to increment a reference count so you
-can give a reference away (&quot;have it be stolen&quot;).  For example, this function
+counts is much saner, since you don’t have to increment a reference count so you
+can give a reference away (“have it be stolen”).  For example, this function
 sets all items of a list (actually, any mutable sequence) to a given item:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"></span>
 <span class="nf">set_all</span><span class="p">(</span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">item</span><span class="p">)</span><span class="w"></span>
@@ -464,10 +470,10 @@ reference to the  object.  Therefore, the generic functions that return object
 references, like <a class="reference internal" href="object.html#c.PyObject_GetItem" title="PyObject_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetItem()</span></code></a> and  <a class="reference internal" href="sequence.html#c.PySequence_GetItem" title="PySequence_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySequence_GetItem()</span></code></a>,
 always return a new reference (the caller becomes the owner of the reference).</p>
 <p>It is important to realize that whether you own a reference returned  by a
-function depends on which function you call only --- <em>the plumage</em> (the type of
-the object passed as an argument to the function) <em>doesn't enter into it!</em>
+function depends on which function you call only — <em>the plumage</em> (the type of
+the object passed as an argument to the function) <em>doesn’t enter into it!</em>
 Thus, if you  extract an item from a list using <a class="reference internal" href="list.html#c.PyList_GetItem" title="PyList_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyList_GetItem()</span></code></a>, you
-don't own the reference --- but if you obtain the same item from the same list
+don’t own the reference — but if you obtain the same item from the same list
 using <a class="reference internal" href="sequence.html#c.PySequence_GetItem" title="PySequence_GetItem"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySequence_GetItem()</span></code></a> (which happens to take exactly the same
 arguments), you do own a reference to the returned object.</p>
 <p id="index-12">Here is an example of how you could write a function that computes the sum of
@@ -536,22 +542,31 @@ describe static tables used to list the functions exported  by a module or the
 data attributes of a new object type, and another is used to describe the value
 of a complex number.  These will  be discussed together with the functions that
 use them.</p>
+<dl class="c type">
+<dt class="sig sig-object c" id="c.Py_ssize_t">
+<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_ssize_t</span></span></span><a class="headerlink" href="#c.Py_ssize_t" title="永久链接至目标">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>A signed integral type such that <code class="docutils literal notranslate"><span class="pre">sizeof(Py_ssize_t)</span> <span class="pre">==</span> <span class="pre">sizeof(size_t)</span></code>.
+C99 doesn’t define such a thing directly (size_t is an unsigned integral type).
+See <span class="target" id="index-15"></span><a class="pep reference external" href="https://peps.python.org/pep-0353/"><strong>PEP 353</strong></a> for details. <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_MAX</span></code> is the largest positive value
+of type <a class="reference internal" href="#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>.</p>
+</dd></dl>
+
 </section>
 </section>
 <section id="exceptions">
 <span id="api-exceptions"></span><h2>异常<a class="headerlink" href="#exceptions" title="永久链接至标题">¶</a></h2>
 <p>Python程序员只需要处理特定需要处理的错误异常；未处理的异常会自动传递给调用者，然后传递给调用者的调用者，依此类推，直到他们到达顶级解释器，在那里将它们报告给用户并伴随堆栈回溯。</p>
-<p id="index-15">For C programmers, however, error checking always has to be explicit.  All
+<p id="index-16">For C programmers, however, error checking always has to be explicit.  All
 functions in the Python/C API can raise exceptions, unless an explicit claim is
-made otherwise in a function's documentation.  In general, when a function
+made otherwise in a function’s documentation.  In general, when a function
 encounters an error, it sets an exception, discards any object references that
 it owns, and returns an error indicator.  If not documented otherwise, this
-indicator is either <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code>, depending on the function's return type.
+indicator is either <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or <code class="docutils literal notranslate"><span class="pre">-1</span></code>, depending on the function’s return type.
 A few functions return a Boolean true/false result, with false indicating an
 error.  Very few functions return no explicit error indicator or have an
 ambiguous return value, and require explicit testing for errors with
 <a class="reference internal" href="exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a>.  These exceptions are always explicitly documented.</p>
-<p id="index-16">Exception state is maintained in per-thread storage (this is  equivalent to
+<p id="index-17">Exception state is maintained in per-thread storage (this is  equivalent to
 using global storage in an unthreaded application).  A  thread can be in one of
 two states: an exception has occurred, or not. The function
 <a class="reference internal" href="exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a> can be used to check for this: it returns a borrowed
@@ -564,16 +579,16 @@ exception state.</p>
 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>): the exception type, the corresponding exception  value, and the
 traceback.  These have the same meanings as the Python result of
 <code class="docutils literal notranslate"><span class="pre">sys.exc_info()</span></code>; however, they are not the same: the Python objects represent
-the last exception being handled by a Python  <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ...
+the last exception being handled by a Python  <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> …
 <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> statement, while the C level exception state only exists while
 an exception is being passed on between C functions until it reaches the Python
-bytecode interpreter's  main loop, which takes care of transferring it to
+bytecode interpreter’s  main loop, which takes care of transferring it to
 <code class="docutils literal notranslate"><span class="pre">sys.exc_info()</span></code> and friends.</p>
-<p id="index-17">Note that starting with Python 1.5, the preferred, thread-safe way to access the
+<p id="index-18">Note that starting with Python 1.5, the preferred, thread-safe way to access the
 exception state from Python code is to call the function <a class="reference internal" href="../library/sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a>,
 which returns the per-thread exception state for Python code.  Also, the
 semantics of both ways to access the exception state have changed so that a
-function which catches an exception will save and restore its thread's exception
+function which catches an exception will save and restore its thread’s exception
 state so as to preserve the exception state of its caller.  This prevents common
 bugs in exception handling code caused by an innocent-looking function
 overwriting the exception being handled; it also reduces the often unwanted
@@ -583,10 +598,10 @@ traceback.</p>
 task should check whether the called function raised an  exception, and if so,
 pass the exception state on to its caller.  It  should discard any object
 references that it owns, and return an  error indicator, but it should <em>not</em> set
-another exception --- that would overwrite the exception that was just raised,
+another exception — that would overwrite the exception that was just raised,
 and lose important information about the exact cause of the error.</p>
-<p id="index-18">A simple example of detecting exceptions and passing them on is shown in the
-<code class="xref c c-func docutils literal notranslate"><span class="pre">sum_sequence()</span></code> example above.  It so happens that this example doesn't
+<p id="index-19">A simple example of detecting exceptions and passing them on is shown in the
+<code class="xref c c-func docutils literal notranslate"><span class="pre">sum_sequence()</span></code> example above.  It so happens that this example doesn’t
 need to clean up any owned references when it detects an error.  The following
 example function shows some error cleanup.  First, to remind you why you like
 Python, we show the equivalent Python code:</p>
@@ -598,7 +613,7 @@ Python, we show the equivalent Python code:</p>
 <span class="w">    </span><span class="n">dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 </pre></div>
 </div>
-<p id="index-19">下面是对应的闪耀荣光的 C 代码：</p>
+<p id="index-20">下面是对应的闪耀荣光的 C 代码：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"></span>
 <span class="nf">incr_item</span><span class="p">(</span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">dict</span><span class="p">,</span><span class="w"> </span><span class="n">PyObject</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">)</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -643,7 +658,7 @@ Python, we show the equivalent Python code:</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<span class="target" id="index-20"></span><p id="index-21">This example represents an endorsed use of the <code class="docutils literal notranslate"><span class="pre">goto</span></code> statement  in C!
+<span class="target" id="index-21"></span><p id="index-22">This example represents an endorsed use of the <code class="docutils literal notranslate"><span class="pre">goto</span></code> statement  in C!
 It illustrates the use of <a class="reference internal" href="exceptions.html#c.PyErr_ExceptionMatches" title="PyErr_ExceptionMatches"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_ExceptionMatches()</span></code></a> and
 <a class="reference internal" href="exceptions.html#c.PyErr_Clear" title="PyErr_Clear"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Clear()</span></code></a> to handle specific exceptions, and the use of
 <a class="reference internal" href="refcounting.html#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> to dispose of owned references that may be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (note the
@@ -659,14 +674,14 @@ the final call made is successful.</p>
 the Python interpreter have to worry about is the initialization, and possibly
 the finalization, of the Python interpreter.  Most functionality of the
 interpreter can only be used after the interpreter has been initialized.</p>
-<p id="index-22">The basic initialization function is <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>. This initializes
+<p id="index-23">The basic initialization function is <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>. This initializes
 the table of loaded modules, and creates the fundamental modules
 <a class="reference internal" href="../library/builtins.html#module-builtins" title="builtins: The module that provides the built-in namespace."><code class="xref py py-mod docutils literal notranslate"><span class="pre">builtins</span></code></a>, <a class="reference internal" href="../library/__main__.html#module-__main__" title="__main__: The environment where top-level code is run. Covers command-line interfaces, import-time behavior, and ``__name__ == '__main__'``."><code class="xref py py-mod docutils literal notranslate"><span class="pre">__main__</span></code></a>, and <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a>.  It also
 initializes the module search path (<code class="docutils literal notranslate"><span class="pre">sys.path</span></code>).</p>
-<p id="index-23"><a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> does not set the &quot;script argument list&quot;  (<code class="docutils literal notranslate"><span class="pre">sys.argv</span></code>).
-If this variable is needed by Python code that will be executed later, it must
-be set explicitly with a call to  <code class="docutils literal notranslate"><span class="pre">PySys_SetArgvEx(argc,</span> <span class="pre">argv,</span> <span class="pre">updatepath)</span></code>
-after the call to <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
+<p><a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> does not set the “script argument list”  (<code class="docutils literal notranslate"><span class="pre">sys.argv</span></code>).
+If this variable is needed by Python code that will be executed later, setting
+<a class="reference internal" href="init_config.html#c.PyConfig.argv" title="PyConfig.argv"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.argv</span></code></a> and <a class="reference internal" href="init_config.html#c.PyConfig.parse_argv" title="PyConfig.parse_argv"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.parse_argv</span></code></a> must be set: see
+<a class="reference internal" href="init_config.html#init-config"><span class="std std-ref">Python Initialization Configuration</span></a>.</p>
 <p>On most systems (in particular, on Unix and Windows, although the details are
 slightly different), <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> calculates the module search path
 based upon its best guess for the location of the standard Python interpreter
@@ -678,7 +693,7 @@ path (the environment variable <span class="target" id="index-24"></span><code c
 <p>For instance, if the Python executable is found in
 <code class="file docutils literal notranslate"><span class="pre">/usr/local/bin/python</span></code>, it will assume that the libraries are in
 <code class="file docutils literal notranslate"><span class="pre">/usr/local/lib/python</span><em><span class="pre">X.Y</span></em></code>.  (In fact, this particular path is also
-the &quot;fallback&quot; location, used when no executable file named <code class="file docutils literal notranslate"><span class="pre">python</span></code> is
+the “fallback” location, used when no executable file named <code class="file docutils literal notranslate"><span class="pre">python</span></code> is
 found along <span class="target" id="index-25"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code>.)  The user can override this behavior by setting the
 environment variable <span class="target" id="index-26"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a>, or insert additional directories in
 front of the standard path by setting <span class="target" id="index-27"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>.</p>
@@ -689,7 +704,7 @@ inserted in front of the standard path.  An application that requires total
 control has to provide its own implementation of <a class="reference internal" href="init.html#c.Py_GetPath" title="Py_GetPath"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetPath()</span></code></a>,
 <a class="reference internal" href="init.html#c.Py_GetPrefix" title="Py_GetPrefix"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetPrefix()</span></code></a>, <a class="reference internal" href="init.html#c.Py_GetExecPrefix" title="Py_GetExecPrefix"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetExecPrefix()</span></code></a>, and
 <a class="reference internal" href="init.html#c.Py_GetProgramFullPath" title="Py_GetProgramFullPath"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_GetProgramFullPath()</span></code></a> (all defined in <code class="file docutils literal notranslate"><span class="pre">Modules/getpath.c</span></code>).</p>
-<p id="index-31">Sometimes, it is desirable to &quot;uninitialize&quot; Python.  For instance,  the
+<p id="index-31">Sometimes, it is desirable to “uninitialize” Python.  For instance,  the
 application may want to start over (make another call to
 <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>) or the application is simply done with its  use of
 Python and wants to free memory allocated by Python.  This can be accomplished
@@ -735,8 +750,9 @@ after every statement run by the interpreter.)</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">概述</a><ul>
 <li><a class="reference internal" href="#coding-standards">代码标准</a></li>
 <li><a class="reference internal" href="#include-files">包含文件</a></li>
@@ -756,12 +772,17 @@ after every statement run by the interpreter.)</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="index.html"
-                        title="上一章">Python/C API 参考手册</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="stable.html"
-                        title="下一章">C API Stability</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">Python/C API 参考手册</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="stable.html"
+                          title="下一章">C API Stability</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -803,7 +824,7 @@ after every statement run by the interpreter.)</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -831,7 +852,7 @@ after every statement run by the interpreter.)</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -839,11 +860,11 @@ after every statement run by the interpreter.)</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

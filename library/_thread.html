@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>_thread --- 底层多线程 API &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>_thread — 底层多线程 API &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
     <link rel="next" title="网络和进程间通信" href="ipc.html" />
-    <link rel="prev" title="contextvars --- 上下文变量" href="contextvars.html" />
+    <link rel="prev" title="contextvars — 上下文变量" href="contextvars.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/_thread.html" />
     
       
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="contextvars.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code> --- 上下文变量</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="ipc.html"
-                        title="下一章">网络和进程间通信</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="contextvars.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code> — 上下文变量</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="ipc.html"
+                          title="下一章">网络和进程间通信</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -105,7 +109,7 @@
           <a href="ipc.html" title="网络和进程间通信"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="contextvars.html" title="contextvars --- 上下文变量"
+          <a href="contextvars.html" title="contextvars — 上下文变量"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" accesskey="U">并发执行</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code> --- 底层多线程 API</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code> — 底层多线程 API</a></li>
                 <li class="right">
                     
 
@@ -147,7 +151,7 @@
           <div class="body" role="main">
             
   <section id="module-_thread">
-<span id="thread-low-level-threading-api"></span><h1><a class="reference internal" href="#module-_thread" title="_thread: Low-level threading API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code></a> --- 底层多线程 API<a class="headerlink" href="#module-_thread" title="永久链接至标题">¶</a></h1>
+<span id="thread-low-level-threading-api"></span><h1><a class="reference internal" href="#module-_thread" title="_thread: Low-level threading API."><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code></a> — 底层多线程 API<a class="headerlink" href="#module-_thread" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" id="index-0" />
 <p>该模块提供了操作多个线程（也被称为 <em class="dfn">轻量级进程</em> 或 <em class="dfn">任务</em>）的底层原语 —— 多个控制线程共享全局数据空间。为了处理同步问题，也提供了简单的锁机制（也称为 <em class="dfn">互斥锁</em> 或 <em class="dfn">二进制信号</em>）。<a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> 模块基于该模块提供了更易用的高级多线程 API。</p>
 <div class="versionchanged" id="index-1">
@@ -156,7 +160,7 @@
 <p>这个模块定义了以下常量和函数：</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="thread.error">
-<span id="_thread.error"></span><em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#thread.error" title="永久链接至目标">¶</a></dt>
+<span id="_thread.error"></span><em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">error</span></span><a class="headerlink" href="#thread.error" title="永久链接至目标">¶</a></dt>
 <dd><p>发生线程相关错误时抛出。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>现在是内建异常 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> 的别名。</p>
@@ -171,7 +175,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="thread.start_new_thread">
-<span id="_thread.start_new_thread"></span><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">start_new_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">function</span></em>, <em class="sig-param"><span class="pre">args</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">kwargs</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#thread.start_new_thread" title="永久链接至目标">¶</a></dt>
+<span id="_thread.start_new_thread"></span><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">start_new_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#thread.start_new_thread" title="永久链接至目标">¶</a></dt>
 <dd><p>开启一个新线程并返回其标识。 线程执行函数 <em>function</em> 并附带参数列表 <em>args</em> (必须是元组)。 可选的 <em>kwargs</em> 参数指定一个关键字参数字典。</p>
 <p>当函数返回时，线程会静默地退出。</p>
 <p>当函数因某个未处理异常而终结时，<a class="reference internal" href="sys.html#sys.unraisablehook" title="sys.unraisablehook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.unraisablehook()</span></code></a> 会被调用以处理异常。 钩子参数的 <em>object</em> 属性为 <em>function</em>。 在默认情况下，会打印堆栈回溯然后该线程将退出（但其他线程会继续运行）。</p>
@@ -191,7 +195,7 @@
 <p><span class="versionmodified changed">在 3.10 版更改: </span>添加了 <em>signum</em> 参数来定制信号的编号。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这并不会发出对应的信号而是将一个调用排入关联处理句柄的计划任务（如果句柄存在的话）。 如果你想要真的发出信号，请使用 <a class="reference internal" href="signal.html#signal.raise_signal" title="signal.raise_signal"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal.raise_signal()</span></code></a>。</p>
 </div>
 </dd></dl>
@@ -218,7 +222,7 @@
 <dt class="sig sig-object py" id="thread.get_native_id">
 <span id="_thread.get_native_id"></span><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">get_native_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#thread.get_native_id" title="永久链接至目标">¶</a></dt>
 <dd><p>返回内核分配给当前线程的原生集成线程 ID。 这是一个非负整数。 它的值可被用来在整个系统中唯一地标识这个特定线程（直到线程终结，在那之后该值可能会被 OS 回收再利用）。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Windows, FreeBSD, Linux, macOS, OpenBSD, NetBSD, AIX。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Windows, FreeBSD, Linux, macOS, OpenBSD, NetBSD, AIX, DragonFlyBSD.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -226,7 +230,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="thread.stack_size">
-<span id="_thread.stack_size"></span><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">stack_size</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">size</span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#thread.stack_size" title="永久链接至目标">¶</a></dt>
+<span id="_thread.stack_size"></span><span class="sig-prename descclassname"><span class="pre">_thread.</span></span><span class="sig-name descname"><span class="pre">stack_size</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#thread.stack_size" title="永久链接至目标">¶</a></dt>
 <dd><p>返回创建线程时使用的堆栈大小。可选参数 <em>size</em> 指定之后新建的线程的堆栈大小，而且一定要是0（根据平台或者默认配置）或者最小是32,768(32KiB)的一个正整数。如果 <em>size</em> 没有指定，默认是0。如果不支持改变线程堆栈大小，会抛出 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> 错误。如果指定的堆栈大小不合法，会抛出 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> 错误并且不会修改堆栈大小。32KiB是当前最小的能保证解释器有足够堆栈空间的堆栈大小。需要注意的是部分平台对于堆栈大小会有特定的限制，例如要求大于32KiB的堆栈大小或者需要根据系统内存页面的整数倍进行分配 - 应当查阅平台文档有关详细信息（4KiB页面比较普遍，在没有更具体信息的情况下，建议的方法是使用4096的倍数作为堆栈大小）。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">适用于</span></a>: Windows，具有 POSIX 线程的系统。</p>
 </dd></dl>
@@ -284,8 +288,8 @@
 <li><p>线程与中断奇怪地交互：<a class="reference internal" href="exceptions.html#KeyboardInterrupt" title="KeyboardInterrupt"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code></a> 异常可能会被任意一个线程捕获。（如果 <a class="reference internal" href="signal.html#module-signal" title="signal: Set handlers for asynchronous events."><code class="xref py py-mod docutils literal notranslate"><span class="pre">signal</span></code></a> 模块可用的话，中断总是会进入主线程。）</p></li>
 <li><p>调用 <a class="reference internal" href="sys.html#sys.exit" title="sys.exit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exit()</span></code></a> 或是抛出 <a class="reference internal" href="exceptions.html#SystemExit" title="SystemExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemExit</span></code></a> 异常等效于调用 <a class="reference internal" href="#thread.exit" title="_thread.exit"><code class="xref py py-func docutils literal notranslate"><span class="pre">_thread.exit()</span></code></a>。</p></li>
 <li><p>不可能中断锁的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code> 方法 —— <a class="reference internal" href="exceptions.html#KeyboardInterrupt" title="KeyboardInterrupt"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code></a> 一场会在锁获取到之后发生。</p></li>
-<li><p>当主线程退出时，由系统决定其他线程是否存活。在大多数系统中，这些线程会直接被杀掉，不会执行 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 语句，也不会执行对象析构函数。</p></li>
-<li><p>当主线程退出时，不会进行正常的清理工作（除非使用了 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 语句），标准 I/O 文件也不会刷新。</p></li>
+<li><p>当主线程退出时，由系统决定其他线程是否存活。在大多数系统中，这些线程会直接被杀掉，不会执行 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> … <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 语句，也不会执行对象析构函数。</p></li>
+<li><p>当主线程退出时，不会进行正常的清理工作（除非使用了 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> … <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 语句），标准 I/O 文件也不会刷新。</p></li>
 </ul>
 </section>
 
@@ -296,12 +300,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="contextvars.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code> --- 上下文变量</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="ipc.html"
-                        title="下一章">网络和进程间通信</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="contextvars.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">contextvars</span></code> — 上下文变量</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="ipc.html"
+                          title="下一章">网络和进程间通信</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -330,7 +338,7 @@
           <a href="ipc.html" title="网络和进程间通信"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="contextvars.html" title="contextvars --- 上下文变量"
+          <a href="contextvars.html" title="contextvars — 上下文变量"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -343,12 +351,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="concurrency.html" >并发执行</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code> --- 底层多线程 API</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">_thread</span></code> — 底层多线程 API</a></li>
                 <li class="right">
                     
 
@@ -372,7 +380,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -380,11 +388,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

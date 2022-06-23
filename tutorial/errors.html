@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>8. 错误和异常 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. 错误和异常 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">8. 错误和异常</a><ul>
 <li><a class="reference internal" href="#syntax-errors">8.1. 句法错误</a></li>
 <li><a class="reference internal" href="#exceptions">8.2. 异常</a></li>
@@ -82,16 +83,22 @@
 <li><a class="reference internal" href="#defining-clean-up-actions">8.7. 定义清理操作</a></li>
 <li><a class="reference internal" href="#predefined-clean-up-actions">8.8. 预定义的清理操作</a></li>
 <li><a class="reference internal" href="#raising-and-handling-multiple-unrelated-exceptions">8.9. Raising and Handling Multiple Unrelated Exceptions</a></li>
+<li><a class="reference internal" href="#enriching-exceptions-with-notes">8.10. Enriching Exceptions with Notes</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="inputoutput.html"
-                        title="上一章"><span class="section-number">7. </span>输入与输出</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="classes.html"
-                        title="下一章"><span class="section-number">9. </span>类</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="inputoutput.html"
+                          title="上一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="classes.html"
+                          title="下一章"><span class="section-number">9. </span>类</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -134,7 +141,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 教程</a> &#187;</li>
@@ -222,7 +229,7 @@
 <span class="o">...</span>     <span class="k">pass</span>
 </pre></div>
 </div>
-<p>如果发生的异常与 <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 子句中的类是同一个类或是它的基类时，则该类与该异常相兼容（反之则不成立 --- 列出派生类的 <em>except 子句</em> 与基类不兼容）。 例如，下面的代码将依次打印 B, C, D:</p>
+<p>如果发生的异常与 <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 子句中的类是同一个类或是它的基类时，则该类与该异常相兼容（反之则不成立 — 列出派生类的 <em>except 子句</em> 与基类不兼容）。 例如，下面的代码将依次打印 B, C, D:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">pass</span>
 
@@ -243,39 +250,15 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>请注意如果颠倒 <em>except 子句</em> 的顺序（把 <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">B</span></code> 放在最前），则会输出 B, B, B --- 即触发了第一个匹配的 <em>except 子句</em>。</p>
-<p>所有异常都继承自 <a class="reference internal" href="../library/exceptions.html#BaseException" title="BaseException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseException</span></code></a>，因此它可被用作通配符。 但这种用法要非常谨慎小心，因为它很容易掩盖真正的编程错误！  它还可被用于打印错误消息然后重新引发异常（允许调用者再来处理该异常）:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;myfile.txt&#39;</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-<span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OS error: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
-<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not convert data to an integer.&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">BaseException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected </span><span class="si">{</span><span class="n">err</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">raise</span>
-</pre></div>
-</div>
-<p>Alternatively the last except clause may omit the exception name(s), however the exception
-value must then be retrieved with <code class="docutils literal notranslate"><span class="pre">sys.exception()</span></code>.</p>
-<p><a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> ... <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 语句具有可选的 <em>else 子句</em>，该子句如果存在，它必须放在所有 <em>except 子句</em> 之后。 它适用于 <em>try 子句</em> 没有引发异常但又必须要执行的代码。 例如:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cannot open&#39;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;has&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()),</span> <span class="s1">&#39;lines&#39;</span><span class="p">)</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>使用 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> 子句比向 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> 子句添加额外的代码要好，可以避免意外捕获非 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code> ... <code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code> 语句保护的代码触发的异常。</p>
-<p>发生异常时，它可能具有关联值，即异常 <em>参数</em> 。是否需要参数，以及参数的类型取决于异常的类型。</p>
-<p><em>except 子句</em> 可以在异常名称后面指定一个变量。 这个变量会绑定到一个异常实例并将参数存储在 <code class="docutils literal notranslate"><span class="pre">instance.args</span></code> 中。 为了方便起见，该异常实例定义了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code> 以便能直接打印参数而无需引用 <code class="docutils literal notranslate"><span class="pre">.args</span></code>。 也可以在引发异常之前先实例化一个异常并根据需要向其添加任何属性。:</p>
+<p>请注意如果颠倒 <em>except 子句</em> 的顺序（把 <code class="docutils literal notranslate"><span class="pre">except</span> <span class="pre">B</span></code> 放在最前），则会输出 B, B, B — 即触发了第一个匹配的 <em>except 子句</em>。</p>
+<p>When an exception occurs, it may have associated values, also known as the
+exception’s <em>arguments</em>. The presence and types of the arguments depend on the
+exception type.</p>
+<p>The <em>except clause</em> may specify a variable after the exception name.  The
+variable is bound to the exception instance which typically has an <code class="docutils literal notranslate"><span class="pre">args</span></code>
+attribute that stores the arguments. For convenience, builtin exception
+types define <code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code> to print all the arguments without explicitly
+accessing <code class="docutils literal notranslate"><span class="pre">.args</span></code>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;spam&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs&#39;</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">inst</span><span class="p">:</span>
@@ -294,8 +277,52 @@ value must then be retrieved with <code class="docutils literal notranslate"><sp
 <span class="go">y = eggs</span>
 </pre></div>
 </div>
-<p>如果异常有参数，则它们将作为未处理异常的消息的最后一部分（'详细信息'）打印。</p>
-<p>异常处理程序不仅会处理在 <em>try 子句</em> 中发生的异常，还会处理在 <em>try 子句</em> 中调用（包括间接调用）的函数。 例如:</p>
+<p>The exception’s <code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code> output is printed as the last part (‘detail’)
+of the message for unhandled exceptions.</p>
+<p><a class="reference internal" href="../library/exceptions.html#BaseException" title="BaseException"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BaseException</span></code></a> is the common base class of all exceptions. One of its
+subclasses, <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a>, is the base class of all the non-fatal exceptions.
+Exceptions which are not subclasses of <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> are not typically
+handled, because they are used to indicate that the program should terminate.
+They include <a class="reference internal" href="../library/exceptions.html#SystemExit" title="SystemExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemExit</span></code></a> which is raised by <a class="reference internal" href="../library/sys.html#sys.exit" title="sys.exit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sys.exit()</span></code></a> and
+<a class="reference internal" href="../library/exceptions.html#KeyboardInterrupt" title="KeyboardInterrupt"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code></a> which is raised when a user wishes to interrupt
+the program.</p>
+<p><a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> can be used as a wildcard that catches (almost) everything.
+However, it is good practice to be as specific as possible with the types
+of exceptions that we intend to handle, and to allow any unexpected
+exceptions to propagate on.</p>
+<p>The most common pattern for handling <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> is to print or log
+the exception and then re-raise it (allowing a caller to handle the
+exception as well):</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;myfile.txt&#39;</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OS error:&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Could not convert data to an integer.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected </span><span class="si">{</span><span class="n">err</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">raise</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> … <a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> 语句具有可选的 <em>else 子句</em>，该子句如果存在，它必须放在所有 <em>except 子句</em> 之后。 它适用于 <em>try 子句</em> 没有引发异常但又必须要执行的代码。 例如:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cannot open&#39;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s1">&#39;has&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()),</span> <span class="s1">&#39;lines&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>使用 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code> 子句比向 <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a> 子句添加额外的代码要好，可以避免意外捕获非 <code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code> … <code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code> 语句保护的代码触发的异常。</p>
+<p>Exception handlers do not handle only exceptions that occur immediately in the
+<em>try clause</em>, but also those that occur inside functions that are called (even
+indirectly) in the <em>try clause</em>. For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">this_fails</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
 <span class="gp">...</span>
@@ -317,7 +344,11 @@ value must then be retrieved with <code class="docutils literal notranslate"><sp
 <span class="gr">NameError</span>: <span class="n">HiThere</span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="../reference/simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> 唯一的参数就是要触发的异常。这个参数必须是异常实例或异常类（派生自 <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> 类）。如果传递的是异常类，将通过调用没有参数的构造函数来隐式实例化：</p>
+<p>The sole argument to <a class="reference internal" href="../reference/simple_stmts.html#raise"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">raise</span></code></a> indicates the exception to be raised.
+This must be either an exception instance or an exception class (a class that
+derives from <a class="reference internal" href="../library/exceptions.html#BaseException" title="BaseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseException</span></code></a>, such as <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code></a> or one of its
+subclasses).  If an exception class is passed, it will be implicitly
+instantiated by calling its constructor with no arguments:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">ValueError</span>  <span class="c1"># shorthand for &#39;raise ValueError()&#39;</span>
 </pre></div>
 </div>
@@ -383,7 +414,8 @@ value must then be retrieved with <code class="docutils literal notranslate"><sp
 are usually kept simple, often only offering a number of attributes that allow
 information about the error to be extracted by handlers for the exception.</p>
 <p>大多数异常命名都以 “Error” 结尾，类似标准异常的命名。</p>
-<p>许多标准模块都需要自定义异常，以报告由其定义的函数中出现的错误。有关类的说明，详见 <a class="reference internal" href="classes.html#tut-classes"><span class="std std-ref">类</span></a>。</p>
+<p>Many standard modules define their own exceptions to report errors that may
+occur in functions they define.</p>
 </section>
 <section id="defining-clean-up-actions">
 <span id="tut-cleanup"></span><h2><span class="section-number">8.7. </span>定义清理操作<a class="headerlink" href="#defining-clean-up-actions" title="永久链接至标题">¶</a></h2>
@@ -545,6 +577,70 @@ the following pattern:</p>
 </pre></div>
 </div>
 </section>
+<section id="enriching-exceptions-with-notes">
+<h2><span class="section-number">8.10. </span>Enriching Exceptions with Notes<a class="headerlink" href="#enriching-exceptions-with-notes" title="永久链接至标题">¶</a></h2>
+<p>When an exception is created in order to be raised, it is usually initialized
+with information that describes the error that has occurred. There are cases
+where it is useful to add information after the exception was caught. For this
+purpose, exceptions have a method <code class="docutils literal notranslate"><span class="pre">add_note(note)</span></code> that accepts a string and
+adds it to the exception’s notes list. The standard traceback rendering
+includes all notes, in the order they were added, after the exception.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;bad type&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">e</span><span class="o">.</span><span class="n">add_note</span><span class="p">(</span><span class="s1">&#39;Add some information&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">e</span><span class="o">.</span><span class="n">add_note</span><span class="p">(</span><span class="s1">&#39;Add some more information&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">raise</span>
+<span class="gp">...</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">2</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">bad type</span>
+<span class="go">Add some information</span>
+<span class="go">Add some more information</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>For example, when collecting exceptions into an exception group, we may want
+to add context information for the individual errors. In the following each
+exception in the group has a note indicating when this error has occurred.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s1">&#39;operation failed&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">excs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">f</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">e</span><span class="o">.</span><span class="n">add_note</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Happened in Iteration </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="n">excs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">raise</span> <span class="n">ExceptionGroup</span><span class="p">(</span><span class="s1">&#39;We have some problems&#39;</span><span class="p">,</span> <span class="n">excs</span><span class="p">)</span>
+<span class="go">  + Exception Group Traceback (most recent call last):</span>
+<span class="go">  |   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span>
+<span class="go">  | ExceptionGroup: We have some problems (3 sub-exceptions)</span>
+<span class="go">  +-+---------------- 1 ----------------</span>
+<span class="go">    | Traceback (most recent call last):</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 3, in &lt;module&gt;</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 2, in f</span>
+<span class="go">    | OSError: operation failed</span>
+<span class="go">    | Happened in Iteration 1</span>
+<span class="go">    +---------------- 2 ----------------</span>
+<span class="go">    | Traceback (most recent call last):</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 3, in &lt;module&gt;</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 2, in f</span>
+<span class="go">    | OSError: operation failed</span>
+<span class="go">    | Happened in Iteration 2</span>
+<span class="go">    +---------------- 3 ----------------</span>
+<span class="go">    | Traceback (most recent call last):</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 3, in &lt;module&gt;</span>
+<span class="go">    |   File &quot;&lt;stdin&gt;&quot;, line 2, in f</span>
+<span class="go">    | OSError: operation failed</span>
+<span class="go">    | Happened in Iteration 3</span>
+<span class="go">    +------------------------------------</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -554,8 +650,9 @@ the following pattern:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">8. 错误和异常</a><ul>
 <li><a class="reference internal" href="#syntax-errors">8.1. 句法错误</a></li>
 <li><a class="reference internal" href="#exceptions">8.2. 异常</a></li>
@@ -566,16 +663,22 @@ the following pattern:</p>
 <li><a class="reference internal" href="#defining-clean-up-actions">8.7. 定义清理操作</a></li>
 <li><a class="reference internal" href="#predefined-clean-up-actions">8.8. 预定义的清理操作</a></li>
 <li><a class="reference internal" href="#raising-and-handling-multiple-unrelated-exceptions">8.9. Raising and Handling Multiple Unrelated Exceptions</a></li>
+<li><a class="reference internal" href="#enriching-exceptions-with-notes">8.10. Enriching Exceptions with Notes</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="inputoutput.html"
-                        title="上一章"><span class="section-number">7. </span>输入与输出</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="classes.html"
-                        title="下一章"><span class="section-number">9. </span>类</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="inputoutput.html"
+                          title="上一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="classes.html"
+                          title="下一章"><span class="section-number">9. </span>类</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -617,7 +720,7 @@ the following pattern:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 教程</a> &#187;</li>
@@ -645,7 +748,7 @@ the following pattern:</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -653,11 +756,11 @@ the following pattern:</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

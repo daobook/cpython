@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Creating a Source Distribution &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Creating a Source Distribution &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">4. Creating a Source Distribution</a><ul>
 <li><a class="reference internal" href="#specifying-the-files-to-distribute">4.1. Specifying the files to distribute</a></li>
 <li><a class="reference internal" href="#manifest-related-options">4.2. Manifest-related options</a></li>
@@ -79,12 +80,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="configfile.html"
-                        title="上一章"><span class="section-number">3. </span>编写设置脚本的配置文件</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="builtdist.html"
-                        title="下一章"><span class="section-number">5. </span>创建构建分布</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="configfile.html"
+                          title="上一章"><span class="section-number">3. </span>编写设置脚本的配置文件</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="builtdist.html"
+                          title="下一章"><span class="section-number">5. </span>创建构建分布</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -127,7 +133,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">分发 Python 模块（遗留版本）</a> &#187;</li>
@@ -157,7 +163,7 @@
   <section id="creating-a-source-distribution">
 <span id="source-dist"></span><h1><span class="section-number">4. </span>Creating a Source Distribution<a class="headerlink" href="#creating-a-source-distribution" title="永久链接至标题">¶</a></h1>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这篇文档是历史遗留文档，在 <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html">https://setuptools.readthedocs.io/en/latest/setuptools.html</a> 上的 <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> 文档独立涵盖此处包含的所有相关信息之后，将不再单独作为正式文档保留。</p>
 </div>
 <p>As shown in section <a class="reference internal" href="introduction.html#distutils-simple-example"><span class="std std-ref">一个简单的例子</span></a>, you use the <strong class="command">sdist</strong> command
@@ -165,9 +171,9 @@ to create a source distribution.  In the simplest case,</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span>
 </pre></div>
 </div>
-<p>(assuming you haven't specified any <strong class="command">sdist</strong> options in the setup script
+<p>(assuming you haven’t specified any <strong class="command">sdist</strong> options in the setup script
 or config file), <strong class="command">sdist</strong> creates the archive of the default format for
-the current platform.  The default format is a gzip'ed tar file
+the current platform.  The default format is a gzip’ed tar file
 (<code class="file docutils literal notranslate"><span class="pre">.tar.gz</span></code>) on Unix, and ZIP file on Windows.</p>
 <p>You can specify as many formats as you like using the <code class="xref std std-option docutils literal notranslate"><span class="pre">--formats</span></code>
 option, for example:</p>
@@ -193,15 +199,15 @@ option, for example:</p>
 <td><p>(1),(3)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gztar</span></code></p></td>
-<td><p>gzip'ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.gz</span></code>)</p></td>
+<td><p>gzip’ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.gz</span></code>)</p></td>
 <td><p>(2)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bztar</span></code></p></td>
-<td><p>bzip2'ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.bz2</span></code>)</p></td>
+<td><p>bzip2’ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.bz2</span></code>)</p></td>
 <td><p>(5)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xztar</span></code></p></td>
-<td><p>xz'ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.xz</span></code>)</p></td>
+<td><p>xz’ed tar 文件 (<code class="file docutils literal notranslate"><span class="pre">.tar.xz</span></code>)</p></td>
 <td><p>(5)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ztar</span></code></p></td>
@@ -225,7 +231,7 @@ option, for example:</p>
 of the standard Python library since Python 1.6)</p></li>
 <li><p>requires the <strong class="program">compress</strong> program. Notice that this format is now
 pending for deprecation and will be removed in the future versions of Python.</p></li>
-<li><p>deprecated by <a class="reference external" href="https://www.python.org/dev/peps/pep-0527/">PEP 527</a>;
+<li><p>deprecated by <a class="reference external" href="https://peps.python.org/pep-0527/">PEP 527</a>;
 <a class="reference external" href="https://pypi.org">PyPI</a> only accepts <code class="docutils literal notranslate"><span class="pre">.zip</span></code> and <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> files.</p></li>
 </ol>
 <p>When using any <code class="docutils literal notranslate"><span class="pre">tar</span></code> format (<code class="docutils literal notranslate"><span class="pre">gztar</span></code>, <code class="docutils literal notranslate"><span class="pre">bztar</span></code>, <code class="docutils literal notranslate"><span class="pre">xztar</span></code>, <code class="docutils literal notranslate"><span class="pre">ztar</span></code> or
@@ -237,7 +243,7 @@ that will be set for each member of the archive.</p>
 </div>
 <section id="specifying-the-files-to-distribute">
 <span id="manifest"></span><h2><span class="section-number">4.1. </span>Specifying the files to distribute<a class="headerlink" href="#specifying-the-files-to-distribute" title="永久链接至标题">¶</a></h2>
-<p>If you don't supply an explicit list of files (or instructions on how to
+<p>If you don’t supply an explicit list of files (or instructions on how to
 generate one), the <strong class="command">sdist</strong> command puts a minimal default set into the
 source distribution:</p>
 <ul class="simple">
@@ -249,7 +255,7 @@ source distribution:</p>
 <li><p>scripts identified by the <code class="docutils literal notranslate"><span class="pre">scripts</span></code> option
 See <a class="reference internal" href="setupscript.html#distutils-installing-scripts"><span class="std std-ref">Installing Scripts</span></a>.</p></li>
 <li><p>anything that looks like a test script: <code class="file docutils literal notranslate"><span class="pre">test/test*.py</span></code> (currently, the
-Distutils don't do anything with test scripts except include them in source
+Distutils don’t do anything with test scripts except include them in source
 distributions, but in the future there will be a standard for testing Python
 module distributions)</p></li>
 <li><p>Any of the standard README files (<code class="file docutils literal notranslate"><span class="pre">README</span></code>, <code class="file docutils literal notranslate"><span class="pre">README.txt</span></code>,
@@ -289,7 +295,7 @@ exists, like it used to do.</p>
 </div>
 <p>The manifest template has one command per line, where each command specifies a
 set of files to include or exclude from the source distribution.  For an
-example, again we turn to the Distutils' own manifest template:</p>
+example, again we turn to the Distutils’ own manifest template:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>include *.txt
 recursive-include examples *.txt *.py
 prune examples/sample?/build
@@ -310,7 +316,7 @@ to or removes from that list of files.  Once we have fully processed the
 manifest template, we remove files that should not be included in the source
 distribution:</p>
 <ul class="simple">
-<li><p>all files in the Distutils &quot;build&quot; tree (default <code class="file docutils literal notranslate"><span class="pre">build/</span></code>)</p></li>
+<li><p>all files in the Distutils “build” tree (default <code class="file docutils literal notranslate"><span class="pre">build/</span></code>)</p></li>
 <li><p>all files in directories named <code class="file docutils literal notranslate"><span class="pre">RCS</span></code>, <code class="file docutils literal notranslate"><span class="pre">CVS</span></code>, <code class="file docutils literal notranslate"><span class="pre">.svn</span></code>,
 <code class="file docutils literal notranslate"><span class="pre">.hg</span></code>, <code class="file docutils literal notranslate"><span class="pre">.git</span></code>, <code class="file docutils literal notranslate"><span class="pre">.bzr</span></code> or <code class="file docutils literal notranslate"><span class="pre">_darcs</span></code></p></li>
 </ul>
@@ -319,14 +325,14 @@ future reference, and then used to build the source distribution archive(s).</p>
 <p>You can disable the default set of included files with the
 <code class="xref std std-option docutils literal notranslate"><span class="pre">--no-defaults</span></code> option, and you can disable the standard exclude set
 with <code class="xref std std-option docutils literal notranslate"><span class="pre">--no-prune</span></code>.</p>
-<p>Following the Distutils' own manifest template, let's trace how the
+<p>Following the Distutils’ own manifest template, let’s trace how the
 <strong class="command">sdist</strong> command builds the list of files to include in the Distutils
 source distribution:</p>
 <ol class="arabic simple">
 <li><p>include all Python source files in the <code class="file docutils literal notranslate"><span class="pre">distutils</span></code> and
 <code class="file docutils literal notranslate"><span class="pre">distutils/command</span></code> subdirectories (because packages corresponding to
 those two directories were mentioned in the <code class="docutils literal notranslate"><span class="pre">packages</span></code> option in the
-setup script---see section <a class="reference internal" href="setupscript.html#setup-script"><span class="std std-ref">编写安装脚本</span></a>)</p></li>
+setup script—see section <a class="reference internal" href="setupscript.html#setup-script"><span class="std std-ref">编写安装脚本</span></a>)</p></li>
 <li><p>include <code class="file docutils literal notranslate"><span class="pre">README.txt</span></code>, <code class="file docutils literal notranslate"><span class="pre">setup.py</span></code>, and <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code> (standard
 files)</p></li>
 <li><p>include <code class="file docutils literal notranslate"><span class="pre">test/test*.py</span></code> (standard files)</p></li>
@@ -335,8 +341,8 @@ files)</p></li>
 <li><p>include anything matching <code class="file docutils literal notranslate"><span class="pre">*.txt</span></code> or <code class="file docutils literal notranslate"><span class="pre">*.py</span></code> in the sub-tree
 under <code class="file docutils literal notranslate"><span class="pre">examples</span></code>,</p></li>
 <li><p>exclude all files in the sub-trees starting at directories matching
-<code class="file docutils literal notranslate"><span class="pre">examples/sample?/build</span></code>---this may exclude files included by the
-previous two steps, so it's important that the <code class="docutils literal notranslate"><span class="pre">prune</span></code> command in the manifest
+<code class="file docutils literal notranslate"><span class="pre">examples/sample?/build</span></code>—this may exclude files included by the
+previous two steps, so it’s important that the <code class="docutils literal notranslate"><span class="pre">prune</span></code> command in the manifest
 template comes after the <code class="docutils literal notranslate"><span class="pre">recursive-include</span></code> command</p></li>
 <li><p>exclude the entire <code class="file docutils literal notranslate"><span class="pre">build</span></code> tree, and any <code class="file docutils literal notranslate"><span class="pre">RCS</span></code>, <code class="file docutils literal notranslate"><span class="pre">CVS</span></code>,
 <code class="file docutils literal notranslate"><span class="pre">.svn</span></code>, <code class="file docutils literal notranslate"><span class="pre">.hg</span></code>, <code class="file docutils literal notranslate"><span class="pre">.git</span></code>, <code class="file docutils literal notranslate"><span class="pre">.bzr</span></code> and <code class="file docutils literal notranslate"><span class="pre">_darcs</span></code>
@@ -354,7 +360,7 @@ template is portable across operating systems.</p>
 <li><p>if the manifest file (<code class="file docutils literal notranslate"><span class="pre">MANIFEST</span></code> by default) exists and the first line
 does not have a comment indicating it is generated from <code class="file docutils literal notranslate"><span class="pre">MANIFEST.in</span></code>,
 then it is used as is, unaltered</p></li>
-<li><p>if the manifest file doesn't exist or has been previously automatically
+<li><p>if the manifest file doesn’t exist or has been previously automatically
 generated, read <code class="file docutils literal notranslate"><span class="pre">MANIFEST.in</span></code> and create the manifest</p></li>
 <li><p>if neither <code class="file docutils literal notranslate"><span class="pre">MANIFEST</span></code> nor <code class="file docutils literal notranslate"><span class="pre">MANIFEST.in</span></code> exist, create a manifest
 with just the default file set</p></li>
@@ -363,7 +369,7 @@ in) to create the source distribution archive(s)</p></li>
 </ul>
 <p>There are a couple of options that modify this behaviour.  First, use the
 <code class="xref std std-option docutils literal notranslate"><span class="pre">--no-defaults</span></code> and <code class="xref std std-option docutils literal notranslate"><span class="pre">--no-prune</span></code> to disable the standard
-&quot;include&quot; and &quot;exclude&quot; sets.</p>
+“include” and “exclude” sets.</p>
 <p>Second, you might just want to (re)generate the manifest, but not create a source
 distribution:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">sdist</span> <span class="o">--</span><span class="n">manifest</span><span class="o">-</span><span class="n">only</span>
@@ -380,8 +386,9 @@ distribution:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">4. Creating a Source Distribution</a><ul>
 <li><a class="reference internal" href="#specifying-the-files-to-distribute">4.1. Specifying the files to distribute</a></li>
 <li><a class="reference internal" href="#manifest-related-options">4.2. Manifest-related options</a></li>
@@ -389,12 +396,17 @@ distribution:</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="configfile.html"
-                        title="上一章"><span class="section-number">3. </span>编写设置脚本的配置文件</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="builtdist.html"
-                        title="下一章"><span class="section-number">5. </span>创建构建分布</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="configfile.html"
+                          title="上一章"><span class="section-number">3. </span>编写设置脚本的配置文件</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="builtdist.html"
+                          title="下一章"><span class="section-number">5. </span>创建构建分布</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -436,7 +448,7 @@ distribution:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >分发 Python 模块（遗留版本）</a> &#187;</li>
@@ -464,7 +476,7 @@ distribution:</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -472,11 +484,11 @@ distribution:</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

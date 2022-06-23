@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>10. 完整的语法规范 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. 完整的语法规范 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="toplevel_components.html"
-                        title="上一章"><span class="section-number">9. </span>顶级组件</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="../library/index.html"
-                        title="下一章">Python 标准库</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="toplevel_components.html"
+                          title="上一章"><span class="section-number">9. </span>顶级组件</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="../library/index.html"
+                          title="下一章">Python 标准库</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 语言参考手册</a> &#187;</li>
@@ -148,7 +152,7 @@
   <section id="full-grammar-specification">
 <h1><span class="section-number">10. </span>完整的语法规范<a class="headerlink" href="#full-grammar-specification" title="永久链接至标题">¶</a></h1>
 <p>这是完整的 Python 语法规范，直接提取自用于生成 CPython 解析器的语法 (参见 <a class="reference external" href="https://github.com/python/cpython/tree/main/Grammar/python.gram">Grammar/python.gram</a>)。 这里显示的版本省略了有关代码生成和错误恢复的细节。</p>
-<p>该标记法是 <a class="reference external" href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> 和 <a class="reference external" href="https://en.wikipedia.org/wiki/Parsing_expression_grammar">PEG</a> 的混合体。 特别地，<code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 后跟一个符号、形符或带括号的分组来表示正向前视（即要求匹配但不会消耗掉），而 <code class="docutils literal notranslate"><span class="pre">!</span></code> 表示负向前视（即 _不要求_ 匹配）。 我们使用 <code class="docutils literal notranslate"><span class="pre">|</span></code> 分隔符来表示 PEG 的“有序选择” (在传统 PEG 语法中写作 <code class="docutils literal notranslate"><span class="pre">/</span></code>)。 请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0617"><strong>PEP 617</strong></a> 了解有关该语法规则的更多细节。</p>
+<p>该标记法是 <a class="reference external" href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form">EBNF</a> 和 <a class="reference external" href="https://en.wikipedia.org/wiki/Parsing_expression_grammar">PEG</a> 的混合体。 特别地，<code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 后跟一个符号、形符或带括号的分组来表示正向前视（即要求匹配但不会消耗掉），而 <code class="docutils literal notranslate"><span class="pre">!</span></code> 表示负向前视（即 _不要求_ 匹配）。 我们使用 <code class="docutils literal notranslate"><span class="pre">|</span></code> 分隔符来表示 PEG 的“有序选择” (在传统 PEG 语法中写作 <code class="docutils literal notranslate"><span class="pre">/</span></code>)。 请参阅 <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0617/"><strong>PEP 617</strong></a> 了解有关该语法规则的更多细节。</p>
 <div class="highlight-peg notranslate"><div class="highlight"><pre><span></span><span class="c c-Singleline"># PEG grammar for Python</span>
 
 
@@ -391,10 +395,12 @@
 
 <span class="nf">star_etc</span><span class="p">:</span>
     <span class="o">|</span> &#39;*&#39; <span class="nf">param_no_default</span> <span class="nf">param_maybe_default</span><span class="o">*</span> <span class="p">[</span><span class="nf">kwds</span><span class="p">]</span> 
+    <span class="o">|</span> &#39;*&#39; <span class="nf">param_no_default_star_annotation</span> <span class="nf">param_maybe_default</span><span class="o">*</span> <span class="p">[</span><span class="nf">kwds</span><span class="p">]</span> 
     <span class="o">|</span> &#39;*&#39; &#39;,&#39; <span class="nf">param_maybe_default</span><span class="o">+</span> <span class="p">[</span><span class="nf">kwds</span><span class="p">]</span> 
     <span class="o">|</span> <span class="nf">kwds</span> 
 
-<span class="nf">kwds</span><span class="p">:</span> &#39;**&#39; <span class="nf">param_no_default</span> 
+<span class="nf">kwds</span><span class="p">:</span>
+    <span class="o">|</span> &#39;**&#39; <span class="nf">param_no_default</span> 
 
 <span class="c c-Singleline"># One parameter.  This *includes* a following comma and type comment.</span>
 <span class="c c-Singleline">#</span>
@@ -412,6 +418,9 @@
 <span class="nf">param_no_default</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">param</span> &#39;,&#39; TYPE_COMMENT<span class="o">?</span> 
     <span class="o">|</span> <span class="nf">param</span> TYPE_COMMENT<span class="o">?</span> &amp;&#39;)&#39; 
+<span class="nf">param_no_default_star_annotation</span><span class="p">:</span>
+    <span class="o">|</span> <span class="nf">param_star_annotation</span> &#39;,&#39; TYPE_COMMENT<span class="o">?</span> 
+    <span class="o">|</span> <span class="nf">param_star_annotation</span> TYPE_COMMENT<span class="o">?</span> &amp;&#39;)&#39; 
 <span class="nf">param_with_default</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">param</span> <span class="nf">default</span> &#39;,&#39; TYPE_COMMENT<span class="o">?</span> 
     <span class="o">|</span> <span class="nf">param</span> <span class="nf">default</span> TYPE_COMMENT<span class="o">?</span> &amp;&#39;)&#39; 
@@ -419,8 +428,10 @@
     <span class="o">|</span> <span class="nf">param</span> <span class="nf">default</span><span class="o">?</span> &#39;,&#39; TYPE_COMMENT<span class="o">?</span> 
     <span class="o">|</span> <span class="nf">param</span> <span class="nf">default</span><span class="o">?</span> TYPE_COMMENT<span class="o">?</span> &amp;&#39;)&#39; 
 <span class="nf">param</span><span class="p">:</span> NAME <span class="nf">annotation</span><span class="o">?</span> 
+<span class="nf">param_star_annotation</span><span class="p">:</span> NAME <span class="nf">star_annotation</span> 
 <span class="nf">annotation</span><span class="p">:</span> &#39;:&#39; <span class="nf">expression</span> 
-<span class="nf">default</span><span class="p">:</span> &#39;=&#39; <span class="nf">expression</span> 
+<span class="nf">star_annotation</span><span class="p">:</span> &#39;:&#39; <span class="nf">star_expression</span> 
+<span class="nf">default</span><span class="p">:</span> &#39;=&#39; <span class="nf">expression</span>  <span class="o">|</span> <span class="nf">invalid_default</span>
 
 <span class="c c-Singleline"># If statement</span>
 <span class="c c-Singleline"># ------------</span>
@@ -771,7 +782,7 @@
 
 <span class="nf">slices</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">slice</span> !&#39;,&#39; 
-    <span class="o">|</span> &#39;,&#39;<span class="o">.</span><span class="nf">slice</span><span class="o">+</span> <span class="p">[</span>&#39;,&#39;<span class="p">]</span> 
+    <span class="o">|</span> &#39;,&#39;<span class="o">.</span><span class="p">(</span><span class="nf">slice</span> <span class="o">|</span> <span class="nf">starred_expression</span><span class="p">)</span><span class="o">+</span> <span class="p">[</span>&#39;,&#39;<span class="p">]</span> 
 
 <span class="nf">slice</span><span class="p">:</span>
     <span class="o">|</span> <span class="p">[</span><span class="nf">expression</span><span class="p">]</span> &#39;:&#39; <span class="p">[</span><span class="nf">expression</span><span class="p">]</span> <span class="p">[</span>&#39;:&#39; <span class="p">[</span><span class="nf">expression</span><span class="p">]</span> <span class="p">]</span> 
@@ -825,7 +836,8 @@
     <span class="o">|</span> &#39;*&#39; &#39;,&#39; <span class="nf">lambda_param_maybe_default</span><span class="o">+</span> <span class="p">[</span><span class="nf">lambda_kwds</span><span class="p">]</span> 
     <span class="o">|</span> <span class="nf">lambda_kwds</span> 
 
-<span class="nf">lambda_kwds</span><span class="p">:</span> &#39;**&#39; <span class="nf">lambda_param_no_default</span> 
+<span class="nf">lambda_kwds</span><span class="p">:</span>
+    <span class="o">|</span> &#39;**&#39; <span class="nf">lambda_param_no_default</span> 
 
 <span class="nf">lambda_param_no_default</span><span class="p">:</span>
     <span class="o">|</span> <span class="nf">lambda_param</span> &#39;,&#39; 
@@ -1013,12 +1025,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="toplevel_components.html"
-                        title="上一章"><span class="section-number">9. </span>顶级组件</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="../library/index.html"
-                        title="下一章">Python 标准库</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="toplevel_components.html"
+                          title="上一章"><span class="section-number">9. </span>顶级组件</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="../library/index.html"
+                          title="下一章">Python 标准库</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1060,7 +1076,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 语言参考手册</a> &#187;</li>
@@ -1088,7 +1104,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1096,11 +1112,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

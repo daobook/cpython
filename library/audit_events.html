@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>审计事件表 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>审计事件表 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,13 +20,13 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="bdb --- Debugger framework" href="bdb.html" />
+    <link rel="next" title="bdb — Debugger framework" href="bdb.html" />
     <link rel="prev" title="调试和分析" href="debug.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/audit_events.html" />
     
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="debug.html"
-                        title="上一章">调试和分析</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="bdb.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> --- Debugger framework</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="debug.html"
+                          title="上一章">调试和分析</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="bdb.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -102,7 +106,7 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="bdb.html" title="bdb --- Debugger framework"
+          <a href="bdb.html" title="bdb — Debugger framework"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="debug.html" title="调试和分析"
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -148,7 +152,7 @@
             
   <span class="target" id="audit-events"></span><section id="audit-events-table">
 <span id="index-0"></span><h1>审计事件表<a class="headerlink" href="#audit-events-table" title="永久链接至标题">¶</a></h1>
-<p>下表包含了在整个 CPython 运行时和标准库中由 <a class="reference internal" href="sys.html#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> 或 <a class="reference internal" href="../c-api/sys.html#c.PySys_Audit" title="PySys_Audit"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_Audit()</span></code></a> 调用所引发的全部事件。 这些调用是在 3.8.0 或更高版本中添加了 (参见 <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0578"><strong>PEP 578</strong></a>)。</p>
+<p>下表包含了在整个 CPython 运行时和标准库中由 <a class="reference internal" href="sys.html#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> 或 <a class="reference internal" href="../c-api/sys.html#c.PySys_Audit" title="PySys_Audit"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_Audit()</span></code></a> 调用所引发的全部事件。 这些调用是在 3.8.0 或更高版本中添加了 (参见 <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0578/"><strong>PEP 578</strong></a>)。</p>
 <p>请参阅 <a class="reference internal" href="sys.html#sys.addaudithook" title="sys.addaudithook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.addaudithook()</span></code></a> 和 <a class="reference internal" href="../c-api/sys.html#c.PySys_AddAuditHook" title="PySys_AddAuditHook"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddAuditHook()</span></code></a> 了解有关处理这些事件的详细信息。</p>
 <div class="impl-detail compound">
 <p><strong>CPython implementation detail:</strong> 此表是根据 CPython 文档生成的，可能无法表示其他实现所引发的事件。 请参阅你的运行时专属的文档了解实际引发的事件。</p>
@@ -419,7 +423,7 @@
 <td><p><a class="reference internal" href="../reference/datamodel.html#object.__setattr__">[1]</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>open</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">file</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">flags</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">mode</span></code>, <code class="docutils literal notranslate"><span class="pre">flags</span></code></p></td>
 <td><p><a class="reference internal" href="functions.html#open">[1]</a><a class="reference internal" href="io.html#io.open">[2]</a><a class="reference internal" href="os.html#os.open">[3]</a></p></td>
 </tr>
 <tr class="row-even"><td><p>os.add_dll_directory</p></td>
@@ -627,7 +631,7 @@
 <td><p><a class="reference internal" href="shutil.html#shutil.move">[1]</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>shutil.rmtree</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">path</span></code>, <code class="docutils literal notranslate"><span class="pre">dir_fd</span></code></p></td>
 <td><p><a class="reference internal" href="shutil.html#shutil.rmtree">[1]</a></p></td>
 </tr>
 <tr class="row-even"><td><p>shutil.unpack_archive</p></td>
@@ -708,11 +712,11 @@
 </tr>
 <tr class="row-odd"><td><p>sqlite3.enable_load_extension</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">connection</span></code>, <code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><a class="reference internal" href="sqlite3.html#sqlite3.enable_load_extension">[1]</a></p></td>
+<td><p><a class="reference internal" href="sqlite3.html#sqlite3.Connection.enable_load_extension">[1]</a></p></td>
 </tr>
 <tr class="row-even"><td><p>sqlite3.load_extension</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">connection</span></code>, <code class="docutils literal notranslate"><span class="pre">path</span></code></p></td>
-<td><p><a class="reference internal" href="sqlite3.html#sqlite3.load_extension">[1]</a></p></td>
+<td><p><a class="reference internal" href="sqlite3.html#sqlite3.Connection.load_extension">[1]</a></p></td>
 </tr>
 <tr class="row-odd"><td><p>subprocess.Popen</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">executable</span></code>, <code class="docutils literal notranslate"><span class="pre">args</span></code>, <code class="docutils literal notranslate"><span class="pre">cwd</span></code>, <code class="docutils literal notranslate"><span class="pre">env</span></code></p></td>
@@ -922,12 +926,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="debug.html"
-                        title="上一章">调试和分析</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="bdb.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> --- Debugger framework</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="debug.html"
+                          title="上一章">调试和分析</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="bdb.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bdb</span></code> — Debugger framework</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -953,7 +961,7 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="bdb.html" title="bdb --- Debugger framework"
+          <a href="bdb.html" title="bdb — Debugger framework"
              >下一页</a> |</li>
         <li class="right" >
           <a href="debug.html" title="调试和分析"
@@ -969,7 +977,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
@@ -998,7 +1006,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1006,11 +1014,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

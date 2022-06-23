@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>安装Python模块（旧版） &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安装Python模块（旧版） &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -69,8 +69,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">安装Python模块（旧版）</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a><ul>
 <li><a class="reference internal" href="#distutils-based-source-distributions">基于 <code class="docutils literal notranslate"><span class="pre">distutils</span></code> 的源代码分发</a></li>
@@ -91,7 +92,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-installation">自定义安装</a><ul>
-<li><a class="reference internal" href="#modifying-python-s-search-path">Modifying Python's Search Path</a></li>
+<li><a class="reference internal" href="#modifying-python-s-search-path">Modifying Python’s Search Path</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#distutils-configuration-files">Distutils Configuration Files</a><ul>
@@ -115,9 +116,12 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="../distutils/apiref.html"
-                        title="上一章"><span class="section-number">9. </span>API参考引用</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="../distutils/apiref.html"
+                          title="上一章"><span class="section-number">9. </span>API参考引用</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -157,7 +161,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">安装Python模块（旧版）</a></li>
@@ -191,7 +195,7 @@
 </dd>
 </dl>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>整个 <code class="docutils literal notranslate"><span class="pre">distutils</span></code> 包已被弃用并将在 Python 3.12 中被移除。 此文档仅保留作参考，并将随包一起被移除。 更多信息请参阅 <a class="reference internal" href="../whatsnew/3.10.html#distutils-deprecated"><span class="std std-ref">有什么新变化</span></a> 条目。</p>
 </div>
 <div class="admonition seealso">
@@ -202,11 +206,11 @@
 </dl>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>这篇文档是历史遗留文档，在 <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/setuptools.html">https://setuptools.readthedocs.io/en/latest/setuptools.html</a> 上的 <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> 文档独立涵盖此处包含的所有相关信息之后，将不再单独作为正式文档保留。</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>本指南仅介绍构建和分发扩展的基本工具，这些扩展是作为此Python版本的一部分提供的。 第三方工具提供更易于使用和更安全的替代方案。有关详细信息，请参阅 Python 打包用户指南中的 <a class="reference external" href="https://packaging.python.org/guides/tool-recommendations/">快速推荐部分</a> 。</p>
 </div>
 <section id="introduction">
@@ -219,7 +223,7 @@
 <span id="inst-new-standard"></span><h3>基于 <code class="docutils literal notranslate"><span class="pre">distutils</span></code> 的源代码分发<a class="headerlink" href="#distutils-based-source-distributions" title="永久链接至标题">¶</a></h3>
 <p>If you download a module source distribution, you can tell pretty quickly if it
 was packaged and distributed in the standard way, i.e. using the Distutils.
-First, the distribution's name and version number will be featured prominently
+First, the distribution’s name and version number will be featured prominently
 in the name of the downloaded archive, e.g. <code class="file docutils literal notranslate"><span class="pre">foo-1.0.tar.gz</span></code> or
 <code class="file docutils literal notranslate"><span class="pre">widget-0.9.7.zip</span></code>.  Next, the archive will unpack into a similarly-named
 directory: <code class="file docutils literal notranslate"><span class="pre">foo-1.0</span></code> or <code class="file docutils literal notranslate"><span class="pre">widget-0.9.7</span></code>.  Additionally, the
@@ -235,8 +239,8 @@ one command from a terminal:</p>
 </pre></div>
 </div>
 <p>If all these things are true, then you already know how to build and install the
-modules you've just downloaded:  Run the command above. Unless you need to
-install things in a non-standard way or customize the build process, you don't
+modules you’ve just downloaded:  Run the command above. Unless you need to
+install things in a non-standard way or customize the build process, you don’t
 really need this manual.  Or rather, the above command is everything you need to
 get out of this manual.</p>
 </section>
@@ -253,14 +257,14 @@ terminal:</p>
 <span id="inst-platform-variations"></span><h3>Platform variations<a class="headerlink" href="#platform-variations" title="永久链接至标题">¶</a></h3>
 <p>You should always run the setup command from the distribution root directory,
 i.e. the top-level subdirectory that the module source distribution unpacks
-into.  For example, if you've just downloaded a module source distribution
+into.  For example, if you’ve just downloaded a module source distribution
 <code class="file docutils literal notranslate"><span class="pre">foo-1.0.tar.gz</span></code> onto a Unix system, the normal thing to do is:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>gunzip -c foo-1.0.tar.gz | tar xf -    # unpacks into directory foo-1.0
 cd foo-1.0
 python setup.py install
 </pre></div>
 </div>
-<p>On Windows, you'd probably download <code class="file docutils literal notranslate"><span class="pre">foo-1.0.zip</span></code>.  If you downloaded the
+<p>On Windows, you’d probably download <code class="file docutils literal notranslate"><span class="pre">foo-1.0.zip</span></code>.  If you downloaded the
 archive file to <code class="file docutils literal notranslate"><span class="pre">C:\Temp</span></code>, then it would unpack into
 <code class="file docutils literal notranslate"><span class="pre">C:\Temp\foo-1.0</span></code>; you can use either an archive manipulator with a
 graphical user interface (such as WinZip) or a command-line tool (such as
@@ -274,10 +278,10 @@ python setup.py install
 <section id="splitting-the-job-up">
 <span id="inst-splitting-up"></span><h3>Splitting the job up<a class="headerlink" href="#splitting-the-job-up" title="永久链接至标题">¶</a></h3>
 <p>Running <code class="docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">install</span></code> builds and installs all modules in one run.  If you
-prefer to work incrementally---especially useful if you want to customize the
-build process, or if things are going wrong---you can use the setup script to do
+prefer to work incrementally—especially useful if you want to customize the
+build process, or if things are going wrong—you can use the setup script to do
 one thing at a time.  This is particularly helpful when the build and install
-will be done by different users---for example, you might want to build a module
+will be done by different users—for example, you might want to build a module
 distribution and hand it off to a system administrator for installation (or do
 it yourself, with super-user privileges).</p>
 <p>For example, you can build everything in one step, and then install everything
@@ -287,19 +291,19 @@ python setup.py install
 </pre></div>
 </div>
 <p>If you do this, you will notice that running the <strong class="command">install</strong> command
-first runs the <strong class="command">build</strong> command, which---in this case---quickly notices
+first runs the <strong class="command">build</strong> command, which—in this case—quickly notices
 that it has nothing to do, since everything in the <code class="file docutils literal notranslate"><span class="pre">build</span></code> directory is
 up-to-date.</p>
 <p>You may not need this ability to break things down often if all you do is
-install modules downloaded off the 'net, but it's very handy for more advanced
+install modules downloaded off the ‘net, but it’s very handy for more advanced
 tasks.  If you get into distributing your own Python modules and extensions,
-you'll run lots of individual Distutils commands on their own.</p>
+you’ll run lots of individual Distutils commands on their own.</p>
 </section>
 <section id="how-building-works">
 <span id="inst-how-build-works"></span><h3>How building works<a class="headerlink" href="#how-building-works" title="永久链接至标题">¶</a></h3>
 <p>As implied above, the <strong class="command">build</strong> command is responsible for putting the
 files to install into a <em>build directory</em>.  By default, this is <code class="file docutils literal notranslate"><span class="pre">build</span></code>
-under the distribution root; if you're excessively concerned with speed, or want
+under the distribution root; if you’re excessively concerned with speed, or want
 to keep the source tree pristine, you can change the build directory with the
 <code class="xref std std-option docutils literal notranslate"><span class="pre">--build-base</span></code> option. For example:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py build --build-base=/path/to/pybuild/foo-1.0
@@ -307,7 +311,7 @@ to keep the source tree pristine, you can change the build directory with the
 </div>
 <p>(Or you could do this permanently with a directive in your system or personal
 Distutils configuration file; see section <a class="reference internal" href="#inst-config-files"><span class="std std-ref">Distutils Configuration Files</span></a>.)  Normally, this
-isn't necessary.</p>
+isn’t necessary.</p>
 <p>The default layout for the build tree is as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>--- build/ --- lib/
 or
@@ -317,11 +321,11 @@ or
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">&lt;plat&gt;</span></code> expands to a brief description of the current OS/hardware
 platform and Python version.  The first form, with just a <code class="file docutils literal notranslate"><span class="pre">lib</span></code> directory,
-is used for &quot;pure module distributions&quot;---that is, module distributions that
+is used for “pure module distributions”—that is, module distributions that
 include only pure Python modules.  If a module distribution contains any
 extensions (modules written in C/C++), then the second form, with two <code class="docutils literal notranslate"><span class="pre">&lt;plat&gt;</span></code>
 directories, is used.  In that case, the <code class="file docutils literal notranslate"><span class="pre">temp.</span><em><span class="pre">plat</span></em></code> directory holds
-temporary files generated by the compile/link process that don't actually get
+temporary files generated by the compile/link process that don’t actually get
 installed.  In either case, the <code class="file docutils literal notranslate"><span class="pre">lib</span></code> (or <code class="file docutils literal notranslate"><span class="pre">lib.</span><em><span class="pre">plat</span></em></code>) directory
 contains all Python modules (pure Python and extensions) that will be installed.</p>
 <p>In the future, more directories will be added to handle Python scripts,
@@ -335,12 +339,12 @@ of installing Python modules and applications.</p>
 command is relatively simple: all it has to do is copy everything under
 <code class="file docutils literal notranslate"><span class="pre">build/lib</span></code> (or <code class="file docutils literal notranslate"><span class="pre">build/lib.</span><em><span class="pre">plat</span></em></code>) to your chosen installation
 directory.</p>
-<p>If you don't choose an installation directory---i.e., if you just run <code class="docutils literal notranslate"><span class="pre">setup.py</span>
-<span class="pre">install</span></code>---then the <strong class="command">install</strong> command installs to the standard
+<p>If you don’t choose an installation directory—i.e., if you just run <code class="docutils literal notranslate"><span class="pre">setup.py</span>
+<span class="pre">install</span></code>—then the <strong class="command">install</strong> command installs to the standard
 location for third-party Python modules.  This location varies by platform and
 by how you built/installed Python itself.  On Unix (and macOS, which is also
 Unix-based), it also depends on whether the module distribution being installed
-is pure Python or contains extensions (&quot;non-pure&quot;):</p>
+is pure Python or contains extensions (“non-pure”):</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 13%" />
@@ -404,12 +408,12 @@ statements shown below, and get the output as shown, to find out my
 </div>
 <p>A few other placeholders are used in this document: <code class="file docutils literal notranslate"><em><span class="pre">X.Y</span></em></code> stands for the
 version of Python, for example <code class="docutils literal notranslate"><span class="pre">3.2</span></code>; <code class="file docutils literal notranslate"><em><span class="pre">abiflags</span></em></code> will be replaced by
-the value of <a class="reference internal" href="../library/sys.html#sys.abiflags" title="sys.abiflags"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.abiflags</span></code></a> or the empty string for platforms which don't
+the value of <a class="reference internal" href="../library/sys.html#sys.abiflags" title="sys.abiflags"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.abiflags</span></code></a> or the empty string for platforms which don’t
 define ABI flags; <code class="file docutils literal notranslate"><em><span class="pre">distname</span></em></code> will be replaced by the name of the module
 distribution being installed.  Dots and capitalization are important in the
 paths; for example, a value that uses <code class="docutils literal notranslate"><span class="pre">python3.2</span></code> on UNIX will typically use
 <code class="docutils literal notranslate"><span class="pre">Python32</span></code> on Windows.</p>
-<p>If you don't want to install modules to the standard location, or if you don't
+<p>If you don’t want to install modules to the standard location, or if you don’t
 have permission to write there, then you need to read about alternate
 installations in section <a class="reference internal" href="#inst-alt-install"><span class="std std-ref">Alternate Installation</span></a>.  If you want to customize your
 installation directories more heavily, see section <a class="reference internal" href="#inst-custom-install"><span class="std std-ref">自定义安装</span></a> on
@@ -434,12 +438,12 @@ differ across platforms, so read whichever of the following sections applies to
 you.</p>
 <p>Note that the various alternate installation schemes are mutually exclusive: you
 can pass <code class="docutils literal notranslate"><span class="pre">--user</span></code>, or <code class="docutils literal notranslate"><span class="pre">--home</span></code>, or <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">--exec-prefix</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">--install-base</span></code> and <code class="docutils literal notranslate"><span class="pre">--install-platbase</span></code>, but you can't mix from these
+<code class="docutils literal notranslate"><span class="pre">--install-base</span></code> and <code class="docutils literal notranslate"><span class="pre">--install-platbase</span></code>, but you can’t mix from these
 groups.</p>
 <section id="alternate-installation-the-user-scheme">
 <span id="inst-alt-install-user"></span><h3>Alternate installation: the user scheme<a class="headerlink" href="#alternate-installation-the-user-scheme" title="永久链接至标题">¶</a></h3>
-<p>This scheme is designed to be the most convenient solution for users that don't
-have write permission to the global site-packages directory or don't want to
+<p>This scheme is designed to be the most convenient solution for users that don’t
+have write permission to the global site-packages directory or don’t want to
 install into it.  It is enabled with a simple option:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py install --user
 </pre></div>
@@ -511,9 +515,9 @@ the runtime search path for shared C libraries (rpath).</p>
 </section>
 <section id="alternate-installation-the-home-scheme">
 <span id="inst-alt-install-home"></span><h3>Alternate installation: the home scheme<a class="headerlink" href="#alternate-installation-the-home-scheme" title="永久链接至标题">¶</a></h3>
-<p>The idea behind the &quot;home scheme&quot; is that you build and maintain a personal
-stash of Python modules.  This scheme's name is derived from the idea of a
-&quot;home&quot; directory on Unix, since it's not unusual for a Unix user to make their
+<p>The idea behind the “home scheme” is that you build and maintain a personal
+stash of Python modules.  This scheme’s name is derived from the idea of a
+“home” directory on Unix, since it’s not unusual for a Unix user to make their
 home directory have a layout similar to <code class="file docutils literal notranslate"><span class="pre">/usr/</span></code> or <code class="file docutils literal notranslate"><span class="pre">/usr/local/</span></code>.
 This scheme can be used by anyone, regardless of the operating system they
 are installing for.</p>
@@ -528,7 +532,7 @@ will expand this to your home directory:</p>
 </pre></div>
 </div>
 <p>To make Python find the distributions installed with this scheme, you may have
-to <a class="reference internal" href="#inst-search-path"><span class="std std-ref">modify Python's search path</span></a> or edit
+to <a class="reference internal" href="#inst-search-path"><span class="std std-ref">modify Python’s search path</span></a> or edit
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sitecustomize</span></code> (see <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a>) to call <a class="reference internal" href="../library/site.html#site.addsitedir" title="site.addsitedir"><code class="xref py py-func docutils literal notranslate"><span class="pre">site.addsitedir()</span></code></a> or edit
 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.</p>
 <p>The <code class="xref std std-option docutils literal notranslate"><span class="pre">--home</span></code> option defines the installation base directory.  Files are
@@ -558,19 +562,19 @@ installed to the following directories under the installation base as follows:</
 </tr>
 </tbody>
 </table>
-<p>(Mentally replace slashes with backslashes if you're on Windows.)</p>
+<p>(Mentally replace slashes with backslashes if you’re on Windows.)</p>
 </section>
 <section id="alternate-installation-unix-the-prefix-scheme">
 <span id="inst-alt-install-prefix-unix"></span><h3>Alternate installation: Unix (the prefix scheme)<a class="headerlink" href="#alternate-installation-unix-the-prefix-scheme" title="永久链接至标题">¶</a></h3>
-<p>The &quot;prefix scheme&quot; is useful when you wish to use one Python installation to
+<p>The “prefix scheme” is useful when you wish to use one Python installation to
 perform the build/install (i.e., to run the setup script), but install modules
 into the third-party module directory of a different Python installation (or
 something that looks like a different Python installation).  If this sounds a
-trifle unusual, it is---that's why the user and home schemes come before.  However,
+trifle unusual, it is—that’s why the user and home schemes come before.  However,
 there are at least two known cases where the prefix scheme will be useful.</p>
 <p>First, consider that many Linux distributions put Python in <code class="file docutils literal notranslate"><span class="pre">/usr</span></code>, rather
 than the more traditional <code class="file docutils literal notranslate"><span class="pre">/usr/local</span></code>.  This is entirely appropriate,
-since in those cases Python is part of &quot;the system&quot; rather than a local add-on.
+since in those cases Python is part of “the system” rather than a local add-on.
 However, if you are installing Python modules from source, you probably want
 them to go in <code class="file docutils literal notranslate"><span class="pre">/usr/local/lib/python2.</span><em><span class="pre">X</span></em></code> rather than
 <code class="file docutils literal notranslate"><span class="pre">/usr/lib/python2.</span><em><span class="pre">X</span></em></code>.  This can be done with</p>
@@ -626,9 +630,9 @@ above do not already exist, they are created at installation time.</p>
 <p>Incidentally, the real reason the prefix scheme is important is simply that a
 standard Unix installation uses the prefix scheme, but with <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code>
 and <code class="xref std std-option docutils literal notranslate"><span class="pre">--exec-prefix</span></code> supplied by Python itself as <code class="docutils literal notranslate"><span class="pre">sys.prefix</span></code> and
-<code class="docutils literal notranslate"><span class="pre">sys.exec_prefix</span></code>.  Thus, you might think you'll never use the prefix scheme,
+<code class="docutils literal notranslate"><span class="pre">sys.exec_prefix</span></code>.  Thus, you might think you’ll never use the prefix scheme,
 but every time you run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code> without any other options,
-you're using it.</p>
+you’re using it.</p>
 <p>Note that installing extensions to an alternate Python installation has no
 effect on how those extensions are built: in particular, the Python header files
 (<code class="file docutils literal notranslate"><span class="pre">Python.h</span></code> and friends) installed with the Python interpreter used to run
@@ -637,12 +641,12 @@ responsibility to ensure that the interpreter used to run extensions installed
 in this way is compatible with the interpreter used to build them.  The best way
 to do this is to ensure that the two interpreters are the same version of Python
 (possibly different builds, or possibly copies of the same build).  (Of course,
-if your <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="xref std std-option docutils literal notranslate"><span class="pre">--exec-prefix</span></code> don't even point to an
+if your <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="xref std std-option docutils literal notranslate"><span class="pre">--exec-prefix</span></code> don’t even point to an
 alternate Python installation, this is immaterial.)</p>
 </section>
 <section id="alternate-installation-windows-the-prefix-scheme">
 <span id="inst-alt-install-prefix-windows"></span><h3>Alternate installation: Windows (the prefix scheme)<a class="headerlink" href="#alternate-installation-windows-the-prefix-scheme" title="永久链接至标题">¶</a></h3>
-<p>Windows has no concept of a user's home directory, and since the standard Python
+<p>Windows has no concept of a user’s home directory, and since the standard Python
 installation under Windows is simpler than under Unix, the <code class="xref std std-option docutils literal notranslate"><span class="pre">--prefix</span></code>
 option has traditionally been used to install additional packages in separate
 locations on Windows.</p>
@@ -684,10 +688,10 @@ Files are installed as follows:</p>
 <section id="custom-installation">
 <span id="inst-custom-install"></span><h2>自定义安装<a class="headerlink" href="#custom-installation" title="永久链接至标题">¶</a></h2>
 <p>Sometimes, the alternate installation schemes described in section
-<a class="reference internal" href="#inst-alt-install"><span class="std std-ref">Alternate Installation</span></a> just don't do what you want.  You might want to tweak just
+<a class="reference internal" href="#inst-alt-install"><span class="std std-ref">Alternate Installation</span></a> just don’t do what you want.  You might want to tweak just
 one or two directories while keeping everything under the same base directory,
 or you might want to completely redefine the installation scheme.  In either
-case, you're creating a <em>custom installation scheme</em>.</p>
+case, you’re creating a <em>custom installation scheme</em>.</p>
 <p>To create a custom installation scheme, you start with one of the alternate
 schemes and override some of the installation directories used for the various
 types of files, using these options:</p>
@@ -725,13 +729,13 @@ types of files, using these options:</p>
 <p>These override options can be relative, absolute,
 or explicitly defined in terms of one of the installation base directories.
 (There are two installation base directories, and they are normally the
-same---they only differ when you use the Unix &quot;prefix scheme&quot; and supply
+same—they only differ when you use the Unix “prefix scheme” and supply
 different <code class="docutils literal notranslate"><span class="pre">--prefix</span></code> and <code class="docutils literal notranslate"><span class="pre">--exec-prefix</span></code> options; using <code class="docutils literal notranslate"><span class="pre">--install-lib</span></code>
 will override values computed or given for <code class="docutils literal notranslate"><span class="pre">--install-purelib</span></code> and
-<code class="docutils literal notranslate"><span class="pre">--install-platlib</span></code>, and is recommended for schemes that don't make a
+<code class="docutils literal notranslate"><span class="pre">--install-platlib</span></code>, and is recommended for schemes that don’t make a
 difference between Python and extension modules.)</p>
-<p>For example, say you're installing a module distribution to your home directory
-under Unix---but you want scripts to go in <code class="file docutils literal notranslate"><span class="pre">~/scripts</span></code> rather than
+<p>For example, say you’re installing a module distribution to your home directory
+under Unix—but you want scripts to go in <code class="file docutils literal notranslate"><span class="pre">~/scripts</span></code> rather than
 <code class="file docutils literal notranslate"><span class="pre">~/bin</span></code>. As you might expect, you can override this directory with the
 <code class="xref std std-option docutils literal notranslate"><span class="pre">--install-scripts</span></code> option; in this case, it makes most sense to supply
 a relative path, which will be interpreted relative to the installation base
@@ -747,23 +751,23 @@ scripts will wind up in <code class="file docutils literal notranslate"><span cl
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py install --install-scripts=/usr/local/bin
 </pre></div>
 </div>
-<p>(This performs an installation using the &quot;prefix scheme&quot;, where the prefix is
-whatever your Python interpreter was installed with--- <code class="file docutils literal notranslate"><span class="pre">/usr/local/python</span></code>
+<p>(This performs an installation using the “prefix scheme”, where the prefix is
+whatever your Python interpreter was installed with— <code class="file docutils literal notranslate"><span class="pre">/usr/local/python</span></code>
 in this case.)</p>
 <p>If you maintain Python on Windows, you might want third-party modules to live in
 a subdirectory of <code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em></code>, rather than right in <code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em></code>
 itself.  This is almost as easy as customizing the script installation
-directory---you just have to remember that there are two types of modules
+directory—you just have to remember that there are two types of modules
 to worry about, Python and extension modules, which can conveniently be both
 controlled by one option:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py install --install-lib=Site
 </pre></div>
 </div>
 <p>The specified installation directory is relative to <code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em></code>.  Of
-course, you also have to ensure that this directory is in Python's module
+course, you also have to ensure that this directory is in Python’s module
 search path, such as by putting a <code class="file docutils literal notranslate"><span class="pre">.pth</span></code> file in a site directory (see
-<a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a>).  See section <a class="reference internal" href="#inst-search-path"><span class="std std-ref">Modifying Python's Search Path</span></a> to find out how to modify
-Python's search path.</p>
+<a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a>).  See section <a class="reference internal" href="#inst-search-path"><span class="std std-ref">Modifying Python’s Search Path</span></a> to find out how to modify
+Python’s search path.</p>
 <p>If you want to define an entire installation scheme, you just have to supply all
 of the installation directory options.  The recommended way to do this is to
 supply relative paths; for example, if you want to maintain all Python
@@ -785,7 +789,7 @@ might define the following installation scheme:</p>
                         --install-data=data
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">$PLAT</span></code> is not (necessarily) an environment variable---it will be expanded by
+<p><code class="docutils literal notranslate"><span class="pre">$PLAT</span></code> is not (necessarily) an environment variable—it will be expanded by
 the Distutils as it parses your command line options, just as it does when
 parsing your configuration file(s).</p>
 <p>Obviously, specifying the entire installation scheme every time you install a
@@ -821,19 +825,19 @@ configuration file input.  These are Distutils configuration variables, which
 bear a strong resemblance to environment variables. In fact, you can use
 environment variables in config files on platforms that have such a notion but
 the Distutils additionally define a few extra variables that may not be in your
-environment, such as <code class="docutils literal notranslate"><span class="pre">$PLAT</span></code>.  (And of course, on systems that don't have
+environment, such as <code class="docutils literal notranslate"><span class="pre">$PLAT</span></code>.  (And of course, on systems that don’t have
 environment variables, such as Mac OS 9, the configuration variables supplied by
 the Distutils are the only ones you can use.) See section <a class="reference internal" href="#inst-config-files"><span class="std std-ref">Distutils Configuration Files</span></a>
 for details.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>When a <a class="reference internal" href="../library/venv.html#venv-def"><span class="std std-ref">virtual environment</span></a> is activated, any options
 that change the installation path will be ignored from all distutils configuration
 files to prevent inadvertently installing projects outside of the virtual
 environment.</p>
 </div>
 <section id="modifying-python-s-search-path">
-<span id="inst-search-path"></span><h3>Modifying Python's Search Path<a class="headerlink" href="#modifying-python-s-search-path" title="永久链接至标题">¶</a></h3>
+<span id="inst-search-path"></span><h3>Modifying Python’s Search Path<a class="headerlink" href="#modifying-python-s-search-path" title="永久链接至标题">¶</a></h3>
 <p>When the Python interpreter executes an <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement, it searches
 for both Python code and extension modules along a search path.  A default value
 for the path is configured into the Python binary when the interpreter is built.
@@ -860,16 +864,16 @@ Add-on Python modules might then belong in <code class="file docutils literal no
 import them, this directory must be added to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  There are several
 different ways to add the directory.</p>
 <p>The most convenient way is to add a path configuration file to a directory
-that's already on Python's path, usually to the <code class="file docutils literal notranslate"><span class="pre">.../site-packages/</span></code>
+that’s already on Python’s path, usually to the <code class="file docutils literal notranslate"><span class="pre">.../site-packages/</span></code>
 directory.  Path configuration files have an extension of <code class="file docutils literal notranslate"><span class="pre">.pth</span></code>, and each
 line must contain a single path that will be appended to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  (Because
 the new paths are appended to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>, modules in the added directories
-will not override standard modules.  This means you can't use this mechanism for
+will not override standard modules.  This means you can’t use this mechanism for
 installing fixed versions of standard modules.)</p>
-<p>Paths can be absolute or relative, in which case they're relative to the
+<p>Paths can be absolute or relative, in which case they’re relative to the
 directory containing the <code class="file docutils literal notranslate"><span class="pre">.pth</span></code> file.  See the documentation of
 the <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> module for more information.</p>
-<p>A slightly less convenient way is to edit the <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> file in Python's
+<p>A slightly less convenient way is to edit the <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> file in Python’s
 standard library, and modify <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> is automatically
 imported when the Python interpreter is executed, unless the <a class="reference internal" href="../using/cmdline.html#cmdoption-S"><code class="xref std std-option docutils literal notranslate"><span class="pre">-S</span></code></a> switch
 is supplied to suppress this behaviour.  So you could simply edit
@@ -880,7 +884,7 @@ is supplied to suppress this behaviour.  So you could simply edit
 </div>
 <p>However, if you reinstall the same major version of Python (perhaps when
 upgrading from 2.2 to 2.2.2, for example) <code class="file docutils literal notranslate"><span class="pre">site.py</span></code> will be overwritten by
-the stock version.  You'd have to remember that it was modified and save a copy
+the stock version.  You’d have to remember that it was modified and save a copy
 before doing the installation.</p>
 <p>There are two environment variables that can modify <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.
 <span class="target" id="index-0"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONHOME"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONHOME</span></code></a> sets an alternate value for the prefix of the Python
@@ -891,7 +895,7 @@ the search path will be set to <code class="docutils literal notranslate"><span 
 added to the beginning of <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.  For example, if <span class="target" id="index-3"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> is
 set to <code class="docutils literal notranslate"><span class="pre">/www/python:/opt/py</span></code>, the search path will begin with
 <code class="docutils literal notranslate"><span class="pre">['/www/python',</span> <span class="pre">'/opt/py']</span></code>.  (Note that directories must exist in order to
-be added to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>; the <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> module removes paths that don't
+be added to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>; the <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> module removes paths that don’t
 exist.)</p>
 <p>Finally, <code class="docutils literal notranslate"><span class="pre">sys.path</span></code> is just a regular Python list, so any Python application
 can modify it by adding or removing entries.</p>
@@ -905,8 +909,8 @@ command can be stored in one of two or three (depending on your platform)
 configuration files, which will be consulted before the command-line is parsed.
 This means that configuration files will override default values, and the
 command-line will in turn override configuration files.  Furthermore, if
-multiple configuration files apply, values from &quot;earlier&quot; files are overridden
-by &quot;later&quot; files.</p>
+multiple configuration files apply, values from “earlier” files are overridden
+by “later” files.</p>
 <section id="location-and-names-of-config-files">
 <span id="inst-config-filenames"></span><h3>Location and names of config files<a class="headerlink" href="#location-and-names-of-config-files" title="永久链接至标题">¶</a></h3>
 <p>The names and locations of the configuration files vary slightly across
@@ -967,8 +971,8 @@ they are processed) are:</p>
 </tr>
 </tbody>
 </table>
-<p>On all platforms, the &quot;personal&quot; file can be temporarily disabled by
-passing the <cite>--no-user-cfg</cite> option.</p>
+<p>On all platforms, the “personal” file can be temporarily disabled by
+passing the <cite>–no-user-cfg</cite> option.</p>
 <p>注释：</p>
 <ol class="arabic simple">
 <li><p>Strictly speaking, the system-wide configuration file lives in the directory
@@ -976,16 +980,16 @@ where the Distutils are installed; under Python 1.6 and later on Unix, this is
 as shown. For Python 1.5.2, the Distutils will normally be installed to
 <code class="file docutils literal notranslate"><em><span class="pre">prefix</span></em><span class="pre">/lib/python1.5/site-packages/distutils</span></code>, so the system
 configuration file should be put there under Python 1.5.2.</p></li>
-<li><p>On Unix, if the <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOME</span></code> environment variable is not defined, the user's
+<li><p>On Unix, if the <span class="target" id="index-4"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOME</span></code> environment variable is not defined, the user’s
 home directory will be determined with the <code class="xref py py-func docutils literal notranslate"><span class="pre">getpwuid()</span></code> function from the
 standard <a class="reference internal" href="../library/pwd.html#module-pwd" title="pwd: The password database (getpwnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code></a> module. This is done by the <a class="reference internal" href="../library/os.path.html#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.path.expanduser()</span></code></a>
 function used by Distutils.</p></li>
 <li><p>I.e., in the current directory (usually the location of the setup script).</p></li>
-<li><p>(See also note (1).)  Under Python 1.6 and later, Python's default &quot;installation
-prefix&quot; is <code class="file docutils literal notranslate"><span class="pre">C:\Python</span></code>, so the system configuration file is normally
+<li><p>(See also note (1).)  Under Python 1.6 and later, Python’s default “installation
+prefix” is <code class="file docutils literal notranslate"><span class="pre">C:\Python</span></code>, so the system configuration file is normally
 <code class="file docutils literal notranslate"><span class="pre">C:\Python\Lib\distutils\distutils.cfg</span></code>. Under Python 1.5.2, the
 default prefix was <code class="file docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Python</span></code>, and the Distutils were not
-part of the standard library---so the system configuration file would be
+part of the standard library—so the system configuration file would be
 <code class="file docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Python\distutils\distutils.cfg</span></code> in a standard Python
 1.5.2 installation under Windows.</p></li>
 <li><p>On Windows, if the <span class="target" id="index-5"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">HOME</span></code> environment variable is not defined,
@@ -1012,7 +1016,7 @@ installed as your personal config file (on systems that support them), it will
 affect only module distributions processed by you.  And if it is used as the
 <code class="file docutils literal notranslate"><span class="pre">setup.cfg</span></code> for a particular module distribution, it affects only that
 distribution.</p>
-<p>You could override the default &quot;build base&quot; directory and make the
+<p>You could override the default “build base” directory and make the
 <strong class="command">build*</strong> commands always forcibly rebuild all files with the
 following:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[build]</span><span class="w"></span>
@@ -1039,7 +1043,7 @@ run, they will use the values in the config file.)</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py --help
 </pre></div>
 </div>
-<p>See also the &quot;Reference&quot; section of the &quot;Distributing Python Modules&quot; manual.</p>
+<p>See also the “Reference” section of the “Distributing Python Modules” manual.</p>
 </section>
 </section>
 <section id="building-extensions-tips-and-tricks">
@@ -1055,7 +1059,7 @@ to override the usual Distutils behaviour.</p>
 <p>Compiling a Python extension written in C or C++ will sometimes require
 specifying custom flags for the compiler and linker in order to use a particular
 library or produce a special kind of object code. This is especially true if the
-extension hasn't been tested on your platform, or if you're trying to
+extension hasn’t been tested on your platform, or if you’re trying to
 cross-compile Python.</p>
 <p>In the most general case, the extension author might have foreseen that
 compiling the extensions would be complicated, and provided a <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> file
@@ -1068,12 +1072,12 @@ the following structure:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>module ... [sourcefile ...] [cpparg ...] [library ...]
 </pre></div>
 </div>
-<p>Let's examine each of the fields in turn.</p>
+<p>Let’s examine each of the fields in turn.</p>
 <ul class="simple">
 <li><p><em>module</em> is the name of the extension module to be built, and should be a
-valid Python identifier.  You can't just change this in order to rename a module
+valid Python identifier.  You can’t just change this in order to rename a module
 (edits to the source code would also be needed), so this should be left alone.</p></li>
-<li><p><em>sourcefile</em> is anything that's likely to be a source code file, at least
+<li><p><em>sourcefile</em> is anything that’s likely to be a source code file, at least
 judging by the filename.  Filenames ending in <code class="file docutils literal notranslate"><span class="pre">.c</span></code> are assumed to be
 written in C, filenames ending in <code class="file docutils literal notranslate"><span class="pre">.C</span></code>, <code class="file docutils literal notranslate"><span class="pre">.cc</span></code>, and <code class="file docutils literal notranslate"><span class="pre">.c++</span></code> are
 assumed to be C++, and filenames ending in <code class="file docutils literal notranslate"><span class="pre">.m</span></code> or <code class="file docutils literal notranslate"><span class="pre">.mm</span></code> are assumed
@@ -1102,7 +1106,7 @@ the <code class="xref std std-option docutils literal notranslate"><span class="
 <p>The next option after <code class="xref std std-option docutils literal notranslate"><span class="pre">-Xcompiler</span></code> and <code class="xref std std-option docutils literal notranslate"><span class="pre">-Xlinker</span></code> will be
 appended to the proper command line, so in the above example the compiler will
 be passed the <code class="xref std std-option docutils literal notranslate"><span class="pre">-o32</span></code> option, and the linker will be passed
-<code class="xref std std-option docutils literal notranslate"><span class="pre">-shared</span></code>.  If a compiler option requires an argument, you'll have to
+<code class="xref std std-option docutils literal notranslate"><span class="pre">-shared</span></code>.  If a compiler option requires an argument, you’ll have to
 supply multiple <code class="xref std std-option docutils literal notranslate"><span class="pre">-Xcompiler</span></code> options; for example, to pass <code class="docutils literal notranslate"><span class="pre">-x</span> <span class="pre">c++</span></code>
 the <code class="file docutils literal notranslate"><span class="pre">Setup</span></code> file would have to contain <code class="docutils literal notranslate"><span class="pre">-Xcompiler</span> <span class="pre">-x</span> <span class="pre">-Xcompiler</span> <span class="pre">c++</span></code>.</p>
 <p>Compiler flags can also be supplied through setting the <span class="target" id="index-9"></span><a class="reference internal" href="../using/configure.html#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a>
@@ -1114,25 +1118,25 @@ the compiler flags specified in the  <code class="file docutils literal notransl
 <section id="borland-codegear-c">
 <h4>Borland/CodeGear C++<a class="headerlink" href="#borland-codegear-c" title="永久链接至标题">¶</a></h4>
 <p>This subsection describes the necessary steps to use Distutils with the Borland
-C++ compiler version 5.5.  First you have to know that Borland's object file
+C++ compiler version 5.5.  First you have to know that Borland’s object file
 format (OMF) is different from the format used by the Python version you can
 download from the Python or ActiveState web site.  (Python is built with
 Microsoft Visual C++, which uses COFF as the object file format.) For this
-reason you have to convert Python's library <code class="file docutils literal notranslate"><span class="pre">python25.lib</span></code> into the
+reason you have to convert Python’s library <code class="file docutils literal notranslate"><span class="pre">python25.lib</span></code> into the
 Borland format.  You can do this as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>coff2omf python25.lib python25_bcpp.lib
 </pre></div>
 </div>
 <p>The <code class="file docutils literal notranslate"><span class="pre">coff2omf</span></code> program comes with the Borland compiler.  The file
 <code class="file docutils literal notranslate"><span class="pre">python25.lib</span></code> is in the <code class="file docutils literal notranslate"><span class="pre">Libs</span></code> directory of your Python
-installation.  If your extension uses other libraries (zlib, ...) you have to
+installation.  If your extension uses other libraries (zlib, …) you have to
 convert them too.</p>
 <p>The converted files have to reside in the same directories as the normal
 libraries.</p>
 <p>How does Distutils manage to use these libraries with their changed names?  If
 the extension needs a library (eg. <code class="file docutils literal notranslate"><span class="pre">foo</span></code>) Distutils checks first if it
 finds a library with suffix <code class="file docutils literal notranslate"><span class="pre">_bcpp</span></code> (eg. <code class="file docutils literal notranslate"><span class="pre">foo_bcpp.lib</span></code>) and then
-uses this library.  In the case it doesn't find such a special library it uses
+uses this library.  In the case it doesn’t find such a special library it uses
 the default name (<code class="file docutils literal notranslate"><span class="pre">foo.lib</span></code>.) <a class="footnote-reference brackets" href="#id4" id="id1">1</a></p>
 <p>To let Distutils compile your extension with Borland C++ you now have to type:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python setup.py build --compiler=bcpp
@@ -1147,7 +1151,7 @@ section <a class="reference internal" href="#inst-config-files"><span class="std
 <dt><a class="reference external" href="https://www.embarcadero.com/products">C++Builder Compiler</a></dt><dd><p>Information about the free C++ compiler from Borland, including links to the
 download pages.</p>
 </dd>
-<dt><a class="reference external" href="http://www.cyberus.ca/~g_will/pyExtenDL.shtml">Creating Python Extensions Using Borland's Free Compiler</a></dt><dd><p>Document describing how to use Borland's free command-line C++ compiler to build
+<dt><a class="reference external" href="http://www.cyberus.ca/~g_will/pyExtenDL.shtml">Creating Python Extensions Using Borland’s Free Compiler</a></dt><dd><p>Document describing how to use Borland’s free command-line C++ compiler to build
 Python.</p>
 </dd>
 </dl>
@@ -1175,11 +1179,11 @@ consider writing it in your personal or system-wide configuration file for
 Distutils (see section <a class="reference internal" href="#inst-config-files"><span class="std std-ref">Distutils Configuration Files</span></a>.)</p>
 <section id="older-versions-of-python-and-mingw">
 <h5>Older Versions of Python and MinGW<a class="headerlink" href="#older-versions-of-python-and-mingw" title="永久链接至标题">¶</a></h5>
-<p>The following instructions only apply if you're using a version of Python
+<p>The following instructions only apply if you’re using a version of Python
 inferior to 2.4.1 with a MinGW inferior to 3.0.0 (with
 binutils-2.13.90-20030111-1).</p>
 <p>These compilers require some special libraries.  This task is more complex than
-for Borland's C++, because there is no program to convert the library.  First
+for Borland’s C++, because there is no program to convert the library.  First
 you have to create a list of symbols which the Python DLL exports. (You can find
 a good program for this task at
 <a class="reference external" href="https://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/">https://sourceforge.net/projects/mingw/files/MinGW/Extension/pexports/</a>).</p>
@@ -1187,8 +1191,8 @@ a good program for this task at
 </pre></div>
 </div>
 <p>The location of an installed <code class="file docutils literal notranslate"><span class="pre">python25.dll</span></code> will depend on the
-installation options and the version and language of Windows.  In a &quot;just for
-me&quot; installation, it will appear in the root of the installation directory.  In
+installation options and the version and language of Windows.  In a “just for
+me” installation, it will appear in the root of the installation directory.  In
 a shared installation, it will be located in the system directory.</p>
 <p>Then you can create from these information an import library for gcc.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/cygwin/bin/dlltool --dllname python25.dll --def python25.def --output-lib libpython25.a
@@ -1197,7 +1201,7 @@ a shared installation, it will be located in the system directory.</p>
 <p>The resulting library has to be placed in the same directory as
 <code class="file docutils literal notranslate"><span class="pre">python25.lib</span></code>. (Should be the <code class="file docutils literal notranslate"><span class="pre">libs</span></code> directory under your Python
 installation directory.)</p>
-<p>If your extension uses other libraries (zlib,...) you might  have to convert
+<p>If your extension uses other libraries (zlib,…) you might  have to convert
 them too. The converted files have to reside in the same directories as the
 normal libraries do.</p>
 <div class="admonition seealso">
@@ -1217,7 +1221,7 @@ of the same name.</p>
 <dd><p>Check <a class="reference external" href="https://www.sourceware.org/cygwin/">https://www.sourceware.org/cygwin/</a> for more information</p>
 </dd>
 <dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>Then you have no POSIX emulation available, but you also don't need
+<dd><p>Then you have no POSIX emulation available, but you also don’t need
 <code class="file docutils literal notranslate"><span class="pre">cygwin1.dll</span></code>.</p>
 </dd>
 </dl>
@@ -1234,8 +1238,9 @@ of the same name.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">安装Python模块（旧版）</a><ul>
 <li><a class="reference internal" href="#introduction">概述</a><ul>
 <li><a class="reference internal" href="#distutils-based-source-distributions">基于 <code class="docutils literal notranslate"><span class="pre">distutils</span></code> 的源代码分发</a></li>
@@ -1256,7 +1261,7 @@ of the same name.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#custom-installation">自定义安装</a><ul>
-<li><a class="reference internal" href="#modifying-python-s-search-path">Modifying Python's Search Path</a></li>
+<li><a class="reference internal" href="#modifying-python-s-search-path">Modifying Python’s Search Path</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#distutils-configuration-files">Distutils Configuration Files</a><ul>
@@ -1280,9 +1285,12 @@ of the same name.</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="../distutils/apiref.html"
-                        title="上一章"><span class="section-number">9. </span>API参考引用</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="../distutils/apiref.html"
+                          title="上一章"><span class="section-number">9. </span>API参考引用</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -1321,7 +1329,7 @@ of the same name.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
         <li class="nav-item nav-item-this"><a href="">安装Python模块（旧版）</a></li>
@@ -1348,7 +1356,7 @@ of the same name.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -1356,11 +1364,11 @@ of the same name.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

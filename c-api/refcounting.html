@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>引用计数 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引用计数 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="veryhigh.html"
-                        title="上一章">The Very High Level Layer</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="exceptions.html"
-                        title="下一章">异常处理</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="veryhigh.html"
+                          title="上一章">The Very High Level Layer</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="exceptions.html"
+                          title="下一章">异常处理</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API 参考手册</a> &#187;</li>
@@ -220,8 +224,20 @@
 <p>每当要减少在垃圾回收期间可能会被遍历的对象的引用计数时，使用该宏是一个好主意。</p>
 </dd></dl>
 
-<p>以下函数适用于 Python 的运行时动态嵌入: <code class="docutils literal notranslate"><span class="pre">Py_IncRef(PyObject</span> <span class="pre">*o)</span></code>, <code class="docutils literal notranslate"><span class="pre">Py_DecRef(PyObject</span> <span class="pre">*o)</span></code>。 它们分别只是 <a class="reference internal" href="#c.Py_XINCREF" title="Py_XINCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XINCREF()</span></code></a> 和 <a class="reference internal" href="#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a> 的简单导出函数版本。</p>
-<p>以下函数或宏仅可在解释器核心内部使用: <code class="xref c c-func docutils literal notranslate"><span class="pre">_Py_Dealloc()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">_Py_ForgetReference()</span></code>, <code class="xref c c-func docutils literal notranslate"><span class="pre">_Py_NewReference()</span></code> 以及全局变量 <code class="xref c c-data docutils literal notranslate"><span class="pre">_Py_RefTotal</span></code>。</p>
+<dl class="c function">
+<dt class="sig sig-object c" id="c.Py_IncRef">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_IncRef</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_IncRef" title="永久链接至目标">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Increment the reference count for object <em>o</em>. A function version of <a class="reference internal" href="#c.Py_XINCREF" title="Py_XINCREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XINCREF()</span></code></a>.
+It can be used for runtime dynamic embedding of Python.</p>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c.Py_DecRef">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_DecRef</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_DecRef" title="永久链接至目标">¶</a><br /></dt>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Decrement the reference count for object <em>o</em>. A function version of <a class="reference internal" href="#c.Py_XDECREF" title="Py_XDECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_XDECREF()</span></code></a>.
+It can be used for runtime dynamic embedding of Python.</p>
+</dd></dl>
+
 </section>
 
 
@@ -231,12 +247,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="veryhigh.html"
-                        title="上一章">The Very High Level Layer</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="exceptions.html"
-                        title="下一章">异常处理</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="veryhigh.html"
+                          title="上一章">The Very High Level Layer</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="exceptions.html"
+                          title="下一章">异常处理</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -278,7 +298,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -306,7 +326,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -314,11 +334,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

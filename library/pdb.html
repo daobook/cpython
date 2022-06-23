@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pdb --- Python 的调试器 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pdb — Python 的调试器 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,20 +70,26 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> --- Python 的调试器</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — Python 的调试器</a><ul>
 <li><a class="reference internal" href="#debugger-commands">调试器命令</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="faulthandler.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> —— 转储 Python 的跟踪信息</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="profile.html"
-                        title="下一章">Python Profilers 分析器</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="faulthandler.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> —— 转储 Python 的跟踪信息</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="profile.html"
+                          title="下一章">Python Profilers 分析器</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -126,12 +132,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" accesskey="U">调试和分析</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> --- Python 的调试器</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — Python 的调试器</a></li>
                 <li class="right">
                     
 
@@ -155,7 +161,7 @@
           <div class="body" role="main">
             
   <section id="module-pdb">
-<span id="pdb-the-python-debugger"></span><span id="debugger"></span><h1><a class="reference internal" href="#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> --- Python 的调试器<a class="headerlink" href="#module-pdb" title="永久链接至标题">¶</a></h1>
+<span id="pdb-the-python-debugger"></span><span id="debugger"></span><h1><a class="reference internal" href="#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> — Python 的调试器<a class="headerlink" href="#module-pdb" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/pdb.py">Lib/pdb.py</a></p>
 <hr class="docutils" id="index-0" />
 <p><a class="reference internal" href="#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> 模块定义了一个交互式源代码调试器，用于 Python 程序。它支持在源码行间设置（有条件的）断点和单步执行，检视堆栈帧，列出源码列表，以及在任何堆栈帧的上下文中运行任意 Python 代码。它还支持事后调试，可以在程序控制下调用。</p>
@@ -257,7 +263,7 @@ running without the debugger using the <a class="reference internal" href="#pdbc
 <p><code class="docutils literal notranslate"><span class="pre">run*</span></code> 函数和 <a class="reference internal" href="#pdb.set_trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_trace()</span></code></a> 都是别名，用于实例化 <a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> 类和调用同名方法。如果要使用其他功能，则必须自己执行以下操作：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="pdb.Pdb">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pdb.</span></span><span class="sig-name descname"><span class="pre">Pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">completekey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tab'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nosigint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readrc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pdb.</span></span><span class="sig-name descname"><span class="pre">Pdb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">completekey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tab'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nosigint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readrc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pdb.Pdb" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#pdb.Pdb" title="pdb.Pdb"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pdb</span></code></a> 是调试器类。</p>
 <p><em>completekey</em>、<em>stdin</em> 和 <em>stdout</em> 参数都会传递给底层的 <a class="reference internal" href="cmd.html#cmd.Cmd" title="cmd.Cmd"><code class="xref py py-class docutils literal notranslate"><span class="pre">cmd.Cmd</span></code></a> 类，请参考相应的描述。</p>
 <p>如果给出 <em>skip</em> 参数，则它必须是一个迭代器，可以迭代出 glob-style 样式的模块名称。如果遇到匹配上述样式的模块，调试器将不会进入来自该模块的堆栈帧。 <a class="footnote-reference brackets" href="#id3" id="id1">1</a></p>
@@ -297,8 +303,13 @@ running without the debugger using the <a class="reference internal" href="#pdbc
 <p>输入一个空白行将重复最后输入的命令。例外：如果最后一个命令是 <a class="reference internal" href="#pdbcommand-list"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">list</span></code></a> 命令，则会列出接下来的 11 行。</p>
 <p>调试器无法识别的命令将被认为是 Python 语句，并在正在调试的程序的上下文中执行。Python 语句也可以用感叹号 (<code class="docutils literal notranslate"><span class="pre">!</span></code>) 作为前缀。这是检查正在调试的程序的强大方法，甚至可以修改变量或调用函数。当此类语句发生异常，将打印异常名称，但调试器的状态不会改变。</p>
 <p>调试器支持 <a class="reference internal" href="#debugger-aliases"><span class="std std-ref">别名</span></a>。别名可以有参数，使得调试器对被检查的上下文有一定程度的适应性。</p>
-<p>在一行中可以输入多个命令，以 <code class="docutils literal notranslate"><span class="pre">;;</span></code> 分隔。（不能使用单个 <code class="docutils literal notranslate"><span class="pre">;</span></code>，因为它用于分隔传递给 Python 解释器的一行中的多条语句。）切分命令很无脑，总是在第一个 <code class="docutils literal notranslate"><span class="pre">;;</span></code> 对处将输入切分开，即使它位于带引号的字符串之中。</p>
-<p id="index-2">If a file <code class="file docutils literal notranslate"><span class="pre">.pdbrc</span></code> exists in the user's home directory or in the current
+<p>Multiple commands may be entered on a single line, separated by <code class="docutils literal notranslate"><span class="pre">;;</span></code>.  (A
+single <code class="docutils literal notranslate"><span class="pre">;</span></code> is not used as it is the separator for multiple commands in a line
+that is passed to the Python parser.)  No intelligence is applied to separating
+the commands; the input is split at the first <code class="docutils literal notranslate"><span class="pre">;;</span></code> pair, even if it is in the
+middle of a quoted string. A workaround for strings with double semicolons
+is to use implicit string concatenation <code class="docutils literal notranslate"><span class="pre">';'';'</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;;&quot;&quot;;&quot;</span></code>.</p>
+<p id="index-2">If a file <code class="file docutils literal notranslate"><span class="pre">.pdbrc</span></code> exists in the user’s home directory or in the current
 directory, it is read with <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code> encoding and executed as if it had been
 typed at the debugger prompt.  This is particularly useful for aliases.  If both
 files exist, the one in the home directory is read first and aliases defined there
@@ -392,7 +403,7 @@ with the system locale encoding.</p>
 <p>如果不带 <em>bpnumber</em> 参数，<code class="docutils literal notranslate"><span class="pre">commands</span></code> 作用于最后一个被设置的断点。</p>
 <p>可以为断点指定命令来重新启动程序。只需使用 <a class="reference internal" href="#pdbcommand-continue"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">continue</span></code></a> 或 <a class="reference internal" href="#pdbcommand-step"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">step</span></code></a> 命令或其他可以继续运行程序的命令。</p>
 <p>如果指定了某个继续运行程序的命令（目前包括 <a class="reference internal" href="#pdbcommand-continue"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">continue</span></code></a>, <a class="reference internal" href="#pdbcommand-step"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">step</span></code></a>, <a class="reference internal" href="#pdbcommand-next"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">next</span></code></a>, <a class="reference internal" href="#pdbcommand-return"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">return</span></code></a>, <a class="reference internal" href="#pdbcommand-jump"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">jump</span></code></a>, <a class="reference internal" href="#pdbcommand-quit"><code class="xref std std-pdbcmd docutils literal notranslate"><span class="pre">quit</span></code></a> 及它们的缩写）将终止命令列表（就像该命令后紧跟着 end）。因为在任何时候继续运行下去（即使是简单的 next 或 step），都可能会遇到另一个断点，该断点可能具有自己的命令列表，这导致要执行的列表含糊不清。</p>
-<p>如果在命令列表中加入 'silent' 命令，那么在该断点处停下时就不会打印常规信息。如果希望断点打印特定信息后继续运行，这可能是理想的。如果没有其他命令来打印一些信息，则看不到已达到断点的迹象。</p>
+<p>如果在命令列表中加入 ‘silent’ 命令，那么在该断点处停下时就不会打印常规信息。如果希望断点打印特定信息后继续运行，这可能是理想的。如果没有其他命令来打印一些信息，则看不到已达到断点的迹象。</p>
 </dd></dl>
 
 <dl class="std pdbcommand">
@@ -433,7 +444,7 @@ with the system locale encoding.</p>
 <dt class="sig sig-object std" id="pdbcommand-jump">
 <span class="sig-name descname"><span class="pre">j(ump)</span></span><span class="sig-prename descclassname"> <span class="pre">lineno</span></span><a class="headerlink" href="#pdbcommand-jump" title="永久链接至目标">¶</a></dt>
 <dd><p>设置即将运行的下一行。仅可用于堆栈最底部的帧。它可以往回跳来再次运行代码，也可以往前跳来跳过不想运行的代码。</p>
-<p>需要注意的是，不是所有的跳转都是允许的 -- 例如，不能跳转到 <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 循环的中间或跳出 <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 子句。</p>
+<p>需要注意的是，不是所有的跳转都是允许的 – 例如，不能跳转到 <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> 循环的中间或跳出 <a class="reference internal" href="../reference/compound_stmts.html#finally"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">finally</span></code></a> 子句。</p>
 </dd></dl>
 
 <dl class="std pdbcommand">
@@ -466,8 +477,8 @@ with the system locale encoding.</p>
 <span class="sig-name descname"><span class="pre">p</span></span><span class="sig-prename descclassname"> <span class="pre">expression</span></span><a class="headerlink" href="#pdbcommand-p" title="永久链接至目标">¶</a></dt>
 <dd><p>在当前上下文中运行 <em>expression</em> 并打印它的值。</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
-<p><code class="docutils literal notranslate"><span class="pre">print()</span></code> 也可以使用，但它不是一个调试器命令 --- 它执行 Python <a class="reference internal" href="functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> 函数。</p>
+<p class="admonition-title">备注</p>
+<p><code class="docutils literal notranslate"><span class="pre">print()</span></code> 也可以使用，但它不是一个调试器命令 — 它执行 Python <a class="reference internal" href="functions.html#print" title="print"><code class="xref py py-func docutils literal notranslate"><span class="pre">print()</span></code></a> 函数。</p>
 </div>
 </dd></dl>
 
@@ -592,20 +603,26 @@ with the system locale encoding.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> --- Python 的调试器</a><ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — Python 的调试器</a><ul>
 <li><a class="reference internal" href="#debugger-commands">调试器命令</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="faulthandler.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> —— 转储 Python 的跟踪信息</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="profile.html"
-                        title="下一章">Python Profilers 分析器</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="faulthandler.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">faulthandler</span></code> —— 转储 Python 的跟踪信息</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="profile.html"
+                          title="下一章">Python Profilers 分析器</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -647,12 +664,12 @@ with the system locale encoding.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="debug.html" >调试和分析</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> --- Python 的调试器</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code> — Python 的调试器</a></li>
                 <li class="right">
                     
 
@@ -676,7 +693,7 @@ with the system locale encoding.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -684,11 +701,11 @@ with the system locale encoding.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

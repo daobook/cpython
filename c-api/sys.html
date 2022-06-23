@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>操作系统实用程序 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作系统实用程序 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,19 +70,25 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">操作系统实用程序</a></li>
 <li><a class="reference internal" href="#system-functions">系统功能</a></li>
 <li><a class="reference internal" href="#process-control">过程控制</a></li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="utilities.html"
-                        title="上一章">工具</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="import.html"
-                        title="下一章">导入模块</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="utilities.html"
+                          title="上一章">工具</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="import.html"
+                          title="下一章">导入模块</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -125,7 +131,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -174,9 +180,10 @@ and <code class="docutils literal notranslate"><span class="pre">NULL</span></co
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_FdIsInteractive</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">fp</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">filename</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_FdIsInteractive" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Return true (nonzero) if the standard I/O file <em>fp</em> with name <em>filename</em> is
 deemed interactive.  This is the case for files for which <code class="docutils literal notranslate"><span class="pre">isatty(fileno(fp))</span></code>
-is true.  If the global flag <a class="reference internal" href="init.html#c.Py_InteractiveFlag" title="Py_InteractiveFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_InteractiveFlag</span></code></a> is true, this function
+is true.  If the <a class="reference internal" href="init_config.html#c.PyConfig.interactive" title="PyConfig.interactive"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.interactive</span></code></a> is non-zero, this function
 also returns true if the <em>filename</em> pointer is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or if the name is equal to
 one of the strings <code class="docutils literal notranslate"><span class="pre">'&lt;stdin&gt;'</span></code> or <code class="docutils literal notranslate"><span class="pre">'???'</span></code>.</p>
+<p>This function must not be called before Python is initialized.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -189,8 +196,8 @@ Only available on systems where <code class="xref c c-func docutils literal notr
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>The C <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code> call should only be made from the
-<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">&quot;main&quot; thread</span></a> (of the
-<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">&quot;main&quot; interpreter</span></a>).  The same is
+<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">“main” thread</span></a> (of the
+<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">“main” interpreter</span></a>).  The same is
 true for <code class="docutils literal notranslate"><span class="pre">PyOS_BeforeFork()</span></code>.</p>
 </div>
 <div class="versionadded">
@@ -209,8 +216,8 @@ Only available on systems where <code class="xref c c-func docutils literal notr
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>The C <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code> call should only be made from the
-<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">&quot;main&quot; thread</span></a> (of the
-<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">&quot;main&quot; interpreter</span></a>).  The same is
+<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">“main” thread</span></a> (of the
+<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">“main” interpreter</span></a>).  The same is
 true for <code class="docutils literal notranslate"><span class="pre">PyOS_AfterFork_Parent()</span></code>.</p>
 </div>
 <div class="versionadded">
@@ -229,8 +236,8 @@ Only available on systems where <code class="xref c c-func docutils literal notr
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>The C <code class="xref c c-func docutils literal notranslate"><span class="pre">fork()</span></code> call should only be made from the
-<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">&quot;main&quot; thread</span></a> (of the
-<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">&quot;main&quot; interpreter</span></a>).  The same is
+<a class="reference internal" href="init.html#fork-and-threads"><span class="std std-ref">“main” thread</span></a> (of the
+<a class="reference internal" href="init.html#sub-interpreter-support"><span class="std std-ref">“main” interpreter</span></a>).  The same is
 true for <code class="docutils literal notranslate"><span class="pre">PyOS_AfterFork_Child()</span></code>.</p>
 </div>
 <div class="versionadded">
@@ -261,9 +268,9 @@ to be called.</p>
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyOS_CheckStack</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyOS_CheckStack" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> on platforms with USE_STACKCHECK since version 3.7.</em><p>Return true when the interpreter runs out of stack space.  This is a reliable
 check, but is only available when <code class="xref py py-const docutils literal notranslate"><span class="pre">USE_STACKCHECK</span></code> is defined (currently
-on Windows using the Microsoft Visual C++ compiler).  <code class="xref py py-const docutils literal notranslate"><span class="pre">USE_STACKCHECK</span></code>
-will be defined automatically; you should never change the definition in your
-own code.</p>
+on certain versions of Windows using the Microsoft Visual C++ compiler).
+<code class="xref py py-const docutils literal notranslate"><span class="pre">USE_STACKCHECK</span></code> will be defined automatically; you should never
+change the definition in your own code.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -337,7 +344,7 @@ handler</span></a>. If the error handler is <a class="reference internal" href="
 converted to bytes 0x80..0xFF.</p>
 <p>Return a pointer to a newly allocated byte string, use <a class="reference internal" href="memory.html#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a>
 to free the memory. Return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on encoding error or memory allocation
-error</p>
+error.</p>
 <p>If error_pos is not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, <code class="docutils literal notranslate"><span class="pre">*error_pos</span></code> is set to <code class="docutils literal notranslate"><span class="pre">(size_t)-1</span></code> on
 success,  or set to the index of the invalid character on encoding error.</p>
 <p>The <a class="reference internal" href="../glossary.html#term-filesystem-encoding-and-error-handler"><span class="xref std std-term">filesystem encoding and error handler</span></a> are selected by
@@ -363,7 +370,7 @@ the <a class="reference internal" href="init_config.html#c.Py_PreInitialize" tit
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>The function now uses the UTF-8 encoding on Windows if
-<a class="reference internal" href="init.html#c.Py_LegacyWindowsFSEncodingFlag" title="Py_LegacyWindowsFSEncodingFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_LegacyWindowsFSEncodingFlag</span></code></a> is zero;</p>
+<a class="reference internal" href="init.html#c.Py_LegacyWindowsFSEncodingFlag" title="Py_LegacyWindowsFSEncodingFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_LegacyWindowsFSEncodingFlag</span></code></a> is zero.</p>
 </div>
 </dd></dl>
 
@@ -371,8 +378,8 @@ the <a class="reference internal" href="init_config.html#c.Py_PreInitialize" tit
 <section id="system-functions">
 <span id="systemfunctions"></span><h1>系统功能<a class="headerlink" href="#system-functions" title="永久链接至标题">¶</a></h1>
 <p>These are utility functions that make functionality from the <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> module
-accessible to C code.  They all work with the current interpreter thread's
-<a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> module's dict, which is contained in the internal thread state structure.</p>
+accessible to C code.  They all work with the current interpreter thread’s
+<a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> module’s dict, which is contained in the internal thread state structure.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PySys_GetObject">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PySys_GetObject</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySys_GetObject" title="永久链接至目标">¶</a><br /></dt>
@@ -417,7 +424,7 @@ Initialization Configuration</span></a>.</p>
 <p>Append <em>unicode</em> to <a class="reference internal" href="../library/sys.html#sys.warnoptions" title="sys.warnoptions"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.warnoptions</span></code></a>.</p>
 <p>Note: this function is not currently usable from outside the CPython
 implementation, as it must be called prior to the implicit import of
-<a class="reference internal" href="../library/warnings.html#module-warnings" title="warnings: Issue warning messages and control their disposition."><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> in <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> to be effective, but can't be
+<a class="reference internal" href="../library/warnings.html#module-warnings" title="warnings: Issue warning messages and control their disposition."><code class="xref py py-mod docutils literal notranslate"><span class="pre">warnings</span></code></a> in <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a> to be effective, but can’t be
 called until enough of the runtime has been initialized to permit the
 creation of Unicode objects.</p>
 <div class="deprecated">
@@ -428,9 +435,16 @@ creation of Unicode objects.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PySys_SetPath">
 <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySys_SetPath</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">wchar_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySys_SetPath" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Set <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> to a list object of paths found in <em>path</em> which should
-be a list of paths separated with the platform's search path delimiter
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This API is kept for backward compatibility: setting
+<a class="reference internal" href="init_config.html#c.PyConfig.module_search_paths" title="PyConfig.module_search_paths"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.module_search_paths</span></code></a> and
+<a class="reference internal" href="init_config.html#c.PyConfig.module_search_paths_set" title="PyConfig.module_search_paths_set"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.module_search_paths_set</span></code></a> should be used instead, see
+<a class="reference internal" href="init_config.html#init-config"><span class="std std-ref">Python Initialization Configuration</span></a>.</p>
+<p>Set <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> to a list object of paths found in <em>path</em> which should
+be a list of paths separated with the platform’s search path delimiter
 (<code class="docutils literal notranslate"><span class="pre">:</span></code> on Unix, <code class="docutils literal notranslate"><span class="pre">;</span></code> on Windows).</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">3.11 版后已移除.</span></p>
+</div>
 </dd></dl>
 
 <dl class="c function">
@@ -439,11 +453,11 @@ be a list of paths separated with the platform's search path delimiter
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Write the output string described by <em>format</em> to <a class="reference internal" href="../library/sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a>.  No
 exceptions are raised, even if truncation occurs (see below).</p>
 <p><em>format</em> should limit the total size of the formatted output string to
-1000 bytes or less -- after 1000 bytes, the output string is truncated.
-In particular, this means that no unrestricted &quot;%s&quot; formats should occur;
-these should be limited using &quot;%.&lt;N&gt;s&quot; where &lt;N&gt; is a decimal number
+1000 bytes or less – after 1000 bytes, the output string is truncated.
+In particular, this means that no unrestricted “%s” formats should occur;
+these should be limited using “%.&lt;N&gt;s” where &lt;N&gt; is a decimal number
 calculated so that &lt;N&gt; plus the maximum size of other formatted text does not
-exceed 1000 bytes.  Also watch out for &quot;%f&quot;, which can print hundreds of
+exceed 1000 bytes.  Also watch out for “%f”, which can print hundreds of
 digits for very large numbers.</p>
 <p>If a problem occurs, or <a class="reference internal" href="../library/sys.html#sys.stdout" title="sys.stdout"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.stdout</span></code></a> is unset, the formatted message
 is written to the real (C level) <em>stdout</em>.</p>
@@ -460,7 +474,7 @@ instead.</p>
 <dt class="sig sig-object c" id="c.PySys_FormatStdout">
 <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySys_FormatStdout</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">format</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySys_FormatStdout" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Function similar to PySys_WriteStdout() but format the message using
-<a class="reference internal" href="unicode.html#c.PyUnicode_FromFormatV" title="PyUnicode_FromFormatV"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_FromFormatV()</span></code></a> and don't truncate the message to an
+<a class="reference internal" href="unicode.html#c.PyUnicode_FromFormatV" title="PyUnicode_FromFormatV"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_FromFormatV()</span></code></a> and don’t truncate the message to an
 arbitrary length.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
@@ -518,13 +532,13 @@ option consumes a reference, but since there is no way to know whether
 arguments to this function will be consumed, using it may cause reference
 leaks.)</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">#</span></code> format characters should always be treated as
-<code class="docutils literal notranslate"><span class="pre">Py_ssize_t</span></code>, regardless of whether <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_CLEAN</span></code> was defined.</p>
+<a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>, regardless of whether <code class="docutils literal notranslate"><span class="pre">PY_SSIZE_T_CLEAN</span></code> was defined.</p>
 <p><a class="reference internal" href="../library/sys.html#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> performs the same function from Python code.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8.2 版更改: </span>Require <code class="docutils literal notranslate"><span class="pre">Py_ssize_t</span></code> for <code class="docutils literal notranslate"><span class="pre">#</span></code> format characters. Previously, an
+<p><span class="versionmodified changed">在 3.8.2 版更改: </span>Require <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a> for <code class="docutils literal notranslate"><span class="pre">#</span></code> format characters. Previously, an
 unavoidable deprecation warning was raised.</p>
 </div>
 </dd></dl>
@@ -533,7 +547,7 @@ unavoidable deprecation warning was raised.</p>
 <dt class="sig sig-object c" id="c.PySys_AddAuditHook">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PySys_AddAuditHook</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">Py_AuditHookFunction</span></span><span class="w"> </span><span class="n"><span class="pre">hook</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">userData</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PySys_AddAuditHook" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Append the callable <em>hook</em> to the list of active auditing hooks.
-Return zero for success
+Return zero on success
 and non-zero on failure. If the runtime has been initialized, also set an
 error on failure. Hooks added through this API are called for all
 interpreters created by the runtime.</p>
@@ -545,10 +559,10 @@ silently abort the operation by raising an error subclassed from
 <p>The hook function is of type <span class="xref c c-texpr"><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="p">*</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="w"> </span><span class="p">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">*</span><span class="n">userData</span><span class="p">)</span></span>, where <em>args</em> is guaranteed to be a
 <a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTupleObject</span></code></a>. The hook function is always called with the GIL
 held by the Python interpreter that raised the event.</p>
-<p>See <span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0578"><strong>PEP 578</strong></a> for a detailed description of auditing.  Functions in the
+<p>See <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0578/"><strong>PEP 578</strong></a> for a detailed description of auditing.  Functions in the
 runtime and standard library that raise events are listed in the
 <a class="reference internal" href="../library/audit_events.html#audit-events"><span class="std std-ref">audit events table</span></a>.
-Details are in each function's documentation.</p>
+Details are in each function’s documentation.</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="../library/sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">sys.addaudithook</span></code>，没有附带参数。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
@@ -594,7 +608,7 @@ function will be called with no arguments and should return no value.  At most
 32 cleanup functions can be registered.  When the registration is successful,
 <a class="reference internal" href="#c.Py_AtExit" title="Py_AtExit"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_AtExit()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">0</span></code>; on failure, it returns <code class="docutils literal notranslate"><span class="pre">-1</span></code>.  The cleanup
 function registered last is called first. Each cleanup function will be called
-at most once.  Since Python's internal finalization will have completed before
+at most once.  Since Python’s internal finalization will have completed before
 the cleanup function, no Python APIs should be called by <em>func</em>.</p>
 </dd></dl>
 
@@ -607,19 +621,25 @@ the cleanup function, no Python APIs should be called by <em>func</em>.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">操作系统实用程序</a></li>
 <li><a class="reference internal" href="#system-functions">系统功能</a></li>
 <li><a class="reference internal" href="#process-control">过程控制</a></li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="utilities.html"
-                        title="上一章">工具</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="import.html"
-                        title="下一章">导入模块</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="utilities.html"
+                          title="上一章">工具</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="import.html"
+                          title="下一章">导入模块</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -661,7 +681,7 @@ the cleanup function, no Python APIs should be called by <em>func</em>.</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -690,7 +710,7 @@ the cleanup function, no Python APIs should be called by <em>func</em>.</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -698,11 +718,11 @@ the cleanup function, no Python APIs should be called by <em>func</em>.</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

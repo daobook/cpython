@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>grp --- 组数据库 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grp — 组数据库 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,14 +20,14 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="crypt —— 验证 Unix 口令的函数" href="crypt.html" />
-    <link rel="prev" title="spwd —— shadow 密码库" href="spwd.html" />
+    <link rel="next" title="termios — POSIX 风格的 tty 控制" href="termios.html" />
+    <link rel="prev" title="pwd — 用户密码数据库" href="pwd.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/grp.html" />
     
       
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="spwd.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code> —— shadow 密码库</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="crypt.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crypt</span></code> —— 验证 Unix 口令的函数</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pwd.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code> — 用户密码数据库</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="termios.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">termios</span></code> — POSIX 风格的 tty 控制</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -102,10 +106,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="crypt.html" title="crypt —— 验证 Unix 口令的函数"
+          <a href="termios.html" title="termios — POSIX 风格的 tty 控制"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="spwd.html" title="spwd —— shadow 密码库"
+          <a href="pwd.html" title="pwd — 用户密码数据库"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -118,12 +122,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix.html" accesskey="U">Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> --- 组数据库</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> — 组数据库</a></li>
                 <li class="right">
                     
 
@@ -147,10 +151,12 @@
           <div class="body" role="main">
             
   <section id="module-grp">
-<span id="grp-the-group-database"></span><h1><a class="reference internal" href="#module-grp" title="grp: The group database (getgrnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code></a> --- 组数据库<a class="headerlink" href="#module-grp" title="永久链接至标题">¶</a></h1>
+<span id="grp-the-group-database"></span><h1><a class="reference internal" href="#module-grp" title="grp: The group database (getgrnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code></a> — 组数据库<a class="headerlink" href="#module-grp" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
 <p>该模块提供对Unix组数据库的访问。 它在所有Unix版本上都可用。</p>
-<p>组数据库条目被报告为类似元组的对象，其属性对应于 <code class="docutils literal notranslate"><span class="pre">group</span></code> 结构的成员（下面的属性字段，请参见 <code class="docutils literal notranslate"><span class="pre">&lt;pwd.h&gt;</span></code> ）：</p>
+<p>Group database entries are reported as a tuple-like object, whose attributes
+correspond to the members of the <code class="docutils literal notranslate"><span class="pre">group</span></code> structure (Attribute field below, see
+<code class="docutils literal notranslate"><span class="pre">&lt;grp.h&gt;</span></code>):</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 14%" />
@@ -210,7 +216,7 @@
 <dl class="simple">
 <dt>模块 <a class="reference internal" href="pwd.html#module-pwd" title="pwd: The password database (getpwnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code></a></dt><dd><p>用户数据库的接口，与此类似。</p>
 </dd>
-<dt>模块 <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a></dt><dd><p>针对影子密码数据库的接口，与本模块类似。</p>
+<dt>模块 <a class="reference internal" href="spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a></dt><dd><p>针对影子密码数据库的接口，与本模块类似。</p>
 </dd>
 </dl>
 </div>
@@ -223,12 +229,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="spwd.html"
-                        title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code> —— shadow 密码库</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="crypt.html"
-                        title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crypt</span></code> —— 验证 Unix 口令的函数</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="pwd.html"
+                          title="上一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pwd</span></code> — 用户密码数据库</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="termios.html"
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">termios</span></code> — POSIX 风格的 tty 控制</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -254,10 +264,10 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="crypt.html" title="crypt —— 验证 Unix 口令的函数"
+          <a href="termios.html" title="termios — POSIX 风格的 tty 控制"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="spwd.html" title="spwd —— shadow 密码库"
+          <a href="pwd.html" title="pwd — 用户密码数据库"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -270,12 +280,12 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 标准库</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="unix.html" >Unix 专有服务</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> --- 组数据库</a></li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code> — 组数据库</a></li>
                 <li class="right">
                     
 
@@ -299,7 +309,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -307,11 +317,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

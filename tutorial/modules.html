@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. 模块 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. 模块 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">6. 模块</a><ul>
 <li><a class="reference internal" href="#more-on-modules">6.1. 模块详解</a><ul>
 <li><a class="reference internal" href="#executing-modules-as-scripts">6.1.1. 以脚本方式执行模块</a></li>
@@ -91,12 +92,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datastructures.html"
-                        title="上一章"><span class="section-number">5. </span>数据结构</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="inputoutput.html"
-                        title="下一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datastructures.html"
+                          title="上一章"><span class="section-number">5. </span>数据结构</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="inputoutput.html"
+                          title="下一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -139,7 +145,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 教程</a> &#187;</li>
@@ -242,7 +248,7 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>为了保证运行效率，每次解释器会话只导入一次模块。如果更改了模块内容，必须重启解释器；仅交互测试一个模块时，也可以使用 <a class="reference internal" href="../library/importlib.html#importlib.reload" title="importlib.reload"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.reload()</span></code></a>，例如 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">importlib;</span> <span class="pre">importlib.reload(modulename)</span></code>。</p>
 </div>
 <section id="executing-modules-as-scripts">
@@ -271,20 +277,25 @@
 </section>
 <section id="the-module-search-path">
 <span id="tut-searchpath"></span><h3><span class="section-number">6.1.2. </span>模块搜索路径<a class="headerlink" href="#the-module-search-path" title="永久链接至标题">¶</a></h3>
-<p id="index-0">导入 <code class="xref py py-mod docutils literal notranslate"><span class="pre">spam</span></code> 模块时，解释器首先查找名为 <cite>spam</cite> 的内置模块。如果没找到，解释器再从 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 变量中的目录列表里查找 <code class="file docutils literal notranslate"><span class="pre">spam.py</span></code> 文件。<a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 初始化时包含以下位置：</p>
+<p id="index-0">When a module named <code class="xref py py-mod docutils literal notranslate"><span class="pre">spam</span></code> is imported, the interpreter first searches for
+a built-in module with that name. These module names are listed in
+<a class="reference internal" href="../library/sys.html#sys.builtin_module_names" title="sys.builtin_module_names"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.builtin_module_names</span></code></a>. If not found, it then searches for a file
+named <code class="file docutils literal notranslate"><span class="pre">spam.py</span></code> in a list of directories given by the variable
+<a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>.  <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> is initialized from these locations:</p>
 <ul class="simple">
 <li><p>输入脚本的目录（或未指定文件时的当前目录）。</p></li>
 <li><p><span class="target" id="index-14"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a> （目录列表，与 shell 变量 <span class="target" id="index-15"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 的语法一样）。</p></li>
 <li><p>依赖于安装的默认值（按惯例包括一个 <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> 目录，由 <a class="reference internal" href="../library/site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> 模块处理）。</p></li>
 </ul>
+<p>More details are at <a class="reference internal" href="../library/sys_path_init.html#sys-path-init"><span class="std std-ref">The initialization of the sys.path module search path</span></a>.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>在支持 symlink 的文件系统中，输入脚本目录是在追加 symlink 后计算出来的。换句话说，包含 symlink 的目录并 <strong>没有</strong> 添加至模块搜索路径。</p>
 </div>
 <p>初始化后，Python 程序可以更改 <a class="reference internal" href="../library/sys.html#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>。运行脚本的目录在标准库路径之前，置于搜索路径的开头。即，加载的是该目录里的脚本，而不是标准库的同名模块。 除非刻意替换，否则会报错。详见 <a class="reference internal" href="#tut-standardmodules"><span class="std std-ref">标准模块</span></a>。</p>
 </section>
 <section id="compiled-python-files">
-<h3><span class="section-number">6.1.3. </span>“已编译的” Python 文件<a class="headerlink" href="#compiled-python-files" title="永久链接至标题">¶</a></h3>
+<span id="tut-pycache"></span><h3><span class="section-number">6.1.3. </span>“已编译的” Python 文件<a class="headerlink" href="#compiled-python-files" title="永久链接至标题">¶</a></h3>
 <p>为了快速加载模块，Python 把模块的编译版缓存在 <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> 目录中，文件名为 <code class="file docutils literal notranslate"><span class="pre">module.</span><em><span class="pre">version</span></em><span class="pre">.pyc</span></code>，version 对编译文件格式进行编码，一般是 Python 的版本号。例如，CPython 的 3.3 发行版中，spam.py 的编译版本缓存为 <code class="docutils literal notranslate"><span class="pre">__pycache__/spam.cpython-33.pyc</span></code>。使用这种命名惯例，可以让不同 Python 发行版及不同版本的已编译模块共存。</p>
 <p>Python 对比编译版本与源码的修改日期，查看它是否已过期，是否要重新编译，此过程完全自动化。此外，编译模块与平台无关，因此，可在不同架构系统之间共享相同的支持库。</p>
 <p>Python 在两种情况下不检查缓存。其一，从命令行直接载入模块，只重新编译，不存储编译结果；其二，没有源模块，就不会检查缓存。为了支持无源文件（仅编译）发行版本， 编译模块必须在源目录下，并且绝不能有源模块。</p>
@@ -293,13 +304,13 @@
 <li><p>在 Python 命令中使用 <a class="reference internal" href="../using/cmdline.html#cmdoption-O"><code class="xref std std-option docutils literal notranslate"><span class="pre">-O</span></code></a> 或 <a class="reference internal" href="../using/cmdline.html#cmdoption-OO"><code class="xref std std-option docutils literal notranslate"><span class="pre">-OO</span></code></a> 开关，可以减小编译模块的大小。<code class="docutils literal notranslate"><span class="pre">-O</span></code> 去除断言语句，<code class="docutils literal notranslate"><span class="pre">-OO</span></code> 去除断言语句和 __doc__ 字符串。有些程序可能依赖于这些内容，因此，没有十足的把握，不要使用这两个选项。“优化过的”模块带有 <code class="docutils literal notranslate"><span class="pre">opt-</span></code> 标签，并且文件通常会一小些。将来的发行版或许会改进优化的效果。</p></li>
 <li><p>从 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件读取的程序不比从 <code class="docutils literal notranslate"><span class="pre">.py</span></code> 读取的执行速度快，<code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件只是加载速度更快。</p></li>
 <li><p><a class="reference internal" href="../library/compileall.html#module-compileall" title="compileall: Tools for byte-compiling all Python source files in a directory tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">compileall</span></code></a> 模块可以为一个目录下的所有模块创建 .pyc 文件。</p></li>
-<li><p>本过程的细节及决策流程图，详见 <span class="target" id="index-16"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-3147"><strong>PEP 3147</strong></a>。</p></li>
+<li><p>本过程的细节及决策流程图，详见 <span class="target" id="index-16"></span><a class="pep reference external" href="https://peps.python.org/pep-3147/"><strong>PEP 3147</strong></a>。</p></li>
 </ul>
 </section>
 </section>
 <section id="standard-modules">
 <span id="tut-standardmodules"></span><h2><span class="section-number">6.2. </span>标准模块<a class="headerlink" href="#standard-modules" title="永久链接至标题">¶</a></h2>
-<p id="index-4">Python 自带一个标准模块的库，它在 Python 库参考（此处以下称为&quot;库参考&quot; ）里另外描述。  一些模块是内嵌到编译器里面的， 它们给一些虽并非语言核心但却内嵌的操作提供接口，要么是为了效率，要么是给操作系统基础操作例如系统调入提供接口。 这些模块集是一个配置选项， 并且还依赖于底层的操作系统。 例如，<a class="reference internal" href="../library/winreg.html#module-winreg" title="winreg: Routines and objects for manipulating the Windows registry. (Windows)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">winreg</span></code></a> 模块只在 Windows 系统上提供。一个特别值得注意的模块 <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a>，它被内嵌到每一个 Python 编译器中。<code class="docutils literal notranslate"><span class="pre">sys.ps1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys.ps2</span></code> 变量定义了一些字符，它们可以用作主提示符和辅助提示符:</p>
+<p id="index-4">Python 自带一个标准模块的库，它在 Python 库参考（此处以下称为”库参考” ）里另外描述。  一些模块是内嵌到编译器里面的， 它们给一些虽并非语言核心但却内嵌的操作提供接口，要么是为了效率，要么是给操作系统基础操作例如系统调入提供接口。 这些模块集是一个配置选项， 并且还依赖于底层的操作系统。 例如，<a class="reference internal" href="../library/winreg.html#module-winreg" title="winreg: Routines and objects for manipulating the Windows registry. (Windows)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">winreg</span></code></a> 模块只在 Windows 系统上提供。一个特别值得注意的模块 <a class="reference internal" href="../library/sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a>，它被内嵌到每一个 Python 编译器中。<code class="docutils literal notranslate"><span class="pre">sys.ps1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">sys.ps2</span></code> 变量定义了一些字符，它们可以用作主提示符和辅助提示符:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">ps1</span>
 <span class="go">&#39;&gt;&gt;&gt; &#39;</span>
@@ -456,7 +467,8 @@
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span> <span class="s2">&quot;surround&quot;</span><span class="p">,</span> <span class="s2">&quot;reverse&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>即，<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sound.effects</span> <span class="pre">import</span> <span class="pre">*</span></code> 将导入 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sound</span></code> 包中的这三个命名子模块。</p>
+<p>This would mean that <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sound.effects</span> <span class="pre">import</span> <span class="pre">*</span></code> would import the three
+named submodules of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">sound.effects</span></code> package.</p>
 <p>如果没有定义 <code class="docutils literal notranslate"><span class="pre">__all__</span></code>，<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sound.effects</span> <span class="pre">import</span> <span class="pre">*</span></code> 语句 <em>不会</em> 把包 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sound.effects</span></code> 中所有子模块都导入到当前命名空间；该语句只确保导入包 <code class="xref py py-mod docutils literal notranslate"><span class="pre">sound.effects</span></code> （可能还会运行 <code class="file docutils literal notranslate"><span class="pre">__init__.py</span></code> 中的初始化代码），然后，再导入包中定义的名称。这些名称包括 <code class="file docutils literal notranslate"><span class="pre">__init__.py</span></code> 中定义的任何名称（以及显式加载的子模块），还包括之前 <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句显式加载的包里的子模块。请看以下代码：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sound.effects.echo</span>
 <span class="kn">import</span> <span class="nn">sound.effects.surround</span>
@@ -499,8 +511,9 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">6. 模块</a><ul>
 <li><a class="reference internal" href="#more-on-modules">6.1. 模块详解</a><ul>
 <li><a class="reference internal" href="#executing-modules-as-scripts">6.1.1. 以脚本方式执行模块</a></li>
@@ -520,12 +533,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="datastructures.html"
-                        title="上一章"><span class="section-number">5. </span>数据结构</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="inputoutput.html"
-                        title="下一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="datastructures.html"
+                          title="上一章"><span class="section-number">5. </span>数据结构</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="inputoutput.html"
+                          title="下一章"><span class="section-number">7. </span>输入与输出</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -567,7 +585,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 教程</a> &#187;</li>
@@ -595,7 +613,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -603,11 +621,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

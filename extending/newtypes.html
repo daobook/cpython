@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. 定义扩展类型：已分类主题 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. 定义扩展类型：已分类主题 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">3. 定义扩展类型：已分类主题</a><ul>
 <li><a class="reference internal" href="#finalization-and-de-allocation">3.1. 终结和内存释放</a></li>
 <li><a class="reference internal" href="#object-presentation">3.2. 对象展示</a></li>
@@ -88,12 +89,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="newtypes_tutorial.html"
-                        title="上一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="building.html"
-                        title="下一章"><span class="section-number">4. </span>构建C/C++扩展</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="newtypes_tutorial.html"
+                          title="上一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="building.html"
+                          title="下一章"><span class="section-number">4. </span>构建C/C++扩展</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -136,7 +142,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">扩展和嵌入 Python 解释器</a> &#187;</li>
@@ -322,10 +328,10 @@
 </pre></div>
 </div>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>There are limitations to what you can safely do in a deallocator function.
 First, if your type supports garbage collection (using <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_traverse" title="PyTypeObject.tp_traverse"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_traverse</span></code></a>
-and/or <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_clear" title="PyTypeObject.tp_clear"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_clear</span></code></a>), some of the object's members can have been
+and/or <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_clear" title="PyTypeObject.tp_clear"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_clear</span></code></a>), some of the object’s members can have been
 cleared or finalized by the time <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_dealloc" title="PyTypeObject.tp_dealloc"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_dealloc</span></code></a> is called.  Second, in
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_dealloc" title="PyTypeObject.tp_dealloc"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_dealloc</span></code></a>, your object is in an unstable state: its reference
 count is equal to zero.  Any call to a non-trivial object or API (as in the
@@ -334,7 +340,7 @@ double free and a crash.</p>
 <p>从 Python 3.4 开始，推荐不要在 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_dealloc" title="PyTypeObject.tp_dealloc"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_dealloc</span></code></a> 放复杂的终结代码，而是使用新的 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_finalize" title="PyTypeObject.tp_finalize"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_finalize</span></code></a> 类型方法。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-6"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0442"><strong>PEP 442</strong></a> 解释了新的终结方案。</p>
+<p><span class="target" id="index-6"></span><a class="pep reference external" href="https://peps.python.org/pep-0442/"><strong>PEP 442</strong></a> 解释了新的终结方案。</p>
 </div>
 </div>
 </section>
@@ -382,7 +388,7 @@ a special case, for which the new value passed to the handler is <code class="do
 only needs to implement the functions for one pair.  The difference is that one
 pair takes the name of the attribute as a <span class="xref c c-texpr"><span class="kt">char</span><span class="p">*</span></span>, while the other
 accepts a <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>.  Each type can use whichever pair makes more
-sense for the implementation's convenience.</p>
+sense for the implementation’s convenience.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">getattrfunc</span><span class="w">  </span><span class="n">tp_getattr</span><span class="p">;</span><span class="w">        </span><span class="cm">/* char * version */</span><span class="w"></span>
 <span class="n">setattrfunc</span><span class="w">  </span><span class="n">tp_setattr</span><span class="p">;</span><span class="w"></span>
 <span class="cm">/* ... */</span><span class="w"></span>
@@ -450,7 +456,7 @@ type which will be able to extract a value from the instance structure.  The
 <code class="file docutils literal notranslate"><span class="pre">structmember.h</span></code> header; the value will be used to determine how to
 convert Python values to and from C values.  The <code class="xref py py-attr docutils literal notranslate"><span class="pre">flags</span></code> field is used to
 store flags which control how the attribute can be accessed.</p>
-<p>以下标志常量定义在:file: ' structmember.h ';它们可以使用bitwise-OR组合。</p>
+<p>以下标志常量定义在:file: ‘ structmember.h ‘;它们可以使用bitwise-OR组合。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 37%" />
@@ -493,7 +499,7 @@ type of the name parameter is the only difference between the <span class="xref 
 and <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> flavors of the interface. This example effectively does
 the same thing as the generic example above, but does not use the generic
 support added in Python 2.2.  It explains how the handler functions are
-called, so that if you do need to extend their functionality, you'll understand
+called, so that if you do need to extend their functionality, you’ll understand
 what needs to be done.</p>
 <p>The <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_getattr" title="PyTypeObject.tp_getattr"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_getattr</span></code></a> handler is called when the object requires an attribute
 look-up.  It is called in the same situations where the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattr__()</span></code>
@@ -543,7 +549,7 @@ where the operator is one of <code class="docutils literal notranslate"><span cl
 <code class="docutils literal notranslate"><span class="pre">Py_LT</span></code> or <code class="docutils literal notranslate"><span class="pre">Py_GT</span></code>.  It should compare the two objects with respect to the
 specified operator and return <code class="docutils literal notranslate"><span class="pre">Py_True</span></code> or <code class="docutils literal notranslate"><span class="pre">Py_False</span></code> if the comparison is
 successful, <code class="docutils literal notranslate"><span class="pre">Py_NotImplemented</span></code> to indicate that comparison is not
-implemented and the other object's comparison method should be tried, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
+implemented and the other object’s comparison method should be tried, or <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
 if an exception was set.</p>
 <p>Here is a sample implementation, for a datatype that is considered equal if the
 size of an internal pointer is equal:</p>
@@ -560,12 +566,12 @@ size of an internal pointer is equal:</p>
 <span class="w">    </span><span class="n">size2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">obj2</span><span class="o">-&gt;</span><span class="n">obj_UnderlyingDatatypePtr</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_LT</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_LE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_EQ</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_NE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_GT</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nl">Py_GE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_LT</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&lt;</span><span class="w">  </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_LE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_EQ</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_NE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_GT</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&gt;</span><span class="w">  </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">Py_GE</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">size2</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">Py_True</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">Py_False</span><span class="p">;</span><span class="w"></span>
 <span class="w">    </span><span class="n">Py_INCREF</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w"></span>
@@ -576,7 +582,7 @@ size of an internal pointer is equal:</p>
 </section>
 <section id="abstract-protocol-support">
 <h2><span class="section-number">3.5. </span>Abstract Protocol Support<a class="headerlink" href="#abstract-protocol-support" title="永久链接至标题">¶</a></h2>
-<p>Python supports a variety of <em>abstract</em> 'protocols;' the specific interfaces
+<p>Python supports a variety of <em>abstract</em> ‘protocols;’ the specific interfaces
 provided to use these interfaces are documented in <a class="reference internal" href="../c-api/abstract.html#abstract"><span class="std std-ref">抽象对象层</span></a>.</p>
 <p>A number of these abstract interfaces were defined early in the development of
 the Python implementation.  In particular, the number, mapping, and sequence
@@ -622,7 +628,7 @@ is successful, as seen above.</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ternaryfunc</span><span class="w"> </span><span class="n">tp_call</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>This function is called when an instance of your data type is &quot;called&quot;, for
+<p>This function is called when an instance of your data type is “called”, for
 example, if <code class="docutils literal notranslate"><span class="pre">obj1</span></code> is an instance of your data type and the Python script
 contains <code class="docutils literal notranslate"><span class="pre">obj1('hello')</span></code>, the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_call" title="PyTypeObject.tp_call"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_call</span></code></a> handler is invoked.</p>
 <p>This function takes three arguments:</p>
@@ -677,11 +683,11 @@ independent iterators, a new iterator should be created and returned by
 each call to <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a>.</p></li>
 <li><p>Objects which can only be iterated over once (usually due to side effects of
 iteration, such as file objects) can implement <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a>
-by returning a new reference to themselves -- and should also therefore
+by returning a new reference to themselves – and should also therefore
 implement the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>  handler.</p></li>
 </ul>
 <p>Any <a class="reference internal" href="../glossary.html#term-iterator"><span class="xref std std-term">iterator</span></a> object should implement both <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a>
-and <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>.  An iterator's
+and <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a>.  An iterator’s
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iter" title="PyTypeObject.tp_iter"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iter</span></code></a> handler should return a new reference
 to the iterator.  Its <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_iternext" title="PyTypeObject.tp_iternext"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_iternext</span></code></a> handler should
 return a new reference to the next object in the iteration, if there is one.
@@ -694,7 +700,7 @@ and return <code class="docutils literal notranslate"><span class="pre">NULL</sp
 </section>
 <section id="weak-reference-support">
 <span id="weakref-support"></span><h2><span class="section-number">3.6. </span>Weak Reference Support<a class="headerlink" href="#weak-reference-support" title="永久链接至标题">¶</a></h2>
-<p>One of the goals of Python's weak reference implementation is to allow any type
+<p>One of the goals of Python’s weak reference implementation is to allow any type
 to participate in the weak reference mechanism without incurring the overhead on
 performance-critical objects (such as numbers).</p>
 <div class="admonition seealso">
@@ -704,7 +710,7 @@ performance-critical objects (such as numbers).</p>
 <p>For an object to be weakly referencable, the extension type must do two things:</p>
 <ol class="arabic simple">
 <li><p>Include a <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> field in the C object structure dedicated to
-the weak reference mechanism.  The object's constructor should leave it
+the weak reference mechanism.  The object’s constructor should leave it
 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (which is automatic when using the default
 <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_alloc" title="PyTypeObject.tp_alloc"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_alloc</span></code></a>).</p></li>
 <li><p>Set the <a class="reference internal" href="../c-api/typeobj.html#c.PyTypeObject.tp_weaklistoffset" title="PyTypeObject.tp_weaklistoffset"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_weaklistoffset</span></code></a> type member
@@ -777,8 +783,9 @@ its use might be something like the following:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">3. 定义扩展类型：已分类主题</a><ul>
 <li><a class="reference internal" href="#finalization-and-de-allocation">3.1. 终结和内存释放</a></li>
 <li><a class="reference internal" href="#object-presentation">3.2. 对象展示</a></li>
@@ -795,12 +802,17 @@ its use might be something like the following:</p>
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="newtypes_tutorial.html"
-                        title="上一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="building.html"
-                        title="下一章"><span class="section-number">4. </span>构建C/C++扩展</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="newtypes_tutorial.html"
+                          title="上一章"><span class="section-number">2. </span>自定义扩展类型：教程</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="building.html"
+                          title="下一章"><span class="section-number">4. </span>构建C/C++扩展</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -842,7 +854,7 @@ its use might be something like the following:</p>
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >扩展和嵌入 Python 解释器</a> &#187;</li>
@@ -870,7 +882,7 @@ its use might be something like the following:</p>
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -878,11 +890,11 @@ its use might be something like the following:</p>
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

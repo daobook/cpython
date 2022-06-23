@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>字符串转换与格式化 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串转换与格式化 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="arg.html"
-                        title="上一章">解析参数并构建值变量</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="reflection.html"
-                        title="下一章">反射</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="arg.html"
+                          title="上一章">解析参数并构建值变量</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="reflection.html"
+                          title="下一章">反射</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -167,7 +171,7 @@
 <ul class="simple">
 <li><p>当 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">rv</span> <span class="pre">&lt;</span> <span class="pre">size</span></code> 时，输出转换即成功并将 <em>rv</em> 个字符写入到 <em>str</em> (不包括末尾 <code class="docutils literal notranslate"><span class="pre">str[rv]</span></code> 位置的 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code> 字节)。</p></li>
 <li><p>当 <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">&gt;=</span> <span class="pre">size</span></code> 时，输出转换会被截断并且需要一个具有 <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">+</span> <span class="pre">1</span></code> 字节的缓冲区才能成功执行。 在此情况下 <code class="docutils literal notranslate"><span class="pre">str[size-1]</span></code> 为 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code>。</p></li>
-<li><p>当 <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> 时，&quot;会发生不好的事情。&quot; 在此情况下 <code class="docutils literal notranslate"><span class="pre">str[size-1]</span></code> 也为 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code>，但 <em>str</em> 的其余部分是未定义的。 错误的确切原因取决于底层平台。</p></li>
+<li><p>当 <code class="docutils literal notranslate"><span class="pre">rv</span> <span class="pre">&lt;</span> <span class="pre">0</span></code> 时，”会发生不好的事情。” 在此情况下 <code class="docutils literal notranslate"><span class="pre">str[size-1]</span></code> 也为 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code>，但 <em>str</em> 的其余部分是未定义的。 错误的确切原因取决于底层平台。</p></li>
 </ul>
 <p>以下函数提供与语言环境无关的字符串到数字转换。</p>
 <dl class="c function">
@@ -192,7 +196,7 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Py_DTSF_SIGN</span></code> 表示总是在返回的字符串前附加一个符号字符，即使 <em>val</em> 为非负数。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Py_DTSF_ADD_DOT_0</span></code> 表示确保返回的字符串看起来不像是一个整数。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Py_DTSF_ALT</span></code> 表示应用 &quot;替代的&quot; 格式化规则。 相关细节请参阅 <a class="reference internal" href="#c.PyOS_snprintf" title="PyOS_snprintf"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyOS_snprintf()</span></code></a> <code class="docutils literal notranslate"><span class="pre">'#'</span></code> 定义文档。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Py_DTSF_ALT</span></code> 表示应用 “替代的” 格式化规则。 相关细节请参阅 <a class="reference internal" href="#c.PyOS_snprintf" title="PyOS_snprintf"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyOS_snprintf()</span></code></a> <code class="docutils literal notranslate"><span class="pre">'#'</span></code> 定义文档。</p></li>
 </ul>
 <p>如果 <em>ptype</em> 不为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，则它指向的值将被设为 <code class="docutils literal notranslate"><span class="pre">Py_DTST_FINITE</span></code>, <code class="docutils literal notranslate"><span class="pre">Py_DTST_INFINITE</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Py_DTST_NAN</span></code> 中的一个，分别表示 <em>val</em> 是一个有限数字、无限数字或非数字。</p>
 <p>返回值是一个指向包含转换后字符串的 <em>buffer</em> 的指针，如果转换失败则为 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。 调用方要负责调用 <a class="reference internal" href="memory.html#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a> 来释放返回的字符串。</p>
@@ -209,7 +213,7 @@
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyOS_strnicmp">
-<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyOS_strnicmp</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s2</span></span>, <span class="n"><span class="pre">Py_ssize_t</span></span><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyOS_strnicmp" title="永久链接至目标">¶</a><br /></dt>
+<span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyOS_strnicmp</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s1</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">s2</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyOS_strnicmp" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>字符串不区分大小写。该函数几乎与 <code class="xref c c-func docutils literal notranslate"><span class="pre">strncmp()</span></code> 的工作方式相同，只是它忽略了大小写。</p>
 </dd></dl>
 
@@ -222,12 +226,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="arg.html"
-                        title="上一章">解析参数并构建值变量</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="reflection.html"
-                        title="下一章">反射</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="arg.html"
+                          title="上一章">解析参数并构建值变量</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="reflection.html"
+                          title="下一章">反射</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -269,7 +277,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -298,7 +306,7 @@
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -306,11 +314,11 @@
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

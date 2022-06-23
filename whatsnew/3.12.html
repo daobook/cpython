@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>What’s New In Python 3.12 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    
+    <script src="../_static/sidebar.js"></script>
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="在 Python 3.12.0a0 文档 中搜索"
+          href="../_static/opensearch.xml"/>
+    <link rel="author" title="关于这些文档" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="copyright" title="版权所有" href="../copyright.html" />
+    <link rel="next" title="What’s New In Python 3.11" href="3.11.html" />
+    <link rel="prev" title="What’s New in Python" href="index.html" />
+    <link rel="canonical" href="https://docs.python.org/3/whatsnew/3.12.html" />
+    
+      
+    
+
+    
+    <style>
+      @media only screen {
+        table.full-width-table {
+            width: 100%;
+        }
+      }
+    </style>
+<link rel="shortcut icon" type="image/png" href="../_static/py.svg" />
+            <script type="text/javascript" src="../_static/copybutton.js"></script>
+            <script type="text/javascript" src="../_static/menu.js"></script> 
+
+  </head>
+<body>
+<div class="mobile-nav">
+    <input type="checkbox" id="menuToggler" class="toggler__input" aria-controls="navigation"
+           aria-pressed="false" aria-expanded="false" role="button" aria-label="Menu" />
+    <label for="menuToggler" class="toggler__label">
+        <span></span>
+    </label>
+    <nav class="nav-content" role="navigation">
+         <a href="https://www.python.org/" class="nav-logo">
+             <img src="../_static/py.svg" alt="Logo"/>
+         </a>
+        <div class="version_switcher_placeholder"></div>
+        <form role="search" class="search" action="../search.html" method="get">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" class="search-icon">
+                <path fill-rule="nonzero"
+                        d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#444"></path>
+            </svg>
+            <input type="text" name="q" aria-label="快速搜索"/>
+            <input type="submit" value="转向"/>
+        </form>
+    </nav>
+    <div class="menu-wrapper">
+        <nav class="menu" role="navigation" aria-label="main navigation">
+            <div class="language_switcher_placeholder"></div>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">What’s New In Python 3.12</a><ul>
+<li><a class="reference internal" href="#summary-release-highlights">Summary – Release highlights</a></li>
+<li><a class="reference internal" href="#new-features">New Features</a></li>
+<li><a class="reference internal" href="#other-language-changes">Other Language Changes</a></li>
+<li><a class="reference internal" href="#new-modules">New Modules</a></li>
+<li><a class="reference internal" href="#improved-modules">Improved Modules</a><ul>
+<li><a class="reference internal" href="#os">os</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#optimizations">Optimizations</a></li>
+<li><a class="reference internal" href="#cpython-bytecode-changes">CPython bytecode changes</a></li>
+<li><a class="reference internal" href="#deprecated">Deprecated</a></li>
+<li><a class="reference internal" href="#pending-removal-in-python-3-13">Pending Removal in Python 3.13</a></li>
+<li><a class="reference internal" href="#pending-removal-in-future-versions">Pending Removal in Future Versions</a></li>
+<li><a class="reference internal" href="#removed">Removed</a></li>
+<li><a class="reference internal" href="#porting-to-python-3-12">Porting to Python 3.12</a><ul>
+<li><a class="reference internal" href="#changes-in-the-python-api">Changes in the Python API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-changes">Build Changes</a></li>
+<li><a class="reference internal" href="#c-api-changes">C API Changes</a><ul>
+<li><a class="reference internal" href="#id1">New Features</a></li>
+<li><a class="reference internal" href="#id2">Porting to Python 3.12</a></li>
+<li><a class="reference internal" href="#id3">Deprecated</a></li>
+<li><a class="reference internal" href="#id4">Removed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">What’s New in Python</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="3.11.html"
+                          title="下一章">What’s New In Python 3.11</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>当前页面</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">提交 Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/main/Doc/whatsnew/3.12.rst"
+            rel="nofollow">显示源码
+        </a>
+      </li>
+    </ul>
+  </div>
+        </nav>
+    </div>
+</div>
+
+  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="3.11.html" title="What’s New In Python 3.11"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="What’s New in Python"
+             accesskey="P">上一页</a> |</li>
+
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
+    <li id="cpython-language-and-version">
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New In Python 3.12</a></li>
+                <li class="right">
+                    
+
+    <div class="inline-search" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="快速搜索" aria-label="快速搜索" type="text" name="q" />
+          <input type="submit" value="转向" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+                     |
+                </li>
+            
+      </ul>
+    </div>    
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="what-s-new-in-python-3-12">
+<h1>What’s New In Python 3.12<a class="headerlink" href="#what-s-new-in-python-3-12" title="永久链接至标题">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Release</dt>
+<dd class="field-odd"><p>3.12.0a0</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>六月 23, 2022</p>
+</dd>
+</dl>
+<p>This article explains the new features in Python 3.12, compared to 3.11.</p>
+<p>For full details, see the <a class="reference internal" href="changelog.html#changelog"><span class="std std-ref">changelog</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>Prerelease users should be aware that this document is currently in draft
+form. It will be updated substantially as Python 3.12 moves towards release,
+so it’s worth checking back even after reading earlier versions.</p>
+</div>
+<section id="summary-release-highlights">
+<h2>Summary – Release highlights<a class="headerlink" href="#summary-release-highlights" title="永久链接至标题">¶</a></h2>
+<p>Important deprecations, removals or restrictions:</p>
+<ul class="simple">
+<li><p><span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0623/"><strong>PEP 623</strong></a>, Remove wstr from Unicode</p></li>
+</ul>
+</section>
+<section id="new-features">
+<h2>New Features<a class="headerlink" href="#new-features" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="other-language-changes">
+<h2>Other Language Changes<a class="headerlink" href="#other-language-changes" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="new-modules">
+<h2>New Modules<a class="headerlink" href="#new-modules" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>None yet.</p></li>
+</ul>
+</section>
+<section id="improved-modules">
+<h2>Improved Modules<a class="headerlink" href="#improved-modules" title="永久链接至标题">¶</a></h2>
+<section id="os">
+<h3>os<a class="headerlink" href="#os" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Add <a class="reference internal" href="../library/os.html#os.PIDFD_NONBLOCK" title="os.PIDFD_NONBLOCK"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.PIDFD_NONBLOCK</span></code></a> to open a file descriptor
+for a process with <a class="reference internal" href="../library/os.html#os.pidfd_open" title="os.pidfd_open"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.pidfd_open()</span></code></a> in non-blocking mode.
+(Contributed by Kumar Aditya in <a class="reference external" href="https://github.com/python/cpython/issues/93312">gh-93312</a>.)</p></li>
+</ul>
+</section>
+</section>
+<section id="optimizations">
+<h2>Optimizations<a class="headerlink" href="#optimizations" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>Removed <code class="docutils literal notranslate"><span class="pre">wstr</span></code> and <code class="docutils literal notranslate"><span class="pre">wstr_length</span></code> members from Unicode objects.
+It reduces object size by 8 or 16 bytes on 64bit platform. (<span class="target" id="index-1"></span><a class="pep reference external" href="https://peps.python.org/pep-0623/"><strong>PEP 623</strong></a>)
+(Contributed by Inada Naoki in <a class="reference external" href="https://github.com/python/cpython/issues/92536">gh-92536</a>.)</p></li>
+</ul>
+</section>
+<section id="cpython-bytecode-changes">
+<h2>CPython bytecode changes<a class="headerlink" href="#cpython-bytecode-changes" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>Removed the <code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code> instruction. It has been merged into
+<a class="reference internal" href="../library/dis.html#opcode-LOAD_ATTR"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_ATTR</span></code></a>. <a class="reference internal" href="../library/dis.html#opcode-LOAD_ATTR"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_ATTR</span></code></a> will now behave like the old
+<code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code> instruction if the low bit of its oparg is set.
+(Contributed by Ken Jin in <a class="reference external" href="https://github.com/python/cpython/issues/93429">gh-93429</a>.)</p></li>
+</ul>
+</section>
+<section id="deprecated">
+<h2>Deprecated<a class="headerlink" href="#deprecated" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="pending-removal-in-python-3-13">
+<h2>Pending Removal in Python 3.13<a class="headerlink" href="#pending-removal-in-python-3-13" title="永久链接至标题">¶</a></h2>
+<p>The following modules and APIs have been deprecated in earlier Python releases,
+and will be removed in Python 3.13.</p>
+<p>Modules (see <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0594/"><strong>PEP 594</strong></a>):</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../library/aifc.html#module-aifc" title="aifc: Read and write audio files in AIFF or AIFC format. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">aifc</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/audioop.html#module-audioop" title="audioop: Manipulate raw audio data. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">audioop</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/cgi.html#module-cgi" title="cgi: Helpers for running Python scripts via the Common Gateway Interface. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cgi</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/cgitb.html#module-cgitb" title="cgitb: Configurable traceback handler for CGI scripts. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cgitb</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/chunk.html#module-chunk" title="chunk: Module to read IFF chunks. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chunk</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/crypt.html#module-crypt" title="crypt: The crypt() function used to check Unix passwords. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">crypt</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/imghdr.html#module-imghdr" title="imghdr: Determine the type of image contained in a file or byte stream. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imghdr</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/mailcap.html#module-mailcap" title="mailcap: Mailcap file handling. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mailcap</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/msilib.html#module-msilib" title="msilib: Creation of Microsoft Installer files, and CAB files. (已移除) (Windows)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">msilib</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/nis.html#module-nis" title="nis: Interface to Sun's NIS (Yellow Pages) library. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nis</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/nntplib.html#module-nntplib" title="nntplib: NNTP protocol client (requires sockets). (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">nntplib</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/ossaudiodev.html#module-ossaudiodev" title="ossaudiodev: Access to OSS-compatible audio devices. (已移除) (Linux, FreeBSD)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ossaudiodev</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/pipes.html#module-pipes" title="pipes: A Python interface to Unix shell pipelines. (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pipes</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/sndhdr.html#module-sndhdr" title="sndhdr: Determine type of a sound file. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sndhdr</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/spwd.html#module-spwd" title="spwd: The shadow password database (getspnam() and friends). (已移除) (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">spwd</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/sunau.html#module-sunau" title="sunau: Provide an interface to the Sun AU sound format. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sunau</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/telnetlib.html#module-telnetlib" title="telnetlib: Telnet client class. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">telnetlib</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/uu.html#module-uu" title="uu: Encode and decode files in uuencode format. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">uu</span></code></a></p></li>
+<li><p><a class="reference internal" href="../library/xdrlib.html#module-xdrlib" title="xdrlib: Encoders and decoders for the External Data Representation (XDR). (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">xdrlib</span></code></a></p></li>
+</ul>
+<p>APIs:</p>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.LegacyInterpolation</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/90765">gh-90765</a>)</p></li>
+<li><p><a class="reference internal" href="../library/locale.html#locale.getdefaultlocale" title="locale.getdefaultlocale"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.getdefaultlocale()</span></code></a> (<a class="reference external" href="https://github.com/python/cpython/issues/90817">gh-90817</a>)</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">turtle.RawTurtle.settiltangle()</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/50096">gh-50096</a>)</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">unittest.findTestCases()</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/50096">gh-50096</a>)</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">unittest.makeSuite()</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/50096">gh-50096</a>)</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">unittest.getTestCaseNames()</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/50096">gh-50096</a>)</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">webbrowser.MacOSX</span></code> (<a class="reference external" href="https://github.com/python/cpython/issues/86421">gh-86421</a>)</p></li>
+</ul>
+</section>
+<section id="pending-removal-in-future-versions">
+<h2>Pending Removal in Future Versions<a class="headerlink" href="#pending-removal-in-future-versions" title="永久链接至标题">¶</a></h2>
+<p>The following APIs were deprecated in earlier Python versions and will be removed,
+although there is currently no date scheduled for their removal.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../library/typing.html#typing.Text" title="typing.Text"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Text</span></code></a> (<a class="reference external" href="https://github.com/python/cpython/issues/92332">gh-92332</a>)</p></li>
+<li><p>Currently Python accepts numeric literals immediately followed by keywords,
+for example <code class="docutils literal notranslate"><span class="pre">0in</span> <span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">1or</span> <span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">0if</span> <span class="pre">1else</span> <span class="pre">2</span></code>.  It allows confusing
+and ambiguous expressions like <code class="docutils literal notranslate"><span class="pre">[0x1for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">y]</span></code> (which can be
+interpreted as <code class="docutils literal notranslate"><span class="pre">[0x1</span> <span class="pre">for</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">y]</span></code> or <code class="docutils literal notranslate"><span class="pre">[0x1f</span> <span class="pre">or</span> <span class="pre">x</span> <span class="pre">in</span> <span class="pre">y]</span></code>).
+A syntax warning is raised if the numeric literal is
+immediately followed by one of keywords <a class="reference internal" href="../reference/expressions.html#and"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">and</span></code></a>, <a class="reference internal" href="../reference/compound_stmts.html#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a>,
+<a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a>, <a class="reference internal" href="../reference/compound_stmts.html#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a>, <a class="reference internal" href="../reference/expressions.html#in"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">in</span></code></a>, <a class="reference internal" href="../reference/expressions.html#is"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">is</span></code></a> and <a class="reference internal" href="../reference/expressions.html#or"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">or</span></code></a>.
+In a future release it will be changed to a syntax error. (<a class="reference external" href="https://github.com/python/cpython/issues/87999">gh-87999</a>)</p></li>
+</ul>
+</section>
+<section id="removed">
+<h2>Removed<a class="headerlink" href="#removed" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>Several names deprecated in the <a class="reference internal" href="../library/configparser.html#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> way back in 3.2 have
+been removed per <a class="reference external" href="https://github.com/python/cpython/issues/89336">gh-89336</a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../library/configparser.html#configparser.ParsingError" title="configparser.ParsingError"><code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ParsingError</span></code></a> no longer has a <code class="docutils literal notranslate"><span class="pre">filename</span></code> attribute
+or argument. Use the <code class="docutils literal notranslate"><span class="pre">source</span></code> attribute and argument instead.</p></li>
+<li><p><a class="reference internal" href="../library/configparser.html#module-configparser" title="configparser: Configuration file parser."><code class="xref py py-mod docutils literal notranslate"><span class="pre">configparser</span></code></a> no longer has a <code class="docutils literal notranslate"><span class="pre">SafeConfigParser</span></code> class. Use the
+shorter <a class="reference internal" href="../library/configparser.html#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigParser</span></code></a> name instead.</p></li>
+<li><p><a class="reference internal" href="../library/configparser.html#configparser.ConfigParser" title="configparser.ConfigParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code></a> no longer has a <code class="docutils literal notranslate"><span class="pre">readfp</span></code> method.
+Use <a class="reference internal" href="../library/configparser.html#configparser.ConfigParser.read_file" title="configparser.ConfigParser.read_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_file()</span></code></a> instead.</p></li>
+</ul>
+</li>
+<li><p>The following undocumented <a class="reference internal" href="../library/sqlite3.html#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a> features, deprecated in Python
+3.10, are now removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sqlite3.enable_shared_cache()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sqlite3.OptimizedUnicode</span></code></p></li>
+</ul>
+<p>If a shared cache must be used, open the database in URI mode using the
+<code class="docutils literal notranslate"><span class="pre">cache=shared</span></code> query parameter.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sqlite3.OptimizedUnicode</span></code> text factory has been an alias for
+<a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> since Python 3.3. Code that previously set the text factory to
+<code class="docutils literal notranslate"><span class="pre">OptimizedUnicode</span></code> can either use <code class="docutils literal notranslate"><span class="pre">str</span></code> explicitly, or rely on the
+default value which is also <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+<p>(Contributed by Erlend E. Aasland in <a class="reference external" href="https://github.com/python/cpython/issues/92548">gh-92548</a>)</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">--experimental-isolated-subinterpreters</span></code> configure flag
+(and corresponding <code class="docutils literal notranslate"><span class="pre">EXPERIMENTAL_ISOLATED_SUBINTERPRETERS</span></code>)
+have been removed.</p></li>
+</ul>
+</section>
+<section id="porting-to-python-3-12">
+<h2>Porting to Python 3.12<a class="headerlink" href="#porting-to-python-3-12" title="永久链接至标题">¶</a></h2>
+<p>This section lists previously described changes and other bugfixes
+that may require changes to your code.</p>
+<section id="changes-in-the-python-api">
+<h3>Changes in the Python API<a class="headerlink" href="#changes-in-the-python-api" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>More strict rules are now applied for numerical group references and
+group names in regular expressions.
+Only sequence of ASCII digits is now accepted as a numerical reference.
+The group name in bytes patterns and replacement strings can now only
+contain ASCII letters and digits and underscore.
+(Contributed by Serhiy Storchaka in <a class="reference external" href="https://github.com/python/cpython/issues/91760">gh-91760</a>.)</p></li>
+<li><p>Removed randrange() functionality deprecated since Python 3.10.  Formerly,
+randrange(10.0) losslessly converted to randrange(10). Now, it raises a
+TypeError. Also, the exception raised for non-integral values such as
+randrange(10.5) or randrange(‘10’) has been changed from ValueError to
+TypeError.  This also prevents bugs where <code class="docutils literal notranslate"><span class="pre">randrange(1e25)</span></code> would silently
+select from a larger range than <code class="docutils literal notranslate"><span class="pre">randrange(10**25)</span></code>.
+(Originally suggested by Serhiy Storchaka gh-86388.)</p></li>
+</ul>
+</section>
+</section>
+<section id="build-changes">
+<h2>Build Changes<a class="headerlink" href="#build-changes" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">va_start()</span></code> with two parameters, like <code class="docutils literal notranslate"><span class="pre">va_start(args,</span> <span class="pre">format),</span></code>
+is now required to build Python.
+<code class="docutils literal notranslate"><span class="pre">va_start()</span></code> is no longer called with a single parameter.
+(Contributed by Kumar Aditya in <a class="reference external" href="https://github.com/python/cpython/issues/93207">gh-93207</a>.)</p></li>
+</ul>
+</section>
+<section id="c-api-changes">
+<h2>C API Changes<a class="headerlink" href="#c-api-changes" title="永久链接至标题">¶</a></h2>
+<section id="id1">
+<h3>New Features<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Added the new limited C API function <a class="reference internal" href="../c-api/type.html#c.PyType_FromMetaclass" title="PyType_FromMetaclass"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyType_FromMetaclass()</span></code></a>,
+which generalizes the existing <a class="reference internal" href="../c-api/type.html#c.PyType_FromModuleAndSpec" title="PyType_FromModuleAndSpec"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyType_FromModuleAndSpec()</span></code></a> using
+an additional metaclass argument.
+(Contributed by Wenzel Jakob in <a class="reference external" href="https://github.com/python/cpython/issues/93012">gh-93012</a>.)</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>Porting to Python 3.12<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Legacy Unicode APIs based on <code class="docutils literal notranslate"><span class="pre">Py_UNICODE*</span></code> representation has been removed.
+Please migrate to APIs based on UTF-8 or <code class="docutils literal notranslate"><span class="pre">wchar_t*</span></code>.</p></li>
+<li><p>Argument parsing functions like <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> doesn’t support
+<code class="docutils literal notranslate"><span class="pre">Py_UNICODE*</span></code> based format (e.g. <code class="docutils literal notranslate"><span class="pre">u</span></code>, <code class="docutils literal notranslate"><span class="pre">Z</span></code>) anymore. Please migrate
+to other formats for Unicode like <code class="docutils literal notranslate"><span class="pre">s</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>, <code class="docutils literal notranslate"><span class="pre">es</span></code>, and <code class="docutils literal notranslate"><span class="pre">U</span></code>.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Deprecated<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>Deprecate global configuration variable:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_DebugFlag" title="Py_DebugFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_DebugFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.parser_debug" title="PyConfig.parser_debug"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.parser_debug</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_VerboseFlag" title="Py_VerboseFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_VerboseFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.verbose" title="PyConfig.verbose"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.verbose</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_QuietFlag" title="Py_QuietFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_QuietFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.quiet" title="PyConfig.quiet"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.quiet</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_InteractiveFlag" title="Py_InteractiveFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_InteractiveFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.interactive" title="PyConfig.interactive"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.interactive</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_InspectFlag" title="Py_InspectFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_InspectFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.inspect" title="PyConfig.inspect"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.inspect</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_OptimizeFlag" title="Py_OptimizeFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_OptimizeFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.optimization_level" title="PyConfig.optimization_level"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.optimization_level</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_NoSiteFlag" title="Py_NoSiteFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_NoSiteFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.site_import" title="PyConfig.site_import"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.site_import</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_BytesWarningFlag" title="Py_BytesWarningFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_BytesWarningFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.bytes_warning" title="PyConfig.bytes_warning"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.bytes_warning</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_FrozenFlag" title="Py_FrozenFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_FrozenFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.pathconfig_warnings" title="PyConfig.pathconfig_warnings"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.pathconfig_warnings</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_IgnoreEnvironmentFlag" title="Py_IgnoreEnvironmentFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_IgnoreEnvironmentFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.use_environment" title="PyConfig.use_environment"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.use_environment</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_DontWriteBytecodeFlag" title="Py_DontWriteBytecodeFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_DontWriteBytecodeFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.write_bytecode" title="PyConfig.write_bytecode"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.write_bytecode</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_NoUserSiteDirectory" title="Py_NoUserSiteDirectory"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_NoUserSiteDirectory</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.user_site_directory" title="PyConfig.user_site_directory"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.user_site_directory</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_UnbufferedStdioFlag" title="Py_UnbufferedStdioFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_UnbufferedStdioFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.buffered_stdio" title="PyConfig.buffered_stdio"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.buffered_stdio</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_HashRandomizationFlag" title="Py_HashRandomizationFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_HashRandomizationFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.use_hash_seed" title="PyConfig.use_hash_seed"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.use_hash_seed</span></code></a>
+and <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.hash_seed" title="PyConfig.hash_seed"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.hash_seed</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_IsolatedFlag" title="Py_IsolatedFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_IsolatedFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.isolated" title="PyConfig.isolated"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.isolated</span></code></a></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_LegacyWindowsFSEncodingFlag" title="Py_LegacyWindowsFSEncodingFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_LegacyWindowsFSEncodingFlag</span></code></a>: use <code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.legacy_windows_fs_encoding</span></code></p></li>
+<li><p><a class="reference internal" href="../c-api/init.html#c.Py_LegacyWindowsStdioFlag" title="Py_LegacyWindowsStdioFlag"><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_LegacyWindowsStdioFlag</span></code></a>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.legacy_windows_stdio" title="PyConfig.legacy_windows_stdio"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.legacy_windows_stdio</span></code></a></p></li>
+<li><p><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_FileSystemDefaultEncoding</span></code>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.filesystem_encoding" title="PyConfig.filesystem_encoding"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.filesystem_encoding</span></code></a></p></li>
+<li><p><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_FileSystemDefaultEncodeErrors</span></code>: use <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.filesystem_errors" title="PyConfig.filesystem_errors"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.filesystem_errors</span></code></a></p></li>
+<li><p><code class="xref c c-var docutils literal notranslate"><span class="pre">Py_UTF8Mode</span></code>: use <a class="reference internal" href="../c-api/init_config.html#c.PyPreConfig.utf8_mode" title="PyPreConfig.utf8_mode"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyPreConfig.utf8_mode</span></code></a> (see <a class="reference internal" href="../c-api/init_config.html#c.Py_PreInitialize" title="Py_PreInitialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_PreInitialize()</span></code></a>)</p></li>
+</ul>
+<p>The <a class="reference internal" href="../c-api/init_config.html#c.Py_InitializeFromConfig" title="Py_InitializeFromConfig"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_InitializeFromConfig()</span></code></a> API should be used with
+<a class="reference internal" href="../c-api/init_config.html#c.PyConfig" title="PyConfig"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyConfig</span></code></a> instead.
+(Contributed by Victor Stinner in <a class="reference external" href="https://github.com/python/cpython/issues/77782">gh-77782</a>.)</p>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>Removed<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">token.h</span></code> header file. There was never any public tokenizer C
+API. The <code class="docutils literal notranslate"><span class="pre">token.h</span></code> header file was only designed to be used by Python
+internals.
+(Contributed by Victor Stinner in <a class="reference external" href="https://github.com/python/cpython/issues/92651">gh-92651</a>.)</p></li>
+<li><p>Leagcy Unicode APIs has been removed. See <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0623/"><strong>PEP 623</strong></a> for detail.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref c c-macro docutils literal notranslate"><span class="pre">PyUnicode_WCHAR_KIND</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_AS_UNICODE()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_AsUnicode()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_AsUnicodeAndSize()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_AS_DATA()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_FromUnicode()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_GET_SIZE()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_GetSize()</span></code></p></li>
+<li><p><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_GET_DATA_SIZE()</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Remove the <code class="docutils literal notranslate"><span class="pre">PyUnicode_InternImmortal()</span></code> function and the
+<code class="docutils literal notranslate"><span class="pre">SSTATE_INTERNED_IMMORTAL</span></code> macro.
+(Contributed by Victor Stinner in <a class="reference external" href="https://github.com/python/cpython/issues/85858">gh-85858</a>.)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">What’s New In Python 3.12</a><ul>
+<li><a class="reference internal" href="#summary-release-highlights">Summary – Release highlights</a></li>
+<li><a class="reference internal" href="#new-features">New Features</a></li>
+<li><a class="reference internal" href="#other-language-changes">Other Language Changes</a></li>
+<li><a class="reference internal" href="#new-modules">New Modules</a></li>
+<li><a class="reference internal" href="#improved-modules">Improved Modules</a><ul>
+<li><a class="reference internal" href="#os">os</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#optimizations">Optimizations</a></li>
+<li><a class="reference internal" href="#cpython-bytecode-changes">CPython bytecode changes</a></li>
+<li><a class="reference internal" href="#deprecated">Deprecated</a></li>
+<li><a class="reference internal" href="#pending-removal-in-python-3-13">Pending Removal in Python 3.13</a></li>
+<li><a class="reference internal" href="#pending-removal-in-future-versions">Pending Removal in Future Versions</a></li>
+<li><a class="reference internal" href="#removed">Removed</a></li>
+<li><a class="reference internal" href="#porting-to-python-3-12">Porting to Python 3.12</a><ul>
+<li><a class="reference internal" href="#changes-in-the-python-api">Changes in the Python API</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#build-changes">Build Changes</a></li>
+<li><a class="reference internal" href="#c-api-changes">C API Changes</a><ul>
+<li><a class="reference internal" href="#id1">New Features</a></li>
+<li><a class="reference internal" href="#id2">Porting to Python 3.12</a></li>
+<li><a class="reference internal" href="#id3">Deprecated</a></li>
+<li><a class="reference internal" href="#id4">Removed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="index.html"
+                          title="上一章">What’s New in Python</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="3.11.html"
+                          title="下一章">What’s New In Python 3.11</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>当前页面</h3>
+    <ul class="this-page-menu">
+      <li><a href="../bugs.html">提交 Bug</a></li>
+      <li>
+        <a href="https://github.com/python/cpython/blob/main/Doc/whatsnew/3.12.rst"
+            rel="nofollow">显示源码
+        </a>
+      </li>
+    </ul>
+  </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总目录"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="3.11.html" title="What’s New In Python 3.11"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="What’s New in Python"
+             >上一页</a> |</li>
+
+          <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
+          <li><a href="https://www.python.org/">Python</a> &#187;</li>
+          <li class="switchers">
+            <div class="language_switcher_placeholder"></div>
+            <div class="version_switcher_placeholder"></div>
+          </li>
+          <li>
+              
+          </li>
+    <li id="cpython-language-and-version">
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
+    </li>
+
+          <li class="nav-item nav-item-1"><a href="index.html" >What’s New in Python</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">What’s New In Python 3.12</a></li>
+                <li class="right">
+                    
+
+    <div class="inline-search" role="search">
+        <form class="inline-search" action="../search.html" method="get">
+          <input placeholder="快速搜索" aria-label="快速搜索" type="text" name="q" />
+          <input type="submit" value="转向" />
+          <input type="hidden" name="check_keywords" value="yes" />
+          <input type="hidden" name="area" value="default" />
+        </form>
+    </div>
+                     |
+                </li>
+            
+      </ul>
+    </div>  
+    <div class="footer">
+    &copy; <a href="../copyright.html">版权所有</a> 2001-2022, Python Software Foundation.
+    <br />
+    This page is licensed under the Python Software Foundation License Version 2.
+    <br />
+    Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
+    <br />
+    See <a href="/license.html">History and License</a> for more information.<br />
+    <br />
+
+    The Python Software Foundation is a non-profit corporation.
+<a href="https://www.python.org/psf/donations/">Please donate.</a>
+<br />
+    <br />
+
+    最后更新于 6月 23, 2022.
+    <a href="/bugs.html">Found a bug</a>?
+    <br />
+
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
+    </div>
+
+  </body>
+</html>

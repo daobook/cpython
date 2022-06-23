@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The Very High Level Layer &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Very High Level Layer &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,12 +70,16 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="stable.html"
-                        title="上一章">C API Stability</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="refcounting.html"
-                        title="下一章">引用计数</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="stable.html"
+                          title="上一章">C API Stability</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="refcounting.html"
+                          title="下一章">引用计数</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -118,7 +122,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python/C API 参考手册</a> &#187;</li>
@@ -166,8 +170,8 @@ the same library that the Python runtime is using.</p>
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_Main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">argc</span></span>, <span class="n"><span class="pre">wchar_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">argv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_Main" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>The main program for the standard interpreter.  This is made available for
 programs which embed Python.  The <em>argc</em> and <em>argv</em> parameters should be
-prepared exactly as those which are passed to a C program's <code class="xref c c-func docutils literal notranslate"><span class="pre">main()</span></code>
-function (converted to wchar_t according to the user's locale).  It is
+prepared exactly as those which are passed to a C program’s <code class="xref c c-func docutils literal notranslate"><span class="pre">main()</span></code>
+function (converted to wchar_t according to the user’s locale).  It is
 important to note that the argument list may be modified (but the contents of
 the strings pointed to by the argument list are not). The return value will
 be <code class="docutils literal notranslate"><span class="pre">0</span></code> if the interpreter exits normally (i.e., without an exception),
@@ -264,7 +268,7 @@ the file, it is decoded from <a class="reference internal" href="../glossary.htm
 If <em>closeit</em> is true, the file is closed before
 <code class="docutils literal notranslate"><span class="pre">PyRun_SimpleFileExFlags()</span></code> returns.</p>
 <div class="admonition note">
-<p class="admonition-title">注解</p>
+<p class="admonition-title">备注</p>
 <p>On Windows, <em>fp</em> should be opened as binary mode (e.g. <code class="docutils literal notranslate"><span class="pre">fopen(filename,</span> <span class="pre">&quot;rb&quot;)</span></code>).
 Otherwise, Python may not handle script file with LF line ending correctly.</p>
 </div>
@@ -311,10 +315,10 @@ error handler</span></a>.  Returns <code class="docutils literal notranslate"><s
 <dt class="sig sig-object c" id="c.PyOS_InputHook">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyOS_InputHook</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.PyOS_InputHook" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Can be set to point to a function with the prototype
-<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">func(void)</span></code>.  The function will be called when Python's
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">func(void)</span></code>.  The function will be called when Python’s
 interpreter prompt is about to become idle and wait for user input
 from the terminal.  The return value is ignored.  Overriding this
-hook can be used to integrate the interpreter's prompt with other
+hook can be used to integrate the interpreter’s prompt with other
 event loops, as done in the <code class="file docutils literal notranslate"><span class="pre">Modules/_tkinter.c</span></code> in the
 Python source code.</p>
 </dd></dl>
@@ -325,8 +329,8 @@ Python source code.</p>
 <dd><p>Can be set to point to a function with the prototype
 <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*func(FILE</span> <span class="pre">*stdin,</span> <span class="pre">FILE</span> <span class="pre">*stdout,</span> <span class="pre">char</span> <span class="pre">*prompt)</span></code>,
 overriding the default function used to read a single line of input
-at the interpreter's prompt.  The function is expected to output
-the string <em>prompt</em> if it's not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, and then read a line of
+at the interpreter’s prompt.  The function is expected to output
+the string <em>prompt</em> if it’s not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, and then read a line of
 input from the provided standard input file, returning the
 resulting string.  For example, The <a class="reference internal" href="../library/readline.html#module-readline" title="readline: GNU readline support for Python. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">readline</span></code></a> module sets
 this hook to provide line-editing and tab-completion features.</p>
@@ -450,29 +454,16 @@ a mapping object of local variables, arrays of arguments, keywords and
 defaults, a dictionary of default values for <a class="reference internal" href="../glossary.html#keyword-only-parameter"><span class="std std-ref">keyword-only</span></a> arguments and a closure tuple of cells.</p>
 </dd></dl>
 
-<dl class="c type">
-<dt class="sig sig-object c" id="c.PyFrameObject">
-<span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFrameObject</span></span></span><a class="headerlink" href="#c.PyFrameObject" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>The C structure of the objects used to describe frame objects.</p>
-<p>The structure is only part of the internal C API: fields should not be
-access directly. Use getter functions like <a class="reference internal" href="reflection.html#c.PyFrame_GetCode" title="PyFrame_GetCode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetCode()</span></code></a> and
-<a class="reference internal" href="reflection.html#c.PyFrame_GetBack" title="PyFrame_GetBack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyFrame_GetBack()</span></code></a>.</p>
-<p>Debuggers and profilers can use the limited C API to access this structure.</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.11 版更改: </span>The structure moved to the internal C API headers.</p>
-</div>
-</dd></dl>
-
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyEval_EvalFrame">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyEval_EvalFrame</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyFrameObject" title="PyFrameObject"><span class="n"><span class="pre">PyFrameObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyEval_EvalFrame" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyEval_EvalFrame</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="frame.html#c.PyFrameObject" title="PyFrameObject"><span class="n"><span class="pre">PyFrameObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">f</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyEval_EvalFrame" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Evaluate an execution frame.  This is a simplified interface to
 <a class="reference internal" href="#c.PyEval_EvalFrameEx" title="PyEval_EvalFrameEx"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyEval_EvalFrameEx()</span></code></a>, for backward compatibility.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyEval_EvalFrameEx">
-<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyEval_EvalFrameEx</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyFrameObject" title="PyFrameObject"><span class="n"><span class="pre">PyFrameObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">f</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">throwflag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyEval_EvalFrameEx" title="永久链接至目标">¶</a><br /></dt>
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyEval_EvalFrameEx</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="frame.html#c.PyFrameObject" title="PyFrameObject"><span class="n"><span class="pre">PyFrameObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">f</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">throwflag</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyEval_EvalFrameEx" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>This is the main, unvarnished function of Python interpretation.  The code
 object associated with the execution frame <em>f</em> is executed, interpreting
 bytecode and executing calls as needed.  The additional <em>throwflag</em>
@@ -548,7 +539,7 @@ initialized to <code class="docutils literal notranslate"><span class="pre">PY_M
 <dt class="sig sig-object c" id="c.CO_FUTURE_DIVISION">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">CO_FUTURE_DIVISION</span></span></span><a class="headerlink" href="#c.CO_FUTURE_DIVISION" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>This bit can be set in <em>flags</em> to cause division operator <code class="docutils literal notranslate"><span class="pre">/</span></code> to be
-interpreted as &quot;true division&quot; according to <span class="target" id="index-3"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0238"><strong>PEP 238</strong></a>.</p>
+interpreted as “true division” according to <span class="target" id="index-3"></span><a class="pep reference external" href="https://peps.python.org/pep-0238/"><strong>PEP 238</strong></a>.</p>
 </dd></dl>
 
 </section>
@@ -560,12 +551,16 @@ interpreted as &quot;true division&quot; according to <span class="target" id="i
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="stable.html"
-                        title="上一章">C API Stability</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="refcounting.html"
-                        title="下一章">引用计数</a></p>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="stable.html"
+                          title="上一章">C API Stability</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="refcounting.html"
+                          title="下一章">引用计数</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -607,7 +602,7 @@ interpreted as &quot;true division&quot; according to <span class="target" id="i
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python/C API 参考手册</a> &#187;</li>
@@ -635,7 +630,7 @@ interpreted as &quot;true division&quot; according to <span class="target" id="i
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -643,11 +638,11 @@ interpreted as &quot;true division&quot; according to <span class="target" id="i
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>

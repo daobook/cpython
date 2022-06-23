@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Python在Windows上的常见问题 &#8212; Python 3.11.0a5 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python在Windows上的常见问题 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -20,7 +20,7 @@
     <script src="../_static/sidebar.js"></script>
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="在 Python 3.11.0a5 文档 中搜索"
+          title="在 Python 3.12.0a0 文档 中搜索"
           href="../_static/opensearch.xml"/>
     <link rel="author" title="关于这些文档" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -70,8 +70,9 @@
     <div class="menu-wrapper">
         <nav class="menu" role="navigation" aria-label="main navigation">
             <div class="language_switcher_placeholder"></div>
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Python在Windows上的常见问题</a><ul>
 <li><a class="reference internal" href="#how-do-i-run-a-python-program-under-windows">我怎样在Windows下运行一个Python程序？</a></li>
 <li><a class="reference internal" href="#how-do-i-make-python-scripts-executable">我怎么让 Python 脚本可执行？</a></li>
@@ -85,12 +86,17 @@
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="extending.html"
-                        title="上一章">扩展/嵌入常见问题</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="gui.html"
-                        title="下一章">图形用户界面（GUI）常见问题</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="extending.html"
+                          title="上一章">扩展/嵌入常见问题</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="gui.html"
+                          title="下一章">图形用户界面（GUI）常见问题</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -133,7 +139,7 @@
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常见问题</a> &#187;</li>
@@ -182,7 +188,12 @@
 <section id="how-do-i-run-a-python-program-under-windows">
 <span id="faq-run-program-under-windows"></span><h2><a class="toc-backref" href="#id3">我怎样在Windows下运行一个Python程序？</a><a class="headerlink" href="#how-do-i-run-a-python-program-under-windows" title="永久链接至标题">¶</a></h2>
 <p>这不一定是一个简单的问题。如果你已经熟悉在Windows的命令行中运行程序的方法，一切都显而易见；不然的话，你也许需要额外获得些许指导。</p>
-<p>除非你在使用某种集成开发环境，否则你将会在被称为“DOS 窗口”或“命令提示符窗口”的地方 <em>输入</em> Windows 命令。 通常你可以在搜索栏搜索 <code class="docutils literal notranslate"><span class="pre">cmd</span></code> 来创建这种窗口。 你应该能够识别你何时打开了这样的窗口，因为你将看到一个 Windows“命令提示符”，通常看起来是这样：</p>
+<p>Unless you use some sort of integrated development environment, you will end up
+<em>typing</em> Windows commands into what is referred to as a
+“Command prompt window”.  Usually you can create such a window from your
+search bar by searching for <code class="docutils literal notranslate"><span class="pre">cmd</span></code>.  You should be able to recognize
+when you have started such a window because you will see a Windows “command
+prompt”, which usually looks like this:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">C:\&gt;</span>
 </pre></div>
 </div>
@@ -246,7 +257,6 @@ hello
 <li><p>请 _不要_ 直接在你的 .exe 文件中内置 Python 。在 Windows 上， Python 必须是一个 DLL ，这样才可以处理导入的本身就是 DLL 的模块。（这是第一个未记录的关键事实。）相反，链接到 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.dll</span></code> ；它通常安装在 <code class="docutils literal notranslate"><span class="pre">C:\Windows\System</span></code> 中。 <em>NN</em> 是 Python 版本，如数字“33”代表 Python 3.3 。</p>
 <p>你可以通过两种不同的方式链接到 Python 。加载时链接意味着链接到 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.lib</span></code> ，而运行时链接意味着链接 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.dll</span></code> 。（一般说明： <code class="file docutils literal notranslate"><span class="pre">python</span> <em><span class="pre">NN</span></em><span class="pre">.lib</span></code> 是所谓的“import lib”，对应于 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.dll</span></code> 。它只定义了链接器的符号。）</p>
 <p>运行时链接极大地简化了链接选项，一切都在运行时发生。你的代码必须使用 Windows 的 <code class="docutils literal notranslate"><span class="pre">LoadLibraryEx()</span></code> 程序加载 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.dll</span></code> 。代码还必须使用使用 Windows 的 <code class="docutils literal notranslate"><span class="pre">GetProcAddress()</span></code> 例程获得的指针访问 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.dll</span></code> 中程序和数据（即 Python 的 C API ）。宏可以使这些指针对任何调用 Python C API 中的例程的 C 代码都是透明的。</p>
-<p>Borland 提示：首先使用 Coff2Omf.exe 将 <code class="file docutils literal notranslate"><span class="pre">python</span><em><span class="pre">NN</span></em><span class="pre">.lib</span></code> 转换为 OMF 格式。</p>
 </li>
 <li><p>如果你使用 SWIG ，很容易创建一个 Python “扩展模块”，它将使应用程序的数据和方法可供 Python 使用。SWIG将为你处理所有蹩脚的细节。结果是你将链接到 .exe 文件 <em>中</em> 的C代码 (!) 你不必创建 DLL 文件，这也简化了链接。</p></li>
 <li><p>SWIG 将创建一个 init 函数（一个 C 函数），其名称取决于扩展模块的名称。例如，如果模块的名称是 leo ，则 init 函数将被称为 initleo() 。 如果您使用 SWIG 阴影类，则 init 函数将被称为 initleoc() 。这初始化了一个由阴影类使用的隐藏辅助类。</p>
@@ -280,7 +290,7 @@ hello
 </section>
 <section id="how-do-i-keep-editors-from-inserting-tabs-into-my-python-source">
 <h2><a class="toc-backref" href="#id9">如何让编辑器不要在我的 Python 源代码中插入 tab ？</a><a class="headerlink" href="#how-do-i-keep-editors-from-inserting-tabs-into-my-python-source" title="永久链接至标题">¶</a></h2>
-<p>本 FAQ 不建议使用制表符， Python 样式指南 <span class="target" id="index-2"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0008"><strong>PEP 8</strong></a> ，为发行的 Python 代码推荐 4 个空格；这也是 Emacs python-mode 默认值。</p>
+<p>本 FAQ 不建议使用制表符， Python 样式指南 <span class="target" id="index-2"></span><a class="pep reference external" href="https://peps.python.org/pep-0008/"><strong>PEP 8</strong></a> ，为发行的 Python 代码推荐 4 个空格；这也是 Emacs python-mode 默认值。</p>
 <p>在任何编辑器下，混合制表符和空格都是一个坏主意。 MSVC 在这方面没有什么不同，并且很容易配置为使用空格： 点击 <span class="menuselection">Tools ‣ Options ‣ Tabs</span>，对于文件类型“Default”，设置“Tab size”和“Indent size”为 4 ，并选择“插入空格”单选按钮。</p>
 <p>如果混合制表符和空格导致前导空格出现问题， Python 会引发 <a class="reference internal" href="../library/exceptions.html#IndentationError" title="IndentationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IndentationError</span></code></a> 或 <a class="reference internal" href="../library/exceptions.html#TabError" title="TabError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TabError</span></code></a> 。你还可以运行 <a class="reference internal" href="../library/tabnanny.html#module-tabnanny" title="tabnanny: Tool for detecting white space related problems in Python source files in a directory tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tabnanny</span></code></a> 模块以批处理模式检查目录树。</p>
 </section>
@@ -297,8 +307,9 @@ hello
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../contents.html">目录</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../contents.html">目录</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Python在Windows上的常见问题</a><ul>
 <li><a class="reference internal" href="#how-do-i-run-a-python-program-under-windows">我怎样在Windows下运行一个Python程序？</a></li>
 <li><a class="reference internal" href="#how-do-i-make-python-scripts-executable">我怎么让 Python 脚本可执行？</a></li>
@@ -312,12 +323,17 @@ hello
 </li>
 </ul>
 
-  <h4>上一个主题</h4>
-  <p class="topless"><a href="extending.html"
-                        title="上一章">扩展/嵌入常见问题</a></p>
-  <h4>下一个主题</h4>
-  <p class="topless"><a href="gui.html"
-                        title="下一章">图形用户界面（GUI）常见问题</a></p>
+  </div>
+  <div>
+    <h4>上一个主题</h4>
+    <p class="topless"><a href="extending.html"
+                          title="上一章">扩展/嵌入常见问题</a></p>
+  </div>
+  <div>
+    <h4>下一个主题</h4>
+    <p class="topless"><a href="gui.html"
+                          title="下一章">图形用户界面（GUI）常见问题</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
     <ul class="this-page-menu">
@@ -359,7 +375,7 @@ hello
               
           </li>
     <li id="cpython-language-and-version">
-      <a href="../index.html">3.11.0a5 Documentation</a> &#187;
+      <a href="../index.html">3.12.0a0 Documentation</a> &#187;
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常见问题</a> &#187;</li>
@@ -387,7 +403,7 @@ hello
     <br />
     Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.
     <br />
-    
+    See <a href="/license.html">History and License</a> for more information.<br />
     <br />
 
     The Python Software Foundation is a non-profit corporation.
@@ -395,11 +411,11 @@ hello
 <br />
     <br />
 
-    最后更新于 3月 15, 2022.
+    最后更新于 6月 23, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.2.0.
+    由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0创建。
     </div>
 
   </body>
