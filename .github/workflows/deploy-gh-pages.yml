@@ -26,14 +26,13 @@ jobs:
       - name: Build the book
         run: |
           cd Doc
-          sphinx-build -D language=zh_CN -b html ./ build/html
-          cd ..
-          mv -f Doc/build/ build/
+          make venv
+          make html
 
       - name: GitHub Pages action
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/html
+          publish_dir: Doc/build/html
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
