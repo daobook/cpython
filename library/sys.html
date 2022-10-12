@@ -157,7 +157,7 @@
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.abiflags">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">abiflags</span></span><a class="headerlink" href="#sys.abiflags" title="永久链接至目标">¶</a></dt>
-<dd><p>在POSIX系统上，以标准的 <code class="docutils literal notranslate"><span class="pre">configure</span></code> 脚本构建的 Python 中，这个变量会包含 <span class="target" id="index-66"></span><a class="pep reference external" href="https://peps.python.org/pep-3149/"><strong>PEP 3149</strong></a> 中定义的ABI标签。</p>
+<dd><p>在POSIX系统上，以标准的 <code class="docutils literal notranslate"><span class="pre">configure</span></code> 脚本构建的 Python 中，这个变量会包含 <span class="target" id="index-67"></span><a class="pep reference external" href="https://peps.python.org/pep-3149/"><strong>PEP 3149</strong></a> 中定义的ABI标签。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>默认的 flags 变为了空字符串（用于 pymalloc 的 <code class="docutils literal notranslate"><span class="pre">m</span></code> 旗标已经移除）</p>
 </div>
@@ -172,7 +172,7 @@
 <dd><p>将可调用对象 <em>hook</em> 附加到当前（子）解释器的活动的审计钩子列表中。</p>
 <p>当通过 <a class="reference internal" href="#sys.audit" title="sys.audit"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.audit()</span></code></a> 函数引发审计事件时，每个钩子将按照其被加入的先后顺序被调用，调用时会传入事件名称和参数元组。 由 <a class="reference internal" href="../c-api/sys.html#c.PySys_AddAuditHook" title="PySys_AddAuditHook"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddAuditHook()</span></code></a> 添加的原生钩子会先被调用，然后是当前（子）解释器中添加的钩子。 接下来这些钩子会记录事件，引发异常来中止操作，或是完全终止进程。</p>
 <p class="audit-hook">调用 <a class="reference internal" href="#sys.addaudithook" title="sys.addaudithook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.addaudithook()</span></code></a> 时它自身将引发一个名为 <code class="docutils literal notranslate"><span class="pre">sys.addaudithook</span></code> 的审计事件且不附带参数。 如果任何现有的钩子引发了派生自 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> 的异常，则新的钩子不会被添加并且该异常会被抑制。 其结果就是，调用者无法确保他们的钩子已经被添加，除非他们控制了全部现有的钩子。</p>
-<p>请参阅 <a class="reference internal" href="audit_events.html#audit-events"><span class="std std-ref">审计事件表</span></a> 以获取由 CPython 引发的所有事件，并参阅 <span class="target" id="index-67"></span><a class="pep reference external" href="https://peps.python.org/pep-0578/"><strong>PEP 578</strong></a> 了解最初的设计讨论。</p>
+<p>请参阅 <a class="reference internal" href="audit_events.html#audit-events"><span class="std std-ref">审计事件表</span></a> 以获取由 CPython 引发的所有事件，并参阅 <span class="target" id="index-68"></span><a class="pep reference external" href="https://peps.python.org/pep-0578/"><strong>PEP 578</strong></a> 了解最初的设计讨论。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -283,9 +283,9 @@
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">breakpointhook</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sys.breakpointhook" title="永久链接至目标">¶</a></dt>
 <dd><p>本钩子函数由内建函数 <a class="reference internal" href="functions.html#breakpoint" title="breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakpoint()</span></code></a> 调用。默认情况下，它将进入 <a class="reference internal" href="pdb.html#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> 调试器，但可以将其改为任何其他函数，以选择使用哪个调试器。</p>
 <p>该函数的特征取决于其调用的函数。例如，默认绑定（即 <code class="docutils literal notranslate"><span class="pre">pdb.set_trace()</span></code> ）不要求提供参数，但可以将绑定换成要求提供附加参数（位置参数/关键字参数）的函数。内建函数 <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> 直接将其 <code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kws</span></code> 传入。<code class="docutils literal notranslate"><span class="pre">breakpointhooks()</span></code> 返回的所有内容都会从 <code class="docutils literal notranslate"><span class="pre">breakpoint()</span></code> 返回。</p>
-<p>默认的实现首先会查询环境变量 <span class="target" id="index-68"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a>。如果将该变量设置为 <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code>，则本函数立即返回，表示在断点处无操作。如果未设置该环境变量或将其设置为空字符串，则调用 <code class="docutils literal notranslate"><span class="pre">pdb.set_trace()</span></code>。否则，此变量应指定要运行的函数，指定函数时应使用 Python 的点导入命名法，如 <code class="docutils literal notranslate"><span class="pre">package.subpackage.module.function</span></code>。这种情况下将导入 <code class="docutils literal notranslate"><span class="pre">package.subpackage.module</span></code>，且导入的模块必须有一个名为 <code class="docutils literal notranslate"><span class="pre">function()</span></code> 的可调用对象。该可调用对象会运行，<code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kws</span></code> 会传入，且无论 <code class="docutils literal notranslate"><span class="pre">function()</span></code> 返回什么，<code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code> 都将返回到內建函数 <a class="reference internal" href="functions.html#breakpoint" title="breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakpoint()</span></code></a>。</p>
-<p>请注意，如果在导入 <span class="target" id="index-69"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a> 指定的可调用对象时出错，则将报告一个 <a class="reference internal" href="exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> 并忽略断点。</p>
-<p>另请注意，如果以编程方式覆盖 <code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code>，则 <em>不会</em> 查询 <span class="target" id="index-70"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a>。</p>
+<p>默认的实现首先会查询环境变量 <span class="target" id="index-69"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a>。如果将该变量设置为 <code class="docutils literal notranslate"><span class="pre">&quot;0&quot;</span></code>，则本函数立即返回，表示在断点处无操作。如果未设置该环境变量或将其设置为空字符串，则调用 <code class="docutils literal notranslate"><span class="pre">pdb.set_trace()</span></code>。否则，此变量应指定要运行的函数，指定函数时应使用 Python 的点导入命名法，如 <code class="docutils literal notranslate"><span class="pre">package.subpackage.module.function</span></code>。这种情况下将导入 <code class="docutils literal notranslate"><span class="pre">package.subpackage.module</span></code>，且导入的模块必须有一个名为 <code class="docutils literal notranslate"><span class="pre">function()</span></code> 的可调用对象。该可调用对象会运行，<code class="docutils literal notranslate"><span class="pre">*args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">**kws</span></code> 会传入，且无论 <code class="docutils literal notranslate"><span class="pre">function()</span></code> 返回什么，<code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code> 都将返回到內建函数 <a class="reference internal" href="functions.html#breakpoint" title="breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakpoint()</span></code></a>。</p>
+<p>请注意，如果在导入 <span class="target" id="index-70"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a> 指定的可调用对象时出错，则将报告一个 <a class="reference internal" href="exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a> 并忽略断点。</p>
+<p>另请注意，如果以编程方式覆盖 <code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code>，则 <em>不会</em> 查询 <span class="target" id="index-71"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONBREAKPOINT"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONBREAKPOINT</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -295,7 +295,9 @@
 <dt class="sig sig-object py" id="sys._debugmallocstats">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">_debugmallocstats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sys._debugmallocstats" title="永久链接至目标">¶</a></dt>
 <dd><p>将有关 CPython 内存分配器状态的底层的信息打印至 stderr。</p>
-<p>如果 Python 是 <cite>以调试模式编译的 &lt;debug-build&gt;</cite> (<a class="reference internal" href="../using/configure.html#cmdoption-with-pydebug"><code class="xref std std-option docutils literal notranslate"><span class="pre">configure</span> <span class="pre">--with-pydebug</span> <span class="pre">option</span></code></a>)，它还会执行一些消耗性能的内部一致性检查。</p>
+<p>If Python is <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">built in debug mode</span></a> (<a class="reference internal" href="../using/configure.html#cmdoption-with-pydebug"><code class="xref std std-option docutils literal notranslate"><span class="pre">configure</span>
+<span class="pre">--with-pydebug</span> <span class="pre">option</span></code></a>), it also performs some expensive
+internal consistency checks.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -344,7 +346,7 @@
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.dont_write_bytecode">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">dont_write_bytecode</span></span><a class="headerlink" href="#sys.dont_write_bytecode" title="永久链接至目标">¶</a></dt>
-<dd><p>如果该值为 true，则 Python 在导入源码模块时将不会尝试写入 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件。该值会被初始化为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 或 <code class="docutils literal notranslate"><span class="pre">False</span></code>，依据是 <a class="reference internal" href="../using/cmdline.html#cmdoption-B"><code class="xref std std-option docutils literal notranslate"><span class="pre">-B</span></code></a> 命令行选项和 <span class="target" id="index-71"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a> 环境变量，可以自行设置该值，来控制是否生成字节码文件。</p>
+<dd><p>如果该值为 true，则 Python 在导入源码模块时将不会尝试写入 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 文件。该值会被初始化为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 或 <code class="docutils literal notranslate"><span class="pre">False</span></code>，依据是 <a class="reference internal" href="../using/cmdline.html#cmdoption-B"><code class="xref std std-option docutils literal notranslate"><span class="pre">-B</span></code></a> 命令行选项和 <span class="target" id="index-72"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONDONTWRITEBYTECODE"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONDONTWRITEBYTECODE</span></code></a> 环境变量，可以自行设置该值，来控制是否生成字节码文件。</p>
 </dd></dl>
 
 <dl class="py data">
@@ -382,7 +384,7 @@ memory support.</p></td>
 </tr>
 </tbody>
 </table>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: WebAssembly Emscripten platform (<em>wasm32-emscripten</em>).</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Emscripten.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -391,9 +393,15 @@ memory support.</p></td>
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.pycache_prefix">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">pycache_prefix</span></span><a class="headerlink" href="#sys.pycache_prefix" title="永久链接至目标">¶</a></dt>
-<dd><p>如果将该值设为某个目录（不是 <code class="docutils literal notranslate"><span class="pre">None</span></code> ），Python 会将字节码缓存文件 <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> 写入到以该目录为根的并行目录树中（并从中读取），而不是在源码树中的 <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> 目录下读写。源码树中所有的 <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> 目录都将被忽略，并将在 pycache prefix 内写入新的 <cite>.pyc</cite> 文件。因此，如果使用 <a class="reference internal" href="compileall.html#module-compileall" title="compileall: Tools for byte-compiling all Python source files in a directory tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">compileall</span></code></a> 作为预构建步骤，则必须确保预构建时使用的 pycache prefix （如果有）与将来运行的时候相同。</p>
+<dd><p>If this is set (not <code class="docutils literal notranslate"><span class="pre">None</span></code>), Python will write bytecode-cache <code class="docutils literal notranslate"><span class="pre">.pyc</span></code>
+files to (and read them from) a parallel directory tree rooted at this
+directory, rather than from <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> directories in the source code
+tree. Any <code class="docutils literal notranslate"><span class="pre">__pycache__</span></code> directories in the source code tree will be ignored
+and new <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files written within the pycache prefix. Thus if you use
+<a class="reference internal" href="compileall.html#module-compileall" title="compileall: Tools for byte-compiling all Python source files in a directory tree."><code class="xref py py-mod docutils literal notranslate"><span class="pre">compileall</span></code></a> as a pre-build step, you must ensure you run it with the
+same pycache prefix (if any) that you will use at runtime.</p>
 <p>相对路径将解释为相对于当前工作目录。</p>
-<p>该值的初值设置，依据 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> <code class="docutils literal notranslate"><span class="pre">pycache_prefix=PATH</span></code> 命令行选项或 <span class="target" id="index-72"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPYCACHEPREFIX"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPYCACHEPREFIX</span></code></a> 环境变量的值（命令行优先）。如果两者均未设置，则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<p>该值的初值设置，依据 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> <code class="docutils literal notranslate"><span class="pre">pycache_prefix=PATH</span></code> 命令行选项或 <span class="target" id="index-73"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPYCACHEPREFIX"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPYCACHEPREFIX</span></code></a> 环境变量的值（命令行优先）。如果两者均未设置，则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -499,8 +507,8 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <dd><p><a class="reference internal" href="../glossary.html#term-named-tuple"><span class="xref std std-term">具名元组</span></a> <em>flags</em> 含有命令行标志的状态。这些属性是只读的。</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 31%" />
-<col style="width: 69%" />
+<col style="width: 21%" />
+<col style="width: 79%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>attribute – 属性</p></th>
@@ -556,6 +564,9 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <tr class="row-odd"><td><p><code class="xref py py-const docutils literal notranslate"><span class="pre">safe_path</span></code></p></td>
 <td><p><a class="reference internal" href="../using/cmdline.html#cmdoption-P"><code class="xref std std-option docutils literal notranslate"><span class="pre">-P</span></code></a></p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-const docutils literal notranslate"><span class="pre">int_max_str_digits</span></code></p></td>
+<td><p><a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span> <span class="pre">int_max_str_digits</span></code></a> (<a class="reference internal" href="stdtypes.html#int-max-str-digits"><span class="std std-ref">integer string conversion length limitation</span></a>)</p></td>
+</tr>
 </tbody>
 </table>
 <div class="versionchanged">
@@ -575,6 +586,9 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">safe_path</span></code> attribute for <a class="reference internal" href="../using/cmdline.html#cmdoption-P"><code class="xref std std-option docutils literal notranslate"><span class="pre">-P</span></code></a> option.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <code class="docutils literal notranslate"><span class="pre">int_max_str_digits</span></code> attribute.</p>
 </div>
 </dd></dl>
 
@@ -715,7 +729,7 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <p><span class="versionmodified changed">在 3.2 版更改: </span><a class="reference internal" href="#sys.getfilesystemencoding" title="sys.getfilesystemencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">getfilesystemencoding()</span></code></a> 的结果将不再有可能是 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>Windows 不再保证会返回 <code class="docutils literal notranslate"><span class="pre">'mbcs'</span></code>。详情请参阅 <span class="target" id="index-73"></span><a class="pep reference external" href="https://peps.python.org/pep-0529/"><strong>PEP 529</strong></a> 和 <a class="reference internal" href="#sys._enablelegacywindowsfsencoding" title="sys._enablelegacywindowsfsencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">_enablelegacywindowsfsencoding()</span></code></a>。</p>
+<p><span class="versionmodified changed">在 3.6 版更改: </span>Windows 不再保证会返回 <code class="docutils literal notranslate"><span class="pre">'mbcs'</span></code>。详情请参阅 <span class="target" id="index-74"></span><a class="pep reference external" href="https://peps.python.org/pep-0529/"><strong>PEP 529</strong></a> 和 <a class="reference internal" href="#sys._enablelegacywindowsfsencoding" title="sys._enablelegacywindowsfsencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">_enablelegacywindowsfsencoding()</span></code></a>。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>返回 <code class="docutils literal notranslate"><span class="pre">'utf-8'</span></code>，如果启用了 <a class="reference internal" href="os.html#utf8-mode"><span class="std std-ref">Python UTF-8 模式</span></a> 的话。</p>
@@ -730,6 +744,16 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <p><a class="reference internal" href="../glossary.html#term-filesystem-encoding-and-error-handler"><span class="xref std std-term">filesystem encoding and error handler</span></a> 是在 Python 启动时通过 <code class="xref c c-func docutils literal notranslate"><span class="pre">PyConfig_Read()</span></code> 函数来配置的：请参阅 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig" title="PyConfig"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyConfig</span></code></a> 的 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.filesystem_encoding" title="PyConfig.filesystem_encoding"><code class="xref c c-member docutils literal notranslate"><span class="pre">filesystem_encoding</span></code></a> 和 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.filesystem_errors" title="PyConfig.filesystem_errors"><code class="xref c c-member docutils literal notranslate"><span class="pre">filesystem_errors</span></code></a> 等成员。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sys.get_int_max_str_digits">
+<span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">get_int_max_str_digits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sys.get_int_max_str_digits" title="永久链接至目标">¶</a></dt>
+<dd><p>Returns the current value for the <a class="reference internal" href="stdtypes.html#int-max-str-digits"><span class="std std-ref">integer string conversion length
+limitation</span></a>. See also <a class="reference internal" href="#sys.set_int_max_str_digits" title="sys.set_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_int_max_str_digits()</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -768,7 +792,7 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <dt class="sig sig-object py" id="sys._getframe">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">_getframe</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#sys._getframe" title="永久链接至目标">¶</a></dt>
 <dd><p>返回来自调用栈的一个帧对象。如果传入可选整数 <em>depth</em>，则返回从栈顶往下相应调用层数的帧对象。如果该数比调用栈更深，则抛出 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。<em>depth</em> 的默认值是 0，返回调用栈顶部的帧。</p>
-<p class="audit-hook">引发一个 <a class="reference internal" href="#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">sys._getframe</span></code>，没有附带参数。</p>
+<p class="audit-hook">Raises an <a class="reference internal" href="#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">sys._getframe</span></code> with argument <code class="docutils literal notranslate"><span class="pre">frame</span></code>.</p>
 <div class="impl-detail compound">
 <p><strong>CPython implementation detail:</strong> 这个函数应该只在内部为了一些特定的目的使用。不保证它在所有 Python 实现中都存在。</p>
 </div>
@@ -835,13 +859,18 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <dl class="py function">
 <dt class="sig sig-object py" id="sys.get_asyncgen_hooks">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">get_asyncgen_hooks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sys.get_asyncgen_hooks" title="永久链接至目标">¶</a></dt>
-<dd><p>返回一个 <em>asyncgen_hooks</em> 对象，该对象类似于 <a class="reference internal" href="collections.html#collections.namedtuple" title="collections.namedtuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code></a>，形式为 <cite>(firstiter, finalizer)</cite>，其中 <em>firstiter</em> 和 <em>finalizer</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 或函数，函数以 <a class="reference internal" href="../glossary.html#term-asynchronous-generator-iterator"><span class="xref std std-term">异步生成器迭代器</span></a> 作为参数，并用于在事件循环中干预异步生成器的终结。</p>
+<dd><p>Returns an <em>asyncgen_hooks</em> object, which is similar to a
+<a class="reference internal" href="collections.html#collections.namedtuple" title="collections.namedtuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">namedtuple</span></code></a> of the form <code class="docutils literal notranslate"><span class="pre">(firstiter,</span> <span class="pre">finalizer)</span></code>,
+where <em>firstiter</em> and <em>finalizer</em> are expected to be either <code class="docutils literal notranslate"><span class="pre">None</span></code> or
+functions which take an <a class="reference internal" href="../glossary.html#term-asynchronous-generator-iterator"><span class="xref std std-term">asynchronous generator iterator</span></a> as an
+argument, and are used to schedule finalization of an asynchronous
+generator by an event loop.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.6 新版功能: </span>详情请参阅 <span class="target" id="index-74"></span><a class="pep reference external" href="https://peps.python.org/pep-0525/"><strong>PEP 525</strong></a>。</p>
+<p><span class="versionmodified added">3.6 新版功能: </span>详情请参阅 <span class="target" id="index-75"></span><a class="pep reference external" href="https://peps.python.org/pep-0525/"><strong>PEP 525</strong></a>。</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-75"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。</p>
+<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-76"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。</p>
 </div>
 </dd></dl>
 
@@ -854,7 +883,7 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-76"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。仅将其用于调试目的。</p>
+<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-77"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。仅将其用于调试目的。</p>
 </div>
 </dd></dl>
 
@@ -931,13 +960,13 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <p><em>version</em> 是一个具名元组，格式与 <a class="reference internal" href="#sys.version_info" title="sys.version_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.version_info</span></code></a> 相同。它表示 Python <em>实现</em> 的版本。 另一个（由 <code class="docutils literal notranslate"><span class="pre">sys.version_info</span></code> 表示）是当前解释器遵循的相应 Python <em>语言</em> 的版本，两者具有不同的含义。 例如，对于 PyPy 1.8，<code class="docutils literal notranslate"><span class="pre">sys.implementation.version</span></code> 可能是 <code class="docutils literal notranslate"><span class="pre">sys.version_info(1,</span> <span class="pre">8,</span> <span class="pre">0,</span> <span class="pre">'final',</span> <span class="pre">0)</span></code>，而 <code class="docutils literal notranslate"><span class="pre">sys.version_info</span></code> 则是 <code class="docutils literal notranslate"><span class="pre">sys.version_info(2,</span> <span class="pre">7,</span> <span class="pre">2,</span> <span class="pre">'final',</span> <span class="pre">0)</span></code>。对于 CPython 而言两个值是相同的，因为它是参考实现。</p>
 <p><em>hexversion</em> 是十六进制的实现版本，类似于 <a class="reference internal" href="#sys.hexversion" title="sys.hexversion"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.hexversion</span></code></a>。</p>
 <p><em>cache_tag</em> 是导入机制使用的标记，用于已缓存模块的文件名。按照惯例，它将由实现的名称和版本组成，如 <code class="docutils literal notranslate"><span class="pre">'cpython-33'</span></code>。但如果合适，Python 实现可以使用其他值。如果 <code class="docutils literal notranslate"><span class="pre">cache_tag</span></code> 被置为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，表示模块缓存已禁用。</p>
-<p><a class="reference internal" href="#sys.implementation" title="sys.implementation"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.implementation</span></code></a> 可能包含相应 Python 实现的其他属性。这些非标准属性必须以下划线开头，此处不详细阐述。无论其内容如何，<a class="reference internal" href="#sys.implementation" title="sys.implementation"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.implementation</span></code></a> 在解释器运行期间或不同实现版本之间都不会更改。（但是不同 Python 语言版本间可能会不同。）详情请参阅 <span class="target" id="index-77"></span><a class="pep reference external" href="https://peps.python.org/pep-0421/"><strong>PEP 421</strong></a>。</p>
+<p><a class="reference internal" href="#sys.implementation" title="sys.implementation"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.implementation</span></code></a> 可能包含相应 Python 实现的其他属性。这些非标准属性必须以下划线开头，此处不详细阐述。无论其内容如何，<a class="reference internal" href="#sys.implementation" title="sys.implementation"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.implementation</span></code></a> 在解释器运行期间或不同实现版本之间都不会更改。（但是不同 Python 语言版本间可能会不同。）详情请参阅 <span class="target" id="index-78"></span><a class="pep reference external" href="https://peps.python.org/pep-0421/"><strong>PEP 421</strong></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>新的必要属性的添加必须经过常规的 PEP 过程。详情请参阅 <span class="target" id="index-78"></span><a class="pep reference external" href="https://peps.python.org/pep-0421/"><strong>PEP 421</strong></a>。</p>
+<p>新的必要属性的添加必须经过常规的 PEP 过程。详情请参阅 <span class="target" id="index-79"></span><a class="pep reference external" href="https://peps.python.org/pep-0421/"><strong>PEP 421</strong></a>。</p>
 </div>
 </dd></dl>
 
@@ -947,8 +976,8 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <dd><p>一个 <a class="reference internal" href="../glossary.html#term-named-tuple"><span class="xref std std-term">具名元组</span></a>，包含 Python 内部整数表示形式的信息。这些属性是只读的。</p>
 <table class="docutils align-default">
 <colgroup>
-<col style="width: 35%" />
-<col style="width: 65%" />
+<col style="width: 46%" />
+<col style="width: 54%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>属性</p></th>
@@ -962,17 +991,31 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <tr class="row-odd"><td><p><code class="xref py py-const docutils literal notranslate"><span class="pre">sizeof_digit</span></code></p></td>
 <td><p>用于表示数字的C类型的字节大小</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-const docutils literal notranslate"><span class="pre">default_max_str_digits</span></code></p></td>
+<td><p>default value for
+<a class="reference internal" href="#sys.get_int_max_str_digits" title="sys.get_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.get_int_max_str_digits()</span></code></a> when it
+is not otherwise explicitly configured.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-const docutils literal notranslate"><span class="pre">str_digits_check_threshold</span></code></p></td>
+<td><p>minimum non-zero value for
+<a class="reference internal" href="#sys.set_int_max_str_digits" title="sys.set_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.set_int_max_str_digits()</span></code></a>,
+<span class="target" id="index-17"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONINTMAXSTRDIGITS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONINTMAXSTRDIGITS</span></code></a>, or
+<a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span> <span class="pre">int_max_str_digits</span></code></a>.</p></td>
+</tr>
 </tbody>
 </table>
 <div class="versionadded">
 <p><span class="versionmodified added">3.1 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added <code class="docutils literal notranslate"><span class="pre">default_max_str_digits</span></code> and <code class="docutils literal notranslate"><span class="pre">str_digits_check_threshold</span></code>.</p>
 </div>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.__interactivehook__">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">__interactivehook__</span></span><a class="headerlink" href="#sys.__interactivehook__" title="永久链接至目标">¶</a></dt>
-<dd><p>当本属性存在，则以 <a class="reference internal" href="../tutorial/interpreter.html#tut-interactive"><span class="std std-ref">交互模式</span></a> 启动解释器时，将自动（不带参数地）调用本属性的值。该过程是在读取 <span class="target" id="index-79"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONSTARTUP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSTARTUP</span></code></a> 文件之后完成的，所以可以在该文件中设置这一钩子。<a class="reference internal" href="site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> 模块 <a class="reference internal" href="site.html#rlcompleter-config"><span class="std std-ref">设置了这一属性</span></a>。</p>
+<dd><p>当本属性存在，则以 <a class="reference internal" href="../tutorial/interpreter.html#tut-interactive"><span class="std std-ref">交互模式</span></a> 启动解释器时，将自动（不带参数地）调用本属性的值。该过程是在读取 <span class="target" id="index-80"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONSTARTUP"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSTARTUP</span></code></a> 文件之后完成的，所以可以在该文件中设置这一钩子。<a class="reference internal" href="site.html#module-site" title="site: Module responsible for site-specific configuration."><code class="xref py py-mod docutils literal notranslate"><span class="pre">site</span></code></a> 模块 <a class="reference internal" href="site.html#rlcompleter-config"><span class="std std-ref">设置了这一属性</span></a>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">cpython.run_interactivehook</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">hook</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
@@ -1017,7 +1060,7 @@ are honored, and it is possible to intercept the exit attempt at an outer level.
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">maxunicode</span></span><a class="headerlink" href="#sys.maxunicode" title="永久链接至目标">¶</a></dt>
 <dd><p>一个整数，表示最大的 Unicode 码点值，如 <code class="docutils literal notranslate"><span class="pre">1114111</span></code> （十六进制为 <code class="docutils literal notranslate"><span class="pre">0x10FFFF</span></code> ）。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>在 <span class="target" id="index-80"></span><a class="pep reference external" href="https://peps.python.org/pep-0393/"><strong>PEP 393</strong></a> 之前，<code class="docutils literal notranslate"><span class="pre">sys.maxunicode</span></code> 曾是 <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> 或 <code class="docutils literal notranslate"><span class="pre">0x10FFFF</span></code>，具体取决于配置选项，该选项指定将 Unicode 字符存储为 UCS-2 还是 UCS-4。</p>
+<p><span class="versionmodified changed">在 3.3 版更改: </span>在 <span class="target" id="index-81"></span><a class="pep reference external" href="https://peps.python.org/pep-0393/"><strong>PEP 393</strong></a> 之前，<code class="docutils literal notranslate"><span class="pre">sys.maxunicode</span></code> 曾是 <code class="docutils literal notranslate"><span class="pre">0xFFFF</span></code> 或 <code class="docutils literal notranslate"><span class="pre">0x10FFFF</span></code>，具体取决于配置选项，该选项指定将 Unicode 字符存储为 UCS-2 还是 UCS-4。</p>
 </div>
 </dd></dl>
 
@@ -1043,7 +1086,7 @@ attribute is passed in as a second argument. The method returns a
 </dl>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>在 Python 3.4 中通过 <span class="target" id="index-81"></span><a class="pep reference external" href="https://peps.python.org/pep-0451/"><strong>PEP 451</strong></a> 引入了 <a class="reference internal" href="../glossary.html#term-module-spec"><span class="xref std std-term">模块规格</span></a>。早期版本的 Python 会寻找一个称为 <a class="reference internal" href="importlib.html#importlib.abc.MetaPathFinder.find_module" title="importlib.abc.MetaPathFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a> 的方法。如果某个 <a class="reference internal" href="#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">meta_path</span></code></a> 条目没有 <a class="reference internal" href="importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 方法，就会回退去调用前一种方法。</p>
+<p><span class="versionmodified changed">在 3.4 版更改: </span>在 Python 3.4 中通过 <span class="target" id="index-82"></span><a class="pep reference external" href="https://peps.python.org/pep-0451/"><strong>PEP 451</strong></a> 引入了 <a class="reference internal" href="../glossary.html#term-module-spec"><span class="xref std std-term">模块规格</span></a>。早期版本的 Python 会寻找一个称为 <a class="reference internal" href="importlib.html#importlib.abc.MetaPathFinder.find_module" title="importlib.abc.MetaPathFinder.find_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_module()</span></code></a> 的方法。如果某个 <a class="reference internal" href="#sys.meta_path" title="sys.meta_path"><code class="xref py py-data docutils literal notranslate"><span class="pre">meta_path</span></code></a> 条目没有 <a class="reference internal" href="importlib.html#importlib.abc.MetaPathFinder.find_spec" title="importlib.abc.MetaPathFinder.find_spec"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find_spec()</span></code></a> 方法，就会回退去调用前一种方法。</p>
 </div>
 </dd></dl>
 
@@ -1066,10 +1109,10 @@ attribute is passed in as a second argument. The method returns a
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.path">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">path</span></span><a class="headerlink" href="#sys.path" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-20">一个由字符串组成的列表，用于指定模块的搜索路径。初始化自环境变量 <span class="target" id="index-82"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>，再加上一条与安装有关的默认路径。</p>
+<dd><p id="index-21">一个由字符串组成的列表，用于指定模块的搜索路径。初始化自环境变量 <span class="target" id="index-83"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>，再加上一条与安装有关的默认路径。</p>
 <p>By default, as initialized upon program startup, a potentially unsafe path
 is prepended to <a class="reference internal" href="#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> (<em>before</em> the entries inserted as a result
-of <span class="target" id="index-22"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>):</p>
+of <span class="target" id="index-23"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></a>):</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">module</span></code> command line: prepend the current working
 directory.</p></li>
@@ -1079,8 +1122,10 @@ If it’s a symbolic link, resolve symbolic links.</p></li>
 string, which means the current working directory.</p></li>
 </ul>
 <p>To not prepend this potentially unsafe path, use the <a class="reference internal" href="../using/cmdline.html#cmdoption-P"><code class="xref std std-option docutils literal notranslate"><span class="pre">-P</span></code></a> command
-line option or the <span class="target" id="index-23"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONSAFEPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSAFEPATH</span></code></a> environment variable?</p>
-<p>程序可以随意修改本列表用于自己的目的。只能向 <a class="reference internal" href="#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a> 中添加 string 和 bytes 类型，其他数据类型将在导入期间被忽略。</p>
+line option or the <span class="target" id="index-24"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONSAFEPATH"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONSAFEPATH</span></code></a> environment variable?</p>
+<p>A program is free to modify this list for its own purposes.  Only strings
+should be added to <a class="reference internal" href="#sys.path" title="sys.path"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path</span></code></a>; all other data types are
+ignored during import.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <ul class="simple">
@@ -1093,14 +1138,14 @@ line option or the <span class="target" id="index-23"></span><a class="reference
 <dt class="sig sig-object py" id="sys.path_hooks">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">path_hooks</span></span><a class="headerlink" href="#sys.path_hooks" title="永久链接至目标">¶</a></dt>
 <dd><p>一个由可调用对象组成的列表，这些对象接受一个路径作为参数，并尝试为该路径创建一个 <a class="reference internal" href="../glossary.html#term-finder"><span class="xref std std-term">查找器</span></a>。如果成功创建查找器，则可调用对象将返回它，否则将引发 <a class="reference internal" href="exceptions.html#ImportError" title="ImportError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ImportError</span></code></a> 异常。</p>
-<p>本特性最早在 <span class="target" id="index-83"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 中被提及。</p>
+<p>本特性最早在 <span class="target" id="index-84"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 中被提及。</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="sys.path_importer_cache">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">path_importer_cache</span></span><a class="headerlink" href="#sys.path_importer_cache" title="永久链接至目标">¶</a></dt>
 <dd><p>一个字典，作为 <a class="reference internal" href="../glossary.html#term-finder"><span class="xref std std-term">查找器</span></a> 对象的缓存。key 是传入 <a class="reference internal" href="#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> 的路径，value 是相应已找到的查找器。如果路径是有效的文件系统路径，但在 <a class="reference internal" href="#sys.path_hooks" title="sys.path_hooks"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.path_hooks</span></code></a> 中未找到查找器，则存入 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
-<p>本特性最早在 <span class="target" id="index-84"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 中被提及。</p>
+<p>本特性最早在 <span class="target" id="index-85"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 中被提及。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>未找到查找器时，改为存储 <code class="docutils literal notranslate"><span class="pre">None</span></code>，而不是 <a class="reference internal" href="imp.html#imp.NullImporter" title="imp.NullImporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">imp.NullImporter</span></code></a>。</p>
 </div>
@@ -1202,7 +1247,7 @@ argument to the <strong class="program">configure</strong> script.  See
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">ps1</span></span><a class="headerlink" href="#sys.ps1" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="sys.ps2">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">ps2</span></span><a class="headerlink" href="#sys.ps2" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-26">字符串，指定解释器的首要和次要提示符。仅当解释器处于交互模式时，它们才有定义。这种情况下，它们的初值为 <code class="docutils literal notranslate"><span class="pre">'&gt;&gt;&gt;</span> <span class="pre">'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'...</span> <span class="pre">'</span></code>。如果赋给其中某个变量的是非字符串对象，则每次解释器准备读取新的交互式命令时，都会重新运行该对象的 <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a>，这可以用来实现动态的提示符。</p>
+<dd><p id="index-27">字符串，指定解释器的首要和次要提示符。仅当解释器处于交互模式时，它们才有定义。这种情况下，它们的初值为 <code class="docutils literal notranslate"><span class="pre">'&gt;&gt;&gt;</span> <span class="pre">'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'...</span> <span class="pre">'</span></code>。如果赋给其中某个变量的是非字符串对象，则每次解释器准备读取新的交互式命令时，都会重新运行该对象的 <a class="reference internal" href="stdtypes.html#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a>，这可以用来实现动态的提示符。</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1213,9 +1258,19 @@ argument to the <strong class="program">configure</strong> script.  See
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="sys.set_int_max_str_digits">
+<span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">set_int_max_str_digits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxdigits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sys.set_int_max_str_digits" title="永久链接至目标">¶</a></dt>
+<dd><p>Set the <a class="reference internal" href="stdtypes.html#int-max-str-digits"><span class="std std-ref">integer string conversion length limitation</span></a> used by this interpreter. See also
+<a class="reference internal" href="#sys.get_int_max_str_digits" title="sys.get_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_int_max_str_digits()</span></code></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="sys.setprofile">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">setprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">profilefunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sys.setprofile" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-27">设置系统的性能分析函数，该函数使得在 Py​​thon 中能够实现一个 Python 源代码性能分析器。关于 Python Profiler 的更多信息请参阅 <a class="reference internal" href="profile.html#profile"><span class="std std-ref">Python Profilers 分析器</span></a> 章节。性能分析函数的调用方式类似于系统的跟踪函数（参阅 <a class="reference internal" href="#sys.settrace" title="sys.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">settrace()</span></code></a> ），但它是通过不同的事件调用的，例如，不是每执行一行代码就调用它一次（仅在调用某函数和从某函数返回时才会调用性能分析函数，但即使某函数发生异常也会算作返回事件）。该函数是特定于单个线程的，但是性能分析器无法得知线程之间的上下文切换，因此在存在多个线程的情况下使用它是没有意义的。另外，因为它的返回值不会被用到，所以可以简单地返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。性能分析函数中的错误将导致其自身被解除设置。</p>
+<dd><p id="index-28">设置系统的性能分析函数，该函数使得在 Py​​thon 中能够实现一个 Python 源代码性能分析器。关于 Python Profiler 的更多信息请参阅 <a class="reference internal" href="profile.html#profile"><span class="std std-ref">Python Profilers 分析器</span></a> 章节。性能分析函数的调用方式类似于系统的跟踪函数（参阅 <a class="reference internal" href="#sys.settrace" title="sys.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">settrace()</span></code></a> ），但它是通过不同的事件调用的，例如，不是每执行一行代码就调用它一次（仅在调用某函数和从某函数返回时才会调用性能分析函数，但即使某函数发生异常也会算作返回事件）。该函数是特定于单个线程的，但是性能分析器无法得知线程之间的上下文切换，因此在存在多个线程的情况下使用它是没有意义的。另外，因为它的返回值不会被用到，所以可以简单地返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。性能分析函数中的错误将导致其自身被解除设置。</p>
 <p>性能分析函数应接收三个参数：<em>frame</em>、<em>event</em> 和 <em>arg</em>。<em>frame</em> 是当前的堆栈帧。<em>event</em> 是一个字符串：<code class="docutils literal notranslate"><span class="pre">'call'</span></code>、<code class="docutils literal notranslate"><span class="pre">'return'</span></code>、<code class="docutils literal notranslate"><span class="pre">'c_call'</span></code>、<code class="docutils literal notranslate"><span class="pre">'c_return'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'c_exception'</span></code>。<em>arg</em> 取决于事件类型。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">sys.setprofile</span></code>，不附带任何参数。</p>
 <p>这些事件具有以下含义：</p>
@@ -1256,7 +1311,7 @@ argument to the <strong class="program">configure</strong> script.  See
 <dl class="py function">
 <dt class="sig sig-object py" id="sys.settrace">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">settrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tracefunc</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sys.settrace" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-28">设置系统的跟踪函数，使得用户在 Python 中就可以实现 Python 源代码调试器。该函数是特定于单个线程的，所以要让调试器支持多线程，必须为正在调试的每个线程都用 <a class="reference internal" href="#sys.settrace" title="sys.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">settrace()</span></code></a> 注册一个跟踪函数，或使用 <a class="reference internal" href="threading.html#threading.settrace" title="threading.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">threading.settrace()</span></code></a>。</p>
+<dd><p id="index-29">设置系统的跟踪函数，使得用户在 Python 中就可以实现 Python 源代码调试器。该函数是特定于单个线程的，所以要让调试器支持多线程，必须为正在调试的每个线程都用 <a class="reference internal" href="#sys.settrace" title="sys.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">settrace()</span></code></a> 注册一个跟踪函数，或使用 <a class="reference internal" href="threading.html#threading.settrace" title="threading.settrace"><code class="xref py py-func docutils literal notranslate"><span class="pre">threading.settrace()</span></code></a>。</p>
 <p>跟踪函数应接收三个参数：<em>frame</em>、<em>event</em> 和 <em>arg</em>。<em>frame</em> 是当前的堆栈帧。<em>event</em> 是一个字符串：<code class="docutils literal notranslate"><span class="pre">'call'</span></code>、<code class="docutils literal notranslate"><span class="pre">'line'</span></code>、<code class="docutils literal notranslate"><span class="pre">'return'</span></code>、<code class="docutils literal notranslate"><span class="pre">'exception'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'opcode'</span></code>。<em>arg</em> 取决于事件类型。</p>
 <p>每次进入 trace 函数的新的局部作用范围，都会调用 trace 函数（ <em>event</em> 会被设置为 <code class="docutils literal notranslate"><span class="pre">'call'</span></code> ），它应该返回一个引用，指向即将用在新作用范围上的局部跟踪函数；如果不需要跟踪当前的作用范围，则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
 <p>局部跟踪函数应返回对自身的引用（或对另一个函数的引用，用来在其作用范围内进行进一步的跟踪），或者返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> 来停止跟踪其作用范围。</p>
@@ -1294,11 +1349,11 @@ argument to the <strong class="program">configure</strong> script.  See
 <p class="audit-hook">引发一个 <a class="reference internal" href="#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">sys.set_asyncgen_hooks_finalizer</span></code>，不附带任何参数。</p>
 <p>之所以会引发两个审计事件，是因为底层的 API 由两个调用组成，每个调用都须要引发自己的事件。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.6 新版功能: </span>更多详情请参阅 <span class="target" id="index-85"></span><a class="pep reference external" href="https://peps.python.org/pep-0525/"><strong>PEP 525</strong></a>，<em>finalizer</em> 方法的参考示例可参阅 <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/asyncio/base_events.py">Lib/asyncio/base_events.py</a> 中 <code class="docutils literal notranslate"><span class="pre">asyncio.Loop.shutdown_asyncgens</span></code> 的实现。</p>
+<p><span class="versionmodified added">3.6 新版功能: </span>更多详情请参阅 <span class="target" id="index-86"></span><a class="pep reference external" href="https://peps.python.org/pep-0525/"><strong>PEP 525</strong></a>，<em>finalizer</em> 方法的参考示例可参阅 <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/asyncio/base_events.py">Lib/asyncio/base_events.py</a> 中 <code class="docutils literal notranslate"><span class="pre">asyncio.Loop.shutdown_asyncgens</span></code> 的实现。</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-86"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。</p>
+<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-87"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。</p>
 </div>
 </dd></dl>
 
@@ -1313,7 +1368,7 @@ argument to the <strong class="program">configure</strong> script.  See
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-87"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。仅将其用于调试目的。</p>
+<p>本函数已添加至暂定软件包（详情请参阅 <span class="target" id="index-88"></span><a class="pep reference external" href="https://peps.python.org/pep-0411/"><strong>PEP 411</strong></a> ）。仅将其用于调试目的。</p>
 </div>
 </dd></dl>
 
@@ -1321,11 +1376,11 @@ argument to the <strong class="program">configure</strong> script.  See
 <dt class="sig sig-object py" id="sys._enablelegacywindowsfsencoding">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">_enablelegacywindowsfsencoding</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sys._enablelegacywindowsfsencoding" title="永久链接至目标">¶</a></dt>
 <dd><p>将 <a class="reference internal" href="../glossary.html#term-filesystem-encoding-and-error-handler"><span class="xref std std-term">filesystem encoding and error handler</span></a> 分别修改为 ‘mbcs’ 和 ‘replace’，以便与 3.6 之前版本的 Python 保持一致。</p>
-<p>这等同于在启动 Python 前先定义好 <span class="target" id="index-88"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSFSENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSFSENCODING</span></code></a> 环境变量。</p>
+<p>这等同于在启动 Python 前先定义好 <span class="target" id="index-89"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSFSENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSFSENCODING</span></code></a> 环境变量。</p>
 <p>另请参阅 <a class="reference internal" href="#sys.getfilesystemencoding" title="sys.getfilesystemencoding"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.getfilesystemencoding()</span></code></a> 和 <a class="reference internal" href="#sys.getfilesystemencodeerrors" title="sys.getfilesystemencodeerrors"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.getfilesystemencodeerrors()</span></code></a>。</p>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Windows。</p>
 <div class="versionadded">
-<p><span class="versionmodified added">3.6 新版功能: </span>更多详情请参阅 <span class="target" id="index-89"></span><a class="pep reference external" href="https://peps.python.org/pep-0529/"><strong>PEP 529</strong></a>。</p>
+<p><span class="versionmodified added">3.6 新版功能: </span>更多详情请参阅 <span class="target" id="index-90"></span><a class="pep reference external" href="https://peps.python.org/pep-0529/"><strong>PEP 529</strong></a>。</p>
 </div>
 </dd></dl>
 
@@ -1347,9 +1402,9 @@ argument to the <strong class="program">configure</strong> script.  See
 <li><p>编码格式和错误处理句柄是由 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.stdio_encoding" title="PyConfig.stdio_encoding"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.stdio_encoding</span></code></a> 和 <a class="reference internal" href="../c-api/init_config.html#c.PyConfig.stdio_errors" title="PyConfig.stdio_errors"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.stdio_errors</span></code></a> 来初始化的。</p>
 <p>在 Windows 上，控制台设备使用 UTF-8。 非字符设备如磁盘文件和管道使用系统语言区域编码格式（例如 ANSI 代码页）。 非控制台字符设备如 NUL（例如当 <code class="docutils literal notranslate"><span class="pre">isatty()</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">True</span></code> 时）会在启动时分别让 stdin 和 stdout/stderr 使用控制台输入和输出代码页。 如果进程初始化时没有被附加到控制台则会使用默认的系统 <a class="reference internal" href="../glossary.html#term-locale-encoding"><span class="xref std std-term">locale encoding</span></a>。</p>
 <p>要重写控制台的特殊行为，可以在启动 Python 前设置 PYTHONLEGACYWINDOWSSTDIO 环境变量。此时，控制台代码页将用于其他字符设备。</p>
-<p>在所有平台上，都可以通过在 Python 启动前设置 <span class="target" id="index-90"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONIOENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> 环境变量来重写字符编码，或通过新的 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> <code class="docutils literal notranslate"><span class="pre">utf8</span></code> 命令行选项和 <span class="target" id="index-91"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> 环境变量来设置。但是，对 Windows 控制台来说，上述方法仅在设置了 <span class="target" id="index-92"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSSTDIO"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSSTDIO</span></code></a> 后才起效。</p>
+<p>在所有平台上，都可以通过在 Python 启动前设置 <span class="target" id="index-91"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONIOENCODING"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONIOENCODING</span></code></a> 环境变量来重写字符编码，或通过新的 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> <code class="docutils literal notranslate"><span class="pre">utf8</span></code> 命令行选项和 <span class="target" id="index-92"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUTF8"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUTF8</span></code></a> 环境变量来设置。但是，对 Windows 控制台来说，上述方法仅在设置了 <span class="target" id="index-93"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONLEGACYWINDOWSSTDIO"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONLEGACYWINDOWSSTDIO</span></code></a> 后才起效。</p>
 </li>
-<li><p>交互模式下，<code class="docutils literal notranslate"><span class="pre">stdout</span></code> 流是行缓冲的。其他情况下，它像常规文本文件一样是块缓冲的。两种情况下的 <code class="docutils literal notranslate"><span class="pre">stderr</span></code> 流都是行缓冲的。要使得两个流都变成无缓冲，可以传入 <a class="reference internal" href="../using/cmdline.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> 命令行选项或设置 <span class="target" id="index-93"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUNBUFFERED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUNBUFFERED</span></code></a> 环境变量。</p></li>
+<li><p>交互模式下，<code class="docutils literal notranslate"><span class="pre">stdout</span></code> 流是行缓冲的。其他情况下，它像常规文本文件一样是块缓冲的。两种情况下的 <code class="docutils literal notranslate"><span class="pre">stderr</span></code> 流都是行缓冲的。要使得两个流都变成无缓冲，可以传入 <a class="reference internal" href="../using/cmdline.html#cmdoption-u"><code class="xref std std-option docutils literal notranslate"><span class="pre">-u</span></code></a> 命令行选项或设置 <span class="target" id="index-94"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONUNBUFFERED"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONUNBUFFERED</span></code></a> 环境变量。</p></li>
 </ul>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.9 版更改: </span>非交互模式下，<code class="docutils literal notranslate"><span class="pre">stderr</span></code> 现在是行缓冲的，而不是全缓冲的。</p>
@@ -1409,6 +1464,8 @@ argument to the <strong class="program">configure</strong> script.  See
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">'nt'</span></code>: Windows 线程</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'pthread'</span></code>: POSIX 线程</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'pthread-stubs'</span></code>: stub POSIX threads
+(on WebAssembly platforms without threading support)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'solaris'</span></code>: Solaris 线程</p></li>
 </ul>
 </div></blockquote>
@@ -1503,13 +1560,13 @@ argument to the <strong class="program">configure</strong> script.  See
 <dt class="sig sig-object py" id="sys._xoptions">
 <span class="sig-prename descclassname"><span class="pre">sys.</span></span><span class="sig-name descname"><span class="pre">_xoptions</span></span><a class="headerlink" href="#sys._xoptions" title="永久链接至目标">¶</a></dt>
 <dd><p>一个字典，包含通过 <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span></code></a> 命令行选项传递的旗标，这些旗标专属于各种具体实现。选项名称将会映射到对应的值（如果显式指定）或者 <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a>。例如:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./python -Xpycache_prefix<span class="o">=</span>some_path -Xdev
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>./python -Xa<span class="o">=</span>b -Xc
 <span class="go">Python 3.2a3+ (py3k, Oct 16 2010, 20:14:50)</span>
 <span class="go">[GCC 4.4.3] on linux2</span>
 <span class="go">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span>
 <span class="go">&gt;&gt;&gt; import sys</span>
 <span class="go">&gt;&gt;&gt; sys._xoptions</span>
-<span class="go">{&#39;pycache_prefix&#39;: &#39;some_path&#39;, &#39;dev&#39;: True}</span>
+<span class="go">{&#39;a&#39;: &#39;b&#39;, &#39;c&#39;: True}</span>
 </pre></div>
 </div>
 <div class="impl-detail compound">
@@ -1523,7 +1580,7 @@ argument to the <strong class="program">configure</strong> script.  See
 <p class="rubric">引用</p>
 <dl class="citation">
 <dt class="label" id="c99"><span class="brackets"><a class="fn-backref" href="#id1">C99</a></span></dt>
-<dd><p>ISO/IEC 9899:1999.  “Programming languages – C.” 该标准的公开草案可从 <a class="reference external" href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf</a>获得。</p>
+<dd><p>ISO/IEC 9899:1999.  “Programming languages – C.”  A public draft of this standard is available at <a class="reference external" href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf">https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf</a>.</p>
 </dd>
 </dl>
 </section>
@@ -1623,7 +1680,7 @@ argument to the <strong class="program">configure</strong> script.  See
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

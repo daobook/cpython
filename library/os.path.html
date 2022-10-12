@@ -159,7 +159,10 @@
 files see <a class="reference internal" href="functions.html#open" title="open"><code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code></a>, and for accessing the filesystem see the <a class="reference internal" href="os.html#module-os" title="os: Miscellaneous operating system interfaces."><code class="xref py py-mod docutils literal notranslate"><span class="pre">os</span></code></a>
 module. The path parameters can be passed as strings, or bytes, or any object
 implementing the <a class="reference internal" href="os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> protocol.</p>
-<p>与unix shell不同，Python不执行任何 <em>自动</em> 路径扩展。当应用程序需要类似shell的路径扩展时，可以显式调用诸如 <a class="reference internal" href="#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">expanduser()</span></code></a> 和 <a class="reference internal" href="#os.path.expandvars" title="os.path.expandvars"><code class="xref py py-func docutils literal notranslate"><span class="pre">expandvars()</span></code></a> 之类的函数。 （另请参见 <a class="reference internal" href="glob.html#module-glob" title="glob: Unix shell style pathname pattern expansion."><code class="xref py py-mod docutils literal notranslate"><span class="pre">glob</span></code></a> 模块。）</p>
+<p>Unlike a Unix shell, Python does not do any <em>automatic</em> path expansions.
+Functions such as <a class="reference internal" href="#os.path.expanduser" title="os.path.expanduser"><code class="xref py py-func docutils literal notranslate"><span class="pre">expanduser()</span></code></a> and <a class="reference internal" href="#os.path.expandvars" title="os.path.expandvars"><code class="xref py py-func docutils literal notranslate"><span class="pre">expandvars()</span></code></a> can be invoked
+explicitly when an application desires shell-like path expansion.  (See also
+the <a class="reference internal" href="glob.html#module-glob" title="glob: Unix shell style pathname pattern expansion."><code class="xref py py-mod docutils literal notranslate"><span class="pre">glob</span></code></a> module.)</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <p><a class="reference internal" href="pathlib.html#module-pathlib" title="pathlib: Object-oriented filesystem paths"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pathlib</span></code></a> 模块提供高级路径对象。</p>
@@ -394,7 +397,12 @@ implementing the <a class="reference internal" href="os.html#os.PathLike" title=
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <blockquote>
-<div><p>在 POSIX 系统上，根据 <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_13">IEEE Std 1003.1 2013 Edition; 4.13 Pathname Resolution</a>，如果一个路径名称以两个斜杠开始，则开始字符之后的第一个部分将以具体实现所定义的方式来解读，但是超过两个开始字符则将被视为单个字符。</p>
+<div><p>On POSIX systems, in accordance with <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap04.html#tag_04_13">IEEE Std 1003.1 2013 Edition; 4.13
+Pathname Resolution</a>,
+if a pathname begins with exactly two slashes, the first component
+following the leading characters may be interpreted in an implementation-defined
+manner, although more than two leading characters shall be treated as a
+single character.</p>
 </div></blockquote>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>接受一个 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。</p>
@@ -638,7 +646,7 @@ be part of the root:</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

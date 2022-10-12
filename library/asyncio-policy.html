@@ -166,12 +166,23 @@
             
   <section id="policies">
 <span id="asyncio-policies"></span><h1>策略<a class="headerlink" href="#policies" title="永久链接至标题">¶</a></h1>
-<p>事件循环策略是各个进程的全局对象 ，它控制事件循环的管理。每个事件循环都有一个默认策略，可以使用策略API更改和定制该策略。</p>
-<p>策略定义了“上下文”的概念，每个上下文管理一个单独的事件循环。默认策略将*context*定义为当前线程。</p>
-<p>通过使用自定义事件循环策略，可以自定义 <a class="reference internal" href="asyncio-eventloop.html#asyncio.get_event_loop" title="asyncio.get_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_event_loop()</span></code></a> 、 <a class="reference internal" href="asyncio-eventloop.html#asyncio.set_event_loop" title="asyncio.set_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_event_loop()</span></code></a>  和 <a class="reference internal" href="asyncio-eventloop.html#asyncio.new_event_loop" title="asyncio.new_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">new_event_loop()</span></code></a> 函数的行为。</p>
+<p>An event loop policy is a global object
+used to get and set the current <a class="reference internal" href="asyncio-eventloop.html#asyncio-event-loop"><span class="std std-ref">event loop</span></a>,
+as well as create new event loops.
+The default policy can be <a class="reference internal" href="#asyncio-policy-get-set"><span class="std std-ref">replaced</span></a> with
+<a class="reference internal" href="#asyncio-policy-builtin"><span class="std std-ref">built-in alternatives</span></a>
+to use different event loop implementations,
+or substituted by a <a class="reference internal" href="#asyncio-custom-policies"><span class="std std-ref">custom policy</span></a>
+that can override these behaviors.</p>
+<p>The <a class="reference internal" href="#asyncio-policy-objects"><span class="std std-ref">policy object</span></a>
+gets and sets a separate event loop per <em>context</em>.
+This is per-thread by default,
+though custom policies could define <em>context</em> differently.</p>
+<p>Custom event loop policies can control the behavior of
+<a class="reference internal" href="asyncio-eventloop.html#asyncio.get_event_loop" title="asyncio.get_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_event_loop()</span></code></a>, <a class="reference internal" href="asyncio-eventloop.html#asyncio.set_event_loop" title="asyncio.set_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_event_loop()</span></code></a>, and <a class="reference internal" href="asyncio-eventloop.html#asyncio.new_event_loop" title="asyncio.new_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">new_event_loop()</span></code></a>.</p>
 <p>策略对象应该实现 <a class="reference internal" href="#asyncio.AbstractEventLoopPolicy" title="asyncio.AbstractEventLoopPolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractEventLoopPolicy</span></code></a> 抽象基类中定义的API。</p>
 <section id="getting-and-setting-the-policy">
-<h2>获取和设置策略<a class="headerlink" href="#getting-and-setting-the-policy" title="永久链接至标题">¶</a></h2>
+<span id="asyncio-policy-get-set"></span><h2>获取和设置策略<a class="headerlink" href="#getting-and-setting-the-policy" title="永久链接至标题">¶</a></h2>
 <p>可以使用下面函数获取和设置当前进程的策略:</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="asyncio.get_event_loop_policy">
@@ -188,7 +199,7 @@
 
 </section>
 <section id="policy-objects">
-<h2>策略对象<a class="headerlink" href="#policy-objects" title="永久链接至标题">¶</a></h2>
+<span id="asyncio-policy-objects"></span><h2>策略对象<a class="headerlink" href="#policy-objects" title="永久链接至标题">¶</a></h2>
 <p>抽象事件循环策略基类定义如下:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="asyncio.AbstractEventLoopPolicy">
@@ -235,7 +246,7 @@
 
 </dd></dl>
 
-<p>asyncio附带下列内置策略:</p>
+<p id="asyncio-policy-builtin">asyncio附带下列内置策略:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="asyncio.DefaultEventLoopPolicy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">DefaultEventLoopPolicy</span></span><a class="headerlink" href="#asyncio.DefaultEventLoopPolicy" title="永久链接至目标">¶</a></dt>
@@ -380,7 +391,7 @@
 
 </section>
 <section id="custom-policies">
-<h2>自定义策略<a class="headerlink" href="#custom-policies" title="永久链接至标题">¶</a></h2>
+<span id="asyncio-custom-policies"></span><h2>自定义策略<a class="headerlink" href="#custom-policies" title="永久链接至标题">¶</a></h2>
 <p>要实现一个新的事件循环策略，建议子类化 <a class="reference internal" href="#asyncio.DefaultEventLoopPolicy" title="asyncio.DefaultEventLoopPolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">DefaultEventLoopPolicy</span></code></a> 并重写需要定制行为的方法，例如:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyEventLoopPolicy</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DefaultEventLoopPolicy</span><span class="p">):</span>
 
@@ -508,7 +519,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

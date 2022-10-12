@@ -390,20 +390,18 @@ on the <a class="reference external" href="https://security.stackexchange.com/qu
 <p><em>dklen</em> 为派生密钥的长度。 如果 <em>dklen</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则会使用哈希算法 <em>hash_name</em> 的摘要大小，例如 SHA-512 为 64。</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">pbkdf2_hmac</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">our_app_iters</span> <span class="o">=</span> <span class="mi">500_000</span>  <span class="c1"># Application specific, read above.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span> <span class="o">=</span> <span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;bad salt&#39;</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">our_app_iters</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span> <span class="o">=</span> <span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;bad salt&#39;</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">our_app_iters</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dk</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
 <span class="go">&#39;15530bba69924174860db778f2c6f8104d3aaf9d26241840c8c4a641c8d000a9&#39;</span>
 </pre></div>
 </div>
+<p>Function only available when Python is compiled with OpenSSL.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>随同 OpenSSL 提供了一个快速的 <em>pbkdf2_hmac</em> 实现。 Python 实现是使用 <a class="reference internal" href="hmac.html#module-hmac" title="hmac: Keyed-Hashing for Message Authentication (HMAC) implementation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">hmac</span></code></a> 的内联版本。 它的速度大约要慢上三倍并且不会释放 GIL。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.10 版后已移除: </span>较慢的 <em>pbkdf2_hmac</em> Python 实现已被弃用。 未来该函数将仅在 Python 附带 OpenSSL 编译时可用。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Function now only available when Python is built with OpenSSL. The slow
+pure Python implementation has been removed.</p>
 </div>
 </dd></dl>
 
@@ -496,7 +494,8 @@ sequential mode).</p></li>
 BLAKE2s, 0 for the first, leftmost, leaf, or in sequential mode).</p></li>
 <li><p><em>node_depth</em>: 节点深度 (0 至 255，对于叶子或在连续模式下则为 0)。</p></li>
 <li><p><em>inner_size</em>: 内部摘要大小 (对于 BLAKE2b 为 0 至 64，对于 BLAKE2s 为 0 至 32，连续模式下则为 0)。</p></li>
-<li><p><em>last_node</em>: 一个布尔值，指明所处理的节点是否为最后一个 (连续模式下则为 <cite>False</cite>)。</p></li>
+<li><p><em>last_node</em>: boolean indicating whether the processed node is the last
+one (<code class="docutils literal notranslate"><span class="pre">False</span></code> for sequential mode).</p></li>
 </ul>
 <figure class="align-default">
 <img alt="Explanation of tree mode parameters." src="../_images/hashlib-blake2-tree.png" />
@@ -920,7 +919,7 @@ p. 21)</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

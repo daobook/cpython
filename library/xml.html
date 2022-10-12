@@ -258,7 +258,11 @@ potential reliance on system-provided libraries. Check
 <dl class="simple">
 <dt>billion laughs / exponential entity expansion （狂笑/递归实体扩展）</dt><dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Billion_laughs">Billion Laughs</a> 攻击 – 也称为递归实体扩展 – 使用多级嵌套实体。 每个实体多次引用另一个实体，最终实体定义包含一个小字符串。 指数级扩展导致几千 GB 的文本，并消耗大量内存和 CPU 时间。</p>
 </dd>
-<dt>quadratic blowup entity expansion（二次爆炸实体扩展）</dt><dd><p>二次爆炸攻击类似于 <a class="reference external" href="https://en.wikipedia.org/wiki/Billion_laughs">Billion Laughs</a> 攻击，它也滥用实体扩展。 它不是嵌套实体，而是一遍又一遍地重复一个具有几千个字符的大型实体。攻击不如递归情况有效，但它避免触发禁止深度嵌套实体的解析器对策。</p>
+<dt>quadratic blowup entity expansion（二次爆炸实体扩展）</dt><dd><p>A quadratic blowup attack is similar to a <a class="reference external" href="https://en.wikipedia.org/wiki/Billion_laughs">Billion Laughs</a> attack; it abuses
+entity expansion, too. Instead of nested entities it repeats one large entity
+with a couple of thousand chars over and over again. The attack isn’t as
+efficient as the exponential case but it avoids triggering parser countermeasures
+that forbid deeply nested entities.</p>
 </dd>
 <dt>external entity expansion</dt><dd><p>实体声明可以包含的不仅仅是替换文本。 它们还可以指向外部资源或本地文件。 XML 解析器访问资源并将内容嵌入到 XML 文档中。</p>
 </dd>
@@ -381,7 +385,7 @@ potential reliance on system-provided libraries. Check
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

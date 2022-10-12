@@ -417,7 +417,8 @@ to read.</p>
 </tbody>
 </table>
 <p>如果没有找到匹配， <a class="reference internal" href="../library/re.html#re.Pattern.match" title="re.Pattern.match"><code class="xref py py-meth docutils literal notranslate"><span class="pre">match()</span></code></a> 和 <a class="reference internal" href="../library/re.html#re.Pattern.search" title="re.Pattern.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> 返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> 。如果它们成功， 一个 <a class="reference internal" href="../library/re.html#match-objects"><span class="std std-ref">匹配对象</span></a> 实例将被返回，包含匹配相关的信息：起始和终结位置、匹配的子串以及其它。</p>
-<p>你可以通过交互式实验 <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块来了解这一点。 如果你有 <a class="reference internal" href="../library/tkinter.html#module-tkinter" title="tkinter: Interface to Tcl/Tk for graphical user interfaces"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tkinter</span></code></a>，你可能还想查看 <a class="reference external" href="https://github.com/python/cpython/tree/main/Tools/demo/redemo.py">Tools/demo/redemo.py</a>，这是 Python 发行附带的演示程序。 它允许你输入正则和字符串，并显示RE是匹配还是失败。  <code class="file docutils literal notranslate"><span class="pre">redemo.py</span></code> 在尝试调试复杂的正则时非常有用。</p>
+<p>You can learn about this by interactively experimenting with the <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a>
+module.</p>
 <p>本 HOWTO 使用标准 Python 解释器作为示例。 首先，运行 Python 解释器，导入 <a class="reference internal" href="../library/re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块，然后编译一个正则</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[a-z]+&#39;</span><span class="p">)</span>
@@ -784,7 +785,9 @@ of a group with a quantifier, such as <code class="docutils literal notranslate"
 <span class="go">{&#39;first&#39;: &#39;Jane&#39;, &#39;last&#39;: &#39;Doe&#39;}</span>
 </pre></div>
 </div>
-<p>命名组很有用，因为它们允许你使用容易记住的名称，而不必记住数字。 这是来自 <a class="reference internal" href="../library/imaplib.html#module-imaplib" title="imaplib: IMAP4 protocol client (requires sockets)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">imaplib</span></code></a> 模块的示例正则</p>
+<p>Named groups are handy because they let you use easily remembered names, instead
+of having to remember numbers.  Here’s an example RE from the <a class="reference internal" href="../library/imaplib.html#module-imaplib" title="imaplib: IMAP4 protocol client (requires sockets)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">imaplib</span></code></a>
+module:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">InternalDate</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;INTERNALDATE &quot;&#39;</span>
         <span class="sa">r</span><span class="s1">&#39;(?P&lt;day&gt;[ 123][0-9])-(?P&lt;mon&gt;[A-Z][a-z][a-z])-&#39;</span>
         <span class="sa">r</span><span class="s1">&#39;(?P&lt;year&gt;[0-9][0-9][0-9][0-9])&#39;</span>
@@ -1174,7 +1177,7 @@ at every step.  This produces just the right result:</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

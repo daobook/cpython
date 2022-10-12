@@ -194,6 +194,10 @@
 <p class="admonition-title">参见</p>
 <p>对于更高级别的 HTTP 客户端接口，建议使用 <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a>  。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p><a class="reference internal" href="#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 模块定义了以下函数：</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="urllib.request.urlopen">
@@ -1102,7 +1106,9 @@ to <code class="docutils literal notranslate"><span class="pre">GET</span></code
 </pre></div>
 </div>
 <p><a class="reference internal" href="#urllib.request.build_opener" title="urllib.request.build_opener"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_opener()</span></code></a> 默认提供了很多现成的 handler，包括 <a class="reference internal" href="#urllib.request.ProxyHandler" title="urllib.request.ProxyHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyHandler</span></code></a>。 默认情况下，<a class="reference internal" href="#urllib.request.ProxyHandler" title="urllib.request.ProxyHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyHandler</span></code></a> 会使用名为 <code class="docutils literal notranslate"><span class="pre">&lt;scheme&gt;_proxy</span></code> 的环境变量，其中的 <code class="docutils literal notranslate"><span class="pre">&lt;scheme&gt;</span></code> 是相关的 URL 协议。 例如，可以读取 <span class="target" id="index-34"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">http_proxy</span></code> 环境变量来获取 HTTP 代理的 URL。</p>
-<p>以下示例将默认的 <a class="reference internal" href="#urllib.request.ProxyHandler" title="urllib.request.ProxyHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyHandler</span></code></a> 替换为自己的 handler，由程序提供代理 URL，并利用 <a class="reference internal" href="#urllib.request.ProxyBasicAuthHandler" title="urllib.request.ProxyBasicAuthHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyBasicAuthHandler</span></code></a> 加入代理认证的支持：</p>
+<p>This example replaces the default <a class="reference internal" href="#urllib.request.ProxyHandler" title="urllib.request.ProxyHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyHandler</span></code></a> with one that uses
+programmatically supplied proxy URLs, and adds proxy authorization support with
+<a class="reference internal" href="#urllib.request.ProxyBasicAuthHandler" title="urllib.request.ProxyBasicAuthHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProxyBasicAuthHandler</span></code></a>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">proxy_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">({</span><span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="s1">&#39;http://www.example.com:3128/&#39;</span><span class="p">})</span>
 <span class="n">proxy_auth_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyBasicAuthHandler</span><span class="p">()</span>
 <span class="n">proxy_auth_handler</span><span class="o">.</span><span class="n">add_password</span><span class="p">(</span><span class="s1">&#39;realm&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;password&#39;</span><span class="p">)</span>
@@ -1477,7 +1483,7 @@ to <code class="docutils literal notranslate"><span class="pre">GET</span></code
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

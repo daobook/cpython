@@ -197,7 +197,7 @@
 <p class="admonition-title">重要</p>
 <p>查看 <a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_task()</span></code></a> 函数，它是创建新任务的首选途径。</p>
 <p>Save a reference to the result of this function, to avoid
-a task disappearing mid execution.</p>
+a task disappearing mid-execution.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5.1 版更改: </span>这个函数接受任意 <a class="reference internal" href="../glossary.html#term-awaitable"><span class="xref std std-term">awaitable</span></a> 对象。</p>
@@ -223,7 +223,10 @@ a task disappearing mid execution.</p>
 <dt class="sig sig-object py" id="asyncio.Future">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">Future</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Future" title="永久链接至目标">¶</a></dt>
 <dd><p>一个 Future 代表一个异步运算的最终结果。线程不安全。</p>
-<p>Future 是一个 <a class="reference internal" href="../glossary.html#term-awaitable"><span class="xref std std-term">awaitable</span></a> 对象。协程可以等待 Future 对象直到它们有结果或异常集合或被取消。</p>
+<p>Future is an <a class="reference internal" href="../glossary.html#term-awaitable"><span class="xref std std-term">awaitable</span></a> object.  Coroutines can await on
+Future objects until they either have a result or an exception
+set, or until they are cancelled. A Future can be awaited multiple
+times and the result is same.</p>
 <p>通常 Future 用于支持底层回调式代码(例如在协议实现中使用asyncio <a class="reference internal" href="asyncio-protocol.html#asyncio-transports-protocols"><span class="std std-ref">transports</span></a>) 与高层异步/等待式代码交互。</p>
 <p>经验告诉我们永远不要面向用户的接口暴露 Future 对象，同时建议使用 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_future" title="asyncio.loop.create_future"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_future()</span></code></a> 来创建 Future 对象。这种方法可以让 Future 对象使用其它的事件循环实现，它可以注入自己的优化实现。</p>
 <div class="versionchanged">
@@ -307,11 +310,6 @@ a task disappearing mid execution.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.9 版更改: </span>Added the <em>msg</em> parameter.</p>
 </div>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.14: </span><em>msg</em> parameter is ambiguous when multiple <a class="reference internal" href="#asyncio.Future.cancel" title="asyncio.Future.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">cancel()</span></code></a>
-are called with different cancellation messages.
-The argument will be removed.</p>
-</div>
 </dd></dl>
 
 <dl class="py method">
@@ -367,19 +365,13 @@ The argument will be removed.</p>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
 <p>该 Future 对象是为了模仿 <a class="reference internal" href="concurrent.futures.html#concurrent.futures.Future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a> 类。主要差异包含：</p>
-<ul>
+<ul class="simple">
 <li><p>与 asyncio 的 Future 不同，<a class="reference internal" href="concurrent.futures.html#concurrent.futures.Future" title="concurrent.futures.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.Future</span></code></a>  实例不是可等待对象。</p></li>
 <li><p><a class="reference internal" href="#asyncio.Future.result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> 和 <a class="reference internal" href="#asyncio.Future.exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a> 不接受 <em>timeout</em> 参数。</p></li>
 <li><p>Future 没有 <em>完成</em> 时 <a class="reference internal" href="#asyncio.Future.result" title="asyncio.Future.result"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.result()</span></code></a> 和 <a class="reference internal" href="#asyncio.Future.exception" title="asyncio.Future.exception"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.exception()</span></code></a> 抛出一个 <a class="reference internal" href="asyncio-exceptions.html#asyncio.InvalidStateError" title="asyncio.InvalidStateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidStateError</span></code></a> 异常。</p></li>
 <li><p>使用 <a class="reference internal" href="#asyncio.Future.add_done_callback" title="asyncio.Future.add_done_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.add_done_callback()</span></code></a> 注册的回调函数不会立即调用，而是被 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.call_soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a> 调度。</p></li>
 <li><p>asyncio Future 不能兼容  <a class="reference internal" href="concurrent.futures.html#concurrent.futures.wait" title="concurrent.futures.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.wait()</span></code></a> 和 <a class="reference internal" href="concurrent.futures.html#concurrent.futures.as_completed" title="concurrent.futures.as_completed"><code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.as_completed()</span></code></a> 函数。</p></li>
-<li><p><a class="reference internal" href="#asyncio.Future.cancel" title="asyncio.Future.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.cancel()</span></code></a> 接受一个可选的 <code class="docutils literal notranslate"><span class="pre">msg</span></code> 参数，但 <code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.cancel()</span></code> 无此参数。</p>
-<div class="deprecated-removed">
-<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.14: </span><em>msg</em> parameter is ambiguous when multiple <code class="xref py py-meth docutils literal notranslate"><span class="pre">cancel()</span></code>
-are called with different cancellation messages.
-The argument will be removed.</p>
-</div>
-</li>
+<li><p><a class="reference internal" href="#asyncio.Future.cancel" title="asyncio.Future.cancel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">asyncio.Future.cancel()</span></code></a> 接受一个可选的 <code class="docutils literal notranslate"><span class="pre">msg</span></code> 参数，但 <code class="xref py py-func docutils literal notranslate"><span class="pre">concurrent.futures.cancel()</span></code> 无此参数。</p></li>
 </ul>
 </div>
 </section>
@@ -492,7 +484,7 @@ The argument will be removed.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

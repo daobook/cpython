@@ -203,7 +203,12 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyFloat_AsDouble">
 <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFloat_AsDouble</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">pyfloat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFloat_AsDouble" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回一个 C <span class="xref c c-texpr"><span class="kt">double</span></span> 代表 <em>pyfloat</em> 的内容。 如果 <em>pyfloat</em> 不是一个 Python 浮点数对象但是具有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__float__()</span></code> 方法，此方法将首先被调用，将 <em>pyfloat</em> 转换成一个数点数。 如果 <code class="docutils literal notranslate"><span class="pre">__float__()</span></code> 未定义则将回退至 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__index__()</span></code>。 如果失败，此方法将返回 <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>，因此开发者应当调用 <a class="reference internal" href="exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a> 来检查错误。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return a C <span class="c-expr sig sig-inline c"><span class="kt">double</span></span> representation of the contents of <em>pyfloat</em>.  If
+<em>pyfloat</em> is not a Python floating point object but has a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__float__()</span></code>
+method, this method will first be called to convert <em>pyfloat</em> into a float.
+If <code class="docutils literal notranslate"><span class="pre">__float__()</span></code> is not defined then it falls back to <code class="xref py py-meth docutils literal notranslate"><span class="pre">__index__()</span></code>.
+This method returns <code class="docutils literal notranslate"><span class="pre">-1.0</span></code> upon failure, so one should call
+<a class="reference internal" href="exceptions.html#c.PyErr_Occurred" title="PyErr_Occurred"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Occurred()</span></code></a> to check for errors.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>如果可用将使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__index__()</span></code>。</p>
 </div>
@@ -212,7 +217,8 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyFloat_AS_DOUBLE">
 <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFloat_AS_DOUBLE</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">pyfloat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFloat_AS_DOUBLE" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>返回一个 <em>pyfloat</em> 内容的 C <span class="xref c c-texpr"><span class="kt">double</span></span> 表示，但没有错误检查。</p>
+<dd><p>Return a C <span class="c-expr sig sig-inline c"><span class="kt">double</span></span> representation of the contents of <em>pyfloat</em>, but
+without error checking.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -224,21 +230,21 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyFloat_GetMax">
 <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFloat_GetMax</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFloat_GetMax" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回最大可表示的有限浮点数 <em>DBL_MAX</em> 为 C <span class="xref c c-texpr"><span class="kt">double</span></span> 。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the maximum representable finite float <em>DBL_MAX</em> as C <span class="c-expr sig sig-inline c"><span class="kt">double</span></span>.</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyFloat_GetMin">
 <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFloat_GetMin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFloat_GetMin" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>返回最小可表示归一化正浮点数 <em>DBL_MIN</em> 为 C <span class="xref c c-texpr"><span class="kt">double</span></span> 。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the minimum normalized positive float <em>DBL_MIN</em> as C <span class="c-expr sig sig-inline c"><span class="kt">double</span></span>.</p>
 </dd></dl>
 
 <section id="pack-and-unpack-functions">
 <h2>Pack and Unpack functions<a class="headerlink" href="#pack-and-unpack-functions" title="永久链接至标题">¶</a></h2>
 <p>The pack and unpack functions provide an efficient platform-independent way to
 store floating-point values as byte strings. The Pack routines produce a bytes
-string from a C <span class="xref c c-texpr"><span class="kt">double</span></span>, and the Unpack routines produce a C
-<span class="xref c c-texpr"><span class="kt">double</span></span> from such a bytes string. The suffix (2, 4 or 8) specifies the
+string from a C <span class="c-expr sig sig-inline c"><span class="kt">double</span></span>, and the Unpack routines produce a C
+<span class="c-expr sig sig-inline c"><span class="kt">double</span></span> from such a bytes string. The suffix (2, 4 or 8) specifies the
 number of bytes in the bytes string.</p>
 <p>On platforms that appear to use IEEE 754 formats these functions work by
 copying bits. On other platforms, the 2-byte format is identical to the IEEE
@@ -260,7 +266,7 @@ happens in such cases is partly accidental (alas).</p>
 <section id="pack-functions">
 <h1>Pack functions<a class="headerlink" href="#pack-functions" title="永久链接至标题">¶</a></h1>
 <p>The pack routines write 2, 4 or 8 bytes, starting at <em>p</em>. <em>le</em> is an
-<span class="xref c c-texpr"><span class="kt">int</span></span> argument, non-zero if you want the bytes string in little-endian
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span> argument, non-zero if you want the bytes string in little-endian
 format (exponent last, at <code class="docutils literal notranslate"><span class="pre">p+1</span></code>, <code class="docutils literal notranslate"><span class="pre">p+3</span></code>, or <code class="docutils literal notranslate"><span class="pre">p+6</span></code> <code class="docutils literal notranslate"><span class="pre">p+7</span></code>), zero if you
 want big-endian format (exponent first, at <em>p</em>). The <code class="xref c c-data docutils literal notranslate"><span class="pre">PY_BIG_ENDIAN</span></code>
 constant can be used to use the native endian: it is equal to <code class="docutils literal notranslate"><span class="pre">1</span></code> on big
@@ -294,7 +300,7 @@ most likely <a class="reference internal" href="../library/exceptions.html#Overf
 <section id="unpack-functions">
 <h1>Unpack functions<a class="headerlink" href="#unpack-functions" title="永久链接至标题">¶</a></h1>
 <p>The unpack routines read 2, 4 or 8 bytes, starting at <em>p</em>.  <em>le</em> is an
-<span class="xref c c-texpr"><span class="kt">int</span></span> argument, non-zero if the bytes string is in little-endian format
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span> argument, non-zero if the bytes string is in little-endian format
 (exponent last, at <code class="docutils literal notranslate"><span class="pre">p+1</span></code>, <code class="docutils literal notranslate"><span class="pre">p+3</span></code> or <code class="docutils literal notranslate"><span class="pre">p+6</span></code> and <code class="docutils literal notranslate"><span class="pre">p+7</span></code>), zero if big-endian
 (exponent first, at <em>p</em>). The <code class="xref c c-data docutils literal notranslate"><span class="pre">PY_BIG_ENDIAN</span></code> constant can be used to
 use the native endian: it is equal to <code class="docutils literal notranslate"><span class="pre">1</span></code> on big endian processor, or <code class="docutils literal notranslate"><span class="pre">0</span></code>
@@ -431,7 +437,7 @@ represents a NaN or infinity.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

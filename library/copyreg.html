@@ -173,13 +173,16 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="copyreg.pickle">
-<span class="sig-prename descclassname"><span class="pre">copyreg.</span></span><span class="sig-name descname"><span class="pre">pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constructor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#copyreg.pickle" title="永久链接至目标">¶</a></dt>
-<dd><p>声明该 <em>function</em> 应当被用作 <em>type</em> 类型对象的“归约函数”。 <em>function</em> 应当返回字符串或包含两到三个元素的元组。</p>
-<p>The optional <em>constructor</em> parameter, if provided, is a callable object which
-can be used to reconstruct the object when called with the tuple of arguments
-returned by <em>function</em> at pickling time.  A <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> is raised if the
-<em>constructor</em> is not callable.</p>
-<p>请查看 <a class="reference internal" href="pickle.html#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> 模块了解 <em>function</em> 和 <em>constructor</em> 所要求的接口的详情。 请注意一个 pickler 对象或 <a class="reference internal" href="pickle.html#pickle.Pickler" title="pickle.Pickler"><code class="xref py py-class docutils literal notranslate"><span class="pre">pickle.Pickler</span></code></a> 的子类的 <a class="reference internal" href="pickle.html#pickle.Pickler.dispatch_table" title="pickle.Pickler.dispatch_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dispatch_table</span></code></a> 属性也可以被用来声明归约函数。</p>
+<span class="sig-prename descclassname"><span class="pre">copyreg.</span></span><span class="sig-name descname"><span class="pre">pickle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constructor_ob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#copyreg.pickle" title="永久链接至目标">¶</a></dt>
+<dd><p>Declares that <em>function</em> should be used as a “reduction” function for objects
+of type <em>type</em>.  <em>function</em> should return either a string or a tuple
+containing two or three elements. See the <a class="reference internal" href="pickle.html#pickle.Pickler.dispatch_table" title="pickle.Pickler.dispatch_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dispatch_table</span></code></a>
+for more details on the interface of <em>function</em>.</p>
+<p>The <em>constructor_ob</em> parameter is a legacy feature and is now ignored, but if
+passed it must be a callable.</p>
+<p>Note that the <a class="reference internal" href="pickle.html#pickle.Pickler.dispatch_table" title="pickle.Pickler.dispatch_table"><code class="xref py py-attr docutils literal notranslate"><span class="pre">dispatch_table</span></code></a> attribute of a pickler
+object or subclass of <a class="reference internal" href="pickle.html#pickle.Pickler" title="pickle.Pickler"><code class="xref py py-class docutils literal notranslate"><span class="pre">pickle.Pickler</span></code></a> can also be used for
+declaring reduction functions.</p>
 </dd></dl>
 
 <section id="example">
@@ -310,7 +313,7 @@ returned by <em>function</em> at pickling time.  A <a class="reference internal"
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

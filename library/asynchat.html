@@ -174,6 +174,10 @@ Please use <a class="reference internal" href="asyncio.html#module-asyncio" titl
 <p>该模块仅为提供向后兼容。我们推荐在新代码中使用 <a class="reference internal" href="asyncio.html#module-asyncio" title="asyncio: Asynchronous I/O."><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a> 。</p>
 </div>
 <p>此模块在 <a class="reference internal" href="asyncore.html#module-asyncore" title="asyncore: A base class for developing asynchronous socket handling services. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncore</span></code></a> 框架之上构建，简化了异步客户端和服务器并使得处理元素为以任意字符串结束或者为可变长度的协议更加容易。 <a class="reference internal" href="#module-asynchat" title="asynchat: Support for asynchronous command/response protocols. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asynchat</span></code></a> 定义了一个可以由你来子类化的抽象类 <a class="reference internal" href="#asynchat.async_chat" title="asynchat.async_chat"><code class="xref py py-class docutils literal notranslate"><span class="pre">async_chat</span></code></a>，提供了 <code class="xref py py-meth docutils literal notranslate"><span class="pre">collect_incoming_data()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">found_terminator()</span></code> 等方法的实现。 它使用与 <a class="reference internal" href="asyncore.html#module-asyncore" title="asyncore: A base class for developing asynchronous socket handling services. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncore</span></code></a> 相同的异步循环，并且可以在通道映射中自由地混合 <a class="reference internal" href="asyncore.html#asyncore.dispatcher" title="asyncore.dispatcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncore.dispatcher</span></code></a> 和 <a class="reference internal" href="#asynchat.async_chat" title="asynchat.async_chat"><code class="xref py py-class docutils literal notranslate"><span class="pre">asynchat.async_chat</span></code></a> 这两种类型的通道。 一般来说 <a class="reference internal" href="asyncore.html#asyncore.dispatcher" title="asyncore.dispatcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncore.dispatcher</span></code></a> 服务器通道在接收到传入的连接请求时会生成新的 <a class="reference internal" href="#asynchat.async_chat" title="asynchat.async_chat"><code class="xref py py-class docutils literal notranslate"><span class="pre">asynchat.async_chat</span></code></a> 通道对象。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="asynchat.async_chat">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asynchat.</span></span><span class="sig-name descname"><span class="pre">async_chat</span></span><a class="headerlink" href="#asynchat.async_chat" title="永久链接至目标">¶</a></dt>
@@ -235,7 +239,10 @@ Please use <a class="reference internal" href="asyncio.html#module-asyncio" titl
 <dl class="py method">
 <dt class="sig sig-object py" id="asynchat.async_chat.push_with_producer">
 <span class="sig-prename descclassname"><span class="pre">async_chat.</span></span><span class="sig-name descname"><span class="pre">push_with_producer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">producer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asynchat.async_chat.push_with_producer" title="永久链接至目标">¶</a></dt>
-<dd><p>获取一个生产者对象并将其加入到与通道相关联的生产者队列中。 当所有当前已推入的生产者都已被耗尽时通道将通过调用其 <code class="xref py py-meth docutils literal notranslate"><span class="pre">more()</span></code> 方法来耗用此生产者的数据并将数据发送至远程端点。</p>
+<dd><p>Takes a producer object and adds it to the producer queue associated with
+the channel.  When all currently pushed producers have been exhausted the
+channel will consume this producer’s data by calling its <code class="xref py py-meth docutils literal notranslate"><span class="pre">more()</span></code>
+method and send the data to the remote endpoint.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -420,7 +427,7 @@ Please use <a class="reference internal" href="asyncio.html#module-asyncio" titl
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -306,7 +306,9 @@
 <dd><p>解压缩 <em>data</em> (一个 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a>)，返回字节串形式的解压缩数据。 某些 <em>data</em> 可以在内部被缓冲，以便用于后续的 <a class="reference internal" href="#lzma.decompress" title="lzma.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> 调用。 返回的数据应当与之前任何 <a class="reference internal" href="#lzma.decompress" title="lzma.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> 调用的输出进行拼接。</p>
 <p>如果 <em>max_length</em> 为非负数，将返回至多 <em>max_length</em> 个字节的解压缩数据。 如果达到此限制并且可以产生后续输出，则 <a class="reference internal" href="#lzma.LZMADecompressor.needs_input" title="lzma.LZMADecompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> 属性将被设为 <code class="docutils literal notranslate"><span class="pre">False</span></code>。 在这种情况下，下一次 <a class="reference internal" href="#lzma.LZMADecompressor.decompress" title="lzma.LZMADecompressor.decompress"><code class="xref py py-meth docutils literal notranslate"><span class="pre">decompress()</span></code></a> 调用提供的 <em>data</em> 可以为 <code class="docutils literal notranslate"><span class="pre">b''</span></code> 以获取更多的输出。</p>
 <p>如果所有输入数据都已被解压缩并返回（或是因为它少于 <em>max_length</em> 个字节，或是因为 <em>max_length</em> 为负数），则 <a class="reference internal" href="#lzma.LZMADecompressor.needs_input" title="lzma.LZMADecompressor.needs_input"><code class="xref py py-attr docutils literal notranslate"><span class="pre">needs_input</span></code></a> 属性将被设为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p>
-<p>在到达数据流末尾之后再尝试解压缩数据会引发 <cite>EOFError</cite>。 在数据流末尾之后获取的任何数据都会被忽略并存储至 <a class="reference internal" href="#lzma.LZMADecompressor.unused_data" title="lzma.LZMADecompressor.unused_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">unused_data</span></code></a> 属性。</p>
+<p>Attempting to decompress data after the end of stream is reached
+raises an <a class="reference internal" href="exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>.  Any data found after the end of the
+stream is ignored and saved in the <a class="reference internal" href="#lzma.LZMADecompressor.unused_data" title="lzma.LZMADecompressor.unused_data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">unused_data</span></code></a> attribute.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>添加了 <em>max_length</em> 形参。</p>
 </div>
@@ -581,7 +583,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -287,20 +287,21 @@ make install
 </li>
 <li><p>下载、编译并安装 OpenSSL。 请确保你使用 <code class="docutils literal notranslate"><span class="pre">install_sw</span></code> 而不是 <code class="docutils literal notranslate"><span class="pre">install</span></code>。 <code class="docutils literal notranslate"><span class="pre">install_sw</span></code> 的目标不会覆盖 <code class="docutils literal notranslate"><span class="pre">openssl.cnf</span></code>。</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl -O https://www.openssl.org/source/openssl-VERSION.tar.gz
-<span class="gp">   $ </span>tar xzf openssl-VERSION
-<span class="gp">   $ </span><span class="nb">pushd</span> openssl-VERSION
-<span class="gp">   $ </span>./config <span class="se">\</span>
-        --prefix<span class="o">=</span>/usr/local/custom-openssl <span class="se">\</span>
-        --libdir<span class="o">=</span>lib <span class="se">\</span>
-        --openssldir<span class="o">=</span>/etc/ssl
-<span class="gp">   $ </span>make -j1 depend
-<span class="gp">   $ </span>make -j8
-<span class="gp">   $ </span>make install_sw
-<span class="gp">   $ </span><span class="nb">popd</span>
+<span class="gp">$ </span>tar xzf openssl-VERSION
+<span class="gp">$ </span><span class="nb">pushd</span> openssl-VERSION
+<span class="gp">$ </span>./config <span class="se">\</span>
+    --prefix<span class="o">=</span>/usr/local/custom-openssl <span class="se">\</span>
+    --libdir<span class="o">=</span>lib <span class="se">\</span>
+    --openssldir<span class="o">=</span>/etc/ssl
+<span class="gp">$ </span>make -j1 depend
+<span class="gp">$ </span>make -j8
+<span class="gp">$ </span>make install_sw
+<span class="gp">$ </span><span class="nb">popd</span>
 </pre></div>
 </div>
 </li>
-<li><p>使用自定义 OpenSSL 编译 Python（参见配置 <cite>–with-openssl</cite> 和 <cite>–with-openssl-rpath</cite> 选项）</p>
+<li><p>Build Python with custom OpenSSL
+(see the configure <code class="docutils literal notranslate"><span class="pre">--with-openssl</span></code> and <code class="docutils literal notranslate"><span class="pre">--with-openssl-rpath</span></code> options)</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">pushd</span> python-3.x.x
 <span class="gp">$ </span>./configure -C <span class="se">\</span>
     --with-openssl<span class="o">=</span>/usr/local/custom-openssl <span class="se">\</span>
@@ -432,7 +433,7 @@ make install
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

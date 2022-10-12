@@ -140,6 +140,12 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#special-attributes">特殊属性</a></li>
+<li><a class="reference internal" href="#integer-string-conversion-length-limitation">Integer string conversion length limitation</a><ul>
+<li><a class="reference internal" href="#affected-apis">Affected APIs</a></li>
+<li><a class="reference internal" href="#configuring-the-limit">Configuring the limit</a></li>
+<li><a class="reference internal" href="#recommended-configuration">Recommended configuration</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -338,7 +344,18 @@ comparison operators).</p>
 </section>
 <section id="numeric-types-int-float-complex">
 <span id="typesnumeric"></span><h2>数字类型 — <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference internal" href="functions.html#complex" title="complex"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a><a class="headerlink" href="#numeric-types-int-float-complex" title="永久链接至标题">¶</a></h2>
-<p id="index-11">存在三种不同的数字类型: <em class="dfn">整数</em>, <em class="dfn">浮点数</em> 和 <em class="dfn">复数</em>。 此外，布尔值属于整数的子类型。 整数具有无限的精度。 浮点数通常使用 C 中的 <span class="xref c c-texpr"><span class="kt">double</span></span> 来实现；有关你的程序运行所在机器上浮点数的精度和内部表示法可在 <a class="reference internal" href="sys.html#sys.float_info" title="sys.float_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.float_info</span></code></a> 中查看。 复数包含实部和虚部，分别以一个浮点数表示。 要从一个复数 <em>z</em> 中提取这两个部分，可使用 <code class="docutils literal notranslate"><span class="pre">z.real</span></code> 和 <code class="docutils literal notranslate"><span class="pre">z.imag</span></code>。 （标准库包含附加的数字类型，如表示有理数的 <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a> 以及以用户定制精度表示浮点数的 <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a>。）</p>
+<p id="index-11">There are three distinct numeric types: <em class="dfn">integers</em>, <em class="dfn">floating
+point numbers</em>, and <em class="dfn">complex numbers</em>.  In addition, Booleans are a
+subtype of integers.  Integers have unlimited precision.  Floating point
+numbers are usually implemented using <span class="c-expr sig sig-inline c"><span class="kt">double</span></span> in C; information
+about the precision and internal representation of floating point
+numbers for the machine on which your program is running is available
+in <a class="reference internal" href="sys.html#sys.float_info" title="sys.float_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.float_info</span></code></a>.  Complex numbers have a real and imaginary
+part, which are each a floating point number.  To extract these parts
+from a complex number <em>z</em>, use <code class="docutils literal notranslate"><span class="pre">z.real</span></code> and <code class="docutils literal notranslate"><span class="pre">z.imag</span></code>. (The standard
+library includes the additional numeric types <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fractions.Fraction</span></code></a>, for
+rationals, and <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a>, for floating-point numbers with
+user-definable precision.)</p>
 <p id="index-12">数字是由数字字面值或内置函数与运算符的结果来创建的。 不带修饰的整数字面值（包括十六进制、八进制和二进制数）会生成整数。 包含小数点或幂运算符的数字字面值会生成浮点数。 在数字字面值末尾加上 <code class="docutils literal notranslate"><span class="pre">'j'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'J'</span></code> 会生成虚数（实部为零的复数），你可以将其与整数或浮点数相加来得到具有实部和虚部的复数。</p>
 <p id="index-13">Python 完全支持混合运算：当一个二元算术运算符的操作数有不同数值类型时，”较窄”类型的操作数会拓宽到另一个操作数的类型，其中整数比浮点数窄，浮点数比复数窄。不同类型的数字之间的比较，同比较这些数字的精确值一样。<a class="footnote-reference brackets" href="#id13" id="id2">2</a></p>
 <p>构造函数 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-func docutils literal notranslate"><span class="pre">int()</span></code></a>、 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-func docutils literal notranslate"><span class="pre">float()</span></code></a> 和 <a class="reference internal" href="functions.html#complex" title="complex"><code class="xref py py-func docutils literal notranslate"><span class="pre">complex()</span></code></a> 可以用来构造特定类型的数字。</p>
@@ -449,7 +466,7 @@ comparison operators).</p>
 <li><p>float 也接受字符串 “nan” 和附带可选前缀 “+” 或 “-” 的 “inf” 分别表示非数字 (NaN) 以及正或负无穷。</p></li>
 <li><p>Python 将 <code class="docutils literal notranslate"><span class="pre">pow(0,</span> <span class="pre">0)</span></code> 和 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">**</span> <span class="pre">0</span></code> 定义为 <code class="docutils literal notranslate"><span class="pre">1</span></code>，这是编程语言的普遍做法。</p></li>
 <li><p>接受的数字字面值包括数码 <code class="docutils literal notranslate"><span class="pre">0</span></code> 到 <code class="docutils literal notranslate"><span class="pre">9</span></code> 或任何等效的 Unicode 字符（具有 <code class="docutils literal notranslate"><span class="pre">Nd</span></code> 特征属性的代码点）。</p>
-<p>See <a class="reference external" href="https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedNumericType.txt">https://www.unicode.org/Public/14.0.0/ucd/extracted/DerivedNumericType.txt</a>
+<p>See <a class="reference external" href="https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedNumericType.txt">https://www.unicode.org/Public/15.0.0/ucd/extracted/DerivedNumericType.txt</a>
 for a complete list of code points with the <code class="docutils literal notranslate"><span class="pre">Nd</span></code> property.</p>
 </li>
 </ol>
@@ -1221,7 +1238,9 @@ If <em>step</em> is zero, <a class="reference internal" href="exceptions.html#Va
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://code.activestate.com/recipes/579000/">linspace recipe</a> 演示了如何实现一个延迟求值版本的适合浮点数应用的 range 对象。</p></li>
+<li><p>The <a class="reference external" href="https://code.activestate.com/recipes/579000/">linspace recipe</a>
+shows how to implement a lazy version of range suitable for floating
+point applications.</p></li>
 </ul>
 </div>
 </section>
@@ -1963,7 +1982,7 @@ expressions:</p>
 <p>小数点前后的有效数码位数由精度决定，默认为 6。</p>
 </li>
 <li><p>如果精度为 <code class="docutils literal notranslate"><span class="pre">N</span></code>，输出将截短为 <code class="docutils literal notranslate"><span class="pre">N</span></code> 个字符。</p></li>
-<li><p>参见 <span class="target" id="index-73"></span><a class="pep reference external" href="https://peps.python.org/pep-0237/"><strong>PEP 237</strong></a>。</p></li>
+<li><p>参见 <span class="target" id="index-75"></span><a class="pep reference external" href="https://peps.python.org/pep-0237/"><strong>PEP 237</strong></a>。</p></li>
 </ol>
 <p>由于 Python 字符串显式指明长度，<code class="docutils literal notranslate"><span class="pre">%s</span></code> 转换不会将 <code class="docutils literal notranslate"><span class="pre">'\0'</span></code> 视为字符串的结束。</p>
 <div class="versionchanged">
@@ -2020,7 +2039,12 @@ expressions:</p>
 <span class="go">&#39;f0f1f2&#39;</span>
 </pre></div>
 </div>
-<p>如果你希望令十六进制数字符串更易读，你可以指定单个字符分隔符作为 <em>sep</em> 形参包含于输出中。 默认会放在每个字节之间。 第二个可选的 <em>bytes_per_sep</em> 形参控制间距。 正值会从右开始计算分隔符的位置，负值则是从左开始。</p>
+<p>If you want to make the hex string easier to read, you can specify a
+single character separator <em>sep</em> parameter to include in the output.
+By default, this separator will be included between each byte.
+A second optional <em>bytes_per_sep</em> parameter controls the spacing.
+Positive values calculate the separator position from the right,
+negative values from the left.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">value</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xf0\xf1\xf2</span><span class="s1">&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">value</span><span class="o">.</span><span class="n">hex</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
 <span class="go">&#39;f0-f1-f2&#39;</span>
@@ -2905,7 +2929,7 @@ expressions:</p>
 <li><p>如果精度为 <code class="docutils literal notranslate"><span class="pre">N</span></code>，输出将截短为 <code class="docutils literal notranslate"><span class="pre">N</span></code> 个字符。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">b'%s'</span></code> 已弃用，但在 3.x 系列中将不会被移除。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">b'%r'</span></code> 已弃用，但在 3.x 系列中将不会被移除。</p></li>
-<li><p>参见 <span class="target" id="index-74"></span><a class="pep reference external" href="https://peps.python.org/pep-0237/"><strong>PEP 237</strong></a>。</p></li>
+<li><p>参见 <span class="target" id="index-76"></span><a class="pep reference external" href="https://peps.python.org/pep-0237/"><strong>PEP 237</strong></a>。</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -2913,7 +2937,7 @@ expressions:</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-75"></span><a class="pep reference external" href="https://peps.python.org/pep-0461/"><strong>PEP 461</strong></a> - 为 bytes 和 bytearray 添加 % 格式化</p>
+<p><span class="target" id="index-77"></span><a class="pep reference external" href="https://peps.python.org/pep-0461/"><strong>PEP 461</strong></a> - 为 bytes 和 bytearray 添加 % 格式化</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
@@ -2996,7 +3020,7 @@ expressions:</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="memoryview.__eq__">
 <span class="sig-name descname"><span class="pre">__eq__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exporter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#memoryview.__eq__" title="永久链接至目标">¶</a></dt>
-<dd><p>memoryview 与 <span class="target" id="index-76"></span><a class="pep reference external" href="https://peps.python.org/pep-3118/"><strong>PEP 3118</strong></a> 中的导出器这两者如果形状相同，并且如果当使用 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 语法解读操作数的相应格式代码时所有对应值都相同，则它们就是等价的。</p>
+<dd><p>memoryview 与 <span class="target" id="index-78"></span><a class="pep reference external" href="https://peps.python.org/pep-3118/"><strong>PEP 3118</strong></a> 中的导出器这两者如果形状相同，并且如果当使用 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 语法解读操作数的相应格式代码时所有对应值都相同，则它们就是等价的。</p>
 <p>对于 <a class="reference internal" href="#memoryview.tolist" title="memoryview.tolist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tolist()</span></code></a> 当前所支持的 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> 格式字符串子集，如果 <code class="docutils literal notranslate"><span class="pre">v.tolist()</span> <span class="pre">==</span> <span class="pre">w.tolist()</span></code> 则 <code class="docutils literal notranslate"><span class="pre">v</span></code> 和 <code class="docutils literal notranslate"><span class="pre">w</span></code> 相等:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">array</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
@@ -3842,7 +3866,14 @@ expressions:</p>
 </div>
 </dd></dl>
 
-<p>键视图类似于集合，因为其条目不重复且可哈希。 如果所有值都是可哈希的，即 <code class="docutils literal notranslate"><span class="pre">(键,</span> <span class="pre">值)</span></code> 对也是不重复且可哈希的，那么条目视图也会类似于集合。 （值视图则不被视为类似于集合，因其条目通常都是有重复的。） 对于类似于集合的视图，为抽象基类 <a class="reference internal" href="collections.abc.html#collections.abc.Set" title="collections.abc.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Set</span></code></a> 所定义的全部操作都是有效的 (例如 <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> 或 <code class="docutils literal notranslate"><span class="pre">^</span></code>)。</p>
+<p>Keys views are set-like since their entries are unique and hashable.  If all
+values are hashable, so that <code class="docutils literal notranslate"><span class="pre">(key,</span> <span class="pre">value)</span></code> pairs are unique and hashable,
+then the items view is also set-like.  (Values views are not treated as set-like
+since the entries are generally not unique.)  For set-like views, all of the
+operations defined for the abstract base class <a class="reference internal" href="collections.abc.html#collections.abc.Set" title="collections.abc.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">collections.abc.Set</span></code></a> are
+available (for example, <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, or <code class="docutils literal notranslate"><span class="pre">^</span></code>).  While using set operators,
+set-like views accept any iterable as the other operand, unlike sets which only
+accept sets as the input.</p>
 <p>一个使用字典视图的示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dishes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;eggs&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;sausage&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;bacon&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;spam&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span> <span class="o">=</span> <span class="n">dishes</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
@@ -3872,6 +3903,8 @@ expressions:</p>
 <span class="go">{&#39;bacon&#39;}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span> <span class="o">^</span> <span class="p">{</span><span class="s1">&#39;sausage&#39;</span><span class="p">,</span> <span class="s1">&#39;juice&#39;</span><span class="p">}</span>
 <span class="go">{&#39;juice&#39;, &#39;sausage&#39;, &#39;bacon&#39;, &#39;spam&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span> <span class="o">|</span> <span class="p">[</span><span class="s1">&#39;juice&#39;</span><span class="p">,</span> <span class="s1">&#39;juice&#39;</span><span class="p">,</span> <span class="s1">&#39;juice&#39;</span><span class="p">]</span>
+<span class="go">{&#39;juice&#39;, &#39;sausage&#39;, &#39;bacon&#39;, &#39;spam&#39;, &#39;eggs&#39;}</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># get back a read-only proxy for the original dictionary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">values</span><span class="o">.</span><span class="n">mapping</span>
@@ -4101,7 +4134,7 @@ undecorated generator function.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><span class="target" id="index-77"></span><a class="pep reference external" href="https://peps.python.org/pep-0484/"><strong>PEP 484</strong></a> —— 类型提示</dt><dd><p>引入 Python 的类型注解框架。</p>
+<dt><span class="target" id="index-79"></span><a class="pep reference external" href="https://peps.python.org/pep-0484/"><strong>PEP 484</strong></a> —— 类型提示</dt><dd><p>引入 Python 的类型注解框架。</p>
 </dd>
 <dt><span class="target" id="index-57"></span><a class="pep reference external" href="https://peps.python.org/pep-0585/"><strong>PEP 585</strong></a> - Type Hinting Generics In Standard Collections</dt><dd><p>Introducing the ability to natively parameterize standard-library
 classes, provided they implement the special class method
@@ -4214,7 +4247,7 @@ parameterized at runtime and understood by static type-checkers.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-78"></span><a class="pep reference external" href="https://peps.python.org/pep-0604/"><strong>PEP 604</strong></a> —— 提出了 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span></code> 语法和 union 类型。</p>
+<p><span class="target" id="index-80"></span><a class="pep reference external" href="https://peps.python.org/pep-0604/"><strong>PEP 604</strong></a> —— 提出了 <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">|</span> <span class="pre">Y</span></code> 语法和 union 类型。</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
@@ -4356,6 +4389,150 @@ parameterized at runtime and understood by static type-checkers.</p>
 </div>
 </dd></dl>
 
+</section>
+<section id="integer-string-conversion-length-limitation">
+<span id="int-max-str-digits"></span><h2>Integer string conversion length limitation<a class="headerlink" href="#integer-string-conversion-length-limitation" title="永久链接至标题">¶</a></h2>
+<p>CPython has a global limit for converting between <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
+to mitigate denial of service attacks. This limit <em>only</em> applies to decimal or
+other non-power-of-two number bases. Hexadecimal, octal, and binary conversions
+are unlimited. The limit can be configured.</p>
+<p>The <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> type in CPython is an abitrary length number stored in binary
+form (commonly known as a “bignum”). There exists no algorithm that can convert
+a string to a binary integer or a binary integer to a string in linear time,
+<em>unless</em> the base is a power of 2. Even the best known algorithms for base 10
+have sub-quadratic complexity. Converting a large value such as <code class="docutils literal notranslate"><span class="pre">int('1'</span> <span class="pre">*</span>
+<span class="pre">500_000)</span></code> can take over a second on a fast CPU.</p>
+<p>Limiting conversion size offers a practical way to avoid <a class="reference external" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-10735">CVE-2020-10735</a>.</p>
+<p>The limit is applied to the number of digit characters in the input or output
+string when a non-linear conversion algorithm would be involved.  Underscores
+and the sign are not counted towards the limit.</p>
+<p>When an operation would exceed the limit, a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">set_int_max_str_digits</span><span class="p">(</span><span class="mi">4300</span><span class="p">)</span>  <span class="c1"># Illustrative, this is the default.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;2&#39;</span> <span class="o">*</span> <span class="mi">5432</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Exceeds the limit (4300) for integer string conversion: value has 5432 digits; use sys.set_int_max_str_digits() to increase the limit.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;2&#39;</span> <span class="o">*</span> <span class="mi">4300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="go">4300</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_squared</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i_squared</span><span class="p">))</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="c">...</span>
+<span class="gr">ValueError</span>: <span class="n">Exceeds the limit (4300) for integer string conversion: value has 8599 digits; use sys.set_int_max_str_digits() to increase the limit.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">i_squared</span><span class="p">))</span>
+<span class="go">7144</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">i_squared</span><span class="p">),</span> <span class="n">base</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span>  <span class="c1"># Hexadecimal is unlimited.</span>
+</pre></div>
+</div>
+<p>The default limit is 4300 digits as provided in
+<a class="reference internal" href="sys.html#sys.int_info" title="sys.int_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.default_max_str_digits</span></code></a>.
+The lowest limit that can be configured is 640 digits as provided in
+<a class="reference internal" href="sys.html#sys.int_info" title="sys.int_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.str_digits_check_threshold</span></code></a>.</p>
+<p>Verification:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">sys</span><span class="o">.</span><span class="n">int_info</span><span class="o">.</span><span class="n">default_max_str_digits</span> <span class="o">==</span> <span class="mi">4300</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">int_info</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">sys</span><span class="o">.</span><span class="n">int_info</span><span class="o">.</span><span class="n">str_digits_check_threshold</span> <span class="o">==</span> <span class="mi">640</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">int_info</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s1">&#39;578966293710682886880994035146873798396722250538762761564&#39;</span>
+<span class="gp">... </span>          <span class="s1">&#39;9252925514383915483333812743580549779436104706260696366600&#39;</span>
+<span class="gp">... </span>          <span class="s1">&#39;571186405732&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">53</span><span class="p">,</span> <span class="s1">&#39;big&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+<section id="affected-apis">
+<h3>Affected APIs<a class="headerlink" href="#affected-apis" title="永久链接至标题">¶</a></h3>
+<p>The limitation only applies to potentially slow conversions between <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>
+and <a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> or <a class="reference internal" href="#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int(string)</span></code> with default base 10.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int(string,</span> <span class="pre">base)</span></code> for all bases that are not a power of 2.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str(integer)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">repr(integer)</span></code></p></li>
+<li><p>any other string conversion to base 10, for example <code class="docutils literal notranslate"><span class="pre">f&quot;{integer}&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;{}&quot;.format(integer)</span></code>, or <code class="docutils literal notranslate"><span class="pre">b&quot;%d&quot;</span> <span class="pre">%</span> <span class="pre">integer</span></code>.</p></li>
+</ul>
+<p>The limitations do not apply to functions with a linear algorithm:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int(string,</span> <span class="pre">base)</span></code> with base 2, 4, 8, 16, or 32.</p></li>
+<li><p><a class="reference internal" href="#int.from_bytes" title="int.from_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">int.from_bytes()</span></code></a> and <a class="reference internal" href="#int.to_bytes" title="int.to_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">int.to_bytes()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="functions.html#hex" title="hex"><code class="xref py py-func docutils literal notranslate"><span class="pre">hex()</span></code></a>, <a class="reference internal" href="functions.html#oct" title="oct"><code class="xref py py-func docutils literal notranslate"><span class="pre">oct()</span></code></a>, <a class="reference internal" href="functions.html#bin" title="bin"><code class="xref py py-func docutils literal notranslate"><span class="pre">bin()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="string.html#formatspec"><span class="std std-ref">格式规格迷你语言</span></a> for hex, octal, and binary numbers.</p></li>
+<li><p><a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a>.</p></li>
+</ul>
+</section>
+<section id="configuring-the-limit">
+<h3>Configuring the limit<a class="headerlink" href="#configuring-the-limit" title="永久链接至标题">¶</a></h3>
+<p>Before Python starts up you can use an environment variable or an interpreter
+command line flag to configure the limit:</p>
+<ul class="simple">
+<li><p><span class="target" id="index-67"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONINTMAXSTRDIGITS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONINTMAXSTRDIGITS</span></code></a>, e.g.
+<code class="docutils literal notranslate"><span class="pre">PYTHONINTMAXSTRDIGITS=640</span> <span class="pre">python3</span></code> to set the limit to 640 or
+<code class="docutils literal notranslate"><span class="pre">PYTHONINTMAXSTRDIGITS=0</span> <span class="pre">python3</span></code> to disable the limitation.</p></li>
+<li><p><a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span> <span class="pre">int_max_str_digits</span></code></a>, e.g.
+<code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-X</span> <span class="pre">int_max_str_digits=640</span></code></p></li>
+<li><p><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.flags.int_max_str_digits</span></code> contains the value of
+<span class="target" id="index-68"></span><a class="reference internal" href="../using/cmdline.html#envvar-PYTHONINTMAXSTRDIGITS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PYTHONINTMAXSTRDIGITS</span></code></a> or <a class="reference internal" href="../using/cmdline.html#cmdoption-X"><code class="xref std std-option docutils literal notranslate"><span class="pre">-X</span> <span class="pre">int_max_str_digits</span></code></a>.
+If both the env var and the <code class="docutils literal notranslate"><span class="pre">-X</span></code> option are set, the <code class="docutils literal notranslate"><span class="pre">-X</span></code> option takes
+precedence. A value of <em>-1</em> indicates that both were unset, thus a value of
+<code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.default_max_str_digits</span></code> was used during initilization.</p></li>
+</ul>
+<p>From code, you can inspect the current limit and set a new one using these
+<a class="reference internal" href="sys.html#module-sys" title="sys: Access system-specific parameters and functions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sys</span></code></a> APIs:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="sys.html#sys.get_int_max_str_digits" title="sys.get_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.get_int_max_str_digits()</span></code></a> and <a class="reference internal" href="sys.html#sys.set_int_max_str_digits" title="sys.set_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.set_int_max_str_digits()</span></code></a> are
+a getter and setter for the interpreter-wide limit. Subinterpreters have
+their own limit.</p></li>
+</ul>
+<p>Information about the default and minimum can be found in <a class="reference internal" href="sys.html#sys.int_info" title="sys.int_info"><code class="xref py py-attr docutils literal notranslate"><span class="pre">sys.int_info</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="sys.html#sys.int_info" title="sys.int_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.default_max_str_digits</span></code></a> is the compiled-in
+default limit.</p></li>
+<li><p><a class="reference internal" href="sys.html#sys.int_info" title="sys.int_info"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.str_digits_check_threshold</span></code></a> is the lowest
+accepted value for the limit (other than 0 which disables it).</p></li>
+</ul>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">小心</p>
+<p>Setting a low limit <em>can</em> lead to problems. While rare, code exists that
+contains integer constants in decimal in their source that exceed the
+minimum threshold. A consequence of setting the limit is that Python source
+code containing decimal integer literals longer than the limit will
+encounter an error during parsing, usually at startup time or import time or
+even at installation time - anytime an up to date <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> does not already
+exist for the code. A workaround for source that contains such large
+constants is to convert them to <code class="docutils literal notranslate"><span class="pre">0x</span></code> hexadecimal form as it has no limit.</p>
+<p>Test your application thoroughly if you use a low limit. Ensure your tests
+run with the limit set early via the environment or flag so that it applies
+during startup and even during any installation step that may invoke Python
+to precompile <code class="docutils literal notranslate"><span class="pre">.py</span></code> sources to <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files.</p>
+</div>
+</section>
+<section id="recommended-configuration">
+<h3>Recommended configuration<a class="headerlink" href="#recommended-configuration" title="永久链接至标题">¶</a></h3>
+<p>The default <code class="xref py py-data docutils literal notranslate"><span class="pre">sys.int_info.default_max_str_digits</span></code> is expected to be
+reasonable for most applications. If your application requires a different
+limit, set it from your main entry point using Python version agnostic code as
+these APIs were added in security patch releases in versions before 3.12.</p>
+<p>Example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s2">&quot;set_int_max_str_digits&quot;</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">upper_bound</span> <span class="o">=</span> <span class="mi">68000</span>
+<span class="gp">... </span>    <span class="n">lower_bound</span> <span class="o">=</span> <span class="mi">4004</span>
+<span class="gp">... </span>    <span class="n">current_limit</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">get_int_max_str_digits</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">current_limit</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">current_limit</span> <span class="o">&gt;</span> <span class="n">upper_bound</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">sys</span><span class="o">.</span><span class="n">set_int_max_str_digits</span><span class="p">(</span><span class="n">upper_bound</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">elif</span> <span class="n">current_limit</span> <span class="o">&lt;</span> <span class="n">lower_bound</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">sys</span><span class="o">.</span><span class="n">set_int_max_str_digits</span><span class="p">(</span><span class="n">lower_bound</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you need to disable it entirely, set it to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -4374,6 +4551,7 @@ parameterized at runtime and understood by static type-checkers.</p>
 <dd><p>若只是要格式化一个元组，则应提供一个单例元组，其中只包含一个元素，就是需要格式化的那个元组。</p>
 </dd>
 </dl>
+</section>
 </section>
 </section>
 
@@ -4454,6 +4632,12 @@ parameterized at runtime and understood by static type-checkers.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#special-attributes">特殊属性</a></li>
+<li><a class="reference internal" href="#integer-string-conversion-length-limitation">Integer string conversion length limitation</a><ul>
+<li><a class="reference internal" href="#affected-apis">Affected APIs</a></li>
+<li><a class="reference internal" href="#configuring-the-limit">Configuring the limit</a></li>
+<li><a class="reference internal" href="#recommended-configuration">Recommended configuration</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -4546,7 +4730,7 @@ parameterized at runtime and understood by static type-checkers.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

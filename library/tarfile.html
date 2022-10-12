@@ -255,7 +255,9 @@ if it already exists.</p></td>
 </table>
 <p>请注意 <code class="docutils literal notranslate"><span class="pre">'a:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'a:bz2'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'a:xz'</span></code> 是不可能的组合。 如果 <em>mode</em> 不适用于打开特定（压缩的）文件用于读取，则会引发 <a class="reference internal" href="#tarfile.ReadError" title="tarfile.ReadError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ReadError</span></code></a>。 请使用 <em>mode</em> <code class="docutils literal notranslate"><span class="pre">'r'</span></code> 来避免这种情况。 如果某种压缩方法不受支持，则会引发 <a class="reference internal" href="#tarfile.CompressionError" title="tarfile.CompressionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CompressionError</span></code></a>。</p>
 <p>如果指定了 <em>fileobj</em>，它会被用作对应于 <em>name</em> 的以二进制模式打开的 <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">file object</span></a> 的替代。 它会被设定为处在位置 0。</p>
-<p>对于 <code class="docutils literal notranslate"><span class="pre">'w:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'r:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w:bz2'</span></code>, <code class="docutils literal notranslate"><span class="pre">'r:bz2'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x:bz2'</span></code> 等模式，<a class="reference internal" href="#tarfile.open" title="tarfile.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">tarfile.open()</span></code></a> 接受关键字参数 <em>compresslevel</em> (默认值为 <code class="docutils literal notranslate"><span class="pre">9</span></code>) 来指定文件的压缩等级。</p>
+<p>For modes <code class="docutils literal notranslate"><span class="pre">'w:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x:gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w|gz'</span></code>, <code class="docutils literal notranslate"><span class="pre">'w:bz2'</span></code>, <code class="docutils literal notranslate"><span class="pre">'x:bz2'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'w|bz2'</span></code>, <a class="reference internal" href="#tarfile.open" title="tarfile.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">tarfile.open()</span></code></a> accepts the keyword argument
+<em>compresslevel</em> (default <code class="docutils literal notranslate"><span class="pre">9</span></code>) to specify the compression level of the file.</p>
 <p>对于 <code class="docutils literal notranslate"><span class="pre">'w:xz'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'x:xz'</span></code> 模式，<a class="reference internal" href="#tarfile.open" title="tarfile.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">tarfile.open()</span></code></a> 接受关键字参数 <em>preset</em> 来指定文件的压缩等级。</p>
 <p>针对特殊的目的，还存在第二种 <em>mode</em> 格式: <code class="docutils literal notranslate"><span class="pre">'filemode|[compression]'</span></code>。 <a class="reference internal" href="#tarfile.open" title="tarfile.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">tarfile.open()</span></code></a> 将返回一个将其数据作为数据块流来处理的 <a class="reference internal" href="#tarfile.TarFile" title="tarfile.TarFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">TarFile</span></code></a> 对象。 对此文件将不能执行随机查找。 如果给定了 <em>fileobj</em>，它可以是任何具有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code> 或 <code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code> 方法 (由 <em>mode</em> 确定) 的对象。 <em>bufsize</em> 指定块大小，默认值为 <code class="docutils literal notranslate"><span class="pre">20</span> <span class="pre">*</span> <span class="pre">512</span></code> 字节。 可与此格式组合使用的有 <code class="docutils literal notranslate"><span class="pre">sys.stdin</span></code>, 套接字 <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">file object</span></a> 或磁带设备等。 但是，对于这样的 <a class="reference internal" href="#tarfile.TarFile" title="tarfile.TarFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">TarFile</span></code></a> 对象存在不允许随机访问的限制，参见 <a class="reference internal" href="#tar-examples"><span class="std std-ref">例子</span></a>。 目前可用的模式如下:</p>
 <table class="docutils align-default">
@@ -303,6 +305,9 @@ if it already exists.</p></td>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span><em>name</em> 形参接受一个 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The <em>compresslevel</em> keyword argument also works for streams.</p>
 </div>
 </dd></dl>
 
@@ -868,7 +873,13 @@ if it already exists.</p></td>
 <ul>
 <li><p>The POSIX.1-1988 ustar 格式 (<a class="reference internal" href="#tarfile.USTAR_FORMAT" title="tarfile.USTAR_FORMAT"><code class="xref py py-const docutils literal notranslate"><span class="pre">USTAR_FORMAT</span></code></a>)。 它支持最多 256 个字符的文件名长度和最多 100 个字符的链接名长度。 文件大小上限为 8 GiB。 这是一种老旧但广受支持的格式。</p></li>
 <li><p>GNU tar 格式 (<a class="reference internal" href="#tarfile.GNU_FORMAT" title="tarfile.GNU_FORMAT"><code class="xref py py-const docutils literal notranslate"><span class="pre">GNU_FORMAT</span></code></a>)。 它支持长文件名和链接名、大于 8 GiB 的文件以及稀疏文件。 它是 GNU/Linux 系统上的事实标准。 <a class="reference internal" href="#module-tarfile" title="tarfile: Read and write tar-format archive files."><code class="xref py py-mod docutils literal notranslate"><span class="pre">tarfile</span></code></a> 完全支持针对长名称的 GNU tar 扩展，稀疏文件支持则限制为只读。</p></li>
-<li><p>POSIX.1-2001 pax 格式 (<a class="reference internal" href="#tarfile.PAX_FORMAT" title="tarfile.PAX_FORMAT"><code class="xref py py-const docutils literal notranslate"><span class="pre">PAX_FORMAT</span></code></a>)。 它是几乎无限制的最灵活格式。 它支持长文件名和链接名，大文件以及使用便捷方式存储路径名。 现代的 tar 实现，包括 GNU tar, bsdtar/libarchive 和 star，完全支持扩展 <em>pax</em> 特性；某些老旧或不维护的库可能不受支持，但应当会将 <em>pax</em> 归档视为广受支持的 <em>ustar</em> 格式。 这是目前新建归档的默认格式。</p>
+<li><p>The POSIX.1-2001 pax format (<a class="reference internal" href="#tarfile.PAX_FORMAT" title="tarfile.PAX_FORMAT"><code class="xref py py-const docutils literal notranslate"><span class="pre">PAX_FORMAT</span></code></a>). It is the most flexible
+format with virtually no limits. It supports long filenames and linknames, large
+files and stores pathnames in a portable way. Modern tar implementations,
+including GNU tar, bsdtar/libarchive and star, fully support extended <em>pax</em>
+features; some old or unmaintained libraries may not, but should treat
+<em>pax</em> archives as if they were in the universally supported <em>ustar</em> format.
+It is the current default format for new archives.</p>
 <p>它扩展了现有的 <em>ustar</em> 格式，包括用于无法以其他方式存储的附加标头。 存在两种形式的 pax 标头：扩展标头只影响后续的文件标头，全局标头则适用于完整归档并会影响所有后续的文件。 为了便于移植，在 pax 标头中的所有数据均以 <em>UTF-8</em> 编码。</p>
 </li>
 </ul>
@@ -1001,7 +1012,7 @@ if it already exists.</p></td>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

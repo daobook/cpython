@@ -205,6 +205,12 @@
 <p>返回的 <em>reader</em> 和 <em>writer</em> 对象是 <a class="reference internal" href="#asyncio.StreamReader" title="asyncio.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a> 和 <a class="reference internal" href="#asyncio.StreamWriter" title="asyncio.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a> 类的实例。</p>
 <p><em>limit</em> 确定返回的 <a class="reference internal" href="#asyncio.StreamReader" title="asyncio.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a> 实例使用的缓冲区大小限制。默认情况下，<em>limit</em> 设置为 64 KiB 。</p>
 <p>其余的参数直接传递到 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_connection" title="asyncio.loop.create_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_connection()</span></code></a> 。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+<a class="reference internal" href="#asyncio.StreamWriter" title="asyncio.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a> created. To close the socket, call its
+<a class="reference internal" href="#asyncio.StreamWriter.close" title="asyncio.StreamWriter.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> parameter.</p>
 </div>
@@ -224,6 +230,12 @@
 <p><em>client_connected_cb</em> 即可以是普通的可调用对象也可以是一个 <a class="reference internal" href="asyncio-task.html#coroutine"><span class="std std-ref">协程函数</span></a>; 如果它是一个协程函数，它将自动作为 <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> 被调度。</p>
 <p><em>limit</em> 确定返回的 <a class="reference internal" href="#asyncio.StreamReader" title="asyncio.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a> 实例使用的缓冲区大小限制。默认情况下，<em>limit</em> 设置为 64 KiB 。</p>
 <p>余下的参数将会直接传递给 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_server" title="asyncio.loop.create_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_server()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+server created. To close the socket, call the server’s
+<a class="reference internal" href="asyncio-eventloop.html#asyncio.Server.close" title="asyncio.Server.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> and <em>start_serving</em> parameters.</p>
 </div>
@@ -239,6 +251,12 @@
 <dd><p>建立一个 Unix 套接字连接并返回 <code class="docutils literal notranslate"><span class="pre">(reader,</span> <span class="pre">writer)</span></code> 这对返回值。</p>
 <p>与 <a class="reference internal" href="#asyncio.open_connection" title="asyncio.open_connection"><code class="xref py py-func docutils literal notranslate"><span class="pre">open_connection()</span></code></a> 相似，但是是在 Unix 套接字上的操作。</p>
 <p>请看文档 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_unix_connection" title="asyncio.loop.create_unix_connection"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_unix_connection()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+<a class="reference internal" href="#asyncio.StreamWriter" title="asyncio.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a> created. To close the socket, call its
+<a class="reference internal" href="#asyncio.StreamWriter.close" title="asyncio.StreamWriter.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> parameter.
@@ -255,6 +273,12 @@ The <em>path</em> parameter can now be a <a class="reference internal" href="../
 <dd><p>启动一个 Unix 套接字服务。</p>
 <p>与 <a class="reference internal" href="#asyncio.start_server" title="asyncio.start_server"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_server()</span></code></a> 相似，但是是在 Unix 套接字上的操作。</p>
 <p>请看文档 <a class="reference internal" href="asyncio-eventloop.html#asyncio.loop.create_unix_server" title="asyncio.loop.create_unix_server"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.create_unix_server()</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+server created. To close the socket, call the server’s
+<a class="reference internal" href="asyncio-eventloop.html#asyncio.Server.close" title="asyncio.Server.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>Added the <em>ssl_handshake_timeout</em> and <em>start_serving</em> parameters.
@@ -700,7 +724,7 @@ if <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

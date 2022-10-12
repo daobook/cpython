@@ -27,7 +27,7 @@
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
     <link rel="next" title="调试和分析" href="debug.html" />
-    <link rel="prev" title="2to3 - 自动将 Python 2 代码转为 Python 3 代码" href="2to3.html" />
+    <link rel="prev" title="2to3 — Automated Python 2 to 3 code translation" href="2to3.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/test.html" />
     
       
@@ -92,7 +92,7 @@
   <div>
     <h4>上一个主题</h4>
     <p class="topless"><a href="2to3.html"
-                          title="上一章">2to3 - 自动将 Python 2 代码转为 Python 3 代码</a></p>
+                          title="上一章">2to3 — Automated Python 2 to 3 code translation</a></p>
   </div>
   <div>
     <h4>下一个主题</h4>
@@ -128,7 +128,7 @@
           <a href="debug.html" title="调试和分析"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
-          <a href="2to3.html" title="2to3 - 自动将 Python 2 代码转为 Python 3 代码"
+          <a href="2to3.html" title="2to3 — Automated Python 2 to 3 code translation"
              accesskey="P">上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -973,6 +973,13 @@ macOS version is less than the minimum, the test is skipped.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="test.support.requires_limited_api">
+<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">test.support.</span></span><span class="sig-name descname"><span class="pre">requires_limited_api</span></span><a class="headerlink" href="#test.support.requires_limited_api" title="永久链接至目标">¶</a></dt>
+<dd><p>Decorator for only running the test if <a class="reference internal" href="../c-api/stable.html#stable"><span class="std std-ref">Limited C API</span></a>
+is available.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="test.support.cpython_only">
 <span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">test.support.</span></span><span class="sig-name descname"><span class="pre">cpython_only</span></span><a class="headerlink" href="#test.support.cpython_only" title="永久链接至目标">¶</a></dt>
 <dd><p>Decorator for tests only applicable to CPython.</p>
@@ -1201,6 +1208,18 @@ an <a class="reference internal" href="exceptions.html#OSError" title="OSError">
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="test.support.adjust_int_max_str_digits">
+<span class="sig-prename descclassname"><span class="pre">test.support.</span></span><span class="sig-name descname"><span class="pre">adjust_int_max_str_digits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_digits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.support.adjust_int_max_str_digits" title="永久链接至目标">¶</a></dt>
+<dd><p>This function returns a context manager that will change the global
+<a class="reference internal" href="sys.html#sys.set_int_max_str_digits" title="sys.set_int_max_str_digits"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.set_int_max_str_digits()</span></code></a> setting for the duration of the
+context to allow execution of test code that needs a different limit
+on the number of digits when converting between an integer and string.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.11 新版功能.</span></p>
+</div>
+</dd></dl>
+
 <p>The <a class="reference internal" href="#module-test.support" title="test.support: Support for Python's regression test suite."><code class="xref py py-mod docutils literal notranslate"><span class="pre">test.support</span></code></a> module defines the following classes:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="test.support.SuppressCrashReport">
@@ -1311,7 +1330,7 @@ test.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="test.support.socket_helper.bind_unix_socket">
 <span class="sig-prename descclassname"><span class="pre">test.support.socket_helper.</span></span><span class="sig-name descname"><span class="pre">bind_unix_socket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#test.support.socket_helper.bind_unix_socket" title="永久链接至目标">¶</a></dt>
-<dd><p>Bind a unix socket, raising <a class="reference internal" href="unittest.html#unittest.SkipTest" title="unittest.SkipTest"><code class="xref py py-exc docutils literal notranslate"><span class="pre">unittest.SkipTest</span></code></a> if
+<dd><p>Bind a Unix socket, raising <a class="reference internal" href="unittest.html#unittest.SkipTest" title="unittest.SkipTest"><code class="xref py py-exc docutils literal notranslate"><span class="pre">unittest.SkipTest</span></code></a> if
 <a class="reference internal" href="exceptions.html#PermissionError" title="PermissionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PermissionError</span></code></a> is raised.</p>
 </dd></dl>
 
@@ -2005,7 +2024,7 @@ warnings directly.</p>
   <div>
     <h4>上一个主题</h4>
     <p class="topless"><a href="2to3.html"
-                          title="上一章">2to3 - 自动将 Python 2 代码转为 Python 3 代码</a></p>
+                          title="上一章">2to3 — Automated Python 2 to 3 code translation</a></p>
   </div>
   <div>
     <h4>下一个主题</h4>
@@ -2040,7 +2059,7 @@ warnings directly.</p>
           <a href="debug.html" title="调试和分析"
              >下一页</a> |</li>
         <li class="right" >
-          <a href="2to3.html" title="2to3 - 自动将 Python 2 代码转为 Python 3 代码"
+          <a href="2to3.html" title="2to3 — Automated Python 2 to 3 code translation"
              >上一页</a> |</li>
 
           <li><img src="../_static/py.svg" alt="python logo" style="vertical-align: middle; margin-top: -1px"/></li>
@@ -2090,7 +2109,7 @@ warnings directly.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

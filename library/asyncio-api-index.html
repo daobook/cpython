@@ -181,40 +181,51 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="asyncio-runner.html#asyncio.run" title="asyncio.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a></p></td>
 <td><p>创建事件循环，运行一个协程，关闭事件循环。</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_task()</span></code></a></p></td>
-<td><p>启动一个asyncio的Task对象。</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="asyncio-runner.html#asyncio.Runner" title="asyncio.Runner"><code class="xref py py-class docutils literal notranslate"><span class="pre">Runner</span></code></a></p></td>
+<td><p>A context manager that simplifies multiple async function calls.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.sleep" title="asyncio.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">sleep()</span></code></a></p></td>
-<td><p>休眠几秒。</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p></td>
+<td><p>Task对象</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.gather" title="asyncio.gather"><code class="xref py py-func docutils literal notranslate"><span class="pre">gather()</span></code></a></p></td>
-<td><p>并发执行所有事件的调度和等待。</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.TaskGroup" title="asyncio.TaskGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">TaskGroup</span></code></a></p></td>
+<td><p>A context manager that holds a group of tasks. Provides
+a convenient and reliable way to wait for all tasks in the group to
+finish.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.wait_for" title="asyncio.wait_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait_for()</span></code></a></p></td>
-<td><p>有超时控制的运行。</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.shield" title="asyncio.shield"><code class="xref py py-func docutils literal notranslate"><span class="pre">shield()</span></code></a></p></td>
-<td><p>屏蔽取消操作</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.wait" title="asyncio.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait()</span></code></a></p></td>
-<td><p>完成情况的监控器</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.create_task" title="asyncio.create_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_task()</span></code></a></p></td>
+<td><p>Start an asyncio Task, then returns it.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.current_task" title="asyncio.current_task"><code class="xref py py-func docutils literal notranslate"><span class="pre">current_task()</span></code></a></p></td>
 <td><p>返回当前Task对象</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.all_tasks" title="asyncio.all_tasks"><code class="xref py py-func docutils literal notranslate"><span class="pre">all_tasks()</span></code></a></p></td>
-<td><p>返回事件循环中所有的task对象。</p></td>
+<td><p>Return all tasks that are not yet finished for an event loop.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p></td>
-<td><p>Task对象</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.sleep" title="asyncio.sleep"><code class="xref py py-func docutils literal notranslate"><span class="pre">sleep()</span></code></a></p></td>
+<td><p>休眠几秒。</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.to_thread" title="asyncio.to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_thread()</span></code></a></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.gather" title="asyncio.gather"><code class="xref py py-func docutils literal notranslate"><span class="pre">gather()</span></code></a></p></td>
+<td><p>并发执行所有事件的调度和等待。</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.wait_for" title="asyncio.wait_for"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait_for()</span></code></a></p></td>
+<td><p>有超时控制的运行。</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.shield" title="asyncio.shield"><code class="xref py py-func docutils literal notranslate"><span class="pre">shield()</span></code></a></p></td>
+<td><p>屏蔽取消操作</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">await</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.wait" title="asyncio.wait"><code class="xref py py-func docutils literal notranslate"><span class="pre">wait()</span></code></a></p></td>
+<td><p>完成情况的监控器</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.timeout" title="asyncio.timeout"><code class="xref py py-func docutils literal notranslate"><span class="pre">timeout()</span></code></a></p></td>
+<td><p>Run with a timeout. Useful in cases when <cite>wait_for</cite> is not suitable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.to_thread" title="asyncio.to_thread"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_thread()</span></code></a></p></td>
 <td><p>在不同的 OS 线程中异步地运行一个函数。</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.run_coroutine_threadsafe" title="asyncio.run_coroutine_threadsafe"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_coroutine_threadsafe()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="asyncio-task.html#asyncio.run_coroutine_threadsafe" title="asyncio.run_coroutine_threadsafe"><code class="xref py py-func docutils literal notranslate"><span class="pre">run_coroutine_threadsafe()</span></code></a></p></td>
 <td><p>从其他OS线程中调度一个协程。</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">in</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.as_completed" title="asyncio.as_completed"><code class="xref py py-func docutils literal notranslate"><span class="pre">as_completed()</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">in</span></code> <a class="reference internal" href="asyncio-task.html#asyncio.as_completed" title="asyncio.as_completed"><code class="xref py py-func docutils literal notranslate"><span class="pre">as_completed()</span></code></a></p></td>
 <td><p>用 <code class="docutils literal notranslate"><span class="pre">for</span></code> 循环监控完成情况。</p></td>
 </tr>
 </tbody>
@@ -483,7 +494,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -343,9 +343,15 @@ of sending some text to the screen or pausing execution for a second.</p>
 </pre></div>
 </div>
 <p>集合可以从可遍历的对象获取内容，也可以让你遍历集合的元素:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">}</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">S</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="go">3</span>
+<span class="go">5</span>
+<span class="go">7</span>
+<span class="go">11</span>
+<span class="go">13</span>
 </pre></div>
 </div>
 </section>
@@ -354,18 +360,18 @@ of sending some text to the screen or pausing execution for a second.</p>
 <h2>生成器表达式和列表推导式<a class="headerlink" href="#generator-expressions-and-list-comprehensions" title="永久链接至标题">¶</a></h2>
 <p>迭代器的输出有两个很常见的使用方式，1) 对每一个元素执行操作，2) 选择一个符合条件的元素子集。比如，给定一个字符串列表，你可能想去掉每个字符串尾部的空白字符，或是选出所有包含给定子串的字符串。</p>
 <p>列表推导式和生成器表达时（简写：”listcomps” 和 “genexps”）让这些操作更加简明，这个形式借鉴自函数式程序语言 Haskell（<a class="reference external" href="https://www.haskell.org/">https://www.haskell.org/</a>）。你可以用以下代码去掉一个字符串流中的所有空白字符:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">line_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;  line 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;line 2  </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">line_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;  line 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;line 2  </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span>
 
-<span class="c1"># Generator expression -- returns iterator</span>
-<span class="n">stripped_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generator expression -- returns iterator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_iter</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">)</span>
 
-<span class="c1"># List comprehension -- returns list</span>
-<span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># List comprehension -- returns list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>你可以加上条件语句 <code class="docutils literal notranslate"><span class="pre">&quot;if&quot;</span></code> 来选取特定的元素:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span>
-                 <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stripped_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">line_list</span>
+<span class="gp">... </span>                 <span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>通过列表推导式，你会获得一个 Python 列表；<code class="docutils literal notranslate"><span class="pre">stripped_list</span></code> 就是一个包含所有结果行的列表，并不是迭代器。 生成器表达式会返回一个迭代器，它在必要的时候计算结果，避免一次性生成所有的值。 这意味着，如果迭代器返回一个无限数据流或者大量的数据，列表推导式就不太好用了。 这种情况下生成器表达式会更受青睐。</p>
@@ -374,7 +380,8 @@ of sending some text to the screen or pausing execution for a second.</p>
              <span class="k">if</span> <span class="n">condition1</span>
              <span class="k">for</span> <span class="n">expr2</span> <span class="ow">in</span> <span class="n">sequence2</span>
              <span class="k">if</span> <span class="n">condition2</span>
-             <span class="k">for</span> <span class="n">expr3</span> <span class="ow">in</span> <span class="n">sequence3</span> <span class="o">...</span>
+             <span class="k">for</span> <span class="n">expr3</span> <span class="ow">in</span> <span class="n">sequence3</span>
+             <span class="o">...</span>
              <span class="k">if</span> <span class="n">condition3</span>
              <span class="k">for</span> <span class="n">exprN</span> <span class="ow">in</span> <span class="n">sequenceN</span>
              <span class="k">if</span> <span class="n">conditionN</span> <span class="p">)</span>
@@ -610,7 +617,9 @@ raise an exception inside the generator; the exception is raised by the
 </section>
 <section id="the-itertools-module">
 <h2>itertools 模块<a class="headerlink" href="#the-itertools-module" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> 模块包含很多常用的迭代器以及用来组合迭代器的函数。本节会用些小的例子来介绍这个模块的内容。</p>
+<p>The <a class="reference internal" href="../library/itertools.html#module-itertools" title="itertools: Functions creating iterators for efficient looping."><code class="xref py py-mod docutils literal notranslate"><span class="pre">itertools</span></code></a> module contains a number of commonly used iterators as well
+as functions for combining several iterators.  This section will introduce the
+module’s contents by showing small examples.</p>
 <p>这个模块里的函数大致可以分为几类：</p>
 <ul class="simple">
 <li><p>从已有的迭代器创建新的迭代器的函数。</p></li>
@@ -934,14 +943,19 @@ raise an exception inside the generator; the exception is raised by the
 <section id="general">
 <h3>通用文献<a class="headerlink" href="#general" title="永久链接至标题">¶</a></h3>
 <p><strong>Structure and Interpretation of Computer Programs</strong>, Harold Abelson, Gerald Jay Sussman 和 Julie Sussman 著。全文可见 <a class="reference external" href="https://mitpress.mit.edu/sicp/">https://mitpress.mit.edu/sicp/</a> 。在这部计算机科学的经典教科书中，第二和第三章讨论了使用序列和流来组织程序内部的数据传递。书中的示例采用 Scheme 语言，但其中这些章节中描述的很多设计方法同样适用于函数式风格的 Python 代码。</p>
-<p><a class="reference external" href="http://www.defmacro.org/ramblings/fp.html">http://www.defmacro.org/ramblings/fp.html</a>: 一个使用 Java 示例的函数式编程的总体介绍，有很长的历史说明。</p>
+<p><a class="reference external" href="https://www.defmacro.org/ramblings/fp.html">https://www.defmacro.org/ramblings/fp.html</a>: A general introduction to functional
+programming that uses Java examples and has a lengthy historical introduction.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Functional_programming">https://en.wikipedia.org/wiki/Functional_programming</a>: 一般性的函数式编程的 Wikipedia 条目。</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Coroutine">https://en.wikipedia.org/wiki/Coroutine</a>: 协程条目。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Partial_application">https://en.wikipedia.org/wiki/Partial_application</a>: Entry for the concept of partial function application.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Currying">https://en.wikipedia.org/wiki/Currying</a>: 函数柯里化条目。</p>
 </section>
 <section id="python-specific">
 <h3>Python 相关<a class="headerlink" href="#python-specific" title="永久链接至标题">¶</a></h3>
-<p><a class="reference external" href="http://gnosis.cx/TPiP/">http://gnosis.cx/TPiP/</a>：David Mertz 书中的第一章 <cite>Text Processing in Python</cite>，&quot;Utilizing Higher-Order Functions in Text Processing&quot; 标题部分讨论了文本处理的函数式编程。</p>
+<p><a class="reference external" href="https://gnosis.cx/TPiP/">https://gnosis.cx/TPiP/</a>: The first chapter of David Mertz’s book
+<cite>Text Processing in Python</cite> discusses functional programming
+for text processing, in the section titled “Utilizing Higher-Order Functions in
+Text Processing”.</p>
 <p>Mertz 还在 IBM 的 DeveloperWorks 站点上针对函数式编程撰写了一系列共 3 篇文章；参见 <a class="reference external" href="https://developer.ibm.com/articles/l-prog/">part 1</a>, <a class="reference external" href="https://developer.ibm.com/tutorials/l-prog2/">part 2</a> 和 <a class="reference external" href="https://developer.ibm.com/tutorials/l-prog3/">part 3</a>,</p>
 </section>
 <section id="python-documentation">
@@ -1095,7 +1109,7 @@ raise an exception inside the generator; the exception is raised by the
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

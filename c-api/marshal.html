@@ -158,7 +158,9 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyMarshal_WriteLongToFile">
 <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMarshal_WriteLongToFile</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="n"><span class="pre">value</span></span>, <span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">version</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMarshal_WriteLongToFile" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>将一个 <span class="xref c c-texpr"><span class="kt">long</span></span> 整数 <em>value</em> 以 marshal 格式写入 <em>file</em>。 这将只写入 <em>value</em> 最低的 32 位；无论本机 <span class="xref c c-texpr"><span class="kt">long</span></span> 类型的长度如何。 <em>version</em> 指明文件格式的版本。</p>
+<dd><p>Marshal a <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> integer, <em>value</em>, to <em>file</em>.  This will only write
+the least-significant 32 bits of <em>value</em>; regardless of the size of the
+native <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> type.  <em>version</em> indicates the file format.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -177,28 +179,39 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyMarshal_ReadLongFromFile">
 <span class="kt"><span class="pre">long</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMarshal_ReadLongFromFile</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMarshal_ReadLongFromFile" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>从打开用于读取的 <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> 的对应数据流返回一个 C <span class="xref c c-texpr"><span class="kt">long</span></span>。 使用只函数只能读取 32 位的值，无论本机 <span class="xref c c-texpr"><span class="kt">long</span></span> 类型的长度为何。</p>
+<dd><p>Return a C <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> from the data stream in a <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> opened
+for reading.  Only a 32-bit value can be read in using this function,
+regardless of the native size of <span class="c-expr sig sig-inline c"><span class="kt">long</span></span>.</p>
 <p>发生错误时，将设置适当的异常 (<a class="reference internal" href="../library/exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>) 并返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyMarshal_ReadShortFromFile">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyMarshal_ReadShortFromFile</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMarshal_ReadShortFromFile" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>从打开用于读取的 <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> 的对应数据流返回一个 C <span class="xref c c-texpr"><span class="kt">short</span></span>。 使用此函数只能读取 16 位的值，无论本机 <span class="xref c c-texpr"><span class="kt">short</span></span> 类型的长度为何。</p>
+<dd><p>Return a C <span class="c-expr sig sig-inline c"><span class="kt">short</span></span> from the data stream in a <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> opened
+for reading.  Only a 16-bit value can be read in using this function,
+regardless of the native size of <span class="c-expr sig sig-inline c"><span class="kt">short</span></span>.</p>
 <p>发生错误时，将设置适当的异常 (<a class="reference internal" href="../library/exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>) 并返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyMarshal_ReadObjectFromFile">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyMarshal_ReadObjectFromFile</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMarshal_ReadObjectFromFile" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>从打开用于读取的 <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> 的对应数据流返回一个 Python 对象。</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Return a Python object from the data stream in a <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> opened for
+reading.</p>
 <p>发生错误时，将设置适当的异常 (<a class="reference internal" href="../library/exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> 或 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>) 并返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。</p>
 </dd></dl>
 
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyMarshal_ReadLastObjectFromFile">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyMarshal_ReadLastObjectFromFile</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">file</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyMarshal_ReadLastObjectFromFile" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><p>从打开用于读取的 <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> 的对应数据流返回一个 Python 对象。 不同于 <a class="reference internal" href="#c.PyMarshal_ReadObjectFromFile" title="PyMarshal_ReadObjectFromFile"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMarshal_ReadObjectFromFile()</span></code></a>，此函数假定将不再从该文件读取更多的对象，允许其将文件数据积极地载入内存，以便反序列化过程可以在内存中的数据上操作而不是每次从文件读取一个字节。 只有当你确定不会再从文件读取任何内容时方可使用此形式。</p>
+<dd><em class="refcount">Return value: New reference.</em><p>Return a Python object from the data stream in a <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> opened for
+reading.  Unlike <a class="reference internal" href="#c.PyMarshal_ReadObjectFromFile" title="PyMarshal_ReadObjectFromFile"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMarshal_ReadObjectFromFile()</span></code></a>, this function
+assumes that no further objects will be read from the file, allowing it to
+aggressively load file data into memory so that the de-serialization can
+operate from data in memory rather than reading a byte at a time from the
+file.  Only use these variant if you are certain that you won’t be reading
+anything else from the file.</p>
 <p>发生错误时，将设置适当的异常 (<a class="reference internal" href="../library/exceptions.html#EOFError" title="EOFError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EOFError</span></code></a>, <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> 或 <a class="reference internal" href="../library/exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>) 并返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>。</p>
 </dd></dl>
 
@@ -306,7 +319,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

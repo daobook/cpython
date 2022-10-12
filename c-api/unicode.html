@@ -218,7 +218,7 @@ single Unicode characters, use <a class="reference internal" href="#c.Py_UCS4" t
 <dl class="c type">
 <dt class="sig sig-object c" id="c.Py_UNICODE">
 <span class="k"><span class="pre">type</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Py_UNICODE</span></span></span><a class="headerlink" href="#c.Py_UNICODE" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>This is a typedef of <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code>, which is a 16-bit type or 32-bit type
+<dd><p>This is a typedef of <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span>, which is a 16-bit type or 32-bit type
 depending on the platform.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3 版更改: </span>In previous versions, this was a 16-bit type or a 32-bit type depending on
@@ -731,8 +731,6 @@ if the first parameter is
 </tr>
 </tbody>
 </table>
-<p>An unrecognized format character causes all the rest of the format string to be
-copied as-is to the result string, and any extra arguments discarded.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>The width formatter unit is number of characters rather than bytes.
@@ -756,6 +754,11 @@ zu, i, x): the 0-conversion flag has effect even when a precision is given.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>Support width and precision formatter for <code class="docutils literal notranslate"><span class="pre">&quot;%s&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;%A&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;%U&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;%V&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;%S&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;%R&quot;</span></code> added.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>An unrecognized format character now sets a <a class="reference internal" href="../library/exceptions.html#SystemError" title="SystemError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemError</span></code></a>.
+In previous versions it caused all the rest of the format string to be
+copied as-is to the result string, and any extra arguments discarded.</p>
 </div>
 </dd></dl>
 
@@ -968,7 +971,7 @@ conversion function:</p>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>ParseTuple converter: encode <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> objects – obtained directly or
 through the <a class="reference internal" href="../library/os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> using
 <a class="reference internal" href="#c.PyUnicode_EncodeFSDefault" title="PyUnicode_EncodeFSDefault"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_EncodeFSDefault()</span></code></a>; <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects are output as-is.
-<em>result</em> must be a <span class="xref c c-texpr"><a class="reference internal" href="bytes.html#c.PyBytesObject" title="PyBytesObject"><span class="n">PyBytesObject</span></a><span class="p">*</span></span> which must be released when it is
+<em>result</em> must be a <span class="c-expr sig sig-inline c"><a class="reference internal" href="bytes.html#c.PyBytesObject" title="PyBytesObject"><span class="n">PyBytesObject</span></a><span class="p">*</span></span> which must be released when it is
 no longer used.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.1 新版功能.</span></p>
@@ -987,7 +990,7 @@ conversion function:</p>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>ParseTuple converter: decode <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> objects – obtained either
 directly or indirectly through the <a class="reference internal" href="../library/os.html#os.PathLike" title="os.PathLike"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.PathLike</span></code></a> interface – to
 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> using <a class="reference internal" href="#c.PyUnicode_DecodeFSDefaultAndSize" title="PyUnicode_DecodeFSDefaultAndSize"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_DecodeFSDefaultAndSize()</span></code></a>; <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>
-objects are output as-is. <em>result</em> must be a <span class="xref c c-texpr"><a class="reference internal" href="#c.PyUnicodeObject" title="PyUnicodeObject"><span class="n">PyUnicodeObject</span></a><span class="p">*</span></span> which
+objects are output as-is. <em>result</em> must be a <span class="c-expr sig sig-inline c"><a class="reference internal" href="#c.PyUnicodeObject" title="PyUnicodeObject"><span class="n">PyUnicodeObject</span></a><span class="p">*</span></span> which
 must be released when it is no longer used.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
@@ -1047,11 +1050,11 @@ object can contain null bytes.</p>
 </section>
 <section id="wchar-t-support">
 <h3>wchar_t Support<a class="headerlink" href="#wchar-t-support" title="永久链接至标题">¶</a></h3>
-<p><code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> support for platforms which support it:</p>
+<p><span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> support for platforms which support it:</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyUnicode_FromWideChar">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyUnicode_FromWideChar</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">wchar_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">w</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_FromWideChar" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Create a Unicode object from the <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> buffer <em>w</em> of the given <em>size</em>.
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Create a Unicode object from the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> buffer <em>w</em> of the given <em>size</em>.
 Passing <code class="docutils literal notranslate"><span class="pre">-1</span></code> as the <em>size</em> indicates that the function must itself compute the length,
 using wcslen.
 Return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> on failure.</p>
@@ -1060,13 +1063,13 @@ Return <code class="docutils literal notranslate"><span class="pre">NULL</span><
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyUnicode_AsWideChar">
 <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyUnicode_AsWideChar</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">unicode</span></span>, <span class="n"><span class="pre">wchar_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">w</span></span>, <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyUnicode_AsWideChar" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Copy the Unicode object contents into the <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> buffer <em>w</em>.  At most
-<em>size</em> <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> characters are copied (excluding a possibly trailing
-null termination character).  Return the number of <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> characters
-copied or <code class="docutils literal notranslate"><span class="pre">-1</span></code> in case of an error.  Note that the resulting <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Copy the Unicode object contents into the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> buffer <em>w</em>.  At most
+<em>size</em> <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> characters are copied (excluding a possibly trailing
+null termination character).  Return the number of <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> characters
+copied or <code class="docutils literal notranslate"><span class="pre">-1</span></code> in case of an error.  Note that the resulting <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span>
 string may or may not be null-terminated.  It is the responsibility of the caller
-to make sure that the <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span> string is null-terminated in case this is
-required by the application. Also, note that the <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span> string
+to make sure that the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span> string is null-terminated in case this is
+required by the application. Also, note that the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span> string
 might contain null characters, which would cause the string to be truncated
 when used with most C functions.</p>
 </dd></dl>
@@ -1077,11 +1080,11 @@ when used with most C functions.</p>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.7.</em><p>Convert the Unicode object to a wide character string. The output string
 always ends with a null character. If <em>size</em> is not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, write the number
 of wide characters (excluding the trailing null termination character) into
-<em>*size</em>. Note that the resulting <code class="xref c c-type docutils literal notranslate"><span class="pre">wchar_t</span></code> string might contain
+<em>*size</em>. Note that the resulting <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span></span> string might contain
 null characters, which would cause the string to be truncated when used with
-most C functions. If <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span> string
+most C functions. If <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span> string
 contains null characters a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised.</p>
-<p>Returns a buffer allocated by <code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Alloc()</span></code> (use
+<p>Returns a buffer allocated by <a class="reference internal" href="memory.html#c.PyMem_New" title="PyMem_New"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_New()</span></code></a> (use
 <a class="reference internal" href="memory.html#c.PyMem_Free" title="PyMem_Free"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyMem_Free()</span></code></a> to free it) on success. On error, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>
 and <em>*size</em> is undefined. Raises a <a class="reference internal" href="../library/exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> if memory allocation
 is failed.</p>
@@ -1089,7 +1092,7 @@ is failed.</p>
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span>Raises a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>Raises a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if <em>size</em> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span>
 string contains null characters.</p>
 </div>
 </dd></dl>
@@ -1776,7 +1779,7 @@ interned string object with the same value.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

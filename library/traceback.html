@@ -520,6 +520,10 @@ creating the <a class="reference internal" href="#traceback.StackSummary" title=
 may not actually get formatted). If <em>capture_locals</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code> the
 local variables in each <a class="reference internal" href="#traceback.FrameSummary" title="traceback.FrameSummary"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrameSummary</span></code></a> are captured as object
 representations.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Exceptions raised from <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> on a local variable (when
+<em>capture_locals</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>) are no longer propagated to the caller.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -609,9 +613,9 @@ exception and traceback:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">traceback</span>
 
 <span class="k">def</span> <span class="nf">lumberjack</span><span class="p">():</span>
-    <span class="n">bright_side_of_death</span><span class="p">()</span>
+    <span class="n">bright_side_of_life</span><span class="p">()</span>
 
-<span class="k">def</span> <span class="nf">bright_side_of_death</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">bright_side_of_life</span><span class="p">():</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -621,9 +625,7 @@ exception and traceback:</p>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** print_tb:&quot;</span><span class="p">)</span>
     <span class="n">traceback</span><span class="o">.</span><span class="n">print_tb</span><span class="p">(</span><span class="n">exc_traceback</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** print_exception:&quot;</span><span class="p">)</span>
-    <span class="c1"># exc_type below is ignored on 3.5 and later</span>
-    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">exc_traceback</span><span class="p">,</span>
-                              <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+    <span class="n">traceback</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">exc_value</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** print_exc:&quot;</span><span class="p">)</span>
     <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** format_exc, first and last line:&quot;</span><span class="p">)</span>
@@ -631,9 +633,7 @@ exception and traceback:</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">formatted_lines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">formatted_lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** format_exception:&quot;</span><span class="p">)</span>
-    <span class="c1"># exc_type below is ignored on 3.5 and later</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span>
-                                          <span class="n">exc_traceback</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="n">exc_value</span><span class="p">)))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** extract_tb:&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">extract_tb</span><span class="p">(</span><span class="n">exc_traceback</span><span class="p">)))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** format_tb:&quot;</span><span class="p">)</span>
@@ -645,42 +645,37 @@ exception and traceback:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*** print_tb:
   File &quot;&lt;doctest...&gt;&quot;, line 10, in &lt;module&gt;
     lumberjack()
-    ^^^^^^^^^^^^
 *** print_exception:
 Traceback (most recent call last):
   File &quot;&lt;doctest...&gt;&quot;, line 10, in &lt;module&gt;
     lumberjack()
-    ^^^^^^^^^^^^
   File &quot;&lt;doctest...&gt;&quot;, line 4, in lumberjack
-    bright_side_of_death()
-    ^^^^^^^^^^^^^^^^^^^^^^
+    bright_side_of_life()
 IndexError: tuple index out of range
 *** print_exc:
 Traceback (most recent call last):
   File &quot;&lt;doctest...&gt;&quot;, line 10, in &lt;module&gt;
     lumberjack()
-    ^^^^^^^^^^^^
   File &quot;&lt;doctest...&gt;&quot;, line 4, in lumberjack
-    bright_side_of_death()
-    ^^^^^^^^^^^^^^^^^^^^^^
+    bright_side_of_life()
 IndexError: tuple index out of range
 *** format_exc, first and last line:
 Traceback (most recent call last):
 IndexError: tuple index out of range
 *** format_exception:
 [&#39;Traceback (most recent call last):\n&#39;,
- &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 10, in &lt;module&gt;\n    lumberjack()\n    ^^^^^^^^^^^^\n&#39;,
- &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 4, in lumberjack\n    bright_side_of_death()\n    ^^^^^^^^^^^^^^^^^^^^^^\n&#39;,
- &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 7, in bright_side_of_death\n    return tuple()[0]\n           ~~~~~~~^^^\n&#39;,
+ &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 10, in &lt;module&gt;\n    lumberjack()\n&#39;,
+ &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 4, in lumberjack\n    bright_side_of_life()\n&#39;,
+ &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 7, in bright_side_of_life\n    return tuple()[0]\n           ~~~~~~~^^^\n&#39;,
  &#39;IndexError: tuple index out of range\n&#39;]
 *** extract_tb:
 [&lt;FrameSummary file &lt;doctest...&gt;, line 10 in &lt;module&gt;&gt;,
  &lt;FrameSummary file &lt;doctest...&gt;, line 4 in lumberjack&gt;,
- &lt;FrameSummary file &lt;doctest...&gt;, line 7 in bright_side_of_death&gt;]
+ &lt;FrameSummary file &lt;doctest...&gt;, line 7 in bright_side_of_life&gt;]
 *** format_tb:
-[&#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 10, in &lt;module&gt;\n    lumberjack()\n    ^^^^^^^^^^^^\n&#39;,
- &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 4, in lumberjack\n    bright_side_of_death()\n    ^^^^^^^^^^^^^^^^^^^^^^\n&#39;,
- &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 7, in bright_side_of_death\n    return tuple()[0]\n           ~~~~~~~^^^\n&#39;]
+[&#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 10, in &lt;module&gt;\n    lumberjack()\n&#39;,
+ &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 4, in lumberjack\n    bright_side_of_life()\n&#39;,
+ &#39;  File &quot;&lt;doctest default[0]&gt;&quot;, line 7, in bright_side_of_life\n    return tuple()[0]\n           ~~~~~~~^^^\n&#39;]
 *** tb_lineno: 10
 </pre></div>
 </div>
@@ -831,7 +826,7 @@ IndexError: tuple index out of range
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

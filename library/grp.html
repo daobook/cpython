@@ -154,6 +154,10 @@
 <span id="grp-the-group-database"></span><h1><a class="reference internal" href="#module-grp" title="grp: The group database (getgrnam() and friends). (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">grp</span></code></a> — 组数据库<a class="headerlink" href="#module-grp" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
 <p>该模块提供对Unix组数据库的访问。 它在所有Unix版本上都可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>Group database entries are reported as a tuple-like object, whose attributes
 correspond to the members of the <code class="docutils literal notranslate"><span class="pre">group</span></code> structure (Attribute field below, see
 <code class="docutils literal notranslate"><span class="pre">&lt;grp.h&gt;</span></code>):</p>
@@ -192,10 +196,10 @@ correspond to the members of the <code class="docutils literal notranslate"><spa
 <p>本模块定义如下内容：</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="grp.getgrgid">
-<span class="sig-prename descclassname"><span class="pre">grp.</span></span><span class="sig-name descname"><span class="pre">getgrgid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grp.getgrgid" title="永久链接至目标">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">grp.</span></span><span class="sig-name descname"><span class="pre">getgrgid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grp.getgrgid" title="永久链接至目标">¶</a></dt>
 <dd><p>返回给定数字组 ID 的组数据库条目。 如果请求的条目无法找到则会引发 <a class="reference internal" href="exceptions.html#KeyError" title="KeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyError</span></code></a>。</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.6 版后已移除: </span>从 Python 3.6 开始，弃用对 <a class="reference internal" href="#grp.getgrgid" title="grp.getgrgid"><code class="xref py py-func docutils literal notranslate"><span class="pre">getgrgid()</span></code></a> 中的 float 或 string 等非 integer 参数的支持。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.10 版更改: </span><a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a> is raised for non-integer arguments like floats or strings.</p>
 </div>
 </dd></dl>
 
@@ -317,7 +321,7 @@ correspond to the members of the <code class="docutils literal notranslate"><spa
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

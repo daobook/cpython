@@ -164,6 +164,10 @@
   <section id="module-mmap">
 <span id="mmap-memory-mapped-file-support"></span><h1><a class="reference internal" href="#module-mmap" title="mmap: Interface to memory-mapped files for Unix and Windows."><code class="xref py py-mod docutils literal notranslate"><span class="pre">mmap</span></code></a> — 内存映射文件支持<a class="headerlink" href="#module-mmap" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>内存映射文件对象的行为既像 <a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 又像 <a class="reference internal" href="../glossary.html#term-file-object"><span class="xref std std-term">文件对象</span></a>。 你可以在大部分接受 <a class="reference internal" href="stdtypes.html#bytearray" title="bytearray"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytearray</span></code></a> 的地方使用 mmap 对象；例如，你可以使用 <a class="reference internal" href="re.html#module-re" title="re: Regular expression operations."><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a> 模块来搜索一个内存映射文件。 你也可以通过执行 <code class="docutils literal notranslate"><span class="pre">obj[index]</span> <span class="pre">=</span> <span class="pre">97</span></code> 来修改单个字节，或者通过对切片赋值来修改一个子序列: <code class="docutils literal notranslate"><span class="pre">obj[i1:i2]</span> <span class="pre">=</span> <span class="pre">b'...'</span></code>。 你还可以在文件的当前位置开始读取和写入数据，并使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">seek()</span></code> 前往另一个位置。</p>
 <p>内存映射文件是由 <a class="reference internal" href="#mmap.mmap" title="mmap.mmap"><code class="xref py py-class docutils literal notranslate"><span class="pre">mmap</span></code></a> 构造函数创建的，其在 Unix 和 Windows 上是不同的。 无论哪种情况，你都必须为一个打开的文件提供文件描述符以进行更新。 如果你希望映射一个已有的 Python 文件对象，请使用该对象的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">fileno()</span></code> 方法来获取 <em>fileno</em> 参数的正确值。 否则，你可以使用 <a class="reference internal" href="os.html#os.open" title="os.open"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.open()</span></code></a> 函数来打开这个文件，这会直接返回一个文件描述符（结束时仍然需要关闭该文件）。</p>
 <div class="admonition note">
@@ -575,7 +579,7 @@ Allows resize against an anonymous map on Windows</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

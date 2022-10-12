@@ -172,6 +172,10 @@
 <p class="admonition-title">备注</p>
 <p><a class="reference internal" href="selectors.html#module-selectors" title="selectors: High-level I/O multiplexing."><code class="xref py py-mod docutils literal notranslate"><span class="pre">selectors</span></code></a> 模块是在 <a class="reference internal" href="#module-select" title="select: Wait for I/O completion on multiple streams."><code class="xref py py-mod docutils literal notranslate"><span class="pre">select</span></code></a> 模块原型的基础上进行高级且高效的 I/O 复用。推荐用户改用 <a class="reference internal" href="selectors.html#module-selectors" title="selectors: High-level I/O multiplexing."><code class="xref py py-mod docutils literal notranslate"><span class="pre">selectors</span></code></a> 模块，除非用户希望对 OS 级的函数原型进行精确控制。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>该模块定义以下内容：</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="select.error">
@@ -200,7 +204,10 @@
 <dt class="sig sig-object py" id="select.epoll">
 <span class="sig-prename descclassname"><span class="pre">select.</span></span><span class="sig-name descname"><span class="pre">epoll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sizehint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#select.epoll" title="永久链接至目标">¶</a></dt>
 <dd><p>（仅支持 Linux 2.5.44 或更高版本）返回一个 edge poll 对象，该对象可作为 I/O 事件的边缘触发或水平触发接口。</p>
-<p><em>sizehint</em> 指示 epoll 预计需要注册的事件数。它必须为正数，或为 <cite>-1</cite> 以使用默认值。它仅在 <code class="xref c c-func docutils literal notranslate"><span class="pre">epoll_create1()</span></code> 不可用的旧系统上会被用到，其他情况下它没有任何作用（尽管仍会检查其值）。</p>
+<p><em>sizehint</em> informs epoll about the expected number of events to be
+registered.  It must be positive, or <code class="docutils literal notranslate"><span class="pre">-1</span></code> to use the default. It is only
+used on older systems where <code class="xref c c-func docutils literal notranslate"><span class="pre">epoll_create1()</span></code> is not available;
+otherwise it has no effect (though its value is still checked).</p>
 <p><em>flags</em> 已经弃用且完全被忽略。但是，如果提供该值，则它必须是 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或 <code class="docutils literal notranslate"><span class="pre">select.EPOLL_CLOEXEC</span></code>，否则会抛出 <code class="docutils literal notranslate"><span class="pre">OSError</span></code> 异常。</p>
 <p>请参阅下方 <a class="reference internal" href="#epoll-objects"><span class="std std-ref">边缘触发和水平触发的轮询 (epoll) 对象</span></a> 获取 epoll 对象所支持的方法。</p>
 <p><code class="docutils literal notranslate"><span class="pre">epoll</span></code> 对象支持上下文管理器：当在 <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句中使用时，新建的文件描述符会在运行至语句块结束时自动关闭。</p>
@@ -328,7 +335,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="select.devpoll.poll">
 <span class="sig-prename descclassname"><span class="pre">devpoll.</span></span><span class="sig-name descname"><span class="pre">poll</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#select.devpoll.poll" title="永久链接至目标">¶</a></dt>
-<dd><p>轮询已注册的文件描述符的集合，并返回一个列表，列表可能为空，也可能有多个 <code class="docutils literal notranslate"><span class="pre">(fd,</span> <span class="pre">event)</span></code> 二元组，其中包含了要报告事件或错误的描述符。<em>fd</em> 是文件描述符，<em>event</em> 是一个位掩码，表示该描述符所报告的事件 — <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLIN</span></code> 表示可以读取，<code class="xref py py-const docutils literal notranslate"><span class="pre">POLLOUT</span></code> 表示该描述符可以写入，依此类推。空列表表示调用超时，没有任何文件描述符报告事件。如果指定了 <em>timeout</em>，它将指定系统等待事件时，等待多长时间后返回（以毫秒为单位）。如果 <em>timeout</em> 为空，-1 或 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>，则本调用将阻塞，直到轮询对象发生事件为止。</p>
+<dd><p>Polls the set of registered file descriptors, and returns a possibly empty list
+containing <code class="docutils literal notranslate"><span class="pre">(fd,</span> <span class="pre">event)</span></code> 2-tuples for the descriptors that have events or
+errors to report. <em>fd</em> is the file descriptor, and <em>event</em> is a bitmask with
+bits set for the reported events for that descriptor — <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLIN</span></code> for
+waiting input, <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLOUT</span></code> to indicate that the descriptor can be written
+to, and so forth. An empty list indicates that the call timed out and no file
+descriptors had any events to report. If <em>timeout</em> is given, it specifies the
+length of time in milliseconds which the system will wait for events before
+returning. If <em>timeout</em> is omitted, -1, or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, the call will
+block until there is an event for this poll object.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <span class="target" id="index-16"></span><a class="pep reference external" href="https://peps.python.org/pep-0475/"><strong>PEP 475</strong></a>）。</p>
 </div>
@@ -515,7 +531,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="select.poll.poll">
 <span class="sig-prename descclassname"><span class="pre">poll.</span></span><span class="sig-name descname"><span class="pre">poll</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#select.poll.poll" title="永久链接至目标">¶</a></dt>
-<dd><p>轮询已注册的文件描述符的集合，并返回一个列表，列表可能为空，也可能有多个 <code class="docutils literal notranslate"><span class="pre">(fd,</span> <span class="pre">event)</span></code> 二元组，其中包含了要报告事件或错误的描述符。<em>fd</em> 是文件描述符，<em>event</em> 是一个位掩码，表示该描述符所报告的事件 — <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLIN</span></code> 表示可以读取，<code class="xref py py-const docutils literal notranslate"><span class="pre">POLLOUT</span></code> 表示该描述符可以写入，依此类推。空列表表示调用超时，没有任何文件描述符报告事件。如果指定了 <em>timeout</em>，它将指定系统等待事件时，等待多长时间后返回（以毫秒为单位）。如果 <em>timeout</em> 为空、负数 或 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>，则本调用将阻塞，直到轮询对象发生事件为止。</p>
+<dd><p>Polls the set of registered file descriptors, and returns a possibly empty list
+containing <code class="docutils literal notranslate"><span class="pre">(fd,</span> <span class="pre">event)</span></code> 2-tuples for the descriptors that have events or
+errors to report. <em>fd</em> is the file descriptor, and <em>event</em> is a bitmask with
+bits set for the reported events for that descriptor — <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLIN</span></code> for
+waiting input, <code class="xref py py-const docutils literal notranslate"><span class="pre">POLLOUT</span></code> to indicate that the descriptor can be written
+to, and so forth. An empty list indicates that the call timed out and no file
+descriptors had any events to report. If <em>timeout</em> is given, it specifies the
+length of time in milliseconds which the system will wait for events before
+returning. If <em>timeout</em> is omitted, negative, or <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>, the call will
+block until there is an event for this poll object.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <span class="target" id="index-18"></span><a class="pep reference external" href="https://peps.python.org/pep-0475/"><strong>PEP 475</strong></a>）。</p>
 </div>
@@ -908,7 +933,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

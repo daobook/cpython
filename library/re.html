@@ -629,7 +629,15 @@ value:</p>
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">X</span></span><a class="headerlink" href="#re.X" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py" id="re.VERBOSE">
 <span class="sig-prename descclassname"><span class="pre">re.</span></span><span class="sig-name descname"><span class="pre">VERBOSE</span></span><a class="headerlink" href="#re.VERBOSE" title="永久链接至目标">¶</a></dt>
-<dd><p id="index-37">这个标记允许你编写更具可读性更友好的正则表达式。通过分段和添加注释。空白符号会被忽略，除非在一个字符集合当中或者由反斜杠转义，或者在 <code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">(?:</span></code> or <code class="docutils literal notranslate"><span class="pre">(?P&lt;…&gt;</span></code> 分组之内。当一个行内有 <code class="docutils literal notranslate"><span class="pre">#</span></code> 不在字符集和转义序列，那么它之后的所有字符都是注释。</p>
+<dd><p id="index-37">This flag allows you to write regular expressions that look nicer and are
+more readable by allowing you to visually separate logical sections of the
+pattern and add comments. Whitespace within the pattern is ignored, except
+when in a character class, or when preceded by an unescaped backslash,
+or within tokens like <code class="docutils literal notranslate"><span class="pre">*?</span></code>, <code class="docutils literal notranslate"><span class="pre">(?:</span></code> or <code class="docutils literal notranslate"><span class="pre">(?P&lt;...&gt;</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">(?</span> <span class="pre">:</span></code>
+and <code class="docutils literal notranslate"><span class="pre">*</span> <span class="pre">?</span></code> are not allowed.
+When a line contains a <code class="docutils literal notranslate"><span class="pre">#</span></code> that is not in a character class and is not
+preceded by an unescaped backslash, all characters from the leftmost such
+<code class="docutils literal notranslate"><span class="pre">#</span></code> through the end of the line are ignored.</p>
 <p>意思就是下面两个正则表达式等价地匹配一个十进制数字：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;\d +  # the integral part</span>
 <span class="s2">                   \.    # the decimal point</span>
@@ -1610,7 +1618,7 @@ in the ASCII range.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

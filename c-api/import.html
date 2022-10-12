@@ -289,6 +289,11 @@ be set.</p>
 structures not already created will still not be created.</p>
 <p>See also <a class="reference internal" href="#c.PyImport_ExecCodeModuleEx" title="PyImport_ExecCodeModuleEx"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ExecCodeModuleEx()</span></code></a> and
 <a class="reference internal" href="#c.PyImport_ExecCodeModuleWithPathnames" title="PyImport_ExecCodeModuleWithPathnames"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyImport_ExecCodeModuleWithPathnames()</span></code></a>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The setting of <a class="reference internal" href="../reference/import.html#cached__" title="__cached__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__cached__</span></code></a> and <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> is
+deprecated. See <a class="reference internal" href="../library/importlib.html#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> for
+alternatives.</p>
+</div>
 </dd></dl>
 
 <dl class="c function">
@@ -307,6 +312,10 @@ attribute of the module object is set to <em>cpathname</em> if it is
 non-<code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  Of the three functions, this is the preferred one to use.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Setting <a class="reference internal" href="../reference/import.html#cached__" title="__cached__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__cached__</span></code></a> is deprecated. See
+<a class="reference internal" href="../library/importlib.html#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> for alternatives.</p>
 </div>
 </dd></dl>
 
@@ -401,7 +410,7 @@ reload the module if it was already imported.)</p>
 UTF-8 encoded string instead of a Unicode object.</p>
 </dd></dl>
 
-<dl class="c type">
+<dl class="c struct">
 <dt class="sig sig-object c" id="c._frozen">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_frozen</span></span></span><a class="headerlink" href="#c._frozen" title="永久链接至目标">¶</a><br /></dt>
 <dd><p id="index-4">This is the structure type definition for frozen module descriptors, as
@@ -425,7 +434,10 @@ This replaces setting the <code class="docutils literal notranslate"><span class
 <dl class="c var">
 <dt class="sig sig-object c" id="c.PyImport_FrozenModules">
 <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#c._frozen" title="_frozen"><span class="n"><span class="pre">_frozen</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyImport_FrozenModules</span></span></span><a class="headerlink" href="#c.PyImport_FrozenModules" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>该指针被初始化为指向 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><a class="reference internal" href="#c._frozen" title="_frozen"><span class="n">_frozen</span></a></span> 数组，以 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 或者 0 作为结束标记。当一个冻结模块被导入，首先要在这个表中搜索。第三方库可以以此来提供动态创建的冻结模块集合。</p>
+<dd><p>This pointer is initialized to point to an array of <a class="reference internal" href="#c._frozen" title="_frozen"><code class="xref c c-struct docutils literal notranslate"><span class="pre">_frozen</span></code></a>
+records, terminated by one whose members are all <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or zero.  When a frozen
+module is imported, it is searched in this table.  Third-party code could play
+tricks with this to provide a dynamically created collection of frozen modules.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -439,7 +451,7 @@ on the first attempted import.  This should be called before
 <a class="reference internal" href="init.html#c.Py_Initialize" title="Py_Initialize"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_Initialize()</span></code></a>.</p>
 </dd></dl>
 
-<dl class="c type">
+<dl class="c struct">
 <dt class="sig sig-object c" id="c._inittab">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">_inittab</span></span></span><a class="headerlink" href="#c._inittab" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>Structure describing a single entry in the list of built-in modules.  Each of
@@ -567,7 +579,7 @@ initialization.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

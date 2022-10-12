@@ -214,7 +214,12 @@
 <span class="k">assert</span> <span class="n">dom3</span><span class="o">.</span><span class="n">documentElement</span><span class="o">.</span><span class="n">tagName</span> <span class="o">==</span> <span class="s2">&quot;myxml&quot;</span>
 </pre></div>
 </div>
-<p>当你完成对一个 DOM 树的处理时，你可以选择调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">unlink()</span></code> 方法以鼓励尽早清除不再需要的对象。 <code class="xref py py-meth docutils literal notranslate"><span class="pre">unlink()</span></code> 是 <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a> 针对 DOM API 的专属扩展，它会将特定节点及其下级标记为不再有用。 在其他情况下，Python 的垃圾回收器将负责最终处理树结构中的对象。</p>
+<p>When you are finished with a DOM tree, you may optionally call the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">unlink()</span></code> method to encourage early cleanup of the now-unneeded
+objects.  <code class="xref py py-meth docutils literal notranslate"><span class="pre">unlink()</span></code> is an <a class="reference internal" href="#module-xml.dom.minidom" title="xml.dom.minidom: Minimal Document Object Model (DOM) implementation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.dom.minidom</span></code></a>-specific
+extension to the DOM API that renders the node and its descendants
+essentially useless.  Otherwise, Python’s garbage collector will
+eventually take care of the objects in the tree.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
@@ -241,7 +246,12 @@
 <span class="sig-prename descclassname"><span class="pre">Node.</span></span><span class="sig-name descname"><span class="pre">writexml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">writer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addindent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standalone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xml.dom.minidom.Node.writexml" title="永久链接至目标">¶</a></dt>
 <dd><p>将 XML 写入到写入器对象。 写入器接受文本而非字节串作为输入，它应当具有与文件对象接口相匹配的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code> 方法。 <em>indent</em> 形参是当前节点的缩进层级。 <em>addindent</em> 形参是用于当前节点的下级节点的缩进量。 <em>newl</em> 形参指定用于一行结束的字符串。</p>
 <p>对于 <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code> 节点，可以使用附加的关键字参数 <em>encoding</em> 来指定 XML 标头的编码格式字段。</p>
-<p>类似地，显式指明 <em>standalone</em> 参数将会使单独的文档声明被添加到 XML 文档的开头部分。 如果将该值设为 <cite>True</cite>，则会添加 <cite>standalone=”yes”</cite>，否则将为 <cite>“no”</cite>。 未指明该参数将使文档声明被省略。</p>
+<p>Similarly, explicitly stating the <em>standalone</em> argument causes the
+standalone document declarations to be added to the prologue of the XML
+document.
+If the value is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">standalone=&quot;yes&quot;</span></code> is added,
+otherwise it is set to <code class="docutils literal notranslate"><span class="pre">&quot;no&quot;</span></code>.
+Not stating the argument will omit the declaration from the document.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span><a class="reference internal" href="#xml.dom.minidom.Node.writexml" title="xml.dom.minidom.Node.writexml"><code class="xref py py-meth docutils literal notranslate"><span class="pre">writexml()</span></code></a> 方法现在会保留用户指定的属性顺序。</p>
 </div>
@@ -485,7 +495,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

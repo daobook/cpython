@@ -167,7 +167,9 @@
 <span id="http-client-http-protocol-client"></span><h1><a class="reference internal" href="#module-http.client" title="http.client: HTTP and HTTPS protocol client (requires sockets)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">http.client</span></code></a> — HTTP 协议客户端<a class="headerlink" href="#module-http.client" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/http/client.py">Lib/http/client.py</a></p>
 <span class="target" id="index-0"></span><hr class="docutils" id="index-1" />
-<p>这个模块定义了实现 HTTP 和 HTTPS 协议客户端的类。 它通常不直接使用 — 模块 <a class="reference internal" href="urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> 用它来处理使用 HTTP 和 HTTPS 的 URL。</p>
+<p>This module defines classes that implement the client side of the HTTP and
+HTTPS protocols.  It is normally not used directly — the module
+<a class="reference internal" href="urllib.request.html#module-urllib.request" title="urllib.request: Extensible library for opening URLs."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.request</span></code></a> uses it to handle URLs that use HTTP and HTTPS.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <p>对于更高级别的 HTTP 客户端接口，建议使用 <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a>  。</p>
@@ -176,11 +178,25 @@
 <p class="admonition-title">备注</p>
 <p>HTTPS 支持仅在编译 Python 时启用了 SSL 支持的情况下（通过 <a class="reference internal" href="ssl.html#module-ssl" title="ssl: TLS/SSL wrapper for socket objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ssl</span></code></a> 模块）可用。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>该模块支持以下类：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="http.client.HTTPConnection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">http.client.</span></span><span class="sig-name descname"><span class="pre">HTTPConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port=None</span></span></em>, <span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">source_address=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksize=8192</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.client.HTTPConnection" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#http.client.HTTPConnection" title="http.client.HTTPConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPConnection</span></code></a> 的实例代表与 HTTP 的一个连接事务。 它的实例化应当传入一个主机和可选的端口号。 如果没有传入端口号，如果主机字符串的形式为 <code class="docutils literal notranslate"><span class="pre">主机:端口</span></code> 则会从中提取端口，否则将使用默认的 HTTP 端口（80）。 如果给出了可选的 <em>timeout</em> 参数，则阻塞操作（例如连接尝试）将在指定的秒数之后超时（如果未给出，则使用全局默认超时设置）。 可选的 <em>source_address</em> 参数可以为一个 (主机, 端口) 元组，用作进行 HTTP 连接的源地址。 可选的 <em>blocksize</em> 参数可以字节为单位设置缓冲区的大小，用来发送文件类消息体。</p>
+<dd><p>An <a class="reference internal" href="#http.client.HTTPConnection" title="http.client.HTTPConnection"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPConnection</span></code></a> instance represents one transaction with an HTTP
+server.  It should be instantiated by passing it a host and optional port
+number.  If no port number is passed, the port is extracted from the host
+string if it has the form <code class="docutils literal notranslate"><span class="pre">host:port</span></code>, else the default HTTP port (80) is
+used.  If the optional <em>timeout</em> parameter is given, blocking
+operations (like connection attempts) will timeout after that many seconds
+(if it is not given, the global default timeout setting is used).
+The optional <em>source_address</em> parameter may be a tuple of a (host, port)
+to use as the source address the HTTP connection is made from.
+The optional <em>blocksize</em> parameter sets the buffer size in bytes for
+sending a file-like message body.</p>
 <p>举个例子，以下调用都是创建连接到同一主机和端口的服务器的实例：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h1</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;www.python.org&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">h2</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPConnection</span><span class="p">(</span><span class="s1">&#39;www.python.org:80&#39;</span><span class="p">)</span>
@@ -192,7 +208,8 @@
 <p><span class="versionmodified changed">在 3.2 版更改: </span>添加了*source_address* 参数</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>删除了 <em>strict</em> 参数，不再支持 HTTP 0.9 风格的“简单响应”。</p>
+<p><span class="versionmodified changed">在 3.4 版更改: </span>The  <em>strict</em> parameter was removed. HTTP 0.9-style “Simple Responses” are
+no longer supported.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>添加了 <em>blocksize</em> 参数。</p>
@@ -502,7 +519,10 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="http.client.HTTPResponse.getheader">
 <span class="sig-prename descclassname"><span class="pre">HTTPResponse.</span></span><span class="sig-name descname"><span class="pre">getheader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#http.client.HTTPResponse.getheader" title="永久链接至目标">¶</a></dt>
-<dd><p>返回头部信息中的 <em>name</em> 值，如果没有与 <em>name</em> 匹配的字段，则返回*default*。如果名为 <em>name</em> 的字段不止一个，则返回所有字段，中间用 ‘, ‘ 连接。 如果 ‘default’ 不是单个字符串，而是其他可迭代对象，则其元素同样以逗号连接并返回。</p>
+<dd><p>Return the value of the header <em>name</em>, or <em>default</em> if there is no header
+matching <em>name</em>.  If there is more than one  header with the name <em>name</em>,
+return all of the values joined by ‘, ‘.  If <em>default</em> is any iterable other
+than a single string, its elements are similarly returned joined by commas.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -631,7 +651,7 @@
 <span class="go">True</span>
 </pre></div>
 </div>
-<p>下面是用 <code class="docutils literal notranslate"><span class="pre">POST</span></code> 发送请求的会话示例：</p>
+<p>Here is an example session that uses the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">http.client</span><span class="o">,</span> <span class="nn">urllib.parse</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">params</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlencode</span><span class="p">({</span><span class="s1">&#39;@number&#39;</span><span class="p">:</span> <span class="mi">12524</span><span class="p">,</span> <span class="s1">&#39;@type&#39;</span><span class="p">:</span> <span class="s1">&#39;issue&#39;</span><span class="p">,</span> <span class="s1">&#39;@action&#39;</span><span class="p">:</span> <span class="s1">&#39;show&#39;</span><span class="p">})</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/x-www-form-urlencoded&quot;</span><span class="p">,</span>
@@ -643,12 +663,16 @@
 <span class="go">302 Found</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>
-<span class="go">b&#39;Redirecting to &lt;a href=&quot;http://bugs.python.org/issue12524&quot;&gt;http://bugs.python.org/issue12524&lt;/a&gt;&#39;</span>
+<span class="go">b&#39;Redirecting to &lt;a href=&quot;https://bugs.python.org/issue12524&quot;&gt;https://bugs.python.org/issue12524&lt;/a&gt;&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>在客户端， <code class="docutils literal notranslate"><span class="pre">HTTP</span> <span class="pre">PUT</span></code> 请求与 <code class="docutils literal notranslate"><span class="pre">POST</span></code> 请求非常相似。区别只在于服务器端，HTTP 服务器将允许通过 <code class="docutils literal notranslate"><span class="pre">PUT</span></code> 请求创建资源。应该注意的是，自定义的 HTTP 方法也可以在 <a class="reference internal" href="urllib.request.html#urllib.request.Request" title="urllib.request.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.Request</span></code></a> 中通过设置适当的方法属性来进行处理。下面是一个会话示例，演示了如何利用 http.client 发送 <code class="docutils literal notranslate"><span class="pre">PUT</span></code> 请求。</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This creates an HTTP message</span>
+<p>Client side HTTP <code class="docutils literal notranslate"><span class="pre">PUT</span></code> requests are very similar to <code class="docutils literal notranslate"><span class="pre">POST</span></code> requests. The
+difference lies only on the server side where HTTP servers will allow resources to
+be created via <code class="docutils literal notranslate"><span class="pre">PUT</span></code> requests. It should be noted that custom HTTP methods
+are also handled in <a class="reference internal" href="urllib.request.html#urllib.request.Request" title="urllib.request.Request"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.Request</span></code></a> by setting the appropriate
+method attribute. Here is an example session that uses the <code class="docutils literal notranslate"><span class="pre">PUT</span></code> method:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># This creates an HTTP request</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># with the content of BODY as the enclosed representation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># for the resource http://localhost:8080/file</span>
 <span class="gp">...</span>
@@ -776,7 +800,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

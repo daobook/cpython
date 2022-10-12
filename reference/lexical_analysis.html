@@ -322,14 +322,14 @@ and identifiers.</p>
 <li><p><em>Mc</em> - 含空白标识</p></li>
 <li><p><em>Nd</em> - 十进制数字</p></li>
 <li><p><em>Pc</em> - 连接标点</p></li>
-<li><p><em>Other_ID_Start</em> - explicit list of characters in <a class="reference external" href="https://www.unicode.org/Public/14.0.0/ucd/PropList.txt">PropList.txt</a> to support backwards
+<li><p><em>Other_ID_Start</em> - explicit list of characters in <a class="reference external" href="https://www.unicode.org/Public/15.0.0/ucd/PropList.txt">PropList.txt</a> to support backwards
 compatibility</p></li>
 <li><p><em>Other_ID_Continue</em> - 同上</p></li>
 </ul>
 <p>在解析时，所有标识符都会被转换为规范形式 NFKC；标识符的比较都是基于 NFKC。</p>
 <p>A non-normative HTML file listing all valid identifier characters for Unicode
-14.0.0 can be found at
-<a class="reference external" href="https://www.unicode.org/Public/14.0.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/14.0.0/ucd/DerivedCoreProperties.txt</a></p>
+15.0.0 can be found at
+<a class="reference external" href="https://www.unicode.org/Public/15.0.0/ucd/DerivedCoreProperties.txt">https://www.unicode.org/Public/15.0.0/ucd/DerivedCoreProperties.txt</a></p>
 <section id="keywords">
 <span id="id8"></span><h3><span class="section-number">2.3.1. </span>关键字<a class="headerlink" href="#keywords" title="永久链接至标题">¶</a></h3>
 <p id="index-13">以下标识符为保留字，或称 <em>关键字</em>，不可用于普通标识符。关键字的拼写必须与这里列出的完全一致：</p>
@@ -435,9 +435,9 @@ See <a class="reference internal" href="#escape-sequences"><span class="std std-
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\newline</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\</span></code>&lt;newline&gt;</p></td>
 <td><p>忽略反斜杠与换行符</p></td>
-<td></td>
+<td><p>(1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\\</span></code></p></td>
 <td><p>反斜杠（<code class="docutils literal notranslate"><span class="pre">\</span></code>）</p></td>
@@ -481,11 +481,11 @@ See <a class="reference internal" href="#escape-sequences"><span class="std std-
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\ooo</span></code></p></td>
 <td><p>八进制数 <em>ooo</em> 字符</p></td>
-<td><p>(1,3)</p></td>
+<td><p>(2,4)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\xhh</span></code></p></td>
 <td><p>十六进制数 <em>hh</em> 字符</p></td>
-<td><p>(2,3)</p></td>
+<td><p>(3,4)</p></td>
 </tr>
 </tbody>
 </table>
@@ -505,20 +505,29 @@ See <a class="reference internal" href="#escape-sequences"><span class="std std-
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\N{name}</span></code></p></td>
 <td><p>Unicode 数据库中名为 <em>name</em> 的字符</p></td>
-<td><p>(4)</p></td>
+<td><p>(5)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">\uxxxx</span></code></p></td>
 <td><p>16 位十六进制数 <em>xxxx</em> 码位的字符</p></td>
-<td><p>(5)</p></td>
+<td><p>(6)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">\Uxxxxxxxx</span></code></p></td>
 <td><p>32 位 16 进制数 <em>xxxxxxxx</em> 码位的字符</p></td>
-<td><p>(6)</p></td>
+<td><p>(7)</p></td>
 </tr>
 </tbody>
 </table>
 <p>注释：</p>
 <ol class="arabic">
+<li><p>A backslash can be added at the end of a line to ignore the newline:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;This string will not include </span><span class="se">\</span>
+<span class="gp">... </span><span class="s1">backslashes or newline characters.&#39;</span>
+<span class="go">&#39;This string will not include backslashes or newline characters.&#39;</span>
+</pre></div>
+</div>
+<p>The same result can be achieved using <a class="reference internal" href="#strings"><span class="std std-ref">triple-quoted strings</span></a>,
+or parentheses and <a class="reference internal" href="#string-concatenation"><span class="std std-ref">string literal concatenation</span></a>.</p>
+</li>
 <li><p>与 C 标准一致，接受最多三个八进制数字。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>Octal escapes with value larger than <code class="docutils literal notranslate"><span class="pre">0o377</span></code> produce a <a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>.
@@ -581,7 +590,10 @@ eventually a <a class="reference internal" href="../library/exceptions.html#Synt
 </div>
 <p>指定了转换符时，表达式求值的结果会先转换，再格式化。转换符 <code class="docutils literal notranslate"><span class="pre">'!s'</span></code> 调用 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> 转换求值结果，<code class="docutils literal notranslate"><span class="pre">'!r'</span></code> 调用 <a class="reference internal" href="../library/functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>，<code class="docutils literal notranslate"><span class="pre">'!a'</span></code> 调用 <a class="reference internal" href="../library/functions.html#ascii" title="ascii"><code class="xref py py-func docutils literal notranslate"><span class="pre">ascii()</span></code></a>。</p>
 <p>输出结果的格式化使用 <a class="reference internal" href="../library/functions.html#format" title="format"><code class="xref py py-func docutils literal notranslate"><span class="pre">format()</span></code></a> 协议。格式说明符传入表达式或转换结果的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__format__()</span></code> 方法。省略格式说明符，则传入空字符串。然后，格式化结果包含在整个字符串的最终值里。</p>
-<p>顶层格式说明符可以包含嵌套替换字段。嵌套字段也可以包含自己的转换字段和 <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">格式说明符</span></a>，但不可再包含更深层嵌套的替换字段。<a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">格式说明符微语言</span></a> 与 <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> 方法使用的微语言相同。</p>
+<p>Top-level format specifiers may include nested replacement fields. These nested
+fields may include their own conversion fields and <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">format specifiers</span></a>, but may not include more deeply nested replacement fields. The
+<a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">format specifier mini-language</span></a> is the same as that used by
+the <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> method.</p>
 <p>格式化字符串字面值可以拼接，但是一个替换字段不能拆分到多个字面值。</p>
 <p>格式字符串字面值示例如下：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Fred&quot;</span>
@@ -734,7 +746,7 @@ eventually a <a class="reference internal" href="../library/exceptions.html#Synt
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id11">1</a></span></dt>
-<dd><p><a class="reference external" href="https://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt">https://www.unicode.org/Public/11.0.0/ucd/NameAliases.txt</a></p>
+<dd><p><a class="reference external" href="https://www.unicode.org/Public/15.0.0/ucd/NameAliases.txt">https://www.unicode.org/Public/15.0.0/ucd/NameAliases.txt</a></p>
 </dd>
 </dl>
 </section>
@@ -874,7 +886,7 @@ eventually a <a class="reference internal" href="../library/exceptions.html#Synt
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

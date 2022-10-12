@@ -171,7 +171,15 @@
             
   <section id="exception-handling">
 <span id="exceptionhandling"></span><h1>异常处理<a class="headerlink" href="#exception-handling" title="永久链接至标题">¶</a></h1>
-<p>本章描述的函数将让你处理和触发 Python 异常。了解一些 Python 异常处理的基本知识是很重要的。 它的工作原理有点像 POSIX 的 <code class="xref c c-data docutils literal notranslate"><span class="pre">errno</span></code> 变量：（每个线程）有一个全局指示器显示最近发生的错误。 大多数 C API 函数不会在成功时理会它，但会在失败时设置它来指示错误的原因。 多数 C API 函数也返回一个错误指示器，如果它们应该返回一个指针，通常返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，如果返回一个整数，则返回 <code class="docutils literal notranslate"><span class="pre">-1</span></code> (例外: <span class="xref c c-texpr"><span class="n">PyArg_</span><span class="p">*</span></span> 函数成功时返回 <code class="docutils literal notranslate"><span class="pre">1</span></code> 而失败时返回 <code class="docutils literal notranslate"><span class="pre">0</span></code>)。</p>
+<p>The functions described in this chapter will let you handle and raise Python
+exceptions.  It is important to understand some of the basics of Python
+exception handling.  It works somewhat like the POSIX <code class="xref c c-data docutils literal notranslate"><span class="pre">errno</span></code> variable:
+there is a global indicator (per thread) of the last error that occurred.  Most
+C API functions don’t clear this on success, but will set it to indicate the
+cause of the error on failure.  Most C API functions also return an error
+indicator, usually <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if they are supposed to return a pointer, or <code class="docutils literal notranslate"><span class="pre">-1</span></code>
+if they return an integer (exception: the <code class="docutils literal notranslate"><span class="pre">PyArg_*</span></code> functions
+return <code class="docutils literal notranslate"><span class="pre">1</span></code> for success and <code class="docutils literal notranslate"><span class="pre">0</span></code> for failure).</p>
 <p>具体地说，错误指示器由三个对象指针组成：异常的类型，异常的值，和回溯对象。如果没有错误被设置，这些指针都可以是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> （尽管一些组合使禁止的，例如，如果异常类型是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code>，你不能有一个非 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 的回溯）。</p>
 <p>当一个函数由于它调用的某个函数失败而必须失败时，通常不会设置错误指示器；它调用的那个函数已经设置了它。而它负责处理错误和清理异常，或在清除其拥有的所有资源后返回（如对象应用或内存分配）。如果不准备处理异常，则 <em>不</em> 应该正常地继续。如果是由于一个错误返回，那么一定要向调用者表明已经设置了错误。如果错误没有得到处理或小心传播，对 Python/C API的其它调用可能不会有预期的行为，并且可能会以某种神秘的方式失败。</p>
 <div class="admonition note">
@@ -293,7 +301,14 @@ encoding and error handler</span></a>.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyErr_SetFromWindowsErr">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyErr_SetFromWindowsErr</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">ierr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_SetFromWindowsErr" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: Always NULL.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> on Windows since version 3.7.</em><p>这是触发 <a class="reference internal" href="../library/exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a> 的方便的函数。如果 <em>lerr</em> 为 <span class="xref c c-texpr"><span class="m">0</span></span> ，则改用调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">GetLastError()</span></code> 返回的错误代码。它调用 Win32 函数 <code class="xref c c-func docutils literal notranslate"><span class="pre">FormatMessage()</span></code> 来检索 <em>ierr</em> 或 <code class="xref c c-func docutils literal notranslate"><span class="pre">GetLastError()</span></code> 给定的错误代码的 Windows 描述，然后构造一个元组对象，其第一项是 <em>ierr</em> 值，第二项是相应的错误信息（从 <code class="xref c c-func docutils literal notranslate"><span class="pre">FormatMessage()</span></code> 获取），然后调用 <code class="docutils literal notranslate"><span class="pre">PyErr_SetObject(PyExc_WindowsError,</span> <span class="pre">object)</span></code> 。该函数永远返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 。</p>
+<dd><em class="refcount">Return value: Always NULL.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> on Windows since version 3.7.</em><p>This is a convenience function to raise <a class="reference internal" href="../library/exceptions.html#WindowsError" title="WindowsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">WindowsError</span></code></a>. If called with
+<em>ierr</em> of <code class="docutils literal notranslate"><span class="pre">0</span></code>, the error code returned by a call to <code class="xref c c-func docutils literal notranslate"><span class="pre">GetLastError()</span></code>
+is used instead.  It calls the Win32 function <code class="xref c c-func docutils literal notranslate"><span class="pre">FormatMessage()</span></code> to retrieve
+the Windows description of error code given by <em>ierr</em> or <code class="xref c c-func docutils literal notranslate"><span class="pre">GetLastError()</span></code>,
+then it constructs a tuple object whose first item is the <em>ierr</em> value and whose
+second item is the corresponding error message (gotten from
+<code class="xref c c-func docutils literal notranslate"><span class="pre">FormatMessage()</span></code>), and then calls <code class="docutils literal notranslate"><span class="pre">PyErr_SetObject(PyExc_WindowsError,</span>
+<span class="pre">object)</span></code>. This function always returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 <p class="availability"><a class="reference internal" href="../library/intro.html#availability"><span class="std std-ref">可用性</span></a>: Windows。</p>
 </dd></dl>
 
@@ -446,7 +461,7 @@ an ASCII-encoded string.</p>
 <dt class="sig sig-object c" id="c.PyErr_Occurred">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyErr_Occurred</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyErr_Occurred" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: Borrowed reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Test whether the error indicator is set.  If set, return the exception <em>type</em>
-(the first argument to the last call to one of the <span class="xref c c-texpr"><span class="n">PyErr_Set</span><span class="p">*</span></span>
+(the first argument to the last call to one of the <code class="docutils literal notranslate"><span class="pre">PyErr_Set*</span></code>
 functions or to <a class="reference internal" href="#c.PyErr_Restore" title="PyErr_Restore"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyErr_Restore()</span></code></a>).  If not set, return <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.  You do not
 own a reference to the return value, so you do not need to <a class="reference internal" href="refcounting.html#c.Py_DECREF" title="Py_DECREF"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_DECREF()</span></code></a>
 it.</p>
@@ -953,7 +968,7 @@ invocation of <a class="reference internal" href="#c.Py_ReprEnter" title="Py_Rep
 <span id="standardexceptions"></span><h2>标准异常<a class="headerlink" href="#standard-exceptions" title="永久链接至标题">¶</a></h2>
 <p>All standard Python exceptions are available as global variables whose names are
 <code class="docutils literal notranslate"><span class="pre">PyExc_</span></code> followed by the Python exception name.  These have the type
-<span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>; they are all class objects.  For completeness, here are all
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>; they are all class objects.  For completeness, here are all
 the variables:</p>
 <table class="docutils align-default" id="index-4">
 <colgroup>
@@ -1232,7 +1247,7 @@ preprocessor macro <code class="docutils literal notranslate"><span class="pre">
 <span id="standardwarningcategories"></span><h2>标准警告类别<a class="headerlink" href="#standard-warning-categories" title="永久链接至标题">¶</a></h2>
 <p>All standard Python warning categories are available as global variables whose
 names are <code class="docutils literal notranslate"><span class="pre">PyExc_</span></code> followed by the Python exception name. These have the type
-<span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>; they are all class objects. For completeness, here are all
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>; they are all class objects. For completeness, here are all
 the variables:</p>
 <table class="docutils align-default" id="index-7">
 <colgroup>
@@ -1419,7 +1434,7 @@ the variables:</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

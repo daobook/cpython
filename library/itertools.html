@@ -531,7 +531,7 @@
 <dd><p>创建一个迭代器，它从 <em>start</em> 值开始，返回均匀间隔的值。常用于 <a class="reference internal" href="functions.html#map" title="map"><code class="xref py py-func docutils literal notranslate"><span class="pre">map()</span></code></a> 中的实参来生成连续的数据点。此外，还用于 <a class="reference internal" href="functions.html#zip" title="zip"><code class="xref py py-func docutils literal notranslate"><span class="pre">zip()</span></code></a> 来添加序列号。大致相当于：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># count(10) --&gt; 10 11 12 13 14 ...</span>
-    <span class="c1"># count(2.5, 0.5) -&gt; 2.5 3.0 3.5 ...</span>
+    <span class="c1"># count(2.5, 0.5) --&gt; 2.5 3.0 3.5 ...</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">start</span>
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">n</span>
@@ -833,7 +833,9 @@
 </pre></div>
 </div>
 <p>一旦 <a class="reference internal" href="#itertools.tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">tee()</span></code></a> 实施了一次分裂，原有的 <em>iterable</em> 不应再被使用；否则tee对象无法得知 <em>iterable</em> 可能已向后迭代。</p>
-<p><code class="docutils literal notranslate"><span class="pre">tee</span></code> 迭代器不是线程安全的。当同时使用由同一个 <a class="reference internal" href="#itertools.tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">tee()</span></code></a> 调用所返回的迭代器时可能引发 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>，即使原本的 <em>iterable</em> 是线程安全的。</p>
+<p><code class="docutils literal notranslate"><span class="pre">tee</span></code> iterators are not threadsafe. A <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> may be
+raised when simultaneously using iterators returned by the same <a class="reference internal" href="#itertools.tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">tee()</span></code></a>
+call, even if the original <em>iterable</em> is threadsafe.</p>
 <p>该迭代工具可能需要相当大的辅助存储空间（这取决于要保存多少临时数据）。通常，如果一个迭代器在另一个迭代器开始之前就要使用大部份或全部数据，使用 <a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-func docutils literal notranslate"><span class="pre">list()</span></code></a> 会比 <a class="reference internal" href="#itertools.tee" title="itertools.tee"><code class="xref py py-func docutils literal notranslate"><span class="pre">tee()</span></code></a> 更快。</p>
 </dd></dl>
 
@@ -880,7 +882,7 @@
 
 <span class="k">def</span> <span class="nf">prepend</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">iterator</span><span class="p">):</span>
     <span class="s2">&quot;Prepend a single value in front of an iterator&quot;</span>
-    <span class="c1"># prepend(1, [2, 3, 4]) -&gt; 1 2 3 4</span>
+    <span class="c1"># prepend(1, [2, 3, 4]) --&gt; 1 2 3 4</span>
     <span class="k">return</span> <span class="n">chain</span><span class="p">([</span><span class="n">value</span><span class="p">],</span> <span class="n">iterator</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">tabulate</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -916,10 +918,7 @@
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">iterable</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">pad_none</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the sequence elements and then returns None indefinitely.</span>
-
-<span class="sd">    Useful for emulating the behavior of the built-in map() function.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s2">&quot;Returns the sequence elements and then returns None indefinitely.&quot;</span>
     <span class="k">return</span> <span class="n">chain</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">repeat</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">ncycles</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -940,6 +939,28 @@
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
         <span class="n">window</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">yield</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="n">kernel</span><span class="p">,</span> <span class="n">window</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">polynomial_from_roots</span><span class="p">(</span><span class="n">roots</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute a polynomial&#39;s coefficients from its roots.</span>
+
+<span class="sd">       (x - 5) (x + 4) (x - 3)  expands to:   x³ -4x² -17x + 60</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># polynomial_from_roots([5, -4, 3]) --&gt; [1, -4, -17, 60]</span>
+    <span class="n">roots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">neg</span><span class="p">,</span> <span class="n">roots</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span> <span class="n">combinations</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span> <span class="n">k</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">sieve</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="s2">&quot;Primes less than n&quot;</span>
+   <span class="c1"># sieve(30) --&gt; 2 3 5 7 11 13 17 19 23 29</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">n</span>
+   <span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+   <span class="n">limit</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">isqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+   <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">compress</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">limit</span><span class="p">),</span> <span class="n">data</span><span class="p">):</span>
+      <span class="n">data</span><span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="n">p</span> <span class="p">:</span> <span class="n">n</span> <span class="p">:</span> <span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)))</span>
+   <span class="k">return</span> <span class="n">compress</span><span class="p">(</span><span class="n">count</span><span class="p">(),</span> <span class="n">data</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">):</span>
     <span class="s2">&quot;Flatten one level of nesting&quot;</span>
@@ -969,14 +990,21 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Expected fill, strict, or ignore&#39;</span><span class="p">)</span>
 
+<span class="k">def</span> <span class="nf">batched</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="s2">&quot;Batch data into lists of length n. The last batch may be shorter.&quot;</span>
+    <span class="c1"># batched(&#39;ABCDEFG&#39;, 3) --&gt; ABC DEF G</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">batch</span> <span class="o">:=</span> <span class="nb">list</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">n</span><span class="p">))):</span>
+        <span class="k">yield</span> <span class="n">batch</span>
+
 <span class="k">def</span> <span class="nf">triplewise</span><span class="p">(</span><span class="n">iterable</span><span class="p">):</span>
     <span class="s2">&quot;Return overlapping triplets from an iterable&quot;</span>
-    <span class="c1"># triplewise(&#39;ABCDEFG&#39;) -&gt; ABC BCD CDE DEF EFG</span>
+    <span class="c1"># triplewise(&#39;ABCDEFG&#39;) --&gt; ABC BCD CDE DEF EFG</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairwise</span><span class="p">(</span><span class="n">pairwise</span><span class="p">(</span><span class="n">iterable</span><span class="p">)):</span>
         <span class="k">yield</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
 
 <span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="c1"># sliding_window(&#39;ABCDEFG&#39;, 4) -&gt; ABCD BCDE CDEF DEFG</span>
+    <span class="c1"># sliding_window(&#39;ABCDEFG&#39;, 4) --&gt; ABCD BCDE CDEF DEFG</span>
     <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
@@ -1257,7 +1285,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

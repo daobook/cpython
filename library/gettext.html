@@ -470,7 +470,15 @@
 </pre></div>
 </div>
 <p>在这个例子中，字符串 <code class="docutils literal notranslate"><span class="pre">'writing</span> <span class="pre">a</span> <span class="pre">log</span> <span class="pre">message'</span></code> 被标记为待翻译，而字符串 <code class="docutils literal notranslate"><span class="pre">'mylog.txt'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'w'</span></code> 没有被标记。</p>
-<p>有一些工具可以将待翻译的字符串提取出来。原版的 GNU <strong class="program">gettext</strong> 仅支持 C 或 C++ 源代码，但其扩展版 <strong class="program">xgettext</strong> 可以扫描多种语言的代码（包括 Python），来找出标记为可翻译的字符串。<a class="reference external" href="http://babel.pocoo.org/">Babel</a> 是一个 Python 国际化库，其中包含一个 <code class="file docutils literal notranslate"><span class="pre">pybabel</span></code> 脚本，用于提取并编译消息编目。François Pinard 写的称为 <strong class="program">xpot</strong> 的程序也能完成类似的工作，可从他的 <a class="reference external" href="https://github.com/pinard/po-utils">po-utils 软件包</a> 中获取。</p>
+<p>There are a few tools to extract the strings meant for translation.
+The original GNU <strong class="program">gettext</strong> only supported C or C++ source
+code but its extended version <strong class="program">xgettext</strong> scans code written
+in a number of languages, including Python, to find strings marked as
+translatable.  <a class="reference external" href="https://babel.pocoo.org/">Babel</a> is a Python
+internationalization library that includes a <code class="file docutils literal notranslate"><span class="pre">pybabel</span></code> script to
+extract and compile message catalogs.  François Pinard’s program
+called <strong class="program">xpot</strong> does a similar job and is available as part of
+his <a class="reference external" href="https://github.com/pinard/po-utils">po-utils package</a>.</p>
 <p>（Python 还包括了这些程序的纯 Python 版本，称为 <strong class="program">pygettext.py</strong> 和 <strong class="program">msgfmt.py</strong>，某些 Python 发行版已经安装了它们。<strong class="program">pygettext.py</strong> 类似于 <strong class="program">xgettext</strong>，但只能理解 Python 源代码，无法处理诸如 C 或 C++ 的其他编程语言。<strong class="program">pygettext.py</strong> 支持的命令行界面类似于 <strong class="program">xgettext</strong>，查看其详细用法请运行 <code class="docutils literal notranslate"><span class="pre">pygettext.py</span> <span class="pre">--help</span></code>。<strong class="program">msgfmt.py</strong> 与 GNU <strong class="program">msgfmt</strong> 是二进制兼容的。有了这两个程序，可以不需要 GNU <strong class="program">gettext</strong> 包来国际化 Python 应用程序。）</p>
 <p><strong class="program">xgettext</strong>、<strong class="program">pygettext</strong> 或类似工具生成的 <code class="file docutils literal notranslate"><span class="pre">.po</span></code> 文件就是消息编目。它们是结构化的人类可读文件，包含源代码中所有被标记的字符串，以及这些字符串的翻译的占位符。</p>
 <p>然后把这些 <code class="file docutils literal notranslate"><span class="pre">.po</span></code> 文件的副本交给各个人工译者，他们为所支持的每种自然语言编写翻译。译者以 <code class="file docutils literal notranslate"><span class="pre">&lt;语言名称&gt;.po</span></code> 文件的形式发送回翻译完的某个语言的版本，将该文件用 <strong class="program">msgfmt</strong> 程序编译为机器可读的 <code class="file docutils literal notranslate"><span class="pre">.mo</span></code> 二进制编目文件。<a class="reference internal" href="#module-gettext" title="gettext: Multilingual internationalization services."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gettext</span></code></a> 模块使用 <code class="file docutils literal notranslate"><span class="pre">.mo</span></code> 文件在运行时进行实际的翻译处理。</p>
@@ -713,7 +721,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

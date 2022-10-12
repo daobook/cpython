@@ -582,7 +582,9 @@
 <dd><p>当收到数据时被调用。 <em>data</em> 为包含入站数据的非空字节串对象。</p>
 <p>数据是否会被缓冲、分块或重组取决于具体传输。 通常，你不应依赖于特定的语义而应使你的解析具有通用性和灵活性。 但是，数据总是要以正确的顺序被接收。</p>
 <p>此方法在连接打开期间可以被调用任意次数。</p>
-<p>但是，<a class="reference internal" href="#asyncio.Protocol.eof_received" title="asyncio.Protocol.eof_received"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocol.eof_received()</span></code></a> 最多只会被调用一次。 一旦 <cite>eof_received()</cite> 被调用，<code class="docutils literal notranslate"><span class="pre">data_received()</span></code> 就不会再被调用。</p>
+<p>However, <a class="reference internal" href="#asyncio.Protocol.eof_received" title="asyncio.Protocol.eof_received"><code class="xref py py-meth docutils literal notranslate"><span class="pre">protocol.eof_received()</span></code></a>
+is called at most once.  Once <code class="docutils literal notranslate"><span class="pre">eof_received()</span></code> is called,
+<code class="docutils literal notranslate"><span class="pre">data_received()</span></code> is not called anymore.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1124,7 +1126,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

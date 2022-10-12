@@ -382,7 +382,17 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="breakpoint">
 <span class="sig-name descname"><span class="pre">breakpoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#breakpoint" title="永久链接至目标">¶</a></dt>
-<dd><p>此函数会在调用时将你陷入调试器中。具体来说，它调用 <a class="reference internal" href="sys.html#sys.breakpointhook" title="sys.breakpointhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code></a> ，直接传递 <code class="docutils literal notranslate"><span class="pre">args</span></code> 和 <code class="docutils literal notranslate"><span class="pre">kws</span></code> 。默认情况下， <code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code> 调用 <a class="reference internal" href="pdb.html#pdb.set_trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">pdb.set_trace()</span></code></a> 且没有参数。在这种情况下，它纯粹是一个便利函数，因此您不必显式导入 <a class="reference internal" href="pdb.html#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> 且键入尽可能少的代码即可进入调试器。但是， <a class="reference internal" href="sys.html#sys.breakpointhook" title="sys.breakpointhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code></a> 可以设置为其他一些函数并被 <a class="reference internal" href="#breakpoint" title="breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakpoint()</span></code></a> 自动调用，以允许进入你想用的调试器。</p>
+<dd><p>This function drops you into the debugger at the call site.  Specifically,
+it calls <a class="reference internal" href="sys.html#sys.breakpointhook" title="sys.breakpointhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code></a>, passing <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">kws</span></code> straight
+through.  By default, <code class="docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code> calls
+<a class="reference internal" href="pdb.html#pdb.set_trace" title="pdb.set_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">pdb.set_trace()</span></code></a> expecting no arguments.  In this case, it is
+purely a convenience function so you don’t have to explicitly import
+<a class="reference internal" href="pdb.html#module-pdb" title="pdb: The Python debugger for interactive interpreters."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pdb</span></code></a> or type as much code to enter the debugger.  However,
+<a class="reference internal" href="sys.html#sys.breakpointhook" title="sys.breakpointhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code></a> can be set to some other function and
+<a class="reference internal" href="#breakpoint" title="breakpoint"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakpoint()</span></code></a> will automatically call that, allowing you to drop into
+the debugger of choice.
+If <a class="reference internal" href="sys.html#sys.breakpointhook" title="sys.breakpointhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.breakpointhook()</span></code></a> is not accessible, this function will
+raise <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">builtins.breakpoint</span></code> 并附带参数 <code class="docutils literal notranslate"><span class="pre">breakpointhook</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
@@ -506,7 +516,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="delattr">
 <span class="sig-name descname"><span class="pre">delattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#delattr" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a> 相关的函数。实参是一个对象和一个字符串。该字符串必须是对象的某个属性。如果对象允许，该函数将删除指定的属性。例如 <code class="docutils literal notranslate"><span class="pre">delattr(x,</span> <span class="pre">'foobar')</span></code>  等价于 <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">x.foobar</span></code> 。</p>
+<dd><p>This is a relative of <a class="reference internal" href="#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a>.  The arguments are an object and a
+string.  The string must be the name of one of the object’s attributes.  The
+function deletes the named attribute, provided the object allows it.  For
+example, <code class="docutils literal notranslate"><span class="pre">delattr(x,</span> <span class="pre">'foobar')</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">x.foobar</span></code>.
+<em>name</em> need not be a Python identifier (see <a class="reference internal" href="#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a>).</p>
 </dd></dl>
 
 <span class="target" id="func-dict"></span><dl class="py class">
@@ -703,7 +717,12 @@ referenced by the code object.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="getattr">
 <span class="sig-name descname"><span class="pre">getattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">default</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#getattr" title="永久链接至目标">¶</a></dt>
-<dd><p>返回对象命名属性的值。<em>name</em> 必须是字符串。如果该字符串是对象的属性之一，则返回该属性的值。例如， <code class="docutils literal notranslate"><span class="pre">getattr(x,</span> <span class="pre">'foobar')</span></code> 等同于 <code class="docutils literal notranslate"><span class="pre">x.foobar</span></code>。如果指定的属性不存在，且提供了 <em>default</em> 值，则返回它，否则触发 <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>。</p>
+<dd><p>Return the value of the named attribute of <em>object</em>.  <em>name</em> must be a string.
+If the string is the name of one of the object’s attributes, the result is the
+value of that attribute.  For example, <code class="docutils literal notranslate"><span class="pre">getattr(x,</span> <span class="pre">'foobar')</span></code> is equivalent to
+<code class="docutils literal notranslate"><span class="pre">x.foobar</span></code>.  If the named attribute does not exist, <em>default</em> is returned if
+provided, otherwise <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a> is raised.
+<em>name</em> need not be a Python identifier (see <a class="reference internal" href="#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a>).</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>由于 <a class="reference internal" href="../reference/expressions.html#private-name-mangling"><span class="std std-ref">私有名称混合</span></a> 发生在编译时，因此必须 手动混合私有属性（以两个下划线打头的属性）名称以使使用 <a class="reference internal" href="#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 来提取它。</p>
@@ -819,6 +838,13 @@ with the result after successfully reading input.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>The delegation to <code class="xref py py-meth docutils literal notranslate"><span class="pre">__trunc__()</span></code> is deprecated.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span><a class="reference internal" href="#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> string inputs and string representations can be limited to
+help avoid denial of service attacks. A <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> is raised when
+the limit is exceeded while converting a string <em>x</em> to an <a class="reference internal" href="#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> or
+when converting an <a class="reference internal" href="#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> into a string would exceed the limit.
+See the <a class="reference internal" href="stdtypes.html#int-max-str-digits"><span class="std std-ref">integer string conversion length limitation</span></a> documentation.</p>
 </div>
 </dd></dl>
 
@@ -1074,7 +1100,9 @@ See the <a class="reference internal" href="codecs.html#module-codecs" title="co
 <li><p><code class="docutils literal notranslate"><span class="pre">'backslashreplace'</span></code> 用Python的反向转义序列替换格式错误的数据。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'namereplace'</span></code> （也只在编写时支持）用 <code class="docutils literal notranslate"><span class="pre">\N{...}</span></code> 转义序列替换不支持的字符。</p></li>
 </ul>
-<p id="open-newline-parameter"><span id="index-6"></span><em>newline</em> 控制 <a class="reference internal" href="../glossary.html#term-universal-newlines"><span class="xref std std-term">universal newlines</span></a> 模式如何生效（它仅适用于文本模式）。它可以是 <code class="docutils literal notranslate"><span class="pre">None</span></code>，<code class="docutils literal notranslate"><span class="pre">''</span></code>，<code class="docutils literal notranslate"><span class="pre">'\n'</span></code>，<code class="docutils literal notranslate"><span class="pre">'\r'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'\r\n'</span></code>。它的工作原理:</p>
+<p id="open-newline-parameter"><span id="index-6"></span><em>newline</em> determines how to parse newline characters from the stream.
+It can be <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">''</span></code>, <code class="docutils literal notranslate"><span class="pre">'\n'</span></code>, <code class="docutils literal notranslate"><span class="pre">'\r'</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">'\r\n'</span></code>.  It works as follows:</p>
 <ul class="simple">
 <li><p>从流中读取输入时，如果 <em>newline</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则启用通用换行模式。输入中的行可以以 <code class="docutils literal notranslate"><span class="pre">'\n'</span></code>，<code class="docutils literal notranslate"><span class="pre">'\r'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'\r\n'</span></code> 结尾，这些行被翻译成 <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> 在返回呼叫者之前。如果它是 <code class="docutils literal notranslate"><span class="pre">''</span></code>，则启用通用换行模式，但行结尾将返回给调用者未翻译。如果它具有任何其他合法值，则输入行仅由给定字符串终止，并且行结尾将返回给未调用的调用者。</p></li>
 <li><p>将输出写入流时，如果 <em>newline</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则写入的任何 <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> 字符都将转换为系统默认行分隔符 <a class="reference internal" href="os.html#os.linesep" title="os.linesep"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.linesep</span></code></a>。如果 <em>newline</em> 是 <code class="docutils literal notranslate"><span class="pre">''</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'\n'</span></code>，则不进行翻译。如果 <em>newline</em> 是任何其他合法值，则写入的任何 <code class="docutils literal notranslate"><span class="pre">'\n'</span></code> 字符将被转换为给定的字符串。</p></li>
@@ -1251,7 +1279,15 @@ to <code class="docutils literal notranslate"><span class="pre">3j</span></code>
 <dl class="py function">
 <dt class="sig sig-object py" id="repr">
 <span class="sig-name descname"><span class="pre">repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#repr" title="永久链接至目标">¶</a></dt>
-<dd><p>返回对象的可打印形式字符串。对于很多类型而言，本函数试图返回的字符串，会与将对象传给 <a class="reference internal" href="#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a> 所生成的结果相同；不然，结果就是一个尖括号包裹的字符串，包含了对象类型名称及其附加信息，附加信息通常包括对象的名称和内存地址。通过定义 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> 方法，类可以控制本函数将为实例返回的内容。</p>
+<dd><p>Return a string containing a printable representation of an object.  For many
+types, this function makes an attempt to return a string that would yield an
+object with the same value when passed to <a class="reference internal" href="#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>; otherwise, the
+representation is a string enclosed in angle brackets that contains the name
+of the type of the object together with additional information often
+including the name and address of the object.  A class can control what this
+function returns for its instances by defining a <code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> method.
+If <a class="reference internal" href="sys.html#sys.displayhook" title="sys.displayhook"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.displayhook()</span></code></a> is not accessible, this function will raise
+<a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1283,6 +1319,11 @@ to <code class="docutils literal notranslate"><span class="pre">3j</span></code>
 <dt class="sig sig-object py" id="setattr">
 <span class="sig-name descname"><span class="pre">setattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#setattr" title="永久链接至目标">¶</a></dt>
 <dd><p>本函数与 <a class="reference internal" href="#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> 相对应。其参数为一个对象、一个字符串和一个任意值。字符串可以为某现有属性的名称，或为新属性。只要对象允许，函数会将值赋给属性。如 <code class="docutils literal notranslate"><span class="pre">setattr(x,</span> <span class="pre">'foobar',</span> <span class="pre">123)</span></code> 等价于 <code class="docutils literal notranslate"><span class="pre">x.foobar</span> <span class="pre">=</span> <span class="pre">123</span></code>。</p>
+<p><em>name</em> need not be a Python identifier as defined in <a class="reference internal" href="../reference/lexical_analysis.html#identifiers"><span class="std std-ref">标识符和关键字</span></a>
+unless the object chooses to enforce that, for example in a custom
+<a class="reference internal" href="../reference/datamodel.html#object.__getattribute__" title="object.__getattribute__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__getattribute__()</span></code></a> or via <a class="reference internal" href="../reference/datamodel.html#object.__slots__" title="object.__slots__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__slots__</span></code></a>.
+An attribute whose name is not an identifier will not be accessible using
+the dot notation, but is accessible through <a class="reference internal" href="#getattr" title="getattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">getattr()</span></code></a> etc..</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>由于 <a class="reference internal" href="../reference/expressions.html#private-name-mangling"><span class="std std-ref">私有名称混合</span></a> 发生在编译时，因此必须手动混合私有属性（以两个下划线打头的属性）名称以便使用 <a class="reference internal" href="#setattr" title="setattr"><code class="xref py py-func docutils literal notranslate"><span class="pre">setattr()</span></code></a> 来设置它。</p>
@@ -1621,7 +1662,7 @@ reflected the <a class="reference internal" href="../reference/datamodel.html#ob
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

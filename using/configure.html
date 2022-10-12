@@ -222,17 +222,6 @@
 </dd></dl>
 
 <dl class="std cmdoption">
-<dt class="sig sig-object std" id="cmdoption-with-cxx-main">
-<span class="sig-name descname"><span class="pre">--with-cxx-main</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-with-cxx-main" title="永久链接至目标">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="std cmdoption">
-<dt class="sig sig-object std" id="cmdoption-0">
-<span class="sig-name descname"><span class="pre">--with-cxx-main</span></span><span class="sig-prename descclassname"><span class="pre">=COMPILER</span></span><a class="headerlink" href="#cmdoption-0" title="永久链接至目标">¶</a></dt>
-<dd><p>编译 Python <code class="docutils literal notranslate"><span class="pre">main()</span></code> 函数，用 C++ 编译器链接 Python 可执行文件： <cite>$CXX`</cite> 或 <em>COMPILER</em>。</p>
-</dd></dl>
-
-<dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-with-suffix">
 <span class="sig-name descname"><span class="pre">--with-suffix</span></span><span class="sig-prename descclassname"><span class="pre">=SUFFIX</span></span><a class="headerlink" href="#cmdoption-with-suffix" title="永久链接至目标">¶</a></dt>
 <dd><p>将 Python 的可执行文件后缀设置为 <em>SUFFIX</em>。</p>
@@ -400,7 +389,9 @@ increases due to limited dead code elimination and additional features.</p>
 </section>
 <section id="performance-options">
 <h3><span class="section-number">3.1.4. </span>性能选项<a class="headerlink" href="#performance-options" title="永久链接至标题">¶</a></h3>
-<p>建议用 <code class="docutils literal notranslate"><span class="pre">--enable-optimizations</span> <span class="pre">--with-lto</span></code> （PGO + LTO）配置 Python，以便实现最佳性能。</p>
+<p>Configuring Python using <code class="docutils literal notranslate"><span class="pre">--enable-optimizations</span> <span class="pre">--with-lto</span></code> (PGO + LTO) is
+recommended for best performance. The experimental <code class="docutils literal notranslate"><span class="pre">--enable-bolt</span></code> flag can
+also be used to improve performance.</p>
 <dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-enable-optimizations">
 <span class="sig-name descname"><span class="pre">--enable-optimizations</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-enable-optimizations" title="永久链接至目标">¶</a></dt>
@@ -435,6 +426,27 @@ increases due to limited dead code elimination and additional features.</p>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能: </span>To use ThinLTO feature, use <code class="docutils literal notranslate"><span class="pre">--with-lto=thin</span></code> on Clang.</p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Use ThinLTO as the default optimization policy on Clang if the compiler accepts the flag.</p>
+</div>
+</dd></dl>
+
+<dl class="std cmdoption">
+<dt class="sig sig-object std" id="cmdoption-enable-bolt">
+<span class="sig-name descname"><span class="pre">--enable-bolt</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-enable-bolt" title="永久链接至目标">¶</a></dt>
+<dd><p>Enable usage of the <a class="reference external" href="https://github.com/llvm/llvm-project/tree/main/bolt">BOLT post-link binary optimizer</a> (disabled by
+default).</p>
+<p>BOLT is part of the LLVM project but is not always included in their binary
+distributions. This flag requires that <code class="docutils literal notranslate"><span class="pre">llvm-bolt</span></code> and <code class="docutils literal notranslate"><span class="pre">merge-fdata</span></code>
+are available.</p>
+<p>BOLT is still a fairly new project so this flag should be considered
+experimental for now. Because this tool operates on machine code its success
+is dependent on a combination of the build environment + the other
+optimization configure args + the CPU architecture, and not all combinations
+are supported.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -746,8 +758,8 @@ option). Main runtime checks:</p>
 <dd></dd></dl>
 
 <dl class="std cmdoption">
-<dt class="sig sig-object std" id="cmdoption-1">
-<span class="sig-name descname"><span class="pre">--enable-universalsdk</span></span><span class="sig-prename descclassname"><span class="pre">=SDKDIR</span></span><a class="headerlink" href="#cmdoption-1" title="永久链接至目标">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-0">
+<span class="sig-name descname"><span class="pre">--enable-universalsdk</span></span><span class="sig-prename descclassname"><span class="pre">=SDKDIR</span></span><a class="headerlink" href="#cmdoption-0" title="永久链接至目标">¶</a></dt>
 <dd><p>创建通用的二进制版本。<em>SDKDIR</em> 指定应采用的 macOS SDK （默认为否）。</p>
 </dd></dl>
 
@@ -757,15 +769,15 @@ option). Main runtime checks:</p>
 <dd></dd></dl>
 
 <dl class="std cmdoption">
-<dt class="sig sig-object std" id="cmdoption-2">
-<span class="sig-name descname"><span class="pre">--enable-framework</span></span><span class="sig-prename descclassname"><span class="pre">=INSTALLDIR</span></span><a class="headerlink" href="#cmdoption-2" title="永久链接至目标">¶</a></dt>
+<dt class="sig sig-object std" id="cmdoption-1">
+<span class="sig-name descname"><span class="pre">--enable-framework</span></span><span class="sig-prename descclassname"><span class="pre">=INSTALLDIR</span></span><a class="headerlink" href="#cmdoption-1" title="永久链接至目标">¶</a></dt>
 <dd><p>创建 Python.framework ，而不是传统的 Unix 安装版。可选参数 <em>INSTALLDIR</em> 指定了安装路径（(默认为否）。</p>
 </dd></dl>
 
 <dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-with-universal-archs">
 <span class="sig-name descname"><span class="pre">--with-universal-archs</span></span><span class="sig-prename descclassname"><span class="pre">=ARCH</span></span><a class="headerlink" href="#cmdoption-with-universal-archs" title="永久链接至目标">¶</a></dt>
-<dd><p>指定应创建何种通用二进制文件。该选项仅当设置了 <a class="reference internal" href="#cmdoption-1"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-universalsdk</span></code></a> 时才有效。</p>
+<dd><p>指定应创建何种通用二进制文件。该选项仅当设置了 <a class="reference internal" href="#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-universalsdk</span></code></a> 时才有效。</p>
 <p>可选项：</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">universal2</span></code>。</p></li>
@@ -782,7 +794,7 @@ option). Main runtime checks:</p>
 <dl class="std cmdoption">
 <dt class="sig sig-object std" id="cmdoption-with-framework-name">
 <span class="sig-name descname"><span class="pre">--with-framework-name</span></span><span class="sig-prename descclassname"><span class="pre">=FRAMEWORK</span></span><a class="headerlink" href="#cmdoption-with-framework-name" title="永久链接至目标">¶</a></dt>
-<dd><p>为 macOS 中的 python 框架指定名称，仅当设置了 <a class="reference internal" href="#cmdoption-2"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-framework</span></code></a> 时有效（默认：<code class="docutils literal notranslate"><span class="pre">Python</span></code>）。</p>
+<dd><p>为 macOS 中的 python 框架指定名称，仅当设置了 <a class="reference internal" href="#cmdoption-1"><code class="xref std std-option docutils literal notranslate"><span class="pre">--enable-framework</span></code></a> 时有效（默认：<code class="docutils literal notranslate"><span class="pre">Python</span></code>）。</p>
 </dd></dl>
 
 </section>
@@ -844,7 +856,7 @@ the version of the cross compiled host Python.</p>
 <li><p><code class="file docutils literal notranslate"><span class="pre">Makefile.pre.in</span></code> =&gt; <code class="file docutils literal notranslate"><span class="pre">Makefile</span></code> (由 <code class="file docutils literal notranslate"><span class="pre">configure</span></code> 创建);</p></li>
 <li><p><code class="file docutils literal notranslate"><span class="pre">pyconfig.h</span></code> (由 <code class="file docutils literal notranslate"><span class="pre">configure</span></code> 创建);</p></li>
 <li><p><code class="file docutils literal notranslate"><span class="pre">Modules/Setup</span></code>:  由Makefile 使用 <code class="file docutils literal notranslate"><span class="pre">Module/makesetup</span></code> shell 脚本构建的 C 扩展;</p></li>
-<li><p><code class="file docutils literal notranslate"><span class="pre">setup.py</span></code>: 使用 <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a> 模块构建的 C 扩展。</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">setup.py</span></code>: C extensions built using the <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> package.</p></li>
 </ul>
 </section>
 <section id="main-build-steps">
@@ -892,7 +904,7 @@ Example on Linux x86-64:</p>
 </pre></div>
 </div>
 <p><code class="file docutils literal notranslate"><span class="pre">Modules/Setup</span></code> 用于生成 Makefile 目标，以构建 C 扩展。在文件的开头， C 被构建为内置模块。在标记 <code class="docutils literal notranslate"><span class="pre">*shared*</span></code> 之后定义的扩展被构建为动态库。</p>
-<p><code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> 脚本只使用 <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a> 模块将 C 构建为共享库。</p>
+<p><code class="file docutils literal notranslate"><span class="pre">setup.py</span></code> 脚本只使用 <code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code> 模块将 C 构建为共享库。</p>
 <p>宏 <code class="xref c c-macro docutils literal notranslate"><span class="pre">PyAPI_FUNC()</span></code> ， <code class="xref c c-macro docutils literal notranslate"><span class="pre">PyAPI_API()</span></code> 和 <code class="xref c c-macro docutils literal notranslate"><span class="pre">PyMODINIT_FUNC()</span></code> 在 <code class="file docutils literal notranslate"><span class="pre">Include/pyport.h</span></code> 中的定义不同，取决于是否定义宏 <code class="docutils literal notranslate"><span class="pre">Py_BUILD_CORE_MODULE</span></code> 。</p>
 <ul class="simple">
 <li><p>如果 <code class="docutils literal notranslate"><span class="pre">Py_BUILD_CORE_MODULE</span></code> 定义了，使用 <code class="docutils literal notranslate"><span class="pre">Py_EXPORTED_SYMBOL</span></code> 。</p></li>
@@ -951,18 +963,9 @@ Example on Linux x86-64:</p>
 </dd></dl>
 
 <dl class="std envvar">
-<dt class="sig sig-object std" id="envvar-MAINCC">
-<span class="sig-name descname"><span class="pre">MAINCC</span></span><a class="headerlink" href="#envvar-MAINCC" title="永久链接至目标">¶</a></dt>
-<dd><p>C编译器命令用于构建像 <code class="docutils literal notranslate"><span class="pre">python</span></code> 这样的程序的 <code class="docutils literal notranslate"><span class="pre">main()</span></code> 函数。</p>
-<p>由配置脚本的 <a class="reference internal" href="#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">--with-cxx-main</span></code></a> 选项设置的变量。</p>
-<p>默认为： <code class="docutils literal notranslate"><span class="pre">$(CC)</span></code> 。</p>
-</dd></dl>
-
-<dl class="std envvar">
 <dt class="sig sig-object std" id="envvar-CXX">
 <span class="sig-name descname"><span class="pre">CXX</span></span><a class="headerlink" href="#envvar-CXX" title="永久链接至目标">¶</a></dt>
 <dd><p>C++ 编译器指令。</p>
-<p>如果使用了 <a class="reference internal" href="#cmdoption-0"><code class="xref std std-option docutils literal notranslate"><span class="pre">--with-cxx-main</span></code></a> 选项，则使用。</p>
 <p>例如： <code class="docutils literal notranslate"><span class="pre">g++</span> <span class="pre">-pthread</span></code> 。</p>
 </dd></dl>
 
@@ -978,11 +981,11 @@ Example on Linux x86-64:</p>
 <dd><p><span class="target" id="index-58"></span><a class="reference internal" href="#envvar-CFLAGS_NODIST"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS_NODIST</span></code></a> 用于构建解释器和 stdlib C 扩展。当 Python 安装后，编译器标志 <em>不</em> 应该成为 distutils <span class="target" id="index-59"></span><a class="reference internal" href="#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a> 的一部分时，可以使用它 （ <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=21121">bpo-21121</a> ）。</p>
 <p>In particular, <span class="target" id="index-12"></span><a class="reference internal" href="#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a> should not contain:</p>
 <ul class="simple">
-<li><p>the compiler flag <cite>-I</cite> (for setting the search path for include files).
-The <cite>-I</cite> flags are processed from left to right, and any flags in
-<span class="target" id="index-13"></span><a class="reference internal" href="#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a> would take precedence over user- and package-supplied <cite>-I</cite>
+<li><p>the compiler flag <code class="docutils literal notranslate"><span class="pre">-I</span></code> (for setting the search path for include files).
+The <code class="docutils literal notranslate"><span class="pre">-I</span></code> flags are processed from left to right, and any flags in
+<span class="target" id="index-13"></span><a class="reference internal" href="#envvar-CFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS</span></code></a> would take precedence over user- and package-supplied <code class="docutils literal notranslate"><span class="pre">-I</span></code>
 flags.</p></li>
-<li><p>hardening flags such as <cite>-Werror</cite> because distributions cannot control
+<li><p>hardening flags such as <code class="docutils literal notranslate"><span class="pre">-Werror</span></code> because distributions cannot control
 whether packages installed by users conform to such heightened
 standards.</p></li>
 </ul>
@@ -1108,7 +1111,7 @@ standards.</p></li>
 <dt class="sig sig-object std" id="envvar-LINKCC">
 <span class="sig-name descname"><span class="pre">LINKCC</span></span><a class="headerlink" href="#envvar-LINKCC" title="永久链接至目标">¶</a></dt>
 <dd><p>用于构建如 <code class="docutils literal notranslate"><span class="pre">python</span></code> 和 <code class="docutils literal notranslate"><span class="pre">_testembed</span></code> 的程序的链接器命令。</p>
-<p>默认为： <code class="docutils literal notranslate"><span class="pre">$(PURIFY)</span> <span class="pre">$(MAINCC)</span></code> 。</p>
+<p>Default: <code class="docutils literal notranslate"><span class="pre">$(PURIFY)</span> <span class="pre">$(CC)</span></code>.</p>
 </dd></dl>
 
 <dl class="std envvar">
@@ -1127,9 +1130,9 @@ standards.</p></li>
 <dd><p><span class="target" id="index-65"></span><a class="reference internal" href="#envvar-LDFLAGS_NODIST"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LDFLAGS_NODIST</span></code></a> 的使用方式与  <span class="target" id="index-66"></span><a class="reference internal" href="#envvar-CFLAGS_NODIST"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">CFLAGS_NODIST</span></code></a> 相同。当 Python 安装后，链接器标志 <em>不</em> 应该成为 distutils <span class="target" id="index-67"></span><a class="reference internal" href="#envvar-LDFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LDFLAGS</span></code></a> 的一部分时，可以使用它（ <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=35257">bpo-35257</a> ）。</p>
 <p>In particular, <span class="target" id="index-22"></span><a class="reference internal" href="#envvar-LDFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LDFLAGS</span></code></a> should not contain:</p>
 <ul class="simple">
-<li><p>the compiler flag <cite>-L</cite> (for setting the search path for libraries).
-The <cite>-L</cite> flags are processed from left to right, and any flags in
-<span class="target" id="index-23"></span><a class="reference internal" href="#envvar-LDFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LDFLAGS</span></code></a> would take precedence over user- and package-supplied <cite>-L</cite>
+<li><p>the compiler flag <code class="docutils literal notranslate"><span class="pre">-L</span></code> (for setting the search path for libraries).
+The <code class="docutils literal notranslate"><span class="pre">-L</span></code> flags are processed from left to right, and any flags in
+<span class="target" id="index-23"></span><a class="reference internal" href="#envvar-LDFLAGS"><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LDFLAGS</span></code></a> would take precedence over user- and package-supplied <code class="docutils literal notranslate"><span class="pre">-L</span></code>
 flags.</p></li>
 </ul>
 </dd></dl>
@@ -1329,7 +1332,7 @@ flags.</p></li>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

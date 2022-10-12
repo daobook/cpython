@@ -278,7 +278,7 @@ change the definition in your own code.</p>
 <span class="n"><span class="pre">PyOS_sighandler_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyOS_getsig</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">i</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyOS_getsig" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Return the current signal handler for signal <em>i</em>.  This is a thin wrapper around
 either <code class="xref c c-func docutils literal notranslate"><span class="pre">sigaction()</span></code> or <code class="xref c c-func docutils literal notranslate"><span class="pre">signal()</span></code>.  Do not call those functions
-directly! <code class="xref c c-type docutils literal notranslate"><span class="pre">PyOS_sighandler_t</span></code> is a typedef alias for <span class="xref c c-texpr"><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span></span>.</p>
+directly! <code class="xref c c-type docutils literal notranslate"><span class="pre">PyOS_sighandler_t</span></code> is a typedef alias for <span class="c-expr sig sig-inline c"><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span></span>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -287,7 +287,7 @@ directly! <code class="xref c c-type docutils literal notranslate"><span class="
 <dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Set the signal handler for signal <em>i</em> to be <em>h</em>; return the old signal handler.
 This is a thin wrapper around either <code class="xref c c-func docutils literal notranslate"><span class="pre">sigaction()</span></code> or <code class="xref c c-func docutils literal notranslate"><span class="pre">signal()</span></code>.  Do
 not call those functions directly!  <code class="xref c c-type docutils literal notranslate"><span class="pre">PyOS_sighandler_t</span></code> is a typedef
-alias for <span class="xref c c-texpr"><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span></span>.</p>
+alias for <span class="c-expr sig sig-inline c"><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span></span>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -332,7 +332,7 @@ back to a byte string.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>The function now uses the UTF-8 encoding on Windows if
-<a class="reference internal" href="init.html#c.Py_LegacyWindowsFSEncodingFlag" title="Py_LegacyWindowsFSEncodingFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_LegacyWindowsFSEncodingFlag</span></code></a> is zero;</p>
+<code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.legacy_windows_fs_encoding</span></code> is zero;</p>
 </div>
 </dd></dl>
 
@@ -370,7 +370,7 @@ the <a class="reference internal" href="init_config.html#c.Py_PreInitialize" tit
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>The function now uses the UTF-8 encoding on Windows if
-<a class="reference internal" href="init.html#c.Py_LegacyWindowsFSEncodingFlag" title="Py_LegacyWindowsFSEncodingFlag"><code class="xref c c-data docutils literal notranslate"><span class="pre">Py_LegacyWindowsFSEncodingFlag</span></code></a> is zero.</p>
+<code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.legacy_windows_fs_encoding</span></code> is zero.</p>
 </div>
 </dd></dl>
 
@@ -556,7 +556,7 @@ interpreters created by the runtime.</p>
 after runtime initialization, existing audit hooks are notified and may
 silently abort the operation by raising an error subclassed from
 <a class="reference internal" href="../library/exceptions.html#Exception" title="Exception"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a> (other errors will not be silenced).</p>
-<p>The hook function is of type <span class="xref c c-texpr"><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="p">*</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="w"> </span><span class="p">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">*</span><span class="n">userData</span><span class="p">)</span></span>, where <em>args</em> is guaranteed to be a
+<p>The hook function is of type <span class="c-expr sig sig-inline c"><span class="kt">int</span><span class="w"> </span><span class="p">(</span><span class="p">*</span><span class="p">)</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="p">*</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="w"> </span><span class="p">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">*</span><span class="n">userData</span><span class="p">)</span></span>, where <em>args</em> is guaranteed to be a
 <a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTupleObject</span></code></a>. The hook function is always called with the GIL
 held by the Python interpreter that raised the event.</p>
 <p>See <span class="target" id="index-0"></span><a class="pep reference external" href="https://peps.python.org/pep-0578/"><strong>PEP 578</strong></a> for a detailed description of auditing.  Functions in the
@@ -718,7 +718,7 @@ the cleanup function, no Python APIs should be called by <em>func</em>.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

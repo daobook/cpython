@@ -158,11 +158,11 @@ the interpreter.</p>
 parameter.  The available start symbols are <code class="xref py py-const docutils literal notranslate"><span class="pre">Py_eval_input</span></code>,
 <code class="xref py py-const docutils literal notranslate"><span class="pre">Py_file_input</span></code>, and <code class="xref py py-const docutils literal notranslate"><span class="pre">Py_single_input</span></code>.  These are described
 following the functions which accept them as parameters.</p>
-<p>Note also that several of these functions take <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> parameters.  One
-particular issue which needs to be handled carefully is that the <code class="xref c c-type docutils literal notranslate"><span class="pre">FILE</span></code>
+<p>Note also that several of these functions take <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> parameters.  One
+particular issue which needs to be handled carefully is that the <span class="c-expr sig sig-inline c"><span class="n">FILE</span></span>
 structure for different C libraries can be different and incompatible.  Under
 Windows (at least), it is possible for dynamically linked extensions to actually
-use different libraries, so care should be taken that <span class="xref c c-texpr"><span class="n">FILE</span><span class="p">*</span></span> parameters
+use different libraries, so care should be taken that <span class="c-expr sig sig-inline c"><span class="n">FILE</span><span class="p">*</span></span> parameters
 are only passed to these functions if it is certain that they were created by
 the same library that the Python runtime is using.</p>
 <dl class="c function">
@@ -179,7 +179,7 @@ be <code class="docutils literal notranslate"><span class="pre">0</span></code> 
 list does not represent a valid Python command line.</p>
 <p>Note that if an otherwise unhandled <a class="reference internal" href="../library/exceptions.html#SystemExit" title="SystemExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemExit</span></code></a> is raised, this
 function will not return <code class="docutils literal notranslate"><span class="pre">1</span></code>, but exit the process, as long as
-<code class="docutils literal notranslate"><span class="pre">Py_InspectFlag</span></code> is not set.</p>
+<a class="reference internal" href="init_config.html#c.PyConfig.inspect" title="PyConfig.inspect"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.inspect</span></code></a> is zero.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -229,7 +229,7 @@ If <em>closeit</em> is true, the file is closed before
 <dt class="sig sig-object c" id="c.PyRun_SimpleString">
 <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyRun_SimpleString</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">command</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyRun_SimpleString" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>This is a simplified interface to <a class="reference internal" href="#c.PyRun_SimpleStringFlags" title="PyRun_SimpleStringFlags"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyRun_SimpleStringFlags()</span></code></a> below,
-leaving the <a class="reference internal" href="#c.PyCompilerFlags" title="PyCompilerFlags"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyCompilerFlags</span></code></a>* argument set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
+leaving the <a class="reference internal" href="#c.PyCompilerFlags" title="PyCompilerFlags"><code class="xref c c-struct docutils literal notranslate"><span class="pre">PyCompilerFlags</span></code></a>* argument set to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -242,7 +242,7 @@ there was an error, there is no way to get the exception information. For the
 meaning of <em>flags</em>, see below.</p>
 <p>Note that if an otherwise unhandled <a class="reference internal" href="../library/exceptions.html#SystemExit" title="SystemExit"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SystemExit</span></code></a> is raised, this
 function will not return <code class="docutils literal notranslate"><span class="pre">-1</span></code>, but exit the process, as long as
-<code class="docutils literal notranslate"><span class="pre">Py_InspectFlag</span></code> is not set.</p>
+<a class="reference internal" href="init_config.html#c.PyConfig.inspect" title="PyConfig.inspect"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.inspect</span></code></a> is zero.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -505,7 +505,7 @@ the symbol to use when compiling arbitrarily long Python source code.</p>
 interpreter loop.</p>
 </dd></dl>
 
-<dl class="c type">
+<dl class="c struct">
 <dt class="sig sig-object c" id="c.PyCompilerFlags">
 <span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyCompilerFlags</span></span></span><a class="headerlink" href="#c.PyCompilerFlags" title="永久链接至目标">¶</a><br /></dt>
 <dd><p>This is the structure used to hold compiler flags.  In cases where code is only
@@ -638,7 +638,7 @@ interpreted as “true division” according to <span class="target" id="index-3
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

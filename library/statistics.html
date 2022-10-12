@@ -178,6 +178,34 @@
 <p>该模块提供了用于计算数字 (<a class="reference internal" href="numbers.html#numbers.Real" title="numbers.Real"><code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code></a>-valued) 数据的数理统计量的函数。</p>
 <p>此模块并不是诸如 <a class="reference external" href="https://numpy.org">NumPy</a> ， <a class="reference external" href="https://www.scipy.org/">SciPy</a> 等第三方库或者诸如 Minitab ， SAS ， Matlab 等针对专业统计学家的专有全功能统计软件包的竞品。此模块针对图形和科学计算器的水平。</p>
 <p>除非明确注释，这些函数支持 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> ， <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> ， <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Decimal</span></code></a> 和 <a class="reference internal" href="fractions.html#fractions.Fraction" title="fractions.Fraction"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fraction</span></code></a> 。当前不支持同其他类型（是否在数字塔中）的行为。混合类型的集合也是未定义的，并且依赖于实现。如果你输入的数据由混合类型组成，你应该能够使用 <a class="reference internal" href="functions.html#map" title="map"><code class="xref py py-func docutils literal notranslate"><span class="pre">map()</span></code></a> 来确保一个一致的结果，比如： <code class="docutils literal notranslate"><span class="pre">map(float,</span> <span class="pre">input_data)</span></code> 。</p>
+<p>Some datasets use <code class="docutils literal notranslate"><span class="pre">NaN</span></code> (not a number) values to represent missing data.
+Since NaNs have unusual comparison semantics, they cause surprising or
+undefined behaviors in the statistics functions that sort data or that count
+occurrences.  The functions affected are <code class="docutils literal notranslate"><span class="pre">median()</span></code>, <code class="docutils literal notranslate"><span class="pre">median_low()</span></code>,
+<code class="docutils literal notranslate"><span class="pre">median_high()</span></code>, <code class="docutils literal notranslate"><span class="pre">median_grouped()</span></code>, <code class="docutils literal notranslate"><span class="pre">mode()</span></code>, <code class="docutils literal notranslate"><span class="pre">multimode()</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">quantiles()</span></code>.  The <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values should be stripped before calling these
+functions:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">median</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isnan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">filterfalse</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mf">20.7</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;NaN&#39;</span><span class="p">),</span><span class="mf">19.2</span><span class="p">,</span> <span class="mf">18.3</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;NaN&#39;</span><span class="p">),</span> <span class="mf">14.4</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># This has surprising behavior</span>
+<span class="go">[20.7, nan, 14.4, 18.3, 19.2, nan]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># This result is unexpected</span>
+<span class="go">16.35</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">isnan</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>    <span class="c1"># Number of missing values</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">filterfalse</span><span class="p">(</span><span class="n">isnan</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>  <span class="c1"># Strip NaN values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clean</span>
+<span class="go">[20.7, 19.2, 18.3, 14.4]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>  <span class="c1"># Sorting now works as expected</span>
+<span class="go">[14.4, 18.3, 19.2, 20.7]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">median</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>       <span class="c1"># This result is now well defined</span>
+<span class="go">18.75</span>
+</pre></div>
+</div>
 <section id="averages-and-measures-of-central-location">
 <h2>平均值以及对中心位置的评估<a class="headerlink" href="#averages-and-measures-of-central-location" title="永久链接至标题">¶</a></h2>
 <p>这些函数用于计算一个总体或样本的平均值或者典型值。</p>
@@ -260,7 +288,7 @@
 <td><p>两个变量的样本协方差。</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#statistics.correlation" title="statistics.correlation"><code class="xref py py-func docutils literal notranslate"><span class="pre">correlation()</span></code></a></p></td>
-<td><p>两个变量的皮尔逊相关系数。</p></td>
+<td><p>Pearson and Spearman’s correlation coefficients.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#statistics.linear_regression" title="statistics.linear_regression"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_regression()</span></code></a></p></td>
 <td><p>简单线性回归的斜率和截距。</p></td>
@@ -628,20 +656,46 @@ Larry B Wallnau (8th Edition).</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="statistics.correlation">
-<span class="sig-prename descclassname"><span class="pre">statistics.</span></span><span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statistics.correlation" title="永久链接至目标">¶</a></dt>
-<dd><p>返回两个输入的 <a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">皮尔逊相关系数</a>。 皮尔逊相关系数 <em>r</em> 的取值在 -1 到 +1 之间。 它衡量线性相关的强度和方向，其中 +1 表示非常强的正线性相关，-1 表示非常强的负线性相关，0 表示无线性相关。</p>
+<span class="sig-prename descclassname"><span class="pre">statistics.</span></span><span class="sig-name descname"><span class="pre">correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statistics.correlation" title="永久链接至目标">¶</a></dt>
+<dd><p>Return the <a class="reference external" href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson’s correlation coefficient</a>
+for two inputs. Pearson’s correlation coefficient <em>r</em> takes values
+between -1 and +1. It measures the strength and direction of a linear
+relationship.</p>
+<p>If <em>method</em> is “ranked”, computes <a class="reference external" href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">Spearman’s rank correlation coefficient</a>
+for two inputs. The data is replaced by ranks.  Ties are averaged so that
+equal values receive the same rank.  The resulting coefficient measures the
+strength of a monotonic relationship.</p>
+<p>Spearman’s correlation coefficient is appropriate for ordinal data or for
+continuous data that doesn’t meet the linear proportion requirement for
+Pearson’s correlation coefficient.</p>
 <p>两个输入必须具有相同的长度（不少于两个元素），并且不必为常量，否则会引发 <a class="reference internal" href="#statistics.StatisticsError" title="statistics.StatisticsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">StatisticsError</span></code></a>。</p>
-<p>示例：</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<p>Example with <a class="reference external" href="https://en.wikipedia.org/wiki/Kepler's_laws_of_planetary_motion">Kepler’s laws of planetary motion</a>:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and  Neptune</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orbital_period</span> <span class="o">=</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">687</span><span class="p">,</span> <span class="mi">4331</span><span class="p">,</span> <span class="mi">10_756</span><span class="p">,</span> <span class="mi">30_687</span><span class="p">,</span> <span class="mi">60_190</span><span class="p">]</span>    <span class="c1"># days</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist_from_sun</span> <span class="o">=</span> <span class="p">[</span><span class="mi">58</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">228</span><span class="p">,</span> <span class="mi">778</span><span class="p">,</span> <span class="mi">1_400</span><span class="p">,</span> <span class="mi">2_900</span><span class="p">,</span> <span class="mi">4_500</span><span class="p">]</span> <span class="c1"># million km</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Show that a perfect monotonic relationship exists</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">correlation</span><span class="p">(</span><span class="n">orbital_period</span><span class="p">,</span> <span class="n">dist_from_sun</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ranked&#39;</span><span class="p">)</span>
 <span class="go">1.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="go">-1.0</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Observe that a linear relationship is imperfect</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">correlation</span><span class="p">(</span><span class="n">orbital_period</span><span class="p">,</span> <span class="n">dist_from_sun</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">0.9882</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Demonstrate Kepler&#39;s third law: There is a linear correlation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># between the square of the orbital period and the cube of the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># distance from the sun.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">period_squared</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="o">*</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">orbital_period</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist_cubed</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dist_from_sun</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">round</span><span class="p">(</span><span class="n">correlation</span><span class="p">(</span><span class="n">period_squared</span><span class="p">,</span> <span class="n">dist_cubed</span><span class="p">),</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">1.0</span>
 </pre></div>
 </div>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Added support for Spearman’s rank correlation coefficient.</p>
 </div>
 </dd></dl>
 
@@ -746,7 +800,10 @@ function simplifies to:</p>
 <dt class="sig sig-object py" id="statistics.NormalDist.pdf">
 <span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#statistics.NormalDist.pdf" title="永久链接至目标">¶</a></dt>
 <dd><p>使用 <a class="reference external" href="https://en.wikipedia.org/wiki/Probability_density_function">概率密度函数 (pdf)</a>，计算一个随机变量 <em>X</em> 趋向于给定值 <em>x</em> 的相对可能性。 在数学意义上，它是当 <em>dx</em> 趋向于零时比率 <code class="docutils literal notranslate"><span class="pre">P(x</span> <span class="pre">&lt;=</span> <span class="pre">X</span> <span class="pre">&lt;</span> <span class="pre">x+dx)</span> <span class="pre">/</span> <span class="pre">dx</span></code> 的极限。</p>
-<p>相对可能性的计算方法是用一个狭窄区间内某个样本出现的概率除以区间的宽度（因此使用“密度”一词）。 由于可能性是相对于其他点的，它的值可以大于 <cite>1.0</cite>。</p>
+<p>The relative likelihood is computed as the probability of a sample
+occurring in a narrow range divided by the width of the range (hence
+the word “density”).  Since the likelihood is relative to other points,
+its value can be greater than <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -838,7 +895,10 @@ function.  Mathematically, it is written <code class="docutils literal notransla
 <span class="go">[1.4591308524824727, 1.8035946855390597, 2.175091447274739]</span>
 </pre></div>
 </div>
-<p>当样本量较大并且成功试验的可能性接近 50% 时，正态分布可以被用来模拟 <a class="reference external" href="http://mathworld.wolfram.com/BinomialDistribution.html">二项分布</a>。</p>
+<p>Normal distributions can be used to approximate <a class="reference external" href="https://mathworld.wolfram.com/BinomialDistribution.html">Binomial
+distributions</a>
+when the sample size is large and when the probability of a successful
+trial is near 50%.</p>
 <p>例如，一次开源会议有 750 名与会者和两个可分别容纳 500 人的会议厅。 会上有一场关于 Python 的演讲和一场关于 Ruby 的演讲。 在往届会议中，65% 的与会者更愿意去听关于 Python 的演讲。 假定人群的偏好没有发生改变，那么 Python 演讲的会议厅不超出其容量上限的可能性是多少？</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="mi">750</span>             <span class="c1"># Sample size</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="mf">0.65</span>            <span class="c1"># Preference for Python</span>
@@ -1015,7 +1075,7 @@ distributed features including height, weight, and foot size.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

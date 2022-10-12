@@ -343,7 +343,10 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.AST">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">AST</span></span><a class="headerlink" href="#ast.AST" title="永久链接至目标">¶</a></dt>
-<dd><p>这是所有 AST 节点类的基类。实际上，这些节点类派生自 <code class="file docutils literal notranslate"><span class="pre">Parser/Python.asdl</span></code> 文件，其中定义的语法树示例 <a class="reference internal" href="#abstract-grammar"><span class="std std-ref">如下</span></a>。它们在 C 语言模块 <code class="xref py py-mod docutils literal notranslate"><span class="pre">_ast</span></code> 中定义，并被导出至 <a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a> 模块。</p>
+<dd><p>This is the base of all AST node classes.  The actual node classes are
+derived from the <code class="file docutils literal notranslate"><span class="pre">Parser/Python.asdl</span></code> file, which is reproduced
+<a class="reference internal" href="#abstract-grammar"><span class="std std-ref">above</span></a>.  They are defined in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">_ast</span></code> C
+module and re-exported in <a class="reference internal" href="#module-ast" title="ast: Abstract Syntax Tree classes and manipulation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ast</span></code></a>.</p>
 <p>抽象语法定义的每个左侧符号（比方说， <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.stmt</span></code> 或者 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.expr</span></code>）定义了一个类。另外，在抽象语法定义的右侧，对每一个构造器也定义了一个类；这些类继承自树左侧的类。比如，<a class="reference internal" href="#ast.BinOp" title="ast.BinOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.BinOp</span></code></a> 继承自 <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.expr</span></code>。对于多分支产生式（也就是”和规则”），树右侧的类是抽象的；只有特定构造器结点的实例能被构造。</p>
 <span class="target" id="index-0"></span><span class="target" id="index-1"></span><dl class="py attribute">
 <dt class="sig sig-object py" id="ast.AST._fields">
@@ -1247,7 +1250,12 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ast.For">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">For</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orelse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_comment</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.For" title="永久链接至目标">¶</a></dt>
-<dd><p><code class="docutils literal notranslate"><span class="pre">for</span></code> 循环。<code class="docutils literal notranslate"><span class="pre">target</span></code> 持有循环指定的变量，作为一个单独的 <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>、<a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a> 或 <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a> 节点。<code class="docutils literal notranslate"><span class="pre">iter</span></code> 持有要被循环的项目，同样是一个节点。<code class="docutils literal notranslate"><span class="pre">body</span></code> 和 <code class="docutils literal notranslate"><span class="pre">orelse</span></code> 包含要执行的节点列表。如果循环正常结束，<code class="docutils literal notranslate"><span class="pre">orelse</span></code> 中的节点将被执行，而不是通过 <code class="docutils literal notranslate"><span class="pre">break</span></code> 语句。</p>
+<dd><p>A <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. <code class="docutils literal notranslate"><span class="pre">target</span></code> holds the variable(s) the loop assigns to, as a
+single <a class="reference internal" href="#ast.Name" title="ast.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>, <a class="reference internal" href="#ast.Tuple" title="ast.Tuple"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tuple</span></code></a>, <a class="reference internal" href="#ast.List" title="ast.List"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>, <a class="reference internal" href="#ast.Attribute" title="ast.Attribute"><code class="xref py py-class docutils literal notranslate"><span class="pre">Attribute</span></code></a> or
+<a class="reference internal" href="#ast.Subscript" title="ast.Subscript"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscript</span></code></a> node. <code class="docutils literal notranslate"><span class="pre">iter</span></code> holds the item to be looped over, again
+as a single node. <code class="docutils literal notranslate"><span class="pre">body</span></code> and <code class="docutils literal notranslate"><span class="pre">orelse</span></code> contain lists of nodes to execute.
+Those in <code class="docutils literal notranslate"><span class="pre">orelse</span></code> are executed if the loop finishes normally, rather than
+via a <code class="docutils literal notranslate"><span class="pre">break</span></code> statement.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ast.For.type_comment">
 <span class="sig-name descname"><span class="pre">type_comment</span></span><a class="headerlink" href="#ast.For.type_comment" title="永久链接至目标">¶</a></dt>
@@ -2159,13 +2167,11 @@ occurrences of the same value (e.g. <a class="reference internal" href="#ast.Add
 <p>此外，如果 <code class="docutils literal notranslate"><span class="pre">mode</span></code> 是 <code class="docutils literal notranslate"><span class="pre">'func_type'</span></code>，输入语法将被修改为对应于 <span class="target" id="index-12"></span><a class="pep reference external" href="https://peps.python.org/pep-0484/"><strong>PEP 484</strong></a> 签名类型注释，例如 <code class="docutils literal notranslate"><span class="pre">(str,</span> <span class="pre">int)</span> <span class="pre">-&gt;</span> <span class="pre">List[str]</span></code>。</p>
 <p>另外，将 <code class="docutils literal notranslate"><span class="pre">feature_version</span></code> 设置为一个元组 <code class="docutils literal notranslate"><span class="pre">(major,</span> <span class="pre">minor)</span></code> 将尝试使用该 Python 版本的语法进行解析。目前 <code class="docutils literal notranslate"><span class="pre">major</span></code> 必须等于 <code class="docutils literal notranslate"><span class="pre">3</span></code>。例如，设置 <code class="docutils literal notranslate"><span class="pre">feature_version=(3,</span> <span class="pre">4)</span></code> 将允许使用 <code class="docutils literal notranslate"><span class="pre">async</span></code> 和 <code class="docutils literal notranslate"><span class="pre">await</span></code> 作为变量名。支持的最低版本是 <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">4)</span></code>；最高版本是 <code class="docutils literal notranslate"><span class="pre">sys.version_info[0:2]</span></code>。</p>
 <p>如果 source 包含一个空字符（’0’），<a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> 将被触发。</p>
-<blockquote>
-<div><div class="admonition warning">
+<div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>注意，成功地将源代码解析成 AST 对象并不保证所提供的源代码是可以执行的有效 Python 代码，因为编译步骤可能会引发进一步的 <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a> 异常。例如，源码 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">42</span></code> 为返回语句生成了一个有效的 AST 节点，但它不能被单独编译（它需要在一个函数节点内）。</p>
 <p>特别是，<a class="reference internal" href="#ast.parse" title="ast.parse"><code class="xref py py-func docutils literal notranslate"><span class="pre">ast.parse()</span></code></a> 不会做任何范围检查，而编译步骤会做。</p>
 </div>
-</div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>足够复杂或是巨大的字符串可能导致 Python 解释器的崩溃，因为 Python 的 AST 编译器是有栈深限制的。</p>
@@ -2195,11 +2201,26 @@ occurrences of the same value (e.g. <a class="reference internal" href="#ast.Add
 <dl class="py function">
 <dt class="sig sig-object py" id="ast.literal_eval">
 <span class="sig-prename descclassname"><span class="pre">ast.</span></span><span class="sig-name descname"><span class="pre">literal_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_or_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ast.literal_eval" title="永久链接至目标">¶</a></dt>
-<dd><p>安全地评估一个表达式节点或一个包含 Python 字面量或容器显示的字符串。提供的字符串或节点只能由以下 Python 字面量结构组成：字符串、字节串、数字、元组、列表、字典、集合、布尔值、<code class="docutils literal notranslate"><span class="pre">None</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Ellipsis</span></code>。</p>
-<p>这可以用来安全地评估来自不受信任的来源的包含 Python 值的字符串，而不需要自己去解析这些值。它不能够评估任意复杂的表达式，例如涉及运算符或索引的表达式。</p>
+<dd><p>Evaluate an expression node or a string containing only a Python literal or
+container display.  The string or node provided may only consist of the
+following Python literal structures: strings, bytes, numbers, tuples, lists,
+dicts, sets, booleans, <code class="docutils literal notranslate"><span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">Ellipsis</span></code>.</p>
+<p>This can be used for evaluating strings containing Python values without the
+need to parse the values oneself.  It is not capable of evaluating
+arbitrarily complex expressions, for example involving operators or
+indexing.</p>
+<p>This function had been documented as “safe” in the past without defining
+what that meant. That was misleading. This is specifically designed not to
+execute Python code, unlike the more general <a class="reference internal" href="functions.html#eval" title="eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>. There is no
+namespace, no name lookups, or ability to call out. But it is not free from
+attack: A relatively small input can lead to memory exhaustion or to C stack
+exhaustion, crashing the process. There is also the possibility for
+excessive CPU consumption denial of service on some inputs. Calling it on
+untrusted data is thus not recommended.</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>足够复杂或是巨大的字符串可能导致 Python 解释器的崩溃，因为 Python 的 AST 编译器是有栈深限制的。</p>
+<p>It is possible to crash the Python interpreter due to stack depth
+limitations in Python’s AST compiler.</p>
 <p>它可能引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>, <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>, <a class="reference internal" href="exceptions.html#SyntaxError" title="SyntaxError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SyntaxError</span></code></a>, <a class="reference internal" href="exceptions.html#MemoryError" title="MemoryError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MemoryError</span></code></a> 和 <a class="reference internal" href="exceptions.html#RecursionError" title="RecursionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RecursionError</span></code></a> ，取决于错误的输入。</p>
 </div>
 <div class="versionchanged">
@@ -2420,7 +2441,7 @@ documentation resource, has good details on working with Python ASTs.</p>
 annotates Python ASTs with the positions of tokens and text in the source
 code that generated them. This is helpful for tools that make source code
 transformations.</p>
-<p><a class="reference external" href="http://leoeditor.com/appendices.html#leoast-py">leoAst.py</a> unifies the
+<p><a class="reference external" href="https://leoeditor.com/appendices.html#leoast-py">leoAst.py</a> unifies the
 token-based and parse-tree-based views of python programs by inserting
 two-way links between tokens and ast nodes.</p>
 <p><a class="reference external" href="https://libcst.readthedocs.io/">LibCST</a> parses code as a Concrete Syntax
@@ -2561,7 +2582,7 @@ in your python file.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

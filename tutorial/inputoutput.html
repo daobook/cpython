@@ -250,7 +250,18 @@
 <span class="go">My hovercraft is full of &#39;eels&#39;.</span>
 </pre></div>
 </div>
-<p>格式规范参考详见参考指南 <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">格式规格迷你语言</span></a>。</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">=</span></code> specifier can be used to expand an expression to the text of the
+expression, an equal sign, then the representation of the evaluated expression:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bugs</span> <span class="o">=</span> <span class="s1">&#39;roaches&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">area</span> <span class="o">=</span> <span class="s1">&#39;living room&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Debugging </span><span class="si">{</span><span class="n">bugs</span><span class="si">=}</span><span class="s1"> </span><span class="si">{</span><span class="n">count</span><span class="si">=}</span><span class="s1"> </span><span class="si">{</span><span class="n">area</span><span class="si">=}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">Debugging bugs=&#39;roaches&#39; count=13 area=&#39;living room&#39;</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../whatsnew/3.8.html#bpo-36817-whatsnew"><span class="std std-ref">self-documenting expressions</span></a> for more information
+on the <code class="docutils literal notranslate"><span class="pre">=</span></code> specifier. For a reference on these format specifications, see
+the reference guide for the <a class="reference internal" href="../library/string.html#formatspec"><span class="std std-ref">格式规格迷你语言</span></a>.</p>
 </section>
 <section id="the-string-format-method">
 <span id="tut-string-format"></span><h3><span class="section-number">7.1.2. </span>字符串 format() 方法<a class="headerlink" href="#the-string-format-method" title="永久链接至标题">¶</a></h3>
@@ -274,7 +285,7 @@
 </div>
 <p>位置参数和关键字参数可以任意组合：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The story of </span><span class="si">{0}</span><span class="s1">, </span><span class="si">{1}</span><span class="s1">, and </span><span class="si">{other}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Bill&#39;</span><span class="p">,</span> <span class="s1">&#39;Manfred&#39;</span><span class="p">,</span>
-<span class="go">                                                       other=&#39;Georg&#39;))</span>
+<span class="gp">... </span>                                                   <span class="n">other</span><span class="o">=</span><span class="s1">&#39;Georg&#39;</span><span class="p">))</span>
 <span class="go">The story of Bill, Manfred, and Georg.</span>
 </pre></div>
 </div>
@@ -293,7 +304,8 @@ notation.</p>
 </pre></div>
 </div>
 <p>与内置函数 <a class="reference internal" href="../library/functions.html#vars" title="vars"><code class="xref py py-func docutils literal notranslate"><span class="pre">vars()</span></code></a> 结合使用时，这种方式非常实用，可以返回包含所有局部变量的字典。</p>
-<p>例如，下面的代码生成一组整齐的列，包含给定整数及其平方与立方：</p>
+<p>As an example, the following lines produce a tidily aligned
+set of columns giving integers and their squares and cubes:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:2d}</span><span class="s1"> </span><span class="si">{1:3d}</span><span class="s1"> </span><span class="si">{2:4d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
 <span class="gp">...</span>
@@ -456,7 +468,14 @@ You can not specify <em>encoding</em> when opening file in binary mode.</p>
 <section id="saving-structured-data-with-json">
 <span id="tut-json"></span><h3><span class="section-number">7.2.2. </span>使用 <a class="reference internal" href="../library/json.html#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> 保存结构化数据<a class="headerlink" href="#saving-structured-data-with-json" title="永久链接至标题">¶</a></h3>
 <p id="index-1">从文件写入或读取字符串很简单，数字则稍显麻烦，因为 <code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code> 方法只返回字符串，这些字符串必须传递给 <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-func docutils literal notranslate"><span class="pre">int()</span></code></a> 这样的函数，接受 <code class="docutils literal notranslate"><span class="pre">'123'</span></code> 这样的字符串，并返回数字值 123。保存嵌套列表、字典等复杂数据类型时，手动解析和序列化的操作非常复杂。</p>
-<p>Python 支持 <a class="reference external" href="http://json.org">JSON (JavaScript Object Notation)</a> 这种流行数据交换格式，用户无需没完没了地编写、调试代码，才能把复杂的数据类型保存到文件。<a class="reference internal" href="../library/json.html#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> 标准模块采用 Python 数据层次结构，并将之转换为字符串表示形式；这个过程称为 <em class="dfn">serializing</em> （序列化）。从字符串表示中重建数据称为 <em class="dfn">deserializing</em> （解序化）。在序列化和解序化之间，表示对象的字符串可能已经存储在文件或数据中，或通过网络连接发送到远方 的机器。</p>
+<p>Rather than having users constantly writing and debugging code to save
+complicated data types to files, Python allows you to use the popular data
+interchange format called <a class="reference external" href="https://json.org">JSON (JavaScript Object Notation)</a>.  The standard module called <a class="reference internal" href="../library/json.html#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> can take Python
+data hierarchies, and convert them to string representations; this process is
+called <em class="dfn">serializing</em>.  Reconstructing the data from the string representation
+is called <em class="dfn">deserializing</em>.  Between serializing and deserializing, the
+string representing the object may have been stored in a file or data, or
+sent over a network connection to some distant machine.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>JSON 格式通常用于现代应用程序的数据交换。程序员早已对它耳熟能详，可谓是交互操作的不二之选。</p>
@@ -607,7 +626,7 @@ JSON file as a <a class="reference internal" href="../glossary.html#term-text-fi
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

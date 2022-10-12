@@ -192,12 +192,20 @@
 <p class="admonition-title">警告</p>
 <p>一个支持 Vectorcall 的类 <strong>必须</strong> 也实现具有相同语义的 <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_call" title="PyTypeObject.tp_call"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_call</span></code></a>。</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The <a class="reference internal" href="typeobj.html#Py_TPFLAGS_HAVE_VECTORCALL" title="Py_TPFLAGS_HAVE_VECTORCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_VECTORCALL</span></code></a> flag is now removed from a class
+when the class’s <a class="reference internal" href="../reference/datamodel.html#object.__call__" title="object.__call__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code></a> method is reassigned.
+(This internally sets <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_call" title="PyTypeObject.tp_call"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_call</span></code></a> only, and thus
+may make it behave differently than the vectorcall function.)
+In earlier Python versions, vectorcall should only be used with
+<a class="reference internal" href="typeobj.html#Py_TPFLAGS_IMMUTABLETYPE" title="Py_TPFLAGS_IMMUTABLETYPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">immutable</span></code></a> or static types.</p>
+</div>
 <p>如果一个类的vectorcall比*tp_call*慢，就不应该实现vectorcall。例如，如果被调用者需要将参数转换为args 元组和kwargs dict，那么实现vectorcall就没有意义。</p>
 <p>类可以通过启用 <a class="reference internal" href="typeobj.html#Py_TPFLAGS_HAVE_VECTORCALL" title="Py_TPFLAGS_HAVE_VECTORCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_VECTORCALL</span></code></a> 标志并将 <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_vectorcall_offset" title="PyTypeObject.tp_vectorcall_offset"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_vectorcall_offset</span></code></a> 设置为对象结构中的 <em>vectorcallfunc</em> 的 offset 来实现 vectorcall 协议。这是一个指向具有以下签名的函数的指针:</p>
 <dl class="c type">
 <dt class="sig sig-object c" id="c.vectorcallfunc">
 <span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">vectorcallfunc</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">callable</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nargsf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">kwnames</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#c.vectorcallfunc" title="永久链接至目标">¶</a><br /></dt>
-<dd></dd></dl>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.12.</em></dd></dl>
 
 <ul class="simple">
 <li><p><em>callable</em> 是指被调用的对象。</p></li>
@@ -240,7 +248,7 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyVectorcall_NARGS">
 <a class="reference internal" href="intro.html#c.Py_ssize_t" title="Py_ssize_t"><span class="n"><span class="pre">Py_ssize_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyVectorcall_NARGS</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">nargsf</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_NARGS" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>给定一个 vectorcall <em>nargsf</em> 实参，返回参数的实际数量。 目前等同于:</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.12.</em><p>给定一个 vectorcall <em>nargsf</em> 实参，返回参数的实际数量。 目前等同于:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Py_ssize_t</span><span class="p">)(</span><span class="n">nargsf</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">PY_VECTORCALL_ARGUMENTS_OFFSET</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
@@ -263,7 +271,7 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyVectorcall_Call">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyVectorcall_Call</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">callable</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">tuple</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dict</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyVectorcall_Call" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>调用*可调对象*的 <a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc"><code class="xref c c-type docutils literal notranslate"><span class="pre">vectorcallfunc</span></code></a>，其位置参数和关键字参数分别以元组和dict形式给出。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.12.</em><p>调用*可调对象*的 <a class="reference internal" href="#c.vectorcallfunc" title="vectorcallfunc"><code class="xref c c-type docutils literal notranslate"><span class="pre">vectorcallfunc</span></code></a>，其位置参数和关键字参数分别以元组和dict形式给出。</p>
 <p>这是一个专门函数，其目的是被放入 <a class="reference internal" href="typeobj.html#c.PyTypeObject.tp_call" title="PyTypeObject.tp_call"><code class="xref c c-member docutils literal notranslate"><span class="pre">tp_call</span></code></a> 槽位或是用于 <code class="docutils literal notranslate"><span class="pre">tp_call</span></code> 的实现。 它不会检查 <a class="reference internal" href="typeobj.html#Py_TPFLAGS_HAVE_VECTORCALL" title="Py_TPFLAGS_HAVE_VECTORCALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">Py_TPFLAGS_HAVE_VECTORCALL</span></code></a> 旗标并且它不会回退到 <code class="docutils literal notranslate"><span class="pre">tp_call</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
@@ -405,7 +413,8 @@ the format of data you have available.</p>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>调用一个可调用的 Python 对象 <em>callable</em>，附带可变数量的 C 参数。 这些 C 参数使用 <a class="reference internal" href="arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a> 风格的格式字符串来描述。 format 可以为 <em>NULL</em>，表示没有提供任何参数。</p>
 <p>成功时返回结果，在失败时抛出一个异常并返回 <em>NULL</em>。</p>
 <p>这等价于 Python 表达式 <code class="docutils literal notranslate"><span class="pre">callable(*args)</span></code>。</p>
-<p>请注意如果你只传入 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 参数，则 <a class="reference internal" href="#c.PyObject_CallFunctionObjArgs" title="PyObject_CallFunctionObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code></a> 是更快速的选择。</p>
+<p>Note that if you only pass <span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> args,
+<a class="reference internal" href="#c.PyObject_CallFunctionObjArgs" title="PyObject_CallFunctionObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallFunctionObjArgs()</span></code></a> is a faster alternative.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>这个 <em>format</em> 类型已从 <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code> 更改。</p>
 </div>
@@ -418,7 +427,8 @@ the format of data you have available.</p>
 <p>格式可以为 <em>NULL</em> ，表示未提供任何参数。</p>
 <p>成功时返回结果，在失败时抛出一个异常并返回 <em>NULL</em>。</p>
 <p>这和Python表达式``obj.name(arg1, arg2, …)``是一样的。</p>
-<p>请注意如果你只传入 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 参数，则  <a class="reference internal" href="#c.PyObject_CallMethodObjArgs" title="PyObject_CallMethodObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code></a> 是更快速的选择。</p>
+<p>Note that if you only pass <span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> args,
+<a class="reference internal" href="#c.PyObject_CallMethodObjArgs" title="PyObject_CallMethodObjArgs"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_CallMethodObjArgs()</span></code></a> is a faster alternative.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>The types of <em>name</em> and <em>format</em> were changed from <code class="docutils literal notranslate"><span class="pre">char</span> <span class="pre">*</span></code>.</p>
 </div>
@@ -427,7 +437,9 @@ the format of data you have available.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyObject_CallFunctionObjArgs">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_CallFunctionObjArgs</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">callable</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallFunctionObjArgs" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>调用一个可调用的 Python 对象 <em>callable</em>，附带可变数量的 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 参数。 这些参数是以 <em>NULL</em> 之后可变数量的形参的形式提供的。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Call a callable Python object <em>callable</em>, with a variable number of
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> arguments.  The arguments are provided as a variable number
+of parameters followed by <em>NULL</em>.</p>
 <p>成功时返回结果，在失败时抛出一个异常并返回 <em>NULL</em>。</p>
 <p>这和Python表达式``callable(arg1, arg2, …)``是一样的。</p>
 </dd></dl>
@@ -435,7 +447,10 @@ the format of data you have available.</p>
 <dl class="c function">
 <dt class="sig sig-object c" id="c.PyObject_CallMethodObjArgs">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_CallMethodObjArgs</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">obj</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">name</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_CallMethodObjArgs" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>调用 Python 对象 <em>obj</em> 中的一个方法，其中方法名称由 <em>name</em> 中的 Python 字符串对象给出。 它将附带可变数量的 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 参数被调用。 这些参数是以 <em>NULL</em> 之后可变数量的形参的形式提供的。</p>
+<dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a>.</em><p>Call a method of the Python object <em>obj</em>, where the name of the method is given as a
+Python string object in <em>name</em>.  It is called with a variable number of
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> arguments.  The arguments are provided as a variable number
+of parameters followed by <em>NULL</em>.</p>
 <p>成功时返回结果，在失败时抛出一个异常并返回 <em>NULL</em>。</p>
 </dd></dl>
 
@@ -614,7 +629,7 @@ the format of data you have available.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

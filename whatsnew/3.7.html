@@ -504,19 +504,19 @@ choice.  Set <code class="docutils literal notranslate"><span class="pre">PYTHON
 <span id="whatsnew37-pep539"></span><h3>PEP 539: New C API for Thread-Local Storage<a class="headerlink" href="#pep-539-new-c-api-for-thread-local-storage" title="永久链接至标题">¶</a></h3>
 <p>While Python provides a C API for thread-local storage support; the existing
 <a class="reference internal" href="../c-api/init.html#thread-local-storage-api"><span class="std std-ref">Thread Local Storage (TLS) API</span></a> has used
-<span class="xref c c-texpr"><span class="kt">int</span></span> to represent TLS keys across all platforms.  This has not
-generally been a problem for officially-support platforms, but that is neither
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span> to represent TLS keys across all platforms.  This has not
+generally been a problem for officially support platforms, but that is neither
 POSIX-compliant, nor portable in any practical sense.</p>
 <p><span class="target" id="index-14"></span><a class="pep reference external" href="https://peps.python.org/pep-0539/"><strong>PEP 539</strong></a> changes this by providing a new <a class="reference internal" href="../c-api/init.html#thread-specific-storage-api"><span class="std std-ref">Thread Specific Storage (TSS)
 API</span></a> to CPython which supersedes use of the
 existing TLS API within the CPython interpreter, while deprecating the existing
-API.  The TSS API uses a new type <a class="reference internal" href="../c-api/init.html#c.Py_tss_t" title="Py_tss_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_tss_t</span></code></a> instead of <span class="xref c c-texpr"><span class="kt">int</span></span>
+API.  The TSS API uses a new type <a class="reference internal" href="../c-api/init.html#c.Py_tss_t" title="Py_tss_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_tss_t</span></code></a> instead of <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>
 to represent TSS keys–an opaque type the definition of which may depend on
 the underlying TLS implementation.  Therefore, this will allow to build CPython
 on platforms where the native TLS key is defined in a way that cannot be safely
-cast to <span class="xref c c-texpr"><span class="kt">int</span></span>.</p>
+cast to <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>.</p>
 <p>Note that on platforms where the native TLS key is defined in a way that cannot
-be safely cast to <span class="xref c c-texpr"><span class="kt">int</span></span>, all functions of the existing TLS API will be
+be safely cast to <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>, all functions of the existing TLS API will be
 no-op and immediately return failure. This indicates clearly that the old API
 is not supported on platforms where it cannot be used reliably, and that no
 effort will be made to add such support.</p>
@@ -778,12 +778,12 @@ new ABC for access to, opening, and reading <em>resources</em> inside packages.
 Resources are roughly similar to files inside packages, but they needn’t
 be actual files on the physical file system.  Module loaders can provide a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_resource_reader()</span></code> function which returns
-a <a class="reference internal" href="../library/importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a> instance to support this
+a <code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code> instance to support this
 new API.  Built-in file path loaders and zip file loaders both support this.</p>
 <p>Contributed by Barry Warsaw and Brett Cannon in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32248">bpo-32248</a>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><a class="reference external" href="http://importlib-resources.readthedocs.io/en/latest/">importlib_resources</a>
+<p><a class="reference external" href="https://importlib-resources.readthedocs.io/en/latest/">importlib_resources</a>
 – a PyPI backport for earlier Python versions.</p>
 </div>
 </section>
@@ -1125,7 +1125,7 @@ window are shown and hidden in the Options menu.
 </section>
 <section id="importlib">
 <h3>importlib<a class="headerlink" href="#importlib" title="永久链接至标题">¶</a></h3>
-<p>The <a class="reference internal" href="../library/importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a> ABC was introduced to
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code> ABC was introduced to
 support the loading of resources from packages.  See also
 <a class="reference internal" href="#whatsnew37-importlib-resources"><span class="std std-ref">importlib.resources</span></a>.
 (Contributed by Barry Warsaw, Brett Cannon in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32248">bpo-32248</a>.)</p>
@@ -1225,7 +1225,7 @@ callbacks to be executed at process fork.
 of <a class="reference internal" href="../library/os.html#os.writev" title="os.writev"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.writev()</span></code></a> and <a class="reference internal" href="../library/os.html#os.pwrite" title="os.pwrite"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.pwrite()</span></code></a>). (Contributed by Pablo Galindo in
 <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=31368">bpo-31368</a>.)</p>
 <p>The mode argument of <a class="reference internal" href="../library/os.html#os.makedirs" title="os.makedirs"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.makedirs()</span></code></a> no longer affects the file
-permission bits of newly-created intermediate-level directories.
+permission bits of newly created intermediate-level directories.
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=19930">bpo-19930</a>.)</p>
 <p><a class="reference internal" href="../library/os.html#os.dup2" title="os.dup2"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.dup2()</span></code></a> now returns the new file descriptor.  Previously, <code class="docutils literal notranslate"><span class="pre">None</span></code>
 was always returned.
@@ -1338,7 +1338,7 @@ method when the underlying SQLite library is at version 3.6.11 or higher.
 <section id="ssl">
 <h3>ssl<a class="headerlink" href="#ssl" title="永久链接至标题">¶</a></h3>
 <p>The <a class="reference internal" href="../library/ssl.html#module-ssl" title="ssl: TLS/SSL wrapper for socket objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ssl</span></code></a> module now uses OpenSSL’s builtin API instead of
-<a class="reference internal" href="../library/ssl.html#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a> to check a host name or an IP address.  Values
+<code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code> to check a host name or an IP address.  Values
 are validated during TLS handshake.  Any certificate validation error
 including failing the host name check now raises
 <a class="reference internal" href="../library/ssl.html#ssl.SSLCertVerificationError" title="ssl.SSLCertVerificationError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">SSLCertVerificationError</span></code></a> and aborts the handshake with a proper
@@ -1355,7 +1355,7 @@ The ssl module is mostly compatible with LibreSSL 2.7.2 and newer.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">ssl</span></code> module no longer sends IP addresses in SNI TLS extension.
 (Contributed by Christian Heimes in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32185">bpo-32185</a>.)</p>
-<p><a class="reference internal" href="../library/ssl.html#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a> no longer supports partial wildcards like
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code> no longer supports partial wildcards like
 <code class="docutils literal notranslate"><span class="pre">www*.example.org</span></code>.
 (Contributed by Mandeep Singh in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=23033">bpo-23033</a> and Christian Heimes in
 <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=31399">bpo-31399</a>.)</p>
@@ -1492,7 +1492,7 @@ dynamically as specified by <span class="target" id="index-33"></span><a class="
 </section>
 <section id="unicodedata">
 <h3>unicodedata<a class="headerlink" href="#unicodedata" title="永久链接至标题">¶</a></h3>
-<p>The internal <a class="reference internal" href="../library/unicodedata.html#module-unicodedata" title="unicodedata: Access the Unicode Database."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unicodedata</span></code></a> database has been upgraded to use <a class="reference external" href="http://www.unicode.org/versions/Unicode11.0.0/">Unicode 11</a>. (Contributed by Benjamin
+<p>The internal <a class="reference internal" href="../library/unicodedata.html#module-unicodedata" title="unicodedata: Access the Unicode Database."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unicodedata</span></code></a> database has been upgraded to use <a class="reference external" href="https://www.unicode.org/versions/Unicode11.0.0/">Unicode 11</a>. (Contributed by Benjamin
 Peterson.)</p>
 </section>
 <section id="unittest">
@@ -1655,11 +1655,11 @@ and access to the UTC singleton with <a class="reference internal" href="../c-ap
 Contributed by Paul Ganssle in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=10381">bpo-10381</a>.</p>
 <p>The type of results of <code class="xref c c-func docutils literal notranslate"><span class="pre">PyThread_start_new_thread()</span></code> and
 <code class="xref c c-func docutils literal notranslate"><span class="pre">PyThread_get_thread_ident()</span></code>, and the <em>id</em> parameter of
-<a class="reference internal" href="../c-api/init.html#c.PyThreadState_SetAsyncExc" title="PyThreadState_SetAsyncExc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_SetAsyncExc()</span></code></a> changed from <span class="xref c c-texpr"><span class="kt">long</span></span> to
-<span class="xref c c-texpr"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span>.
+<a class="reference internal" href="../c-api/init.html#c.PyThreadState_SetAsyncExc" title="PyThreadState_SetAsyncExc"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyThreadState_SetAsyncExc()</span></code></a> changed from <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> to
+<span class="c-expr sig sig-inline c"><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span></span>.
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=6532">bpo-6532</a>.)</p>
 <p><a class="reference internal" href="../c-api/unicode.html#c.PyUnicode_AsWideCharString" title="PyUnicode_AsWideCharString"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyUnicode_AsWideCharString()</span></code></a> now raises a <a class="reference internal" href="../library/exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> if the
-second argument is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="xref c c-texpr"><span class="n">wchar_t</span><span class="p">*</span></span> string contains null
+second argument is <code class="docutils literal notranslate"><span class="pre">NULL</span></code> and the <span class="c-expr sig sig-inline c"><span class="n">wchar_t</span><span class="p">*</span></span> string contains null
 characters.  (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=30708">bpo-30708</a>.)</p>
 <p>Changes to the startup sequence and the management of dynamic memory
 allocators mean that the long documented requirement to call
@@ -1809,7 +1809,7 @@ namespace module object’s <code class="docutils literal notranslate"><span cla
 <li><p>The <a class="reference internal" href="../library/functions.html#locals" title="locals"><code class="xref py py-func docutils literal notranslate"><span class="pre">locals()</span></code></a> dictionary now displays in the lexical order that
 variables were defined.  Previously, the order was undefined.
 (Contributed by Raymond Hettinger in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32690">bpo-32690</a>.)</p></li>
-<li><p>The <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a> <code class="docutils literal notranslate"><span class="pre">upload</span></code> command no longer tries to change CR
+<li><p>The <code class="docutils literal notranslate"><span class="pre">distutils</span></code> <code class="docutils literal notranslate"><span class="pre">upload</span></code> command no longer tries to change CR
 end-of-line characters to CRLF.  This fixes a corruption issue with sdists
 that ended with a byte equivalent to CR.
 (Contributed by Bo Bayles in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32304">bpo-32304</a>.)</p></li>
@@ -1896,11 +1896,11 @@ and
 both deprecated in Python 3.4 now emit <a class="reference internal" href="../library/exceptions.html#DeprecationWarning" title="DeprecationWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DeprecationWarning</span></code></a>.
 (Contributed by Matthias Bussonnier in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=29576">bpo-29576</a>)</p>
 <p>The <a class="reference internal" href="../library/importlib.html#importlib.abc.ResourceLoader" title="importlib.abc.ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceLoader</span></code></a> ABC has been deprecated in
-favour of <a class="reference internal" href="../library/importlib.html#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>.</p>
+favour of <code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code>.</p>
 </section>
 <section id="id7">
 <h3>locale<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
-<p><a class="reference internal" href="../library/locale.html#locale.format" title="locale.format"><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.format()</span></code></a> has been deprecated, use <a class="reference internal" href="../library/locale.html#locale.format_string" title="locale.format_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">locale.format_string()</span></code></a>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">locale.format()</span></code> has been deprecated, use <a class="reference internal" href="../library/locale.html#locale.format_string" title="locale.format_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">locale.format_string()</span></code></a>
 instead.  (Contributed by Garvit in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=10379">bpo-10379</a>.)</p>
 </section>
 <section id="macpath">
@@ -2026,7 +2026,7 @@ objects is now prohibited. The constructors were never documented, tested,
 or designed as public constructors.  Users were supposed to use
 <a class="reference internal" href="../library/ssl.html#ssl.wrap_socket" title="ssl.wrap_socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.wrap_socket()</span></code></a> or <a class="reference internal" href="../library/ssl.html#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLContext</span></code></a>.
 (Contributed by Christian Heimes in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32951">bpo-32951</a>.)</p></li>
-<li><p>The unused <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a> <code class="docutils literal notranslate"><span class="pre">install_misc</span></code> command has been removed.
+<li><p>The unused <code class="docutils literal notranslate"><span class="pre">distutils</span></code> <code class="docutils literal notranslate"><span class="pre">install_misc</span></code> command has been removed.
 (Contributed by Eric N. Vander Weele in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=29218">bpo-29218</a>.)</p></li>
 </ul>
 </section>
@@ -2122,7 +2122,7 @@ Assigning to them was deprecated in Python 3.5.
 Use the <a class="reference internal" href="../library/http.cookies.html#http.cookies.Morsel.set" title="http.cookies.Morsel.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> method for setting them.
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=29192">bpo-29192</a>.)</p></li>
 <li><p>The <em>mode</em> argument of <a class="reference internal" href="../library/os.html#os.makedirs" title="os.makedirs"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.makedirs()</span></code></a> no longer affects the file
-permission bits of newly-created intermediate-level directories.
+permission bits of newly created intermediate-level directories.
 To set their file permission bits you can set the umask before invoking
 <code class="docutils literal notranslate"><span class="pre">makedirs()</span></code>.
 (Contributed by Serhiy Storchaka in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=19930">bpo-19930</a>.)</p></li>
@@ -2252,7 +2252,7 @@ notice, even in micro version releases.</p></li>
 <p>The function <a class="reference internal" href="../c-api/slice.html#c.PySlice_GetIndicesEx" title="PySlice_GetIndicesEx"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySlice_GetIndicesEx()</span></code></a> is considered unsafe for
 resizable sequences.  If the slice indices are not instances of <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>,
 but objects that implement the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__index__()</span></code> method, the sequence can be
-resized after passing its length to <span class="xref c c-texpr"><span class="o">!</span><a class="reference internal" href="../c-api/slice.html#c.PySlice_GetIndicesEx" title="PySlice_GetIndicesEx"><span class="n">PySlice_GetIndicesEx</span></a></span>.  This
+resized after passing its length to <code class="xref c c-func docutils literal notranslate"><span class="pre">PySlice_GetIndicesEx()</span></code>.  This
 can lead to returning indices out of the length of the sequence.  For
 avoiding possible problems use new functions <a class="reference internal" href="../c-api/slice.html#c.PySlice_Unpack" title="PySlice_Unpack"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySlice_Unpack()</span></code></a> and
 <a class="reference internal" href="../c-api/slice.html#c.PySlice_AdjustIndices" title="PySlice_AdjustIndices"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySlice_AdjustIndices()</span></code></a>.
@@ -2260,7 +2260,7 @@ avoiding possible problems use new functions <a class="reference internal" href=
 </section>
 <section id="cpython-bytecode-changes">
 <h3>CPython bytecode changes<a class="headerlink" href="#cpython-bytecode-changes" title="永久链接至标题">¶</a></h3>
-<p>There are two new opcodes: <code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code> and <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code>.
+<p>There are two new opcodes: <a class="reference internal" href="../library/dis.html#opcode-LOAD_METHOD"><code class="xref std std-opcode docutils literal notranslate"><span class="pre">LOAD_METHOD</span></code></a> and <code class="xref std std-opcode docutils literal notranslate"><span class="pre">CALL_METHOD</span></code>.
 (Contributed by Yury Selivanov and INADA Naoki in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=26110">bpo-26110</a>.)</p>
 <p>The <code class="xref std std-opcode docutils literal notranslate"><span class="pre">STORE_ANNOTATION</span></code> opcode has been removed.
 (Contributed by Mark Shannon in <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=32550">bpo-32550</a>.)</p>
@@ -2289,7 +2289,7 @@ number of other issues). Some known details affected:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../c-api/sys.html#c.PySys_AddWarnOptionUnicode" title="PySys_AddWarnOptionUnicode"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddWarnOptionUnicode()</span></code></a> is not currently usable by embedding
 applications due to the requirement to create a Unicode object prior to
-calling <cite>Py_Initialize</cite>. Use <a class="reference internal" href="../c-api/sys.html#c.PySys_AddWarnOption" title="PySys_AddWarnOption"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddWarnOption()</span></code></a> instead.</p></li>
+calling <code class="docutils literal notranslate"><span class="pre">Py_Initialize</span></code>. Use <a class="reference internal" href="../c-api/sys.html#c.PySys_AddWarnOption" title="PySys_AddWarnOption"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddWarnOption()</span></code></a> instead.</p></li>
 <li><p>warnings filters added by an embedding application with
 <a class="reference internal" href="../c-api/sys.html#c.PySys_AddWarnOption" title="PySys_AddWarnOption"><code class="xref c c-func docutils literal notranslate"><span class="pre">PySys_AddWarnOption()</span></code></a> should now more consistently take precedence
 over the default filters set by the interpreter</p></li>
@@ -2590,7 +2590,7 @@ documentation.
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

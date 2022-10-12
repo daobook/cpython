@@ -275,7 +275,17 @@ properties:</p>
 <dt>不可变序列</dt><dd><p id="index-17">不可变序列类型的对象一旦创建就不能再改变。(如果对象包含对其他对象的引用，其中的可变对象就是可以改变的；但是，一个不可变对象所直接引用的对象集是不能改变的。)</p>
 <p>以下类型属于不可变对象:</p>
 <dl id="index-18">
-<dt>字符串</dt><dd><p id="index-19">字符串是由 Unicode 码位值组成的序列。范围在 <code class="docutils literal notranslate"><span class="pre">U+0000</span> <span class="pre">-</span> <span class="pre">U+10FFFF</span></code> 之内的所有码位值都可在字符串中使用。Python 没有 <span class="xref c c-texpr"><span class="kt">char</span></span> 类型；而是将字符串中的每个码位表示为一个长度为 <code class="docutils literal notranslate"><span class="pre">1</span></code> 的字符串对象。内置函数 <a class="reference internal" href="../library/functions.html#ord" title="ord"><code class="xref py py-func docutils literal notranslate"><span class="pre">ord()</span></code></a> 可将一个码位由字符串形式转换成一个范围在 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">-</span> <span class="pre">10FFFF</span></code> 之内的整型数；<a class="reference internal" href="../library/functions.html#chr" title="chr"><code class="xref py py-func docutils literal notranslate"><span class="pre">chr()</span></code></a> 可将一个范围在 <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">-</span> <span class="pre">10FFFF</span></code> 之内的整型数转换为长度为 <code class="docutils literal notranslate"><span class="pre">1</span></code> 的对应字符串对象。<a class="reference internal" href="../library/stdtypes.html#str.encode" title="str.encode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.encode()</span></code></a> 可以使用指定的文本编码将 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 转换为 <a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>，而 <a class="reference internal" href="../library/stdtypes.html#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a> 则可以实现反向的解码。</p>
+<dt>字符串</dt><dd><p id="index-19">A string is a sequence of values that represent Unicode code points.
+All the code points in the range <code class="docutils literal notranslate"><span class="pre">U+0000</span> <span class="pre">-</span> <span class="pre">U+10FFFF</span></code> can be
+represented in a string.  Python doesn’t have a <span class="c-expr sig sig-inline c"><span class="kt">char</span></span> type;
+instead, every code point in the string is represented as a string
+object with length <code class="docutils literal notranslate"><span class="pre">1</span></code>.  The built-in function <a class="reference internal" href="../library/functions.html#ord" title="ord"><code class="xref py py-func docutils literal notranslate"><span class="pre">ord()</span></code></a>
+converts a code point from its string form to an integer in the
+range <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">-</span> <span class="pre">10FFFF</span></code>; <a class="reference internal" href="../library/functions.html#chr" title="chr"><code class="xref py py-func docutils literal notranslate"><span class="pre">chr()</span></code></a> converts an integer in the range
+<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">-</span> <span class="pre">10FFFF</span></code> to the corresponding length <code class="docutils literal notranslate"><span class="pre">1</span></code> string object.
+<a class="reference internal" href="../library/stdtypes.html#str.encode" title="str.encode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.encode()</span></code></a> can be used to convert a <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> to
+<a class="reference internal" href="../library/stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> using the given text encoding, and
+<a class="reference internal" href="../library/stdtypes.html#bytes.decode" title="bytes.decode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">bytes.decode()</span></code></a> can be used to achieve the opposite.</p>
 </dd>
 <dt>元组</dt><dd><p id="index-20">一个元组中的条目可以是任意 Python 对象。包含两个或以上条目的元组由逗号分隔的表达式构成。只有一个条目的元组 (‘单项元组’) 可通过在表达式后加一个逗号来构成 (一个表达式本身不能创建为元组，因为圆括号要用来设置表达式分组)。一个空元组可通过一对内容为空的圆括号创建。</p>
 </dd>
@@ -648,7 +658,10 @@ falling back to <a class="reference internal" href="#object.__getitem__" title="
 <dt class="sig sig-object py" id="object.__new__">
 <span class="sig-prename descclassname"><span class="pre">object.</span></span><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#object.__new__" title="永久链接至目标">¶</a></dt>
 <dd><p id="index-69">调用以创建一个 <em>cls</em> 类的新实例。<a class="reference internal" href="#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> 是一个静态方法 (因为是特例所以你不需要显式地声明)，它会将所请求实例所属的类作为第一个参数。其余的参数会被传递给对象构造器表达式 (对类的调用)。<a class="reference internal" href="#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> 的返回值应为新对象实例 (通常是 <em>cls</em> 的实例)。</p>
-<p>典型的实现会附带适宜的参数使用 <code class="docutils literal notranslate"><span class="pre">super().__new__(cls[,</span> <span class="pre">...])</span></code>，通过超类的 <a class="reference internal" href="#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> 方法来创建一个类的新实例，然后根据需要修改新创建的实例再将其返回。</p>
+<p>Typical implementations create a new instance of the class by invoking the
+superclass’s <a class="reference internal" href="#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> method using <code class="docutils literal notranslate"><span class="pre">super().__new__(cls[,</span> <span class="pre">...])</span></code>
+with appropriate arguments and then modifying the newly created instance
+as necessary before returning it.</p>
 <p>If <a class="reference internal" href="#object.__new__" title="object.__new__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__new__()</span></code></a> is invoked during object construction and it returns an
 instance of <em>cls</em>, then the new instance’s <a class="reference internal" href="#object.__init__" title="object.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a> method
 will be invoked like <code class="docutils literal notranslate"><span class="pre">__init__(self[,</span> <span class="pre">...])</span></code>, where <em>self</em> is the new instance
@@ -779,7 +792,7 @@ hashing the tuple. Example:</p>
 <p class="admonition-title">备注</p>
 <p>在默认情况下，str 和 bytes 对象的 <a class="reference internal" href="#object.__hash__" title="object.__hash__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__hash__()</span></code></a> 值会使用一个不可预知的随机值“加盐”。 虽然它们在一个单独 Python 进程中会保持不变，但它们的值在重复运行的 Python 间是不可预测的。</p>
 <p>This is intended to provide protection against a denial-of-service caused
-by carefully-chosen inputs that exploit the worst case performance of a
+by carefully chosen inputs that exploit the worst case performance of a
 dict insertion, O(n<sup>2</sup>) complexity.  See
 <a class="reference external" href="http://www.ocert.org/advisories/ocert-2011-003.html">http://www.ocert.org/advisories/ocert-2011-003.html</a> for details.</p>
 <p>改变哈希值会影响集合的迭代次序。Python 也从不保证这个次序不会被改变（通常它在 32 位和 64 位构建上是不一致的）。</p>
@@ -1719,6 +1732,10 @@ the exception is raised at the suspension point.  The result
 when iterating over the <a class="reference internal" href="#object.__await__" title="object.__await__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__await__()</span></code></a> return value, described
 above.  If the exception is not caught in the coroutine, it propagates
 back to the caller.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The second signature (type[, value[, traceback]]) is deprecated and
+may be removed in a future version of Python.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1974,7 +1991,7 @@ supported, which is why the reflected method is not called.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -199,7 +199,10 @@
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fibo</span>
 </pre></div>
 </div>
-<p>这项操作不直接把 <code class="docutils literal notranslate"><span class="pre">fibo</span></code> 函数定义的名称导入到当前符号表，只导入模块名 <code class="docutils literal notranslate"><span class="pre">fibo</span></code> 。要使用模块名访问函数：</p>
+<p>This does not add the names of the functions defined in <code class="docutils literal notranslate"><span class="pre">fibo</span></code>  directly to
+the current <a class="reference internal" href="../glossary.html#term-namespace"><span class="xref std std-term">namespace</span></a> (see <a class="reference internal" href="classes.html#tut-scopes"><span class="std std-ref">Python 作用域和命名空间</span></a> for more details);
+it only adds the module name <code class="docutils literal notranslate"><span class="pre">fibo</span></code> there. Using
+the module name you can access the functions:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fibo</span><span class="o">.</span><span class="n">fib</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
 <span class="go">0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fibo</span><span class="o">.</span><span class="n">fib2</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -217,15 +220,25 @@
 <section id="more-on-modules">
 <span id="tut-moremodules"></span><h2><span class="section-number">6.1. </span>模块详解<a class="headerlink" href="#more-on-modules" title="永久链接至标题">¶</a></h2>
 <p>模块包含可执行语句及函数定义。这些语句用于初始化模块，且仅在 import 语句 <em>第一次</em> 遇到模块名时执行。<a class="footnote-reference brackets" href="#id3" id="id1">1</a> (文件作为脚本运行时，也会执行这些语句。)</p>
-<p>模块有自己的私有符号表，用作模块中所有函数的全局符号表。因此，在模块内使用全局变量时，不用担心与用户定义的全局变量发生冲突。另一方面，可以用与访问模块函数一样的标记法，访问模块的全局变量，<code class="docutils literal notranslate"><span class="pre">modname.itemname</span></code>。</p>
-<p>可以把其他模块导入模块。按惯例，所有 <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句都放在模块（或脚本）开头，但这不是必须的。导入的模块名存在导入模块的全局符号表里。</p>
-<p><a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> 语句有一个变体，可以直接把模块里的名称导入到另一个模块的符号表。例如：</p>
+<p>Each module has its own private namespace, which is used as the global namespace
+by all functions defined in the module. Thus, the author of a module can
+use global variables in the module without worrying about accidental clashes
+with a user’s global variables. On the other hand, if you know what you are
+doing you can touch a module’s global variables with the same notation used to
+refer to its functions, <code class="docutils literal notranslate"><span class="pre">modname.itemname</span></code>.</p>
+<p>Modules can import other modules.  It is customary but not required to place all
+<a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statements at the beginning of a module (or script, for that
+matter).  The imported module names, if placed at the top level of a module
+(outside any functions or classes), are added to the module’s global namespace.</p>
+<p>There is a variant of the <a class="reference internal" href="../reference/simple_stmts.html#import"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">import</span></code></a> statement that imports names from a
+module directly into the importing module’s namespace.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="n">fib</span><span class="p">,</span> <span class="n">fib2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
 <span class="go">0 1 1 2 3 5 8 13 21 34 55 89 144 233 377</span>
 </pre></div>
 </div>
-<p>这段代码不会把模块名导入到局部符号表里（因此，本例没有定义 <code class="docutils literal notranslate"><span class="pre">fibo</span></code>）。</p>
+<p>This does not introduce the module name from which the imports are taken in the
+local namespace (so in the example, <code class="docutils literal notranslate"><span class="pre">fibo</span></code> is not defined).</p>
 <p>还有一种变体可以导入模块内定义的所有名称：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fib</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
@@ -497,7 +510,9 @@ named submodules of the <code class="xref py py-mod docutils literal notranslate
 <p class="rubric">备注</p>
 <dl class="footnote brackets">
 <dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>实际上，函数定义也是“可执行”的“语句”；执行模块级函数定义时，函数名将被导入到模块的全局符号表。</p>
+<dd><p>In fact function definitions are also ‘statements’ that are ‘executed’; the
+execution of a module-level function definition adds the function name to
+the module’s global namespace.</p>
 </dd>
 </dl>
 </section>
@@ -621,7 +636,7 @@ named submodules of the <code class="xref py py-mod docutils literal notranslate
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

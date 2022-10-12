@@ -215,6 +215,10 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <p class="admonition-title">警告</p>
 <p>在阅读 <a class="reference internal" href="#ssl-security"><span class="std std-ref">安全考量</span></a> 前不要使用此模块。 这样做可能会导致虚假的安全感，因为ssl模块的默认设置不一定适合你的应用程序。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>文档本文档记录``ssl`` 模块的对象和函数；更多关于TLS,SSL,和证书的信息，请参阅下方的“详情”选项</p>
 <p>本模块提供了一个类 <a class="reference internal" href="#ssl.SSLSocket" title="ssl.SSLSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLSocket</span></code></a>，它派生自 <a class="reference internal" href="socket.html#socket.socket" title="socket.socket"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></a> 类型，并提供类似套接字的包装器，也能够对通过带 SSL 套接字的数据进行加密和解密。 它支持一些额外方法例如 <code class="xref py py-meth docutils literal notranslate"><span class="pre">getpeercert()</span></code>，该方法可从连接的另一端获取证书，还有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">cipher()</span></code>，该方法可获取安全连接所使用的密码。</p>
 <p>对于更复杂的应用程序，<a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLContext</span></code></a> 类有助于管理设置项和证书，进而可以被使用 <a class="reference internal" href="#ssl.SSLContext.wrap_socket" title="ssl.SSLContext.wrap_socket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLContext.wrap_socket()</span></code></a> 方法创建的 SSL 套接字继承。</p>
@@ -225,7 +229,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <p><span class="versionmodified changed">在 3.6 版更改: </span>OpenSSL 0.9.8、1.0.0 和 1.0.1 已过时，将不再被支持。在 ssl 模块未来的版本中，最低需要 OpenSSL 1.0.2 或 1.1.0。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.10 版更改: </span><span class="target" id="index-50"></span><a class="pep reference external" href="https://peps.python.org/pep-0644/"><strong>PEP 644</strong></a> 已经实现。ssl 模块需要 OpenSSL 1.1.1 以上版本的支持。</p>
+<p><span class="versionmodified changed">在 3.10 版更改: </span><span class="target" id="index-42"></span><a class="pep reference external" href="https://peps.python.org/pep-0644/"><strong>PEP 644</strong></a> 已经实现。ssl 模块需要 OpenSSL 1.1.1 以上版本的支持。</p>
 <p>使用废弃的常量和函数会导致废弃警告。</p>
 </div>
 <section id="functions-constants-and-exceptions">
@@ -278,7 +282,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <dd><p>返回一个新的 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 对象，使用给定 <em>purpose</em> 的默认设置。 该设置由 <a class="reference internal" href="#module-ssl" title="ssl: TLS/SSL wrapper for socket objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ssl</span></code></a> 模块选择，并且通常是代表一个比直接调用 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 构造器时更高的安全等级。</p>
 <p><em>cafile</em>, <em>capath</em>, <em>cadata</em> 代表用于进行证书核验的可选受信任 CA 证书，与 <a class="reference internal" href="#ssl.SSLContext.load_verify_locations" title="ssl.SSLContext.load_verify_locations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLContext.load_verify_locations()</span></code></a> 的一致。 如果三个参数均为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>，此函数可以转而选择信任系统的默认 CA 证书。</p>
 <p>设置为： <a class="reference internal" href="#ssl.PROTOCOL_TLS_CLIENT" title="ssl.PROTOCOL_TLS_CLIENT"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_CLIENT</span></code></a> 或 <a class="reference internal" href="#ssl.PROTOCOL_TLS_SERVER" title="ssl.PROTOCOL_TLS_SERVER"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_SERVER</span></code></a>、 <a class="reference internal" href="#ssl.OP_NO_SSLv2" title="ssl.OP_NO_SSLv2"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv2</span></code></a> 和 <a class="reference internal" href="#ssl.OP_NO_SSLv3" title="ssl.OP_NO_SSLv3"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv3</span></code></a>，带有不含 RC4 及未认证的高强度加密密码套件。 传入 <a class="reference internal" href="#ssl.Purpose.SERVER_AUTH" title="ssl.Purpose.SERVER_AUTH"><code class="xref py py-data docutils literal notranslate"><span class="pre">SERVER_AUTH</span></code></a> 作为 <em>purpose</em>，会将 <a class="reference internal" href="#ssl.SSLContext.verify_mode" title="ssl.SSLContext.verify_mode"><code class="xref py py-data docutils literal notranslate"><span class="pre">verify_mode</span></code></a> 设为 <a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-data docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a>，并加载 CA 证书（若给出 <em>cafile</em>、<em>capath</em> 或 <em>cadata</em> 之一）或用 <a class="reference internal" href="#ssl.SSLContext.load_default_certs" title="ssl.SSLContext.load_default_certs"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLContext.load_default_certs()</span></code></a> 加载默认CA证书。</p>
-<p>当 <a class="reference internal" href="#ssl.SSLContext.keylog_filename" title="ssl.SSLContext.keylog_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">keylog_filename</span></code></a> 受支持并且设置了环境变量 <span class="target" id="index-51"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SSLKEYLOGFILE</span></code> 时，<a class="reference internal" href="#ssl.create_default_context" title="ssl.create_default_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_default_context()</span></code></a> 会启用密钥日志记录。</p>
+<p>当 <a class="reference internal" href="#ssl.SSLContext.keylog_filename" title="ssl.SSLContext.keylog_filename"><code class="xref py py-attr docutils literal notranslate"><span class="pre">keylog_filename</span></code></a> 受支持并且设置了环境变量 <span class="target" id="index-43"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SSLKEYLOGFILE</span></code> 时，<a class="reference internal" href="#ssl.create_default_context" title="ssl.create_default_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_default_context()</span></code></a> 会启用密钥日志记录。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>协议、选项、密码和其他设置可随时更改为更具约束性的值而无须事先弃用。 这些值代表了兼容性和安全性之间的合理平衡。</p>
@@ -303,7 +307,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <p>3DES 被从默认密码字符串中丢弃。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>增加了对密钥日志记录至 <span class="target" id="index-52"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SSLKEYLOGFILE</span></code> 的支持。</p>
+<p><span class="versionmodified changed">在 3.8 版更改: </span>增加了对密钥日志记录至 <span class="target" id="index-44"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SSLKEYLOGFILE</span></code> 的支持。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.10 版更改: </span>当前上下文使用 <a class="reference internal" href="#ssl.PROTOCOL_TLS_CLIENT" title="ssl.PROTOCOL_TLS_CLIENT"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_CLIENT</span></code></a> 或 <a class="reference internal" href="#ssl.PROTOCOL_TLS_SERVER" title="ssl.PROTOCOL_TLS_SERVER"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_SERVER</span></code></a> 协议而非通用的 <a class="reference internal" href="#ssl.PROTOCOL_TLS" title="ssl.PROTOCOL_TLS"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS</span></code></a>。</p>
@@ -430,20 +434,6 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ssl.RAND_pseudo_bytes">
-<span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">RAND_pseudo_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.RAND_pseudo_bytes" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 (bytes, is_cryptographic): bytes 是 <em>num</em> 个伪随机字节数据，如果所生成的字节数据为高加密强度则 is_cryptographic 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。 如果当前 RAND 方法不支持此操作则会引发 <a class="reference internal" href="#ssl.SSLError" title="ssl.SSLError"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLError</span></code></a>。</p>
-<p>所生成的伪随机字节序列如果具有足够的长度则将会具有唯一性，并是并非不可预测。 它们可被用于非加密目的以及加密协议中的特定目的，但通常不可被用于密钥生成等目的。</p>
-<p>对于几乎所有应用程序都更推荐使用 <a class="reference internal" href="os.html#os.urandom" title="os.urandom"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.urandom()</span></code></a>。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.3 新版功能.</span></p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.6 版后已移除: </span>OpenSSL 已弃用了 <a class="reference internal" href="#ssl.RAND_pseudo_bytes" title="ssl.RAND_pseudo_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.RAND_pseudo_bytes()</span></code></a>，请改用 <a class="reference internal" href="#ssl.RAND_bytes" title="ssl.RAND_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.RAND_bytes()</span></code></a>。</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="ssl.RAND_status">
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">RAND_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ssl.RAND_status" title="永久链接至目标">¶</a></dt>
 <dd><p>如果 SSL 伪随机数生成器已使用‘足够的’随机性作为种子则返回  <code class="docutils literal notranslate"><span class="pre">True</span></code>，否则返回 <code class="docutils literal notranslate"><span class="pre">False</span></code>。 你可以使用 <code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.RAND_egd()</span></code> 和 <a class="reference internal" href="#ssl.RAND_add" title="ssl.RAND_add"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.RAND_add()</span></code></a> 来增加伪随机数生成器的随机性。</p>
@@ -452,7 +442,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <dl class="py function">
 <dt class="sig sig-object py" id="ssl.RAND_add">
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">RAND_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entropy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.RAND_add" title="永久链接至目标">¶</a></dt>
-<dd><p>将给定的 <em>bytes</em> 混合到 SSL 伪随机数生成器中。 形参 <em>entropy</em> (float 类型) 是数据所包含的熵的下界 (因此你可以总是使用 <code class="xref py py-const docutils literal notranslate"><span class="pre">0.0</span></code>)。 请查看 <span class="target" id="index-53"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1750.html"><strong>RFC 1750</strong></a> 了解有关熵源的更多信息。</p>
+<dd><p>将给定的 <em>bytes</em> 混合到 SSL 伪随机数生成器中。 形参 <em>entropy</em> (float 类型) 是数据所包含的熵的下界 (因此你可以总是使用 <code class="xref py py-const docutils literal notranslate"><span class="pre">0.0</span></code>)。 请查看 <span class="target" id="index-45"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1750.html"><strong>RFC 1750</strong></a> 了解有关熵源的更多信息。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>现在接受可写的 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">字节类对象</span></a>。</p>
 </div>
@@ -461,38 +451,6 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 </section>
 <section id="certificate-handling">
 <h3>证书处理<a class="headerlink" href="#certificate-handling" title="永久链接至标题">¶</a></h3>
-<dl class="py function">
-<dt class="sig sig-object py" id="ssl.match_hostname">
-<span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">match_hostname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.match_hostname" title="永久链接至目标">¶</a></dt>
-<dd><p>验证 <em>cert</em> (使用 <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a> 所返回的已解码格式) 是否匹配给定的 <em>hostname</em>。 所应用的规则是在 <span class="target" id="index-54"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2818.html"><strong>RFC 2818</strong></a>, <span class="target" id="index-55"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5280.html"><strong>RFC 5280</strong></a> 和 <span class="target" id="index-56"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6125.html"><strong>RFC 6125</strong></a> 中描述的检查 HTTPS 服务器身份的规则。 除了 HTTPS，此函数还应当适用于各种基于 SSL 协议的服务器身份检查操作，例如 FTPS, IMAPS, POPS 等等。</p>
-<p>失败时引发 <a class="reference internal" href="#ssl.CertificateError" title="ssl.CertificateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">CertificateError</span></code></a>。 成功时此函数无返回值:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cert</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="p">(((</span><span class="s1">&#39;commonName&#39;</span><span class="p">,</span> <span class="s1">&#39;example.com&#39;</span><span class="p">),),)}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ssl</span><span class="o">.</span><span class="n">match_hostname</span><span class="p">(</span><span class="n">cert</span><span class="p">,</span> <span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ssl</span><span class="o">.</span><span class="n">match_hostname</span><span class="p">(</span><span class="n">cert</span><span class="p">,</span> <span class="s2">&quot;example.org&quot;</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;/home/py3k/Lib/ssl.py&quot;</span>, line <span class="m">130</span>, in <span class="n">match_hostname</span>
-<span class="gr">ssl.CertificateError</span>: <span class="n">hostname &#39;example.org&#39; doesn&#39;t match &#39;example.com&#39;</span>
-</pre></div>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified added">3.2 新版功能.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3.3 版更改: </span>此函数现在遵循 <span class="target" id="index-57"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6125.html"><strong>RFC 6125</strong></a>, 6.4.3 小节，它不会匹配多个通配符 (例如 <code class="docutils literal notranslate"><span class="pre">*.*.com</span></code> 或 <code class="docutils literal notranslate"><span class="pre">*a*.example.org</span></code>) 也不匹配国际化域名 (IDN) 片段内部的通配符。 IDN A 标签例如 <code class="docutils literal notranslate"><span class="pre">www*.xn--pthon-kva.org</span></code> 仍然受支持，但 <code class="docutils literal notranslate"><span class="pre">x*.python.org</span></code> 不再能匹配 <code class="docutils literal notranslate"><span class="pre">xn--tda.python.org</span></code>。</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.5 版更改: </span>现在支持匹配存在于证书的 subjectAltName 字段中的 IP 地址。</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span>此函数不再被用于 TLS 连接。 主机匹配现在是由 OpenSSL 执行的。</p>
-<p>允许位于段的最左端且为唯一字符的通配符。 部分通配符例如 <code class="docutils literal notranslate"><span class="pre">www*.example.com</span></code> 已不再受支持。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.7 版后已移除.</span></p>
-</div>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="ssl.cert_time_to_seconds">
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">cert_time_to_seconds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cert_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.cert_time_to_seconds" title="永久链接至目标">¶</a></dt>
@@ -507,7 +465,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <span class="go">2018-01-05 09:34:43</span>
 </pre></div>
 </div>
-<p>“notBefore” 或 “notAfter” 日期值必须使用 GMT (<span class="target" id="index-58"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5280.html"><strong>RFC 5280</strong></a>)。</p>
+<p>“notBefore” 或 “notAfter” 日期值必须使用 GMT (<span class="target" id="index-46"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5280.html"><strong>RFC 5280</strong></a>)。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>将输入时间解读为 UTC 时间，基于输入字符串中指明的 ‘GMT’ 时区。 在之前使用的是本地时区。 返回一个整数（不带输入格式中秒的分数部分）</p>
 </div>
@@ -552,7 +510,6 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">openssl_capath_env</span></code> - 指向一个 capath 的 OpenSSL 环境键,</p></li>
 <li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">openssl_capath</span></code> - 一个 capath 目录的硬编码路径</p></li>
 </ul>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: LibreSSL 会忽略环境变量 <code class="xref py py-attr docutils literal notranslate"><span class="pre">openssl_cafile_env</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">openssl_capath_env</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -747,21 +704,6 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <dd><p><a class="reference internal" href="#ssl.PROTOCOL_TLS" title="ssl.PROTOCOL_TLS"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS</span></code></a> 的别名。</p>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.6 版后已移除: </span>请改用 <a class="reference internal" href="#ssl.PROTOCOL_TLS" title="ssl.PROTOCOL_TLS"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS</span></code></a>。</p>
-</div>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="ssl.PROTOCOL_SSLv2">
-<span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">PROTOCOL_SSLv2</span></span><a class="headerlink" href="#ssl.PROTOCOL_SSLv2" title="永久链接至目标">¶</a></dt>
-<dd><p>选择 SSL 版本 2 作为通道加密协议。</p>
-<p>This protocol is not available if OpenSSL is compiled with the
-<code class="docutils literal notranslate"><span class="pre">no-ssl2</span></code> option.</p>
-<div class="admonition warning">
-<p class="admonition-title">警告</p>
-<p>SSL 版本 2 并不安全。 极不建议使用它。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.6 版后已移除: </span>OpenSSL 已经移除了对 SSLv2 的支持。</p>
 </div>
 </dd></dl>
 
@@ -978,7 +920,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <dl class="py data">
 <dt class="sig sig-object py" id="ssl.HAS_ALPN">
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">HAS_ALPN</span></span><a class="headerlink" href="#ssl.HAS_ALPN" title="永久链接至目标">¶</a></dt>
-<dd><p>OpenSSL 库是否具有对 <span class="target" id="index-59"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7301.html"><strong>RFC 7301</strong></a> 中描述的 <em>应用层协议协商</em> TLS 扩展的内置支持。</p>
+<dd><p>OpenSSL 库是否具有对 <span class="target" id="index-47"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7301.html"><strong>RFC 7301</strong></a> 中描述的 <em>应用层协议协商</em> TLS 扩展的内置支持。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
 </div>
@@ -1005,7 +947,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <dl class="py data">
 <dt class="sig sig-object py" id="ssl.HAS_SNI">
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">HAS_SNI</span></span><a class="headerlink" href="#ssl.HAS_SNI" title="永久链接至目标">¶</a></dt>
-<dd><p>OpenSSL 库是否具有对 <em>服务器名称提示</em> 扩展（在 <span class="target" id="index-60"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066</strong></a> 中定义）的内置支持。</p>
+<dd><p>OpenSSL 库是否具有对 <em>服务器名称提示</em> 扩展（在 <span class="target" id="index-48"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066</strong></a> 中定义）的内置支持。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.2 新版功能.</span></p>
 </div>
@@ -1131,7 +1073,7 @@ probably additional platforms, as long as OpenSSL is installed on that platform.
 <span class="sig-prename descclassname"><span class="pre">ssl.</span></span><span class="sig-name descname"><span class="pre">ALERT_DESCRIPTION_INTERNAL_ERROR</span></span><a class="headerlink" href="#ssl.ALERT_DESCRIPTION_INTERNAL_ERROR" title="永久链接至目标">¶</a></dt>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">ALERT_DESCRIPTION_*</span></span></dt>
-<dd><p>来自 <span class="target" id="index-61"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5246.html"><strong>RFC 5246</strong></a> 等文档的警报描述。 <a class="reference external" href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xml#tls-parameters-6">IANA TLS Alert Registry</a> 中包含了这个列表及对定义其含义的 RFC 引用。</p>
+<dd><p>来自 <span class="target" id="index-49"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5246.html"><strong>RFC 5246</strong></a> 等文档的警报描述。 <a class="reference external" href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xml#tls-parameters-6">IANA TLS Alert Registry</a> 中包含了这个列表及对定义其含义的 RFC 引用。</p>
 <p>被用作 <a class="reference internal" href="#ssl.SSLContext.set_servername_callback" title="ssl.SSLContext.set_servername_callback"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLContext.set_servername_callback()</span></code></a> 中的回调函数的返回值。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
@@ -1310,13 +1252,13 @@ for plain-text sockets only, else <a class="reference internal" href="socket.htm
 <span class="sig-prename descclassname"><span class="pre">SSLSocket.</span></span><span class="sig-name descname"><span class="pre">do_handshake</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ssl.SSLSocket.do_handshake" title="永久链接至目标">¶</a></dt>
 <dd><p>执行 SSL 设置握手。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>当套接字的 <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">context</span></code></a> 的 <a class="reference internal" href="#ssl.SSLContext.check_hostname" title="ssl.SSLContext.check_hostname"><code class="xref py py-attr docutils literal notranslate"><span class="pre">check_hostname</span></code></a> 属性为真值时此握手方法还会执行 <a class="reference internal" href="#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a>。</p>
+<p><span class="versionmodified changed">在 3.4 版更改: </span>当套接字的 <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">context</span></code></a> 的 <a class="reference internal" href="#ssl.SSLContext.check_hostname" title="ssl.SSLContext.check_hostname"><code class="xref py py-attr docutils literal notranslate"><span class="pre">check_hostname</span></code></a> 属性为真值时此握手方法还会执行 <code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code>。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>套接字超时在每次接收或发送字节数据时不会再被重置。 现在套接字超时为握手的最大总持续时间。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span>主机名或 IP 地址会在握手期间由 OpenSSL 进行匹配。 函数 <a class="reference internal" href="#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a> 将不再被使用。 在 OpenSSL 拒绝主机名和 IP 地址的情况下，握手将提前被中止并向对等方发送 TLS 警告消息。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>主机名或 IP 地址会在握手期间由 OpenSSL 进行匹配。 函数 <code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code> 将不再被使用。 在 OpenSSL 拒绝主机名和 IP 地址的情况下，握手将提前被中止并向对等方发送 TLS 警告消息。</p>
 </div>
 </dd></dl>
 
@@ -1324,7 +1266,7 @@ for plain-text sockets only, else <a class="reference internal" href="socket.htm
 <dt class="sig sig-object py" id="ssl.SSLSocket.getpeercert">
 <span class="sig-prename descclassname"><span class="pre">SSLSocket.</span></span><span class="sig-name descname"><span class="pre">getpeercert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binary_form</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.SSLSocket.getpeercert" title="永久链接至目标">¶</a></dt>
 <dd><p>如果连接另一端的对等方没有证书，则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。 如果 SSL 握手还未完成，则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
-<p>如果 <code class="docutils literal notranslate"><span class="pre">binary_form</span></code> 形参为 <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>，并且从对等方接收到了证书，此方法将返回一个 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 实例。 如果证书未通过验证，则字典将为空。 如果证书通过验证，它将返回由多个密钥组成的字典，其中包括 <code class="docutils literal notranslate"><span class="pre">subject</span></code> (证书颁发给的主体) 和 <code class="docutils literal notranslate"><span class="pre">issuer</span></code> (颁发证书的主体)。 如果证书包含一个 <em>Subject Alternative Name</em> 扩展的实例 (see <span class="target" id="index-62"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc3280.html"><strong>RFC 3280</strong></a>)，则字典中还将有一个 <code class="docutils literal notranslate"><span class="pre">subjectAltName</span></code> 键。</p>
+<p>如果 <code class="docutils literal notranslate"><span class="pre">binary_form</span></code> 形参为 <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>，并且从对等方接收到了证书，此方法将返回一个 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 实例。 如果证书未通过验证，则字典将为空。 如果证书通过验证，它将返回由多个密钥组成的字典，其中包括 <code class="docutils literal notranslate"><span class="pre">subject</span></code> (证书颁发给的主体) 和 <code class="docutils literal notranslate"><span class="pre">issuer</span></code> (颁发证书的主体)。 如果证书包含一个 <em>Subject Alternative Name</em> 扩展的实例 (see <span class="target" id="index-50"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc3280.html"><strong>RFC 3280</strong></a>)，则字典中还将有一个 <code class="docutils literal notranslate"><span class="pre">subjectAltName</span></code> 键。</p>
 <p><code class="docutils literal notranslate"><span class="pre">subject</span></code> 和 <code class="docutils literal notranslate"><span class="pre">issuer</span></code> 字段都是包含在证书中相应字段的数据结构中给出的相对专有名称（RDN）序列的元组，每个 RDN 均为 name-value 对的序列。 这里是一个实际的示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;issuer&#39;</span><span class="p">:</span> <span class="p">(((</span><span class="s1">&#39;countryName&#39;</span><span class="p">,</span> <span class="s1">&#39;IL&#39;</span><span class="p">),),</span>
             <span class="p">((</span><span class="s1">&#39;organizationName&#39;</span><span class="p">,</span> <span class="s1">&#39;StartCom Ltd.&#39;</span><span class="p">),),</span>
@@ -1346,15 +1288,12 @@ for plain-text sockets only, else <a class="reference internal" href="socket.htm
  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>要验证特定服务的证书，你可以使用 <a class="reference internal" href="#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a> 函数。</p>
-</div>
 <p>如果 <code class="docutils literal notranslate"><span class="pre">binary_form</span></code> 形参为 <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a>，并且提供了证书，此方法会将整个证书的 DER 编码形式作为字节序列返回，或者如果对等方未提供证书则返回 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。 对等方是否提供证书取决于 SSL 套接字的角色:</p>
 <ul class="simple">
 <li><p>对于客户端 SSL 套接字，服务器将总是提供证书，无论是否需要进行验证;</p></li>
 <li><p>对于服务器 SSL 套接字，客户端将仅在服务器要求时才提供证书；因此如果你使用了 <a class="reference internal" href="#ssl.CERT_NONE" title="ssl.CERT_NONE"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_NONE</span></code></a> (而不是 <a class="reference internal" href="#ssl.CERT_OPTIONAL" title="ssl.CERT_OPTIONAL"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_OPTIONAL</span></code></a> 或 <a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a>) 则 <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getpeercert()</span></code></a> 将返回 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。</p></li>
 </ul>
+<p>See also <a class="reference internal" href="#ssl.SSLContext.check_hostname" title="ssl.SSLContext.check_hostname"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLContext.check_hostname</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>返回的字典包括额外的条目例如 <code class="docutils literal notranslate"><span class="pre">issuer</span></code> 和 <code class="docutils literal notranslate"><span class="pre">notBefore</span></code>。</p>
 </div>
@@ -1395,7 +1334,7 @@ for plain-text sockets only, else <a class="reference internal" href="socket.htm
 <dt class="sig sig-object py" id="ssl.SSLSocket.get_channel_binding">
 <span class="sig-prename descclassname"><span class="pre">SSLSocket.</span></span><span class="sig-name descname"><span class="pre">get_channel_binding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cb_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'tls-unique'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.SSLSocket.get_channel_binding" title="永久链接至目标">¶</a></dt>
 <dd><p>为当前连接获取字节串形式的通道绑定数据。 如果尚未连接或握手尚未完成则返回 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
-<p><em>cb_type</em> 形参允许选择需要的通道绑定类型。 有效的通道绑定类型在 <a class="reference internal" href="#ssl.CHANNEL_BINDING_TYPES" title="ssl.CHANNEL_BINDING_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">CHANNEL_BINDING_TYPES</span></code></a> 列表中列出。 目前只支持由 <span class="target" id="index-63"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5929.html"><strong>RFC 5929</strong></a> 所定义的 ‘tls-unique’ 通道绑定。 如果请求了一个不受支持的通道绑定类型则将引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
+<p><em>cb_type</em> 形参允许选择需要的通道绑定类型。 有效的通道绑定类型在 <a class="reference internal" href="#ssl.CHANNEL_BINDING_TYPES" title="ssl.CHANNEL_BINDING_TYPES"><code class="xref py py-data docutils literal notranslate"><span class="pre">CHANNEL_BINDING_TYPES</span></code></a> 列表中列出。 目前只支持由 <span class="target" id="index-51"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5929.html"><strong>RFC 5929</strong></a> 所定义的 ‘tls-unique’ 通道绑定。 如果请求了一个不受支持的通道绑定类型则将引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1609,7 +1548,13 @@ Recent OpenSSL versions may define more return values.</p>
 <p><a class="reference internal" href="#ssl.create_default_context" title="ssl.create_default_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_default_context()</span></code></a> 让 <a class="reference internal" href="#module-ssl" title="ssl: TLS/SSL wrapper for socket objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ssl</span></code></a> 为特定目标选择安全设置。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>上下文会使用安全默认值来创建。 默认设置的选项有 <a class="reference internal" href="#ssl.OP_NO_COMPRESSION" title="ssl.OP_NO_COMPRESSION"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_COMPRESSION</span></code></a>, <a class="reference internal" href="#ssl.OP_CIPHER_SERVER_PREFERENCE" title="ssl.OP_CIPHER_SERVER_PREFERENCE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_CIPHER_SERVER_PREFERENCE</span></code></a>, <a class="reference internal" href="#ssl.OP_SINGLE_DH_USE" title="ssl.OP_SINGLE_DH_USE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_SINGLE_DH_USE</span></code></a>, <a class="reference internal" href="#ssl.OP_SINGLE_ECDH_USE" title="ssl.OP_SINGLE_ECDH_USE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_SINGLE_ECDH_USE</span></code></a>, <a class="reference internal" href="#ssl.OP_NO_SSLv2" title="ssl.OP_NO_SSLv2"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv2</span></code></a> (except for <a class="reference internal" href="#ssl.PROTOCOL_SSLv2" title="ssl.PROTOCOL_SSLv2"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_SSLv2</span></code></a>) 和 <a class="reference internal" href="#ssl.OP_NO_SSLv3" title="ssl.OP_NO_SSLv3"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv3</span></code></a> (except for <a class="reference internal" href="#ssl.PROTOCOL_SSLv3" title="ssl.PROTOCOL_SSLv3"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_SSLv3</span></code></a>)。 初始密码集列表只包含 <code class="docutils literal notranslate"><span class="pre">HIGH</span></code> 密码，不包含 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 密码和 <code class="docutils literal notranslate"><span class="pre">MD5</span></code> 密码 (<a class="reference internal" href="#ssl.PROTOCOL_SSLv2" title="ssl.PROTOCOL_SSLv2"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_SSLv2</span></code></a> 除外)。</p>
+<p><span class="versionmodified changed">在 3.6 版更改: </span>The context is created with secure default values. The options
+<a class="reference internal" href="#ssl.OP_NO_COMPRESSION" title="ssl.OP_NO_COMPRESSION"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_COMPRESSION</span></code></a>, <a class="reference internal" href="#ssl.OP_CIPHER_SERVER_PREFERENCE" title="ssl.OP_CIPHER_SERVER_PREFERENCE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_CIPHER_SERVER_PREFERENCE</span></code></a>,
+<a class="reference internal" href="#ssl.OP_SINGLE_DH_USE" title="ssl.OP_SINGLE_DH_USE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_SINGLE_DH_USE</span></code></a>, <a class="reference internal" href="#ssl.OP_SINGLE_ECDH_USE" title="ssl.OP_SINGLE_ECDH_USE"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_SINGLE_ECDH_USE</span></code></a>,
+<a class="reference internal" href="#ssl.OP_NO_SSLv2" title="ssl.OP_NO_SSLv2"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv2</span></code></a>,
+and <a class="reference internal" href="#ssl.OP_NO_SSLv3" title="ssl.OP_NO_SSLv3"><code class="xref py py-data docutils literal notranslate"><span class="pre">OP_NO_SSLv3</span></code></a> (except for <a class="reference internal" href="#ssl.PROTOCOL_SSLv3" title="ssl.PROTOCOL_SSLv3"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_SSLv3</span></code></a>) are
+set by default. The initial cipher suite list contains only <code class="docutils literal notranslate"><span class="pre">HIGH</span></code>
+ciphers, no <code class="docutils literal notranslate"><span class="pre">NULL</span></code> ciphers and no <code class="docutils literal notranslate"><span class="pre">MD5</span></code> ciphers.</p>
 </div>
 <div class="deprecated">
 <p><span class="versionmodified deprecated">3.10 版后已移除: </span>不带协议参数的 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 已废弃。将来，上下文类会要求使用 <a class="reference internal" href="#ssl.PROTOCOL_TLS_CLIENT" title="ssl.PROTOCOL_TLS_CLIENT"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_CLIENT</span></code></a> 或 <a class="reference internal" href="#ssl.PROTOCOL_TLS_SERVER" title="ssl.PROTOCOL_TLS_SERVER"><code class="xref py py-data docutils literal notranslate"><span class="pre">PROTOCOL_TLS_SERVER</span></code></a> 协议。</p>
@@ -1752,7 +1697,7 @@ load CA certificates from other locations, too.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ssl.SSLContext.set_alpn_protocols">
 <span class="sig-prename descclassname"><span class="pre">SSLContext.</span></span><span class="sig-name descname"><span class="pre">set_alpn_protocols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ssl.SSLContext.set_alpn_protocols" title="永久链接至目标">¶</a></dt>
-<dd><p>指定在 SSL/TLS 握手期间套接字应当通告的协议。 它应为由 ASCII 字符串组成的列表，例如 <code class="docutils literal notranslate"><span class="pre">['http/1.1',</span> <span class="pre">'spdy/2']</span></code>，按首选顺序排列。 协议的选择将在握手期间发生，并依据 <span class="target" id="index-64"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7301.html"><strong>RFC 7301</strong></a> 来执行。 在握手成功后，<a class="reference internal" href="#ssl.SSLSocket.selected_alpn_protocol" title="ssl.SSLSocket.selected_alpn_protocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.selected_alpn_protocol()</span></code></a> 方法将返回已达成一致的协议。</p>
+<dd><p>指定在 SSL/TLS 握手期间套接字应当通告的协议。 它应为由 ASCII 字符串组成的列表，例如 <code class="docutils literal notranslate"><span class="pre">['http/1.1',</span> <span class="pre">'spdy/2']</span></code>，按首选顺序排列。 协议的选择将在握手期间发生，并依据 <span class="target" id="index-52"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7301.html"><strong>RFC 7301</strong></a> 来执行。 在握手成功后，<a class="reference internal" href="#ssl.SSLSocket.selected_alpn_protocol" title="ssl.SSLSocket.selected_alpn_protocol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.selected_alpn_protocol()</span></code></a> 方法将返回已达成一致的协议。</p>
 <p>如果 <a class="reference internal" href="#ssl.HAS_ALPN" title="ssl.HAS_ALPN"><code class="xref py py-data docutils literal notranslate"><span class="pre">HAS_ALPN</span></code></a> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 则此方法将引发 <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
@@ -1775,7 +1720,7 @@ load CA certificates from other locations, too.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="ssl.SSLContext.sni_callback">
 <span class="sig-prename descclassname"><span class="pre">SSLContext.</span></span><span class="sig-name descname"><span class="pre">sni_callback</span></span><a class="headerlink" href="#ssl.SSLContext.sni_callback" title="永久链接至目标">¶</a></dt>
-<dd><p>注册一个回调函数，当 TLS 客户端指定了一个服务器名称提示时，该回调函数将在 SSL/TLS 服务器接收到 TLS Client Hello 握手消息后被调用。 服务器名称提示机制的定义见 <span class="target" id="index-65"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066</strong></a> section 3 - Server Name Indication。</p>
+<dd><p>注册一个回调函数，当 TLS 客户端指定了一个服务器名称提示时，该回调函数将在 SSL/TLS 服务器接收到 TLS Client Hello 握手消息后被调用。 服务器名称提示机制的定义见 <span class="target" id="index-53"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066</strong></a> section 3 - Server Name Indication。</p>
 <p>每个 <code class="docutils literal notranslate"><span class="pre">SSLContext</span></code> 只能设置一个回调。 如果 <em>sni_callback</em> 被设置为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则会禁用回调。 对该函数的后续调用将禁用之前注册的回调。</p>
 <p>此回调函数将附带三个参数来调用；第一个参数是 <a class="reference internal" href="#ssl.SSLSocket" title="ssl.SSLSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLSocket</span></code></a>，第二个参数是代表客户端准备与之通信的服务器的字符串 (或者如果 TLS Client Hello 不包含服务器名称则为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>) 而第三个参数是原来的 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a>。 服务器名称参数为文本形式。 对于国际化域名，服务器名称是一个 IDN A 标签 (<code class="docutils literal notranslate"><span class="pre">&quot;xn--pythn-mua.org&quot;</span></code>)。</p>
 <p>此回调的一个典型用法是将 <a class="reference internal" href="#ssl.SSLSocket" title="ssl.SSLSocket"><code class="xref py py-class docutils literal notranslate"><span class="pre">ssl.SSLSocket</span></code></a> 的 <a class="reference internal" href="#ssl.SSLSocket.context" title="ssl.SSLSocket.context"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLSocket.context</span></code></a> 属性修改为一个 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 类型的新对象，该对象代表与服务器相匹配的证书链。</p>
@@ -2045,13 +1990,13 @@ in the session cache since the context was created:</p>
 </div>
 </dd></dl>
 
-<span class="target" id="index-18"></span></section>
+<span class="target" id="index-14"></span></section>
 <section id="certificates">
-<span id="ssl-certificates"></span><span id="index-19"></span><h2>证书<a class="headerlink" href="#certificates" title="永久链接至标题">¶</a></h2>
+<span id="ssl-certificates"></span><span id="index-15"></span><h2>证书<a class="headerlink" href="#certificates" title="永久链接至标题">¶</a></h2>
 <p>总的来说证书是公钥/私钥系统的一个组成部分。 在这个系统中，每 个 <em>主体</em> (可能是一台机器、一个人或者一个组织) 都会分配到唯一的包含两部分的加密密钥。 一部分密钥是公开的，称为 <em>公钥</em>；另一部分密钥是保密的，称为 <em>私钥</em>。 这两个部分是互相关联的，就是说如果你用其中一个部分来加密一条消息，你将能用并且 <strong>只能</strong> 用另一个部分来解密它。</p>
 <p>在一个证书中包含有两个主体的相关信息。 它包含 <em>目标方</em> 的名称和目标方的公钥。 它还包含由第二个主体 <em>颁发方</em> 所发布的声明：目标方的身份与他们所宣称的一致，包含的公钥也确实是目标方的公钥。 颁发方的声明使用颁发方的私钥进行签名，该私钥的内容只有颁发方自己才知道。 但是，任何人都可以找到颁发方的公钥，用它来解密这个声明，并将其与证书中的其他信息进行比较来验证颁发方声明的真实性。 证书还包含有关其有效期限的信息。 这被表示为两个字段，即 “notBefore” 和 “notAfter”。</p>
 <p>在 Python 中应用证书时，客户端或服务器可以用证书来证明自己的身份。 还可以要求网络连接的另一方提供证书，提供的证书可以用于验证以满足客户端或服务器的验证要求。 如果验证失败，连接尝试可被设置为引发一个异常。 验证是由下层的 OpenSSL 框架来自动执行的；应用程序本身不必关注其内部的机制。 但是应用程序通常需要提供一组证书以允许此过程的发生。</p>
-<p>Python 使用文件来包含证书。 它们应当采用 “PEM” 格式 (参见 <span class="target" id="index-66"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1422.html"><strong>RFC 1422</strong></a>)，这是一种带有头部行和尾部行的 base-64 编码包装形式:</p>
+<p>Python 使用文件来包含证书。 它们应当采用 “PEM” 格式 (参见 <span class="target" id="index-54"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1422.html"><strong>RFC 1422</strong></a>)，这是一种带有头部行和尾部行的 base-64 编码包装形式:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="o">-----</span><span class="n">BEGIN</span> <span class="n">CERTIFICATE</span><span class="o">-----</span>
 <span class="o">...</span> <span class="p">(</span><span class="n">certificate</span> <span class="ow">in</span> <span class="n">base64</span> <span class="n">PEM</span> <span class="n">encoding</span><span class="p">)</span> <span class="o">...</span>
 <span class="o">-----</span><span class="n">END</span> <span class="n">CERTIFICATE</span><span class="o">-----</span>
@@ -2445,9 +2390,19 @@ in the session cache since the context was created:</p>
 <h3>手动设置<a class="headerlink" href="#manual-settings" title="永久链接至标题">¶</a></h3>
 <section id="verifying-certificates">
 <h4>验证证书<a class="headerlink" href="#verifying-certificates" title="永久链接至标题">¶</a></h4>
-<p>当直接调用 <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 构造器时，默认会使用 <a class="reference internal" href="#ssl.CERT_NONE" title="ssl.CERT_NONE"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_NONE</span></code></a>。 由于它不会验证对等方的身份真实性，因此是不安全的，特别是在客户端模式下，大多数时候你都希望能保证你所连接的服务器的身份真实性。 因此，当处于客户端模式时，强烈推荐使用 <a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a>。 但是，光这样还不够；你还必须检查服务器证书，这可以通过调用 <a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a> 来获取并匹配目标服务。 对于许多协议和应用来说，服务可通过主机名来标识；在此情况下，可以使用 <a class="reference internal" href="#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a> 函数。 这种通用检测会在 <a class="reference internal" href="#ssl.SSLContext.check_hostname" title="ssl.SSLContext.check_hostname"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLContext.check_hostname</span></code></a> 被启用时自动执行。</p>
+<p>When calling the <a class="reference internal" href="#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> constructor directly,
+<a class="reference internal" href="#ssl.CERT_NONE" title="ssl.CERT_NONE"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_NONE</span></code></a> is the default.  Since it does not authenticate the other
+peer, it can be insecure, especially in client mode where most of time you
+would like to ensure the authenticity of the server you’re talking to.
+Therefore, when in client mode, it is highly recommended to use
+<a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a>.  However, it is in itself not sufficient; you also
+have to check that the server certificate, which can be obtained by calling
+<a class="reference internal" href="#ssl.SSLSocket.getpeercert" title="ssl.SSLSocket.getpeercert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">SSLSocket.getpeercert()</span></code></a>, matches the desired service.  For many
+protocols and applications, the service can be identified by the hostname.
+This common check is automatically performed when
+<a class="reference internal" href="#ssl.SSLContext.check_hostname" title="ssl.SSLContext.check_hostname"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SSLContext.check_hostname</span></code></a> is enabled.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span>主机名匹配现在是由 OpenSSL 来执行的。 Python 不会再使用 <a class="reference internal" href="#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code></a>。</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>主机名匹配现在是由 OpenSSL 来执行的。 Python 不会再使用 <code class="xref py py-func docutils literal notranslate"><span class="pre">match_hostname()</span></code>。</p>
 </div>
 <p>在服务器模式下，如果你想要使用 SSL 层来验证客户端（而不是使用更高层级的验证机制），你也必须要指定 <a class="reference internal" href="#ssl.CERT_REQUIRED" title="ssl.CERT_REQUIRED"><code class="xref py py-const docutils literal notranslate"><span class="pre">CERT_REQUIRED</span></code></a> 并以类似方式检查客户端证书。</p>
 </section>
@@ -2476,7 +2431,13 @@ system.</p>
 </section>
 <section id="multi-processing">
 <h3>多进程<a class="headerlink" href="#multi-processing" title="永久链接至标题">¶</a></h3>
-<p>如果使用此模块作为多进程应用的一部分（例如使用 <a class="reference internal" href="multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> 或 <a class="reference internal" href="concurrent.futures.html#module-concurrent.futures" title="concurrent.futures: Execute computations concurrently using threads or processes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">concurrent.futures</span></code></a> 模块），请注意 OpenSSL 的内部随机数字生成器并不能正确处理分支进程。 应用程序必须修改父进程的 PRNG 状态，如果它们要使用任何包含 <a class="reference internal" href="os.html#os.fork" title="os.fork"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fork()</span></code></a> 的 SSL 特性的话。 任何对 <a class="reference internal" href="#ssl.RAND_add" title="ssl.RAND_add"><code class="xref py py-func docutils literal notranslate"><span class="pre">RAND_add()</span></code></a>, <a class="reference internal" href="#ssl.RAND_bytes" title="ssl.RAND_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">RAND_bytes()</span></code></a> 或 <a class="reference internal" href="#ssl.RAND_pseudo_bytes" title="ssl.RAND_pseudo_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">RAND_pseudo_bytes()</span></code></a> 都可以 做到这一点。</p>
+<p>If using this module as part of a multi-processed application (using,
+for example the <a class="reference internal" href="multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> or <a class="reference internal" href="concurrent.futures.html#module-concurrent.futures" title="concurrent.futures: Execute computations concurrently using threads or processes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">concurrent.futures</span></code></a> modules),
+be aware that OpenSSL’s internal random number generator does not properly
+handle forked processes.  Applications must change the PRNG state of the
+parent process if they use any SSL feature with <a class="reference internal" href="os.html#os.fork" title="os.fork"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fork()</span></code></a>.  Any
+successful call of <a class="reference internal" href="#ssl.RAND_add" title="ssl.RAND_add"><code class="xref py py-func docutils literal notranslate"><span class="pre">RAND_add()</span></code></a> or <a class="reference internal" href="#ssl.RAND_bytes" title="ssl.RAND_bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">RAND_bytes()</span></code></a> is
+sufficient.</p>
 </section>
 </section>
 <section id="tls-1-3">
@@ -2498,19 +2459,19 @@ system.</p>
 </dd>
 <dt><a class="reference external" href="https://httpd.apache.org/docs/trunk/en/ssl/ssl_intro.html">SSL/TLS 高强度加密：概述</a></dt><dd><p>Apache HTTP Server文档介绍</p>
 </dd>
-<dt><span class="target" id="index-67"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1422.html"><strong>RFC 1422: 因特网电子邮件的隐私加强：第二部分：基于证书的密钥管理</strong></a></dt><dd><p>Steve Kent</p>
+<dt><span class="target" id="index-55"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1422.html"><strong>RFC 1422: 因特网电子邮件的隐私加强：第二部分：基于证书的密钥管理</strong></a></dt><dd><p>Steve Kent</p>
 </dd>
-<dt><span class="target" id="index-68"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc4086.html"><strong>RFC 4086: 确保安全的随机性要求</strong></a></dt><dd><p>Donald E., Jeffrey I. Schiller</p>
+<dt><span class="target" id="index-56"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc4086.html"><strong>RFC 4086: 确保安全的随机性要求</strong></a></dt><dd><p>Donald E., Jeffrey I. Schiller</p>
 </dd>
-<dt><span class="target" id="index-69"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5280.html"><strong>RFC 5280: 互联网 X.509 公钥基础架构证书和证书吊销列表 (CRL) 配置文件</strong></a></dt><dd><p>D. Cooper</p>
+<dt><span class="target" id="index-57"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5280.html"><strong>RFC 5280: 互联网 X.509 公钥基础架构证书和证书吊销列表 (CRL) 配置文件</strong></a></dt><dd><p>D. Cooper</p>
 </dd>
-<dt><span class="target" id="index-70"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5246.html"><strong>RFC 5246: 传输层安全性 (TLS) 协议版本 1.2</strong></a></dt><dd><p>T. Dierks et. al.</p>
+<dt><span class="target" id="index-58"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5246.html"><strong>RFC 5246: 传输层安全性 (TLS) 协议版本 1.2</strong></a></dt><dd><p>T. Dierks et. al.</p>
 </dd>
-<dt><span class="target" id="index-71"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066: 传输层安全性 (TLS) 的扩展</strong></a></dt><dd><p>D. Eastlake</p>
+<dt><span class="target" id="index-59"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc6066.html"><strong>RFC 6066: 传输层安全性 (TLS) 的扩展</strong></a></dt><dd><p>D. Eastlake</p>
 </dd>
 <dt><a class="reference external" href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xml">IANA TLS: 传输层安全性 (TLS) 的参数</a></dt><dd><p>IANA</p>
 </dd>
-<dt><span class="target" id="index-72"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7525.html"><strong>RFC 7525: 传输层安全性 (TLS) 和数据报传输层安全性 (DTLS) 的安全使用建议</strong></a></dt><dd><p>IETF</p>
+<dt><span class="target" id="index-60"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc7525.html"><strong>RFC 7525: 传输层安全性 (TLS) 和数据报传输层安全性 (DTLS) 的安全使用建议</strong></a></dt><dd><p>IETF</p>
 </dd>
 <dt><a class="reference external" href="https://wiki.mozilla.org/Security/Server_Side_TLS">Mozilla 的服务器端 TLS 建议</a></dt><dd><p>Mozilla</p>
 </dd>
@@ -2662,7 +2623,7 @@ system.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

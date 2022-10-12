@@ -277,13 +277,21 @@
 <span id="why-self"></span><h2><a class="toc-backref" href="#id8">为什么必须在方法定义和调用中显式使用“self”？</a><a class="headerlink" href="#why-must-self-be-used-explicitly-in-method-definitions-and-calls" title="永久链接至标题">¶</a></h2>
 <p>这个想法借鉴了 Modula-3 语言。 出于多种原因它被证明是非常有用的。</p>
 <p>首先，更明显的显示出，使用的是方法或实例属性而不是局部变量。 阅读 <code class="docutils literal notranslate"><span class="pre">self.x</span></code> 或 <code class="docutils literal notranslate"><span class="pre">self.meth()</span></code> 可以清楚地表明，即使您不知道类的定义，也会使用实例变量或方法。在 C++ 中，可以通过缺少局部变量声明来判断（假设全局变量很少见或容易识别） —— 但是在 Python 中没有局部变量声明，所以必须查找类定义才能确定。 一些 C++ 和 Java 编码标准要求实例属性具有 <code class="docutils literal notranslate"><span class="pre">m_</span></code> 前缀，因此这种显式性在这些语言中仍然有用。</p>
-<p>其次，这意味着如果要显式引用或从特定类调用该方法，不需要特殊语法。 在 C++ 中，如果你想使用在派生类中重写基类中的方法，你必须使用 <code class="docutils literal notranslate"><span class="pre">::</span></code> 运算符 – 在 Python 中你可以编写 <code class="docutils literal notranslate"><span class="pre">baseclass.methodname(self,</span> <span class="pre">&lt;argument</span> <span class="pre">list&gt;)</span></code>。 这对于 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code> 方法非常有用，特别是在派生类方法想要扩展同名的基类方法，而必须以某种方式调用基类方法时。</p>
+<p>Second, it means that no special syntax is necessary if you want to explicitly
+reference or call the method from a particular class.  In C++, if you want to
+use a method from a base class which is overridden in a derived class, you have
+to use the <code class="docutils literal notranslate"><span class="pre">::</span></code> operator – in Python you can write
+<code class="docutils literal notranslate"><span class="pre">baseclass.methodname(self,</span> <span class="pre">&lt;argument</span> <span class="pre">list&gt;)</span></code>.  This is particularly useful
+for <a class="reference internal" href="../reference/datamodel.html#object.__init__" title="object.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a> methods, and in general in cases where a derived class
+method wants to extend the base class method of the same name and thus has to
+call the base class method somehow.</p>
 <p>最后，它解决了变量赋值的语法问题：为了 Python 中的局部变量（根据定义！）在函数体中赋值的那些变量（并且没有明确声明为全局）赋值，就必须以某种方式告诉解释器一个赋值是为了分配一个实例变量而不是一个局部变量，它最好是通过语法实现的（出于效率原因）。 C++ 通过声明来做到这一点，但是 Python 没有声明，仅仅为了这个目的而引入它们会很可惜。 使用显式的 <code class="docutils literal notranslate"><span class="pre">self.var</span></code> 很好地解决了这个问题。 类似地，对于使用实例变量，必须编写 <code class="docutils literal notranslate"><span class="pre">self.var</span></code> 意味着对方法内部的非限定名称的引用不必搜索实例的目录。 换句话说，局部变量和实例变量存在于两个不同的命名空间中，您需要告诉 Python 使用哪个命名空间。</p>
 </section>
 <section id="why-can-t-i-use-an-assignment-in-an-expression">
 <span id="id2"></span><h2><a class="toc-backref" href="#id9">为什么不能在表达式中赋值？</a><a class="headerlink" href="#why-can-t-i-use-an-assignment-in-an-expression" title="永久链接至标题">¶</a></h2>
 <p>自 Python 3.8 开始，你能做到的！</p>
-<p>赋值表达式使用海象运算符 <cite>:=</cite> 在表达式中为变量赋值:</p>
+<p>Assignment expressions using the walrus operator <code class="docutils literal notranslate"><span class="pre">:=</span></code> assign a variable in an
+expression:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
    <span class="nb">print</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </pre></div>
@@ -320,7 +328,10 @@
 </section>
 <section id="how-fast-are-exceptions">
 <h2><a class="toc-backref" href="#id12">异常有多快？</a><a class="headerlink" href="#how-fast-are-exceptions" title="永久链接至标题">¶</a></h2>
-<p>如果没有引发异常，则try/except块的效率极高。实际上捕获异常是昂贵的。在2.0之前的Python版本中，通常使用这个习惯用法:</p>
+<p>A <a class="reference internal" href="../reference/compound_stmts.html#try"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">try</span></code></a>/<a class="reference internal" href="../reference/compound_stmts.html#except"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">except</span></code></a> block is extremely efficient if no exceptions
+are raised.  Actually
+catching an exception is expensive.  In versions of Python prior to 2.0 it was
+common to use this idiom:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">mydict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
@@ -370,26 +381,37 @@
 <section id="why-can-t-lambda-expressions-contain-statements">
 <h2><a class="toc-backref" href="#id15">为什么lambda表达式不能包含语句？</a><a class="headerlink" href="#why-can-t-lambda-expressions-contain-statements" title="永久链接至标题">¶</a></h2>
 <p>Python的 lambda表达式不能包含语句，因为Python的语法框架不能处理嵌套在表达式内部的语句。然而，在Python中，这并不是一个严重的问题。与其他语言中添加功能的lambda表单不同，Python的 lambdas只是一种速记符号，如果您懒得定义函数的话。</p>
-<p>函数已经是Python中的第一类对象，可以在本地范围内声明。 因此，使用lambda而不是本地定义的函数的唯一优点是你不需要为函数创建一个名称 – 这只是一个分配了函数对象(与lambda表达式生成的对象类型完全相同)的局部变量！</p>
+<p>Functions are already first class objects in Python, and can be declared in a
+local scope.  Therefore the only advantage of using a lambda instead of a
+locally defined function is that you don’t need to invent a name for the
+function – but that’s just a local variable to which the function object (which
+is exactly the same type of object that a lambda expression yields) is assigned!</p>
 </section>
 <section id="can-python-be-compiled-to-machine-code-c-or-some-other-language">
 <h2><a class="toc-backref" href="#id16">可以将Python编译为机器代码，C或其他语言吗？</a><a class="headerlink" href="#can-python-be-compiled-to-machine-code-c-or-some-other-language" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="http://cython.org/">Cython</a> compiles a modified version of Python with
-optional annotations into C extensions.  <a class="reference external" href="http://www.nuitka.net/">Nuitka</a> is
+<p><a class="reference external" href="https://cython.org/">Cython</a> compiles a modified version of Python with
+optional annotations into C extensions.  <a class="reference external" href="https://www.nuitka.net/">Nuitka</a> is
 an up-and-coming compiler of Python into C++ code, aiming to support the full
 Python language.</p>
 </section>
 <section id="how-does-python-manage-memory">
 <h2><a class="toc-backref" href="#id17">Python如何管理内存？</a><a class="headerlink" href="#how-does-python-manage-memory" title="永久链接至标题">¶</a></h2>
 <p>Python 内存管理的细节取决于实现。 Python 的标准实现 <a class="reference internal" href="../glossary.html#term-CPython"><span class="xref std std-term">CPython</span></a> 使用引用计数来检测不可访问的对象，并使用另一种机制来收集引用循环，定期执行循环检测算法来查找不可访问的循环并删除所涉及的对象。 <a class="reference internal" href="../library/gc.html#module-gc" title="gc: Interface to the cycle-detecting garbage collector."><code class="xref py py-mod docutils literal notranslate"><span class="pre">gc</span></code></a> 模块提供了执行垃圾回收、获取调试统计信息和优化收集器参数的函数。</p>
-<p>但是，其他实现(如  <a class="reference external" href="http://www.jython.org">Jython</a>  或  <a class="reference external" href="http://www.pypy.org">PyPy</a> )，)可以依赖不同的机制，如完全的垃圾回收器 。如果你的Python代码依赖于引用计数实现的行为，则这种差异可能会导致一些微妙的移植问题。</p>
+<p>Other implementations (such as <a class="reference external" href="https://www.jython.org">Jython</a> or
+<a class="reference external" href="https://www.pypy.org">PyPy</a>), however, can rely on a different mechanism
+such as a full-blown garbage collector.  This difference can cause some
+subtle porting problems if your Python code depends on the behavior of the
+reference counting implementation.</p>
 <p>在一些Python实现中，以下代码（在CPython中工作的很好）可能会耗尽文件描述符:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">very_long_list_of_files</span><span class="p">:</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>实际上，使用CPython的引用计数和析构函数方案， 每个新赋值的 <em>f</em> 都会关闭前一个文件。然而，对于传统的GC，这些文件对象只能以不同的时间间隔（可能很长的时间间隔）被收集（和关闭）。</p>
+<p>Indeed, using CPython’s reference counting and destructor scheme, each new
+assignment to <code class="docutils literal notranslate"><span class="pre">f</span></code> closes the previous file.  With a traditional GC, however,
+those file objects will only get collected (and closed) at varying and possibly
+long intervals.</p>
 <p>如果要编写可用于任何python实现的代码，则应显式关闭该文件或使用  <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> 语句；无论内存管理方案如何，这都有效：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">very_long_list_of_files</span><span class="p">:</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -400,7 +422,12 @@ Python language.</p>
 <section id="why-doesn-t-cpython-use-a-more-traditional-garbage-collection-scheme">
 <h2><a class="toc-backref" href="#id18">为什么CPython不使用更传统的垃圾回收方案？</a><a class="headerlink" href="#why-doesn-t-cpython-use-a-more-traditional-garbage-collection-scheme" title="永久链接至标题">¶</a></h2>
 <p>首先，这不是C标准特性，因此不能移植。(是的，我们知道Boehm GC库。它包含了 <em>大多数</em> 常见平台（但不是所有平台）的汇编代码，尽管它基本上是透明的，但也不是完全透明的; 要让Python使用它，需要使用补丁。)</p>
-<p>当Python嵌入到其他应用程序中时，传统的GC也成为一个问题。在独立的Python中，可以用GC库提供的版本替换标准的malloc()和free()，嵌入Python的应用程序可能希望用 <em>它自己</em> 替代malloc()和free()，而可能不需要Python的。现在，CPython可以正确地实现malloc()和free()。</p>
+<p>Traditional GC also becomes a problem when Python is embedded into other
+applications.  While in a standalone Python it’s fine to replace the standard
+<code class="docutils literal notranslate"><span class="pre">malloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">free()</span></code> with versions provided by the GC library, an application
+embedding Python may want to have its <em>own</em> substitute for <code class="docutils literal notranslate"><span class="pre">malloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">free()</span></code>,
+and may not want Python’s.  Right now, CPython works with anything that
+implements <code class="docutils literal notranslate"><span class="pre">malloc()</span></code> and <code class="docutils literal notranslate"><span class="pre">free()</span></code> properly.</p>
 </section>
 <section id="why-isn-t-all-memory-freed-when-cpython-exits">
 <h2><a class="toc-backref" href="#id19">CPython退出时为什么不释放所有内存？</a><a class="headerlink" href="#why-isn-t-all-memory-freed-when-cpython-exits" title="永久链接至标题">¶</a></h2>
@@ -409,8 +436,19 @@ Python language.</p>
 </section>
 <section id="why-are-there-separate-tuple-and-list-data-types">
 <h2><a class="toc-backref" href="#id20">为什么有单独的元组和列表数据类型？</a><a class="headerlink" href="#why-are-there-separate-tuple-and-list-data-types" title="永久链接至标题">¶</a></h2>
-<p>虽然列表和元组在许多方面是相似的，但它们的使用方式通常是完全不同的。可以认为元组类似于Pascal记录或C结构；它们是相关数据的小集合，可以是不同类型的数据，可以作为一个组进行操作。例如，笛卡尔坐标适当地表示为两个或三个数字的元组。</p>
-<p>另一方面，列表更像其他语言中的数组。它们倾向于持有不同数量的对象，所有对象都具有相同的类型，并且逐个操作。例如， <code class="docutils literal notranslate"><span class="pre">os.listdir('.')</span></code> 返回表示当前目录中的文件的字符串列表。如果向目录中添加了一两个文件，对此输出进行操作的函数通常不会中断。</p>
+<p>Lists and tuples, while similar in many respects, are generally used in
+fundamentally different ways.  Tuples can be thought of as being similar to
+Pascal <code class="docutils literal notranslate"><span class="pre">records</span></code> or C <code class="docutils literal notranslate"><span class="pre">structs</span></code>; they’re small collections of related data which may
+be of different types which are operated on as a group.  For example, a
+Cartesian coordinate is appropriately represented as a tuple of two or three
+numbers.</p>
+<p>Lists, on the other hand, are more like arrays in other languages.  They tend to
+hold a varying number of objects all of which have the same type and which are
+operated on one-by-one.  For example, <a class="reference internal" href="../library/os.html#os.listdir" title="os.listdir"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.listdir('.')</span></code></a>
+returns a list of
+strings representing the files in the current directory.  Functions which
+operate on this output would generally not break if you added another file or
+two to the directory.</p>
 <p>元组是不可变的，这意味着一旦创建了元组，就不能用新值替换它的任何元素。列表是可变的，这意味着您始终可以更改列表的元素。只有不变元素可以用作字典的key，因此只能将元组和非列表用作key。</p>
 </section>
 <section id="how-are-lists-implemented-in-cpython">
@@ -422,7 +460,14 @@ Python language.</p>
 <section id="how-are-dictionaries-implemented-in-cpython">
 <h2><a class="toc-backref" href="#id22">字典是如何在CPython中实现的？</a><a class="headerlink" href="#how-are-dictionaries-implemented-in-cpython" title="永久链接至标题">¶</a></h2>
 <p>CPython的字典实现为可调整大小的哈希表。与B-树相比，这在大多数情况下为查找（目前最常见的操作）提供了更好的性能，并且实现更简单。</p>
-<p>字典的工作方式是使用 <a class="reference internal" href="../library/functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> 内置函数计算字典中存储的每个键的hash代码。hash代码根据键和每个进程的种子而变化很大；例如，”Python” 的hash值为-539294296，而”python”(一个按位不同的字符串)的hash值为1142331976。然后，hash代码用于计算内部数组中将存储该值的位置。假设您存储的键都具有不同的hash值，这意味着字典需要恒定的时间 – O(1)，用Big-O表示法 – 来检索一个键。</p>
+<p>Dictionaries work by computing a hash code for each key stored in the dictionary
+using the <a class="reference internal" href="../library/functions.html#hash" title="hash"><code class="xref py py-func docutils literal notranslate"><span class="pre">hash()</span></code></a> built-in function.  The hash code varies widely depending
+on the key and a per-process seed; for example, <code class="docutils literal notranslate"><span class="pre">'Python'</span></code> could hash to
+<code class="docutils literal notranslate"><span class="pre">-539294296</span></code> while <code class="docutils literal notranslate"><span class="pre">'python'</span></code>, a string that differs by a single bit, could hash
+to <code class="docutils literal notranslate"><span class="pre">1142331976</span></code>.  The hash code is then used to calculate a location in an
+internal array where the value will be stored.  Assuming that you’re storing
+keys that all have different hash values, this means that dictionaries take
+constant time – O(1), in Big-O notation – to retrieve a key.</p>
 </section>
 <section id="why-must-dictionary-keys-be-immutable">
 <h2><a class="toc-backref" href="#id23">为什么字典key必须是不可变的？</a><a class="headerlink" href="#why-must-dictionary-keys-be-immutable" title="永久链接至标题">¶</a></h2>
@@ -441,7 +486,13 @@ Python language.</p>
 <li><p>允许列表作为键，但告诉用户不要修改它们。当你意外忘记或修改列表时，这将产生程序中的一类难以跟踪的错误。它还使一个重要的字典不变量无效： <code class="docutils literal notranslate"><span class="pre">d.keys()</span></code> 中的每个值都可用作字典的键。</p></li>
 <li><p>将列表用作字典键后，应标记为其只读。问题是，它不仅仅是可以改变其值的顶级对象；你可以使用包含列表作为键的元组。将任何内容作为键关联到字典中都需要将从那里可到达的所有对象标记为只读 —— 并且自引用对象可能会导致无限循环。</p></li>
 </ul>
-<p>如果需要，可以使用以下方法来解决这个问题，但使用它需要你自担风险：你可以将一个可变结构包装在一个类实例中，该实例同时具有 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">__hash__()</span></code> 方法。然后，你必须确保驻留在字典（或其他基于 hash 的结构）中的所有此类包装器对象的哈希值在对象位于字典（或其他结构）中时保持固定。:</p>
+<p>There is a trick to get around this if you need to, but use it at your own risk:
+You can wrap a mutable structure inside a class instance which has both a
+<a class="reference internal" href="../reference/datamodel.html#object.__eq__" title="object.__eq__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__eq__()</span></code></a> and a <a class="reference internal" href="../reference/datamodel.html#object.__hash__" title="object.__hash__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__hash__()</span></code></a> method.
+You must then make sure that the
+hash value for all such wrapper objects that reside in a dictionary (or other
+hash based structure), remain fixed while the object is in the dictionary (or
+other structure).</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ListWrapper</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">the_list</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">the_list</span> <span class="o">=</span> <span class="n">the_list</span>
@@ -462,7 +513,10 @@ Python language.</p>
 </div>
 <p>注意，哈希计算由于列表的某些成员可能不可用以及算术溢出的可能性而变得复杂。</p>
 <p>此外，必须始终如此，如果 <code class="docutils literal notranslate"><span class="pre">o1</span> <span class="pre">==</span> <span class="pre">o2</span></code> （即 <code class="docutils literal notranslate"><span class="pre">o1.__eq__(o2)</span> <span class="pre">is</span> <span class="pre">True</span></code> ）则 <code class="docutils literal notranslate"><span class="pre">hash(o1)</span> <span class="pre">==</span> <span class="pre">hash(o2)``（即</span> <span class="pre">``o1.__hash__()</span> <span class="pre">==</span> <span class="pre">o2.__hash__()</span></code> ），无论对象是否在字典中。 如果你不能满足这些限制，字典和其他基于 hash 的结构将会出错。</p>
-<p>对于 ListWrapper ，只要包装器对象在字典中，包装列表就不能更改以避免异常。除非你准备好认真考虑需求以及不正确地满足这些需求的后果，否则不要这样做。请留意。</p>
+<p>In the case of <code class="xref py py-class docutils literal notranslate"><span class="pre">ListWrapper</span></code>, whenever the wrapper object is in a dictionary the
+wrapped list must not change to avoid anomalies.  Don’t do this unless you are
+prepared to think hard about the requirements and the consequences of not
+meeting them correctly.  Consider yourself warned.</p>
 </section>
 <section id="why-doesn-t-list-sort-return-the-sorted-list">
 <h2><a class="toc-backref" href="#id24">为什么 list.sort() 没有返回排序列表？</a><a class="headerlink" href="#why-doesn-t-list-sort-return-the-sorted-list" title="永久链接至标题">¶</a></h2>
@@ -479,13 +533,28 @@ Python language.</p>
 <p>Python 2.6添加了一个 <a class="reference internal" href="../library/abc.html#module-abc" title="abc: Abstract base classes according to :pep:`3119`."><code class="xref py py-mod docutils literal notranslate"><span class="pre">abc</span></code></a> 模块，允许定义抽象基类 (ABCs)。然后可以使用 <a class="reference internal" href="../library/functions.html#isinstance" title="isinstance"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a> 和 <a class="reference internal" href="../library/functions.html#issubclass" title="issubclass"><code class="xref py py-func docutils literal notranslate"><span class="pre">issubclass()</span></code></a> 来检查实例或类是否实现了特定的ABC。 <a class="reference internal" href="../library/collections.abc.html#module-collections.abc" title="collections.abc: Abstract base classes for containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">collections.abc</span></code></a> 模块定义了一组有用的ABCs 例如 <a class="reference internal" href="../library/collections.abc.html#collections.abc.Iterable" title="collections.abc.Iterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a> ， <a class="reference internal" href="../library/collections.abc.html#collections.abc.Container" title="collections.abc.Container"><code class="xref py py-class docutils literal notranslate"><span class="pre">Container</span></code></a> , 和 <a class="reference internal" href="../library/collections.abc.html#collections.abc.MutableMapping" title="collections.abc.MutableMapping"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a></p>
 <p>对于 Python，接口规范的许多好处可以通过组件的适当测试规程来获得。</p>
 <p>一个好的模块测试套件既可以提供回归测试，也可以作为模块接口规范和一组示例。许多Python模块可以作为脚本运行，以提供简单的“自我测试”。即使是使用复杂外部接口的模块，也常常可以使用外部接口的简单“桩代码（stub）”模拟进行隔离测试。可以使用 <a class="reference internal" href="../library/doctest.html#module-doctest" title="doctest: Test pieces of code within docstrings."><code class="xref py py-mod docutils literal notranslate"><span class="pre">doctest</span></code></a> 和 <a class="reference internal" href="../library/unittest.html#module-unittest" title="unittest: Unit testing framework for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest</span></code></a> 模块或第三方测试框架来构造详尽的测试套件，以运行模块中的每一行代码。</p>
-<p>适当的测试规程可以帮助在Python中构建大型的、复杂的应用程序以及接口规范。事实上，它可能会更好，因为接口规范不能测试程序的某些属性。例如， <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> 方法将向一些内部列表的末尾添加新元素；接口规范不能测试您的 <code class="xref py py-meth docutils literal notranslate"><span class="pre">append()</span></code> 实现是否能够正确执行此操作，但是在测试套件中检查这个属性是很简单的。</p>
+<p>An appropriate testing discipline can help build large complex applications in
+Python as well as having interface specifications would.  In fact, it can be
+better because an interface specification cannot test certain properties of a
+program.  For example, the <code class="xref py py-meth docutils literal notranslate"><span class="pre">list.append()</span></code> method is expected to add new elements
+to the end of some internal list; an interface specification cannot test that
+your <code class="xref py py-meth docutils literal notranslate"><span class="pre">list.append()</span></code> implementation will actually do this correctly, but it’s
+trivial to check this property in a test suite.</p>
 <p>编写测试套件非常有用，并且你可能希望将你的代码设计为易于测试。 一种日益流行的技术是面向测试的开发，它要求在编写任何实际代码之前首先编写测试套件的各个部分。 当然 Python 也允许你采用更粗率的方式，不必编写任何测试用例。</p>
 </section>
 <section id="why-is-there-no-goto">
 <h2><a class="toc-backref" href="#id26">为什么没有goto？</a><a class="headerlink" href="#why-is-there-no-goto" title="永久链接至标题">¶</a></h2>
-<p>在 1970 年代人们了解到不受限制的 goto 可能导致混乱得像“意大利面”那样难以理解和修改的代码。 在高级语言中，它也是不必要的，只需有实现分支 (在 Python 中是使用 <code class="docutils literal notranslate"><span class="pre">if</span></code> 语句以及 <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">and</span></code> 和 <code class="docutils literal notranslate"><span class="pre">if-else</span></code> 表达式) 和循环 (使用 <code class="docutils literal notranslate"><span class="pre">while</span></code> 和 <code class="docutils literal notranslate"><span class="pre">for</span></code> 语句，并可能包含 <code class="docutils literal notranslate"><span class="pre">continue</span></code> 和 <code class="docutils literal notranslate"><span class="pre">break</span></code>) 的手段就足够了。</p>
-<p>人们还可以使用异常捕获来提供甚至能跨函数调用的“结构化 goto”。 许多人认为异常可以方便地模拟 C, Fortran 和其他语言中所有合理使用的“go”或“goto”构造。 例如:</p>
+<p>In the 1970s people realized that unrestricted goto could lead
+to messy “spaghetti” code that was hard to understand and revise.
+In a high-level language, it is also unneeded as long as there
+are ways to branch (in Python, with <a class="reference internal" href="../reference/compound_stmts.html#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a> statements and <a class="reference internal" href="../reference/expressions.html#or"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">or</span></code></a>,
+<a class="reference internal" href="../reference/expressions.html#and"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">and</span></code></a>, and <a class="reference internal" href="../reference/compound_stmts.html#if"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">if</span></code></a>/<a class="reference internal" href="../reference/compound_stmts.html#else"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">else</span></code></a> expressions) and loop (with <a class="reference internal" href="../reference/compound_stmts.html#while"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">while</span></code></a>
+and <a class="reference internal" href="../reference/compound_stmts.html#for"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">for</span></code></a> statements, possibly containing <a class="reference internal" href="../reference/simple_stmts.html#continue"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">continue</span></code></a> and <a class="reference internal" href="../reference/simple_stmts.html#break"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">break</span></code></a>).</p>
+<p>One can also use exceptions to provide a “structured goto”
+that works even across
+function calls.  Many feel that exceptions can conveniently emulate all
+reasonable uses of the <code class="docutils literal notranslate"><span class="pre">go</span></code> or <code class="docutils literal notranslate"><span class="pre">goto</span></code> constructs of C, Fortran, and other
+languages.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">label</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span> <span class="k">pass</span>  <span class="c1"># declare a label</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -497,7 +566,8 @@ Python language.</p>
 <span class="o">...</span>
 </pre></div>
 </div>
-<p>但是不允许你跳到循环的中间，这通常被认为是滥用goto。谨慎使用。</p>
+<p>This doesn’t allow you to jump into the middle of a loop, but that’s usually
+considered an abuse of <code class="docutils literal notranslate"><span class="pre">goto</span></code> anyway.  Use sparingly.</p>
 </section>
 <section id="why-can-t-raw-strings-r-strings-end-with-a-backslash">
 <h2><a class="toc-backref" href="#id27">为什么原始字符串（r-strings）不能以反斜杠结尾？</a><a class="headerlink" href="#why-can-t-raw-strings-r-strings-end-with-a-backslash" title="永久链接至标题">¶</a></h2>
@@ -516,7 +586,9 @@ Python language.</p>
 </section>
 <section id="why-doesn-t-python-have-a-with-statement-for-attribute-assignments">
 <h2><a class="toc-backref" href="#id28">为什么Python没有属性赋值的“with”语句？</a><a class="headerlink" href="#why-doesn-t-python-have-a-with-statement-for-attribute-assignments" title="永久链接至标题">¶</a></h2>
-<p>Python 具有 ‘with’ 语句，它能将一个代码块的执行包装起来，在进入和退出代码块时调用特定的代码。 有些语言具有这样的结构:</p>
+<p>Python has a <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement that wraps the execution of a block, calling code
+on the entrance and exit from the block.  Some languages have a construct that
+looks like this:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">obj</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>               <span class="c1"># equivalent to obj.a = 1</span>
     <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1"># obj.total = obj.total + 1</span>
@@ -531,8 +603,13 @@ Python language.</p>
         <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>该代码段假设 “a” 必须有一个名为 “x” 的成员属性。然而，Python中并没有告诉解释器这一点。假设 “a” 是整数，会发生什么？如果有一个名为 “x” 的全局变量，它是否会在with块中使用？如您所见，Python的动态特性使得这样的选择更加困难。</p>
-<p>然而，Python 可以通过赋值轻松实现 “with” 和类似语言特性（减少代码量）的主要好处。代替:</p>
+<p>The snippet assumes that <code class="docutils literal notranslate"><span class="pre">a</span></code> must have a member attribute called <code class="docutils literal notranslate"><span class="pre">x</span></code>. However,
+there is nothing in Python that tells the interpreter this. What should happen
+if <code class="docutils literal notranslate"><span class="pre">a</span></code> is, let us say, an integer?  If there is a global variable named <code class="docutils literal notranslate"><span class="pre">x</span></code>,
+will it be used inside the <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> block?  As you see, the dynamic nature of Python
+makes such choices much harder.</p>
+<p>The primary benefit of <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> and similar language features (reduction of code
+volume) can, however, easily be achieved in Python by assignment.  Instead of:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">21</span>
 <span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">42</span>
 <span class="n">function</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">mydict</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">63</span>
@@ -546,13 +623,17 @@ Python language.</p>
 </pre></div>
 </div>
 <p>这也具有提高执行速度的副作用，因为Python在运行时解析名称绑定，而第二个版本只需要执行一次解析。</p>
+<p>Similar proposals that would introduce syntax to further reduce code volume,
+such as using a ‘leading dot’, have been rejected in favour of explicitness (see
+<a class="reference external" href="https://mail.python.org/pipermail/python-ideas/2016-May/040070.html">https://mail.python.org/pipermail/python-ideas/2016-May/040070.html</a>).</p>
 </section>
 <section id="why-don-t-generators-support-the-with-statement">
 <h2><a class="toc-backref" href="#id29">生成器为什么不支持 with 语句？</a><a class="headerlink" href="#why-don-t-generators-support-the-with-statement" title="永久链接至标题">¶</a></h2>
 <p>For technical reasons, a generator used directly as a context manager
 would not work correctly.  When, as is most common, a generator is used as
 an iterator run to completion, no closing is needed.  When it is, wrap
-it as “contextlib.closing(generator)” in the ‘with’ statement.</p>
+it as <a class="reference internal" href="../library/contextlib.html#contextlib.closing" title="contextlib.closing"><code class="xref py py-func docutils literal notranslate"><span class="pre">contextlib.closing(generator)</span></code></a>
+in the <a class="reference internal" href="../reference/compound_stmts.html#with"><code class="xref std std-keyword docutils literal notranslate"><span class="pre">with</span></code></a> statement.</p>
 </section>
 <section id="why-are-colons-required-for-the-if-while-def-class-statements">
 <h2><a class="toc-backref" href="#id30">为什么 if/while/def/class语句需要冒号？</a><a class="headerlink" href="#why-are-colons-required-for-the-if-while-def-class-statements" title="永久链接至标题">¶</a></h2>
@@ -727,7 +808,7 @@ it as “contextlib.closing(generator)” in the ‘with’ statement.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

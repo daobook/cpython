@@ -265,6 +265,20 @@ are offered the event to handle, and propagation stops at that point.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="logging.Logger.getChildren">
+<span class="sig-name descname"><span class="pre">getChildren</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#logging.Logger.getChildren" title="永久链接至目标">¶</a></dt>
+<dd><p>Returns a set of loggers which are immediate children of this logger. So for
+example <code class="docutils literal notranslate"><span class="pre">logging.getLogger().getChildren()</span></code> might return a set containing
+loggers named <code class="docutils literal notranslate"><span class="pre">foo</span></code> and <code class="docutils literal notranslate"><span class="pre">bar</span></code>, but a logger named <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code> wouldn’t be
+included in the set. Likewise, <code class="docutils literal notranslate"><span class="pre">logging.getLogger('foo').getChildren()</span></code> might
+return a set including a logger named <code class="docutils literal notranslate"><span class="pre">foo.bar</span></code>, but it wouldn’t include one
+named <code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="logging.Logger.debug">
 <span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Logger.debug" title="永久链接至目标">¶</a></dt>
 <dd><p>在此记录器上记录 <code class="xref py py-const docutils literal notranslate"><span class="pre">DEBUG</span></code> 级别的消息。 <em>msg</em> 是消息格式字符串，而 <em>args</em> 是用于字符串格式化操作合并到 <em>msg</em> 的参数。（请注意，这意味着您可以在格式字符串中使用关键字以及单个字典参数。）当未提供 <em>args</em> 时，不会对 <em>msg</em> 执行 ％ 格式化操作。</p>
@@ -289,7 +303,9 @@ are offered the event to handle, and propagation stops at that point.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>2006-02-08 22:20:02,165 192.168.0.1 fbloggs  Protocol problem: connection reset
 </pre></div>
 </div>
-<p><em>extra</em> 中传入的字典的键不应与日志系统使用的键冲突。（有关日志系统使用哪些键的更多信息，请参见 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 的文档。）</p>
+<p>The keys in the dictionary passed in <em>extra</em> should not clash with the keys used
+by the logging system. (See the section on <a class="reference internal" href="#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a> for more
+information on which keys are used by the logging system.)</p>
 <p>如果在已记录的消息中使用这些属性，则需要格外小心。例如，在上面的示例中，<a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 已设置了格式字符串，其在 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 的属性字典中键值为 “clientip” 和 “user”。如果缺少这些内容，则将不会记录该消息，因为会引发字符串格式化异常。因此，在这种情况下，您始终需要使用 <em>extra</em> 字典传递这些键。</p>
 <p>尽管这可能很烦人，但此功能旨在用于特殊情况，例如在多个上下文中执行相同代码的多线程服务器，并且出现的有趣条件取决于此上下文（例如在上面的示例中就是远程客户端IP地址和已验证用户名）。在这种情况下，很可能将专门的 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 与特定的 <a class="reference internal" href="#logging.Handler" title="logging.Handler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handler</span></code></a> 一起使用。</p>
 <p>If no handler is attached to this logger (or any of its ancestors,
@@ -543,6 +559,24 @@ the message will be sent to the handler set on <a class="reference internal" hre
 <dt class="sig sig-object py" id="logging.Handler.emit">
 <span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Handler.emit" title="永久链接至目标">¶</a></dt>
 <dd><p>执行实际记录给定日志记录所需的操作。这个版本应由子类实现，因此这里直接引发 <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a> 异常。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>This method is called after a handler-level lock is acquired, which
+is released after this method returns. When you override this method, note
+that you should be careful when calling anything that invokes other parts of
+the logging API which might do locking, because that might result in a
+deadlock. Specifically:</p>
+<ul class="simple">
+<li><p>Logging configuration APIs acquire the module-level lock, and then
+individual handler-level locks as those handlers are configured.</p></li>
+<li><p>Many logging APIs lock the module-level lock. If such an API is called
+from this method, it could cause a deadlock if a configuration call is
+made on another thread, because that thread will try to acquire the
+module-level lock <em>before</em> the handler-level lock, whereas this thread
+tries to acquire the module-level lock <em>after</em> the handler-level lock
+(because in this method, the handler-level lock has already been acquired).</p></li>
+</ul>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -551,23 +585,48 @@ the message will be sent to the handler set on <a class="reference internal" hre
 </section>
 <section id="formatter-objects">
 <span id="id1"></span><h2>格式器对象<a class="headerlink" href="#formatter-objects" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 对象拥有以下的属性和方法。一般情况下，它们负责将 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 转换为可由人或外部系统解释的字符串。基础的 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 允许指定格式字符串。如果未提供任何值，则使用默认值 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> ，它仅将消息包括在日志记录调用中。要在格式化输出中包含其他信息（如时间戳），请阅读下文。</p>
-<p>格式器可以使用格式化字符串来初始化，该字符串利用 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 的属性 —— 例如上述默认值，用户的消息和参数预先格式化为 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 的 <em>message</em> 属性后被使用。此格式字符串包含标准的 Python %-s 样式映射键。有关字符串格式的更多信息，请参见 <a class="reference internal" href="stdtypes.html#old-string-formatting"><span class="std std-ref">printf 风格的字符串格式化</span></a>。</p>
-<p><a class="reference internal" href="#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a> 一节中给出了 <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> 中有用的映射键。</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="logging.Formatter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">Formatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Formatter" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> 类的新实例。实例将使用整个消息的格式字符串以及消息的日期/时间部分的格式字符串进行初始化。如果未指定 <em>fmt</em> ，则使用 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code>。如果未指定 <em>datefmt</em>，则使用  <a class="reference internal" href="#logging.Formatter.formatTime" title="logging.Formatter.formatTime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatTime()</span></code></a> 文档中描述的格式。</p>
-<p><em>style</em> 形参可以是 ‘%’, ‘{’ 或 ‘$’ 之一，它决定格式字符串将如何与数据进行合并：使用 %-formatting, <a class="reference internal" href="stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> 或是 <a class="reference internal" href="string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a>。 这仅适用于格式字符串 <em>fmt</em> (例如 <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">{message}</span></code>)，不适用于传递给 <code class="docutils literal notranslate"><span class="pre">Logger.debug</span></code> 的实际日志消息等；请参阅 <a class="reference internal" href="../howto/logging-cookbook.html#formatting-styles"><span class="std std-ref">生效于整个应用程序的格式化样式</span></a> 了解有关在日志消息中使用 {- 和 $-formatting 的更多详情。</p>
-<p><em>defaults</em> 形参可以是一个包含在自定义字段中使用的默认值的字典。 例如: <code class="docutils literal notranslate"><span class="pre">logging.Formatter('%(ip)s</span> <span class="pre">%(message)s',</span> <span class="pre">defaults={&quot;ip&quot;:</span> <span class="pre">None})</span></code></p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span>加入了 <em>style</em>  形参。</p>
+<dd><p>Responsible for converting a <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> to an output string
+to be interpreted by a human or external system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fmt</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – A format string in the given <em>style</em> for
+the logged output as a whole.
+The possible mapping keys are drawn from the <a class="reference internal" href="#logging.LogRecord" title="logging.LogRecord"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code></a> object’s
+<a class="reference internal" href="#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a>.
+If not specified, <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> is used,
+which is just the logged message.</p></li>
+<li><p><strong>datefmt</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – A format string in the given <em>style</em> for
+the date/time portion of the logged output.
+If not specified, the default described in <a class="reference internal" href="#logging.Formatter.formatTime" title="logging.Formatter.formatTime"><code class="xref py py-meth docutils literal notranslate"><span class="pre">formatTime()</span></code></a> is used.</p></li>
+<li><p><strong>style</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – Can be one of <code class="docutils literal notranslate"><span class="pre">'%'</span></code>, <code class="docutils literal notranslate"><span class="pre">'{'</span></code> or <code class="docutils literal notranslate"><span class="pre">'$'</span></code> and determines
+how the format string will be merged with its data: using one of
+<a class="reference internal" href="stdtypes.html#old-string-formatting"><span class="std std-ref">printf 风格的字符串格式化</span></a> (<code class="docutils literal notranslate"><span class="pre">%</span></code>), <a class="reference internal" href="stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> (<code class="docutils literal notranslate"><span class="pre">{</span></code>)
+or <a class="reference internal" href="string.html#string.Template" title="string.Template"><code class="xref py py-class docutils literal notranslate"><span class="pre">string.Template</span></code></a> (<code class="docutils literal notranslate"><span class="pre">$</span></code>). This only applies to
+<em>fmt</em> and <em>datefmt</em> (e.g. <code class="docutils literal notranslate"><span class="pre">'%(message)s'</span></code> versus <code class="docutils literal notranslate"><span class="pre">'{message}'</span></code>),
+not to the actual log messages passed to the logging methods.
+However, there are <a class="reference internal" href="../howto/logging-cookbook.html#formatting-styles"><span class="std std-ref">other ways</span></a>
+to use <code class="docutils literal notranslate"><span class="pre">{</span></code>- and <code class="docutils literal notranslate"><span class="pre">$</span></code>-formatting for log messages.</p></li>
+<li><p><strong>validate</strong> (<a class="reference internal" href="functions.html#bool" title="bool"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), incorrect or mismatched
+<em>fmt</em> and <em>style</em> will raise a <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>; for example,
+<code class="docutils literal notranslate"><span class="pre">logging.Formatter('%(asctime)s</span> <span class="pre">-</span> <span class="pre">%(message)s',</span> <span class="pre">style='{')</span></code>.</p></li>
+<li><p><strong>defaults</strong> (<a class="reference internal" href="stdtypes.html#dict" title="dict"><em>dict</em></a><em>[</em><a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a><em>, </em><em>Any</em><em>]</em>) – A dictionary with default values to use in custom fields.
+For example,
+<code class="docutils literal notranslate"><span class="pre">logging.Formatter('%(ip)s</span> <span class="pre">%(message)s',</span> <span class="pre">defaults={&quot;ip&quot;:</span> <span class="pre">None})</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<div class="versionadded">
+<p><span class="versionmodified added">3.2 新版功能: </span>The <em>style</em> parameter.</p>
 </div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.8 版更改: </span>加入*validate* 参数。不正确或不匹配的样式和格式将引发 <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> 错误。例如: <code class="docutils literal notranslate"><span class="pre">logging.Formatter('%(asctime)s</span> <span class="pre">-</span> <span class="pre">%(message)s',</span> <span class="pre">style='{')</span></code>。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.8 新版功能: </span>The <em>validate</em> parameter.</p>
 </div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.10 版更改: </span>增加了 <em>defaults</em> 形参。</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.10 新版功能: </span>The <em>defaults</em> parameter.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.Formatter.format">
@@ -603,6 +662,43 @@ the message will be sent to the handler set on <a class="reference internal" hre
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="logging.BufferingFormatter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">BufferingFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.BufferingFormatter" title="永久链接至目标">¶</a></dt>
+<dd><p>A base formatter class suitable for subclassing when you want to format a
+number of records. You can pass a <a class="reference internal" href="#logging.Formatter" title="logging.Formatter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Formatter</span></code></a> instance which you want
+to use to format each line (that corresponds to a single record). If not
+specified, the default formatter (which just outputs the event message) is
+used as the line formatter.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="logging.BufferingFormatter.formatHeader">
+<span class="sig-name descname"><span class="pre">formatHeader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.BufferingFormatter.formatHeader" title="永久链接至目标">¶</a></dt>
+<dd><p>Return a header for a list of <em>records</em>. The base implementation just
+returns the empty string. You will need to override this method if you
+want specific behaviour, e.g. to show the count of records, a title or a
+separator line.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logging.BufferingFormatter.formatFooter">
+<span class="sig-name descname"><span class="pre">formatFooter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.BufferingFormatter.formatFooter" title="永久链接至目标">¶</a></dt>
+<dd><p>Return a footer for a list of <em>records</em>. The base implementation just
+returns the empty string. You will need to override this method if you
+want specific behaviour, e.g. to show the count of records or a separator
+line.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="logging.BufferingFormatter.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">records</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.BufferingFormatter.format" title="永久链接至目标">¶</a></dt>
+<dd><p>Return formatted text for a list of <em>records</em>. The base implementation
+just returns the empty string if there are no records; otherwise, it
+returns the concatenation of the header, each record formatted with the
+line formatter, and the footer.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="filter-objects">
 <span id="filter"></span><h2>过滤器对象<a class="headerlink" href="#filter-objects" title="永久链接至标题">¶</a></h2>
@@ -614,7 +710,7 @@ the message will be sent to the handler set on <a class="reference internal" hre
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.Filter.filter">
 <span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.Filter.filter" title="永久链接至目标">¶</a></dt>
-<dd><p>Is the specified record to be logged? Returns falsy for no, truthy for
+<dd><p>Is the specified record to be logged? Returns false for no, true for
 yes. Filters can either modify log records in-place or return a completely
 different record instance which will replace the original
 log record in any future processing of the event.</p>
@@ -642,19 +738,34 @@ having side effects on other handlers.</p>
 <dt class="sig sig-object py" id="logging.LogRecord">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.</span></span><span class="sig-name descname"><span class="pre">LogRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pathname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lineno</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exc_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.LogRecord" title="永久链接至目标">¶</a></dt>
 <dd><p>包含与被记录的事件相关的所有信息。</p>
-<p>主要信息是在 <code class="xref py py-attr docutils literal notranslate"><span class="pre">msg</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">args</span></code> 中传递的，它们使用 <code class="docutils literal notranslate"><span class="pre">msg</span> <span class="pre">%</span> <span class="pre">args</span></code> 组合到一起以创建记录的 <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code> 字段。</p>
+<p>The primary information is passed in <em>msg</em> and <em>args</em>,
+which are combined using <code class="docutils literal notranslate"><span class="pre">msg</span> <span class="pre">%</span> <span class="pre">args</span></code> to create
+the <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code> attribute of the record.</p>
 <dl class="field-list simple">
 <dt class="field-odd">参数</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – 用于记录由此 LogRecord 所表示事件的记录器名称。 请注意此名称将始终为该值，即使它可能是由附加到不同（祖先）日志记录器的处理器所发出的。</p></li>
-<li><p><strong>level</strong> – 以数字表示的日志记录事件层级（如 DEBUG, INFO 等）。 请注意这会转换为 LogRecord 的 <em>两个</em> 属性: <code class="docutils literal notranslate"><span class="pre">levelno</span></code> 为数字值而 <code class="docutils literal notranslate"><span class="pre">levelname</span></code> 为对应的层级名称。</p></li>
-<li><p><strong>pathname</strong> – 进行日志记录调用的文件的完整路径名。</p></li>
-<li><p><strong>lineno</strong> – 记录调用所在源文件中的行号。</p></li>
-<li><p><strong>msg</strong> – 事件描述消息，可能为带有可变数据占位符的格式字符串。</p></li>
-<li><p><strong>args</strong> – 要合并到 <em>msg</em> 参数以获得事件描述的可变数据。</p></li>
-<li><p><strong>exc_info</strong> – 包含当前异常信息的异常元组，或者如果没有可用异常信息则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p></li>
-<li><p><strong>func</strong> – 发起调用日志记录调用的函数或方法名称。</p></li>
-<li><p><strong>sinfo</strong> – 一个文本字符串，表示当前线程中从堆栈底部直到日志记录调用的堆栈信息。</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – The name of the logger used to log the event
+represented by this <code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code>.
+Note that the logger name in the <code class="xref py py-class docutils literal notranslate"><span class="pre">LogRecord</span></code>
+will always have this value,
+even though it may be emitted by a handler
+attached to a different (ancestor) logger.</p></li>
+<li><p><strong>level</strong> (<a class="reference internal" href="functions.html#int" title="int"><em>int</em></a>) – The <a class="reference internal" href="#levels"><span class="std std-ref">numeric level</span></a> of the logging event
+(such as <code class="docutils literal notranslate"><span class="pre">10</span></code> for <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>, <code class="docutils literal notranslate"><span class="pre">20</span></code> for <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, etc).
+Note that this is converted to <em>two</em> attributes of the LogRecord:
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">levelno</span></code> for the numeric value
+and <code class="xref py py-attr docutils literal notranslate"><span class="pre">levelname</span></code> for the corresponding level name.</p></li>
+<li><p><strong>pathname</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – The full string path of the source file
+where the logging call was made.</p></li>
+<li><p><strong>lineno</strong> (<a class="reference internal" href="functions.html#int" title="int"><em>int</em></a>) – 记录调用所在源文件中的行号。</p></li>
+<li><p><strong>msg</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a>) – The event description message,
+which can be a %-format string with placeholders for variable data.</p></li>
+<li><p><strong>args</strong> (<a class="reference internal" href="stdtypes.html#tuple" title="tuple"><em>tuple</em></a><em> | </em><a class="reference internal" href="stdtypes.html#dict" title="dict"><em>dict</em></a><em>[</em><a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a><em>, </em><a class="reference internal" href="typing.html#typing.Any" title="typing.Any"><em>Any</em></a><em>]</em>) – 要合并到 <em>msg</em> 参数以获得事件描述的可变数据。</p></li>
+<li><p><strong>exc_info</strong> (<a class="reference internal" href="stdtypes.html#tuple" title="tuple"><em>tuple</em></a><em>[</em><a class="reference internal" href="functions.html#type" title="type"><em>type</em></a><em>[</em><a class="reference internal" href="exceptions.html#BaseException" title="BaseException"><em>BaseException</em></a><em>]</em><em>, </em><a class="reference internal" href="exceptions.html#BaseException" title="BaseException"><em>BaseException</em></a><em>, </em><a class="reference internal" href="types.html#types.TracebackType" title="types.TracebackType"><em>types.TracebackType</em></a><em>] </em><em>| </em><em>None</em>) – An exception tuple with the current exception information,
+as returned by <a class="reference internal" href="sys.html#sys.exc_info" title="sys.exc_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">sys.exc_info()</span></code></a>,
+or <code class="docutils literal notranslate"><span class="pre">None</span></code> if no exception information is available.</p></li>
+<li><p><strong>func</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a><em> | </em><em>None</em>) – 发起调用日志记录调用的函数或方法名称。</p></li>
+<li><p><strong>sinfo</strong> (<a class="reference internal" href="stdtypes.html#str" title="str"><em>str</em></a><em> | </em><em>None</em>) – 一个文本字符串，表示当前线程中从堆栈底部直到日志记录调用的堆栈信息。</p></li>
 </ul>
 </dd>
 </dl>
@@ -1289,7 +1400,7 @@ with that name.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

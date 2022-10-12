@@ -184,6 +184,12 @@
 is a lightweight data interchange format inspired by
 <a class="reference external" href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> object literal syntax
 (although it is not a strict subset of JavaScript <a class="footnote-reference brackets" href="#rfc-errata" id="id1">1</a> ).</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Be cautious when parsing JSON data from untrusted sources. A malicious
+JSON string may cause the decoder to consume considerable CPU and memory
+resources. Limiting the size of data to be parsed is recommended.</p>
+</div>
 <p><a class="reference internal" href="#module-json" title="json: Encode and decode the JSON format."><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> 提供了与标准库 <a class="reference internal" href="marshal.html#module-marshal" title="marshal: Convert Python objects to streams of bytes and back (with different constraints)."><code class="xref py py-mod docutils literal notranslate"><span class="pre">marshal</span></code></a> 和 <a class="reference internal" href="pickle.html#module-pickle" title="pickle: Convert Python objects to streams of bytes and back."><code class="xref py py-mod docutils literal notranslate"><span class="pre">pickle</span></code></a> 相似的API接口。</p>
 <p>对基本的 Python 对象层次结构进行编码：</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">json</span>
@@ -275,7 +281,10 @@ is a lightweight data interchange format inspired by
 <p>详细文档请参见 <a class="reference internal" href="#json-commandline"><span class="std std-ref">命令行界面</span></a>。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>JSON 是 <a class="reference external" href="http://yaml.org/">YAML</a> 1.2 的一个子集。由该模块的默认设置生成的 JSON （尤其是默认的 “分隔符” 设置值）也是 YAML 1.0 and 1.1 的一个子集。因此该模块也能够用于序列化为 YAML。</p>
+<p>JSON is a subset of <a class="reference external" href="https://yaml.org/">YAML</a> 1.2.  The JSON produced by
+this module’s default settings (in particular, the default <em>separators</em>
+value) is also a subset of YAML 1.0 and 1.1.  This module can thus also be
+used as a YAML serializer.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -328,13 +337,23 @@ will result in a <a class="reference internal" href="exceptions.html#RecursionEr
 <dt class="sig sig-object py" id="json.load">
 <span class="sig-prename descclassname"><span class="pre">json.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_float</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object_pairs_hook</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#json.load" title="永久链接至目标">¶</a></dt>
 <dd><p>使用这个 <a class="reference internal" href="#json-to-py-table"><span class="std std-ref">转换表</span></a> 将 <em>fp</em> (一个支持 <code class="docutils literal notranslate"><span class="pre">.read()</span></code> 并包含一个 JSON 文档的 <a class="reference internal" href="../glossary.html#term-text-file"><span class="xref std std-term">text file</span></a> 或者 <a class="reference internal" href="../glossary.html#term-binary-file"><span class="xref std std-term">binary file</span></a>) 反序列化为一个 Python 对象。</p>
-<p><em>object_hook</em> 是一个可选的函数，它会被调用于每一个解码出的对象字面量（即一个 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>）。<em>object_hook</em> 的返回值会取代原本的 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>。这一特性能够被用于实现自定义解码器（如 <a class="reference external" href="http://www.jsonrpc.org">JSON-RPC</a> 的类型提示)。</p>
+<p><em>object_hook</em> is an optional function that will be called with the result of
+any object literal decoded (a <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>).  The return value of
+<em>object_hook</em> will be used instead of the <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.  This feature can be used
+to implement custom decoders (e.g. <a class="reference external" href="https://www.jsonrpc.org">JSON-RPC</a>
+class hinting).</p>
 <p><em>object_pairs_hook</em> 是一个可选的函数，它会被调用于每一个有序列表对解码出的对象字面量。 <em>object_pairs_hook</em> 的返回值将会取代原本的 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 。这一特性能够被用于实现自定义解码器。如果 <em>object_hook</em> 也被定义， <em>object_pairs_hook</em> 优先。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.1 版更改: </span>添加了对 <em>object_pairs_hook</em> 的支持。</p>
 </div>
 <p><em>parse_float</em> ，如果指定，将与每个要解码 JSON 浮点数的字符串一同调用。默认状态下，相当于 <code class="docutils literal notranslate"><span class="pre">float(num_str)</span></code> 。可以用于对 JSON 浮点数使用其它数据类型和语法分析程序 （比如 <a class="reference internal" href="decimal.html#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">decimal.Decimal</span></code></a> ）。</p>
 <p><em>parse_int</em> ，如果指定，将与每个要解码 JSON 整数的字符串一同调用。默认状态下，相当于 <code class="docutils literal notranslate"><span class="pre">int(num_str)</span></code> 。可以用于对 JSON 整数使用其它数据类型和语法分析程序 （比如 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> ）。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>The default <em>parse_int</em> of <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-func docutils literal notranslate"><span class="pre">int()</span></code></a> now limits the maximum length of
+the integer string via the interpreter’s <a class="reference internal" href="stdtypes.html#int-max-str-digits"><span class="std std-ref">integer string
+conversion length limitation</span></a> to help avoid denial
+of service attacks.</p>
+</div>
 <p><em>parse_constant</em> ，如果指定，将要与以下字符串中的一个一同调用： <code class="docutils literal notranslate"><span class="pre">'-Infinity'</span></code> ， <code class="docutils literal notranslate"><span class="pre">'Infinity'</span></code> ， <code class="docutils literal notranslate"><span class="pre">'NaN'</span></code> 。如果遇到无效的 JSON 数字则可以使用它引发异常。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.1 版更改: </span><em>parse_constant</em> 不再调用 ‘null’ ， ‘true’ ， ‘false’ 。</p>
@@ -409,7 +428,10 @@ will result in a <a class="reference internal" href="exceptions.html#RecursionEr
 </tbody>
 </table>
 <p>它还将“NaN”、“Infinity”和“-Infinity”理解为它们对应的“float”值，这超出了JSON规范。</p>
-<p>如果指定了 <em>object_hook</em>，它将被调用并传入每个已解码 JSON 对象的结果，并且其返回值将被用来替代给定的 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>。 它可被用于提供自定义的反序列化操作（例如支持 <a class="reference external" href="http://www.jsonrpc.org">JSON-RPC</a> 类提示）。</p>
+<p><em>object_hook</em>, if specified, will be called with the result of every JSON
+object decoded and its return value will be used in place of the given
+<a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.  This can be used to provide custom deserializations (e.g. to
+support <a class="reference external" href="https://www.jsonrpc.org">JSON-RPC</a> class hinting).</p>
 <p>如果指定了 <em>object_pairs_hook</em> 则它将被调用并传入以对照值有序列表进行解码的每个 JSON 对象的结果。 <em>object_pairs_hook</em> 的结果值将被用来替代 <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>。 这一特性可被用于实现自定义解码器。 如果还定义了 <em>object_hook</em>，则 <em>object_pairs_hook</em> 的优先级更高。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.1 版更改: </span>添加了对 <em>object_pairs_hook</em> 的支持。</p>
@@ -580,6 +602,47 @@ Otherwise, no such check takes place.</p>
 
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="json.AttrDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">json.</span></span><span class="sig-name descname"><span class="pre">AttrDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#json.AttrDict" title="永久链接至目标">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">json.</span></span><span class="sig-name descname"><span class="pre">AttrDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mapping</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">json.</span></span><span class="sig-name descname"><span class="pre">AttrDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Subclass of <a class="reference internal" href="stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> object that also supports attribute style dotted access.</p>
+<p>This class is intended for use with the <code class="xref py py-attr docutils literal notranslate"><span class="pre">object_hook</span></code> in
+<a class="reference internal" href="#json.load" title="json.load"><code class="xref py py-func docutils literal notranslate"><span class="pre">json.load()</span></code></a> and <a class="reference internal" href="#json.loads" title="json.loads"><code class="xref py py-func docutils literal notranslate"><span class="pre">json.loads()</span></code></a>:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">doctest</span><span class="p">::</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">json_string</span> <span class="o">=</span> <span class="s1">&#39;{&quot;mercury&quot;: 88, &quot;venus&quot;: 225, &quot;earth&quot;: 365, &quot;mars&quot;: 687}&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orbital_period</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">,</span> <span class="n">object_hook</span><span class="o">=</span><span class="n">AttrDict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orbital_period</span><span class="p">[</span><span class="s1">&#39;earth&#39;</span><span class="p">]</span>     <span class="c1"># Dict style lookup</span>
+<span class="go">365</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orbital_period</span><span class="o">.</span><span class="n">earth</span>        <span class="c1"># Attribute style lookup</span>
+<span class="go">365</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orbital_period</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>       <span class="c1"># All dict methods are present</span>
+<span class="go">dict_keys([&#39;mercury&#39;, &#39;venus&#39;, &#39;earth&#39;, &#39;mars&#39;])</span>
+</pre></div>
+</div>
+<p>Attribute style access only works for keys that are valid attribute
+names.  In contrast, dictionary style access works for all keys.  For
+example, <code class="docutils literal notranslate"><span class="pre">d.two</span> <span class="pre">words</span></code> contains a space and is not syntactically
+valid Python, so <code class="docutils literal notranslate"><span class="pre">d[&quot;two</span> <span class="pre">words&quot;]</span></code> should be used instead.</p>
+<p>If a key has the same name as a dictionary method, then a dictionary
+lookup finds the key and an attribute lookup finds the method:</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">AttrDict</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]</span>                  <span class="c1"># Lookup the key</span>
+<span class="go">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>                   <span class="c1"># Call the method</span>
+<span class="go">dict_items([(&#39;items&#39;, 50)])</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -867,7 +930,7 @@ and pretty-print JSON objects.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

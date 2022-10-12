@@ -176,6 +176,9 @@
 <h2>一般规则<a class="headerlink" href="#general-rules" title="永久链接至标题">¶</a></h2>
 <p><a class="reference internal" href="#signal.signal" title="signal.signal"><code class="xref py py-func docutils literal notranslate"><span class="pre">signal.signal()</span></code></a> 函数允许定义在接收到信号时执行的自定义处理程序。少量的默认处理程序已经设置： <a class="reference internal" href="#signal.SIGPIPE" title="signal.SIGPIPE"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIGPIPE</span></code></a> 被忽略（因此管道和套接字上的写入错误可以报告为普通的 Python 异常）以及如果父进程没有更改 <a class="reference internal" href="#signal.SIGINT" title="signal.SIGINT"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIGINT</span></code></a> ，则其会被翻译成 <a class="reference internal" href="exceptions.html#KeyboardInterrupt" title="KeyboardInterrupt"><code class="xref py py-exc docutils literal notranslate"><span class="pre">KeyboardInterrupt</span></code></a> 异常。</p>
 <p>一旦设置，特定信号的处理程序将保持安装，直到它被显式重置（ Python 模拟 BSD 样式接口而不管底层实现），但 <a class="reference internal" href="#signal.SIGCHLD" title="signal.SIGCHLD"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIGCHLD</span></code></a> 的处理程序除外，它遵循底层实现。</p>
+<p>On WebAssembly platforms <code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>, signals
+are emulated and therefore behave differently. Several functions and signals
+are not available on these platforms.</p>
 <section id="execution-of-python-signal-handlers">
 <h3>执行 Python 信号处理程序<a class="headerlink" href="#execution-of-python-signal-handlers" title="永久链接至标题">¶</a></h3>
 <p>Python 信号处理程序不会在低级（ C ）信号处理程序中执行。相反，低级信号处理程序设置一个标志，告诉 <a class="reference internal" href="../glossary.html#term-virtual-machine"><span class="xref std std-term">virtual machine</span></a> 稍后执行相应的 Python 信号处理程序（例如在下一个 <a class="reference internal" href="../glossary.html#term-bytecode"><span class="xref std std-term">bytecode</span></a> 指令）。这会导致：</p>
@@ -227,8 +230,7 @@ related constants listed below were turned into
 <dt class="sig sig-object py" id="signal.Sigmasks">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">Sigmasks</span></span><a class="headerlink" href="#signal.Sigmasks" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="enum.html#enum.IntEnum" title="enum.IntEnum"><code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></a> collection the constants <a class="reference internal" href="#signal.SIG_BLOCK" title="signal.SIG_BLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIG_BLOCK</span></code></a>, <a class="reference internal" href="#signal.SIG_UNBLOCK" title="signal.SIG_UNBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIG_UNBLOCK</span></code></a> and <a class="reference internal" href="#signal.SIG_SETMASK" title="signal.SIG_SETMASK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIG_SETMASK</span></code></a>.</p>
-<p>Availability: Unix. See the man page <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigprocmask(2)">sigprocmask(2)</a></em> and
-<em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pthread_sigmask(3)">pthread_sigmask(3)</a></em> for further information.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.5 新版功能.</span></p>
 </div>
@@ -353,8 +355,9 @@ related constants listed below were turned into
 <div><p>Stack fault on coprocessor. The Linux kernel does not raise this signal: it
 can only be raised in user space.</p>
 </div></blockquote>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux, on architectures where the signal is available. See
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux.<p>On architectures where the signal is available. See
 the man page <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/signal(7)">signal(7)</a></em> for further information.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.11 新版功能.</span></p>
 </div>
@@ -480,7 +483,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.alarm">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">alarm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.alarm" title="永久链接至目标">¶</a></dt>
 <dd><p>如果 <em>time</em> 值非零，则此函数将要求将一个 <a class="reference internal" href="#signal.SIGALRM" title="signal.SIGALRM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SIGALRM</span></code></a> 信号在 <em>time</em> 秒内发往进程。 任何在之前排入计划的警报都会被取消（在任何时刻都只能有一个警报被排入计划）。 后续的返回值将是任何之前设置的警报被传入之前的秒数。 如果 <em>time</em> 值为零，则不会将任何警报排入计划，并且任何已排入计划的警报都会被取消。 如果返回值为零，则目前没有任何警报被排入计划。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/alarm(2)">alarm(2)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 </dd></dl>
 
 <dl class="py function">
@@ -511,7 +514,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.pause">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">pause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signal.pause" title="永久链接至目标">¶</a></dt>
 <dd><p>使进程休眠直至接收到一个信号；然后将会调用适当的处理程序。 返回空值。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/signal(2)">signal(2)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.sigwait" title="signal.sigwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwait()</span></code></a>, <a class="reference internal" href="#signal.sigwaitinfo" title="signal.sigwaitinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwaitinfo()</span></code></a>, <a class="reference internal" href="#signal.sigtimedwait" title="signal.sigtimedwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigtimedwait()</span></code></a> 和 <a class="reference internal" href="#signal.sigpending" title="signal.sigpending"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigpending()</span></code></a>。</p>
 </dd></dl>
 
@@ -529,7 +532,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">pidfd_send_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pidfd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">siginfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.pidfd_send_signal" title="永久链接至目标">¶</a></dt>
 <dd><p>发送信号 <em>sig</em> 到文件描述符 <em>pidfd</em> 所指向的进程。 Python 目前不支持 <em>siginfo</em> 形参；它必须为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。 提供 <em>flags</em> 参数是为了将来扩展；当前未定义旗标值。</p>
 <p>更多信息请参阅 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pidfd_send_signal(2)">pidfd_send_signal(2)</a></em> 手册页面。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Linux 5.1+</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 5.1</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
@@ -542,7 +545,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <p>使用 <a class="reference internal" href="threading.html#threading.get_ident" title="threading.get_ident"><code class="xref py py-func docutils literal notranslate"><span class="pre">threading.get_ident()</span></code></a> 或 <a class="reference internal" href="threading.html#threading.Thread" title="threading.Thread"><code class="xref py py-class docutils literal notranslate"><span class="pre">threading.Thread</span></code></a> 对象的 <a class="reference internal" href="threading.html#threading.Thread.ident" title="threading.Thread.ident"><code class="xref py py-attr docutils literal notranslate"><span class="pre">ident</span></code></a> 属性为 <em>thread_id</em> 获取合适的值。</p>
 <p>如果 <em>signalnum</em> 为 0，则不会发送信号，但仍然会执行错误检测；这可被用来检测目标线程是否仍在运行。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">signal.pthread_kill</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">thread_id</span></code>, <code class="docutils literal notranslate"><span class="pre">signalnum</span></code>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pthread_kill(3)">pthread_kill(3)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="os.html#os.kill" title="os.kill"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.kill()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -562,7 +565,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <p><em>mask</em> 是一个信号编号集合 (例如 {<a class="reference internal" href="#signal.SIGINT" title="signal.SIGINT"><code class="xref py py-const docutils literal notranslate"><span class="pre">signal.SIGINT</span></code></a>, <a class="reference internal" href="#signal.SIGTERM" title="signal.SIGTERM"><code class="xref py py-const docutils literal notranslate"><span class="pre">signal.SIGTERM</span></code></a>})。 请使用 <a class="reference internal" href="#signal.valid_signals" title="signal.valid_signals"><code class="xref py py-func docutils literal notranslate"><span class="pre">valid_signals()</span></code></a> 表示包含所有信号的完全掩码。</p>
 <p>例如，<code class="docutils literal notranslate"><span class="pre">signal.pthread_sigmask(signal.SIG_BLOCK,</span> <span class="pre">[])</span></code> 会读取调用方线程的信号掩码。</p>
 <p><a class="reference internal" href="#signal.SIGKILL" title="signal.SIGKILL"><code class="xref py py-data docutils literal notranslate"><span class="pre">SIGKILL</span></code></a> 和 <code class="xref py py-data docutils literal notranslate"><span class="pre">SIGSTOP</span></code> 不能被阻塞。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigprocmask(2)">sigprocmask(2)</a></em> 和 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pthread_sigmask(3)">pthread_sigmask(3)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.pause" title="signal.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>, <a class="reference internal" href="#signal.sigpending" title="signal.sigpending"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigpending()</span></code></a> 和 <a class="reference internal" href="#signal.sigwait" title="signal.sigwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwait()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -607,7 +610,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.siginterrupt">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">siginterrupt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signalnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.siginterrupt" title="永久链接至目标">¶</a></dt>
 <dd><p>更改系统调用重启行为：如果 <em>flag</em> 为 <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>，系统调用将在被信号 <em>signalnum</em> 中断时重启，否则系统调用将被中断。 返回空值。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/siginterrupt(3)">siginterrupt(3)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>请注意用 <a class="reference internal" href="#module-signal" title="signal: Set handlers for asynchronous events."><code class="xref py py-func docutils literal notranslate"><span class="pre">signal()</span></code></a> 安装信号处理程序将重启行为重置为可通过显式调用 <code class="xref c c-func docutils literal notranslate"><span class="pre">siginterrupt()</span></code> 并为给定信号的 <em>flag</em> 设置真值来实现中断。</p>
 </dd></dl>
 
@@ -624,7 +627,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.sigpending">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">sigpending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#signal.sigpending" title="永久链接至目标">¶</a></dt>
 <dd><p>检查正在等待传送给调用方线程的信号集合（即在阻塞期间被引发的信号）。 返回正在等待的信号集合。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigpending(2)">sigpending(2)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.pause" title="signal.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>, <a class="reference internal" href="#signal.pthread_sigmask" title="signal.pthread_sigmask"><code class="xref py py-func docutils literal notranslate"><span class="pre">pthread_sigmask()</span></code></a> 和 <a class="reference internal" href="#signal.sigwait" title="signal.sigwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwait()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -635,7 +638,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.sigwait">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">sigwait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.sigwait" title="永久链接至目标">¶</a></dt>
 <dd><p>挂起调用方线程的执行直到信号集合 <em>sigset</em> 中指定的信号之一被传送。 此函数会接受该信号（将其从等待信号列表中移除），并返回信号编号。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigwait(3)">sigwait(3)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.pause" title="signal.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>, <a class="reference internal" href="#signal.pthread_sigmask" title="signal.pthread_sigmask"><code class="xref py py-func docutils literal notranslate"><span class="pre">pthread_sigmask()</span></code></a>, <a class="reference internal" href="#signal.sigpending" title="signal.sigpending"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigpending()</span></code></a>, <a class="reference internal" href="#signal.sigwaitinfo" title="signal.sigwaitinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwaitinfo()</span></code></a> 和 <a class="reference internal" href="#signal.sigtimedwait" title="signal.sigtimedwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigtimedwait()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -647,7 +650,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">sigwaitinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.sigwaitinfo" title="永久链接至目标">¶</a></dt>
 <dd><p>挂起调用方线程的执行直到信号集合 <em>sigset</em> 中指定的信号之一被传送。 此函数会接受该信号并将其从等待信号列表中移除。 如果 <em>sigset</em> 中的信号之一已经在等待调用方线程，此函数将立即返回并附带有关该信号的信息。 被传送信号的信号处理程序不会被调用。 如果该函数被某个不在 <em>sigset</em> 中的信号中断则会引发 <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a>。</p>
 <p>返回值是一个代表 <code class="xref c c-type docutils literal notranslate"><span class="pre">siginfo_t</span></code> 结构体所包含数据的对象，具体为: <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_signo</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_code</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_errno</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_pid</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_uid</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_status</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">si_band</span></code>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigwaitinfo(2)">sigwaitinfo(2)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.pause" title="signal.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>, <a class="reference internal" href="#signal.sigwait" title="signal.sigwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwait()</span></code></a> 和 <a class="reference internal" href="#signal.sigtimedwait" title="signal.sigtimedwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigtimedwait()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -661,7 +664,7 @@ Use <a class="reference internal" href="#signal.valid_signals" title="signal.val
 <dt class="sig sig-object py" id="signal.sigtimedwait">
 <span class="sig-prename descclassname"><span class="pre">signal.</span></span><span class="sig-name descname"><span class="pre">sigtimedwait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#signal.sigtimedwait" title="永久链接至目标">¶</a></dt>
 <dd><p>类似于 <a class="reference internal" href="#signal.sigwaitinfo" title="signal.sigwaitinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwaitinfo()</span></code></a>，但会接受一个额外的 <em>timeout</em> 参数来指定超时限制。 如果将 <em>timeout</em> 指定为 <code class="xref py py-const docutils literal notranslate"><span class="pre">0</span></code>，则会执行轮询。 如果发生超时则返回 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。 更多信息请参见手册页面 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/sigtimedwait(2)">sigtimedwait(2)</a></em>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <p>另请参阅 <a class="reference internal" href="#signal.pause" title="signal.pause"><code class="xref py py-func docutils literal notranslate"><span class="pre">pause()</span></code></a>, <a class="reference internal" href="#signal.sigwait" title="signal.sigwait"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwait()</span></code></a> 和 <a class="reference internal" href="#signal.sigwaitinfo" title="signal.sigwaitinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">sigwaitinfo()</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -903,7 +906,7 @@ of gracefully shutting down.  Instead, they should install their own
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -221,7 +221,15 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="email.headerregistry.DateHeader.datetime">
 <span class="sig-name descname"><span class="pre">datetime</span></span><a class="headerlink" href="#email.headerregistry.DateHeader.datetime" title="永久链接至目标">¶</a></dt>
-<dd><p>如果标头值能被识别为某一种有效的日期形式，此属性将包含一个代表该日期的 <a class="reference internal" href="datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> 实例。 如果输入日期的时区被指定为 <code class="docutils literal notranslate"><span class="pre">-0000</span></code> (表示为 UTC 但不包含源时区的相关信息)，则 <a class="reference internal" href="#email.headerregistry.DateHeader.datetime" title="email.headerregistry.DateHeader.datetime"><code class="xref py py-attr docutils literal notranslate"><span class="pre">datetime</span></code></a> 将为简单型 <a class="reference internal" href="datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>。 如果找到了特定的时区时差值 (包括 <cite>+0000</cite>)，则 <a class="reference internal" href="#email.headerregistry.DateHeader.datetime" title="email.headerregistry.DateHeader.datetime"><code class="xref py py-attr docutils literal notranslate"><span class="pre">datetime</span></code></a> 将包含使用 <a class="reference internal" href="datetime.html#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timezone</span></code></a> 来记录时区时差时的感知型 <code class="docutils literal notranslate"><span class="pre">datetime</span></code>。</p>
+<dd><p>If the header value can be recognized as a valid date of one form or
+another, this attribute will contain a <a class="reference internal" href="datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>
+instance representing that date.  If the timezone of the input date is
+specified as <code class="docutils literal notranslate"><span class="pre">-0000</span></code> (indicating it is in UTC but contains no
+information about the source timezone), then <a class="reference internal" href="#email.headerregistry.DateHeader.datetime" title="email.headerregistry.DateHeader.datetime"><code class="xref py py-attr docutils literal notranslate"><span class="pre">datetime</span></code></a> will be a
+naive <a class="reference internal" href="datetime.html#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>.  If a specific timezone offset is
+found (including <code class="docutils literal notranslate"><span class="pre">+0000</span></code>), then <a class="reference internal" href="#email.headerregistry.DateHeader.datetime" title="email.headerregistry.DateHeader.datetime"><code class="xref py py-attr docutils literal notranslate"><span class="pre">datetime</span></code></a> will contain an aware
+<code class="docutils literal notranslate"><span class="pre">datetime</span></code> that uses <a class="reference internal" href="datetime.html#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timezone</span></code></a> to record the timezone
+offset.</p>
 </dd></dl>
 
 <p>标头的 <code class="docutils literal notranslate"><span class="pre">decoded</span></code> 值是由按照 <span class="target" id="index-38"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc5322.html"><strong>RFC 5322</strong></a> 对 <code class="docutils literal notranslate"><span class="pre">datetime</span></code> 进行格式化来确定的；也就是说，它会被设为:</p>
@@ -628,7 +636,7 @@ unicode.  The <code class="docutils literal notranslate"><span class="pre">decod
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

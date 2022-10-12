@@ -473,11 +473,20 @@ HOWTO, available at <a class="reference external" href="https://web.archive.org/
 <p>由 urlopen （或者 <code class="xref py py-exc docutils literal notranslate"><span class="pre">HTTPError</span></code> 实例）所返回的响应包含两个有用的方法： <code class="xref py py-meth docutils literal notranslate"><span class="pre">info()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">geturl()</span></code>，该响应由模块 <a class="reference internal" href="../library/urllib.request.html#module-urllib.response" title="urllib.response: Response classes used by urllib."><code class="xref py py-mod docutils literal notranslate"><span class="pre">urllib.response</span></code></a> 定义。</p>
 <p><strong>geturl</strong> ——返回所获取页面的真实 URL。该方法很有用，因为 <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> （或 opener 对象）可能已经经过了一次重定向。已获取页面的 URL 未必就是所请求的 URL 。</p>
 <p><strong>info</strong> - 该方法返回一个类似字典的对象，描述了所获取的页面，特别是由服务器送出的头部信息（headers） 。目前它是一个 <code class="xref py py-class docutils literal notranslate"><span class="pre">http.client.HTTPMessage</span></code> 实例。</p>
-<p>典型的 HTTP  头部信息包括“Content-length”、“Content-type”等。有关 HTTP 头部信息的清单，包括含义和用途的简要说明，请参阅 <a class="reference external" href="http://jkorpela.fi/http.html">HTTP Header 快速参考</a> 。</p>
+<p>Typical headers include ‘Content-length’, ‘Content-type’, and so on. See the
+<a class="reference external" href="https://jkorpela.fi/http.html">Quick Reference to HTTP Headers</a>
+for a useful listing of HTTP headers with brief explanations of their meaning
+and use.</p>
 </section>
 <section id="openers-and-handlers">
 <h2>Opener 和 Handler<a class="headerlink" href="#openers-and-handlers" title="永久链接至标题">¶</a></h2>
-<p>当获取 URL 时，会用到了一个 opener（一个类名可能经过混淆的 <a class="reference internal" href="../library/urllib.request.html#urllib.request.OpenerDirector" title="urllib.request.OpenerDirector"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.OpenerDirector</span></code></a> 的实例）。通常一直会用默认的 opener   ——通过 <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> ——但也可以创建自定义的 opener 。opener 会用到 handler。所有的“繁重工作”都由 handler 完成。每种 handler 知道某种 URL 方案（http、ftp 等）的 URL 的打开方式，或是某方面 URL 的打开方式，例如 HTTP 重定向或 HTTP cookie。</p>
+<p>When you fetch a URL you use an opener (an instance of the perhaps
+confusingly named <a class="reference internal" href="../library/urllib.request.html#urllib.request.OpenerDirector" title="urllib.request.OpenerDirector"><code class="xref py py-class docutils literal notranslate"><span class="pre">urllib.request.OpenerDirector</span></code></a>). Normally we have been using
+the default opener - via <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> - but you can create custom
+openers. Openers use handlers. All the “heavy lifting” is done by the
+handlers. Each handler knows how to open URLs for a particular URL scheme (http,
+ftp, etc.), or how to handle an aspect of URL opening, for example HTTP
+redirections or HTTP cookies.</p>
 <p>若要用已安装的某个 handler 获取 URL，需要创建一个 opener 对象，例如处理 cookie 的 opener，或对重定向不做处理的 opener。</p>
 <p>若要创建 opener，请实例化一个 <code class="docutils literal notranslate"><span class="pre">OpenerDirector</span></code> ，然后重复调用 <code class="docutils literal notranslate"><span class="pre">.add_handler(some_handler_instance)</span></code> 。</p>
 <p>或者也可以用 <code class="docutils literal notranslate"><span class="pre">build_opener</span></code> ，这是个用单次调用创建 opener 对象的便捷函数。<code class="docutils literal notranslate"><span class="pre">build_opener</span></code> 默认会添加几个  handler，不过还提供了一种快速添加和/或覆盖默认 handler 的方法。</p>
@@ -573,7 +582,7 @@ HOWTO, available at <a class="reference external" href="https://web.archive.org/
 <dd><p>MSIE 6 的 user-agent 信息是 <em>“Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)”</em></p>
 </dd>
 <dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
-<dd><p>有关 HTTP 请求的头部信息，详情请参阅 <a class="reference internal" href="#quick-reference-to-http-headers">Quick Reference to HTTP Headers</a>。</p>
+<dd><p>有关 HTTP 请求的头部信息，详情请参阅 <a class="reference external" href="https://jkorpela.fi/http.html">Quick Reference to HTTP Headers</a>。</p>
 </dd>
 <dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id6">5</a></span></dt>
 <dd><p>本人必须使用代理才能在工作中访问互联网。如果尝试通过代理获取 <em>localhost</em> URL，将会遭到阻止。IE 设置为代理模式，urllib 就会获取到配置信息。为了用 localhost 服务器测试脚本，我必须阻止 urllib 使用代理。</p>
@@ -713,7 +722,7 @@ HOWTO, available at <a class="reference external" href="https://web.archive.org/
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

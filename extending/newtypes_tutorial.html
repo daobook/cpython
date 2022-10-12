@@ -168,7 +168,14 @@
 <p>Python 允许编写 C 扩展模块定义可以从 Python 代码中操纵的新类型，这很像内置的 <a class="reference internal" href="../library/stdtypes.html#str" title="str"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> 和 <a class="reference internal" href="../library/stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> 类型。所有扩展类型的代码都遵循一个模式，但是在您开始之前，您需要了解一些细节。这份文件是对这个主题介绍。</p>
 <section id="the-basics">
 <span id="dnt-basics"></span><h2><span class="section-number">2.1. </span>基础<a class="headerlink" href="#the-basics" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../glossary.html#term-CPython"><span class="xref std std-term">CPython</span></a> 运行时将所有 Python 对象都视为类型 <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 的变量，即所有 Python 对象的”基础类型”。 <a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> 结构体本身包含了对象的 <a class="reference internal" href="../glossary.html#term-reference-count"><span class="xref std std-term">reference count</span></a> 和对象的”类型对象”。 类型对象确定解释器需要调用哪些 (C) 函数，例如一个属性查询一个对象，一个方法调用，或者与另一个对象相乘。 这些 C 函数被称为“类型方法”。</p>
+<p>The <a class="reference internal" href="../glossary.html#term-CPython"><span class="xref std std-term">CPython</span></a> runtime sees all Python objects as variables of type
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>, which serves as a “base type” for all Python objects.
+The <a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> structure itself only contains the object’s
+<a class="reference internal" href="../glossary.html#term-reference-count"><span class="xref std std-term">reference count</span></a> and a pointer to the object’s “type object”.
+This is where the action is; the type object determines which (C) functions
+get called by the interpreter when, for instance, an attribute gets looked up
+on an object, a method called, or it is multiplied by another object.  These
+C functions are called “type methods”.</p>
 <p>所以，如果你想要定义新的扩展类型，需要创建新的类型对象。</p>
 <p>这类事情只能用例子解释，这里用一个最小化但完整的的模块，定义了新的类型叫做 <code class="xref py py-class docutils literal notranslate"><span class="pre">Custom</span></code> 在C扩展模块 <code class="xref py py-mod docutils literal notranslate"><span class="pre">custom</span></code> 里。</p>
 <div class="admonition note">
@@ -367,7 +374,7 @@ play around with Custom objects.</p>
 doesn’t do anything. It can’t even be subclassed.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>While this documentation showcases the standard <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a> module
+<p>While this documentation showcases the standard <code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code> module
 for building C extensions, it is recommended in real-world use cases to
 use the newer and better-maintained <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> library.  Documentation
 on how to do this is out of scope for this document and can be found in
@@ -1722,7 +1729,7 @@ reference cycles.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -169,8 +169,24 @@
 <p>此模块提供了一个类、一个实例和一个函数：</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="reprlib.Repr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">Repr</span></span><a class="headerlink" href="#reprlib.Repr" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">reprlib.</span></span><span class="sig-name descname"><span class="pre">Repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxtuple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxarray</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxfrozenset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxdeque</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxstring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlong</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxother</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'...'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reprlib.Repr" title="永久链接至目标">¶</a></dt>
 <dd><p>该类提供了格式化服务 适用于实现与内置 <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a> 相似的方法；其中附加了针对不同对象类型的大小限制，以避免生成超长的表示。</p>
+<p>The keyword arguments of the constructor can be used as a shortcut to set the
+attributes of the <a class="reference internal" href="#reprlib.Repr" title="reprlib.Repr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repr</span></code></a> instance. Which means that the following
+initialization:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">aRepr</span> <span class="o">=</span> <span class="n">reprlib</span><span class="o">.</span><span class="n">Repr</span><span class="p">(</span><span class="n">maxlevel</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Is equivalent to:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">aRepr</span> <span class="o">=</span> <span class="n">reprlib</span><span class="o">.</span><span class="n">Repr</span><span class="p">()</span>
+<span class="n">aRepr</span><span class="o">.</span><span class="n">maxlevel</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>See section <a class="reference internal" href="#id1">Repr Objects</a> for more information about <a class="reference internal" href="#reprlib.Repr" title="reprlib.Repr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repr</span></code></a>
+attributes.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Allow attributes to be set via keyword arguments.</p>
+</div>
 </dd></dl>
 
 <dl class="py data">
@@ -261,6 +277,63 @@
 <dt class="sig sig-object py" id="reprlib.Repr.maxother">
 <span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">maxother</span></span><a class="headerlink" href="#reprlib.Repr.maxother" title="永久链接至目标">¶</a></dt>
 <dd><p>此限制用于控制在 <a class="reference internal" href="#reprlib.Repr" title="reprlib.Repr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repr</span></code></a> 对象上没有特定的格式化方法可用的对象类型的大小。 它会以类似 <a class="reference internal" href="#reprlib.Repr.maxstring" title="reprlib.Repr.maxstring"><code class="xref py py-attr docutils literal notranslate"><span class="pre">maxstring</span></code></a> 的方式被应用。 默认值为 <code class="docutils literal notranslate"><span class="pre">20</span></code>。</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="reprlib.Repr.indent">
+<span class="sig-prename descclassname"><span class="pre">Repr.</span></span><span class="sig-name descname"><span class="pre">indent</span></span><a class="headerlink" href="#reprlib.Repr.indent" title="永久链接至目标">¶</a></dt>
+<dd><p>If this attribute is set to <code class="docutils literal notranslate"><span class="pre">None</span></code> (the default), the output is formatted
+with no line breaks or indentation, like the standard <a class="reference internal" href="functions.html#repr" title="repr"><code class="xref py py-func docutils literal notranslate"><span class="pre">repr()</span></code></a>.
+For example:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="p">[</span>
+<span class="go">        1, &#39;spam&#39;, {&#39;a&#39;: 2, &#39;b&#39;: &#39;spam eggs&#39;, &#39;c&#39;: {3: 4.5, 6: []}}, &#39;ham&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">reprlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aRepr</span> <span class="o">=</span> <span class="n">reprlib</span><span class="o">.</span><span class="n">Repr</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">aRepr</span><span class="o">.</span><span class="n">repr</span><span class="p">(</span><span class="n">example</span><span class="p">))</span>
+<span class="go">[1, &#39;spam&#39;, {&#39;a&#39;: 2, &#39;b&#39;: &#39;spam eggs&#39;, &#39;c&#39;: {3: 4.5, 6: []}}, &#39;ham&#39;]</span>
+</pre></div>
+</div>
+<p>If <a class="reference internal" href="#reprlib.Repr.indent" title="reprlib.Repr.indent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">indent</span></code></a> is set to a string, each recursion level
+is placed on its own line, indented by that string:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aRepr</span><span class="o">.</span><span class="n">indent</span> <span class="o">=</span> <span class="s1">&#39;--&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">aRepr</span><span class="o">.</span><span class="n">repr</span><span class="p">(</span><span class="n">example</span><span class="p">))</span>
+<span class="go">[</span>
+<span class="go">--&gt;1,</span>
+<span class="go">--&gt;&#39;spam&#39;,</span>
+<span class="go">--&gt;{</span>
+<span class="go">--&gt;--&gt;&#39;a&#39;: 2,</span>
+<span class="go">--&gt;--&gt;&#39;b&#39;: &#39;spam eggs&#39;,</span>
+<span class="go">--&gt;--&gt;&#39;c&#39;: {</span>
+<span class="go">--&gt;--&gt;--&gt;3: 4.5,</span>
+<span class="go">--&gt;--&gt;--&gt;6: [],</span>
+<span class="go">--&gt;--&gt;},</span>
+<span class="go">--&gt;},</span>
+<span class="go">--&gt;&#39;ham&#39;,</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<p>Setting <a class="reference internal" href="#reprlib.Repr.indent" title="reprlib.Repr.indent"><code class="xref py py-attr docutils literal notranslate"><span class="pre">indent</span></code></a> to a positive integer value behaves as if it
+was set to a string with that number of spaces:</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aRepr</span><span class="o">.</span><span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">aRepr</span><span class="o">.</span><span class="n">repr</span><span class="p">(</span><span class="n">example</span><span class="p">))</span>
+<span class="go">[</span>
+<span class="go">    1,</span>
+<span class="go">    &#39;spam&#39;,</span>
+<span class="go">    {</span>
+<span class="go">        &#39;a&#39;: 2,</span>
+<span class="go">        &#39;b&#39;: &#39;spam eggs&#39;,</span>
+<span class="go">        &#39;c&#39;: {</span>
+<span class="go">            3: 4.5,</span>
+<span class="go">            6: [],</span>
+<span class="go">        },</span>
+<span class="go">    },</span>
+<span class="go">    &#39;ham&#39;,</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -408,7 +481,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

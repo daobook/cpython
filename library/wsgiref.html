@@ -365,7 +365,7 @@ returns an empty bytestring, iteration is ended and is not resumable.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="wsgiref.simple_server.WSGIServer.get_app">
 <span class="sig-name descname"><span class="pre">get_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsgiref.simple_server.WSGIServer.get_app" title="永久链接至目标">¶</a></dt>
-<dd><p>返回当前设置的应用程序可调用对象。</p>
+<dd><p>Returns the currently set application callable.</p>
 </dd></dl>
 
 <p>但是，你通常不需要使用这些附加的方法，因为 <a class="reference internal" href="#wsgiref.simple_server.WSGIServer.set_app" title="wsgiref.simple_server.WSGIServer.set_app"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_app()</span></code></a> 通常会由 <a class="reference internal" href="#wsgiref.simple_server.make_server" title="wsgiref.simple_server.make_server"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_server()</span></code></a> 来调用，而 <a class="reference internal" href="#wsgiref.simple_server.WSGIServer.get_app" title="wsgiref.simple_server.WSGIServer.get_app"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_app()</span></code></a> 主要是针对请求处理句柄实例的。</p>
@@ -568,7 +568,12 @@ request currently being processed.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="wsgiref.handlers.BaseHandler.setup_environ">
 <span class="sig-name descname"><span class="pre">setup_environ</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wsgiref.handlers.BaseHandler.setup_environ" title="永久链接至目标">¶</a></dt>
-<dd><p>将 <code class="xref py py-attr docutils literal notranslate"><span class="pre">environ</span></code> 属性设为填充了完整内容的 WSGI 环境。 默认的实现会使用上述的所有方法和属性，加上 <a class="reference internal" href="#wsgiref.handlers.BaseHandler.get_stdin" title="wsgiref.handlers.BaseHandler.get_stdin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_stdin()</span></code></a>, <a class="reference internal" href="#wsgiref.handlers.BaseHandler.get_stderr" title="wsgiref.handlers.BaseHandler.get_stderr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_stderr()</span></code></a> 和 <a class="reference internal" href="#wsgiref.handlers.BaseHandler.add_cgi_vars" title="wsgiref.handlers.BaseHandler.add_cgi_vars"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_cgi_vars()</span></code></a> 方法以及 <a class="reference internal" href="#wsgiref.handlers.BaseHandler.wsgi_file_wrapper" title="wsgiref.handlers.BaseHandler.wsgi_file_wrapper"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wsgi_file_wrapper</span></code></a> 属性。 它还会插入一个 <code class="docutils literal notranslate"><span class="pre">SERVER_SOFTWARE</span></code> 键，如果该键还不存在的话，只要 <a class="reference internal" href="#wsgiref.handlers.BaseHandler.origin_server" title="wsgiref.handlers.BaseHandler.origin_server"><code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_server</span></code></a> 属性为真值并且设置了 <a class="reference internal" href="#wsgiref.handlers.BaseHandler.server_software" title="wsgiref.handlers.BaseHandler.server_software"><code class="xref py py-attr docutils literal notranslate"><span class="pre">server_software</span></code></a> 属性。</p>
+<dd><p>Set the <code class="xref py py-attr docutils literal notranslate"><span class="pre">environ</span></code> attribute to a fully populated WSGI environment.  The
+default implementation uses all of the above methods and attributes, plus the
+<a class="reference internal" href="#wsgiref.handlers.BaseHandler.get_stdin" title="wsgiref.handlers.BaseHandler.get_stdin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_stdin()</span></code></a>, <a class="reference internal" href="#wsgiref.handlers.BaseHandler.get_stderr" title="wsgiref.handlers.BaseHandler.get_stderr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_stderr()</span></code></a>, and <a class="reference internal" href="#wsgiref.handlers.BaseHandler.add_cgi_vars" title="wsgiref.handlers.BaseHandler.add_cgi_vars"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_cgi_vars()</span></code></a> methods and the
+<a class="reference internal" href="#wsgiref.handlers.BaseHandler.wsgi_file_wrapper" title="wsgiref.handlers.BaseHandler.wsgi_file_wrapper"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wsgi_file_wrapper</span></code></a> attribute.  It also inserts a <code class="docutils literal notranslate"><span class="pre">SERVER_SOFTWARE</span></code> key
+if not present, as long as the <a class="reference internal" href="#wsgiref.handlers.BaseHandler.origin_server" title="wsgiref.handlers.BaseHandler.origin_server"><code class="xref py py-attr docutils literal notranslate"><span class="pre">origin_server</span></code></a> attribute is a true value
+and the <a class="reference internal" href="#wsgiref.handlers.BaseHandler.server_software" title="wsgiref.handlers.BaseHandler.server_software"><code class="xref py py-attr docutils literal notranslate"><span class="pre">server_software</span></code></a> attribute is set.</p>
 </dd></dl>
 
 <p>用于自定义异常处理的方法和属性:</p>
@@ -888,7 +893,7 @@ directory and port number (default: 8000) on the command line:</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

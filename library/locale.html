@@ -444,8 +444,8 @@
 <p>根据 POSIX 的规范，未调用 <code class="docutils literal notranslate"><span class="pre">setlocale(LC_ALL,</span> <span class="pre">'')</span></code> 的程序采用可移植的 <code class="docutils literal notranslate"><span class="pre">'C'</span></code> 区域设置运行。 调用 <code class="docutils literal notranslate"><span class="pre">setlocale(LC_ALL,</span> <span class="pre">'')</span></code> 则可采用 <span class="target" id="index-13"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LANG</span></code> 变量定义的默认区域。 由于不想干扰当前的区域设置，因此就以上述方式进行了模拟。</p>
 <p>为了维持与其他平台的兼容性，不仅需要检测 <span class="target" id="index-14"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LANG</span></code> 变量，还需要检测 envvars 参数给出的变量列表。首先发现的定义将被采用。 <em>envvars</em> 默认为 GNU gettext 采用的搜索路径；必须包含 <code class="docutils literal notranslate"><span class="pre">'LANG'</span></code> 变量。 GNU gettext 的搜索路径依次包含了 <code class="docutils literal notranslate"><span class="pre">'LC_ALL'</span></code>、<code class="docutils literal notranslate"><span class="pre">'LC_CTYPE'</span></code>、<code class="docutils literal notranslate"><span class="pre">'LANG'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'LANGUAGE'</span></code>。</p>
 <p>除了 <code class="docutils literal notranslate"><span class="pre">'C'</span></code> 之外，语言代码对应 <span class="target" id="index-15"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc1766.html"><strong>RFC 1766</strong></a> 标准。若 <em>语言代码</em> 和 <em>编码</em>  无法确定，则可为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.11 版后已移除: </span>3.13</p>
+<div class="deprecated-removed">
+<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.13.</span></p>
 </div>
 </dd></dl>
 
@@ -503,8 +503,8 @@ function ignores the <a class="reference internal" href="os.html#utf8-mode"><spa
 <span class="sig-prename descclassname"><span class="pre">locale.</span></span><span class="sig-name descname"><span class="pre">resetlocale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LC_ALL</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#locale.resetlocale" title="永久链接至目标">¶</a></dt>
 <dd><p>将 <em>category</em> 的区域设为默认值。</p>
 <p>默认设置通过调用 <a class="reference internal" href="#locale.getdefaultlocale" title="locale.getdefaultlocale"><code class="xref py py-func docutils literal notranslate"><span class="pre">getdefaultlocale()</span></code></a> 确定。<em>category</em> 默认为 <a class="reference internal" href="#locale.LC_ALL" title="locale.LC_ALL"><code class="xref py py-const docutils literal notranslate"><span class="pre">LC_ALL</span></code></a>。</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.11 版后已移除: </span>3.13</p>
+<div class="deprecated-removed">
+<p><span class="versionmodified">Deprecated since version 3.11, will be removed in version 3.13.</span></p>
 </div>
 </dd></dl>
 
@@ -528,16 +528,6 @@ function ignores the <a class="reference internal" href="os.html#utf8-mode"><spa
 <p>格式化符的处理类似 <code class="docutils literal notranslate"><span class="pre">format</span> <span class="pre">%</span> <span class="pre">val</span></code> ，但会考虑到当前的区域设置。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>增加了关键字参数 <em>monetary</em> 。</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="locale.format">
-<span class="sig-prename descclassname"><span class="pre">locale.</span></span><span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">format</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grouping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monetary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#locale.format" title="永久链接至目标">¶</a></dt>
-<dd><p>请注意，本函数的工作原理与 <a class="reference internal" href="#locale.format_string" title="locale.format_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format_string()</span></code></a> 类似，但只认一种 <code class="docutils literal notranslate"><span class="pre">%char</span></code> 格式符。 比如 <code class="docutils literal notranslate"><span class="pre">'%f'</span></code> 和 <code class="docutils literal notranslate"><span class="pre">'%.0f'</span></code> 都是有效的格式符，但 <code class="docutils literal notranslate"><span class="pre">'%f</span> <span class="pre">KiB'</span></code> 则不是。</p>
-<p>若想用到全部的格式化串，请采用 <a class="reference internal" href="#locale.format_string" title="locale.format_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">format_string()</span></code></a>。</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.7 版后已移除: </span>请改用 <a class="reference internal" href="#locale.format_string" title="locale.format_string"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format_string()</span></code></a> 。</p>
 </div>
 </dd></dl>
 
@@ -619,7 +609,10 @@ by calling <em>func</em> on the result of calling <a class="reference internal" 
 <dl class="py data">
 <dt class="sig sig-object py" id="locale.LC_NUMERIC">
 <span class="sig-prename descclassname"><span class="pre">locale.</span></span><span class="sig-name descname"><span class="pre">LC_NUMERIC</span></span><a class="headerlink" href="#locale.LC_NUMERIC" title="永久链接至目标">¶</a></dt>
-<dd><p>格式化数字时用到的区域类别。 <a class="reference internal" href="#module-locale" title="locale: Internationalization services."><code class="xref py py-mod docutils literal notranslate"><span class="pre">locale</span></code></a> 模块的 <a class="reference internal" href="#locale.format" title="locale.format"><code class="xref py py-func docutils literal notranslate"><span class="pre">format()</span></code></a> 、 <a class="reference internal" href="#locale.atoi" title="locale.atoi"><code class="xref py py-func docutils literal notranslate"><span class="pre">atoi()</span></code></a> 、 <a class="reference internal" href="#locale.atof" title="locale.atof"><code class="xref py py-func docutils literal notranslate"><span class="pre">atof()</span></code></a> 和 <a class="reference internal" href="#locale.str" title="locale.str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> 函数会受到该类别的影响。其他所有数字格式化操作不受影响。</p>
+<dd><p>Locale category for formatting numbers.  The functions <a class="reference internal" href="#locale.format_string" title="locale.format_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">format_string()</span></code></a>,
+<a class="reference internal" href="#locale.atoi" title="locale.atoi"><code class="xref py py-func docutils literal notranslate"><span class="pre">atoi()</span></code></a>, <a class="reference internal" href="#locale.atof" title="locale.atof"><code class="xref py py-func docutils literal notranslate"><span class="pre">atof()</span></code></a> and <a class="reference internal" href="#locale.str" title="locale.str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a> of the <a class="reference internal" href="#module-locale" title="locale: Internationalization services."><code class="xref py py-mod docutils literal notranslate"><span class="pre">locale</span></code></a> module are
+affected by that category.  All other numeric formatting operations are not
+affected.</p>
 </dd></dl>
 
 <dl class="py data">
@@ -651,7 +644,9 @@ by calling <em>func</em> on the result of calling <a class="reference internal" 
 <p>当程序第一次启动时，无论用户偏好定义成什么，区域值都是 <code class="docutils literal notranslate"><span class="pre">C</span></code>。不过有一个例外，就是在启动时修改 <a class="reference internal" href="#locale.LC_CTYPE" title="locale.LC_CTYPE"><code class="xref py py-data docutils literal notranslate"><span class="pre">LC_CTYPE</span></code></a> 类别，设置当前区域编码为用户偏好编码。程序必须调用 <code class="docutils literal notranslate"><span class="pre">setlocale(LC_ALL,</span> <span class="pre">'')</span></code> 明确表示用户偏好区域将设为其他类别。</p>
 <p>若要从库程序中调用 <a class="reference internal" href="#locale.setlocale" title="locale.setlocale"><code class="xref py py-func docutils literal notranslate"><span class="pre">setlocale()</span></code></a> ，通常这不是个好主意，因为副作用是会影响整个程序。保存和恢复区域设置也几乎一样糟糕：不仅代价高昂，而且会影响到恢复之前运行的其他线程。</p>
 <p>如果是要编写通用模块，需要有一种不受区域设置影响的操作方式（比如某些用到 <a class="reference internal" href="time.html#time.strftime" title="time.strftime"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.strftime()</span></code></a> 的格式），将不得不寻找一种不用标准库的方案。更好的办法是说服自己，可以采纳区域设置。只有在万不得已的情况下，才能用文档标注出模块与非 <code class="docutils literal notranslate"><span class="pre">C</span></code> 区域设置不兼容。</p>
-<p>根据区域设置进行数字运算的唯一方法，就是采用本模块定义的函数：<a class="reference internal" href="#locale.atof" title="locale.atof"><code class="xref py py-func docutils literal notranslate"><span class="pre">atof()</span></code></a> 、 <a class="reference internal" href="#locale.atoi" title="locale.atoi"><code class="xref py py-func docutils literal notranslate"><span class="pre">atoi()</span></code></a> 、 <a class="reference internal" href="#locale.format" title="locale.format"><code class="xref py py-func docutils literal notranslate"><span class="pre">format()</span></code></a> 、 <a class="reference internal" href="#locale.str" title="locale.str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a>。</p>
+<p>The only way to perform numeric operations according to the locale is to use the
+special functions defined by this module: <a class="reference internal" href="#locale.atof" title="locale.atof"><code class="xref py py-func docutils literal notranslate"><span class="pre">atof()</span></code></a>, <a class="reference internal" href="#locale.atoi" title="locale.atoi"><code class="xref py py-func docutils literal notranslate"><span class="pre">atoi()</span></code></a>,
+<a class="reference internal" href="#locale.format_string" title="locale.format_string"><code class="xref py py-func docutils literal notranslate"><span class="pre">format_string()</span></code></a>, <a class="reference internal" href="#locale.str" title="locale.str"><code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code></a>.</p>
 <p>无法根据区域设置进行大小写转换和字符分类。对于（Unicode）文本字符串来说，这些操作都是根据字符值进行的；而对于字节符串来说，转换和分类则是根据字节的 ASCII 值进行的，高位被置位的字节（即非 ASCII 字节）永远不会被转换或被视作字母或空白符之类。</p>
 </section>
 <section id="for-extension-writers-and-programs-that-embed-python">
@@ -798,7 +793,7 @@ by calling <em>func</em> on the result of calling <a class="reference internal" 
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

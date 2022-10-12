@@ -215,8 +215,14 @@
 <section id="writing-c-is-hard-are-there-any-alternatives">
 <span id="c-wrapper-software"></span><h2><a class="toc-backref" href="#id6">C很难写，有没有其他选择？</a><a class="headerlink" href="#writing-c-is-hard-are-there-any-alternatives" title="永久链接至标题">¶</a></h2>
 <p>编写自己的C扩展有很多选择，具体取决于您要做的事情。</p>
-<p><a class="reference external" href="http://cython.org">Cython</a> 及其相关的 <a class="reference external" href="https://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/">Pyrex</a> 是接受稍微修改过的Python形式并生成相应C代码的编译器。 Cython和Pyrex可以编写扩展而无需学习Python的C API。</p>
-<p>如果需要连接到某些当前不存在Python扩展的C或C ++库，可以尝试使用 <a class="reference external" href="http://www.swig.org">SWIG</a> 等工具包装库的数据类型和函数。  <a class="reference external" href="https://riverbankcomputing.com/software/sip/intro">SIP</a> ， <a class="reference external" href="http://cxx.sourceforge.net/">CXX</a> <a class="reference external" href="http://www.boost.org/libs/python/doc/index.html">Boost</a> , 或 <a class="reference external" href="https://github.com/scipy/weave">Weave</a> 也是包装C ++库的替代方案。</p>
+<p><a class="reference external" href="https://cython.org">Cython</a> and its relative <a class="reference external" href="https://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/">Pyrex</a> are compilers
+that accept a slightly modified form of Python and generate the corresponding
+C code.  Cython and Pyrex make it possible to write an extension without having
+to learn Python’s C API.</p>
+<p>If you need to interface to some C or C++ library for which no Python extension
+currently exists, you can try wrapping the library’s data types and functions
+with a tool such as <a class="reference external" href="https://www.swig.org">SWIG</a>.  <a class="reference external" href="https://riverbankcomputing.com/software/sip/intro">SIP</a>, <a class="reference external" href="https://cxx.sourceforge.net/">CXX</a> <a class="reference external" href="https://www.boost.org/libs/python/doc/index.html">Boost</a>, or <a class="reference external" href="https://github.com/scipy/weave">Weave</a> are also
+alternatives for wrapping C++ libraries.</p>
 </section>
 <section id="how-can-i-execute-arbitrary-python-statements-from-c">
 <h2><a class="toc-backref" href="#id7">如何在 C 中执行任意 Python 语句？</a><a class="headerlink" href="#how-can-i-execute-arbitrary-python-statements-from-c" title="永久链接至标题">¶</a></h2>
@@ -347,7 +353,9 @@
 <section id="can-i-create-an-object-class-with-some-methods-implemented-in-c-and-others-in-python-e-g-through-inheritance">
 <h2><a class="toc-backref" href="#id20">能否创建一个对象类，其中部分方法在C中实现，而其他方法在Python中实现（例如通过继承）？</a><a class="headerlink" href="#can-i-create-an-object-class-with-some-methods-implemented-in-c-and-others-in-python-e-g-through-inheritance" title="永久链接至标题">¶</a></h2>
 <p>是的，您可以继承内置类，例如 <a class="reference internal" href="../library/functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> ， <a class="reference internal" href="../library/stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> ， <a class="reference internal" href="../library/stdtypes.html#dict" title="dict"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> 等。</p>
-<p>Boost Python库（BPL，http：//www.boost.org/libs/python/doc/index.html）提供了一种从C ++执行此操作的方法（即，您可以使用BPL继承自C ++编写的扩展类 ）。</p>
+<p>The Boost Python Library (BPL, <a class="reference external" href="https://www.boost.org/libs/python/doc/index.html">https://www.boost.org/libs/python/doc/index.html</a>)
+provides a way of doing this from C++ (i.e. you can inherit from an extension
+class written in C++ using the BPL).</p>
 </section>
 </section>
 
@@ -471,7 +479,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -165,6 +165,10 @@
 <span id="resource-resource-usage-information"></span><h1><a class="reference internal" href="#module-resource" title="resource: An interface to provide resource usage information on the current process. (Unix)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">resource</span></code></a> — 资源使用信息<a class="headerlink" href="#module-resource" title="永久链接至标题">¶</a></h1>
 <hr class="docutils" />
 <p>该模块提供了测量和控制程序所利用的系统资源的基本机制。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>符号常量被用来指定特定的系统资源，并要求获得关于当前进程或其子进程的使用信息。</p>
 <p>当系统调用失败时，会触发一个 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 。</p>
 <dl class="py exception">
@@ -209,7 +213,7 @@
 <p>当 <em>limits</em> 没有给出时，该函数返回进程 <em>pid</em> 的 <em>resource</em> 限制。当 <em>limits</em> 被给定时，进程的 <em>resource</em> 限制被设置，并返回以前的资源限制。</p>
 <p>当 <em>pid</em> 找不到时，触发 <a class="reference internal" href="exceptions.html#ProcessLookupError" title="ProcessLookupError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ProcessLookupError</span></code></a> ；当用户没有进程的 <code class="docutils literal notranslate"><span class="pre">CAP_SYS_RESOURCE</span></code> 时，触发 <a class="reference internal" href="exceptions.html#PermissionError" title="PermissionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">PermissionError</span></code></a> 。</p>
 <p class="audit-hook">触发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">auditing event</span></a> <code class="docutils literal notranslate"><span class="pre">resource.prlimit</span></code> 带有参数 <code class="docutils literal notranslate"><span class="pre">pid</span></code> ， <code class="docutils literal notranslate"><span class="pre">resource</span></code> ， <code class="docutils literal notranslate"><span class="pre">limits</span></code> 。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.36 或更新版本带有 glibc 2.13 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.36 with glibc &gt;= 2.13.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -293,7 +297,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_MSGQUEUE">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_MSGQUEUE</span></span><a class="headerlink" href="#resource.RLIMIT_MSGQUEUE" title="永久链接至目标">¶</a></dt>
 <dd><p>可分配给 POSIX 消息队列的字节数。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.8 或更新版本。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.8.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -303,7 +307,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_NICE">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_NICE</span></span><a class="headerlink" href="#resource.RLIMIT_NICE" title="永久链接至目标">¶</a></dt>
 <dd><p>进程的 Nice 级别的上限（计算为 20 - rlim_cur ）。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.12 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.12.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -313,7 +317,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_RTPRIO">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_RTPRIO</span></span><a class="headerlink" href="#resource.RLIMIT_RTPRIO" title="永久链接至目标">¶</a></dt>
 <dd><p>实时优先级的上限。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.12 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.12.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -323,7 +327,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_RTTIME">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_RTTIME</span></span><a class="headerlink" href="#resource.RLIMIT_RTTIME" title="永久链接至目标">¶</a></dt>
 <dd><p>在实时调度下，一个进程在不进行阻塞性系统调用的情况下，可以花费的 CPU 时间限制（以微秒计）。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.25 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.25.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -333,7 +337,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_SIGPENDING">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_SIGPENDING</span></span><a class="headerlink" href="#resource.RLIMIT_SIGPENDING" title="永久链接至目标">¶</a></dt>
 <dd><p>进程可能排队的信号数量。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.8 或更新版本。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.8.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -343,7 +347,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_SBSIZE">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_SBSIZE</span></span><a class="headerlink" href="#resource.RLIMIT_SBSIZE" title="永久链接至目标">¶</a></dt>
 <dd><p>这个用户使用的套接字缓冲区的最大大小（字节数）。这限制了这个用户在任何时候都可以持有的网络内存数量，因此也限制了 mbufs 的数量。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD 9 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -353,7 +357,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_SWAP">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_SWAP</span></span><a class="headerlink" href="#resource.RLIMIT_SWAP" title="永久链接至目标">¶</a></dt>
 <dd><p>这个用户 ID 的所有进程可能保留或使用的交换空间的最大大小（字节数）。这个限制只有在 vm.overcommit sysctl的第 1 位被置 1 时才会被强制执行。请参阅 <a class="reference external" href="https://www.freebsd.org/cgi/man.cgi?query=tuning&amp;sektion=7">tuning(7)</a> 以获得关于这个系统检测器的完整介绍。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD 9 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -363,7 +367,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_NPTS">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_NPTS</span></span><a class="headerlink" href="#resource.RLIMIT_NPTS" title="永久链接至目标">¶</a></dt>
 <dd><p>该用户 ID 创建的伪终端的最大数量。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD 9 或更新版本</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -373,7 +377,7 @@
 <dt class="sig sig-object py" id="resource.RLIMIT_KQUEUES">
 <span class="sig-prename descclassname"><span class="pre">resource.</span></span><span class="sig-name descname"><span class="pre">RLIMIT_KQUEUES</span></span><a class="headerlink" href="#resource.RLIMIT_KQUEUES" title="永久链接至目标">¶</a></dt>
 <dd><p>这个用户 ID 被允许创建的最大 kqueue 数量。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD 11 或更新版本。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD &gt;= 11.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.10 新版功能.</span></p>
 </div>
@@ -629,7 +633,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

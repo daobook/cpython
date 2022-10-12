@@ -610,6 +610,15 @@ are the absolute paths of the oldest backup log files written by the handler.</p
 <dt class="sig sig-object py" id="logging.handlers.DatagramHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.handlers.</span></span><span class="sig-name descname"><span class="pre">DatagramHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.DatagramHandler" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.handlers.DatagramHandler" title="logging.handlers.DatagramHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">DatagramHandler</span></code></a> 类的新实例，该实例旨在与使用 <em>host</em> 与 <em>port</em> 给定地址的远程主机进行通信。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>As UDP is not a streaming protocol, there is no persistent connection
+between an instance of this handler and <em>host</em>. For this reason, when using a
+network socket, a DNS lookup might have to be made each time an event is
+logged, which can introduce some latency into the system. If this affects you,
+you can do a lookup yourself and initialize this handler using the looked-up IP
+address rather than the hostname.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>如果 <code class="docutils literal notranslate"><span class="pre">port</span></code> 指定为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，会使用 <code class="docutils literal notranslate"><span class="pre">host</span></code> 中的值来创建一个 Unix 域套接字 —— 在其他情况下，则会创建一个 UDP 套接字。</p>
 </div>
@@ -642,6 +651,13 @@ are the absolute paths of the oldest backup log files written by the handler.</p
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.handlers.</span></span><span class="sig-name descname"><span class="pre">SysLogHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('localhost',</span> <span class="pre">SYSLOG_UDP_PORT)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LOG_USER</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">socktype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">socket.SOCK_DGRAM</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.SysLogHandler" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.handlers.SysLogHandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> 类的新实例用来与通过 <em>address</em> 以 <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code> 元组形式给出地址的远程 Unix 机器进行通讯。 如果未指定 <em>address</em>，则使用 <code class="docutils literal notranslate"><span class="pre">('localhost',</span> <span class="pre">514)</span></code>。 该地址会被用于打开套接字。 提供 <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code> 元组的一种替代方式是提供字符串形式的地址，例如 ‘/dev/log’。 在这种情况下，会使用 Unix 域套接字将消息发送到 syslog。 如果未指定 <em>facility</em>，则使用 <code class="xref py py-const docutils literal notranslate"><span class="pre">LOG_USER</span></code>。 打开的套接字类型取决于 <em>socktype</em> 参数，该参数的默认值为 <a class="reference internal" href="socket.html#socket.SOCK_DGRAM" title="socket.SOCK_DGRAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">socket.SOCK_DGRAM</span></code></a> 即打开一个 UDP 套接字。 要打开一个 TCP 套接字（用来配合较新的 syslog 守护程序例如 rsyslog 使用），请指定值为 <a class="reference internal" href="socket.html#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">socket.SOCK_STREAM</span></code></a>。</p>
 <p>请注意如果你的服务器不是在 UDP 端口 514 上进行侦听，则 <a class="reference internal" href="#logging.handlers.SysLogHandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> 可能无法正常工作。 在这种情况下，请检查你应当为域套接字所使用的地址 —— 它依赖于具体的系统。 例如，在 Linux 上通常为 ‘/dev/log’ 而在 OS/X 上则为 ‘/var/run/syslog’。 你需要检查你的系统平台并使用适当的地址（如果你的应用程序需要在多个平台上运行则可能需要在运行时进行这样的检查）。 在 Windows 上，你大概必须要使用 UDP 选项。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>On macOS 12.x (Monterey), Apple has changed the behaviour of their
+syslog daemon - it no longer listens on a domain socket. Therefore, you cannot
+expect <a class="reference internal" href="#logging.handlers.SysLogHandler" title="logging.handlers.SysLogHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code></a> to work on this system.</p>
+<p>See <a class="reference external" href="https://github.com/python/cpython/issues/91070">gh-91070</a> for more information.</p>
+</div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>添加了 <em>socktype</em>。</p>
 </div>
@@ -961,6 +977,11 @@ are the absolute paths of the oldest backup log files written by the handler.</p
 <dt class="sig sig-object py" id="logging.handlers.QueueHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.handlers.</span></span><span class="sig-name descname"><span class="pre">QueueHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queue</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.QueueHandler" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.handlers.QueueHandler" title="logging.handlers.QueueHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueHandler</span></code></a> 类的新实例。 该实例使用队列来初始化以向其发送消息。 <em>queue</em> 可以为任何队列类对象；它由 <a class="reference internal" href="#logging.handlers.QueueHandler.enqueue" title="logging.handlers.QueueHandler.enqueue"><code class="xref py py-meth docutils literal notranslate"><span class="pre">enqueue()</span></code></a> 方法来使用，该方法需要知道如何向其发送消息。 队列 <em>不要求</em> 具有任务跟踪 API，这意味着你可以为 <em>queue</em> 使用 <a class="reference internal" href="queue.html#queue.SimpleQueue" title="queue.SimpleQueue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleQueue</span></code></a> 实例。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>If you are using <a class="reference internal" href="multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>, you should avoid using
+<a class="reference internal" href="queue.html#queue.SimpleQueue" title="queue.SimpleQueue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleQueue</span></code></a> and instead use <a class="reference internal" href="multiprocessing.html#multiprocessing.Queue" title="multiprocessing.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Queue</span></code></a>.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="logging.handlers.QueueHandler.emit">
 <span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.QueueHandler.emit" title="永久链接至目标">¶</a></dt>
@@ -972,13 +993,29 @@ are the absolute paths of the oldest backup log files written by the handler.</p
 <span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.QueueHandler.prepare" title="永久链接至目标">¶</a></dt>
 <dd><p>准备用于队列的记录。 此方法返回的对象会被排入队列。</p>
 <p>The base implementation formats the record to merge the message,
-arguments, and exception information, if present.  It also removes
+arguments, exception and stack information, if present.  It also removes
 unpickleable items from the record in-place. Specifically, it overwrites
 the record’s <code class="xref py py-attr docutils literal notranslate"><span class="pre">msg</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">message</span></code> attributes with the merged
 message (obtained by calling the handler’s <a class="reference internal" href="functions.html#format" title="format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">format()</span></code></a> method), and
 sets the <code class="xref py py-attr docutils literal notranslate"><span class="pre">args</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">exc_info</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">exc_text</span></code> attributes
 to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>如果你想要将记录转换为 dict 或 JSON 字符串，或者发送记录被修改后的副本而让初始记录保持原样，则你可能会想要重载此方法。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The base implementation formats the message with arguments, sets
+the <code class="docutils literal notranslate"><span class="pre">message</span></code> and <code class="docutils literal notranslate"><span class="pre">msg</span></code> attributes to the formatted message and
+sets the <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">exc_text</span></code> attributes to <code class="docutils literal notranslate"><span class="pre">None</span></code> to allow
+pickling and to prevent further attempts at formatting. This means
+that a handler on the <a class="reference internal" href="#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> side won’t have the
+information to do custom formatting, e.g. of exceptions. You may wish
+to subclass <code class="docutils literal notranslate"><span class="pre">QueueHandler</span></code> and override this method to e.g. avoid
+setting <code class="docutils literal notranslate"><span class="pre">exc_text</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">message</span></code> / <code class="docutils literal notranslate"><span class="pre">msg</span></code>
+/ <code class="docutils literal notranslate"><span class="pre">args</span></code> changes are related to ensuring the record is pickleable,
+and you might or might not be able to avoid doing that depending on
+whether your <code class="docutils literal notranslate"><span class="pre">args</span></code> are pickleable. (Note that you may have to
+consider not only your own code but also code in any libraries that
+you use.)</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1012,6 +1049,11 @@ handler. Otherwise, it will be <code class="docutils literal notranslate"><span 
 <dt class="sig sig-object py" id="logging.handlers.QueueListener">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">logging.handlers.</span></span><span class="sig-name descname"><span class="pre">QueueListener</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">queue</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">handlers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">respect_handler_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#logging.handlers.QueueListener" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个 <a class="reference internal" href="#logging.handlers.QueueListener" title="logging.handlers.QueueListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueueListener</span></code></a> 类的新实例。 该实例初始化时要传入一个队列以向其发送消息，还要传入一个处理程序列表用来处理放置在队列中的条目。 队列可以是任何队列类对象；它会被原样传给 <a class="reference internal" href="#logging.handlers.QueueListener.dequeue" title="logging.handlers.QueueListener.dequeue"><code class="xref py py-meth docutils literal notranslate"><span class="pre">dequeue()</span></code></a> 方法，该方法需要知道如何从其获取消息。 队列 <em>不要求</em> 具有任务跟踪 API（但如提供则会使用它），这意味着你可以为 <em>queue</em> 使用 <a class="reference internal" href="queue.html#queue.SimpleQueue" title="queue.SimpleQueue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleQueue</span></code></a> 实例。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>If you are using <a class="reference internal" href="multiprocessing.html#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a>, you should avoid using
+<a class="reference internal" href="queue.html#queue.SimpleQueue" title="queue.SimpleQueue"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleQueue</span></code></a> and instead use <a class="reference internal" href="multiprocessing.html#multiprocessing.Queue" title="multiprocessing.Queue"><code class="xref py py-class docutils literal notranslate"><span class="pre">multiprocessing.Queue</span></code></a>.</p>
+</div>
 <p>如果 <code class="docutils literal notranslate"><span class="pre">respect_handler_level</span></code> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，则在决定是否将消息传递给处理程序之前会遵循处理程序的级别（与消息的级别进行比较）；在其他情况下，其行为与之前的 Python 版本一致 —— 总是将每条消息传递给每个处理程序。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>增加了 <code class="docutils literal notranslate"><span class="pre">respect_handler_level</span></code> 参数。</p>
@@ -1194,7 +1236,7 @@ handler. Otherwise, it will be <code class="docutils literal notranslate"><span 
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

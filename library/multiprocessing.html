@@ -26,7 +26,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="copyright" title="版权所有" href="../copyright.html" />
-    <link rel="next" title="multiprocessing.shared_memory — 可从进程直接访问的共享内存" href="multiprocessing.shared_memory.html" />
+    <link rel="next" title="multiprocessing.shared_memory — Shared memory for direct access across processes" href="multiprocessing.shared_memory.html" />
     <link rel="prev" title="threading — 基于线程的并行" href="threading.html" />
     <link rel="canonical" href="https://docs.python.org/3/library/multiprocessing.html" />
     
@@ -131,7 +131,7 @@
   <div>
     <h4>下一个主题</h4>
     <p class="topless"><a href="multiprocessing.shared_memory.html"
-                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.shared_memory</span></code> — 可从进程直接访问的共享内存</a></p>
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.shared_memory</span></code> — Shared memory for direct access across processes</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
@@ -159,7 +159,7 @@
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="multiprocessing.shared_memory.html" title="multiprocessing.shared_memory — 可从进程直接访问的共享内存"
+          <a href="multiprocessing.shared_memory.html" title="multiprocessing.shared_memory — Shared memory for direct access across processes"
              accesskey="N">下一页</a> |</li>
         <li class="right" >
           <a href="threading.html" title="threading — 基于线程的并行"
@@ -207,6 +207,10 @@
 <span id="multiprocessing-process-based-parallelism"></span><h1><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> — 基于进程的并行<a class="headerlink" href="#module-multiprocessing" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/multiprocessing/">Lib/multiprocessing/</a></p>
 <hr class="docutils" />
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <section id="introduction">
 <h2>概述<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
 <p><a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> 是一个支持使用与 <a class="reference internal" href="threading.html#module-threading" title="threading: Thread-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">threading</span></code></a> 模块类似的 API 来产生进程的包。 <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> 包同时提供了本地和远程并发操作，通过使用子进程而非线程有效地绕过了 <a class="reference internal" href="../glossary.html#term-global-interpreter-lock"><span class="xref std std-term">全局解释器锁</span></a>。 因此，<a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> 模块允许程序员充分利用给定机器上的多个处理器。 它在 Unix 和 Windows 上均可运行。</p>
@@ -224,6 +228,15 @@
 <p>将在标准输出中打印</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
 </pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">参见</p>
+<p><a class="reference internal" href="concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" title="concurrent.futures.ProcessPoolExecutor"><code class="xref py py-class docutils literal notranslate"><span class="pre">concurrent.futures.ProcessPoolExecutor</span></code></a> offers a higher level interface
+to push tasks to a background process without blocking execution of the
+calling process. Compared to using the <a class="reference internal" href="#multiprocessing.pool.Pool" title="multiprocessing.pool.Pool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Pool</span></code></a>
+interface directly, the <a class="reference internal" href="concurrent.futures.html#module-concurrent.futures" title="concurrent.futures: Execute computations concurrently using threads or processes."><code class="xref py py-mod docutils literal notranslate"><span class="pre">concurrent.futures</span></code></a> API more readily allows
+the submission of work to the underlying process pool to be separated from
+waiting for the results.</p>
 </div>
 <section id="the-process-class">
 <h3><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code> 类<a class="headerlink" href="#the-process-class" title="永久链接至标题">¶</a></h3>
@@ -267,7 +280,12 @@
 <p id="multiprocessing-start-methods">根据不同的平台， <a class="reference internal" href="#module-multiprocessing" title="multiprocessing: Process-based parallelism."><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> 支持三种启动进程的方法。这些 <em>启动方法</em> 有</p>
 <blockquote>
 <div><dl>
-<dt><em>spawn</em></dt><dd><p>父进程会启动一个全新的 python 解释器进程。 子进程将只继承那些运行进程对象的 <a class="reference internal" href="#multiprocessing.Process.run" title="multiprocessing.Process.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> 方法所必需的资源。 特别地，来自父进程的非必需文件描述符和句柄将不会被继承。 使用此方法启动进程相比使用 <em>fork</em> 或 <em>forkserver</em> 要慢上许多。</p>
+<dt><em>spawn</em></dt><dd><p>The parent process starts a fresh Python interpreter process.  The
+child process will only inherit those resources necessary to run
+the process object’s <a class="reference internal" href="#multiprocessing.Process.run" title="multiprocessing.Process.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.  In particular,
+unnecessary file descriptors and handles from the parent process
+will not be inherited.  Starting a process using this method is
+rather slow compared to using <em>fork</em> or <em>forkserver</em>.</p>
 <p>可在Unix和Windows上使用。 Windows上的默认设置。</p>
 </dd>
 <dt><em>fork</em></dt><dd><p>父进程使用 <a class="reference internal" href="os.html#os.fork" title="os.fork"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.fork()</span></code></a> 来产生 Python 解释器分叉。子进程在开始时实际上与父进程相同。父进程的所有资源都由子进程继承。请注意，安全分叉多线程进程是棘手的。</p>
@@ -282,7 +300,10 @@
 <p><span class="versionmodified changed">在 3.8 版更改: </span>对于 macOS，<em>spawn</em> 启动方式是默认方式。 因为 <em>fork</em> 可能导致subprocess崩溃，被认为是不安全的，查看 <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=33725">bpo-33725</a> 。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>在所有unix平台上添加支持了 <em>spawn</em> ，并且为一些unix平台添加了 <em>forkserver</em> 。在Windows上子进程不再继承所有可继承的父进程句柄。</p>
+<p><span class="versionmodified changed">在 3.4 版更改: </span><em>spawn</em> added on all Unix platforms, and <em>forkserver</em> added for
+some Unix platforms.
+Child processes no longer inherit all of the parents inheritable
+handles on Windows.</p>
 </div>
 <p>在 Unix 上通过 <em>spawn</em> 和 <em>forkserver</em> 方式启动多进程会同时启动一个 <em>资源追踪</em> 进程，负责追踪当前程序的进程产生的、并且不再被使用的命名系统资源(如命名信号量以及 <a class="reference internal" href="multiprocessing.shared_memory.html#multiprocessing.shared_memory.SharedMemory" title="multiprocessing.shared_memory.SharedMemory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SharedMemory</span></code></a>  对象)。当所有进程退出后，资源追踪会负责释放这些仍被追踪的的对象。通常情况下是不会有这种对象的，但是假如一个子进程被某个信号杀死，就可能存在这一类资源的“泄露”情况。（泄露的信号量以及共享内存不会被释放，直到下一次系统重启，对于这两类资源来说，这是一个比较大的问题，因为操作系统允许的命名信号量的数量是有限的，而共享内存也会占据主内存的一片空间）</p>
 <p>要选择一个启动方法，你应该在主模块的 <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">'__main__'</span></code> 子句中调用 <a class="reference internal" href="#multiprocessing.set_start_method" title="multiprocessing.set_start_method"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_start_method()</span></code></a> 。例如：</p>
@@ -668,19 +689,19 @@ signal <em>N</em>, the exit code will be the negative value <em>-N</em>.</p>
 
 <p>注意 <a class="reference internal" href="#multiprocessing.Process.start" title="multiprocessing.Process.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">start()</span></code></a> 、 <a class="reference internal" href="#multiprocessing.Process.join" title="multiprocessing.Process.join"><code class="xref py py-meth docutils literal notranslate"><span class="pre">join()</span></code></a> 、 <a class="reference internal" href="#multiprocessing.Process.is_alive" title="multiprocessing.Process.is_alive"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_alive()</span></code></a> 、 <a class="reference internal" href="#multiprocessing.Process.terminate" title="multiprocessing.Process.terminate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">terminate()</span></code></a> 和 <a class="reference internal" href="#multiprocessing.Process.exitcode" title="multiprocessing.Process.exitcode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">exitcode</span></code></a> 方法只能由创建进程对象的进程调用。</p>
 <p><a class="reference internal" href="#multiprocessing.Process" title="multiprocessing.Process"><code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></a> 一些方法的示例用法：</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; import multiprocessing, time, signal</span>
-<span class="go"> &gt;&gt;&gt; p = multiprocessing.Process(target=time.sleep, args=(1000,))</span>
-<span class="go"> &gt;&gt;&gt; print(p, p.is_alive())</span>
-<span class="go"> &lt;Process ... initial&gt; False</span>
-<span class="go"> &gt;&gt;&gt; p.start()</span>
-<span class="go"> &gt;&gt;&gt; print(p, p.is_alive())</span>
-<span class="go"> &lt;Process ... started&gt; True</span>
-<span class="go"> &gt;&gt;&gt; p.terminate()</span>
-<span class="go"> &gt;&gt;&gt; time.sleep(0.1)</span>
-<span class="go"> &gt;&gt;&gt; print(p, p.is_alive())</span>
-<span class="go"> &lt;Process ... stopped exitcode=-SIGTERM&gt; False</span>
-<span class="go"> &gt;&gt;&gt; p.exitcode == -signal.SIGTERM</span>
-<span class="go"> True</span>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">multiprocessing</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">signal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span>
+<span class="go">&lt;Process ... initial&gt; False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span>
+<span class="go">&lt;Process ... started&gt; True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">())</span>
+<span class="go">&lt;Process ... stopped exitcode=-SIGTERM&gt; False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">exitcode</span> <span class="o">==</span> <span class="o">-</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1418,6 +1439,9 @@ HELLO WORLD
 used by the manager completes in the <a class="reference internal" href="#multiprocessing.managers.BaseManager.shutdown" title="multiprocessing.managers.BaseManager.shutdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutdown()</span></code></a> method. If the
 shutdown times out, the process is terminated. If terminating the process
 also times out, the process is killed.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <em>shutdown_timeout</em> parameter.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="multiprocessing.managers.BaseManager.start">
 <span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">initializer</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">initargs</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#multiprocessing.managers.BaseManager.start" title="永久链接至目标">¶</a></dt>
@@ -2139,7 +2163,10 @@ unpacked as arguments.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">'AF_INET'</span></code> 地址是 <code class="docutils literal notranslate"><span class="pre">(hostname,</span> <span class="pre">port)</span></code>  形式的元组类型，其中 <em>hostname</em> 是一个字符串，<em>port</em> 是整数。</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">'AF_UNIX'</span></code> 地址是文件系统上文件名的字符串。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">'AF_PIPE'</span></code> 地址是一个 <code class="samp docutils literal notranslate"><span class="pre">r'\.\pipe{PipeName}'</span></code> 形式的字符串。 要使用 <a class="reference internal" href="#multiprocessing.connection.Client" title="multiprocessing.connection.Client"><code class="xref py py-func docutils literal notranslate"><span class="pre">Client()</span></code></a> 来连接到远程计算机上一个名为 <em>ServerName</em> 的命名管道，则应当改用 <code class="samp docutils literal notranslate"><span class="pre">r'\</span><em><span class="pre">ServerName</span></em><span class="pre">\pipe{PipeName}'</span></code> 形式的地址。</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">'AF_PIPE'</span></code> address is a string of the form
+<code class="samp docutils literal notranslate"><span class="pre">r'\\.\pipe\</span><em><span class="pre">PipeName</span></em><span class="pre">'</span></code>.  To use <a class="reference internal" href="#multiprocessing.connection.Client" title="multiprocessing.connection.Client"><code class="xref py py-func docutils literal notranslate"><span class="pre">Client()</span></code></a> to connect to a named
+pipe on a remote computer called <em>ServerName</em> one should use an address of the
+form <code class="samp docutils literal notranslate"><span class="pre">r'\\</span><em><span class="pre">ServerName</span></em><span class="pre">\pipe\</span><em><span class="pre">PipeName</span></em><span class="pre">'</span></code> instead.</p></li>
 </ul>
 <p>注意，使用两个反斜线开头的字符串默认被当做 <code class="docutils literal notranslate"><span class="pre">'AF_PIPE'</span></code> 地址而不是 <code class="docutils literal notranslate"><span class="pre">'AF_UNIX'</span></code>  。</p>
 </section>
@@ -2763,7 +2790,7 @@ You can modify <code class="docutils literal notranslate"><span class="pre">leve
   <div>
     <h4>下一个主题</h4>
     <p class="topless"><a href="multiprocessing.shared_memory.html"
-                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.shared_memory</span></code> — 可从进程直接访问的共享内存</a></p>
+                          title="下一章"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing.shared_memory</span></code> — Shared memory for direct access across processes</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>当前页面</h3>
@@ -2790,7 +2817,7 @@ You can modify <code class="docutils literal notranslate"><span class="pre">leve
           <a href="../py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="right" >
-          <a href="multiprocessing.shared_memory.html" title="multiprocessing.shared_memory — 可从进程直接访问的共享内存"
+          <a href="multiprocessing.shared_memory.html" title="multiprocessing.shared_memory — Shared memory for direct access across processes"
              >下一页</a> |</li>
         <li class="right" >
           <a href="threading.html" title="threading — 基于线程的并行"
@@ -2843,7 +2870,7 @@ You can modify <code class="docutils literal notranslate"><span class="pre">leve
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

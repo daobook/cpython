@@ -273,7 +273,14 @@ it will be replaced. Returns the path to the newly created file.</p>
 <dt class="sig sig-object py" id="shutil.copy2">
 <span class="sig-prename descclassname"><span class="pre">shutil.</span></span><span class="sig-name descname"><span class="pre">copy2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dst</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">follow_symlinks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#shutil.copy2" title="永久链接至目标">¶</a></dt>
 <dd><p>类似于 <a class="reference internal" href="#shutil.copy" title="shutil.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy()</span></code></a>，区别在于 <a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> 还会尝试保留文件的元数据。</p>
-<p>当 <em>follow_symlinks</em> 为假值且 <em>src</em> 为符号链接时，<a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> 会尝试将来自 <em>src</em> 符号链接的所有元数据拷贝到新创建的 <em>dst</em> 符号链接。 但是，此功能不是在所有平台上均可用。 在此功能部分或全部不可用的平台上，<a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> 将尽量保留所有元数据；<a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> 一定不会由于无法保留文件元数据而引发异常。</p>
+<p>When <em>follow_symlinks</em> is false, and <em>src</em> is a symbolic
+link, <a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> attempts to copy all metadata from the
+<em>src</em> symbolic link to the newly created <em>dst</em> symbolic link.
+However, this functionality is not available on all platforms.
+On platforms where some or all of this functionality is
+unavailable, <a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> will preserve all the metadata
+it can; <a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> never raises an exception because it
+cannot preserve file metadata.</p>
 <p><a class="reference internal" href="#shutil.copy2" title="shutil.copy2"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy2()</span></code></a> 会使用 <a class="reference internal" href="#shutil.copystat" title="shutil.copystat"><code class="xref py py-func docutils literal notranslate"><span class="pre">copystat()</span></code></a> 来拷贝文件元数据。 请参阅 <a class="reference internal" href="#shutil.copystat" title="shutil.copystat"><code class="xref py py-func docutils literal notranslate"><span class="pre">copystat()</span></code></a> 了解有关修改符号链接元数据的平台支持的更多信息。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">shutil.copyfile</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">dst</span></code>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">shutil.copystat</span></code> 附带参数 <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">dst</span></code>。</p>
@@ -504,9 +511,10 @@ errors when <em>symlinks</em> is false.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>This function is not thread-safe when custom archivers registered
-with <a class="reference internal" href="#shutil.register_archive_format" title="shutil.register_archive_format"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_archive_format()</span></code></a> are used.  In this case it
+with <a class="reference internal" href="#shutil.register_archive_format" title="shutil.register_archive_format"><code class="xref py py-func docutils literal notranslate"><span class="pre">register_archive_format()</span></code></a> do not support the <em>root_dir</em>
+argument.  In this case it
 temporarily changes the current working directory of the process
-to perform archiving.</p>
+to <em>root_dir</em> to perform archiving.</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.8 版更改: </span>现在对于通过 <code class="docutils literal notranslate"><span class="pre">format=&quot;tar&quot;</span></code> 创建的归档文件将使用新式的 pax (POSIX.1-2001) 格式而非旧式的 GNU 格式。</p>
@@ -537,8 +545,16 @@ to perform archiving.</p>
 <span class="sig-prename descclassname"><span class="pre">shutil.</span></span><span class="sig-name descname"><span class="pre">register_archive_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">extra_args</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">description</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#shutil.register_archive_format" title="永久链接至目标">¶</a></dt>
 <dd><p>为 <em>name</em> 格式注册一个归档器。</p>
 <p><em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接收要创建文件的 <em>base_name</em>，再加上要归档内容的 <em>base_dir</em> (其默认值为 <a class="reference internal" href="os.html#os.curdir" title="os.curdir"><code class="xref py py-data docutils literal notranslate"><span class="pre">os.curdir</span></code></a>)。 更多参数会被作为关键字参数传入: <em>owner</em>, <em>group</em>, <em>dry_run</em> 和 <em>logger</em> (与向 <a class="reference internal" href="#shutil.make_archive" title="shutil.make_archive"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_archive()</span></code></a> 传入的参数一致)。</p>
+<p>If <em>function</em> has the custom attribute <code class="docutils literal notranslate"><span class="pre">function.supports_root_dir</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+the <em>root_dir</em> argument is passed as a keyword argument.
+Otherwise the current working directory of the process is temporarily
+changed to <em>root_dir</em> before calling <em>function</em>.
+In this case <a class="reference internal" href="#shutil.make_archive" title="shutil.make_archive"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_archive()</span></code></a> is not thread-safe.</p>
 <p>如果给出了 <em>extra_args</em>，则其应为一个 <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">value)</span></code> 对的序列，将在归档器可调用对象被使用时作为附加的关键字参数。</p>
 <p><em>description</em> 由 <a class="reference internal" href="#shutil.get_archive_formats" title="shutil.get_archive_formats"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_archive_formats()</span></code></a> 使用，它将返回归档器的列表。 默认值为一个空字符串。</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Added support for functions supporting the <em>root_dir</em> argument.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -663,7 +679,7 @@ starting with “/” or filenames with two dots “..”.</p>
 <p>如果未定义 <code class="docutils literal notranslate"><span class="pre">COLUMNS</span></code> 或 <code class="docutils literal notranslate"><span class="pre">LINES</span></code>，这是通常的情况，则连接到 <a class="reference internal" href="sys.html#sys.__stdout__" title="sys.__stdout__"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.__stdout__</span></code></a> 的终端将通过发起调用 <a class="reference internal" href="os.html#os.get_terminal_size" title="os.get_terminal_size"><code class="xref py py-func docutils literal notranslate"><span class="pre">os.get_terminal_size()</span></code></a> 被查询。</p>
 <p>如果由于系统不支持查询，或是由于我们未连接到某个终端而导致查询终端尺寸不成功，则会使用在 <code class="docutils literal notranslate"><span class="pre">fallback</span></code> 形参中给出的值。 <code class="docutils literal notranslate"><span class="pre">fallback</span></code> 默认为 <code class="docutils literal notranslate"><span class="pre">(80,</span> <span class="pre">24)</span></code>，这是许多终端模拟器所使用的默认尺寸。</p>
 <p>返回的值是一个 <a class="reference internal" href="os.html#os.terminal_size" title="os.terminal_size"><code class="xref py py-class docutils literal notranslate"><span class="pre">os.terminal_size</span></code></a> 类型的具名元组。</p>
-<p>另请参阅: The Single UNIX Specification, Version 2, <a class="reference external" href="http://pubs.opengroup.org/onlinepubs/7908799/xbd/envvar.html#tag_002_003">Other Environment Variables</a>.</p>
+<p>另请参阅: The Single UNIX Specification, Version 2, <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/7908799/xbd/envvar.html#tag_002_003">Other Environment Variables</a>.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -792,7 +808,7 @@ returns zeroes.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

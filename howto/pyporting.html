@@ -198,7 +198,7 @@
 <li><p>只担心支持Python 2.7的问题</p></li>
 <li><p>确保你有良好的测试覆盖率（可以用 <a class="reference external" href="https://pypi.org/project/coverage">coverage.py</a>；<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">coverage</span></code>）。</p></li>
 <li><p>了解Python 2 和 3之间的区别</p></li>
-<li><p>使用 <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> (<a class="reference external" href="https://python-modernize.readthedocs.io/">或Modernize</a>) 来更新你的代码 (例如``python -m pip install future``)。</p></li>
+<li><p>使用 <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> (<a class="reference external" href="https://python-modernize.readthedocs.io/">或Modernize</a>) 来更新你的代码 (例如``python -m pip install future``)。</p></li>
 <li><p>使用 <a class="reference external" href="https://pypi.org/project/pylint">Pylint</a> 来帮助确保你在Python 3支持上不倒退(<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pylint</span></code>)</p></li>
 <li><p>使用 <a class="reference external" href="https://pypi.org/project/caniusepython3">caniusepython3</a> 来找出你的哪些依赖关系阻碍了你对 Python 3 的使用 (<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">caniusepython3</span></code>)</p></li>
 <li><p>一旦你的依赖性不再阻碍你，使用持续集成来确保你与 Python 2 和 3 保持兼容 (<a class="reference external" href="https://pypi.org/project/tox">tox</a> 可以帮助对多个版本的 Python 进行测试；<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tox</span></code>)</p></li>
@@ -230,11 +230,11 @@
 </section>
 <section id="learn-the-differences-between-python-2-3">
 <h3>了解Python 2 和 3之间的区别<a class="headerlink" href="#learn-the-differences-between-python-2-3" title="永久链接至标题">¶</a></h3>
-<p>一旦你的代码经过了很好的测试，你就可以开始把你的代码移植到 Python 3 上了！ 但是为了充分了解你的代码将发生怎样的变化，以及你在编码时要注意什么，你将会想要了解 Python 3 相比 Python 2 的变化。 通常来说，两个最好的方法是阅读 Python 3 每个版本的 <a class="reference internal" href="../whatsnew/index.html#whatsnew-index"><span class="std std-ref">“What’s New”</span></a> 文档和 <a class="reference external" href="http://python3porting.com/">Porting to Python 3</a> 书（在线免费版本）。还有一个来自 Python-Future 项目的便利 <a class="reference external" href="http://python-future.org/compatible_idioms.html">cheat sheet</a>。</p>
+<p>一旦你的代码经过了很好的测试，你就可以开始把你的代码移植到 Python 3 上了！ 但是为了充分了解你的代码将发生怎样的变化，以及你在编码时要注意什么，你将会想要了解 Python 3 相比 Python 2 的变化。 通常来说，两个最好的方法是阅读 Python 3 每个版本的 <a class="reference internal" href="../whatsnew/index.html#whatsnew-index"><span class="std std-ref">“What’s New”</span></a> 文档和 <a class="reference external" href="http://python3porting.com/">Porting to Python 3</a> 书（在线免费版本）。还有一个来自 Python-Future 项目的便利 <a class="reference external" href="https://python-future.org/compatible_idioms.html">cheat sheet</a>。</p>
 </section>
 <section id="update-your-code">
 <h3>更新代码<a class="headerlink" href="#update-your-code" title="永久链接至标题">¶</a></h3>
-<p>一旦你觉得你知道了 Python 3 与 Python 2 相比有什么不同，就是时候更新你的代码了！ 你可以选择两种工具来自动移植你的代码: <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> 和 <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>。 你选择哪个工具将取决于你希望你的代码有多像 Python 3。 <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> 尽力使 Python 3 的习性和做法在 Python 2 中存在，例如，从 Python 3 中回传 <code class="docutils literal notranslate"><span class="pre">bytes</span></code> 类型，这样你就可以在 Python 的主要版本之间实现语义上的平等。 另一方面，<a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> 更加保守，它针对的是 Python 2/3 的子集，直接依靠 <a class="reference external" href="https://pypi.org/project/six">six</a> 来帮助提供兼容性。 由于 Python 3 是未来，最好考虑 Futurize，以开始适应 Python 3 所引入的、你还不习惯的任何新做法。</p>
+<p>一旦你觉得你知道了 Python 3 与 Python 2 相比有什么不同，就是时候更新你的代码了！ 你可以选择两种工具来自动移植你的代码: <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> 和 <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a>。 你选择哪个工具将取决于你希望你的代码有多像 Python 3。 <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> 尽力使 Python 3 的习性和做法在 Python 2 中存在，例如，从 Python 3 中回传 <code class="docutils literal notranslate"><span class="pre">bytes</span></code> 类型，这样你就可以在 Python 的主要版本之间实现语义上的平等。 另一方面，<a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> 更加保守，它针对的是 Python 2/3 的子集，直接依靠 <a class="reference external" href="https://pypi.org/project/six">six</a> 来帮助提供兼容性。 由于 Python 3 是未来，最好考虑 Futurize，以开始适应 Python 3 所引入的、你还不习惯的任何新做法。</p>
 <p>无论你选择哪种工具，它们都会更新你的代码，使之在Python 3下运行，同时与你开始使用的Python 2版本保持兼容。根据你想要的保守程度，你可能想先在你的测试套件上运行该工具，并目测差异以确保转换的准确性。在你转换了你的测试套件并验证了所有的测试仍然如期通过后，你就可以转换你的应用程序代码了，因为你知道任何测试失败都是转译的错误。</p>
 <p>不幸的是，这些工具不能自动地使你的代码在Python 3下工作，因此有一些东西你需要手动更新以获得对Python 3的完全支持（这些步骤在不同的工具中是必要的）。阅读你选择使用的工具的文档，看看它默认修复了什么，以及它可以选择做什么，以了解哪些将（不）为你修复，哪些你可能必须自己修复（例如，在Modernize中使用``io.open()``覆写内置的``open()``函数默认是关闭的）。不过幸运的是，只有几件需要注意的事情，可以说是大问题，如果不注意的话，可能很难调试。</p>
 <section id="division">
@@ -332,7 +332,7 @@
 </pre></div>
 </div>
 <p>你也可以在运行Python 2时使用``-3``标志，对你的代码在执行过程中引发的各种兼容性问题进行警告。如果你用``-Werror``把警告变成错误，那么你可以确保你不会意外地错过一个警告。</p>
-<p>你也可以使用 <a class="reference external" href="https://pypi.org/project/pylint">Pylint</a> 项目和它的``–py3k``标志来提示你的代码，当你的代码开始偏离 Python 3 的兼容性时，就会收到警告。这也避免了你不得不定期在你的代码上运行 <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> 或 <a class="reference external" href="http://python-future.org/automatic_conversion.html">Futurize</a> 来捕捉兼容性的退步。这确实要求你只支持Python 2.7和Python 3.4或更新的版本，因为这是Pylint支持的最小Python版本。</p>
+<p>你也可以使用 <a class="reference external" href="https://pypi.org/project/pylint">Pylint</a> 项目和它的``–py3k``标志来提示你的代码，当你的代码开始偏离 Python 3 的兼容性时，就会收到警告。这也避免了你不得不定期在你的代码上运行 <a class="reference external" href="https://python-modernize.readthedocs.io/">Modernize</a> 或 <a class="reference external" href="https://python-future.org/automatic_conversion.html">Futurize</a> 来捕捉兼容性的退步。这确实要求你只支持Python 2.7和Python 3.4或更新的版本，因为这是Pylint支持的最小Python版本。</p>
 </section>
 <section id="check-which-dependencies-block-your-transition">
 <h3>检查哪些依赖性会阻碍你的过渡<a class="headerlink" href="#check-which-dependencies-block-your-transition" title="永久链接至标题">¶</a></h3>
@@ -478,7 +478,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

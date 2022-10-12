@@ -241,6 +241,12 @@ deprecated in favour of using <a class="reference internal" href="#c.PyObject_De
 <dt class="sig sig-object c" id="c.PyObject_GenericGetDict">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyObject_GenericGetDict</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">o</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">context</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyObject_GenericGetDict" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: New reference.</em><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.10.</em><p><code class="docutils literal notranslate"><span class="pre">__dict__</span></code> 描述符的获取函数的一种通用实现。必要时会创建该字典。</p>
+<p>This function may also be called to get the <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a>
+of the object <em>o</em>. Pass <code class="docutils literal notranslate"><span class="pre">NULL</span></code> for <em>context</em> when calling it.
+Since this function may need to allocate memory for the
+dictionary, it may be more efficient to call <a class="reference internal" href="#c.PyObject_GetAttr" title="PyObject_GetAttr"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetAttr()</span></code></a>
+when accessing an attribute on the object.</p>
+<p>On failure, returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> with an exception set.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -253,6 +259,16 @@ deprecated in favour of using <a class="reference internal" href="#c.PyObject_De
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
+</dd></dl>
+
+<dl class="c function">
+<dt class="sig sig-object c" id="c._PyObject_GetDictPtr">
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">_PyObject_GetDictPtr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">obj</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._PyObject_GetDictPtr" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>Return a pointer to <a class="reference internal" href="../library/stdtypes.html#object.__dict__" title="object.__dict__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__dict__</span></code></a> of the object <em>obj</em>.
+If there is no <code class="docutils literal notranslate"><span class="pre">__dict__</span></code>, return <code class="docutils literal notranslate"><span class="pre">NULL</span></code> without setting an exception.</p>
+<p>This function may need to allocate memory for the
+dictionary, so it may be more efficient to call <a class="reference internal" href="#c.PyObject_GetAttr" title="PyObject_GetAttr"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyObject_GetAttr()</span></code></a>
+when accessing an attribute on the object.</p>
 </dd></dl>
 
 <dl class="c function">
@@ -356,7 +372,7 @@ of object <em>o</em>. On failure, raises <a class="reference internal" href="../
 is equivalent to the Python expression <code class="docutils literal notranslate"><span class="pre">type(o)</span></code>. This function increments the
 reference count of the return value. There’s really no reason to use this
 function instead of the <a class="reference internal" href="structures.html#c.Py_TYPE" title="Py_TYPE"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_TYPE()</span></code></a> function, which returns a
-pointer of type <span class="xref c c-texpr"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span>, except when the incremented reference
+pointer of type <span class="c-expr sig sig-inline c"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span>, except when the incremented reference
 count is needed.</p>
 </dd></dl>
 
@@ -519,7 +535,7 @@ count is needed.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

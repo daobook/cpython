@@ -184,7 +184,7 @@ to simplify async code usage for common wide-spread scenarios.</p>
 <dd><p>Execute the <a class="reference internal" href="../glossary.html#term-coroutine"><span class="xref std std-term">coroutine</span></a> <em>coro</em> and return the result.</p>
 <p>This function runs the passed coroutine, taking care of
 managing the asyncio event loop, <em>finalizing asynchronous
-generators</em>, and closing the threadpool.</p>
+generators</em>, and closing the executor.</p>
 <p>This function cannot be called when another asyncio event loop is
 running in the same thread.</p>
 <p>If <em>debug</em> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the event loop will be run in debug mode. <code class="docutils literal notranslate"><span class="pre">False</span></code> disables
@@ -193,6 +193,9 @@ debug mode explicitly. <code class="docutils literal notranslate"><span class="p
 <p>This function always creates a new event loop and closes it at
 the end.  It should be used as a main entry point for asyncio
 programs, and should ideally only be called once.</p>
+<p>The executor is given a timeout duration of 5 minutes to shutdown.
+If the executor hasn’t finished within that duration, a warning is
+emitted and the executor is closed.</p>
 <p>Example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -226,7 +229,9 @@ loop</span></a> and <a class="reference internal" href="contextvars.html#context
 debug mode explicitly. <code class="docutils literal notranslate"><span class="pre">None</span></code> is used to respect the global
 <a class="reference internal" href="asyncio-dev.html#asyncio-debug-mode"><span class="std std-ref">Debug 模式</span></a> settings.</p>
 <p><em>loop_factory</em> could be used for overriding the loop creation.
-<a class="reference internal" href="asyncio-eventloop.html#asyncio.new_event_loop" title="asyncio.new_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.new_event_loop()</span></code></a> is used if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+It is the responsibility of the <em>loop_factory</em> to set the created loop as the
+current one. By default <a class="reference internal" href="asyncio-eventloop.html#asyncio.new_event_loop" title="asyncio.new_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.new_event_loop()</span></code></a> is used and set as
+current event loop with <a class="reference internal" href="asyncio-eventloop.html#asyncio.set_event_loop" title="asyncio.set_event_loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.set_event_loop()</span></code></a> if <em>loop_factory</em> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Basically, <a class="reference internal" href="#asyncio.run" title="asyncio.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.run()</span></code></a> example can be rewritten with the runner usage:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -411,7 +416,7 @@ immediately raises the <a class="reference internal" href="exceptions.html#Keybo
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

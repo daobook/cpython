@@ -78,6 +78,7 @@
 <li><a class="reference internal" href="#functions-for-bytes">用于字节数据的函数</a></li>
 <li><a class="reference internal" href="#functions-for-integers">整数用函数</a></li>
 <li><a class="reference internal" href="#functions-for-sequences">序列用函数</a></li>
+<li><a class="reference internal" href="#discrete-distributions">Discrete distributions</a></li>
 <li><a class="reference internal" href="#real-valued-distributions">实值分布</a></li>
 <li><a class="reference internal" href="#alternative-generator">替代生成器</a></li>
 <li><a class="reference internal" href="#notes-on-reproducibility">关于再现性的说明</a></li>
@@ -247,9 +248,9 @@ Modeling and Computer Simulation Vol. 8, No. 1, January pp.3–30 1998.</p>
 <p>This is roughly equivalent to <code class="docutils literal notranslate"><span class="pre">choice(range(start,</span> <span class="pre">stop,</span> <span class="pre">step))</span></code> but
 supports arbitrarily large ranges and is optimized for common cases.</p>
 <p>The positional argument pattern matches the <a class="reference internal" href="stdtypes.html#range" title="range"><code class="xref py py-func docutils literal notranslate"><span class="pre">range()</span></code></a> function.</p>
-<p>Keyword arguments should not be used because they can interpreted
-in unexpected ways. For example <code class="docutils literal notranslate"><span class="pre">range(start=100)</span></code> is interpreted
-as <code class="docutils literal notranslate"><span class="pre">range(0,</span> <span class="pre">100,</span> <span class="pre">1)</span></code>.</p>
+<p>Keyword arguments should not be used because they can be interpreted
+in unexpected ways. For example <code class="docutils literal notranslate"><span class="pre">randrange(start=100)</span></code> is interpreted
+as <code class="docutils literal notranslate"><span class="pre">randrange(0,</span> <span class="pre">100,</span> <span class="pre">1)</span></code>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span><a class="reference internal" href="#random.randrange" title="random.randrange"><code class="xref py py-meth docutils literal notranslate"><span class="pre">randrange()</span></code></a> 在生成均匀分布的值方面更为复杂。 以前它使用了像``int(random()*n)``这样的形式，它可以产生稍微不均匀的分布。</p>
 </div>
@@ -269,7 +270,11 @@ now raise a <a class="reference internal" href="exceptions.html#TypeError" title
 <dl class="py function">
 <dt class="sig sig-object py" id="random.getrandbits">
 <span class="sig-prename descclassname"><span class="pre">random.</span></span><span class="sig-name descname"><span class="pre">getrandbits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#random.getrandbits" title="永久链接至目标">¶</a></dt>
-<dd><p>返回具有 <em>k</em> 个随机比特位的非负 Python 整数。 此方法随 MersenneTwister 生成器一起提供，其他一些生成器也可能将其作为 API 的可选部分提供。 在可能的情况下，<a class="reference internal" href="#random.getrandbits" title="random.getrandbits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getrandbits()</span></code></a> 会启用 <a class="reference internal" href="#random.randrange" title="random.randrange"><code class="xref py py-meth docutils literal notranslate"><span class="pre">randrange()</span></code></a> 来处理任意大的区间。</p>
+<dd><p>Returns a non-negative Python integer with <em>k</em> random bits. This method
+is supplied with the Mersenne Twister generator and some other generators
+may also provide it as an optional part of the API. When available,
+<a class="reference internal" href="#random.getrandbits" title="random.getrandbits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getrandbits()</span></code></a> enables <a class="reference internal" href="#random.randrange" title="random.randrange"><code class="xref py py-meth docutils literal notranslate"><span class="pre">randrange()</span></code></a> to handle arbitrarily large
+ranges.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.9 版更改: </span>此方法现在接受零作为 <em>k</em> 的值。</p>
 </div>
@@ -327,6 +332,28 @@ sequence.  Used for random sampling without replacement.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>The <em>population</em> must be a sequence.  Automatic conversion of sets
 to lists is no longer supported.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="discrete-distributions">
+<h2>Discrete distributions<a class="headerlink" href="#discrete-distributions" title="永久链接至标题">¶</a></h2>
+<p>The following function generates a discrete distribution.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="random.binomialvariate">
+<span class="sig-prename descclassname"><span class="pre">random.</span></span><span class="sig-name descname"><span class="pre">binomialvariate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#random.binomialvariate" title="永久链接至目标">¶</a></dt>
+<dd><p><a class="reference external" href="https://mathworld.wolfram.com/BinomialDistribution.html">Binomial distribution</a>.
+Return the number of successes for <em>n</em> independent trials with the
+probability of success in each trial being <em>p</em>:</p>
+<p>Mathematically equivalent to:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The number of trials <em>n</em> should be a non-negative integer.
+The probability of success <em>p</em> should be between <code class="docutils literal notranslate"><span class="pre">0.0</span> <span class="pre">&lt;=</span> <span class="pre">p</span> <span class="pre">&lt;=</span> <span class="pre">1.0</span></code>.
+The result is an integer in the range <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">X</span> <span class="pre">&lt;=</span> <span class="pre">n</span></code>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
 </div>
 </dd></dl>
 
@@ -486,16 +513,13 @@ to lists is no longer supported.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Deal 20 cards without replacement from a deck</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># of 52 playing cards, and determine the proportion of cards</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># with a ten-value:  ten, jack, queen, or king.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dealt</span> <span class="o">=</span> <span class="n">sample</span><span class="p">([</span><span class="s1">&#39;tens&#39;</span><span class="p">,</span> <span class="s1">&#39;low cards&#39;</span><span class="p">],</span> <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dealt</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;tens&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deal</span> <span class="o">=</span> <span class="n">sample</span><span class="p">([</span><span class="s1">&#39;tens&#39;</span><span class="p">,</span> <span class="s1">&#39;low cards&#39;</span><span class="p">],</span> <span class="n">counts</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">deal</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;tens&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span>
 <span class="go">0.15</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Estimate the probability of getting 5 or more heads from 7 spins</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># of a biased coin that settles on heads 60% of the time.</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">trial</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">return</span> <span class="n">choices</span><span class="p">(</span><span class="s1">&#39;HT&#39;</span><span class="p">,</span> <span class="n">cum_weights</span><span class="o">=</span><span class="p">(</span><span class="mf">0.60</span><span class="p">,</span> <span class="mf">1.00</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">trial</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">))</span> <span class="o">/</span> <span class="mi">10_000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">(</span><span class="n">binomialvariate</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">))</span> <span class="o">/</span> <span class="mi">10_000</span>
 <span class="go">0.4169</span>
 
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Probability of the median of 5 samples being in middle two quartiles</span>
@@ -507,7 +531,7 @@ to lists is no longer supported.</p>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">statistical bootstrapping</a> 的示例，使用重新采样和替换来估计一个样本的均值的置信区间:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># http://statistics.about.com/od/Applications/a/Example-Of-Bootstrapping.htm</span>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://www.thoughtco.com/example-of-bootstrapping-3126155</span>
 <span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">fmean</span> <span class="k">as</span> <span class="n">mean</span>
 <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choices</span>
 
@@ -570,8 +594,15 @@ to lists is no longer supported.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <p><a class="reference external" href="https://www.youtube.com/watch?v=Iq9DzN6mvYA">Statistics for Hackers</a> <a class="reference external" href="https://us.pycon.org/2016/speaker/profile/295/">Jake Vanderplas</a> 撰写的视频教程，使用一些基本概念进行统计分析，包括模拟、抽样、改组和交叉验证。</p>
-<p><a class="reference external" href="http://nbviewer.jupyter.org/url/norvig.com/ipython/Economics.ipynb">Economics Simulation</a> <a class="reference external" href="http://norvig.com/bio.html">Peter Norvig</a> 编写的市场模拟，显示了该模块提供的许多工具和分布的有效使用（高斯、均匀、样本、beta变量、选择、三角和随机范围等）。</p>
-<p><a class="reference external" href="http://nbviewer.jupyter.org/url/norvig.com/ipython/Probability.ipynb">A Concrete Introduction to Probability (using Python)</a> <a class="reference external" href="http://norvig.com/bio.html">Peter Norvig</a> 撰写的教程，涵盖了概率论基础知识，如何编写模拟，以及如何使用 Python 进行数据分析。</p>
+<p><a class="reference external" href="https://nbviewer.jupyter.org/url/norvig.com/ipython/Economics.ipynb">Economics Simulation</a>
+a simulation of a marketplace by
+<a class="reference external" href="https://norvig.com/bio.html">Peter Norvig</a> that shows effective
+use of many of the tools and distributions provided by this module
+(gauss, uniform, sample, betavariate, choice, triangular, and randrange).</p>
+<p><a class="reference external" href="https://nbviewer.jupyter.org/url/norvig.com/ipython/Probability.ipynb">A Concrete Introduction to Probability (using Python)</a>
+a tutorial by <a class="reference external" href="https://norvig.com/bio.html">Peter Norvig</a> covering
+the basics of probability theory, how to write simulations, and
+how to perform data analysis using Python.</p>
 </div>
 </section>
 <section id="recipes">
@@ -624,6 +655,7 @@ to lists is no longer supported.</p>
 <li><a class="reference internal" href="#functions-for-bytes">用于字节数据的函数</a></li>
 <li><a class="reference internal" href="#functions-for-integers">整数用函数</a></li>
 <li><a class="reference internal" href="#functions-for-sequences">序列用函数</a></li>
+<li><a class="reference internal" href="#discrete-distributions">Discrete distributions</a></li>
 <li><a class="reference internal" href="#real-valued-distributions">实值分布</a></li>
 <li><a class="reference internal" href="#alternative-generator">替代生成器</a></li>
 <li><a class="reference internal" href="#notes-on-reproducibility">关于再现性的说明</a></li>
@@ -722,7 +754,7 @@ to lists is no longer supported.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -295,10 +295,7 @@ enumeration.</p>
 <p><span class="versionmodified added">3.6 新版功能: </span><code class="docutils literal notranslate"><span class="pre">Flag</span></code>, <code class="docutils literal notranslate"><span class="pre">IntFlag</span></code>, <code class="docutils literal notranslate"><span class="pre">auto</span></code></p>
 </div>
 <div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能: </span><code class="docutils literal notranslate"><span class="pre">StrEnum</span></code>, <code class="docutils literal notranslate"><span class="pre">EnumCheck</span></code>, <code class="docutils literal notranslate"><span class="pre">FlagBoundary</span></code>, <code class="docutils literal notranslate"><span class="pre">property</span></code></p>
-</div>
-<div class="versionadded">
-<p><span class="versionmodified added">3.11 新版功能: </span><code class="docutils literal notranslate"><span class="pre">member</span></code>, <code class="docutils literal notranslate"><span class="pre">nonmember</span></code></p>
+<p><span class="versionmodified added">3.11 新版功能: </span><code class="docutils literal notranslate"><span class="pre">StrEnum</span></code>, <code class="docutils literal notranslate"><span class="pre">EnumCheck</span></code>, <code class="docutils literal notranslate"><span class="pre">FlagBoundary</span></code>, <code class="docutils literal notranslate"><span class="pre">property</span></code>, <code class="docutils literal notranslate"><span class="pre">member</span></code>, <code class="docutils literal notranslate"><span class="pre">nonmember</span></code></p>
 </div>
 </section>
 <hr class="docutils" />
@@ -338,16 +335,6 @@ non-Enum-member is used in a containment check.</p>
 names of the members in <em>cls</em>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">dir</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
 <span class="go">[&#39;BLUE&#39;, &#39;GREEN&#39;, &#39;RED&#39;, &#39;__class__&#39;, &#39;__contains__&#39;, &#39;__doc__&#39;, &#39;__getitem__&#39;, &#39;__init_subclass__&#39;, &#39;__iter__&#39;, &#39;__len__&#39;, &#39;__members__&#39;, &#39;__module__&#39;, &#39;__name__&#39;, &#39;__qualname__&#39;]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="enum.EnumType.__getattr__">
-<span class="sig-name descname"><span class="pre">__getattr__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#enum.EnumType.__getattr__" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns the Enum member in <em>cls</em> matching <em>name</em>, or raises an <a class="reference internal" href="exceptions.html#AttributeError" title="AttributeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">AttributeError</span></code></a>:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Color</span><span class="o">.</span><span class="n">GREEN</span>
-<span class="go">&lt;Color.GREEN: 2&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -1080,6 +1067,12 @@ than the last value; for <em>StrEnum</em> it will be the lower-cased version of 
 member’s name.</p>
 <p><code class="docutils literal notranslate"><span class="pre">_generate_next_value_</span></code> can be overridden to customize the values used by
 <em>auto</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>in 3.13 the default <code class="docutils literal notranslate"><span class="pre">&quot;generate_next_value_</span></code> will always return
+the highest member value incremented by 1, and will fail if any
+member is an incompatible type.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1294,7 +1287,7 @@ base class by mixing in the <code class="docutils literal notranslate"><span cla
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

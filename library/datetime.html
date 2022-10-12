@@ -680,7 +680,8 @@ ISO 8601 format, except ordinal dates (e.g. <code class="docutils literal notran
 </thead>
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">date2</span> <span class="pre">=</span> <span class="pre">date1</span> <span class="pre">+</span> <span class="pre">timedelta</span></code></p></td>
-<td><p><em>date2</em> 等于从 <em>date1</em> 减去 <code class="docutils literal notranslate"><span class="pre">timedelta.days</span></code> 天。 (1)</p></td>
+<td><p><em>date2</em> will be <code class="docutils literal notranslate"><span class="pre">timedelta.days</span></code> days
+after <em>date1</em>. (1)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">date2</span> <span class="pre">=</span> <span class="pre">date1</span> <span class="pre">-</span> <span class="pre">timedelta</span></code></p></td>
 <td><p>计算 <em>date2</em> 的值使得 <code class="docutils literal notranslate"><span class="pre">date2</span> <span class="pre">+</span> <span class="pre">timedelta</span> <span class="pre">==</span> <span class="pre">date1</span></code>。 (2)</p></td>
@@ -1288,7 +1289,12 @@ ISO 8601 format, with the following exceptions:</p>
 <dt class="sig sig-object py" id="datetime.datetime.timestamp">
 <span class="sig-prename descclassname"><span class="pre">datetime.</span></span><span class="sig-name descname"><span class="pre">timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#datetime.datetime.timestamp" title="永久链接至目标">¶</a></dt>
 <dd><p>返回对应于 <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> 实例的 POSIX 时间戳。 此返回值是与 <a class="reference internal" href="time.html#time.time" title="time.time"><code class="xref py py-func docutils literal notranslate"><span class="pre">time.time()</span></code></a> 返回值类似的 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 对象。</p>
-<p>简单型 <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> 实例会假定为代表本地时间，并且此方法依赖于平台的 C <code class="xref c c-func docutils literal notranslate"><span class="pre">mktime()</span></code> 函数来执行转换。 由于在许多平台上 <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> 支持的范围比 <code class="xref c c-func docutils literal notranslate"><span class="pre">mktime()</span></code> 更广，对于极其遥远的过去或未来此方法可能引发 <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>。</p>
+<p>Naive <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> instances are assumed to represent local
+time and this method relies on the platform C <code class="xref c c-func docutils literal notranslate"><span class="pre">mktime()</span></code>
+function to perform the conversion. Since <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a>
+supports wider range of values than <code class="xref c c-func docutils literal notranslate"><span class="pre">mktime()</span></code> on many
+platforms, this method may raise <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a> or <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>
+for times far in the past or far in the future.</p>
 <p>对于感知型 <a class="reference internal" href="#datetime.datetime" title="datetime.datetime"><code class="xref py py-class docutils literal notranslate"><span class="pre">datetime</span></code></a> 实例，返回值的计算方式为:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">dt</span> <span class="o">-</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">1970</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">tzinfo</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">))</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
 </pre></div>
@@ -1642,7 +1648,7 @@ ISO 8601 format, with the following exceptions:</p>
 ISO 8601 format, with the following exceptions:</p>
 <ol class="arabic simple">
 <li><p>Time zone offsets may have fractional seconds.</p></li>
-<li><p>The leading <cite>T</cite>, normally required in cases where there may be ambiguity between
+<li><p>The leading <code class="docutils literal notranslate"><span class="pre">T</span></code>, normally required in cases where there may be ambiguity between
 a date and a time, is not required.</p></li>
 <li><p>Fractional seconds may have any number of digits (anything beyond 6 will
 be truncated).</p></li>
@@ -1969,7 +1975,7 @@ be truncated).</p></li>
 <span class="c1"># DST start and end times. For a complete and up-to-date set of DST rules</span>
 <span class="c1"># and timezone definitions, visit the Olson Database (or try pytz):</span>
 <span class="c1"># http://www.twinsun.com/tz/tz-link.htm</span>
-<span class="c1"># http://sourceforge.net/projects/pytz/ (might not be up-to-date)</span>
+<span class="c1"># https://sourceforge.net/projects/pytz/ (might not be up-to-date)</span>
 <span class="c1">#</span>
 <span class="c1"># In the US, since 2007, DST starts at 2am (standard time) on the second</span>
 <span class="c1"># Sunday in March, which is the first Sunday on or after Mar 8.</span>
@@ -2162,7 +2168,8 @@ database) to Python, and its usage is recommended.</p>
 <dd><p>返回当 <a class="reference internal" href="#datetime.timezone" title="datetime.timezone"><code class="xref py py-class docutils literal notranslate"><span class="pre">timezone</span></code></a> 实例被构造时指定的固定值。</p>
 <p>如果没有在构造器中提供 <em>name</em>，则 <code class="docutils literal notranslate"><span class="pre">tzname(dt)</span></code> 所返回的名称将根据 <code class="docutils literal notranslate"><span class="pre">offset</span></code> 值按以下规则生成。 如果 <em>offset</em> 为 <code class="docutils literal notranslate"><span class="pre">timedelta(0)</span></code>，则名称为“UTC”，否则为字符串 <code class="docutils literal notranslate"><span class="pre">UTC±HH:MM</span></code>，其中 ± 为 <code class="docutils literal notranslate"><span class="pre">offset</span></code> 的正负符号，HH 和 MM 分别为表示 <code class="docutils literal notranslate"><span class="pre">offset.hours</span></code> 和 <code class="docutils literal notranslate"><span class="pre">offset.minutes</span></code> 的两个数码。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.6 版更改: </span>由 <code class="docutils literal notranslate"><span class="pre">offset=timedelta(0)</span></code> 生成的名称现在为简单的 <cite>‘UTC’</cite> 而不再是 <code class="docutils literal notranslate"><span class="pre">'UTC+00:00'</span></code>。</p>
+<p><span class="versionmodified changed">在 3.6 版更改: </span>Name generated from <code class="docutils literal notranslate"><span class="pre">offset=timedelta(0)</span></code> is now plain <code class="docutils literal notranslate"><span class="pre">'UTC'</span></code>, not
+<code class="docutils literal notranslate"><span class="pre">'UTC+00:00'</span></code>.</p>
 </div>
 </dd></dl>
 
@@ -2458,6 +2465,17 @@ week 0.</p></td>
 <td><p>(8),
 (9)</p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%:z</span></code></p></td>
+<td><p>UTC offset in the form
+<code class="docutils literal notranslate"><span class="pre">±HH:MM[:SS[.ffffff]]</span></code>
+(empty string if the object is
+naive).</p></td>
+<td><p>(empty), +00:00,
+-04:00, +10:30,
++06:34:15,
+-03:07:12.345216</p></td>
+<td><p>(6)</p></td>
+</tr>
 </tbody>
 </table>
 <p>这些代码可能不是在所有平台上都可与 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> 方法配合使用。 ISO 8601 年份和 ISO 8601 星期指令并不能与上面的年份和星期序号指令相互替代。 调用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> 时传入不完整或有歧义的 ISO 8601 指令将引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
@@ -2468,6 +2486,9 @@ platform, consult the <em class="manpage"><a class="manpage reference external" 
 differences between platforms in handling of unsupported format specifiers.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能: </span>增加了 <code class="docutils literal notranslate"><span class="pre">%G</span></code>,  <code class="docutils literal notranslate"><span class="pre">%u</span></code>  和 <code class="docutils literal notranslate"><span class="pre">%V</span></code>。</p>
+</div>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能: </span><code class="docutils literal notranslate"><span class="pre">%:z</span></code> was added.</p>
 </div>
 </section>
 <section id="technical-detail">
@@ -2496,7 +2517,8 @@ differences between platforms in handling of unsupported format specifiers.</p>
 <li><p>当与 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> 方法一起使用时，如果使用 <code class="docutils literal notranslate"><span class="pre">%I</span></code> 指令来解析小时，<code class="docutils literal notranslate"><span class="pre">%p</span></code> 指令只影响输出小时字段。</p></li>
 <li><p>与 <a class="reference internal" href="time.html#module-time" title="time: Time access and conversions."><code class="xref py py-mod docutils literal notranslate"><span class="pre">time</span></code></a> 模块不同的是， <a class="reference internal" href="#module-datetime" title="datetime: Basic date and time types."><code class="xref py py-mod docutils literal notranslate"><span class="pre">datetime</span></code></a> 模块不支持闰秒。</p></li>
 <li><p>当与 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> 方法一起使用时，<code class="docutils literal notranslate"><span class="pre">%f</span></code> 指令可接受一至六个数码及左边的零填充。 <code class="docutils literal notranslate"><span class="pre">%f</span></code> 是对 C 标准中格式字符集的扩展（但单独在 datetime 对象中实现，因此它总是可用）。</p></li>
-<li><p>对于简单型对象，<code class="docutils literal notranslate"><span class="pre">%z</span></code> and <code class="docutils literal notranslate"><span class="pre">%Z</span></code> 格式代码会被替换为空字符串。</p>
+<li><p>For a naive object, the <code class="docutils literal notranslate"><span class="pre">%z</span></code>, <code class="docutils literal notranslate"><span class="pre">%:z</span></code> and <code class="docutils literal notranslate"><span class="pre">%Z</span></code> format codes are replaced
+by empty strings.</p>
 <p>对于一个感知型对象而言：</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">%z</span></code></dt><dd><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">utcoffset()</span></code> 会被转换为 <code class="docutils literal notranslate"><span class="pre">±HHMM[SS[.ffffff]]</span></code> 形式的字符串，其中 <code class="docutils literal notranslate"><span class="pre">HH</span></code> 为给出 UTC 时差的小时部分的 2 位数码字符串，<code class="docutils literal notranslate"><span class="pre">MM</span></code> 为给出 UTC 时差的分钟部分的 2 位数码字符串，<code class="docutils literal notranslate"><span class="pre">SS</span></code> 为给出 UTC 时差的秒部分的 2 位数码字符串，而 <code class="docutils literal notranslate"><span class="pre">ffffff</span></code> 为给出 UTC 时差的微秒部分的 6 位数码字符串。 当时差为整数秒时 <code class="docutils literal notranslate"><span class="pre">ffffff</span></code> 部分将被省略，而当时差为整数分钟时 <code class="docutils literal notranslate"><span class="pre">ffffff</span></code> 和 <code class="docutils literal notranslate"><span class="pre">SS</span></code> 部分都将被省略。 例如，如果 <code class="xref py py-meth docutils literal notranslate"><span class="pre">utcoffset()</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">timedelta(hours=-3,</span> <span class="pre">minutes=-30)</span></code>，则 <code class="docutils literal notranslate"><span class="pre">%z</span></code> 会被替换为字符串 <code class="docutils literal notranslate"><span class="pre">'-0330'</span></code>。</p>
@@ -2509,6 +2531,9 @@ differences between platforms in handling of unsupported format specifiers.</p>
 <p><span class="versionmodified changed">在 3.7 版更改: </span>当提供 <code class="docutils literal notranslate"><span class="pre">%z</span></code> 指令给 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> 方法时，UTC 差值可以在时、分和秒之间使用冒号分隔符。 例如，<code class="docutils literal notranslate"><span class="pre">'+01:00:00'</span></code> 将被解读为一小时的差值。 此外，提供 <code class="docutils literal notranslate"><span class="pre">'Z'</span></code> 就相当于 <code class="docutils literal notranslate"><span class="pre">'+00:00'</span></code>。</p>
 </div>
 <dl>
+<dt><code class="docutils literal notranslate"><span class="pre">%:z</span></code></dt><dd><p>Behaves exactly as <code class="docutils literal notranslate"><span class="pre">%z</span></code>, but has a colon separator added between
+hours, minutes and seconds.</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">%Z</span></code></dt><dd><p>在 <code class="xref py py-meth docutils literal notranslate"><span class="pre">strftime()</span></code> 中，如果 <code class="xref py py-meth docutils literal notranslate"><span class="pre">tzname()</span></code> 返回 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则 <code class="docutils literal notranslate"><span class="pre">%Z</span></code> 会被替换为一个空字符串；在其他情况下 <code class="docutils literal notranslate"><span class="pre">%Z</span></code> 会被替换为返回值，该值必须为一个字符串。</p>
 <p><code class="xref py py-meth docutils literal notranslate"><span class="pre">strptime()</span></code> 仅接受特定的 <code class="docutils literal notranslate"><span class="pre">%Z</span></code> 值:</p>
 <ol class="arabic simple">
@@ -2680,7 +2705,7 @@ for a good explanation.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

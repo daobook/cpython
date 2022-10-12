@@ -187,7 +187,9 @@ which should return an <a class="reference internal" href="numbers.html#numbers.
 <span class="sig-prename descclassname"><span class="pre">math.</span></span><span class="sig-name descname"><span class="pre">comb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#math.comb" title="永久链接至目标">¶</a></dt>
 <dd><p>返回不重复且无顺序地从 <em>n</em> 项中选择 <em>k</em> 项的方式总数。</p>
 <p>当 <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">&lt;=</span> <span class="pre">n</span></code> 时取值为 <code class="docutils literal notranslate"><span class="pre">n!</span> <span class="pre">/</span> <span class="pre">(k!</span> <span class="pre">*</span> <span class="pre">(n</span> <span class="pre">-</span> <span class="pre">k)!)</span></code>；当 <code class="docutils literal notranslate"><span class="pre">k</span> <span class="pre">&gt;</span> <span class="pre">n</span></code> 时取值为零。</p>
-<p>也称为二项式系数，因为它等价于表达式 <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">x)</span> <span class="pre">**</span> <span class="pre">n</span></code> 的多项式展开中第 k 项的系数。</p>
+<p>Also called the binomial coefficient because it is equivalent
+to the coefficient of k-th term in polynomial expansion of
+<code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">+</span> <span class="pre">x)ⁿ</span></code>.</p>
 <p>如果任一参数不为整数则会引发 <a class="reference internal" href="exceptions.html#TypeError" title="TypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code></a>。 如果任一参数为负数则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
@@ -239,8 +241,9 @@ should return an <a class="reference internal" href="numbers.html#numbers.Integr
 <dl class="py function">
 <dt class="sig sig-object py" id="math.fsum">
 <span class="sig-prename descclassname"><span class="pre">math.</span></span><span class="sig-name descname"><span class="pre">fsum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#math.fsum" title="永久链接至目标">¶</a></dt>
-<dd><p>返回迭代中的精确浮点值。通过跟踪多个中间部分和来避免精度损失:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">])</span>
+<dd><p>Return an accurate floating point sum of values in the iterable.  Avoids
+loss of precision by tracking multiple intermediate partial sums:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">sum</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">])</span>
 <span class="go">0.9999999999999999</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fsum</span><span class="p">([</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">])</span>
 <span class="go">1.0</span>
@@ -443,8 +446,11 @@ for negative <em>x</em>. If <em>x</em> is not a float, delegates to <a class="re
 <dl class="py function">
 <dt class="sig sig-object py" id="math.expm1">
 <span class="sig-prename descclassname"><span class="pre">math.</span></span><span class="sig-name descname"><span class="pre">expm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#math.expm1" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 <em>e</em> 的 <em>x</em> 次幂，减1。这里 <em>e</em> 是自然对数的基数。对于小浮点数 <em>x</em> ， <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code> 中的减法可能导致 <a class="reference external" href="https://en.wikipedia.org/wiki/Loss_of_significance">significant loss of precision</a>； <a class="reference internal" href="#math.expm1" title="math.expm1"><code class="xref py py-func docutils literal notranslate"><span class="pre">expm1()</span></code></a> 函数提供了一种将此数量计算为全精度的方法:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">expm1</span>
+<dd><p>Return <em>e</em> raised to the power <em>x</em>, minus 1.  Here <em>e</em> is the base of natural
+logarithms.  For small floats <em>x</em>, the subtraction in <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code>
+can result in a <a class="reference external" href="https://en.wikipedia.org/wiki/Loss_of_significance">significant loss of precision</a>; the <a class="reference internal" href="#math.expm1" title="math.expm1"><code class="xref py py-func docutils literal notranslate"><span class="pre">expm1()</span></code></a>
+function provides a way to compute this quantity to full precision:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">expm1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">exp</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># gives result accurate to 11 places</span>
 <span class="go">1.0000050000069649e-05</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">expm1</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">)</span>    <span class="c1"># result accurate to full precision</span>
@@ -600,7 +606,9 @@ for consistency with IEEE 754.</p>
 </section>
 <section id="hyperbolic-functions">
 <h2>双曲函数<a class="headerlink" href="#hyperbolic-functions" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_function">双曲函数</a> 是基于双曲线而非圆来对三角函数进行模拟。</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Hyperbolic_functions">Hyperbolic functions</a>
+are analogs of trigonometric functions that are based on hyperbolas
+instead of circles.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="math.acosh">
 <span class="sig-prename descclassname"><span class="pre">math.</span></span><span class="sig-name descname"><span class="pre">acosh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#math.acosh" title="永久链接至目标">¶</a></dt>
@@ -725,7 +733,7 @@ not considered to equal to any other numeric value, including themselves. To che
 whether a number is a NaN, use the <a class="reference internal" href="#math.isnan" title="math.isnan"><code class="xref py py-func docutils literal notranslate"><span class="pre">isnan()</span></code></a> function to test
 for NaNs instead of <code class="docutils literal notranslate"><span class="pre">is</span></code> or <code class="docutils literal notranslate"><span class="pre">==</span></code>.
 Example:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">math</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">math</span><span class="o">.</span><span class="n">nan</span>
 <span class="go">False</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
@@ -869,7 +877,7 @@ Example:</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

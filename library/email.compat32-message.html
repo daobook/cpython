@@ -172,7 +172,12 @@
 <span class="sig-name descname"><span class="pre">as_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unixfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxheaderlen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.message.Message.as_string" title="永久链接至目标">¶</a></dt>
 <dd><p>以展平的字符串形式返回整个消息对象。 或可选的 <em>unixfrom</em> 为真值，返回的字符串会包括封包标头。 <em>unixfrom</em> 的默认值是 <code class="docutils literal notranslate"><span class="pre">False</span></code>。 出于保持向下兼容性的原因，<em>maxheaderlen</em> 的默认值是 <code class="docutils literal notranslate"><span class="pre">0</span></code>，因此如果你想要不同的值你必须显式地重载它（在策略中为 <em>max_line_length</em> 指定的值将被此方法忽略）。 <em>policy</em> 参数可被用于覆盖从消息实例获取的默认策略。 这可以用来对该方法所输出的格式进行一些控制，因为指定的 <em>policy</em> 将被传递给 <code class="docutils literal notranslate"><span class="pre">Generator</span></code>。</p>
 <p>如果需要填充默认值以完成对字符串的转换则展平消息可能触发对 <a class="reference internal" href="#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> 的修改（例如，MIME 边界可能会被生成或被修改）。</p>
-<p>请注意此方法是出于便捷原因提供的，可能无法总是以你想要的方式格式化消息。 例如，在默认情况下它不会按 unix mbox 格式的要求对以 <code class="docutils literal notranslate"><span class="pre">From</span></code> 打头的行执行调整。 为了获得更高灵活性，请实例化一个 <a class="reference internal" href="email.generator.html#email.generator.Generator" title="email.generator.Generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a> 实例并直接使用其 <a class="reference internal" href="email.generator.html#email.generator.Generator.flatten" title="email.generator.Generator.flatten"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flatten()</span></code></a> 方法。 例如:</p>
+<p>Note that this method is provided as a convenience and may not always
+format the message the way you want.  For example, by default it does
+not do the mangling of lines that begin with <code class="docutils literal notranslate"><span class="pre">From</span></code> that is
+required by the Unix mbox format.  For more flexibility, instantiate a
+<a class="reference internal" href="email.generator.html#email.generator.Generator" title="email.generator.Generator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a> instance and use its
+<a class="reference internal" href="email.generator.html#email.generator.Generator.flatten" title="email.generator.Generator.flatten"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flatten()</span></code></a> method directly.  For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">from</span> <span class="nn">email.generator</span> <span class="kn">import</span> <span class="n">Generator</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
@@ -198,7 +203,13 @@
 <span class="sig-name descname"><span class="pre">as_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unixfrom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">policy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#email.message.Message.as_bytes" title="永久链接至目标">¶</a></dt>
 <dd><p>以字节串对象的形式返回整个扁平化后的消息。 当可选的 <em>unixfrom</em> 为真值时，返回的字符串会包括封包标头。 <em>unixfrom</em> 的默认值为 <code class="docutils literal notranslate"><span class="pre">False</span></code>。 <em>policy</em> 参数可被用于重载从消息实例获取的默认策略。 这可被用来控制该方法所产生的部分格式化效果，因为指定的 <em>policy</em> 将被传递给 <code class="docutils literal notranslate"><span class="pre">BytesGenerator</span></code>。</p>
 <p>如果需要填充默认值以完成对字符串的转换则展平消息可能触发对 <a class="reference internal" href="#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> 的修改（例如，MIME 边界可能会被生成或被修改）。</p>
-<p>请注意此方法是出于便捷原因提供的，可能无法总是以你想要的方式格式化消息。 例如，在默认情况下它不会按 unix mbox 格式的要求对以 <code class="docutils literal notranslate"><span class="pre">From</span></code> 打头的行执行调整。 为了获得更高灵活性，请实例化一个 <a class="reference internal" href="email.generator.html#email.generator.BytesGenerator" title="email.generator.BytesGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesGenerator</span></code></a> 实例并直接使用其 <a class="reference internal" href="email.generator.html#email.generator.BytesGenerator.flatten" title="email.generator.BytesGenerator.flatten"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flatten()</span></code></a> 方法。 例如:</p>
+<p>Note that this method is provided as a convenience and may not always
+format the message the way you want.  For example, by default it does
+not do the mangling of lines that begin with <code class="docutils literal notranslate"><span class="pre">From</span></code> that is
+required by the Unix mbox format.  For more flexibility, instantiate a
+<a class="reference internal" href="email.generator.html#email.generator.BytesGenerator" title="email.generator.BytesGenerator"><code class="xref py py-class docutils literal notranslate"><span class="pre">BytesGenerator</span></code></a> instance and use its
+<a class="reference internal" href="email.generator.html#email.generator.BytesGenerator.flatten" title="email.generator.BytesGenerator.flatten"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flatten()</span></code></a> method directly.
+For example:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">email.generator</span> <span class="kn">import</span> <span class="n">BytesGenerator</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
@@ -281,7 +292,10 @@
 <p>以下方法实现了用于访问消息的 <span class="target" id="index-25"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2822.html"><strong>RFC 2822</strong></a> 标头的类映射接口。  请注意这些方法和普通映射（例如字典）接口之间存在一些语义上的不同。 举例来说，在一个字典中不能有重复的键，但消息标头则可能有重复。 并且，在字典中由 <a class="reference internal" href="#email.message.Message.keys" title="email.message.Message.keys"><code class="xref py py-meth docutils literal notranslate"><span class="pre">keys()</span></code></a> 返回的键的顺序是没有保证的，但在 <a class="reference internal" href="#email.message.Message" title="email.message.Message"><code class="xref py py-class docutils literal notranslate"><span class="pre">Message</span></code></a> 对象中，标头总是会按它们在原始消息中的出现或后继加入顺序返回。 任何已删除再重新加入的标头总是会添加到标头列表的末尾。</p>
 <p>这些语义上的差异是有意为之且其目的是为了提供最大的便利性。</p>
 <p>请注意在任何情况下，消息当中的任何封包标头都不会包含在映射接口当中。</p>
-<p>在由字节串生成的模型中，任何包含非 ASCII 字节数据（违反 RFC）的标头值当通过此接口来获取时，将被表示为使用 <cite>unknown-8bit</cite> 字符集的 <a class="reference internal" href="email.header.html#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> 对象。</p>
+<p>In a model generated from bytes, any header values that (in contravention of
+the RFCs) contain non-ASCII bytes will, when retrieved through this
+interface, be represented as <a class="reference internal" href="email.header.html#email.header.Header" title="email.header.Header"><code class="xref py py-class docutils literal notranslate"><span class="pre">Header</span></code></a> objects with
+a charset of <code class="docutils literal notranslate"><span class="pre">unknown-8bit</span></code>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="email.message.Message.__len__">
 <span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#email.message.Message.__len__" title="永久链接至目标">¶</a></dt>
@@ -668,7 +682,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

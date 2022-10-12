@@ -255,7 +255,9 @@ library; for 32-bit systems, it is typically in 2038.</p></li>
 <p class="admonition-title">警告</p>
 <p>传递无效的或过期的 <em>thread_id</em> 可能会导致未定义的行为，例如段错误。</p>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a> ： Unix（有关详细信息，请参见 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pthread_getcpuclockid(3)">pthread_getcpuclockid(3)</a></em> 的手册页）。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix<p>See the man page for <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/pthread_getcpuclockid(3)">pthread_getcpuclockid(3)</a></em> for
+further information.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -717,7 +719,8 @@ time</a>.</p>
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">thread_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="functions.html#float" title="float"><span class="pre">float</span></a></span></span><a class="headerlink" href="#time.thread_time" title="永久链接至目标">¶</a></dt>
 <dd><p id="index-12">（以小数表示的秒为单位）返回当前线程的系统和用户 CPU 时间的总计值。 它不包括睡眠状态所消耗的时间。 根据定义它只作用于线程范围。 返回值的参考点未被定义，因此只有两次调用之间的差值才是有效的。</p>
 <p>使用 <a class="reference internal" href="#time.thread_time_ns" title="time.thread_time_ns"><code class="xref py py-func docutils literal notranslate"><span class="pre">thread_time_ns()</span></code></a> 以避免 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 类型导致的精度损失。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a> ： Windows、 Linux、 Unix 系统支持 <code class="docutils literal notranslate"><span class="pre">CLOCK_THREAD_CPUTIME_ID</span></code> 。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux, Unix, Windows.<p>Unix systems supporting <code class="docutils literal notranslate"><span class="pre">CLOCK_THREAD_CPUTIME_ID</span></code>.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -796,7 +799,7 @@ time</a>.</p>
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">CLOCK_BOOTTIME</span></span><a class="headerlink" href="#time.CLOCK_BOOTTIME" title="永久链接至目标">¶</a></dt>
 <dd><p>与 <a class="reference internal" href="#time.CLOCK_MONOTONIC" title="time.CLOCK_MONOTONIC"><code class="xref py py-data docutils literal notranslate"><span class="pre">CLOCK_MONOTONIC</span></code></a> 相同，除了它还包括系统暂停的任何时间。</p>
 <p>这允许应用程序获得一个暂停感知的单调时钟，而不必处理 <a class="reference internal" href="#time.CLOCK_REALTIME" title="time.CLOCK_REALTIME"><code class="xref py py-data docutils literal notranslate"><span class="pre">CLOCK_REALTIME</span></code></a> 的复杂性，如果使用 <code class="docutils literal notranslate"><span class="pre">settimeofday()</span></code> 或类似的时间更改时间可能会有不连续性。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Linux 2.6.39 或更新</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.39.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -826,7 +829,7 @@ time</a>.</p>
 <dt class="sig sig-object py" id="time.CLOCK_MONOTONIC_RAW">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">CLOCK_MONOTONIC_RAW</span></span><a class="headerlink" href="#time.CLOCK_MONOTONIC_RAW" title="永久链接至目标">¶</a></dt>
 <dd><p>类似于 <a class="reference internal" href="#time.CLOCK_MONOTONIC" title="time.CLOCK_MONOTONIC"><code class="xref py py-data docutils literal notranslate"><span class="pre">CLOCK_MONOTONIC</span></code></a> ，但可以访问不受NTP调整影响的原始硬件时间。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Linux 2.6.28 和更新版本， macOS 10.12 和更新版本。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.28, macOS &gt;= 10.12.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -846,7 +849,7 @@ time</a>.</p>
 <dt class="sig sig-object py" id="time.CLOCK_PROF">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">CLOCK_PROF</span></span><a class="headerlink" href="#time.CLOCK_PROF" title="永久链接至目标">¶</a></dt>
 <dd><p>来自CPU的高分辨率每进程计时器。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: FreeBSD， NetBSD 7 或更新， OpenBSD.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD, NetBSD &gt;= 7, OpenBSD.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -877,7 +880,7 @@ time</a>.</p>
 <dt class="sig sig-object py" id="time.CLOCK_UPTIME">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">CLOCK_UPTIME</span></span><a class="headerlink" href="#time.CLOCK_UPTIME" title="永久链接至目标">¶</a></dt>
 <dd><p>该时间的绝对值是系统运行且未暂停的时间，提供准确的正常运行时间测量，包括绝对值和间隔值。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: FreeBSD， OpenBSD 5.5 或更新。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: FreeBSD, OpenBSD &gt;= 5.5.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -887,7 +890,7 @@ time</a>.</p>
 <dt class="sig sig-object py" id="time.CLOCK_UPTIME_RAW">
 <span class="sig-prename descclassname"><span class="pre">time.</span></span><span class="sig-name descname"><span class="pre">CLOCK_UPTIME_RAW</span></span><a class="headerlink" href="#time.CLOCK_UPTIME_RAW" title="永久链接至目标">¶</a></dt>
 <dd><p>单调递增的时钟，记录从一个任意起点开始的时间，不受频率或时间调整的影响，并且当系统休眠时将不会递增。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: macOS 10.12 和更新版本。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: macOS &gt;= 10.12.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.8 新版功能.</span></p>
 </div>
@@ -1067,7 +1070,7 @@ been first recommended by <span class="target" id="index-21"></span><a class="rf
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -191,7 +191,7 @@
           <div class="body" role="main">
             
   <section id="event-loop">
-<h1>事件循环<a class="headerlink" href="#event-loop" title="永久链接至标题">¶</a></h1>
+<span id="asyncio-event-loop"></span><h1>事件循环<a class="headerlink" href="#event-loop" title="永久链接至标题">¶</a></h1>
 <p><strong>源代码:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/asyncio/events.py">Lib/asyncio/events.py</a>, <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/asyncio/base_events.py">Lib/asyncio/base_events.py</a></p>
 <hr class="docutils" />
 <p class="rubric">前言</p>
@@ -244,7 +244,7 @@
 <li><p><a class="reference internal" href="#examples">Examples</a> 章节展示了如何使用某些事件循环API。</p></li>
 </ul>
 <section id="event-loop-methods">
-<span id="asyncio-event-loop"></span><h2>事件循环方法集<a class="headerlink" href="#event-loop-methods" title="永久链接至标题">¶</a></h2>
+<span id="asyncio-event-loop-methods"></span><h2>事件循环方法集<a class="headerlink" href="#event-loop-methods" title="永久链接至标题">¶</a></h2>
 <p>事件循环有下列 <strong>低级</strong> APIs：</p>
 <div class="contents local topic" id="id1">
 <ul class="simple">
@@ -332,11 +332,19 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="asyncio.loop.shutdown_default_executor">
-<em class="property"><span class="pre">coroutine</span> </em><span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">shutdown_default_executor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.shutdown_default_executor" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">coroutine</span> </em><span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">shutdown_default_executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.shutdown_default_executor" title="永久链接至目标">¶</a></dt>
 <dd><p>安排默认执行器的关闭并等待它合并 <code class="xref py py-class docutils literal notranslate"><span class="pre">ThreadPoolExecutor</span></code> 中的所有线程。 在调用此方法后，如果在使用默认执行器期间调用了 <a class="reference internal" href="#asyncio.loop.run_in_executor" title="asyncio.loop.run_in_executor"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.run_in_executor()</span></code></a> 则将会引发 <a class="reference internal" href="exceptions.html#RuntimeError" title="RuntimeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a>。</p>
+<p>The <em>timeout</em> parameter specifies the amount of time the executor will
+be given to finish joining. The default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>, which means the
+executor will be given an unlimited amount of time.</p>
+<p>If the timeout duration is reached, a warning is emitted and executor is
+terminated without waiting for its threads to finish joining.</p>
 <p>请注意当使用 <a class="reference internal" href="asyncio-runner.html#asyncio.run" title="asyncio.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">asyncio.run()</span></code></a> 时不必调用此函数。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
+</div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>Added the <em>timeout</em> parameter.</p>
 </div>
 </dd></dl>
 
@@ -440,7 +448,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="asyncio.loop.create_task">
 <span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">create_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coro</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.create_task" title="永久链接至目标">¶</a></dt>
-<dd><p>安排一个 <a class="reference internal" href="asyncio-task.html#coroutine"><span class="std std-ref">协程</span></a> 的执行。返回一个  <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a>  对象。</p>
+<dd><p>Schedule the execution of <a class="reference internal" href="asyncio-task.html#coroutine"><span class="std std-ref">coroutine</span></a> <em>coro</em>.
+Return a <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> object.</p>
 <p>第三方的事件循环可以使用它们自己的 <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> 子类来满足互操作性。这种情况下结果类型是一个 <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> 的子类。</p>
 <p>如果提供了 <em>name</em> 参数且不为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，它会使用 <a class="reference internal" href="asyncio-task.html#asyncio.Task.set_name" title="asyncio.Task.set_name"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Task.set_name()</span></code></a> 来设为任务的名称。</p>
 <p>An optional keyword-only <em>context</em> argument allows specifying a
@@ -476,7 +485,7 @@ must return a <a class="reference internal" href="asyncio-future.html#asyncio.Fu
 <h3><a class="toc-backref" href="#id6">打开网络连接</a><a class="headerlink" href="#opening-network-connections" title="永久链接至标题">¶</a></h3>
 <dl class="py method">
 <dt class="sig sig-object py" id="asyncio.loop.create_connection">
-<em class="property"><span class="pre">coroutine</span> </em><span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol_factory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">family</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_handshake_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_shutdown_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">happy_eyeballs_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interleave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.create_connection" title="永久链接至目标">¶</a></dt>
+<em class="property"><span class="pre">coroutine</span> </em><span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">create_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol_factory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">family</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">proto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_addr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_hostname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_handshake_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_shutdown_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">happy_eyeballs_delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interleave</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_errors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.create_connection" title="永久链接至目标">¶</a></dt>
 <dd><p>打开一个流式传输连接，连接到由 <em>host</em> 和 <em>port</em> 指定的地址。</p>
 <p>套接字族可以是 <a class="reference internal" href="socket.html#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET</span></code></a> 或 <a class="reference internal" href="socket.html#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>，具体取决于 <em>host</em> (或 <em>family</em> 参数，如果有提供的话)。</p>
 <p>套接字类型将为 <a class="reference internal" href="socket.html#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-data docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a>。</p>
@@ -502,12 +511,25 @@ must return a <a class="reference internal" href="asyncio-future.html#asyncio.Fu
 <li><p><em>family</em>, <em>proto</em>, <em>flags</em>  是可选的地址族、协议和标志，它们会被传递给 getaddrinfo() 来对 <em>host</em> 进行解析。如果要指定的话，这些都应该是来自于 <a class="reference internal" href="socket.html#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> 模块的对应常量。</p></li>
 <li><p>如果给出 <em>happy_eyeballs_delay</em>，它将为此链接启用 Happy Eyeballs。 该函数应当为一个表示在开始下一个并行尝试之前要等待连接尝试完成的秒数的浮点数。 这也就是在 <span class="target" id="index-15"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8305.html"><strong>RFC 8305</strong></a> 中定义的 “连接尝试延迟”。 该 RFC 所推荐的合理默认值为 <code class="docutils literal notranslate"><span class="pre">0.25</span></code> (250 毫秒)。</p></li>
 <li><p><em>interleave</em> 控制当主机名解析为多个 IP 地址时的地址重排序。 如果该参数为 <code class="docutils literal notranslate"><span class="pre">0</span></code> 或未指定，则不会进行重排序，这些地址会按 <a class="reference internal" href="#asyncio.loop.getaddrinfo" title="asyncio.loop.getaddrinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 所返回的顺序进行尝试。 如果指定了一个正整数，这些地址会按地址族交错排列，而指定的整数会被解读为 <span class="target" id="index-16"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc8305.html"><strong>RFC 8305</strong></a> 所定义的 “首个地址族计数”。 如果 <em>happy_eyeballs_delay</em> 未指定则默认值为 <code class="docutils literal notranslate"><span class="pre">0</span></code>，否则为 <code class="docutils literal notranslate"><span class="pre">1</span></code>。</p></li>
-<li><p>如果给出 <em>sock</em>，它应当是一个已存在、已连接并将被传输所使用的 <a class="reference internal" href="socket.html#socket.socket" title="socket.socket"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></a> 对象。 如果给出了 <em>sock</em>，则 <em>host</em>, <em>port</em>, <em>family</em>, <em>proto</em>, <em>flags</em>, <em>happy_eyeballs_delay</em>, <em>interleave</em> 和 <em>local_addr</em> 都不应当被指定。</p></li>
+<li><p>如果给出 <em>sock</em>，它应当是一个已存在、已连接并将被传输所使用的 <a class="reference internal" href="socket.html#socket.socket" title="socket.socket"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></a> 对象。 如果给出了 <em>sock</em>，则 <em>host</em>, <em>port</em>, <em>family</em>, <em>proto</em>, <em>flags</em>, <em>happy_eyeballs_delay</em>, <em>interleave</em> 和 <em>local_addr</em> 都不应当被指定。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+transport created. To close the socket, call the transport’s
+<a class="reference internal" href="asyncio-protocol.html#asyncio.BaseTransport.close" title="asyncio.BaseTransport.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
+</li>
 <li><p>如果给出 <em>local_addr</em>，它应当是一个用来在本地绑定套接字的 <code class="docutils literal notranslate"><span class="pre">(local_host,</span> <span class="pre">local_port)</span></code> 元组。 <em>local_host</em> 和 <em>local_port</em> 会使用 <code class="docutils literal notranslate"><span class="pre">getaddrinfo()</span></code> 来查找，这与 <em>host</em> 和 <em>port</em> 类似。</p></li>
 <li><p><em>ssl_handshake_timeout</em> 是（用于 TLS 连接的）在放弃连接之前要等待 TLS 握手完成的秒数。 如果参数为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 则使用 (默认的) <code class="docutils literal notranslate"><span class="pre">60.0</span></code>。</p></li>
 <li><p><em>ssl_shutdown_timeout</em> is the time in seconds to wait for the SSL shutdown
 to complete before aborting the connection. <code class="docutils literal notranslate"><span class="pre">30.0</span></code> seconds if <code class="docutils literal notranslate"><span class="pre">None</span></code>
 (default).</p></li>
+<li><p><em>all_errors</em> determines what exceptions are raised when a connection cannot
+be created. By default, only a single <code class="docutils literal notranslate"><span class="pre">Exception</span></code> is raised: the first
+exception if there is only one or all errors have same message, or a single
+<code class="docutils literal notranslate"><span class="pre">OSError</span></code> with the error messages combined. When <code class="docutils literal notranslate"><span class="pre">all_errors</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>,
+an <code class="docutils literal notranslate"><span class="pre">ExceptionGroup</span></code> will be raised containing all exceptions (even if there
+is only one).</p></li>
 </ul>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span><a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a> 类中添加 SSL/TLS 支持。</p>
@@ -526,6 +548,9 @@ to complete before aborting the connection. <code class="docutils literal notran
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.11 版更改: </span>Added the <em>ssl_shutdown_timeout</em> parameter.</p>
 </div>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span><em>all_errors</em> was added.</p>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <p><a class="reference internal" href="asyncio-stream.html#asyncio.open_connection" title="asyncio.open_connection"><code class="xref py py-func docutils literal notranslate"><span class="pre">open_connection()</span></code></a> 函数是一个高层级的替代 API。 它返回一对 (<a class="reference internal" href="asyncio-stream.html#asyncio.StreamReader" title="asyncio.StreamReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamReader</span></code></a>, <a class="reference internal" href="asyncio-stream.html#asyncio.StreamWriter" title="asyncio.StreamWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamWriter</span></code></a>)，可在 async/await 代码中直接使用。</p>
@@ -541,13 +566,20 @@ to complete before aborting the connection. <code class="docutils literal notran
 <p><em>protocol_factory</em> 必须为一个返回 <a class="reference internal" href="asyncio-protocol.html#asyncio-protocol"><span class="std std-ref">协议</span></a> 实现的可调用对象。</p>
 <p>成功时返回一个 <code class="docutils literal notranslate"><span class="pre">(transport,</span> <span class="pre">protocol)</span></code> 元组。</p>
 <p>其他参数：</p>
-<ul class="simple">
+<ul>
 <li><p>如果给出 <em>local_addr</em>，它应当是一个用来在本地绑定套接字的 <code class="docutils literal notranslate"><span class="pre">(local_host,</span> <span class="pre">local_port)</span></code> 元组。 <em>local_host</em> 和 <em>local_port</em> 是使用 <a class="reference internal" href="#asyncio.loop.getaddrinfo" title="asyncio.loop.getaddrinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 来查找的。</p></li>
 <li><p><em>remote_addr</em>，如果指定的话，就是一个 <code class="docutils literal notranslate"><span class="pre">(remote_host,</span> <span class="pre">remote_port)</span></code> 元组，用于同一个远程地址连接。<em>remote_host</em> 和 <em>remote_port</em> 是使用 <a class="reference internal" href="#asyncio.loop.getaddrinfo" title="asyncio.loop.getaddrinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 来查找的。</p></li>
 <li><p><em>family</em>, <em>proto</em>, <em>flags</em> 是可选的地址族，协议和标志，其会被传递给 <a class="reference internal" href="#asyncio.loop.getaddrinfo" title="asyncio.loop.getaddrinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 来完成 <em>host</em> 的解析。如果要指定的话，这些都应该是来自于 <a class="reference internal" href="socket.html#module-socket" title="socket: Low-level networking interface."><code class="xref py py-mod docutils literal notranslate"><span class="pre">socket</span></code></a> 模块的对应常量。</p></li>
 <li><p><em>reuse_port</em> 告知内核，只要在创建时都设置了这个旗标，就允许此端点绑定到其他现有端点所绑定的相同端口上。 这个选项在 Windows 和某些 Unix 上不受支持。 如果 <code class="xref py py-data docutils literal notranslate"><span class="pre">SO_REUSEPORT</span></code> 常量未定义则此功能就是不受支持的。</p></li>
 <li><p><em>allow_broadcast</em> 告知内核允许此端点向广播地址发送消息。</p></li>
-<li><p><em>sock</em> 可选择通过指定此值用于使用一个预先存在的，已经处于连接状态的 <a class="reference internal" href="socket.html#socket.socket" title="socket.socket"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></a> 对象，并将其提供给此传输对象使用。如果指定了这个值， <em>local_addr</em> 和 <em>remote_addr</em> 就应该被忽略 (必须为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>)。</p></li>
+<li><p><em>sock</em> 可选择通过指定此值用于使用一个预先存在的，已经处于连接状态的 <a class="reference internal" href="socket.html#socket.socket" title="socket.socket"><code class="xref py py-class docutils literal notranslate"><span class="pre">socket.socket</span></code></a> 对象，并将其提供给此传输对象使用。如果指定了这个值， <em>local_addr</em> 和 <em>remote_addr</em> 就应该被忽略 (必须为 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>)。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+transport created. To close the socket, call the transport’s
+<a class="reference internal" href="asyncio-protocol.html#asyncio.BaseTransport.close" title="asyncio.BaseTransport.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
+</li>
 </ul>
 <p>参见 <a class="reference internal" href="asyncio-protocol.html#asyncio-udp-echo-client-protocol"><span class="std std-ref">UDP echo 客户端协议</span></a>  和 <a class="reference internal" href="asyncio-protocol.html#asyncio-udp-echo-server-protocol"><span class="std std-ref">UDP echo 服务端协议</span></a> 的例子。</p>
 <div class="versionchanged">
@@ -597,10 +629,10 @@ The <em>path</em> parameter can now be a <a class="reference internal" href="../
 <dd><p>创建TCP服务 (socket 类型 <a class="reference internal" href="socket.html#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-data docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> ) 监听 <em>host</em> 地址的 <em>port</em> 端口。</p>
 <p>返回一个 <a class="reference internal" href="#asyncio.Server" title="asyncio.Server"><code class="xref py py-class docutils literal notranslate"><span class="pre">Server</span></code></a> 对象。</p>
 <p>参数：</p>
-<ul class="simple">
+<ul>
 <li><p><em>protocol_factory</em> 必须为一个返回 <a class="reference internal" href="asyncio-protocol.html#asyncio-protocol"><span class="std std-ref">协议</span></a> 实现的可调用对象。</p></li>
 <li><p><em>host</em> 形参可被设为几种类型，它确定了服务器所应监听的位置:</p>
-<ul>
+<ul class="simple">
 <li><p>如果 <em>host</em> 是一个字符串，则 TCP 服务器会被绑定到 <em>host</em> 所指明的单一网络接口。</p></li>
 <li><p>如果 <em>host</em> 是一个字符串序列，则 TCP 服务器会被绑定到序列所指明的所有网络接口。</p></li>
 <li><p>如果 <em>host</em> 是一个空字符串或 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则会应用所有接口并将返回包含多个套接字的列表（通常是一个 IPv4 的加一个 IPv6 的）。</p></li>
@@ -612,7 +644,14 @@ be selected (note that if <em>host</em> resolves to multiple network interfaces,
 a different random port will be selected for each interface).</p></li>
 <li><p><em>family</em> 可被设为 <a class="reference internal" href="socket.html#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-data docutils literal notranslate"><span class="pre">socket.AF_INET</span></code></a> 或 <a class="reference internal" href="socket.html#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-data docutils literal notranslate"><span class="pre">AF_INET6</span></code></a> 以强制此套接字使用 IPv4 或 IPv6。 如果未设定，则 <em>family</em> 将通过主机名称来确定 (默认为 <code class="xref py py-data docutils literal notranslate"><span class="pre">AF_UNSPEC</span></code>)。</p></li>
 <li><p><em>flags</em> 是用于 <a class="reference internal" href="#asyncio.loop.getaddrinfo" title="asyncio.loop.getaddrinfo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 的位掩码。</p></li>
-<li><p>可以选择指定 <em>sock</em> 以便使用预先存在的套接字对象。 如果指定了此参数，则不可再指定 <em>host</em> 和 <em>port</em>。</p></li>
+<li><p>可以选择指定 <em>sock</em> 以便使用预先存在的套接字对象。 如果指定了此参数，则不可再指定 <em>host</em> 和 <em>port</em>。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+server created. To close the socket, call the server’s
+<a class="reference internal" href="#asyncio.Server.close" title="asyncio.Server.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
+</li>
 <li><p><em>backlog</em> 是传递给 <a class="reference internal" href="socket.html#socket.socket.listen" title="socket.socket.listen"><code class="xref py py-meth docutils literal notranslate"><span class="pre">listen()</span></code></a> 的最大排队连接的数量（默认为100）。</p></li>
 <li><p><em>ssl</em> 可被设置为一个 <a class="reference internal" href="ssl.html#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 实例以在所接受的连接上启用 TLS。</p></li>
 <li><p><em>reuse_address</em> 告知内核要重用一个处于 <code class="docutils literal notranslate"><span class="pre">TIME_WAIT</span></code> 状态的本地套接字，而不是等待其自然超时失效。 如果未指定此参数则在 Unix 上将自动设置为 <code class="docutils literal notranslate"><span class="pre">True</span></code>。</p></li>
@@ -665,9 +704,16 @@ The <em>path</em> parameter can now be a <a class="reference internal" href="pat
 <dd><p>将已被接受的连接包装成一个传输/协议对。</p>
 <p>此方法可被服务器用来接受 asyncio 以外的连接，但是使用 asyncio 来处理它们。</p>
 <p>参数：</p>
-<ul class="simple">
+<ul>
 <li><p><em>protocol_factory</em> 必须为一个返回 <a class="reference internal" href="asyncio-protocol.html#asyncio-protocol"><span class="std std-ref">协议</span></a> 实现的可调用对象。</p></li>
-<li><p><em>sock</em> 是一个预先存在的套接字对象，它是由 <a class="reference internal" href="socket.html#socket.socket.accept" title="socket.socket.accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.accept</span></code></a> 返回的。</p></li>
+<li><p><em>sock</em> 是一个预先存在的套接字对象，它是由 <a class="reference internal" href="socket.html#socket.socket.accept" title="socket.socket.accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">socket.accept</span></code></a> 返回的。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>The <em>sock</em> argument transfers ownership of the socket to the
+transport created. To close the socket, call the transport’s
+<a class="reference internal" href="asyncio-protocol.html#asyncio.BaseTransport.close" title="asyncio.BaseTransport.close"><code class="xref py py-meth docutils literal notranslate"><span class="pre">close()</span></code></a> method.</p>
+</div>
+</li>
 <li><p><em>ssl</em> 可被设置为一个 <a class="reference internal" href="ssl.html#ssl.SSLContext" title="ssl.SSLContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SSLContext</span></code></a> 以在接受的连接上启用 SSL。</p></li>
 <li><p><em>ssl_handshake_timeout</em> 是(为一个SSL连接)在中止连接前，等待SSL握手完成的时间【单位秒】。如果为 <code class="docutils literal notranslate"><span class="pre">None</span></code> (缺省) 则是 <code class="docutils literal notranslate"><span class="pre">60.0</span></code> 秒。</p></li>
 <li><p><em>ssl_shutdown_timeout</em> is the time in seconds to wait for the SSL shutdown
@@ -1032,6 +1078,13 @@ instance. The default executor is used if <em>executor</em> is <code class="docu
 <span class="sig-prename descclassname"><span class="pre">loop.</span></span><span class="sig-name descname"><span class="pre">set_exception_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.loop.set_exception_handler" title="永久链接至目标">¶</a></dt>
 <dd><p>将 <em>handler</em> 设置为新的事件循环异常处理器。</p>
 <p>如果 <em>handler</em> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，将设置默认的异常处理程序。 在其他情况下，<em>handler</em> 必须是一个可调用对象且签名匹配 <code class="docutils literal notranslate"><span class="pre">(loop,</span> <span class="pre">context)</span></code>，其中 <code class="docutils literal notranslate"><span class="pre">loop</span></code> 是对活动事件循环的引用，而 <code class="docutils literal notranslate"><span class="pre">context</span></code> 是一个包含异常详情的 <code class="docutils literal notranslate"><span class="pre">dict</span></code> (请查看 <a class="reference internal" href="#asyncio.loop.call_exception_handler" title="asyncio.loop.call_exception_handler"><code class="xref py py-meth docutils literal notranslate"><span class="pre">call_exception_handler()</span></code></a> 文档来获取关于上下文的更多信息)。</p>
+<p>If the handler is called on behalf of a <a class="reference internal" href="asyncio-task.html#asyncio.Task" title="asyncio.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a> or
+<a class="reference internal" href="#asyncio.Handle" title="asyncio.Handle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Handle</span></code></a>, it is run in the
+<a class="reference internal" href="contextvars.html#contextvars.Context" title="contextvars.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code></a> of that task or callback handle.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.12 版更改: </span>The handler may be called in the <a class="reference internal" href="contextvars.html#contextvars.Context" title="contextvars.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>
+of the task or handle where the exception originated.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1181,6 +1234,16 @@ details.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">Handle</span></span><a class="headerlink" href="#asyncio.Handle" title="永久链接至目标">¶</a></dt>
 <dd><p>由 <a class="reference internal" href="#asyncio.loop.call_soon" title="asyncio.loop.call_soon"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon()</span></code></a>, <a class="reference internal" href="#asyncio.loop.call_soon_threadsafe" title="asyncio.loop.call_soon_threadsafe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">loop.call_soon_threadsafe()</span></code></a> 所返回的回调包装器对象。</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="asyncio.Handle.get_context">
+<span class="sig-name descname"><span class="pre">get_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Handle.get_context" title="永久链接至目标">¶</a></dt>
+<dd><p>Return the <a class="reference internal" href="contextvars.html#contextvars.Context" title="contextvars.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">contextvars.Context</span></code></a> object
+associated with the handle.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="asyncio.Handle.cancel">
 <span class="sig-name descname"><span class="pre">cancel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#asyncio.Handle.cancel" title="永久链接至目标">¶</a></dt>
 <dd><p>取消回调。 如果此回调已被取消或已被执行，此方法将没有任何效果。</p>
@@ -1315,7 +1378,7 @@ the server is already serving.</p>
 
 </section>
 <section id="event-loop-implementations">
-<span id="asyncio-event-loops"></span><h2>事件循环实现<a class="headerlink" href="#event-loop-implementations" title="永久链接至标题">¶</a></h2>
+<span id="asyncio-event-loop-implementations"></span><span id="asyncio-event-loops"></span><h2>事件循环实现<a class="headerlink" href="#event-loop-implementations" title="永久链接至标题">¶</a></h2>
 <p>asyncio 带有两种不同的事件循环实现: <a class="reference internal" href="#asyncio.SelectorEventLoop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> 和 <a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a>。</p>
 <p>默认情况下 asyncio 被配置为在 Unix 上使用 <a class="reference internal" href="#asyncio.SelectorEventLoop" title="asyncio.SelectorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelectorEventLoop</span></code></a> 而在 Windows 上使用 <a class="reference internal" href="#asyncio.ProactorEventLoop" title="asyncio.ProactorEventLoop"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProactorEventLoop</span></code></a>。</p>
 <dl class="py class">
@@ -1326,9 +1389,12 @@ the server is already serving.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">import</span> <span class="nn">selectors</span>
 
-<span class="n">selector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">SelectSelector</span><span class="p">()</span>
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">SelectorEventLoop</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
-<span class="n">asyncio</span><span class="o">.</span><span class="n">set_event_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MyPolicy</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">DefaultEventLoopPolicy</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">new_event_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+      <span class="n">selector</span> <span class="o">=</span> <span class="n">selectors</span><span class="o">.</span><span class="n">SelectSelector</span><span class="p">()</span>
+      <span class="k">return</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">SelectorEventLoop</span><span class="p">(</span><span class="n">selector</span><span class="p">)</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">set_event_loop_policy</span><span class="p">(</span><span class="n">MyPolicy</span><span class="p">())</span>
 </pre></div>
 </div>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
@@ -1349,7 +1415,9 @@ the server is already serving.</p>
 <dt class="sig sig-object py" id="asyncio.AbstractEventLoop">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncio.</span></span><span class="sig-name descname"><span class="pre">AbstractEventLoop</span></span><a class="headerlink" href="#asyncio.AbstractEventLoop" title="永久链接至目标">¶</a></dt>
 <dd><p>asyncio 兼容事件循环的抽象基类。</p>
-<p><a class="reference internal" href="#asyncio-event-loop"><span class="std std-ref">事件循环方法</span></a> 一节列出了 <code class="docutils literal notranslate"><span class="pre">AbstractEventLoop</span></code> 的替代实现应当定义的所有方法。</p>
+<p>The <a class="reference internal" href="#asyncio-event-loop-methods"><span class="std std-ref">事件循环方法集</span></a> section lists all
+methods that an alternative implementation of <code class="docutils literal notranslate"><span class="pre">AbstractEventLoop</span></code>
+should have defined.</p>
 </dd></dl>
 
 </section>
@@ -1366,7 +1434,7 @@ the server is already serving.</p>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World&#39;</span><span class="p">)</span>
     <span class="n">loop</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>
 
 <span class="c1"># Schedule a call to hello_world()</span>
 <span class="n">loop</span><span class="o">.</span><span class="n">call_soon</span><span class="p">(</span><span class="n">hello_world</span><span class="p">,</span> <span class="n">loop</span><span class="p">)</span>
@@ -1396,7 +1464,7 @@ the server is already serving.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">loop</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>
 
 <span class="c1"># Schedule the first call to display_date()</span>
 <span class="n">end_time</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">+</span> <span class="mf">5.0</span>
@@ -1423,7 +1491,7 @@ the server is already serving.</p>
 <span class="c1"># Create a pair of connected file descriptors</span>
 <span class="n">rsock</span><span class="p">,</span> <span class="n">wsock</span> <span class="o">=</span> <span class="n">socketpair</span><span class="p">()</span>
 
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">reader</span><span class="p">():</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">rsock</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -1627,7 +1695,7 @@ the server is already serving.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

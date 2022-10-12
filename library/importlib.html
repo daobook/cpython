@@ -449,7 +449,7 @@ are also provided to help in implementing the core ABCs.</p>
 <dd><p><a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> 的抽象基类。 关于一个加载器的实际定义请查看 <span class="target" id="index-40"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a>。</p>
 <p>Loaders that wish to support resource reading should implement a
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_resource_reader()</span></code> method as specified by
-<a class="reference internal" href="#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>.</p>
+<a class="reference internal" href="importlib.resources.abc.html#importlib.resources.abc.ResourceReader" title="importlib.resources.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.resources.abc.ResourceReader</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.7 版更改: </span>Introduced the optional <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_resource_reader()</span></code> method.</p>
 </div>
@@ -494,13 +494,13 @@ Otherwise the loader should create a new module and insert it into
 from the import.  If the loader inserted a module and the load fails, it
 must be removed by the loader from <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a>; modules already
 in <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> before the loader began execution should be left
-alone (see <a class="reference internal" href="#importlib.util.module_for_loader" title="importlib.util.module_for_loader"><code class="xref py py-func docutils literal notranslate"><span class="pre">importlib.util.module_for_loader()</span></code></a>).</p>
+alone.</p>
 <p>The loader should set several attributes on the module
 (note that some of these attributes can change when a module is
 reloaded):</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a></dt><dd><p>The module’s fully-qualified name.
+<dt><a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a></dt><dd><p>The module’s fully qualified name.
 It is <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code> for an executed module.</p>
 </dd>
 </dl>
@@ -529,7 +529,7 @@ as an indicator that the module is a package.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a></dt><dd><p>The fully-qualified name of the package the module is in (or the
+<dt><a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a></dt><dd><p>The fully qualified name of the package the module is in (or the
 empty string for a top-level module).
 If the module is a package then this is the same as <a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a>.</p>
 </dd>
@@ -556,64 +556,6 @@ other responsibilities of <a class="reference internal" href="#importlib.abc.Loa
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Loader.module_repr">
-<span class="sig-name descname"><span class="pre">module_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Loader.module_repr" title="永久链接至目标">¶</a></dt>
-<dd><p>A legacy method which when implemented calculates and returns the given
-module’s representation, as a string.  The module type’s default
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">__repr__()</span></code> will use the result of this method as appropriate.</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.3 新版功能.</span></p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>是可选的方法而不是一个抽象方法。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>现在导入机制会自动地关注这个方法。</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="importlib.abc.ResourceReader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">ResourceReader</span></span><a class="headerlink" href="#importlib.abc.ResourceReader" title="永久链接至目标">¶</a></dt>
-<dd><p><em>被 TraversableResources</em> 取代</p>
-<p>提供读取 <em>resources</em> 能力的一个 <a class="reference internal" href="../glossary.html#term-abstract-base-class"><span class="xref std std-term">abstract base class</span></a> 。</p>
-<p>从这个 ABC 的视角出发，<em>resource</em> 指一个包附带的二进制文件。常见的如在包的  <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> 文件旁的数据文件。这个类存在的目的是为了将对数据文件的访问进行抽象，这样包就和其数据文件的存储方式无关了。不论这些文件是存放在一个 zip 文件里还是直接在文件系统内。</p>
-<p>对于该类中的任一方法，<em>resource</em> 参数的值都需要是一个在概念上表示文件名称的 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。 这意味着任何子目录的路径都不该出现在 <em>resouce</em> 参数值内。 因为对于阅读器而言，包的位置就代表着「目录」。 因此目录和文件名就分别对应于包和资源。 这也是该类的实例都需要和一个包直接关联（而不是潜在指代很多包或者一整个模块）的原因。</p>
-<p>想支持资源读取的加载器需要提供一个返回实现了此 ABC 的接口的 <code class="docutils literal notranslate"><span class="pre">get_resource_reader(fullname)</span></code> 方法。如果通过全名指定的模块不是一个包，这个方法应该返回 <a class="reference internal" href="constants.html#None" title="None"><code class="xref py py-const docutils literal notranslate"><span class="pre">None</span></code></a>。 当指定的模块是一个包时，应该只返回一个与这个抽象类ABC兼容的对象。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.7 新版功能.</span></p>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.ResourceReader.open_resource">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">open_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.ResourceReader.open_resource" title="永久链接至目标">¶</a></dt>
-<dd><p>返回一个打开的 <a class="reference internal" href="../glossary.html#term-file-like-object"><span class="xref std std-term">file-like object</span></a> 用于 <em>resource</em> 的二进制读取。</p>
-<p>如果无法找到资源，将会引发 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.ResourceReader.resource_path">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">resource_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.ResourceReader.resource_path" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 <em>resource</em> 的文件系统路径。</p>
-<p>如果资源并不实际存在于文件系统中，将会引发 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a>。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.ResourceReader.is_resource">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">is_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.ResourceReader.is_resource" title="永久链接至目标">¶</a></dt>
-<dd><p>如果*name* 被视作资源，则返回True。如果*name*不存在，则引发 <a class="reference internal" href="exceptions.html#FileNotFoundError" title="FileNotFoundError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></a> 异常。</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.ResourceReader.contents">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">contents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.ResourceReader.contents" title="永久链接至目标">¶</a></dt>
-<dd><p>反回由字符串组成的 <a class="reference internal" href="../glossary.html#term-iterable"><span class="xref std std-term">iterable</span></a>，表示这个包的所有内容。 请注意并不要求迭代器返回的所有名称都是实际的资源，例如返回 <a class="reference internal" href="importlib.resources.abc.html#ResourceReader.is_resource" title="ResourceReader.is_resource"><code class="xref py py-meth docutils literal notranslate"><span class="pre">is_resource()</span></code></a> 为假值的名称也是可接受的。</p>
-<p>允许非资源名字被返回是为了允许存储的一个包和它的资源的方式是已知先验的并且非资源名字会有用的情况。比如，允许返回子目录名字，目的是当得知包和资源存储在文件系统上面的时候，能够直接使用子目录的名字。</p>
-<p>这个抽象方法返回了一个不包含任何内容的可迭代对象。</p>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -621,7 +563,8 @@ module’s representation, as a string.  The module type’s default
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">ResourceLoader</span></span><a class="headerlink" href="#importlib.abc.ResourceLoader" title="永久链接至目标">¶</a></dt>
 <dd><p>一个 <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> 的抽象基类，它实现了可选的 <span class="target" id="index-41"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 协议用于从存储后端加载任意资源。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.7 版后已移除: </span>由于要支持使用 <a class="reference internal" href="#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>  类来加载资源，这个 ABC 已经被弃用了。</p>
+<p><span class="versionmodified deprecated">3.7 版后已移除: </span>This ABC is deprecated in favour of supporting resource loading
+through <a class="reference internal" href="importlib.resources.abc.html#importlib.resources.abc.ResourceReader" title="importlib.resources.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.resources.abc.ResourceReader</span></code></a>.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.ResourceLoader.get_data">
@@ -697,7 +640,7 @@ module’s representation, as a string.  The module type’s default
 <span class="sig-name descname"><span class="pre">load_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.InspectLoader.load_module" title="永久链接至目标">¶</a></dt>
 <dd><p><a class="reference internal" href="#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Loader.load_module()</span></code></a> 的实现。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>使用 <a class="reference internal" href="importlib.resources.abc.html#InspectLoader.exec_module" title="InspectLoader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> 来代替。</p>
+<p><span class="versionmodified deprecated">3.4 版后已移除: </span>使用 <a class="reference internal" href="#importlib.abc.InspectLoader.exec_module" title="importlib.abc.InspectLoader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> 来代替。</p>
 </div>
 </dd></dl>
 
@@ -706,7 +649,7 @@ module’s representation, as a string.  The module type’s default
 <dl class="py class">
 <dt class="sig sig-object py" id="importlib.abc.ExecutionLoader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">ExecutionLoader</span></span><a class="headerlink" href="#importlib.abc.ExecutionLoader" title="永久链接至目标">¶</a></dt>
-<dd><p>一个继承自 <a class="reference internal" href="importlib.resources.abc.html#InspectLoader" title="InspectLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">InspectLoader</span></code></a> 的抽象基类，当被实现时，帮助一个模块作为脚本来执行。 这个抽象基类表示可选的 <span class="target" id="index-43"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 协议。</p>
+<dd><p>一个继承自 <a class="reference internal" href="#importlib.abc.InspectLoader" title="importlib.abc.InspectLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">InspectLoader</span></code></a> 的抽象基类，当被实现时，帮助一个模块作为脚本来执行。 这个抽象基类表示可选的 <span class="target" id="index-43"></span><a class="pep reference external" href="https://peps.python.org/pep-0302/"><strong>PEP 302</strong></a> 协议。</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.ExecutionLoader.get_filename">
 <em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.ExecutionLoader.get_filename" title="永久链接至目标">¶</a></dt>
@@ -722,7 +665,7 @@ module’s representation, as a string.  The module type’s default
 <dl class="py class">
 <dt class="sig sig-object py" id="importlib.abc.FileLoader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">FileLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.FileLoader" title="永久链接至目标">¶</a></dt>
-<dd><p>一个继承自 <a class="reference internal" href="importlib.resources.abc.html#ResourceLoader" title="ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> 和 <a class="reference internal" href="importlib.resources.abc.html#ExecutionLoader" title="ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>，提供 <a class="reference internal" href="importlib.resources.abc.html#ResourceLoader.get_data" title="ResourceLoader.get_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceLoader.get_data()</span></code></a> 和 <a class="reference internal" href="importlib.resources.abc.html#ExecutionLoader.get_filename" title="ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a> 具体实现的抽象基类。</p>
+<dd><p>一个继承自 <a class="reference internal" href="#importlib.abc.ResourceLoader" title="importlib.abc.ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> 和 <a class="reference internal" href="#importlib.abc.ExecutionLoader" title="importlib.abc.ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>，提供 <a class="reference internal" href="#importlib.abc.ResourceLoader.get_data" title="importlib.abc.ResourceLoader.get_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceLoader.get_data()</span></code></a> 和 <a class="reference internal" href="#importlib.abc.ExecutionLoader.get_filename" title="importlib.abc.ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a> 具体实现的抽象基类。</p>
 <p>参数*fullname*是加载器要处理的模块的完全解析的名字。参数*path*是模块文件的路径。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -751,7 +694,7 @@ module’s representation, as a string.  The module type’s default
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.FileLoader.get_filename">
 <em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">get_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.FileLoader.get_filename" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 <a class="reference internal" href="importlib.resources.abc.html#FileLoader.path" title="FileLoader.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a>。</p>
+<dd><p>返回 <a class="reference internal" href="#importlib.abc.FileLoader.path" title="importlib.abc.FileLoader.path"><code class="xref py py-attr docutils literal notranslate"><span class="pre">path</span></code></a>。</p>
 </dd></dl>
 
 <dl class="py method">
@@ -765,11 +708,11 @@ module’s representation, as a string.  The module type’s default
 <dl class="py class">
 <dt class="sig sig-object py" id="importlib.abc.SourceLoader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">SourceLoader</span></span><a class="headerlink" href="#importlib.abc.SourceLoader" title="永久链接至目标">¶</a></dt>
-<dd><p>一个用于实现源文件（和可选地字节码）加载的抽象基类。这个类继承自 <a class="reference internal" href="importlib.resources.abc.html#ResourceLoader" title="ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> 和 <a class="reference internal" href="importlib.resources.abc.html#ExecutionLoader" title="ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>，需要实现：</p>
+<dd><p>一个用于实现源文件（和可选地字节码）加载的抽象基类。这个类继承自 <a class="reference internal" href="#importlib.abc.ResourceLoader" title="importlib.abc.ResourceLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceLoader</span></code></a> 和 <a class="reference internal" href="#importlib.abc.ExecutionLoader" title="importlib.abc.ExecutionLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExecutionLoader</span></code></a>，需要实现：</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="importlib.resources.abc.html#ResourceLoader.get_data" title="ResourceLoader.get_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceLoader.get_data()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#importlib.abc.ResourceLoader.get_data" title="importlib.abc.ResourceLoader.get_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ResourceLoader.get_data()</span></code></a></p></li>
 <li><dl class="simple">
-<dt><a class="reference internal" href="importlib.resources.abc.html#ExecutionLoader.get_filename" title="ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a></dt><dd><p>应该是只返回源文件的路径；不支持无源加载。</p>
+<dt><a class="reference internal" href="#importlib.abc.ExecutionLoader.get_filename" title="importlib.abc.ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a></dt><dd><p>应该是只返回源文件的路径；不支持无源加载。</p>
 </dd>
 </dl>
 </li>
@@ -797,7 +740,7 @@ module’s representation, as a string.  The module type’s default
 <span class="sig-name descname"><span class="pre">path_mtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.SourceLoader.path_mtime" title="永久链接至目标">¶</a></dt>
 <dd><p>返回指定文件路径修改时间的可选的抽象方法。</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.3 版后已移除: </span>在有了 <a class="reference internal" href="importlib.resources.abc.html#SourceLoader.path_stats" title="SourceLoader.path_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_stats()</span></code></a> 的情况下，这个方法被弃用了。 没必要去实现它了，但是为了兼容性，它依然处于可用状态。 如果文件路径不能被处理，则引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 异常。</p>
+<p><span class="versionmodified deprecated">3.3 版后已移除: </span>在有了 <a class="reference internal" href="#importlib.abc.SourceLoader.path_stats" title="importlib.abc.SourceLoader.path_stats"><code class="xref py py-meth docutils literal notranslate"><span class="pre">path_stats()</span></code></a> 的情况下，这个方法被弃用了。 没必要去实现它了，但是为了兼容性，它依然处于可用状态。 如果文件路径不能被处理，则引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 异常。</p>
 </div>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>引发 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 而不是 <a class="reference internal" href="constants.html#NotImplemented" title="NotImplemented"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplemented</span></code></a>。</p>
@@ -817,7 +760,7 @@ module’s representation, as a string.  The module type’s default
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.SourceLoader.get_code">
 <span class="sig-name descname"><span class="pre">get_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.SourceLoader.get_code" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="importlib.resources.abc.html#InspectLoader.get_code" title="InspectLoader.get_code"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.get_code()</span></code></a> 的具体实现。</p>
+<dd><p><a class="reference internal" href="#importlib.abc.InspectLoader.get_code" title="importlib.abc.InspectLoader.get_code"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.get_code()</span></code></a> 的具体实现。</p>
 </dd></dl>
 
 <dl class="py method">
@@ -834,108 +777,20 @@ module’s representation, as a string.  The module type’s default
 <span class="sig-name descname"><span class="pre">load_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.SourceLoader.load_module" title="永久链接至目标">¶</a></dt>
 <dd><p>Concrete implementation of <a class="reference internal" href="#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Loader.load_module()</span></code></a>.</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>使用 <a class="reference internal" href="importlib.resources.abc.html#SourceLoader.exec_module" title="SourceLoader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> 来代替。</p>
+<p><span class="versionmodified deprecated">3.4 版后已移除: </span>使用 <a class="reference internal" href="#importlib.abc.SourceLoader.exec_module" title="importlib.abc.SourceLoader.exec_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exec_module()</span></code></a> 来代替。</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.SourceLoader.get_source">
 <span class="sig-name descname"><span class="pre">get_source</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.SourceLoader.get_source" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="importlib.resources.abc.html#InspectLoader.get_source" title="InspectLoader.get_source"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.get_source()</span></code></a> 的具体实现。</p>
+<dd><p><a class="reference internal" href="#importlib.abc.InspectLoader.get_source" title="importlib.abc.InspectLoader.get_source"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.get_source()</span></code></a> 的具体实现。</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="importlib.abc.SourceLoader.is_package">
 <span class="sig-name descname"><span class="pre">is_package</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.SourceLoader.is_package" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="importlib.resources.abc.html#InspectLoader.is_package" title="InspectLoader.is_package"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.is_package()</span></code></a> 的具体实现。一个模块被确定为一个包的条件是：它的文件路径（由 <a class="reference internal" href="importlib.resources.abc.html#ExecutionLoader.get_filename" title="ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a> 提供）当文件扩展名被移除时是一个命名为 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 的文件，<strong>并且</strong> 这个模块名字本身不是以``__init__``结束。</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="importlib.abc.Traversable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">Traversable</span></span><a class="headerlink" href="#importlib.abc.Traversable" title="永久链接至目标">¶</a></dt>
-<dd><p>拥有部分 pathlib.Path 方法的对象，适用于遍历目录和打开文件。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.9 新版功能.</span></p>
-</div>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#importlib.abc.Traversable.name" title="永久链接至目标">¶</a></dt>
-<dd><p>Abstract. The base name of this object without any parent references.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.iterdir">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">iterdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.iterdir" title="永久链接至目标">¶</a></dt>
-<dd><p>Yield Traversable objects in self.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.is_dir">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">is_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.is_dir" title="永久链接至目标">¶</a></dt>
-<dd><p>Return True if self is a directory.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.is_file">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">is_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.is_file" title="永久链接至目标">¶</a></dt>
-<dd><p>Return True if self is a file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.joinpath">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">joinpath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.joinpath" title="永久链接至目标">¶</a></dt>
-<dd><p>Return Traversable child in self.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.__truediv__">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">__truediv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">child</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.__truediv__" title="永久链接至目标">¶</a></dt>
-<dd><p>Return Traversable child in self.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.open">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.open" title="永久链接至目标">¶</a></dt>
-<dd><p><em>mode</em> may be ‘r’ or ‘rb’ to open as text or binary. Return a handle
-suitable for reading (same as <a class="reference internal" href="pathlib.html#pathlib.Path.open" title="pathlib.Path.open"><code class="xref py py-attr docutils literal notranslate"><span class="pre">pathlib.Path.open</span></code></a>).</p>
-<p>When opening as text, accepts encoding parameters such as those
-accepted by <a class="reference internal" href="io.html#io.TextIOWrapper" title="io.TextIOWrapper"><code class="xref py py-attr docutils literal notranslate"><span class="pre">io.TextIOWrapper</span></code></a>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.read_bytes">
-<span class="sig-name descname"><span class="pre">read_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.read_bytes" title="永久链接至目标">¶</a></dt>
-<dd><p>Read contents of self as bytes.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.Traversable.read_text">
-<span class="sig-name descname"><span class="pre">read_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.Traversable.read_text" title="永久链接至目标">¶</a></dt>
-<dd><p>Read contents of self as text.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="importlib.abc.TraversableResources">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importlib.abc.</span></span><span class="sig-name descname"><span class="pre">TraversableResources</span></span><a class="headerlink" href="#importlib.abc.TraversableResources" title="永久链接至目标">¶</a></dt>
-<dd><p>An abstract base class for resource readers capable of serving
-the <a class="reference internal" href="importlib.resources.html#importlib.resources.files" title="importlib.resources.files"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.resources.files()</span></code></a> interface. Subclasses
-<a class="reference internal" href="#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a> and provides
-concrete implementations of the <a class="reference internal" href="#importlib.abc.ResourceReader" title="importlib.abc.ResourceReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.ResourceReader</span></code></a>’s
-abstract methods. Therefore, any loader supplying
-<code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.TraversableReader</span></code> also supplies ResourceReader.</p>
-<p>需要支持资源读取的加载器应实现此接口。</p>
-<div class="versionadded">
-<p><span class="versionmodified added">3.9 新版功能.</span></p>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="importlib.abc.TraversableResources.files">
-<em class="property"><span class="pre">abstractmethod</span> </em><span class="sig-name descname"><span class="pre">files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importlib.abc.TraversableResources.files" title="永久链接至目标">¶</a></dt>
-<dd><p>Returns a <a class="reference internal" href="#importlib.abc.Traversable" title="importlib.abc.Traversable"><code class="xref py py-class docutils literal notranslate"><span class="pre">importlib.abc.Traversable</span></code></a> object for the loaded
-package.</p>
+<dd><p><a class="reference internal" href="#importlib.abc.InspectLoader.is_package" title="importlib.abc.InspectLoader.is_package"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.is_package()</span></code></a> 的具体实现。一个模块被确定为一个包的条件是：它的文件路径（由 <a class="reference internal" href="#importlib.abc.ExecutionLoader.get_filename" title="importlib.abc.ExecutionLoader.get_filename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ExecutionLoader.get_filename()</span></code></a> 提供）当文件扩展名被移除时是一个命名为 <code class="docutils literal notranslate"><span class="pre">__init__</span></code> 的文件，<strong>并且</strong> 这个模块名字本身不是以``__init__``结束。</p>
 </dd></dl>
 
 </dd></dl>
@@ -1337,7 +1192,7 @@ reflected in the module’s <code class="xref py py-attr docutils literal notran
 <dd></dd></dl>
 
 <p>(<a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a>)</p>
-<p>The module’s fully-qualified name.
+<p>The module’s fully qualified name.
 The <a class="reference internal" href="../glossary.html#term-finder"><span class="xref std std-term">finder</span></a> should always set this attribute to a non-empty string.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="importlib.machinery.ModuleSpec.loader">
@@ -1393,7 +1248,7 @@ for modules that do not need compiled code stored.</p>
 <dd></dd></dl>
 
 <p>(<a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a>)</p>
-<p>(Read-only) The fully-qualified name of the package the module is in (or the
+<p>(Read-only) The fully qualified name of the package the module is in (or the
 empty string for a top-level module).
 If the module is a package then this is the same as <a class="reference internal" href="#importlib.machinery.ModuleSpec.name" title="importlib.machinery.ModuleSpec.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">name</span></code></a>.</p>
 <dl class="py attribute">
@@ -1505,47 +1360,9 @@ package).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="importlib.util.module_for_loader">
-<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">importlib.util.</span></span><span class="sig-name descname"><span class="pre">module_for_loader</span></span><a class="headerlink" href="#importlib.util.module_for_loader" title="永久链接至目标">¶</a></dt>
-<dd><p><a class="reference internal" href="#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.load_module()</span></code></a> 的一个 <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a>，用来选取合适的模块对象以供加载。被装饰方法的签名应带有两个位置参数（如：<code class="docutils literal notranslate"><span class="pre">load_module(self,</span> <span class="pre">module)</span></code>），其中第二个参数将是加载器用到的模块 <strong>对象</strong>。请注意，由于假定有两个参数，所以装饰器对静态方法不起作用。</p>
-<p>装饰的方法将接受要加载的模块的 <strong>name</strong>，正如 <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> 一样。如果在 <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中没有找到该模块，那么将构造一个新模块。不管模块来自哪里， <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> 设置为 <strong>self</strong> ，并且 <a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a> 是根据 <a class="reference internal" href="#importlib.abc.InspectLoader.is_package" title="importlib.abc.InspectLoader.is_package"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.InspectLoader.is_package()</span></code></a> 的返回值设置的。这些属性会无条件进行设置以便支持再次加载。</p>
-<p>如果被装饰的方法触发异常，并且已有模块加入 <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中，那么该模块将被移除，以防 <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中残留一个部分初始化的模块。如果该模块原先已在 <a class="reference internal" href="sys.html#sys.modules" title="sys.modules"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.modules</span></code></a> 中，则会保留不变。</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>有可能时自动设置 <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> 和 <a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a> 。</p>
-</div>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>无条件设置 <a class="reference internal" href="../reference/import.html#name__" title="__name__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__name__</span></code></a> 、 <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> 、 <a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a> 以支持再次加载。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>现在，导入机制直接执行本函数提供的所有功能。</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="importlib.util.set_loader">
-<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">importlib.util.</span></span><span class="sig-name descname"><span class="pre">set_loader</span></span><a class="headerlink" href="#importlib.util.set_loader" title="永久链接至目标">¶</a></dt>
-<dd><p>一个 <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a>，用于 <a class="reference internal" href="#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.load_module()</span></code></a> 在返回的模块上设置 <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> 属性。如果该属性已被设置，装饰器就什么都不做。这里假定被封装方法的第一个位置参数（即 <code class="docutils literal notranslate"><span class="pre">self</span></code>）就是 <a class="reference internal" href="../reference/import.html#loader__" title="__loader__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__loader__</span></code></a> 要设置的。</p>
-<div class="versionchanged">
-<p><span class="versionmodified changed">在 3.4 版更改: </span>如果设为 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则会去设置 <code class="docutils literal notranslate"><span class="pre">__loader__</span></code> ，就像该属性不存在一样。</p>
-</div>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>现在导入机制会自动用到本方法。</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="importlib.util.set_package">
-<span class="sig-prename descclassname"><span class="pre">&#64;</span></span><span class="sig-prename descclassname"><span class="pre">importlib.util.</span></span><span class="sig-name descname"><span class="pre">set_package</span></span><a class="headerlink" href="#importlib.util.set_package" title="永久链接至目标">¶</a></dt>
-<dd><p>一个用于 <a class="reference internal" href="#importlib.abc.Loader.load_module" title="importlib.abc.Loader.load_module"><code class="xref py py-meth docutils literal notranslate"><span class="pre">importlib.abc.Loader.load_module()</span></code></a> 的 <a class="reference internal" href="../glossary.html#term-decorator"><span class="xref std std-term">decorator</span></a> ，以便设置返回模块的 <a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a> 属性。如果 <a class="reference internal" href="../reference/import.html#package__" title="__package__"><code class="xref py py-attr docutils literal notranslate"><span class="pre">__package__</span></code></a> 已设置且不为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则不会做改动。</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">3.4 版后已移除: </span>现在导入机制会自动用到本方法。</p>
-</div>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="importlib.util.spec_from_loader">
 <span class="sig-prename descclassname"><span class="pre">importlib.util.</span></span><span class="sig-name descname"><span class="pre">spec_from_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loader</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_package</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importlib.util.spec_from_loader" title="永久链接至目标">¶</a></dt>
-<dd><p>一个工厂函数，用于创建基于加载器的 <a class="reference internal" href="#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> 实例。参数的含义与 ModuleSpec 的相同。该函数会利用当前可用的 <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> API，比如 <a class="reference internal" href="importlib.resources.abc.html#InspectLoader.is_package" title="InspectLoader.is_package"><code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.is_package()</span></code></a>，以填充所有缺失的规格信息。</p>
+<dd><p>一个工厂函数，用于创建基于加载器的 <a class="reference internal" href="#importlib.machinery.ModuleSpec" title="importlib.machinery.ModuleSpec"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleSpec</span></code></a> 实例。参数的含义与 ModuleSpec 的相同。该函数会利用当前可用的 <a class="reference internal" href="../glossary.html#term-loader"><span class="xref std std-term">loader</span></a> API，比如 <code class="xref py py-meth docutils literal notranslate"><span class="pre">InspectLoader.is_package()</span></code>，以填充所有缺失的规格信息。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.4 新版功能.</span></p>
 </div>
@@ -1862,7 +1679,7 @@ approximate implementation of
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

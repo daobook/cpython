@@ -180,7 +180,9 @@
 <span id="decimal-decimal-fixed-point-and-floating-point-arithmetic"></span><h1><a class="reference internal" href="#module-decimal" title="decimal: Implementation of the General Decimal Arithmetic  Specification."><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal</span></code></a> — 十进制定点和浮点运算<a class="headerlink" href="#module-decimal" title="永久链接至标题">¶</a></h1>
 <p><strong>源码：</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/decimal.py">Lib/decimal.py</a></p>
 <hr class="docutils" />
-<p><a class="reference internal" href="#module-decimal" title="decimal: Implementation of the General Decimal Arithmetic  Specification."><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal</span></code></a> 模块为快速正确舍入的十进制浮点运算提供支持。 与 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 数据类型相比，它具有以下几个优点：</p>
+<p>The <a class="reference internal" href="#module-decimal" title="decimal: Implementation of the General Decimal Arithmetic  Specification."><code class="xref py py-mod docutils literal notranslate"><span class="pre">decimal</span></code></a> module provides support for fast correctly rounded
+decimal floating point arithmetic. It offers several advantages over the
+<a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> datatype:</p>
 <ul>
 <li><p>Decimal 类型的“设计是基于考虑人类习惯的浮点数模型，并且因此具有以下最高指导原则 —— 计算机必须提供与人们在学校所学习的算术相一致的算术。” —— 摘自 decimal 算术规范描述。</p></li>
 <li><p>Decimal 数字的表示是完全精确的。 相比之下，<code class="xref py py-const docutils literal notranslate"><span class="pre">1.1</span></code> 和 <code class="xref py py-const docutils literal notranslate"><span class="pre">2.2</span></code> 这样的数字在二进制浮点中没有精确的表示。 最终用户通常不希望 <code class="docutils literal notranslate"><span class="pre">1.1</span> <span class="pre">+</span> <span class="pre">2.2</span></code> 如二进制浮点数表示那样被显示为 <code class="xref py py-const docutils literal notranslate"><span class="pre">3.3000000000000003</span></code>。</p></li>
@@ -208,7 +210,8 @@
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <ul class="simple">
-<li><p>IBM 的通用十进制算术规范描述 <a class="reference external" href="http://speleotrove.com/decimal/decarith.html">The General Decimal Arithmetic Specification</a>。</p></li>
+<li><p>IBM’s General Decimal Arithmetic Specification, <a class="reference external" href="https://speleotrove.com/decimal/decarith.html">The General Decimal Arithmetic
+Specification</a>.</p></li>
 </ul>
 </div>
 <section id="quick-start-tutorial">
@@ -551,7 +554,11 @@
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#decimal.Decimal.from_float" title="永久链接至目标">¶</a></dt>
 <dd><p>Alternative constructor that only accepts instances of <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> or
 <a class="reference internal" href="functions.html#int" title="int"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>.</p>
-<p>注意， <cite>Decimal.from_float(0.1)</cite> 与 <cite>Decimal(‘0.1’)</cite> 不同。 由于 0.1 在二进制浮点中不能精确表示，因此该值存储为最接近的可表示值，即 <cite>0x1.999999999999ap-4</cite> 。 十进制的等效值是`0.1000000000000000055511151231257827021181583404541015625`。</p>
+<p>Note <code class="docutils literal notranslate"><span class="pre">Decimal.from_float(0.1)</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">Decimal('0.1')</span></code>.
+Since 0.1 is not exactly representable in binary floating point, the
+value is stored as the nearest representable value which is
+<code class="docutils literal notranslate"><span class="pre">0x1.999999999999ap-4</span></code>.  That equivalent value in decimal is
+<code class="docutils literal notranslate"><span class="pre">0.1000000000000000055511151231257827021181583404541015625</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>从 Python 3.2 开始，<a class="reference internal" href="#decimal.Decimal" title="decimal.Decimal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Decimal</span></code></a> 实例也可以直接从 <a class="reference internal" href="functions.html#float" title="float"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> 构造。</p>
@@ -1094,7 +1101,7 @@ invalid value for an attribute.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="decimal.Context.exp">
 <span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#decimal.Context.exp" title="永久链接至目标">¶</a></dt>
-<dd><p>返回 <cite>e ** x</cite>。</p>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">**</span> <span class="pre">x</span></code>.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1281,10 +1288,16 @@ invalid value for an attribute.</p>
 <dt class="sig sig-object py" id="decimal.Context.power">
 <span class="sig-name descname"><span class="pre">power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">modulo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#decimal.Context.power" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <code class="docutils literal notranslate"><span class="pre">x</span></code> 的 <code class="docutils literal notranslate"><span class="pre">y</span></code> 次方，如果给出了模数 <code class="docutils literal notranslate"><span class="pre">modulo</span></code> 则取其余数。</p>
-<p>如为两个参数则计算 <code class="docutils literal notranslate"><span class="pre">x**y</span></code>。 如果 <code class="docutils literal notranslate"><span class="pre">x</span></code> 为负值则 <code class="docutils literal notranslate"><span class="pre">y</span></code> 必须为整数。 除非 <code class="docutils literal notranslate"><span class="pre">y</span></code> 为整数且结果为有限值并可在 ‘precision’ 位内精确表示否则结果将是不精确的。 上下文的舍入模式将被使用。 结果在 Python 版中总是会被正确地舍入。</p>
+<p>With two arguments, compute <code class="docutils literal notranslate"><span class="pre">x**y</span></code>.  If <code class="docutils literal notranslate"><span class="pre">x</span></code> is negative then <code class="docutils literal notranslate"><span class="pre">y</span></code>
+must be integral.  The result will be inexact unless <code class="docutils literal notranslate"><span class="pre">y</span></code> is integral and
+the result is finite and can be expressed exactly in ‘precision’ digits.
+The rounding mode of the context is used. Results are always correctly rounded
+in the Python version.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Decimal(0)</span> <span class="pre">**</span> <span class="pre">Decimal(0)</span></code> 结果为 <code class="docutils literal notranslate"><span class="pre">InvalidOperation</span></code>，而如果 <code class="docutils literal notranslate"><span class="pre">InvalidOperation</span></code> 未被捕获，则结果为 <code class="docutils literal notranslate"><span class="pre">Decimal('NaN')</span></code>。</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.3 版更改: </span>C 模块计算 <a class="reference internal" href="#decimal.Context.power" title="decimal.Context.power"><code class="xref py py-meth docutils literal notranslate"><span class="pre">power()</span></code></a> 时会使用已正确舍入的 <a class="reference internal" href="#decimal.Context.exp" title="decimal.Context.exp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exp()</span></code></a> 和 <a class="reference internal" href="#decimal.Context.ln" title="decimal.Context.ln"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ln()</span></code></a> 函数。 结果是经过良好定义的，但仅限于“几乎总是正确地舍入”。</p>
+<p><span class="versionmodified changed">在 3.3 版更改: </span>The C module computes <a class="reference internal" href="#decimal.Context.power" title="decimal.Context.power"><code class="xref py py-meth docutils literal notranslate"><span class="pre">power()</span></code></a> in terms of the correctly rounded
+<a class="reference internal" href="#decimal.Context.exp" title="decimal.Context.exp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">exp()</span></code></a> and <a class="reference internal" href="#decimal.Context.ln" title="decimal.Context.ln"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ln()</span></code></a> functions. The result is well-defined but
+only “almost always correctly rounded”.</p>
 </div>
 <p>带有三个参数时，计算 <code class="docutils literal notranslate"><span class="pre">(x**y)</span> <span class="pre">%</span> <span class="pre">modulo</span></code>。 对于三个参数的形式，参数将会应用以下限制：</p>
 <blockquote>
@@ -1938,7 +1951,12 @@ invalid value for an attribute.</p>
 </pre></div>
 </div>
 <p>Q. CPython 实现对于巨大数字是否足够快速？</p>
-<p>A. 是的。 在 CPython 和 PyPy3 实现中，decimal 模块的 C/CFFI 版本集成了高速 <a class="reference external" href="https://www.bytereef.org/mpdecimal/doc/libmpdec/index.html">libmpdec</a> 库用于实现任意精度正确舍入的十进制浮点算术 <a class="footnote-reference brackets" href="#id4" id="id2">1</a>。 <code class="docutils literal notranslate"><span class="pre">libmpdec</span></code> 会对中等大小的数字使用 <a class="reference external" href="https://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba 乘法</a> 而对非常巨大的数字使用 <a class="reference external" href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform_(general)#Number-theoretic_transform">数字原理变换</a>。</p>
+<p>A. Yes.  In the CPython and PyPy3 implementations, the C/CFFI versions of
+the decimal module integrate the high speed <a class="reference external" href="https://www.bytereef.org/mpdecimal/doc/libmpdec/index.html">libmpdec</a> library for
+arbitrary precision correctly rounded decimal floating point arithmetic <a class="footnote-reference brackets" href="#id4" id="id2">1</a>.
+<code class="docutils literal notranslate"><span class="pre">libmpdec</span></code> uses <a class="reference external" href="https://en.wikipedia.org/wiki/Karatsuba_algorithm">Karatsuba multiplication</a>
+for medium-sized numbers and the <a class="reference external" href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform_(general)#Number-theoretic_transform">Number Theoretic Transform</a>
+for very large numbers.</p>
 <p>必须要对任意精度算术适配上下文。 <code class="xref py py-attr docutils literal notranslate"><span class="pre">Emin</span></code> 和 <code class="xref py py-attr docutils literal notranslate"><span class="pre">Emax</span></code> 应当总是设为最大值，<code class="xref py py-attr docutils literal notranslate"><span class="pre">clamp</span></code> 应当总是设为 0 (默认值)。 设置 <code class="xref py py-attr docutils literal notranslate"><span class="pre">prec</span></code> 需要十分谨慎。</p>
 <p>进行大数字算术的最便捷方式也是使用 <code class="xref py py-attr docutils literal notranslate"><span class="pre">prec</span></code> 的最大值 <a class="footnote-reference brackets" href="#id5" id="id3">2</a>:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">setcontext</span><span class="p">(</span><span class="n">Context</span><span class="p">(</span><span class="n">prec</span><span class="o">=</span><span class="n">MAX_PREC</span><span class="p">,</span> <span class="n">Emax</span><span class="o">=</span><span class="n">MAX_EMAX</span><span class="p">,</span> <span class="n">Emin</span><span class="o">=</span><span class="n">MIN_EMIN</span><span class="p">))</span>
@@ -2113,7 +2131,7 @@ invalid value for an attribute.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

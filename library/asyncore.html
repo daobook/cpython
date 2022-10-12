@@ -175,6 +175,10 @@ Please use <a class="reference internal" href="asyncio.html#module-asyncio" titl
 <p>该模块仅为提供向后兼容。我们推荐在新代码中使用 <a class="reference internal" href="asyncio.html#module-asyncio" title="asyncio: Asynchronous I/O."><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncio</span></code></a> 。</p>
 </div>
 <p>该模块提供用于编写异步套接字服务客户端与服务端的基础构件。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>只有两种方法让单个处理器上的程序“同一时间完成不止一件事”。 多线程编程是最简单和最流行的方法，但是还有另一种非常不同的技术，它可以让你拥有多线程的几乎所有优点，而无需实际使用多线程。 它仅仅在你的程序主要受 I/O 限制时有用，那么。 如果你的程序受处理器限制，那么先发制人的预定线程可能就是你真正需要的。 但是，网络服务器很少受处理器限制。</p>
 <p>如果你的操作系统在其 I/O 库中支持 <code class="xref c c-func docutils literal notranslate"><span class="pre">select()</span></code> 系统调用（几乎所有操作系统），那么你可以使用它来同时处理多个通信通道；在 I/O 正在“后台”时进行其他工作。 虽然这种策略看起来很奇怪和复杂，特别是起初，它在很多方面比多线程编程更容易理解和控制。 <a class="reference internal" href="#module-asyncore" title="asyncore: A base class for developing asynchronous socket handling services. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asyncore</span></code></a> 模块为您解决了许多难题，使得构建复杂的高性能网络服务器和客户端的任务变得轻而易举。 对于“会话”应用程序和协议，伴侣 <a class="reference internal" href="asynchat.html#module-asynchat" title="asynchat: Support for asynchronous command/response protocols. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">asynchat</span></code></a> 模块是非常宝贵的。</p>
 <p>这两个模块背后的基本思想是创建一个或多个网络 <em>通道</em> ，类的实例 <a class="reference internal" href="#asyncore.dispatcher" title="asyncore.dispatcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncore.dispatcher</span></code></a> 和 <a class="reference internal" href="asynchat.html#asynchat.async_chat" title="asynchat.async_chat"><code class="xref py py-class docutils literal notranslate"><span class="pre">asynchat.async_chat</span></code></a> 。 创建通道会将它们添加到全局映射中，如果你不为它提供自己的 <em>映射</em> ，则由 <a class="reference internal" href="#asyncore.loop" title="asyncore.loop"><code class="xref py py-func docutils literal notranslate"><span class="pre">loop()</span></code></a> 函数使用。</p>
@@ -535,7 +539,7 @@ Please use <a class="reference internal" href="asyncio.html#module-asyncio" titl
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -156,7 +156,19 @@
 <dl class="c function">
 <dt class="sig sig-object c" id="c.Py_GenericAlias">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">Py_GenericAlias</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">origin</span></span>, <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_GenericAlias" title="永久链接至目标">¶</a><br /></dt>
-<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.9.</em><p>创建一个 <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> 对象。相当于调用 Python 类 <a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a> 。参数 <em>origin</em> 和 <em>args</em> 分别设置 <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>‘s <code class="docutils literal notranslate"><span class="pre">__origin__</span></code> 属性和 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 属性。 <em>origin</em> 应该是 <span class="xref c c-texpr"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span> 类型， <em>args</em> 可以是 <span class="xref c c-texpr"><a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><span class="n">PyTupleObject</span></a><span class="p">*</span></span> 类型或者任意 <code class="docutils literal notranslate"><span class="pre">PyObject*</span></code> 类型。如果传递的 <em>args</em> 不是一个元组，则自动构建一个 1 元元组，并将 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 设置为 <code class="docutils literal notranslate"><span class="pre">(args,)</span></code> 。对参数进行了最小限度的检查，因此即使 <em>origin</em> 不是类型，函数也会成功。<code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code> 的 <code class="docutils literal notranslate"><span class="pre">__parameters__</span></code> 属性是通过 <code class="docutils literal notranslate"><span class="pre">__args__</span></code> 懒加载的。如果失败，则触发异常并返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 。</p>
+<dd><em class="stableabi"> Part of the <a class="reference internal" href="stable.html#stable"><span class="std std-ref">Stable ABI</span></a> since version 3.9.</em><p>Create a <a class="reference internal" href="../library/stdtypes.html#types-genericalias"><span class="std std-ref">GenericAlias</span></a> object.
+Equivalent to calling the Python class
+<a class="reference internal" href="../library/types.html#types.GenericAlias" title="types.GenericAlias"><code class="xref py py-class docutils literal notranslate"><span class="pre">types.GenericAlias</span></code></a>.  The <em>origin</em> and <em>args</em> arguments set the
+<code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>‘s <code class="docutils literal notranslate"><span class="pre">__origin__</span></code> and <code class="docutils literal notranslate"><span class="pre">__args__</span></code> attributes respectively.
+<em>origin</em> should be a <span class="c-expr sig sig-inline c"><a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><span class="n">PyTypeObject</span></a><span class="p">*</span></span>, and <em>args</em> can be a
+<span class="c-expr sig sig-inline c"><a class="reference internal" href="tuple.html#c.PyTupleObject" title="PyTupleObject"><span class="n">PyTupleObject</span></a><span class="p">*</span></span> or any <code class="docutils literal notranslate"><span class="pre">PyObject*</span></code>.  If <em>args</em> passed is
+not a tuple, a 1-tuple is automatically constructed and <code class="docutils literal notranslate"><span class="pre">__args__</span></code> is set
+to <code class="docutils literal notranslate"><span class="pre">(args,)</span></code>.
+Minimal checking is done for the arguments, so the function will succeed even
+if <em>origin</em> is not a type.
+The <code class="docutils literal notranslate"><span class="pre">GenericAlias</span></code>‘s <code class="docutils literal notranslate"><span class="pre">__parameters__</span></code> attribute is constructed lazily
+from <code class="docutils literal notranslate"><span class="pre">__args__</span></code>.  On failure, an exception is raised and <code class="docutils literal notranslate"><span class="pre">NULL</span></code> is
+returned.</p>
 <p>下面是一个如何创建一个扩展类型泛型的例子:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="p">...</span><span class="w"></span>
 <span class="k">static</span><span class="w"> </span><span class="n">PyMethodDef</span><span class="w"> </span><span class="n">my_obj_methods</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -282,7 +294,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

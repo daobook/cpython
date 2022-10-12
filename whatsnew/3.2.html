@@ -490,7 +490,7 @@ of the actual file that was imported:</p>
 </li>
 <li><p>The tag that is unique to each interpreter is accessible from the <a class="reference internal" href="../library/imp.html#module-imp" title="imp: Access the implementation of the import statement. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imp</span></code></a>
 module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">imp</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">imp</span> 
 <span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">get_tag</span><span class="p">()</span> 
 <span class="go">&#39;cpython-32&#39;</span>
 </pre></div>
@@ -499,7 +499,7 @@ module:</p>
 <li><p>Scripts that try to deduce source filename from the imported file now need to
 be smarter.  It is no longer sufficient to simply strip the “c” from a “.pyc”
 filename.  Instead, use the new functions in the <a class="reference internal" href="../library/imp.html#module-imp" title="imp: Access the implementation of the import statement. (已移除)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imp</span></code></a> module:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">source_from_cache</span><span class="p">(</span><span class="s1">&#39;c:/py32/lib/__pycache__/collections.cpython-32.pyc&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">source_from_cache</span><span class="p">(</span><span class="s1">&#39;c:/py32/lib/__pycache__/collections.cpython-32.pyc&#39;</span><span class="p">)</span> 
 <span class="go">&#39;c:/py32/lib/collections.py&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">imp</span><span class="o">.</span><span class="n">cache_from_source</span><span class="p">(</span><span class="s1">&#39;c:/py32/lib/collections.py&#39;</span><span class="p">)</span> 
 <span class="go">&#39;c:/py32/lib/__pycache__/collections.cpython-32.pyc&#39;</span>
@@ -1111,7 +1111,7 @@ released and a <a class="reference internal" href="../library/threading.html#thr
 <p>In this example, the barrier enforces a more robust rule.  If some election
 sites do not finish before midnight, the barrier times-out and the ballots are
 sealed and deposited in a queue for later handling.</p>
-<p>See <a class="reference external" href="http://osl.cs.illinois.edu/media/papers/karmani-2009-barrier_synchronization_pattern.pdf">Barrier Synchronization Patterns</a>
+<p>See <a class="reference external" href="https://osl.cs.illinois.edu/media/papers/karmani-2009-barrier_synchronization_pattern.pdf">Barrier Synchronization Patterns</a>
 for more examples of how barriers can be used in parallel computing.  Also, there is
 a simple but thorough explanation of barriers in <a class="reference external" href="https://greenteapress.com/semaphores/LittleBookOfSemaphores.pdf">The Little Book of Semaphores</a>, <em>section 3.6</em>.</p>
 <p>(Contributed by Kristján Valur Jónsson with an API review by Jeffrey Yasskin in
@@ -1714,7 +1714,7 @@ for secure (encrypted, authenticated) internet connections:</p>
 SSL data, such as protocol settings, certificates, private keys, and various
 other options. It includes a <a class="reference internal" href="../library/ssl.html#ssl.SSLContext.wrap_socket" title="ssl.SSLContext.wrap_socket"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wrap_socket()</span></code></a> for creating
 an SSL socket from an SSL context.</p></li>
-<li><p>A new function, <a class="reference internal" href="../library/ssl.html#ssl.match_hostname" title="ssl.match_hostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.match_hostname()</span></code></a>, supports server identity
+<li><p>A new function, <code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.match_hostname()</span></code>, supports server identity
 verification for higher-level protocols by implementing the rules of HTTPS
 (from <span class="target" id="index-12"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc2818.html"><strong>RFC 2818</strong></a>) which are also suitable for other protocols.</p></li>
 <li><p>The <a class="reference internal" href="../library/ssl.html#ssl.wrap_socket" title="ssl.wrap_socket"><code class="xref py py-func docutils literal notranslate"><span class="pre">ssl.wrap_socket()</span></code></a> constructor function now takes a <em>ciphers</em>
@@ -1800,7 +1800,7 @@ names.</p>
 instead of module names for running specific tests (<a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=10620">bpo-10620</a>).  The new
 test discovery can find tests within packages, locating any test importable
 from the top-level directory.  The top-level directory can be specified with
-the <cite>-t</cite> option, a pattern for matching files with <code class="docutils literal notranslate"><span class="pre">-p</span></code>, and a directory to
+the <code class="docutils literal notranslate"><span class="pre">-t</span></code> option, a pattern for matching files with <code class="docutils literal notranslate"><span class="pre">-p</span></code>, and a directory to
 start discovery with <code class="docutils literal notranslate"><span class="pre">-s</span></code>:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m unittest discover -s my_proj_dir -p _test.py
 </pre></div>
@@ -1884,8 +1884,7 @@ deprecated in favor of the preferred names:</p>
 </table>
 </div></blockquote>
 <p>Likewise, the <code class="docutils literal notranslate"><span class="pre">TestCase.fail*</span></code> methods deprecated in Python 3.1 are expected
-to be removed in Python 3.3.  Also see the <a class="reference internal" href="../library/unittest.html#deprecated-aliases"><span class="std std-ref">Deprecated aliases</span></a> section in
-the <a class="reference internal" href="../library/unittest.html#module-unittest" title="unittest: Unit testing framework for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">unittest</span></code></a> documentation.</p>
+to be removed in Python 3.3.</p>
 <p>(Contributed by Ezio Melotti; <a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=9424">bpo-9424</a>.)</p>
 </li>
 <li><p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">assertDictContainsSubset()</span></code> method was deprecated
@@ -1920,7 +1919,7 @@ structure.</p>
 <h3>asyncore<a class="headerlink" href="#asyncore" title="永久链接至标题">¶</a></h3>
 <p><a class="reference internal" href="../library/asyncore.html#asyncore.dispatcher" title="asyncore.dispatcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">asyncore.dispatcher</span></code></a> now provides a
 <a class="reference internal" href="../library/asyncore.html#asyncore.dispatcher.handle_accepted" title="asyncore.dispatcher.handle_accepted"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_accepted()</span></code></a> method
-returning a <cite>(sock, addr)</cite> pair which is called when a connection has actually
+returning a <code class="docutils literal notranslate"><span class="pre">(sock,</span> <span class="pre">addr)</span></code> pair which is called when a connection has actually
 been established with a new remote endpoint. This is supposed to be used as a
 replacement for old <a class="reference internal" href="../library/asyncore.html#asyncore.dispatcher.handle_accept" title="asyncore.dispatcher.handle_accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_accept()</span></code></a> and avoids
 the user  to call <a class="reference internal" href="../library/asyncore.html#asyncore.dispatcher.accept" title="asyncore.dispatcher.accept"><code class="xref py py-meth docutils literal notranslate"><span class="pre">accept()</span></code></a> directly.</p>
@@ -2105,7 +2104,7 @@ information:</p>
 such as “3.2”.</p></li>
 </ul>
 <p>It also provides access to the paths and variables corresponding to one of
-seven named schemes used by <a class="reference internal" href="../library/distutils.html#module-distutils" title="distutils: Support for building and installing Python modules into an existing Python installation."><code class="xref py py-mod docutils literal notranslate"><span class="pre">distutils</span></code></a>.  Those include <em>posix_prefix</em>,
+seven named schemes used by <code class="docutils literal notranslate"><span class="pre">distutils</span></code>.  Those include <em>posix_prefix</em>,
 <em>posix_home</em>, <em>posix_user</em>, <em>nt</em>, <em>nt_user</em>, <em>os2</em>, <em>os2_home</em>:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../library/sysconfig.html#sysconfig.get_paths" title="sysconfig.get_paths"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_paths()</span></code></a> makes a dictionary containing installation paths
@@ -2429,13 +2428,13 @@ faster (<a class="reference external" href="https://bugs.python.org/issue?&#64;a
 </section>
 <section id="unicode">
 <h2>Unicode<a class="headerlink" href="#unicode" title="永久链接至标题">¶</a></h2>
-<p>Python has been updated to <a class="reference external" href="http://unicode.org/versions/Unicode6.0.0/">Unicode 6.0.0</a>.  The update to the standard adds
+<p>Python has been updated to <a class="reference external" href="https://unicode.org/versions/Unicode6.0.0/">Unicode 6.0.0</a>.  The update to the standard adds
 over 2,000 new characters including <a class="reference external" href="https://en.wikipedia.org/wiki/Emoji">emoji</a>
 symbols which are important for mobile phones.</p>
 <p>In addition, the updated standard has altered the character properties for two
 Kannada characters (U+0CF1, U+0CF2) and one New Tai Lue numeric character
 (U+19DA), making the former eligible for use in identifiers while disqualifying
-the latter.  For more information, see <a class="reference external" href="http://www.unicode.org/versions/Unicode6.0.0/#Database_Changes">Unicode Character Database Changes</a>.</p>
+the latter.  For more information, see <a class="reference external" href="https://www.unicode.org/versions/Unicode6.0.0/#Database_Changes">Unicode Character Database Changes</a>.</p>
 </section>
 <section id="codecs">
 <h2>Codecs<a class="headerlink" href="#codecs" title="永久链接至标题">¶</a></h2>
@@ -2502,7 +2501,7 @@ trailing whitespace.</p>
 </section>
 <section id="code-repository">
 <h2>Code Repository<a class="headerlink" href="#code-repository" title="永久链接至标题">¶</a></h2>
-<p>In addition to the existing Subversion code repository at <a class="reference external" href="http://svn.python.org">http://svn.python.org</a>
+<p>In addition to the existing Subversion code repository at <a class="reference external" href="https://svn.python.org">https://svn.python.org</a>
 there is now a <a class="reference external" href="https://www.mercurial-scm.org/">Mercurial</a> repository at
 <a class="reference external" href="https://hg.python.org/">https://hg.python.org/</a>.</p>
 <p>After the 3.2 release, there are plans to switch to Mercurial as the primary
@@ -2571,7 +2570,7 @@ advantage of pymalloc at other times (<a class="reference external" href="https:
 longer used and it had never been documented (<a class="reference external" href="https://bugs.python.org/issue?&#64;action=redirect&amp;bpo=8837">bpo-8837</a>).</p></li>
 </ul>
 <p>There were a number of other small changes to the C-API.  See the
-Misc/NEWS &lt;<a class="reference external" href="https://github.com/python/cpython/blob/v3.2.6/Misc/NEWS">https://github.com/python/cpython/blob/v3.2.6/Misc/NEWS</a>&gt;`_
+<a class="reference external" href="https://github.com/python/cpython/blob/v3.2.6/Misc/NEWS">Misc/NEWS</a>
 file for a complete list.</p>
 <p>Also, there were a number of updates to the Mac OS X build, see
 <a class="reference external" href="https://github.com/python/cpython/blob/v3.2.6/Mac/BuildScript/README.txt">Mac/BuildScript/README.txt</a>
@@ -2874,7 +2873,7 @@ cannot be called before <a class="reference internal" href="../c-api/init.html#c
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

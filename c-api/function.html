@@ -226,6 +226,17 @@ code object’s <code class="docutils literal notranslate"><span class="pre">co_
 </dd></dl>
 
 <dl class="c function">
+<dt class="sig sig-object c" id="c.PyFunction_SetVectorcall">
+<span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PyFunction_SetVectorcall</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#c.PyFunctionObject" title="PyFunctionObject"><span class="n"><span class="pre">PyFunctionObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">func</span></span>, <a class="reference internal" href="call.html#c.vectorcallfunc" title="vectorcallfunc"><span class="n"><span class="pre">vectorcallfunc</span></span></a><span class="w"> </span><span class="n"><span class="pre">vectorcall</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFunction_SetVectorcall" title="永久链接至目标">¶</a><br /></dt>
+<dd><p>Set the vectorcall field of a given function object <em>func</em>.</p>
+<p>Warning: extensions using this API must preserve the behavior
+of the unaltered (default) vectorcall function!</p>
+<div class="versionadded">
+<p><span class="versionmodified added">3.12 新版功能.</span></p>
+</div>
+</dd></dl>
+
+<dl class="c function">
 <dt class="sig sig-object c" id="c.PyFunction_GetClosure">
 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">PyFunction_GetClosure</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n"><span class="pre">PyObject</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">op</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.PyFunction_GetClosure" title="永久链接至目标">¶</a><br /></dt>
 <dd><em class="refcount">Return value: Borrowed reference.</em><p>返回关联到函数对象 <em>op</em> 的闭包。 这可以是 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> 或 cell 对象的元组。</p>
@@ -348,7 +359,7 @@ code object’s <code class="docutils literal notranslate"><span class="pre">co_
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

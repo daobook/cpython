@@ -171,10 +171,15 @@
 <span id="posix-large-files"></span><h2>大文件支持<a class="headerlink" href="#large-file-support" title="永久链接至标题">¶</a></h2>
 <p id="index-1">Several operating systems (including AIX and Solaris) provide
 support for files that are larger than 2 GiB from a C programming model where
-<span class="xref c c-texpr"><span class="kt">int</span></span> and <span class="xref c c-texpr"><span class="kt">long</span></span> are 32-bit values. This is typically accomplished
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span> and <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> are 32-bit values. This is typically accomplished
 by defining the relevant size and offset types as 64-bit values. Such files are
 sometimes referred to as <em class="dfn">large files</em>.</p>
-<p>Python 中的大文件支持会在 <code class="xref c c-type docutils literal notranslate"><span class="pre">off_t</span></code> 的大小超过 <span class="xref c c-texpr"><span class="kt">long</span></span> 且 <span class="xref c c-texpr"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> 的大小至少与 <code class="xref c c-type docutils literal notranslate"><span class="pre">off_t</span></code> 一样时被启用。 要启用此模式可能必须在启用特定编译旗标的情况下来配置和编译 Python。 例如，在 Solaris 2.6 和 2.7 中你需要执行这样的操作:</p>
+<p>Large file support is enabled in Python when the size of an <code class="xref c c-type docutils literal notranslate"><span class="pre">off_t</span></code> is
+larger than a <span class="c-expr sig sig-inline c"><span class="kt">long</span></span> and the <span class="c-expr sig sig-inline c"><span class="kt">long</span><span class="w"> </span><span class="kt">long</span></span> is at least as large
+as an <code class="xref c c-type docutils literal notranslate"><span class="pre">off_t</span></code>.
+It may be necessary to configure and compile Python with certain compiler flags
+to enable this mode. For example, with Solaris 2.6 and 2.7 you need to do
+something like:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;`getconf LFS_CFLAGS`&quot;</span> <span class="n">OPT</span><span class="o">=</span><span class="s2">&quot;-g -O2 $CFLAGS&quot;</span> \
         <span class="o">./</span><span class="n">configure</span>
 </pre></div>
@@ -311,7 +316,7 @@ sometimes referred to as <em class="dfn">large files</em>.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

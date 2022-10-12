@@ -454,6 +454,24 @@ them.</p>
 filter instances in addition to ids.</p>
 </div>
 </div></blockquote>
+<p>You can also specify a special key <code class="docutils literal notranslate"><span class="pre">'.'</span></code> whose value is a dictionary is a
+mapping of attribute names to values. If found, the specified attributes will
+be set on the user-defined object before it is returned. Thus, with the
+following configuration:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;()&#39;</span> <span class="p">:</span> <span class="s1">&#39;my.package.customFormatterFactory&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;bar&#39;</span> <span class="p">:</span> <span class="s1">&#39;baz&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;spam&#39;</span> <span class="p">:</span> <span class="mf">99.9</span><span class="p">,</span>
+  <span class="s1">&#39;answer&#39;</span> <span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="s1">&#39;.&#39;</span> <span class="p">{</span>
+    <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="s1">&#39;bozz&#39;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>the returned formatter will have attribute <code class="docutils literal notranslate"><span class="pre">foo</span></code> set to <code class="docutils literal notranslate"><span class="pre">'bar'</span></code> and
+attribute <code class="docutils literal notranslate"><span class="pre">baz</span></code> set to <code class="docutils literal notranslate"><span class="pre">'bozz'</span></code>.</p>
 </section>
 <section id="access-to-external-objects">
 <span id="logging-config-dict-externalobj"></span><h3>访问外部对象<a class="headerlink" href="#access-to-external-objects" title="永久链接至标题">¶</a></h3>
@@ -811,7 +829,7 @@ for the handler class. If not provided, it defaults to <code class="docutils lit
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

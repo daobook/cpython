@@ -168,6 +168,10 @@
 <hr class="docutils" />
 <p>此模块提供一个接口到Unix <code class="docutils literal notranslate"><span class="pre">syslog</span></code> 日常库. 参考 Unix 手册页关于 <code class="docutils literal notranslate"><span class="pre">syslog</span></code> 设施的详细描述.</p>
 <p>此模块包装了系统的 <code class="docutils literal notranslate"><span class="pre">syslog</span></code> 例程族。 一个能与 syslog 服务器对话的纯 Python 库则以 <a class="reference internal" href="logging.handlers.html#module-logging.handlers" title="logging.handlers: Handlers for the logging module."><code class="xref py py-mod docutils literal notranslate"><span class="pre">logging.handlers</span></code></a> 模块中 <code class="xref py py-class docutils literal notranslate"><span class="pre">SysLogHandler</span></code> 类的形式提供。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p>这个模块定义了以下函数：</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="syslog.syslog">
@@ -175,8 +179,14 @@
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">syslog.</span></span><span class="sig-name descname"><span class="pre">syslog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">priority</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>将字符串 <em>message</em> 发送到系统日志记录器。 如有必要会添加末尾换行符。 每条消息都带有一个由 <em>facility</em> 和 <em>level</em> 组成的优先级标价签。 可选的 <em>priority</em> 参数默认值为 <code class="xref py py-const docutils literal notranslate"><span class="pre">LOG_INFO</span></code>，它确定消息的优先级。 如果未在 <em>priority</em> 中使用逻辑或 (<code class="docutils literal notranslate"><span class="pre">LOG_INFO</span> <span class="pre">|</span> <span class="pre">LOG_USER</span></code>) 对 facility 进行编码，则会使用在 <a class="reference internal" href="#syslog.openlog" title="syslog.openlog"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlog()</span></code></a> 调用中所给定的值。</p>
-<p>如果 <a class="reference internal" href="#syslog.openlog" title="syslog.openlog"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlog()</span></code></a> 未在对 <a class="reference internal" href="#module-syslog" title="syslog: An interface to the Unix syslog library routines. (Unix)"><code class="xref py py-func docutils literal notranslate"><span class="pre">syslog()</span></code></a> 的调用之前被调用，则将不带参数地调用 <code class="docutils literal notranslate"><span class="pre">openlog()</span></code>。</p>
+<p>If <a class="reference internal" href="#syslog.openlog" title="syslog.openlog"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlog()</span></code></a> has not been called prior to the call to <a class="reference internal" href="#module-syslog" title="syslog: An interface to the Unix syslog library routines. (Unix)"><code class="xref py py-func docutils literal notranslate"><span class="pre">syslog()</span></code></a>,
+<a class="reference internal" href="#syslog.openlog" title="syslog.openlog"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlog()</span></code></a> will be called with no arguments.</p>
 <p class="audit-hook">引发 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">syslog.syslog</span></code> 使用参数 <code class="docutils literal notranslate"><span class="pre">priority</span></code>, <code class="docutils literal notranslate"><span class="pre">message</span></code>.</p>
+<div class="versionchanged">
+<p><span class="versionmodified changed">在 3.2 版更改: </span>In previous versions, <a class="reference internal" href="#syslog.openlog" title="syslog.openlog"><code class="xref py py-func docutils literal notranslate"><span class="pre">openlog()</span></code></a> would not be called automatically if
+it wasn’t called prior to the call to <a class="reference internal" href="#module-syslog" title="syslog: An interface to the Unix syslog library routines. (Unix)"><code class="xref py py-func docutils literal notranslate"><span class="pre">syslog()</span></code></a>, deferring to the syslog
+implementation to call <code class="docutils literal notranslate"><span class="pre">openlog()</span></code>.</p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -186,7 +196,8 @@
 <p>可选的 <em>ident</em> 关键字参数是在每条消息前添加的字符串，默认为 <code class="docutils literal notranslate"><span class="pre">sys.argv[0]</span></code> 去除打头的路径部分。 可选的 <em>logoption</em> 关键字参数（默认为 0）是一个位字段 – 请参见下文了解可能的组合值。 可选的 <em>facility</em> 关键字参数 (默认为 <code class="xref py py-const docutils literal notranslate"><span class="pre">LOG_USER</span></code>) 为没有显式编码 facility 的消息设置默认的 facility。</p>
 <p class="audit-hook">引发 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">syslog.openlog</span></code> 使用参数 <code class="docutils literal notranslate"><span class="pre">ident</span></code>, <code class="docutils literal notranslate"><span class="pre">logoption</span></code>, <code class="docutils literal notranslate"><span class="pre">facility</span></code>.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.2 版更改: </span>在之前的版本中，不允许关键字参数，并且要求必须有 <em>ident</em>。 <em>ident</em> 的默认值依赖于系统库，它往往为 <code class="docutils literal notranslate"><span class="pre">python</span></code> 而不是 Python 程序文件的实际名称。</p>
+<p><span class="versionmodified changed">在 3.2 版更改: </span>In previous versions, keyword arguments were not allowed, and <em>ident</em> was
+required.</p>
 </div>
 </dd></dl>
 
@@ -345,7 +356,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

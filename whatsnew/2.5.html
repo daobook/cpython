@@ -204,7 +204,7 @@ Python 2.5 is scheduled for August 2006; <span class="target" id="index-0"></spa
 release schedule.  Python 2.5 was released on September 19, 2006.</p>
 <p>The changes in Python 2.5 are an interesting mix of language and library
 improvements. The library enhancements will be more important to Python’s user
-community, I think, because several widely-useful packages were added.  New
+community, I think, because several widely useful packages were added.  New
 modules include ElementTree for XML processing (<code class="xref py py-mod docutils literal notranslate"><span class="pre">xml.etree</span></code>),
 the SQLite database module (<code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite</span></code>), and the <a class="reference internal" href="../library/ctypes.html#module-ctypes" title="ctypes: A foreign function library for Python."><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a>
 module for calling C functions.</p>
@@ -946,17 +946,17 @@ to be able to remove the string-exception feature in a few releases.</p>
 <section id="pep-353-using-ssize-t-as-the-index-type">
 <span id="pep-353"></span><h2>PEP 353: Using ssize_t as the index type<a class="headerlink" href="#pep-353-using-ssize-t-as-the-index-type" title="永久链接至标题">¶</a></h2>
 <p>A wide-ranging change to Python’s C API, using a new  <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a> type
-definition instead of <span class="xref c c-texpr"><span class="kt">int</span></span>,  will permit the interpreter to handle more
+definition instead of <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>,  will permit the interpreter to handle more
 data on 64-bit platforms. This change doesn’t affect Python’s capacity on 32-bit
 platforms.</p>
-<p>Various pieces of the Python interpreter used C’s <span class="xref c c-texpr"><span class="kt">int</span></span> type to store
+<p>Various pieces of the Python interpreter used C’s <span class="c-expr sig sig-inline c"><span class="kt">int</span></span> type to store
 sizes or counts; for example, the number of items in a list or tuple were stored
-in an <span class="xref c c-texpr"><span class="kt">int</span></span>.  The C compilers for most 64-bit platforms still define
-<span class="xref c c-texpr"><span class="kt">int</span></span> as a 32-bit type, so that meant that lists could only hold up to
+in an <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>.  The C compilers for most 64-bit platforms still define
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span> as a 32-bit type, so that meant that lists could only hold up to
 <code class="docutils literal notranslate"><span class="pre">2**31</span> <span class="pre">-</span> <span class="pre">1</span></code> = 2147483647 items. (There are actually a few different
 programming models that 64-bit C compilers can use – see
-<a class="reference external" href="http://www.unix.org/version2/whatsnew/lp64_wp.html">http://www.unix.org/version2/whatsnew/lp64_wp.html</a> for a discussion – but the
-most commonly available model leaves <span class="xref c c-texpr"><span class="kt">int</span></span> as 32 bits.)</p>
+<a class="reference external" href="https://unix.org/version2/whatsnew/lp64_wp.html">https://unix.org/version2/whatsnew/lp64_wp.html</a> for a discussion – but the
+most commonly available model leaves <span class="c-expr sig sig-inline c"><span class="kt">int</span></span> as 32 bits.)</p>
 <p>A limit of 2147483647 items doesn’t really matter on a 32-bit platform because
 you’ll run out of memory before hitting the length limit. Each list item
 requires space for a pointer, which is 4 bytes, plus space for a
@@ -966,7 +966,7 @@ than a 32-bit address space can contain.</p>
 pointers for a list that size would only require 16 GiB of space, so it’s not
 unreasonable that Python programmers might construct lists that large.
 Therefore, the Python interpreter had to be changed to use some type other than
-<span class="xref c c-texpr"><span class="kt">int</span></span>, and this will be a 64-bit type on 64-bit platforms.  The change
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span>, and this will be a 64-bit type on 64-bit platforms.  The change
 will cause incompatibilities on 64-bit machines, so it was deemed worth making
 the transition now, while the number of 64-bit users is still relatively small.
 (In 5 or 10 years, we may <em>all</em> be on 64-bit machines, and the transition would
@@ -978,7 +978,7 @@ strings and container types such as lists and tuples  now use
 may therefore need to have some variables changed to <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>.</p>
 <p>The <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a> and <a class="reference internal" href="../c-api/arg.html#c.Py_BuildValue" title="Py_BuildValue"><code class="xref c c-func docutils literal notranslate"><span class="pre">Py_BuildValue()</span></code></a> functions have a new
 conversion code, <code class="docutils literal notranslate"><span class="pre">n</span></code>, for <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>.   <a class="reference internal" href="../c-api/arg.html#c.PyArg_ParseTuple" title="PyArg_ParseTuple"><code class="xref c c-func docutils literal notranslate"><span class="pre">PyArg_ParseTuple()</span></code></a>’s
-<code class="docutils literal notranslate"><span class="pre">s#</span></code> and <code class="docutils literal notranslate"><span class="pre">t#</span></code> still output <span class="xref c c-texpr"><span class="kt">int</span></span> by default, but you can define the
+<code class="docutils literal notranslate"><span class="pre">s#</span></code> and <code class="docutils literal notranslate"><span class="pre">t#</span></code> still output <span class="c-expr sig sig-inline c"><span class="kt">int</span></span> by default, but you can define the
 macro  <code class="xref c c-macro docutils literal notranslate"><span class="pre">PY_SSIZE_T_CLEAN</span></code> before including <code class="file docutils literal notranslate"><span class="pre">Python.h</span></code>  to make
 them return <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>.</p>
 <p><span class="target" id="index-16"></span><a class="pep reference external" href="https://peps.python.org/pep-0353/"><strong>PEP 353</strong></a> has a section on conversion guidelines that  extension authors should
@@ -1302,7 +1302,7 @@ argument to the <code class="xref py py-class docutils literal notranslate"><spa
 received several enhancements and a number of bugfixes.  You can now set the
 maximum size in bytes of a field by calling the
 <code class="docutils literal notranslate"><span class="pre">csv.field_size_limit(new_limit)</span></code> function; omitting the <em>new_limit</em>
-argument will return the currently-set limit.  The <code class="xref py py-class docutils literal notranslate"><span class="pre">reader</span></code> class now has
+argument will return the currently set limit.  The <code class="xref py py-class docutils literal notranslate"><span class="pre">reader</span></code> class now has
 a <code class="xref py py-attr docutils literal notranslate"><span class="pre">line_num</span></code> attribute that counts the number of physical lines read from
 the source; records can span multiple physical lines, so <code class="xref py py-attr docutils literal notranslate"><span class="pre">line_num</span></code> is not
 the same as the number of records read.</p>
@@ -1637,7 +1637,7 @@ attributes of the <code class="xref py py-class docutils literal notranslate"><s
 </pre></div>
 </div>
 <p>Type constructors for the various C types are provided: <code class="xref py py-func docutils literal notranslate"><span class="pre">c_int()</span></code>,
-<code class="xref py py-func docutils literal notranslate"><span class="pre">c_float()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">c_double()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">c_char_p()</span></code> (equivalent to <span class="xref c c-texpr"><span class="kt">char</span><span class="p">*</span></span>), and so forth.  Unlike Python’s types, the C versions are all mutable; you
+<code class="xref py py-func docutils literal notranslate"><span class="pre">c_float()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">c_double()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">c_char_p()</span></code> (equivalent to <span class="c-expr sig sig-inline c"><span class="kt">char</span><span class="p">*</span></span>), and so forth.  Unlike Python’s types, the C versions are all mutable; you
 can assign to their <code class="xref py py-attr docutils literal notranslate"><span class="pre">value</span></code> attribute to change the wrapped value.  Python
 integers and strings will be automatically converted to the corresponding C
 types, but for other types you  must call the correct type constructor.  (And I
@@ -1665,7 +1665,7 @@ attribute of the function object to  change this:</p>
 <code class="docutils literal notranslate"><span class="pre">ctypes.pythonapi</span></code> object.  This object does <em>not</em>  release the global
 interpreter lock before calling a function, because the lock must be held when
 calling into the interpreter’s code.   There’s a <code class="xref py py-class docutils literal notranslate"><span class="pre">py_object()</span></code> type
-constructor that will create a  <span class="xref c c-texpr"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> pointer.  A simple usage:</p>
+constructor that will create a  <span class="c-expr sig sig-inline c"><a class="reference internal" href="../c-api/structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> pointer.  A simple usage:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ctypes</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1865,7 +1865,7 @@ with the same digest state.</p>
 </section>
 <section id="the-sqlite3-package">
 <span id="module-sqlite"></span><h3>The sqlite3 package<a class="headerlink" href="#the-sqlite3-package" title="永久链接至标题">¶</a></h3>
-<p>The pysqlite module (<a class="reference external" href="http://www.pysqlite.org">http://www.pysqlite.org</a>), a wrapper for the SQLite embedded
+<p>The pysqlite module (<a class="reference external" href="https://www.pysqlite.org">https://www.pysqlite.org</a>), a wrapper for the SQLite embedded
 database, has been added to the standard library under the package name
 <a class="reference internal" href="../library/sqlite3.html#module-sqlite3" title="sqlite3: A DB-API 2.0 implementation using SQLite 3.x."><code class="xref py py-mod docutils literal notranslate"><span class="pre">sqlite3</span></code></a>.</p>
 <p>SQLite is a C library that provides a lightweight disk-based database that
@@ -1946,7 +1946,7 @@ rows.</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
 <dl class="simple">
-<dt><a class="reference external" href="http://www.pysqlite.org">http://www.pysqlite.org</a></dt><dd><p>The pysqlite web page.</p>
+<dt><a class="reference external" href="https://www.pysqlite.org">https://www.pysqlite.org</a></dt><dd><p>The pysqlite web page.</p>
 </dd>
 <dt><a class="reference external" href="https://www.sqlite.org">https://www.sqlite.org</a></dt><dd><p>The SQLite web page; the documentation describes the syntax and the available
 data types for the supported SQL dialect.</p>
@@ -2003,7 +2003,7 @@ refcounting problems, often occurring in error-handling code.  See
 <a class="reference external" href="https://scan.coverity.com">https://scan.coverity.com</a> for the statistics.</p></li>
 <li><p>The largest change to the C API came from <span class="target" id="index-29"></span><a class="pep reference external" href="https://peps.python.org/pep-0353/"><strong>PEP 353</strong></a>, which modifies the
 interpreter to use a <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a> type definition instead of
-<span class="xref c c-texpr"><span class="kt">int</span></span>.  See the earlier section <a class="reference internal" href="#pep-353"><span class="std std-ref">PEP 353: Using ssize_t as the index type</span></a> for a discussion of this
+<span class="c-expr sig sig-inline c"><span class="kt">int</span></span>.  See the earlier section <a class="reference internal" href="#pep-353"><span class="std std-ref">PEP 353: Using ssize_t as the index type</span></a> for a discussion of this
 change.</p></li>
 <li><p>The design of the bytecode compiler has changed a great deal,  no longer
 generating bytecode by traversing the parse tree.  Instead the parse tree is
@@ -2144,14 +2144,14 @@ have a <code class="xref py py-attr docutils literal notranslate"><span class="p
 limited set of URL paths; the default is to allow only <code class="docutils literal notranslate"><span class="pre">'/'</span></code> and <code class="docutils literal notranslate"><span class="pre">'/RPC2'</span></code>.
 Setting  <code class="xref py py-attr docutils literal notranslate"><span class="pre">rpc_paths</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> or an empty tuple disables  this path
 checking.</p></li>
-<li><p>C API: Many functions now use <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>  instead of <span class="xref c c-texpr"><span class="kt">int</span></span> to
+<li><p>C API: Many functions now use <a class="reference internal" href="../c-api/intro.html#c.Py_ssize_t" title="Py_ssize_t"><code class="xref c c-type docutils literal notranslate"><span class="pre">Py_ssize_t</span></code></a>  instead of <span class="c-expr sig sig-inline c"><span class="kt">int</span></span> to
 allow processing more data on 64-bit machines.  Extension code may need to make
 the same change to avoid warnings and to support 64-bit machines.  See the
 earlier section <a class="reference internal" href="#pep-353"><span class="std std-ref">PEP 353: Using ssize_t as the index type</span></a> for a discussion of this change.</p></li>
 <li><p>C API:  The obmalloc changes mean that  you must be careful to not mix usage
-of the <span class="xref c c-texpr"><span class="n">PyMem_</span><span class="p">*</span></span> and <span class="xref c c-texpr"><span class="n">PyObject_</span><span class="p">*</span></span> families of functions. Memory
-allocated with  one family’s <span class="xref c c-texpr"><span class="o">*</span><span class="n">_Malloc</span></span> must be  freed with the
-corresponding family’s <span class="xref c c-texpr"><span class="o">*</span><span class="n">_Free</span></span> function.</p></li>
+of the <code class="docutils literal notranslate"><span class="pre">PyMem_*</span></code> and <code class="docutils literal notranslate"><span class="pre">PyObject_*</span></code> families of functions. Memory
+allocated with  one family’s <code class="docutils literal notranslate"><span class="pre">*_Malloc</span></code> must be  freed with the
+corresponding family’s <code class="docutils literal notranslate"><span class="pre">*_Free</span></code> function.</p></li>
 </ul>
 </section>
 <section id="acknowledgements">
@@ -2302,7 +2302,7 @@ Rovner, Scott Weikart, Barry Warsaw, Thomas Wouters.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

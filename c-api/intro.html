@@ -259,7 +259,8 @@ macro is defined), the <a class="reference internal" href="#c.Py_ALWAYS_INLINE" 
 <dl class="c macro">
 <dt class="sig sig-object c" id="c.Py_GETENV">
 <span class="sig-name descname"><span class="n"><span class="pre">Py_GETENV</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">s</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.Py_GETENV" title="永久链接至目标">¶</a><br /></dt>
-<dd><p>与 <code class="docutils literal notranslate"><span class="pre">getenv(s)</span></code> 类似，但是如果命令行上传递了 <a class="reference internal" href="../using/cmdline.html#cmdoption-E"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> ，则返回 <code class="docutils literal notranslate"><span class="pre">NULL</span></code> （即如果设置了 <code class="docutils literal notranslate"><span class="pre">Py_IgnoreEnvironmentFlag</span></code> ）。</p>
+<dd><p>Like <code class="docutils literal notranslate"><span class="pre">getenv(s)</span></code>, but returns <code class="docutils literal notranslate"><span class="pre">NULL</span></code> if <a class="reference internal" href="../using/cmdline.html#cmdoption-E"><code class="xref std std-option docutils literal notranslate"><span class="pre">-E</span></code></a> was passed on the
+command line (see <a class="reference internal" href="init_config.html#c.PyConfig.use_environment" title="PyConfig.use_environment"><code class="xref c c-member docutils literal notranslate"><span class="pre">PyConfig.use_environment</span></code></a>).</p>
 </dd></dl>
 
 <dl class="c macro">
@@ -369,7 +370,16 @@ consumption: useful on LTO+PGO builds which heavily inline code (see
 </section>
 <section id="objects-types-and-reference-counts">
 <span id="api-objects"></span><h2>对象、类型和引用计数<a class="headerlink" href="#objects-types-and-reference-counts" title="永久链接至标题">¶</a></h2>
-<p id="index-8">多数 Python/C API 有一个或多个参数，以及一个 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 类型的返回值。这种类型是指向任意 Python 对象的不透明数据类型的指针。所有 Python 对象类型在大多数情况下都被 Python 语言由相同的方式处理（例如，赋值，作用域规则，和参数传递），因此将它们由单个 C 类型表示才合适。几乎所有 Python 对象存放在堆中：你不能声明一个类型为 <a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a> 的自动或静态的变量，只能声明类型为 <span class="xref c c-texpr"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> 的指针。type 对象是唯一的例外，因为它们永远不能被释放，所以它们通常是静态的 <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> 对象。</p>
+<p id="index-8">Most Python/C API functions have one or more arguments as well as a return value
+of type <span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span>.  This type is a pointer to an opaque data type
+representing an arbitrary Python object.  Since all Python object types are
+treated the same way by the Python language in most situations (e.g.,
+assignments, scope rules, and argument passing), it is only fitting that they
+should be represented by a single C type.  Almost all Python objects live on the
+heap: you never declare an automatic or static variable of type
+<a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyObject</span></code></a>, only pointer variables of type <span class="c-expr sig sig-inline c"><a class="reference internal" href="structures.html#c.PyObject" title="PyObject"><span class="n">PyObject</span></a><span class="p">*</span></span> can  be
+declared.  The sole exception are the type objects; since these must never be
+deallocated, they are typically static <a class="reference internal" href="type.html#c.PyTypeObject" title="PyTypeObject"><code class="xref c c-type docutils literal notranslate"><span class="pre">PyTypeObject</span></code></a> objects.</p>
 <p>所有 Python 对象（甚至 Python 整数）都有一个 <em class="dfn">type</em> 和一个 <em class="dfn">reference count</em>。对象的类型确定它是什么类型的对象（例如整数、列表或用户定义函数；还有更多，如 <a class="reference internal" href="../reference/datamodel.html#types"><span class="std std-ref">标准类型层级结构</span></a> 中所述）。对于每个众所周知的类型，都有一个宏来检查对象是否属于该类型；例如，当（且仅当） <em>a</em> 所指的对象是 Python 列表时 <code class="docutils literal notranslate"><span class="pre">PyList_Check(a)</span></code> 为真。</p>
 <section id="reference-counts">
 <span id="api-refcounts"></span><h3>引用计数<a class="headerlink" href="#reference-counts" title="永久链接至标题">¶</a></h3>
@@ -536,8 +546,8 @@ using <a class="reference internal" href="sequence.html#c.PySequence_GetItem" ti
 <section id="types">
 <span id="api-types"></span><span id="index-14"></span><h3>类型<a class="headerlink" href="#types" title="永久链接至标题">¶</a></h3>
 <p>There are few other data types that play a significant role in  the Python/C
-API; most are simple C types such as <span class="xref c c-texpr"><span class="kt">int</span></span>,  <span class="xref c c-texpr"><span class="kt">long</span></span>,
-<span class="xref c c-texpr"><span class="kt">double</span></span> and <span class="xref c c-texpr"><span class="kt">char</span><span class="p">*</span></span>.  A few structure types  are used to
+API; most are simple C types such as <span class="c-expr sig sig-inline c"><span class="kt">int</span></span>,  <span class="c-expr sig sig-inline c"><span class="kt">long</span></span>,
+<span class="c-expr sig sig-inline c"><span class="kt">double</span></span> and <span class="c-expr sig sig-inline c"><span class="kt">char</span><span class="p">*</span></span>.  A few structure types  are used to
 describe static tables used to list the functions exported  by a module or the
 data attributes of a new object type, and another is used to describe the value
 of a complex number.  These will  be discussed together with the functions that
@@ -723,7 +733,7 @@ overhead to the runtime so they are not enabled by default.</p>
 <code class="file docutils literal notranslate"><span class="pre">Misc/SpecialBuilds.txt</span></code> in the Python source distribution. Builds are
 available that support tracing of reference counts, debugging the memory
 allocator, or low-level profiling of the main interpreter loop.  Only the most
-frequently-used builds will be described in the remainder of this section.</p>
+frequently used builds will be described in the remainder of this section.</p>
 <p>Compiling the interpreter with the <code class="xref c c-macro docutils literal notranslate"><span class="pre">Py_DEBUG</span></code> macro defined produces
 what is generally meant by <a class="reference internal" href="../using/configure.html#debug-build"><span class="std std-ref">a debug build of Python</span></a>.
 <code class="xref c c-macro docutils literal notranslate"><span class="pre">Py_DEBUG</span></code> is enabled in the Unix build by adding
@@ -860,7 +870,7 @@ after every statement run by the interpreter.)</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

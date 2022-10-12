@@ -199,8 +199,12 @@
 <p>在下面的段落中，你可以找到关于 <a class="reference internal" href="#module-subprocess" title="subprocess: Subprocess management."><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> 模块如何代替这些模块和功能的相关信息。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><span class="target" id="index-9"></span><a class="pep reference external" href="https://peps.python.org/pep-0324/"><strong>PEP 324</strong></a> – 提出 subprocess 模块的 PEP</p>
+<p><span class="target" id="index-8"></span><a class="pep reference external" href="https://peps.python.org/pep-0324/"><strong>PEP 324</strong></a> – 提出 subprocess 模块的 PEP</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <section id="using-the-subprocess-module">
 <h2>使用 <a class="reference internal" href="#module-subprocess" title="subprocess: Subprocess management."><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> 模块<a class="headerlink" href="#using-the-subprocess-module" title="永久链接至标题">¶</a></h2>
 <p>推荐的调用子进程的方式是在任何它支持的用例中使用 <a class="reference internal" href="#subprocess.run" title="subprocess.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> 函数。对于更进阶的用例，也可以使用底层的 <a class="reference internal" href="#subprocess.Popen" title="subprocess.Popen"><code class="xref py py-class docutils literal notranslate"><span class="pre">Popen</span></code></a> 接口。</p>
@@ -330,7 +334,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="subprocess.TimeoutExpired.output">
 <span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#subprocess.TimeoutExpired.output" title="永久链接至目标">¶</a></dt>
-<dd><p>子进程的输出， 如果被 <a class="reference internal" href="#subprocess.run" title="subprocess.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> 或 <a class="reference internal" href="#subprocess.check_output" title="subprocess.check_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_output()</span></code></a> 捕获。否则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<dd><p>Output of the child process if it was captured by <a class="reference internal" href="#subprocess.run" title="subprocess.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> or
+<a class="reference internal" href="#subprocess.check_output" title="subprocess.check_output"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_output()</span></code></a>.  Otherwise, <code class="docutils literal notranslate"><span class="pre">None</span></code>.  This is always
+<a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> when any output was captured regardless of the
+<code class="docutils literal notranslate"><span class="pre">text=True</span></code> setting.  It may remain <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of <code class="docutils literal notranslate"><span class="pre">b''</span></code>
+when no output was observed.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -342,7 +350,10 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="subprocess.TimeoutExpired.stderr">
 <span class="sig-name descname"><span class="pre">stderr</span></span><a class="headerlink" href="#subprocess.TimeoutExpired.stderr" title="永久链接至目标">¶</a></dt>
-<dd><p>子进程的标准错误输出，如果被 <a class="reference internal" href="#subprocess.run" title="subprocess.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> 捕获。 否则为 <code class="docutils literal notranslate"><span class="pre">None</span></code>。</p>
+<dd><p>Stderr output of the child process if it was captured by <a class="reference internal" href="#subprocess.run" title="subprocess.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a>.
+Otherwise, <code class="docutils literal notranslate"><span class="pre">None</span></code>.  This is always <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> when stderr output
+was captured regardless of the <code class="docutils literal notranslate"><span class="pre">text=True</span></code> setting.  It may remain
+<code class="docutils literal notranslate"><span class="pre">None</span></code> instead of <code class="docutils literal notranslate"><span class="pre">b''</span></code> when no stderr output was observed.</p>
 </dd></dl>
 
 <div class="versionadded">
@@ -444,7 +455,11 @@ handle as for <em>stdout</em>.</p>
 <p><em>args</em> 应当是一个程序参数的序列或者是一个单独的字符串或 <a class="reference internal" href="../glossary.html#term-path-like-object"><span class="xref std std-term">path-like object</span></a>。 默认情况下，如果 <em>args</em> 是序列则要运行的程序为 <em>args</em> 中的第一项。 如果 <em>args</em> 是字符串，则其解读依赖于具体平台，如下所述。 请查看 <em>shell</em> 和 <em>executable</em> 参数了解其与默认行为的其他差异。 除非另有说明，否则推荐以序列形式传入 <em>args</em>。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>为了最大化可靠性，请使用可执行文件的完整限定路径。 要在 <span class="target" id="index-10"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code> 中搜索一个未限定名称，请使用 <a class="reference internal" href="shutil.html#shutil.which" title="shutil.which"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutil.which()</span></code></a>。 在所有平台上，传入 <a class="reference internal" href="sys.html#sys.executable" title="sys.executable"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.executable</span></code></a> 是再次启动当前 Python 解释器的推荐方式，并请使用 <code class="docutils literal notranslate"><span class="pre">-m</span></code> 命令行格式来启动已安装的模块。</p>
+<p>For maximum reliability, use a fully qualified path for the executable.
+To search for an unqualified name on <span class="target" id="index-2"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">PATH</span></code>, use
+<a class="reference internal" href="shutil.html#shutil.which" title="shutil.which"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutil.which()</span></code></a>. On all platforms, passing <a class="reference internal" href="sys.html#sys.executable" title="sys.executable"><code class="xref py py-data docutils literal notranslate"><span class="pre">sys.executable</span></code></a>
+is the recommended way to launch the current Python interpreter again,
+and use the <code class="docutils literal notranslate"><span class="pre">-m</span></code> command-line format to launch an installed module.</p>
 <p>对 <em>executable</em> (或 <em>args</em> 的第一项) 路径的解析方式依赖于具体平台。 对于 POSIX，请参阅 <a class="reference internal" href="os.html#os.execvpe" title="os.execvpe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">os.execvpe()</span></code></a>，并要注意当解析或搜索可执行文件路径时，<em>cwd</em> 会覆盖当前工作目录而 <em>env</em> 可以覆盖 <code class="docutils literal notranslate"><span class="pre">PATH</span></code> 环境变量。 对于 Windows，请参阅 <code class="docutils literal notranslate"><span class="pre">lpApplicationName</span></code> 的文档以及 <code class="docutils literal notranslate"><span class="pre">lpCommandLine</span></code> 形参 (传给 WinAPI <code class="docutils literal notranslate"><span class="pre">CreateProcess</span></code>)，并要注意当解析或搜索可执行文件路径时如果传入 <code class="docutils literal notranslate"><span class="pre">shell=False</span></code>，则 <em>cwd</em> 不会覆盖当前工作目录而 <em>env</em> 无法覆盖 <code class="docutils literal notranslate"><span class="pre">PATH</span></code> 环境变量。 使用完整路径可避免所有这些变化情况。</p>
 </div>
 <p>向外部函数传入序列形式参数的一个例子如下:</p>
@@ -478,7 +493,7 @@ handle as for <em>stdout</em>.</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;/bin/sh&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">...</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>在 Windows，使用 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>，环境变量 <span class="target" id="index-11"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">COMSPEC</span></code> 指定了默认 shell。在 Windows 你唯一需要指定 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code> 的情况是你想要执行内置在 shell 中的命令（例如 <strong class="command">dir</strong> 或者 <strong class="command">copy</strong>）。在运行一个批处理文件或者基于控制台的可执行文件时，不需要 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>。</p>
+<p>在 Windows，使用 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>，环境变量 <span class="target" id="index-9"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">COMSPEC</span></code> 指定了默认 shell。在 Windows 你唯一需要指定 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code> 的情况是你想要执行内置在 shell 中的命令（例如 <strong class="command">dir</strong> 或者 <strong class="command">copy</strong>）。在运行一个批处理文件或者基于控制台的可执行文件时，不需要 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code>。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>在使用 <code class="docutils literal notranslate"><span class="pre">shell=True</span></code> 之前， 请阅读 <a class="reference internal" href="#security-considerations">Security Considerations</a> 段落。</p>
@@ -589,7 +604,7 @@ be made in the child process prior to the execution of the subprocess.</p>
 <p>如果 <em>env</em> 不为 <code class="docutils literal notranslate"><span class="pre">None</span></code>，则必须为一个为新进程定义了环境变量的字典；这些用于替换继承的当前进程环境的默认行为。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>如果指定， <em>env</em> 必须提供所有被子进程需求的变量。在 Windows，为了运行一个 <a class="reference external" href="https://en.wikipedia.org/wiki/Side-by-Side_Assembly">side-by-side assembly</a> ，指定的 <em>env</em> <strong>必须</strong> 包含一个有效的 <span class="target" id="index-12"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SystemRoot</span></code>。</p>
+<p>如果指定， <em>env</em> 必须提供所有被子进程需求的变量。在 Windows，为了运行一个 <a class="reference external" href="https://en.wikipedia.org/wiki/Side-by-Side_Assembly">side-by-side assembly</a> ，指定的 <em>env</em> <strong>必须</strong> 包含一个有效的 <span class="target" id="index-10"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">SystemRoot</span></code>。</p>
 </div>
 <p>If <em>encoding</em> or <em>errors</em> are specified, or <em>text</em> is true, the file objects
 <em>stdin</em>, <em>stdout</em> and <em>stderr</em> are opened in text mode with the specified
@@ -1262,7 +1277,7 @@ see the notes on <a class="reference internal" href="#frequently-used-arguments"
 <span class="go">(-15, &#39;&#39;)</span>
 </pre></div>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: POSIX 和 Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3.4 版更改: </span>添加了 Windows 支持。</p>
 <p>此函数现在返回 (exitcode, output) 而不是像 Python 3.3.3 及更早的版本那样返回 (status, output)。 exitcode 的值与 <a class="reference internal" href="#subprocess.Popen.returncode" title="subprocess.Popen.returncode"><code class="xref py py-attr docutils literal notranslate"><span class="pre">returncode</span></code></a> 相同。</p>
@@ -1281,7 +1296,7 @@ see the notes on <a class="reference internal" href="#frequently-used-arguments"
 <span class="go">&#39;/bin/ls&#39;</span>
 </pre></div>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: POSIX 和 Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.3.4 版更改: </span>添加了 Windows 支持</p>
 </div>
@@ -1316,7 +1331,7 @@ see the notes on <a class="reference internal" href="#frequently-used-arguments"
 <p>On Linux, <a class="reference internal" href="#module-subprocess" title="subprocess: Subprocess management."><code class="xref py py-mod docutils literal notranslate"><span class="pre">subprocess</span></code></a> defaults to using the <code class="docutils literal notranslate"><span class="pre">vfork()</span></code> system call
 internally when it is safe to do so rather than <code class="docutils literal notranslate"><span class="pre">fork()</span></code>. This greatly
 improves performance.</p>
-<p>If you ever encounter a presumed highly-unusual situation where you need to
+<p>If you ever encounter a presumed highly unusual situation where you need to
 prevent <code class="docutils literal notranslate"><span class="pre">vfork()</span></code> from being used by Python, you can set the
 <code class="xref py py-attr docutils literal notranslate"><span class="pre">subprocess._USE_VFORK</span></code> attribute to a false value.</p>
 <blockquote>
@@ -1478,7 +1493,7 @@ code.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

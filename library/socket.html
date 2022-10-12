@@ -186,6 +186,10 @@
 <p class="admonition-title">备注</p>
 <p>一些行为可能因平台不同而异，因为调用的是操作系统的套接字API。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not Emscripten, not WASI.<p>This module does not work or is not available on WebAssembly platforms
+<code class="docutils literal notranslate"><span class="pre">wasm32-emscripten</span></code> and <code class="docutils literal notranslate"><span class="pre">wasm32-wasi</span></code>. See
+<a class="reference internal" href="intro.html#wasm-availability"><span class="std std-ref">WebAssembly platforms</span></a> for more information.</p>
+</p>
 <p id="index-0">这个Python接口是用Python的面向对象风格对Unix系统调用和套接字库接口的直译：函数 <code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code> 返回一个 <em class="dfn">套接字对象</em> ，其方法是对各种套接字系统调用的实现。形参类型一般与C接口相比更高级：例如在Python文件 <code class="xref py py-meth docutils literal notranslate"><span class="pre">read()</span></code> 和 <code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code> 操作中，接收操作的缓冲区分配是自动的，发送操作的缓冲区长度是隐式的。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
@@ -238,7 +242,11 @@
 <li><p><a class="reference internal" href="#socket.CAN_J1939" title="socket.CAN_J1939"><code class="xref py py-const docutils literal notranslate"><span class="pre">CAN_J1939</span></code></a> 协议接受一个元组 <code class="docutils literal notranslate"><span class="pre">(interface,</span> <span class="pre">name,</span> <span class="pre">pgn,</span> <span class="pre">addr)</span></code>，其中额外参数有：表示 ECU 名称的 64 位无符号整数，表示参数组号 (Parameter Group Number, PGN) 的 32 位无符号整数，以及表示地址的 8 位整数。</p></li>
 </ul>
 </li>
-<li><p><code class="xref py py-const docutils literal notranslate"><span class="pre">PF_SYSTEM</span></code> 协议簇的 <code class="xref py py-const docutils literal notranslate"><span class="pre">SYSPROTO_CONTROL</span></code> 协议接受一个字符串或元组 <code class="docutils literal notranslate"><span class="pre">(id,</span> <span class="pre">unit)</span></code>。其中字符串是内核控件的名称，该控件使用动态分配的 ID。而如果 ID 和内核控件的单元 (unit) 编号都已知，或使用了已注册的 ID，可以采用元组。</p>
+<li><p>A string or a tuple <code class="docutils literal notranslate"><span class="pre">(id,</span> <span class="pre">unit)</span></code> is used for the <code class="xref py py-const docutils literal notranslate"><span class="pre">SYSPROTO_CONTROL</span></code>
+protocol of the <code class="xref py py-const docutils literal notranslate"><span class="pre">PF_SYSTEM</span></code> family. The string is the name of a
+kernel control using a dynamically assigned ID. The tuple can be used if ID
+and unit number of the kernel control are known or if a registered ID is
+used.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -261,13 +269,15 @@
 <li><p><em>name</em> 是表示算法类型和操作模式的字符串，如 <code class="docutils literal notranslate"><span class="pre">sha256</span></code>、<code class="docutils literal notranslate"><span class="pre">hmac(sha256)</span></code>、<code class="docutils literal notranslate"><span class="pre">cbc(aes)</span></code> 或 <code class="docutils literal notranslate"><span class="pre">drbg_nopr_ctr_aes256</span></code>。</p></li>
 <li><p><em>feat</em> 和 <em>mask</em> 是无符号 32 位整数。</p></li>
 </ul>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux 2.6.38, some algorithm types require more recent Kernels.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.38.<p>Some algorithm types require more recent Kernels.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.6 新版功能.</span></p>
 </div>
 </li>
 <li><p><a class="reference internal" href="#socket.AF_VSOCK" title="socket.AF_VSOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_VSOCK</span></code></a> 用于支持虚拟机与宿主机之间的通讯。该套接字用 <code class="docutils literal notranslate"><span class="pre">(CID,</span> <span class="pre">port)</span></code> 元组表示，其中 Context ID (CID) 和 port 都是整数。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 4.8 QEMU &gt;= 2.8 ESX &gt;= 4.0 ESX Workstation &gt;= 6.5.</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 3.9<p>See <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/vsock(7)">vsock(7)</a></em></p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.7 新版功能.</span></p>
 </div>
@@ -302,7 +312,7 @@
 </li>
 <li><p><code class="xref py py-const docutils literal notranslate"><span class="pre">IPPROTO_UDPLITE</span></code> 是一种 UDP 的变体，允许指定数据包的哪一部分计算入校验码内。它添加了两个可以修改的套接字选项。<code class="docutils literal notranslate"><span class="pre">self.setsockopt(IPPROTO_UDPLITE,</span> <span class="pre">UDPLITE_SEND_CSCOV,</span> <span class="pre">length)</span></code> 修改传出数据包的哪一部分计算入校验码内，而 <code class="docutils literal notranslate"><span class="pre">self.setsockopt(IPPROTO_UDPLITE,</span> <span class="pre">UDPLITE_RECV_CSCOV,</span> <span class="pre">length)</span></code> 将过滤掉计算入校验码的数据太少的数据包。在这两种情况下，<code class="docutils literal notranslate"><span class="pre">length</span></code> 都应在 <code class="docutils literal notranslate"><span class="pre">range(8,</span> <span class="pre">2**16,</span> <span class="pre">8)</span></code> 范围内。</p>
 <p>对于 IPv4，应使用 <code class="docutils literal notranslate"><span class="pre">socket(AF_INET,</span> <span class="pre">SOCK_DGRAM,</span> <span class="pre">IPPROTO_UDPLITE)</span></code> 来构造这样的套接字；对于 IPv6，应使用 <code class="docutils literal notranslate"><span class="pre">socket(AF_INET6,</span> <span class="pre">SOCK_DGRAM,</span> <span class="pre">IPPROTO_UDPLITE)</span></code> 来构造这样的套接字。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.20, FreeBSD &gt;= 10.1-RELEASE</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Linux &gt;= 2.6.20, FreeBSD &gt;= 10.1</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
@@ -424,7 +434,8 @@ subclasses.</p>
 <dd><p>这两个常量（如果已定义）可以与上述套接字类型结合使用，允许你设置这些原子性相关的 flags （从而避免可能的竞争条件和单独调用的需要）。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参见</p>
-<p><a class="reference external" href="http://udrepper.livejournal.com/20407.html">Secure File Descriptor Handling （安全地处理文件描述符）</a> 提供了更详尽的解释。</p>
+<p><a class="reference external" href="https://udrepper.livejournal.com/20407.html">Secure File Descriptor Handling</a>
+for a more thorough explanation.</p>
 </div>
 <p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： Linux &gt;= 2.6.27。</p>
 <div class="versionadded">
@@ -771,7 +782,10 @@ the latter for the message type.</p>
 <p><span class="versionmodified changed">在 3.7 版更改: </span>添加了 CAN_ISOTP 协议。</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">在 3.7 版更改: </span>当将 <a class="reference internal" href="#socket.SOCK_NONBLOCK" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> 或 <a class="reference internal" href="#socket.SOCK_CLOEXEC" title="socket.SOCK_CLOEXEC"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_CLOEXEC</span></code></a> 标志位应用于 <em>type</em> 上时，它们会被清除，且 <a class="reference internal" href="#socket.socket.type" title="socket.socket.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">socket.type</span></code></a> 反映不出它们。但它们仍将传递给底层系统的 <cite>socket()</cite> 调用。因此，</p>
+<p><span class="versionmodified changed">在 3.7 版更改: </span>When <a class="reference internal" href="#socket.SOCK_NONBLOCK" title="socket.SOCK_NONBLOCK"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_NONBLOCK</span></code></a> or <a class="reference internal" href="#socket.SOCK_CLOEXEC" title="socket.SOCK_CLOEXEC"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_CLOEXEC</span></code></a>
+bit flags are applied to <em>type</em> they are cleared, and
+<a class="reference internal" href="#socket.socket.type" title="socket.socket.type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">socket.type</span></code></a> will not reflect them.  They are still passed
+to the underlying system <code class="docutils literal notranslate"><span class="pre">socket()</span></code> call.  Therefore,</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span>
     <span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span>
     <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span> <span class="o">|</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_NONBLOCK</span><span class="p">)</span>
@@ -936,6 +950,7 @@ the hostname from <a class="reference internal" href="#socket.gethostname" title
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">gethostbyname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.gethostbyname" title="永久链接至目标">¶</a></dt>
 <dd><p>将主机名转换为 IPv4 地址格式。IPv4 地址以字符串格式返回，如 <code class="docutils literal notranslate"><span class="pre">'100.50.200.5'</span></code>。如果主机名本身是 IPv4 地址，则原样返回。更完整的接口请参考 <a class="reference internal" href="#socket.gethostbyname_ex" title="socket.gethostbyname_ex"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostbyname_ex()</span></code></a>。 <a class="reference internal" href="#socket.gethostbyname" title="socket.gethostbyname"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostbyname()</span></code></a> 不支持 IPv6 名称解析，应使用 <a class="reference internal" href="#socket.getaddrinfo" title="socket.getaddrinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> 来支持 IPv4/v6 双协议栈。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.gethostbyname</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">hostname</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -950,6 +965,7 @@ always a single address). <a class="reference internal" href="#socket.gethostbyn
 resolution, and <a class="reference internal" href="#socket.getaddrinfo" title="socket.getaddrinfo"><code class="xref py py-func docutils literal notranslate"><span class="pre">getaddrinfo()</span></code></a> should be used instead for IPv4/v6 dual
 stack support.</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.gethostbyname</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">hostname</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -958,6 +974,7 @@ stack support.</p>
 <dd><p>返回一个字符串，包含当前正在运行 Python 解释器的机器的主机名。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.gethostname</span></code>，没有附带参数。</p>
 <p>注意： <a class="reference internal" href="#socket.gethostname" title="socket.gethostname"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostname()</span></code></a> 并不总是返回全限定域名，必要的话请使用 <a class="reference internal" href="#socket.getfqdn" title="socket.getfqdn"><code class="xref py py-func docutils literal notranslate"><span class="pre">getfqdn()</span></code></a>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -965,21 +982,27 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">gethostbyaddr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.gethostbyaddr" title="永久链接至目标">¶</a></dt>
 <dd><p>返回三元组 <code class="docutils literal notranslate"><span class="pre">(hostname,</span> <span class="pre">aliaslist,</span> <span class="pre">ipaddrlist)</span></code>，其中 <em>hostname</em> 是响应给定 <em>ip_address</em> 的主要主机名，<em>aliaslist</em> 是相同地址的其他可用主机名的列表（可能为空），而 <em>ipaddrlist</em> 是 IPv4/v6 地址列表，包含相同主机名、相同接口的不同地址（很可能仅包含一个地址）。要查询全限定域名，请使用函数 <a class="reference internal" href="#socket.getfqdn" title="socket.getfqdn"><code class="xref py py-func docutils literal notranslate"><span class="pre">getfqdn()</span></code></a>。<a class="reference internal" href="#socket.gethostbyaddr" title="socket.gethostbyaddr"><code class="xref py py-func docutils literal notranslate"><span class="pre">gethostbyaddr()</span></code></a> 支持 IPv4 和 IPv6。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.gethostbyaddr</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">ip_address</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.getnameinfo">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">getnameinfo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sockaddr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.getnameinfo" title="永久链接至目标">¶</a></dt>
-<dd><p>将套接字地址 <em>sockaddr</em> 转换为二元组 <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code>。<em>host</em> 的形式可能是全限定域名，或是由数字表示的地址，具体取决于 <em>flags</em> 的设置。同样，<em>port</em> 可以包含字符串格式的端口名称或数字格式的端口号。</p>
+<dd><p>Translate a socket address <em>sockaddr</em> into a 2-tuple <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port)</span></code>. Depending
+on the settings of <em>flags</em>, the result can contain a fully qualified domain name
+or numeric address representation in <em>host</em>.  Similarly, <em>port</em> can contain a
+string port name or a numeric port number.</p>
 <p>对于 IPv6 地址，如果 <em>sockaddr</em> 包含有意义的 <em>scope_id</em>，则 <code class="docutils literal notranslate"><span class="pre">%scope_id</span></code> 会被附加到主机部分。 这种情况通常发生在多播地址上。</p>
 <p>关于 <em>flags</em> 的更多信息可参阅 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/getnameinfo(3)">getnameinfo(3)</a></em>。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.getnameinfo</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">sockaddr</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.getprotobyname">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">getprotobyname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocolname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.getprotobyname" title="永久链接至目标">¶</a></dt>
 <dd><p>将一个互联网协议名称 (如 <code class="docutils literal notranslate"><span class="pre">'icmp'</span></code>) 转换为能被作为 (可选的) 第三个参数传给 <code class="xref py py-func docutils literal notranslate"><span class="pre">socket()</span></code> 函数的常量。 这通常仅对以 “raw” 模式 (<a class="reference internal" href="#socket.SOCK_RAW" title="socket.SOCK_RAW"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_RAW</span></code></a>) 打开的套接字来说是必要的；对于正常的套接字模式，当该协议名称被省略或为零时会自动选择正确的协议。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -987,6 +1010,7 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">getservbyname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">servicename</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">protocolname</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.getservbyname" title="永久链接至目标">¶</a></dt>
 <dd><p>将一个互联网服务名称和协议名称转换为该服务的端口号。 如果给出了可选的协议名称，它应为 <code class="docutils literal notranslate"><span class="pre">'tcp'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'udp'</span></code>，否则将匹配任意的协议。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.getservbyname</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">servicename</span></code>、<code class="docutils literal notranslate"><span class="pre">protocolname</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -994,6 +1018,7 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">getservbyport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">protocolname</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.getservbyport" title="永久链接至目标">¶</a></dt>
 <dd><p>将一个互联网端口号和协议名称转换为该服务的服务名称。 如果给出了可选的协议名称，它应为 <code class="docutils literal notranslate"><span class="pre">'tcp'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'udp'</span></code>，否则将匹配任意的协议。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.getservbyport</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">port</span></code>、<code class="docutils literal notranslate"><span class="pre">protocolname</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -1029,7 +1054,11 @@ stack support.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.inet_aton">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">inet_aton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.inet_aton" title="永久链接至目标">¶</a></dt>
-<dd><p>将 IPv4 地址从点分十进制字符串格式（如 ‘123.45.67.89’ ）转换为 32 位压缩二进制格式，转换后为字节对象，长度为四个字符。与那些使用标准 C 库，且需要 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in_addr</span></span> 类型的对象的程序交换信息时，此功能很有用。 该类型即此函数返回的 32 位压缩二进制的 C 类型。</p>
+<dd><p>Convert an IPv4 address from dotted-quad string format (for example,
+‘123.45.67.89’) to 32-bit packed binary format, as a bytes object four characters in
+length.  This is useful when conversing with a program that uses the standard C
+library and needs objects of type <code class="xref c c-struct docutils literal notranslate"><span class="pre">in_addr</span></code>, which is the C type
+for the 32-bit packed binary this function returns.</p>
 <p><a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a> 也接受句点数少于三的字符串，详情请参阅 Unix 手册 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/inet(3)">inet(3)</a></em>。</p>
 <p>如果传入本函数的 IPv4 地址字符串无效，则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。注意，具体什么样的地址有效取决于 <code class="xref c c-func docutils literal notranslate"><span class="pre">inet_aton()</span></code> 的底层 C 实现。</p>
 <p><a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a> 不支持 IPv6，在 IPv4/v6 双协议栈下应使用 <a class="reference internal" href="#socket.inet_pton" title="socket.inet_pton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_pton()</span></code></a> 来代替。</p>
@@ -1038,7 +1067,12 @@ stack support.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.inet_ntoa">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">inet_ntoa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packed_ip</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.inet_ntoa" title="永久链接至目标">¶</a></dt>
-<dd><p>将 32 位压缩 IPv4 地址（一个 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">类字节对象</span></a>，长 4 个字节）转换为标准的点分十进制字符串形式（如 ‘123.45.67.89’ ）。与那些使用标准 C 库，且需要 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in_addr</span></span> 类型的对象的程序交换信息时，本函数很有用。 该类型即是本函数参数中的 32 位压缩二进制数据的 C 类型。</p>
+<dd><p>Convert a 32-bit packed IPv4 address (a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> four
+bytes in length) to its standard dotted-quad string representation (for example,
+‘123.45.67.89’).  This is useful when conversing with a program that uses the
+standard C library and needs objects of type <code class="xref c c-struct docutils literal notranslate"><span class="pre">in_addr</span></code>, which
+is the C type for the 32-bit packed binary data this function takes as an
+argument.</p>
 <p>如果传入本函数的字节序列长度不是 4 个字节，则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。<a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a> 不支持 IPv6，在 IPv4/v6 双协议栈下应使用 <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> 来代替。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>现在接受可写的 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">字节类对象</span></a>。</p>
@@ -1048,9 +1082,12 @@ stack support.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.inet_pton">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">inet_pton</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_family</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip_string</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.inet_pton" title="永久链接至目标">¶</a></dt>
-<dd><p>将特定地址簇的 IP 地址（字符串）转换为压缩二进制格式。当库或网络协议需要接受 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in_addr</span></span> 类型的对象（类似 <a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a> ）或 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in6_addr</span></span> 类型的对象时，<a class="reference internal" href="#socket.inet_pton" title="socket.inet_pton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_pton()</span></code></a> 很有用。</p>
+<dd><p>Convert an IP address from its family-specific string format to a packed,
+binary format. <a class="reference internal" href="#socket.inet_pton" title="socket.inet_pton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_pton()</span></code></a> is useful when a library or network protocol
+calls for an object of type <code class="xref c c-struct docutils literal notranslate"><span class="pre">in_addr</span></code> (similar to
+<a class="reference internal" href="#socket.inet_aton" title="socket.inet_aton"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_aton()</span></code></a>) or <code class="xref c c-struct docutils literal notranslate"><span class="pre">in6_addr</span></code>.</p>
 <p>目前 <em>address_family</em> 支持 <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> 和 <a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>。如果 IP 地址字符串 <em>ip_string</em> 无效，则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。注意，具体什么地址有效取决于 <em>address_family</em> 的值和 <code class="xref c c-func docutils literal notranslate"><span class="pre">inet_pton()</span></code> 的底层实现。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： Unix（可能非所有平台都可用）、Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>添加了 Windows 支持</p>
 </div>
@@ -1059,9 +1096,14 @@ stack support.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="socket.inet_ntop">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">inet_ntop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address_family</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packed_ip</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.inet_ntop" title="永久链接至目标">¶</a></dt>
-<dd><p>将压缩 IP 地址（一个 <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">类字节对象</span></a>，数个字节长）转换为标准的、特定地址簇的字符串形式（如 <code class="docutils literal notranslate"><span class="pre">'7.10.0.5'</span></code> 或 <code class="docutils literal notranslate"><span class="pre">'5aef:2b::8'</span></code> ）。当库或网络协议返回 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in_addr</span></span> 类型的对象（类似 <a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a> ）或 <span class="xref c c-texpr"><span class="k">struct</span><span class="w"> </span><span class="n">in6_addr</span></span> 类型的对象时，<a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> 很有用。</p>
+<dd><p>Convert a packed IP address (a <a class="reference internal" href="../glossary.html#term-bytes-like-object"><span class="xref std std-term">bytes-like object</span></a> of some number of
+bytes) to its standard, family-specific string representation (for
+example, <code class="docutils literal notranslate"><span class="pre">'7.10.0.5'</span></code> or <code class="docutils literal notranslate"><span class="pre">'5aef:2b::8'</span></code>).
+<a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> is useful when a library or network protocol returns an
+object of type <code class="xref c c-struct docutils literal notranslate"><span class="pre">in_addr</span></code> (similar to <a class="reference internal" href="#socket.inet_ntoa" title="socket.inet_ntoa"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntoa()</span></code></a>) or
+<code class="xref c c-struct docutils literal notranslate"><span class="pre">in6_addr</span></code>.</p>
 <p>目前 <em>address_family</em> 支持 <a class="reference internal" href="#socket.AF_INET" title="socket.AF_INET"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET</span></code></a> 和 <a class="reference internal" href="#socket.AF_INET6" title="socket.AF_INET6"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_INET6</span></code></a>。如果字节对象 <em>packed_ip</em> 与指定的地址簇长度不符，则抛出 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。针对 <a class="reference internal" href="#socket.inet_ntop" title="socket.inet_ntop"><code class="xref py py-func docutils literal notranslate"><span class="pre">inet_ntop()</span></code></a> 调用的错误则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： Unix（可能非所有平台都可用）、Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>添加了 Windows 支持</p>
 </div>
@@ -1074,7 +1116,8 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.CMSG_LEN">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">CMSG_LEN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.CMSG_LEN" title="永久链接至目标">¶</a></dt>
 <dd><p>返回给定 <em>length</em> 所关联数据的辅助数据项的总长度（不带尾部填充）。此值通常用作 <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 接收一个辅助数据项的缓冲区大小，但是 <span class="target" id="index-31"></span><a class="rfc reference external" href="https://datatracker.ietf.org/doc/html/rfc3542.html"><strong>RFC 3542</strong></a> 要求可移植应用程序使用 <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a>，以此将尾部填充的空间计入，即使该项在缓冲区的最后。如果 <em>length</em> 超出允许范围，则抛出 <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： 大多数 Unix 平台，其他平台也可能可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, not Emscripten, not WASI.<p>Most Unix platforms.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1085,7 +1128,8 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">CMSG_SPACE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.CMSG_SPACE" title="永久链接至目标">¶</a></dt>
 <dd><p>返回 <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 所需的缓冲区大小，以接收给定 <em>length</em> 所关联数据的辅助数据项，带有尾部填充。接收多个项目所需的缓冲区空间是关联数据长度的 <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> 值的总和。如果 <em>length</em> 超出允许范围，则抛出 <a class="reference internal" href="exceptions.html#OverflowError" title="OverflowError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OverflowError</span></code></a>。</p>
 <p>请注意，某些系统可能支持辅助数据，但不提供本函数。还需注意，如果使用本函数的结果来设置缓冲区大小，可能无法精确限制可接收的辅助数据量，因为可能会有其他数据写入尾部填充区域。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： 大多数 Unix 平台，其他平台也可能可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, not Emscripten, not WASI.<p>most Unix platforms.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1118,7 +1162,7 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.if_nameindex">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">if_nameindex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_nameindex" title="永久链接至目标">¶</a></dt>
 <dd><p>返回一个列表，包含网络接口（网卡）信息二元组（整数索引，名称字符串）。系统调用失败则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows, not Emscripten, not WASI.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1142,7 +1186,7 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.if_nametoindex">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">if_nametoindex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">if_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_nametoindex" title="永久链接至目标">¶</a></dt>
 <dd><p>返回网络接口名称相对应的索引号。如果没有所给名称的接口，则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows, not Emscripten, not WASI.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1159,7 +1203,7 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.if_indextoname">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">if_indextoname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">if_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.if_indextoname" title="永久链接至目标">¶</a></dt>
 <dd><p>返回网络接口索引号相对应的接口名称。如果没有所给索引号的接口，则抛出 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a>。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix, Windows。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows, not Emscripten, not WASI.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1176,7 +1220,9 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.send_fds">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">send_fds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fds</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.send_fds" title="永久链接至目标">¶</a></dt>
 <dd><p>将文件描述符列表 <em>fds</em> 通过一个 <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> 套接字 <em>sock</em> 进行发送。 <em>fds</em> 形参是由文件描述符构成的序列。 请查看 <code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code> 获取这些形参的文档。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: 支持 <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> 和 <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> 机制的 Unix 系统。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows, not Emscripten, not WASI.<p>Unix platforms supporting <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a>
+and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
@@ -1186,7 +1232,9 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.recv_fds">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">recv_fds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bufsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxfds</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.recv_fds" title="永久链接至目标">¶</a></dt>
 <dd><p>接收至多 <em>maxfds</em> 个来自 <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> 套接字 <em>sock</em> 的文件描述符。 返回 <code class="docutils literal notranslate"><span class="pre">(msg,</span> <span class="pre">list(fds),</span> <span class="pre">flags,</span> <span class="pre">addr)</span></code>。 请查看 <code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code> 获取有些形参的文档。</p>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: 支持 <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 和 <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> 机制的 Unix 系统。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, Windows, not Emscripten, not WASI.<p>Unix platforms supporting <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a>
+and <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> mechanism.</p>
+</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.9 新版功能.</span></p>
 </div>
@@ -1223,6 +1271,7 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.bind" title="永久链接至目标">¶</a></dt>
 <dd><p>将套接字绑定到 <em>address</em>。套接字必须尚未绑定。（ <em>address</em> 的格式取决于地址簇 —— 参见上文）</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.bind</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">self</span></code>、<code class="docutils literal notranslate"><span class="pre">address</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1248,6 +1297,7 @@ stack support.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span>本方法现在将等待，直到连接完成，而不是在以下情况抛出 <a class="reference internal" href="exceptions.html#InterruptedError" title="InterruptedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InterruptedError</span></code></a> 异常。该情况为，连接被信号中断，信号处理程序未抛出异常，且套接字阻塞中或已超时（具体解释请参阅 <span class="target" id="index-33"></span><a class="pep reference external" href="https://peps.python.org/pep-0475/"><strong>PEP 475</strong></a> ）。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1255,6 +1305,7 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">connect_ex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">address</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.connect_ex" title="永久链接至目标">¶</a></dt>
 <dd><p>类似于 <code class="docutils literal notranslate"><span class="pre">connect(address)</span></code>，但是对于 C 级别的 <code class="xref c c-func docutils literal notranslate"><span class="pre">connect()</span></code> 调用返回的错误，本函数将返回错误指示器，而不是抛出异常（对于其他问题，如“找不到主机”，仍然可以抛出异常）。如果操作成功，则错误指示器为 <code class="docutils literal notranslate"><span class="pre">0</span></code>，否则为 <code class="xref c c-data docutils literal notranslate"><span class="pre">errno</span></code> 变量的值。这对支持如异步连接很有用。</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.connect</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">self</span></code>、<code class="docutils literal notranslate"><span class="pre">address</span></code>。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1274,6 +1325,7 @@ stack support.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.4 版更改: </span>该套接字现在是不可继承的。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1308,6 +1360,7 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.socket.getsockopt">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">getsockopt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optname</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">buflen</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.getsockopt" title="永久链接至目标">¶</a></dt>
 <dd><p>返回指定套接字选项的值（参阅 Unix 手册页 <em class="manpage"><a class="manpage reference external" href="https://manpages.debian.org/getsockopt(2)">getsockopt(2)</a></em> ）。所需的符号常量（ <code class="xref py py-const docutils literal notranslate"><span class="pre">SO_*</span></code> 等）已定义在本模块中。如果未指定 <em>buflen</em>，则认为该选项值为整数，由本函数返回该整数值。如果指定 <em>buflen</em>，则它定义了用于存放选项值的缓冲区的最大长度，且该缓冲区将作为字节对象返回。对缓冲区的解码工作由调用者自行完成（针对编码为字节串的 C 结构，其解码方法请参阅可选的内置模块 <a class="reference internal" href="struct.html#module-struct" title="struct: Interpret bytes as packed binary data."><code class="xref py py-mod docutils literal notranslate"><span class="pre">struct</span></code></a> ）。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1346,6 +1399,7 @@ stack support.</p>
 <dt class="sig sig-object py" id="socket.socket.listen">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">listen</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">backlog</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.listen" title="永久链接至目标">¶</a></dt>
 <dd><p>启动一个服务器用于接受连接。如果指定 <em>backlog</em>，则它最低为 0（小于 0 会被置为 0），它指定系统允许暂未 accept 的连接数，超过后将拒绝新连接。未指定则自动设为合理的默认值。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.5 版更改: </span><em>backlog</em> 参数现在是可选的。</p>
 </div>
@@ -1393,7 +1447,16 @@ stack support.</p>
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">recvmsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bufsize</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">ancbufsize</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span></em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.recvmsg" title="永久链接至目标">¶</a></dt>
 <dd><p>从套接字接收普通数据（至多 <em>bufsize</em> 字节）和辅助数据。<em>ancbufsize</em> 参数设置用于接收辅助数据的内部缓冲区的大小（以字节为单位），默认为 0，表示不接收辅助数据。可以使用 <a class="reference internal" href="#socket.CMSG_SPACE" title="socket.CMSG_SPACE"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_SPACE()</span></code></a> 或 <a class="reference internal" href="#socket.CMSG_LEN" title="socket.CMSG_LEN"><code class="xref py py-func docutils literal notranslate"><span class="pre">CMSG_LEN()</span></code></a> 计算辅助数据缓冲区的合适大小，无法放入缓冲区的项目可能会被截断或丢弃。<em>flags</em> 参数默认为 0，其含义与 <a class="reference internal" href="#socket.socket.recv" title="socket.socket.recv"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recv()</span></code></a> 中的相同。</p>
 <p>返回值是一个四元组： <code class="docutils literal notranslate"><span class="pre">(data,</span> <span class="pre">ancdata,</span> <span class="pre">msg_flags,</span> <span class="pre">address)</span></code>。<em>data</em> 项是一个 <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象，用于保存接收到的非辅助数据。<em>ancdata</em> 项是零个或多个元组 <code class="docutils literal notranslate"><span class="pre">(cmsg_level,</span> <span class="pre">cmsg_type,</span> <span class="pre">cmsg_data)</span></code> 组成的列表，表示接收到的辅助数据（控制消息）：<em>cmsg_level</em> 和 <em>cmsg_type</em> 是分别表示协议级别和协议类型的整数，而 <em>cmsg_data</em> 是保存相关数据的 <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象。<em>msg_flags</em> 项由各种标志按位或组成，表示接收消息的情况，详细信息请参阅系统文档。如果接收端套接字断开连接，则 <em>address</em> 是发送端套接字的地址（如果有），否则该值无指定。</p>
-<p>某些系统上可以利用 <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a> 套接字通过 <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> 和 <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 在进程之间传递文件描述符。使用此功能时（通常仅限于 <a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> 套接字），<a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 将在其辅助数据中返回以下格式的项 <code class="docutils literal notranslate"><span class="pre">(socket.SOL_SOCKET,</span> <span class="pre">socket.SCM_RIGHTS,</span> <span class="pre">fds)</span></code>，其中 <em>fds</em> 是一个 <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> 对象，是新文件描述符表示为原生 C <span class="xref c c-texpr"><span class="kt">int</span></span> 类型的二进制数组。如果 <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 在系统调用返回后抛出异常，它将首先关闭此机制接收到的所有文件描述符。</p>
+<p>On some systems, <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a> and <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> can be used to
+pass file descriptors between processes over an <a class="reference internal" href="#socket.AF_UNIX" title="socket.AF_UNIX"><code class="xref py py-const docutils literal notranslate"><span class="pre">AF_UNIX</span></code></a>
+socket.  When this facility is used (it is often restricted to
+<a class="reference internal" href="#socket.SOCK_STREAM" title="socket.SOCK_STREAM"><code class="xref py py-const docutils literal notranslate"><span class="pre">SOCK_STREAM</span></code></a> sockets), <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> will return, in its
+ancillary data, items of the form <code class="docutils literal notranslate"><span class="pre">(socket.SOL_SOCKET,</span>
+<span class="pre">socket.SCM_RIGHTS,</span> <span class="pre">fds)</span></code>, where <em>fds</em> is a <a class="reference internal" href="stdtypes.html#bytes" title="bytes"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> object
+representing the new file descriptors as a binary array of the
+native C <span class="c-expr sig sig-inline c"><span class="kt">int</span></span> type.  If <a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> raises an
+exception after the system call returns, it will first attempt to
+close any file descriptors received via this mechanism.</p>
 <p>对于仅接收到一部分的辅助数据项，一些系统没有指示其截断长度。如果某个项目可能超出了缓冲区的末尾，<a class="reference internal" href="#socket.socket.recvmsg" title="socket.socket.recvmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">recvmsg()</span></code></a> 将发出 <a class="reference internal" href="exceptions.html#RuntimeWarning" title="RuntimeWarning"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></a>，并返回其在缓冲区内的部分，前提是该对象被截断于关联数据开始后。</p>
 <p>在支持 <code class="xref py py-const docutils literal notranslate"><span class="pre">SCM_RIGHTS</span></code> 机制的系统上，下方的函数将最多接收 <em>maxfds</em> 个文件描述符，返回消息数据和包含描述符的列表（同时忽略意外情况，如接收到无关的控制消息）。另请参阅 <a class="reference internal" href="#socket.socket.sendmsg" title="socket.socket.sendmsg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sendmsg()</span></code></a>。</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span><span class="o">,</span> <span class="nn">array</span>
@@ -1408,7 +1471,7 @@ stack support.</p>
     <span class="k">return</span> <span class="n">msg</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">fds</span><span class="p">)</span>
 </pre></div>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： 大多数 Unix 平台，其他平台也可能可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1436,7 +1499,7 @@ stack support.</p>
 <span class="go">[bytearray(b&#39;Mary&#39;), bytearray(b&#39;01 had a 9&#39;), bytearray(b&#39;little lamb---&#39;)]</span>
 </pre></div>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： 大多数 Unix 平台，其他平台也可能可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>: Unix。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
 </div>
@@ -1498,7 +1561,8 @@ stack support.</p>
     <span class="k">return</span> <span class="n">sock</span><span class="o">.</span><span class="n">sendmsg</span><span class="p">([</span><span class="n">msg</span><span class="p">],</span> <span class="p">[(</span><span class="n">socket</span><span class="o">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SCM_RIGHTS</span><span class="p">,</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="n">fds</span><span class="p">))])</span>
 </pre></div>
 </div>
-<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">可用性</span></a>： 大多数 Unix 平台，其他平台也可能可用。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: Unix, not WASI.<p>Most Unix platforms.</p>
+</p>
 <p class="audit-hook">引发一个 <a class="reference internal" href="sys.html#auditing"><span class="std std-ref">审计事件</span></a> <code class="docutils literal notranslate"><span class="pre">socket.sendmsg</span></code>，附带参数 <code class="docutils literal notranslate"><span class="pre">self</span></code>、<code class="docutils literal notranslate"><span class="pre">address</span></code>。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">3.3 新版功能.</span></p>
@@ -1580,12 +1644,14 @@ stack support.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>添加了 setsockopt(level, optname, None, optlen: int) 调用形式。</p>
 </div>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="socket.socket.shutdown">
 <span class="sig-prename descclassname"><span class="pre">socket.</span></span><span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">how</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket.socket.shutdown" title="永久链接至目标">¶</a></dt>
 <dd><p>关闭一半或全部的连接。如果 <em>how</em> 为 <code class="xref py py-const docutils literal notranslate"><span class="pre">SHUT_RD</span></code>，则后续不再允许接收。如果 <em>how</em> 为 <code class="xref py py-const docutils literal notranslate"><span class="pre">SHUT_WR</span></code>，则后续不再允许发送。如果 <em>how</em> 为 <code class="xref py py-const docutils literal notranslate"><span class="pre">SHUT_RDWR</span></code>，则后续的发送和接收都不允许。</p>
+<p class="availability"><a class="reference internal" href="intro.html#availability"><span class="std std-ref">Availability</span></a>: not WASI.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1957,7 +2023,7 @@ stack support.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

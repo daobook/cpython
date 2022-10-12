@@ -251,6 +251,7 @@
 <p><em>fieldnames</em> 参数是一个 <a class="reference internal" href="../glossary.html#term-sequence"><span class="xref std std-term">sequence</span></a>。如果省略 <em>fieldnames</em>，则文件 <em>f</em> 第一行中的值将用作字段名。无论字段名是如何确定的，字典都将保留其原始顺序。</p>
 <p>如果某一行中的字段多于字段名，则剩余数据会被放入一个列表，并与 <em>restkey</em> 所指定的字段名 (默认为 <code class="docutils literal notranslate"><span class="pre">None</span></code>) 一起保存。 如果某个非空白行的字段少于字段名，则缺失的值会使用 <em>restval</em> 的值来填充 (默认为 <code class="docutils literal notranslate"><span class="pre">None</span></code>)。</p>
 <p>所有其他可选或关键字参数都传递给底层的 <a class="reference internal" href="#csv.reader" title="csv.reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">reader</span></code></a> 实例。</p>
+<p>If the argument passed to <em>fieldnames</em> is an iterator, it will be coerced to a <a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.6 版更改: </span>返回的行现在的类型是 <code class="xref py py-class docutils literal notranslate"><span class="pre">OrderedDict</span></code>。</p>
 </div>
@@ -278,6 +279,7 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">csv.</span></span><span class="sig-name descname"><span class="pre">DictWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extrasaction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'raise'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'excel'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#csv.DictWriter" title="永久链接至目标">¶</a></dt>
 <dd><p>创建一个对象，该对象在操作上类似常规 writer，但会将字典映射到输出行。 <em>fieldnames</em> 参数是由键组成的 <a class="reference internal" href="collections.abc.html#module-collections.abc" title="collections.abc: Abstract base classes for containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">序列</span></code></a>，它指定字典中值的顺序，这些值会按指定顺序传递给 <code class="xref py py-meth docutils literal notranslate"><span class="pre">writerow()</span></code> 方法并写入文件 <em>f</em>。 如果字典缺少 <em>fieldnames</em> 中的键，则可选参数 <em>restval</em> 用于指定要写入的值。 如果传递给 <code class="xref py py-meth docutils literal notranslate"><span class="pre">writerow()</span></code> 方法的字典的某些键在 <em>fieldnames</em> 中找不到，则可选参数 <em>extrasaction</em> 用于指定要执行的操作。 如果将其设置为默认值 <code class="docutils literal notranslate"><span class="pre">'raise'</span></code>，则会引发 <a class="reference internal" href="exceptions.html#ValueError" title="ValueError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a>。 如果将其设置为 <code class="docutils literal notranslate"><span class="pre">'ignore'</span></code>，则字典中的其他键值将被忽略。 所有其他可选或关键字参数都传递给底层的 <a class="reference internal" href="#csv.writer" title="csv.writer"><code class="xref py py-class docutils literal notranslate"><span class="pre">writer</span></code></a> 实例。</p>
 <p>注意，与 <a class="reference internal" href="#csv.DictReader" title="csv.DictReader"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictReader</span></code></a> 类不同，<a class="reference internal" href="#csv.DictWriter" title="csv.DictWriter"><code class="xref py py-class docutils literal notranslate"><span class="pre">DictWriter</span></code></a> 类的 <em>fieldnames</em> 参数不是可选参数。</p>
+<p>If the argument passed to <em>fieldnames</em> is an iterator, it will be coerced to a <a class="reference internal" href="stdtypes.html#list" title="list"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>.</p>
 <p>一个简短的用法示例:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
 
@@ -455,7 +457,8 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="csv.Dialect.skipinitialspace">
 <span class="sig-prename descclassname"><span class="pre">Dialect.</span></span><span class="sig-name descname"><span class="pre">skipinitialspace</span></span><a class="headerlink" href="#csv.Dialect.skipinitialspace" title="永久链接至目标">¶</a></dt>
-<dd><p>如果为 <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a>，则忽略 <em>定界符</em> 之后的空格。默认值为 <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>。</p>
+<dd><p>When <a class="reference internal" href="constants.html#True" title="True"><code class="xref py py-const docutils literal notranslate"><span class="pre">True</span></code></a>, spaces immediately following the <em>delimiter</em> are ignored.
+The default is <a class="reference internal" href="constants.html#False" title="False"><code class="xref py py-const docutils literal notranslate"><span class="pre">False</span></code></a>.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -714,7 +717,7 @@ using a different encoding, use the <code class="docutils literal notranslate"><
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -281,7 +281,9 @@ logging cookbook, please see <a class="reference internal" href="#tutorial-ref-l
 </section>
 <section id="logging-to-a-file">
 <h3>记录日志到文件<a class="headerlink" href="#logging-to-a-file" title="永久链接至标题">¶</a></h3>
-<p>一种非常常见的情况是将日志事件记录到文件，让我们继续往下看。请确认启动新的Python 解释器，不要在上一个环境中继续操作:</p>
+<p>A very common situation is that of recording logging events in a file, so let’s
+look at that next. Be sure to try the following in a newly started Python
+interpreter, and don’t just continue from the session described above:</p>
 <div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;example.log&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;This message should go to the log file&#39;</span><span class="p">)</span>
@@ -502,8 +504,14 @@ should receive help before too long.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%Y-%m-%d %H:%M:%S
 </pre></div>
 </div>
-<p>最后加上毫秒数。 <code class="docutils literal notranslate"><span class="pre">style</span></code> 是 <cite>％</cite>，’{ ‘ 或 ‘$’ 之一。 如果未指定，则将使用 ‘％’。</p>
-<p>如果 <code class="docutils literal notranslate"><span class="pre">style</span></code> 是 ‘％’，则消息格式字符串使用 <code class="docutils literal notranslate"><span class="pre">%(&lt;dictionary</span> <span class="pre">key&gt;)s</span></code> 样式字符串替换；可能的键值在 <a class="reference internal" href="../library/logging.html#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a> 中。 如果样式为 ‘{’，则假定消息格式字符串与 <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> （使用关键字参数）兼容，而如果样式为 ‘$’ ，则消息格式字符串应符合 <a class="reference internal" href="../library/string.html#string.Template.substitute" title="string.Template.substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">string.Template.substitute()</span></code></a> 。</p>
+<p>with the milliseconds tacked on at the end. The <code class="docutils literal notranslate"><span class="pre">style</span></code> is one of <code class="docutils literal notranslate"><span class="pre">'%'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'{'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'$'</span></code>. If one of these is not specified, then <code class="docutils literal notranslate"><span class="pre">'%'</span></code> will be used.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">style</span></code> is <code class="docutils literal notranslate"><span class="pre">'%'</span></code>, the message format string uses
+<code class="docutils literal notranslate"><span class="pre">%(&lt;dictionary</span> <span class="pre">key&gt;)s</span></code> styled string substitution; the possible keys are
+documented in <a class="reference internal" href="../library/logging.html#logrecord-attributes"><span class="std std-ref">LogRecord 属性</span></a>. If the style is <code class="docutils literal notranslate"><span class="pre">'{'</span></code>, the message
+format string is assumed to be compatible with <a class="reference internal" href="../library/stdtypes.html#str.format" title="str.format"><code class="xref py py-meth docutils literal notranslate"><span class="pre">str.format()</span></code></a> (using
+keyword arguments), while if the style is <code class="docutils literal notranslate"><span class="pre">'$'</span></code> then the message format string
+should conform to what is expected by <a class="reference internal" href="../library/string.html#string.Template.substitute" title="string.Template.substitute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">string.Template.substitute()</span></code></a>.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">在 3.2 版更改: </span>添加 <code class="docutils literal notranslate"><span class="pre">style</span></code> 形参。</p>
 </div>
@@ -968,7 +976,7 @@ your library as they wish.</p>
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 

@@ -258,14 +258,13 @@
 <dt class="sig sig-object py" id="winreg.DeleteKeyEx">
 <span class="sig-prename descclassname"><span class="pre">winreg.</span></span><span class="sig-name descname"><span class="pre">DeleteKeyEx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">KEY_WOW64_64KEY</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reserved</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#winreg.DeleteKeyEx" title="永久链接至目标">¶</a></dt>
 <dd><p>删除指定的键。</p>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>函数 <a class="reference internal" href="#winreg.DeleteKeyEx" title="winreg.DeleteKeyEx"><code class="xref py py-func docutils literal notranslate"><span class="pre">DeleteKeyEx()</span></code></a> 通过 RegDeleteKeyEx 这个 Windows API 函数实现，该函数为 Windows 的64位版本专属。 参阅 <a class="reference external" href="https://msdn.microsoft.com/en-us/library/ms724847%28VS.85%29.aspx">RegDeleteKeyEx 文档</a>。</p>
-</div>
 <p><em>key</em> 为某个已经打开的键，或者预定义的 <a class="reference internal" href="#hkey-constants"><span class="std std-ref">HKEY_* 常量</span></a> 之一。</p>
 <p><em>sub_key</em> 这个字符串必须是由 <em>key</em> 参数所指定键的一个子项。该值项不可以是 <code class="docutils literal notranslate"><span class="pre">None</span></code>，同时键也不可以有子项。</p>
 <p><em>reserved</em> 是一个保留的证书，必须是零。默认值为零。</p>
-<p><em>access</em> 为一个整数，用于给键的预期安全访问指定访问掩码。默认值为常量 <code class="xref py py-const docutils literal notranslate"><span class="pre">_WOW64_64KEY</span></code> 。参阅 <a class="reference internal" href="#access-rights"><span class="std std-ref">Access Rights</span></a>  了解其它允许值。</p>
+<p><em>access</em> is an integer that specifies an access mask that describes the
+desired security access for the key.  Default is <a class="reference internal" href="#winreg.KEY_WOW64_64KEY" title="winreg.KEY_WOW64_64KEY"><code class="xref py py-const docutils literal notranslate"><span class="pre">KEY_WOW64_64KEY</span></code></a>.
+On 32-bit Windows, the WOW64 constants are ignored.
+See <a class="reference internal" href="#access-rights"><span class="std std-ref">Access Rights</span></a> for other allowed values.</p>
 <p><em>该方法不能删除带有子项的键。</em></p>
 <p>如果方法成功，则整个键，包括其所有值项都会被移除。如果方法失败，则引发一个 <a class="reference internal" href="exceptions.html#OSError" title="OSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OSError</span></code></a> 异常。</p>
 <p>在不支持的 Windows 版本之上，将会引发 <a class="reference internal" href="exceptions.html#NotImplementedError" title="NotImplementedError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a> 异常。</p>
@@ -652,13 +651,15 @@
 <dl class="py data">
 <dt class="sig sig-object py" id="winreg.KEY_WOW64_64KEY">
 <span class="sig-prename descclassname"><span class="pre">winreg.</span></span><span class="sig-name descname"><span class="pre">KEY_WOW64_64KEY</span></span><a class="headerlink" href="#winreg.KEY_WOW64_64KEY" title="永久链接至目标">¶</a></dt>
-<dd><p>表示 64 位 Windows 中的应用程序应在 64 位注册表视图上操作。</p>
+<dd><p>Indicates that an application on 64-bit Windows should operate on
+the 64-bit registry view. On 32-bit Windows, this constant is ignored.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="winreg.KEY_WOW64_32KEY">
 <span class="sig-prename descclassname"><span class="pre">winreg.</span></span><span class="sig-name descname"><span class="pre">KEY_WOW64_32KEY</span></span><a class="headerlink" href="#winreg.KEY_WOW64_32KEY" title="永久链接至目标">¶</a></dt>
-<dd><p>表示 64 位 Windows 中的应用程序应在 32 位注册表视图上操作。</p>
+<dd><p>Indicates that an application on 64-bit Windows should operate on
+the 32-bit registry view. On 32-bit Windows, this constant is ignored.</p>
 </dd></dl>
 
 </section>
@@ -918,7 +919,7 @@
 <br />
     <br />
 
-    最后更新于 6月 23, 2022.
+    最后更新于 10月 12, 2022.
     <a href="/bugs.html">Found a bug</a>?
     <br />
 
