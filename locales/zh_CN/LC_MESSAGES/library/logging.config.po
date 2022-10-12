@@ -14,17 +14,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:34+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 01:09+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../library/logging.config.rst:2
 msgid ":mod:`logging.config` --- Logging configuration"
@@ -778,11 +778,25 @@ msgid ""
 "instances in addition to ids."
 msgstr ""
 
-#: ../../library/logging.config.rst:541
+#: ../../library/logging.config.rst:537
+msgid ""
+"You can also specify a special key ``'.'`` whose value is a dictionary is"
+" a mapping of attribute names to values. If found, the specified "
+"attributes will be set on the user-defined object before it is returned. "
+"Thus, with the following configuration::"
+msgstr ""
+
+#: ../../library/logging.config.rst:553
+msgid ""
+"the returned formatter will have attribute ``foo`` set to ``'bar'`` and "
+"attribute ``baz`` set to ``'bozz'``."
+msgstr ""
+
+#: ../../library/logging.config.rst:560
 msgid "Access to external objects"
 msgstr "访问外部对象"
 
-#: ../../library/logging.config.rst:543
+#: ../../library/logging.config.rst:562
 msgid ""
 "There are times where a configuration needs to refer to objects external "
 "to the configuration, for example ``sys.stderr``.  If the configuration "
@@ -802,7 +816,7 @@ msgstr ""
 "为了实现这种区分，配置系统会在字符串值中查找规定的特殊前缀并对其做特殊处理。 例如，如果在配置中将字符串字面值 "
 "``'ext://sys.stderr'`` 作为一个值来提供，则 ``ext://`` 将被去除而该值的剩余部分将使用正常导入机制来处理。"
 
-#: ../../library/logging.config.rst:556
+#: ../../library/logging.config.rst:575
 msgid ""
 "The handling of such prefixes is done in a way analogous to protocol "
 "handling: there is a generic mechanism to look for prefixes which match "
@@ -816,11 +830,11 @@ msgstr ""
 "``^(?P<prefix>[a-z]+)://(?P<suffix>.*)$`` 相匹配的前缀，如果识别出了 ``prefix``，则 "
 "``suffix`` 会以与前缀相对应的方式来处理并且处理的结果将替代原字符串值。 如果未识别出前缀，则原字符串将保持不变。"
 
-#: ../../library/logging.config.rst:568
+#: ../../library/logging.config.rst:587
 msgid "Access to internal objects"
 msgstr "访问内部对象"
 
-#: ../../library/logging.config.rst:570
+#: ../../library/logging.config.rst:589
 msgid ""
 "As well as external objects, there is sometimes also a need to refer to "
 "objects in the configuration.  This will be done implicitly by the "
@@ -834,7 +848,7 @@ msgstr ""
 "的字符串值 ``'DEBUG'`` 将被自动转换为值 ``logging.DEBUG``，而 ``handlers``, ``filters`` "
 "和 ``formatter`` 条目将接受一个对象 ID 并解析为适当的目标对象。"
 
-#: ../../library/logging.config.rst:578
+#: ../../library/logging.config.rst:597
 msgid ""
 "However, a more generic mechanism is needed for user-defined objects "
 "which are not known to the :mod:`logging` module.  For example, consider "
@@ -855,7 +869,7 @@ msgstr ""
 "``my.package.MyHandler``，则配置程序将不知道 ``alternate`` 指向的是一个处理程序。 "
 "为了应对这种情况，通用解析系统允许用户指定:"
 
-#: ../../library/logging.config.rst:600
+#: ../../library/logging.config.rst:619
 msgid ""
 "The literal string ``'cfg://handlers.file'`` will be resolved in an "
 "analogous way to strings with the ``ext://`` prefix, but looking in the "
@@ -867,7 +881,7 @@ msgstr ""
 "前缀类似的方式被解析为结果字符串，但查找操作是在配置自身而不是在导入命名空间中进行。 该机制允许按点号或按索引来访问，与 "
 "``str.format`` 所提供的方式类似。 这样，给定以下代码段:"
 
-#: ../../library/logging.config.rst:618
+#: ../../library/logging.config.rst:637
 msgid ""
 "in the configuration, the string ``'cfg://handlers'`` would resolve to "
 "the dict with key ``handlers``, the string ``'cfg://handlers.email`` "
@@ -892,7 +906,7 @@ msgstr ""
 "``'cfg://handlers.email[subject]'`` 来访问。 后一种形式仅在键包含空格或非字母类数字类字符的情况下才需要使用。"
 " 如果一个索引仅由十进制数码构成，则将尝试使用相应的整数值来访问，如果有必要则将回退为字符串值。"
 
-#: ../../library/logging.config.rst:632
+#: ../../library/logging.config.rst:651
 msgid ""
 "Given a string ``cfg://handlers.myhandler.mykey.123``, this will resolve "
 "to ``config_dict['handlers']['myhandler']['mykey']['123']``. If the "
@@ -907,11 +921,11 @@ msgstr ""
 "``config_dict['handlers']['myhandler']['mykey'][123]`` 中提取值，并在尝试失败时回退为 "
 "``config_dict['handlers']['myhandler']['mykey']['123']``。"
 
-#: ../../library/logging.config.rst:644
+#: ../../library/logging.config.rst:663
 msgid "Import resolution and custom importers"
 msgstr "导入解析与定制导入器"
 
-#: ../../library/logging.config.rst:646
+#: ../../library/logging.config.rst:665
 msgid ""
 "Import resolution, by default, uses the builtin :func:`__import__` "
 "function to do its importing. You may want to replace this with your own "
@@ -928,17 +942,17 @@ msgstr ""
 ":attr:`importer` 属性。 但是你必须小心谨慎，因为函数是从类中通过描述器方式来访问的。 如果你使用 Python "
 "可调用对象来执行导入，并且你希望在类层级而不是在实例层级上定义它，则你需要用 :func:`staticmethod` 来装饰它。 例如::"
 
-#: ../../library/logging.config.rst:661
+#: ../../library/logging.config.rst:680
 msgid ""
 "You don't need to wrap with :func:`staticmethod` if you're setting the "
 "import callable on a configurator *instance*."
 msgstr "如果你是在一个配置器的 *实例* 上设置导入可调用对象则你不需要用 :func:`staticmethod` 来装饰。"
 
-#: ../../library/logging.config.rst:667
+#: ../../library/logging.config.rst:686
 msgid "Configuring QueueHandler and QueueListener"
 msgstr ""
 
-#: ../../library/logging.config.rst:669
+#: ../../library/logging.config.rst:688
 msgid ""
 "If you want to configure a :class:`~logging.handlers.QueueHandler`, "
 "noting that this is normally used in conjunction with a "
@@ -952,24 +966,24 @@ msgid ""
 "below."
 msgstr ""
 
-#: ../../library/logging.config.rst:690
+#: ../../library/logging.config.rst:709
 msgid "The ``queue`` and ``listener`` keys are optional."
 msgstr ""
 
-#: ../../library/logging.config.rst:692
+#: ../../library/logging.config.rst:711
 msgid ""
 "If the ``queue`` key is present, the corresponding value can be one of "
 "the following:"
 msgstr ""
 
-#: ../../library/logging.config.rst:694
+#: ../../library/logging.config.rst:713
 msgid ""
 "An actual instance of :class:`queue.Queue` or a subclass thereof. This is"
 " of course only possible if you are constructing or modifying the "
 "configuration dictionary in code."
 msgstr ""
 
-#: ../../library/logging.config.rst:698
+#: ../../library/logging.config.rst:717
 msgid ""
 "A string that resolves to a callable which, when called with no "
 "arguments, returns the :class:`queue.Queue` instance to use. That "
@@ -977,39 +991,39 @@ msgid ""
 "returns a suitable queue instance, such as ``my.module.queue_factory()``."
 msgstr ""
 
-#: ../../library/logging.config.rst:703
+#: ../../library/logging.config.rst:722
 msgid ""
 "A dict with a ``'()'`` key which is constructed in the usual way as "
 "discussed in :ref:`logging-config-dict-userdef`. The result of this "
 "construction should be a :class:`queue.Queue` instance."
 msgstr ""
 
-#: ../../library/logging.config.rst:707
+#: ../../library/logging.config.rst:726
 msgid ""
 "If the  ``queue`` key is absent, a standard unbounded "
 ":class:`queue.Queue` instance is created and used."
 msgstr ""
 
-#: ../../library/logging.config.rst:710
+#: ../../library/logging.config.rst:729
 msgid ""
 "If the ``listener`` key is present, the corresponding value can be one of"
 " the following:"
 msgstr ""
 
-#: ../../library/logging.config.rst:712
+#: ../../library/logging.config.rst:731
 msgid ""
 "A subclass of :class:`logging.handlers.QueueListener`. This is of course "
 "only possible if you are constructing or modifying the configuration "
 "dictionary in code."
 msgstr ""
 
-#: ../../library/logging.config.rst:716
+#: ../../library/logging.config.rst:735
 msgid ""
 "A string which resolves to a class which is a subclass of "
 "``QueueListener``, such as ``'my.package.CustomListener'``."
 msgstr ""
 
-#: ../../library/logging.config.rst:719
+#: ../../library/logging.config.rst:738
 msgid ""
 "A dict with a ``'()'`` key which is constructed in the usual way as "
 "discussed in :ref:`logging-config-dict-userdef`. The result of this "
@@ -1017,20 +1031,20 @@ msgid ""
 "``QueueListener`` initializer."
 msgstr ""
 
-#: ../../library/logging.config.rst:723
+#: ../../library/logging.config.rst:742
 msgid ""
 "If the ``listener`` key is absent, "
 ":class:`logging.handlers.QueueListener` is used."
 msgstr ""
 
-#: ../../library/logging.config.rst:725
+#: ../../library/logging.config.rst:744
 msgid ""
 "The values under the ``handlers`` key are the names of other handlers in "
 "the configuration (not shown in the above snippet) which will be passed "
 "to the queue listener."
 msgstr ""
 
-#: ../../library/logging.config.rst:729
+#: ../../library/logging.config.rst:748
 msgid ""
 "Any custom queue handler and listener classes will need to be defined "
 "with the same initialization signatures as "
@@ -1038,11 +1052,11 @@ msgid ""
 ":class:`~logging.handlers.QueueListener`."
 msgstr ""
 
-#: ../../library/logging.config.rst:738
+#: ../../library/logging.config.rst:757
 msgid "Configuration file format"
 msgstr "配置文件格式"
 
-#: ../../library/logging.config.rst:740
+#: ../../library/logging.config.rst:759
 msgid ""
 "The configuration file format understood by :func:`fileConfig` is based "
 "on :mod:`configparser` functionality. The file must contain sections "
@@ -1067,7 +1081,7 @@ msgstr ""
 "的格式化器，其配置将在名为 ``[formatter_form01]`` 的小节中指定。 根日志记录器的配置必须在名为 "
 "``[logger_root]`` 的小节中指定。"
 
-#: ../../library/logging.config.rst:755
+#: ../../library/logging.config.rst:774
 msgid ""
 "The :func:`fileConfig` API is older than the :func:`dictConfig` API and "
 "does not provide functionality to cover certain aspects of logging. For "
@@ -1086,17 +1100,17 @@ msgstr ""
 ":func:`dictConfig`。 请注意未来还将向 :func:`dictConfig` "
 "添加对配置功能的强化，因此值得考虑在方便的时候转换到这个新 API。"
 
-#: ../../library/logging.config.rst:765
+#: ../../library/logging.config.rst:784
 msgid "Examples of these sections in the file are given below."
 msgstr "在文件中这些小节的例子如下所示。"
 
-#: ../../library/logging.config.rst:778
+#: ../../library/logging.config.rst:797
 msgid ""
 "The root logger must specify a level and a list of handlers. An example "
 "of a root logger section is given below."
 msgstr "根日志记录器必须指定一个级别和一个处理程序列表。 根日志小节的例子如下所示。"
 
-#: ../../library/logging.config.rst:787
+#: ../../library/logging.config.rst:806
 #, fuzzy
 msgid ""
 "The ``level`` entry can be one of ``DEBUG, INFO, WARNING, ERROR, "
@@ -1108,7 +1122,7 @@ msgstr ""
 "之一。 其中 ``NOTSET`` 仅适用于根日志记录器，表示将会记录所有消息。 级别值会在 ``logging`` 包命名空间的上下文中通过 "
 ":func:`eval` 来得出。"
 
-#: ../../library/logging.config.rst:792
+#: ../../library/logging.config.rst:811
 msgid ""
 "The ``handlers`` entry is a comma-separated list of handler names, which "
 "must appear in the ``[handlers]`` section. These names must appear in the"
@@ -1116,13 +1130,13 @@ msgid ""
 "configuration file."
 msgstr "``handlers`` 条目是以逗号分隔的处理程序名称列表，它必须出现于 ``[handlers]`` 小节并且在配置文件中有相应的小节。"
 
-#: ../../library/logging.config.rst:797
+#: ../../library/logging.config.rst:816
 msgid ""
 "For loggers other than the root logger, some additional information is "
 "required. This is illustrated by the following example."
 msgstr "对于根日志记录器以外的日志记录器，还需要某些附加信息。 下面的例子演示了这些信息。"
 
-#: ../../library/logging.config.rst:808
+#: ../../library/logging.config.rst:827
 msgid ""
 "The ``level`` and ``handlers`` entries are interpreted as for the root "
 "logger, except that if a non-root logger's level is specified as "
@@ -1139,13 +1153,13 @@ msgstr ""
 "表示消息必须从此日志记录器传播到更高层级的处理程序，设为 0 表示消息 **不会** 传播到更高层级的处理程序。 ``qualname`` "
 "条目是日志记录器的层级通道名称，也就是应用程序获取日志记录器所用的名称。"
 
-#: ../../library/logging.config.rst:817
+#: ../../library/logging.config.rst:836
 msgid ""
 "Sections which specify handler configuration are exemplified by the "
 "following."
 msgstr "指定处理程序配置的小节说明如下。"
 
-#: ../../library/logging.config.rst:827
+#: ../../library/logging.config.rst:846
 msgid ""
 "The ``class`` entry indicates the handler's class (as determined by "
 ":func:`eval` in the ``logging`` package's namespace). The ``level`` is "
@@ -1155,7 +1169,7 @@ msgstr ""
 "``class`` 条目指明处理程序的类（由 ``logging`` 包命名空间中的 :func:`eval` 来确定）。 ``level`` "
 "会以与日志记录器相同的方式来解读，``NOTSET`` 会被视为表示‘记录一切消息’。"
 
-#: ../../library/logging.config.rst:831
+#: ../../library/logging.config.rst:850
 msgid ""
 "The ``formatter`` entry indicates the key name of the formatter for this "
 "handler. If blank, a default formatter (``logging._defaultFormatter``) is"
@@ -1166,7 +1180,7 @@ msgstr ""
 "(``logging._defaultFormatter``)。 如果指定了名称，则它必须出现于 ``[formatters]`` "
 "小节并且在配置文件中有相应的小节。"
 
-#: ../../library/logging.config.rst:836
+#: ../../library/logging.config.rst:855
 #, fuzzy
 msgid ""
 "The ``args`` entry, when :ref:`evaluated <func-eval>` in the context of "
@@ -1178,7 +1192,7 @@ msgstr ""
 "``args`` 条目，当在 ``logging`` 包命名空间的上下文中执行 :func:`eval` 时将是传给处理程序类构造器的参数列表。 "
 "请参阅相应处理程序的构造器说明或者下面的示例，以了解典型的条目是如何构造的。 如果未提供，则默认为 ``()``。"
 
-#: ../../library/logging.config.rst:842
+#: ../../library/logging.config.rst:861
 #, fuzzy
 msgid ""
 "The optional ``kwargs`` entry, when :ref:`evaluated <func-eval>` in the "
@@ -1189,13 +1203,13 @@ msgstr ""
 "可选的 ``kwargs`` 条目，当在 ``logging`` 包命名空间的上下文中执行 :func:`eval` "
 "时将是传给处理程序的构造器的关键字参数字典。 如果未提供，则默认为 ``{}``。"
 
-#: ../../library/logging.config.rst:899
+#: ../../library/logging.config.rst:918
 msgid ""
 "Sections which specify formatter configuration are typified by the "
 "following."
 msgstr "指定格式化器配置的小节说明如下。"
 
-#: ../../library/logging.config.rst:910
+#: ../../library/logging.config.rst:929
 msgid ""
 "The arguments for the formatter configuration are the same as the keys in"
 " the dictionary schema :ref:`formatters section <logging-config-"
@@ -1204,7 +1218,7 @@ msgstr ""
 "用于格式化器配置的参数与字典规范 :ref:`格式化器部分 <logging-config-dictschema-formatters>` "
 "中的键相同。"
 
-#: ../../library/logging.config.rst:916
+#: ../../library/logging.config.rst:935
 msgid ""
 "Due to the use of :func:`eval` as described above, there are potential "
 "security risks which result from using the :func:`listen` to send and "
@@ -1215,19 +1229,19 @@ msgstr ""
 "由于如上所述使用了 :func:`eval`，因此使用 :func:`listen` 通过套接字来发送和接收配置会导致潜在的安全风险。 "
 "此风险仅限于相互间没有信任的多个用户在同一台机器上运行代码的情况；请参阅 :func:`listen` 了解更多信息。"
 
-#: ../../library/logging.config.rst:925
+#: ../../library/logging.config.rst:944
 msgid "Module :mod:`logging`"
 msgstr "模块 :mod:`logging`"
 
-#: ../../library/logging.config.rst:925
+#: ../../library/logging.config.rst:944
 msgid "API reference for the logging module."
 msgstr "日志记录模块的 API 参考。"
 
-#: ../../library/logging.config.rst:927
+#: ../../library/logging.config.rst:946
 msgid "Module :mod:`logging.handlers`"
 msgstr ":mod:`logging.handlers` 模块"
 
-#: ../../library/logging.config.rst:928
+#: ../../library/logging.config.rst:947
 msgid "Useful handlers included with the logging module."
 msgstr "日志记录模块附带的有用处理器。"
 

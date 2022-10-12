@@ -17,17 +17,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:34+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 00:49+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../c-api/init.rst:8
 msgid "Initialization, Finalization, and Threads"
@@ -706,7 +706,7 @@ msgstr ""
 #: ../../c-api/init.rst:789 ../../c-api/init.rst:815
 msgid ""
 "Use :c:func:`Py_DecodeLocale` to decode a bytes string to get a "
-":c:type:`wchar_*` string."
+":c:expr:`wchar_*` string."
 msgstr ""
 
 #: ../../c-api/init.rst:497
@@ -1140,11 +1140,11 @@ msgstr ""
 
 #: ../../c-api/init.rst:959
 msgid ""
-"Note that the :c:func:`PyGILState_\\*` functions assume there is only one"
-" global interpreter (created automatically by :c:func:`Py_Initialize`).  "
-"Python supports the creation of additional interpreters (using "
+"Note that the ``PyGILState_*`` functions assume there is only one global "
+"interpreter (created automatically by :c:func:`Py_Initialize`).  Python "
+"supports the creation of additional interpreters (using "
 ":c:func:`Py_NewInterpreter`), but mixing multiple interpreters and the "
-":c:func:`PyGILState_\\*` API is unsupported."
+"``PyGILState_*`` API is unsupported."
 msgstr ""
 
 #: ../../c-api/init.rst:969
@@ -1220,7 +1220,7 @@ msgstr ""
 #: ../../c-api/init.rst:1025
 msgid ""
 "This data structure represents the state of a single thread.  The only "
-"public data member is :attr:`interp` (:c:type:`PyInterpreterState *`), "
+"public data member is :attr:`interp` (:c:expr:`PyInterpreterState *`), "
 "which points to this thread's interpreter state."
 msgstr ""
 
@@ -1620,8 +1620,8 @@ msgstr ""
 
 #: ../../c-api/init.rst:1402
 msgid ""
-"The type of the *id* parameter changed from :c:type:`long` to "
-":c:type:`unsigned long`."
+"The type of the *id* parameter changed from :c:expr:`long` to "
+":c:expr:`unsigned long`."
 msgstr ""
 
 #: ../../c-api/init.rst:1408
@@ -1817,10 +1817,10 @@ msgstr ""
 
 #: ../../c-api/init.rst:1590
 msgid ""
-"Also note that combining this functionality with :c:func:`PyGILState_\\*`"
-" APIs is delicate, because these APIs assume a bijection between Python "
-"thread states and OS-level threads, an assumption broken by the presence "
-"of sub-interpreters. It is highly recommended that you don't switch sub-"
+"Also note that combining this functionality with ``PyGILState_*`` APIs is"
+" delicate, because these APIs assume a bijection between Python thread "
+"states and OS-level threads, an assumption broken by the presence of sub-"
+"interpreters. It is highly recommended that you don't switch sub-"
 "interpreters between a pair of matching :c:func:`PyGILState_Ensure` and "
 ":c:func:`PyGILState_Release` calls. Furthermore, extensions (such as "
 ":mod:`ctypes`) using these APIs to allow calling of Python code from non-"
@@ -2072,11 +2072,25 @@ msgstr ""
 msgid "See also the :func:`sys.setprofile` function."
 msgstr ""
 
-#: ../../c-api/init.rst:1775 ../../c-api/init.rst:1789
+#: ../../c-api/init.rst:1775 ../../c-api/init.rst:1782
+#: ../../c-api/init.rst:1801 ../../c-api/init.rst:1808
 msgid "The caller must hold the :term:`GIL`."
 msgstr ""
 
-#: ../../c-api/init.rst:1780
+#: ../../c-api/init.rst:1779
+msgid ""
+"Like :c:func:`PyEval_SetProfile` but sets the profile function in all "
+"running threads belonging to the current interpreter instead of the "
+"setting it only on the current thread."
+msgstr ""
+
+#: ../../c-api/init.rst:1784
+msgid ""
+"As :c:func:`PyEval_SetProfile`, this function ignores any exceptions "
+"raised while setting the profile functions in all threads."
+msgstr ""
+
+#: ../../c-api/init.rst:1792
 msgid ""
 "Set the tracing function to *func*.  This is similar to "
 ":c:func:`PyEval_SetProfile`, except the tracing function does receive "
@@ -2087,96 +2101,109 @@ msgid ""
 ":const:`PyTrace_C_RETURN` as a value for the *what* parameter."
 msgstr ""
 
-#: ../../c-api/init.rst:1787
+#: ../../c-api/init.rst:1799
 msgid "See also the :func:`sys.settrace` function."
 msgstr ""
 
-#: ../../c-api/init.rst:1795
+#: ../../c-api/init.rst:1805
+msgid ""
+"Like :c:func:`PyEval_SetTrace` but sets the tracing function in all "
+"running threads belonging to the current interpreter instead of the "
+"setting it only on the current thread."
+msgstr ""
+
+#: ../../c-api/init.rst:1810
+msgid ""
+"As :c:func:`PyEval_SetTrace`, this function ignores any exceptions raised"
+" while setting the trace functions in all threads."
+msgstr ""
+
+#: ../../c-api/init.rst:1819
 msgid "Advanced Debugger Support"
 msgstr "高级调试器支持"
 
-#: ../../c-api/init.rst:1800
+#: ../../c-api/init.rst:1824
 msgid "These functions are only intended to be used by advanced debugging tools."
 msgstr ""
 
-#: ../../c-api/init.rst:1805
+#: ../../c-api/init.rst:1829
 msgid ""
 "Return the interpreter state object at the head of the list of all such "
 "objects."
 msgstr ""
 
-#: ../../c-api/init.rst:1810
+#: ../../c-api/init.rst:1834
 msgid "Return the main interpreter state object."
 msgstr ""
 
-#: ../../c-api/init.rst:1815
+#: ../../c-api/init.rst:1839
 msgid ""
 "Return the next interpreter state object after *interp* from the list of "
 "all such objects."
 msgstr ""
 
-#: ../../c-api/init.rst:1821
+#: ../../c-api/init.rst:1845
 msgid ""
 "Return the pointer to the first :c:type:`PyThreadState` object in the "
 "list of threads associated with the interpreter *interp*."
 msgstr ""
 
-#: ../../c-api/init.rst:1827
+#: ../../c-api/init.rst:1851
 msgid ""
 "Return the next thread state object after *tstate* from the list of all "
 "such objects belonging to the same :c:type:`PyInterpreterState` object."
 msgstr ""
 
-#: ../../c-api/init.rst:1834
+#: ../../c-api/init.rst:1858
 msgid "Thread Local Storage Support"
 msgstr ""
 
-#: ../../c-api/init.rst:1838
+#: ../../c-api/init.rst:1862
 msgid ""
 "The Python interpreter provides low-level support for thread-local "
 "storage (TLS) which wraps the underlying native TLS implementation to "
 "support the Python-level thread local storage API "
 "(:class:`threading.local`).  The CPython C level APIs are similar to "
 "those offered by pthreads and Windows: use a thread key and functions to "
-"associate a :c:type:`void*` value per thread."
+"associate a :c:expr:`void*` value per thread."
 msgstr ""
 
-#: ../../c-api/init.rst:1845
+#: ../../c-api/init.rst:1869
 msgid ""
 "The GIL does *not* need to be held when calling these functions; they "
 "supply their own locking."
 msgstr ""
 
-#: ../../c-api/init.rst:1848
+#: ../../c-api/init.rst:1872
 msgid ""
 "Note that :file:`Python.h` does not include the declaration of the TLS "
 "APIs, you need to include :file:`pythread.h` to use thread-local storage."
 msgstr ""
 
-#: ../../c-api/init.rst:1852
+#: ../../c-api/init.rst:1876
 msgid ""
 "None of these API functions handle memory management on behalf of the "
-":c:type:`void*` values.  You need to allocate and deallocate them "
-"yourself. If the :c:type:`void*` values happen to be :c:type:`PyObject*`,"
+":c:expr:`void*` values.  You need to allocate and deallocate them "
+"yourself. If the :c:expr:`void*` values happen to be :c:expr:`PyObject*`,"
 " these functions don't do refcount operations on them either."
 msgstr ""
 
-#: ../../c-api/init.rst:1860
+#: ../../c-api/init.rst:1884
 msgid "Thread Specific Storage (TSS) API"
 msgstr ""
 
-#: ../../c-api/init.rst:1862
+#: ../../c-api/init.rst:1886
 msgid ""
 "TSS API is introduced to supersede the use of the existing TLS API within"
 " the CPython interpreter.  This API uses a new type :c:type:`Py_tss_t` "
-"instead of :c:type:`int` to represent thread keys."
+"instead of :c:expr:`int` to represent thread keys."
 msgstr ""
 
-#: ../../c-api/init.rst:1868
+#: ../../c-api/init.rst:1892
 msgid "\"A New C-API for Thread-Local Storage in CPython\" (:pep:`539`)"
 msgstr ""
 
-#: ../../c-api/init.rst:1873
+#: ../../c-api/init.rst:1897
 msgid ""
 "This data structure represents the state of a thread key, the definition "
 "of which may depend on the underlying TLS implementation, and it has an "
@@ -2184,24 +2211,24 @@ msgid ""
 " public members in this structure."
 msgstr ""
 
-#: ../../c-api/init.rst:1878
+#: ../../c-api/init.rst:1902
 msgid ""
 "When :ref:`Py_LIMITED_API <stable>` is not defined, static allocation of "
 "this type by :c:macro:`Py_tss_NEEDS_INIT` is allowed."
 msgstr ""
 
-#: ../../c-api/init.rst:1884
+#: ../../c-api/init.rst:1908
 msgid ""
 "This macro expands to the initializer for :c:type:`Py_tss_t` variables. "
 "Note that this macro won't be defined with :ref:`Py_LIMITED_API "
 "<stable>`."
 msgstr ""
 
-#: ../../c-api/init.rst:1889
+#: ../../c-api/init.rst:1913
 msgid "Dynamic Allocation"
 msgstr ""
 
-#: ../../c-api/init.rst:1891
+#: ../../c-api/init.rst:1915
 msgid ""
 "Dynamic allocation of the :c:type:`Py_tss_t`, required in extension "
 "modules built with :ref:`Py_LIMITED_API <stable>`, where static "
@@ -2209,32 +2236,32 @@ msgid ""
 "opaque at build time."
 msgstr ""
 
-#: ../../c-api/init.rst:1898
+#: ../../c-api/init.rst:1922
 msgid ""
 "Return a value which is the same state as a value initialized with "
 ":c:macro:`Py_tss_NEEDS_INIT`, or ``NULL`` in the case of dynamic "
 "allocation failure."
 msgstr ""
 
-#: ../../c-api/init.rst:1905
+#: ../../c-api/init.rst:1929
 msgid ""
 "Free the given *key* allocated by :c:func:`PyThread_tss_alloc`, after "
 "first calling :c:func:`PyThread_tss_delete` to ensure any associated "
 "thread locals have been unassigned. This is a no-op if the *key* argument"
-" is `NULL`."
+" is ``NULL``."
 msgstr ""
 
-#: ../../c-api/init.rst:1911
+#: ../../c-api/init.rst:1935
 msgid ""
 "A freed key becomes a dangling pointer. You should reset the key to "
 "`NULL`."
 msgstr ""
 
-#: ../../c-api/init.rst:1916
+#: ../../c-api/init.rst:1940
 msgid "Methods"
 msgstr "方法"
 
-#: ../../c-api/init.rst:1918
+#: ../../c-api/init.rst:1942
 msgid ""
 "The parameter *key* of these functions must not be ``NULL``.  Moreover, "
 "the behaviors of :c:func:`PyThread_tss_set` and "
@@ -2242,13 +2269,13 @@ msgid ""
 "has not been initialized by :c:func:`PyThread_tss_create`."
 msgstr ""
 
-#: ../../c-api/init.rst:1926
+#: ../../c-api/init.rst:1950
 msgid ""
 "Return a non-zero value if the given :c:type:`Py_tss_t` has been "
 "initialized by :c:func:`PyThread_tss_create`."
 msgstr ""
 
-#: ../../c-api/init.rst:1932
+#: ../../c-api/init.rst:1956
 msgid ""
 "Return a zero value on successful initialization of a TSS key.  The "
 "behavior is undefined if the value pointed to by the *key* argument is "
@@ -2257,7 +2284,7 @@ msgid ""
 " key is a no-op and immediately returns success."
 msgstr ""
 
-#: ../../c-api/init.rst:1941
+#: ../../c-api/init.rst:1965
 msgid ""
 "Destroy a TSS key to forget the values associated with the key across all"
 " threads, and change the key's initialization state to uninitialized.  A "
@@ -2266,31 +2293,31 @@ msgid ""
 "the same key -- calling it on an already destroyed key is a no-op."
 msgstr ""
 
-#: ../../c-api/init.rst:1950
+#: ../../c-api/init.rst:1974
 msgid ""
 "Return a zero value to indicate successfully associating a "
-":c:type:`void*` value with a TSS key in the current thread.  Each thread "
-"has a distinct mapping of the key to a :c:type:`void*` value."
+":c:expr:`void*` value with a TSS key in the current thread.  Each thread "
+"has a distinct mapping of the key to a :c:expr:`void*` value."
 msgstr ""
 
-#: ../../c-api/init.rst:1957
+#: ../../c-api/init.rst:1981
 msgid ""
-"Return the :c:type:`void*` value associated with a TSS key in the current"
+"Return the :c:expr:`void*` value associated with a TSS key in the current"
 " thread.  This returns ``NULL`` if no value is associated with the key in"
 " the current thread."
 msgstr ""
 
-#: ../../c-api/init.rst:1965
+#: ../../c-api/init.rst:1989
 msgid "Thread Local Storage (TLS) API"
 msgstr ""
 
-#: ../../c-api/init.rst:1967
+#: ../../c-api/init.rst:1991
 msgid ""
 "This API is superseded by :ref:`Thread Specific Storage (TSS) API "
 "<thread-specific-storage-api>`."
 msgstr ""
 
-#: ../../c-api/init.rst:1972
+#: ../../c-api/init.rst:1996
 msgid ""
 "This version of the API does not support platforms where the native TLS "
 "key is defined in a way that cannot be safely cast to ``int``.  On such "
@@ -2299,7 +2326,7 @@ msgid ""
 "platforms."
 msgstr ""
 
-#: ../../c-api/init.rst:1977
+#: ../../c-api/init.rst:2001
 msgid ""
 "Due to the compatibility problem noted above, this version of the API "
 "should not be used in new code."
@@ -2380,5 +2407,115 @@ msgstr "由于上面提到的兼容性问题，不应在新代码中使用此版
 #~ msgstr ""
 
 #~ msgid "See also the :data:`Py_Version` constant."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Use :c:func:`Py_DecodeLocale` to decode a "
+#~ "bytes string to get a :c:type:`wchar_*`"
+#~ " string."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Note that the :c:func:`PyGILState_\\*` "
+#~ "functions assume there is only one "
+#~ "global interpreter (created automatically by"
+#~ " :c:func:`Py_Initialize`).  Python supports the"
+#~ " creation of additional interpreters (using"
+#~ " :c:func:`Py_NewInterpreter`), but mixing "
+#~ "multiple interpreters and the "
+#~ ":c:func:`PyGILState_\\*` API is unsupported."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This data structure represents the state"
+#~ " of a single thread.  The only "
+#~ "public data member is :attr:`interp` "
+#~ "(:c:type:`PyInterpreterState *`), which points "
+#~ "to this thread's interpreter state."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The type of the *id* parameter "
+#~ "changed from :c:type:`long` to "
+#~ ":c:type:`unsigned long`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Also note that combining this "
+#~ "functionality with :c:func:`PyGILState_\\*` APIs "
+#~ "is delicate, because these APIs assume"
+#~ " a bijection between Python thread "
+#~ "states and OS-level threads, an "
+#~ "assumption broken by the presence of "
+#~ "sub-interpreters. It is highly "
+#~ "recommended that you don't switch "
+#~ "sub-interpreters between a pair of "
+#~ "matching :c:func:`PyGILState_Ensure` and "
+#~ ":c:func:`PyGILState_Release` calls. Furthermore, "
+#~ "extensions (such as :mod:`ctypes`) using "
+#~ "these APIs to allow calling of "
+#~ "Python code from non-Python created "
+#~ "threads will probably be broken when "
+#~ "using sub-interpreters."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The Python interpreter provides low-"
+#~ "level support for thread-local storage"
+#~ " (TLS) which wraps the underlying "
+#~ "native TLS implementation to support the"
+#~ " Python-level thread local storage "
+#~ "API (:class:`threading.local`).  The CPython C"
+#~ " level APIs are similar to those "
+#~ "offered by pthreads and Windows: use "
+#~ "a thread key and functions to "
+#~ "associate a :c:type:`void*` value per "
+#~ "thread."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "None of these API functions handle "
+#~ "memory management on behalf of the "
+#~ ":c:type:`void*` values.  You need to "
+#~ "allocate and deallocate them yourself. "
+#~ "If the :c:type:`void*` values happen to"
+#~ " be :c:type:`PyObject*`, these functions "
+#~ "don't do refcount operations on them "
+#~ "either."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "TSS API is introduced to supersede "
+#~ "the use of the existing TLS API"
+#~ " within the CPython interpreter.  This "
+#~ "API uses a new type :c:type:`Py_tss_t`"
+#~ " instead of :c:type:`int` to represent "
+#~ "thread keys."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Free the given *key* allocated by "
+#~ ":c:func:`PyThread_tss_alloc`, after first calling"
+#~ " :c:func:`PyThread_tss_delete` to ensure any "
+#~ "associated thread locals have been "
+#~ "unassigned. This is a no-op if "
+#~ "the *key* argument is `NULL`."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Return a zero value to indicate "
+#~ "successfully associating a :c:type:`void*` "
+#~ "value with a TSS key in the "
+#~ "current thread.  Each thread has a "
+#~ "distinct mapping of the key to a"
+#~ " :c:type:`void*` value."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Return the :c:type:`void*` value associated"
+#~ " with a TSS key in the current"
+#~ " thread.  This returns ``NULL`` if no"
+#~ " value is associated with the key "
+#~ "in the current thread."
 #~ msgstr ""
 

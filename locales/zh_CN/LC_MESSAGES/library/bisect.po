@@ -13,17 +13,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:34+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 00:56+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../library/bisect.rst:2
 msgid ":mod:`bisect` --- Array bisection algorithm"
@@ -34,23 +34,32 @@ msgid "**Source code:** :source:`Lib/bisect.py`"
 msgstr "**源代码：** :source:`Lib/bisect.py`"
 
 #: ../../library/bisect.rst:14
+#, fuzzy
 msgid ""
 "This module provides support for maintaining a list in sorted order "
 "without having to sort the list after each insertion.  For long lists of "
 "items with expensive comparison operations, this can be an improvement "
-"over the more common approach.  The module is called :mod:`bisect` "
-"because it uses a basic bisection algorithm to do its work.  The source "
-"code may be most useful as a working example of the algorithm (the "
-"boundary conditions are already right!)."
+"over linear searches or frequent resorting."
 msgstr ""
 "这个模块对有序列表提供了支持，使得他们可以在插入新数据仍然保持有序。对于长列表，如果其包含元素的比较操作十分昂贵的话，这可以是对更常见方法的改进。这个模块叫做"
 " :mod:`bisect` 因为其使用了基本的二分（bisection）算法。源代码也可以作为很棒的算法示例（边界判断也做好啦！）"
 
-#: ../../library/bisect.rst:21
+#: ../../library/bisect.rst:19
+msgid ""
+"The module is called :mod:`bisect` because it uses a basic bisection "
+"algorithm to do its work.  Unlike other bisection tools that search for a"
+" specific value, the functions in this module are designed to locate an "
+"insertion point. Accordingly, the functions never call an :meth:`__eq__` "
+"method to determine whether a value has been found.  Instead, the "
+"functions only call the :meth:`__lt__` method and will return an "
+"insertion point between values in an array."
+msgstr ""
+
+#: ../../library/bisect.rst:27
 msgid "The following functions are provided:"
 msgstr "定义了以下函数："
 
-#: ../../library/bisect.rst:26
+#: ../../library/bisect.rst:32
 msgid ""
 "Locate the insertion point for *x* in *a* to maintain sorted order. The "
 "parameters *lo* and *hi* may be used to specify a subset of the list "
@@ -64,16 +73,18 @@ msgstr ""
 " *x* 已经在 *a* 里存在，那么插入点会在已存在元素之前（也就是左边）。如果 *a* 是列表（list）的话，返回值是可以被放在 "
 "``list.insert()`` 的第一个参数的。"
 
-#: ../../library/bisect.rst:33
+#: ../../library/bisect.rst:39
+#, fuzzy
 msgid ""
-"The returned insertion point *i* partitions the array *a* into two halves"
-" so that ``all(val < x for val in a[lo : i])`` for the left side and "
-"``all(val >= x for val in a[i : hi])`` for the right side."
+"The returned insertion point *ip* partitions the array *a* into two "
+"slices such that ``all(elem < x for elem in a[lo : ip])`` is true for the"
+" left slice and ``all(elem >= x for elem in a[ip : hi])`` is true for the"
+" right slice."
 msgstr ""
 "返回的插入点 *i* 将数组 *a* 分成两半，使得 ``all(val < x for val in a[lo : i])`` 在左半边而 "
 "``all(val >= x for val in a[i : hi])`` 在右半边。"
 
-#: ../../library/bisect.rst:37 ../../library/bisect.rst:58
+#: ../../library/bisect.rst:44
 msgid ""
 "*key* specifies a :term:`key function` of one argument that is used to "
 "extract a comparison key from each element in the array.  To support "
@@ -81,28 +92,30 @@ msgid ""
 "value."
 msgstr ""
 
-#: ../../library/bisect.rst:41 ../../library/bisect.rst:62
+#: ../../library/bisect.rst:48
 msgid ""
-"If *key* is ``None``, the elements are compared directly with no "
-"intervening function call."
+"If *key* is ``None``, the elements are compared directly and no key "
+"function is called."
 msgstr ""
 
-#: ../../library/bisect.rst:44 ../../library/bisect.rst:65
+#: ../../library/bisect.rst:51 ../../library/bisect.rst:65
 #: ../../library/bisect.rst:83 ../../library/bisect.rst:103
 msgid "Added the *key* parameter."
 msgstr "增加了 *key* 形参。"
 
-#: ../../library/bisect.rst:51
+#: ../../library/bisect.rst:58
 msgid ""
 "Similar to :func:`bisect_left`, but returns an insertion point which "
 "comes after (to the right of) any existing entries of *x* in *a*."
 msgstr "类似于 :func:`bisect_left`，但是返回的插入点是 *a* 中已存在元素 *x* 的右侧。"
 
-#: ../../library/bisect.rst:54
+#: ../../library/bisect.rst:61
+#, fuzzy
 msgid ""
-"The returned insertion point *i* partitions the array *a* into two halves"
-" so that ``all(val <= x for val in a[lo : i])`` for the left side and "
-"``all(val > x for val in a[i : hi])`` for the right side."
+"The returned insertion point *ip* partitions the array *a* into two "
+"slices such that ``all(elem <= x for elem in a[lo : ip])`` is true for "
+"the left slice and ``all(elem > x for elem in a[ip : hi])`` is true for "
+"the right slice."
 msgstr ""
 "返回的插入点 *i* 将数组 *a* 分成两半，使得左半边为 ``all(val <= x for val in a[lo : i])`` "
 "而右半边为 ``all(val > x for val in a[i : hi])``。"
@@ -184,9 +197,10 @@ msgstr ""
 "另外，也可以考虑搜索一个预先计算好的键数组来定位插入点（如下面的示例节所演示的）。"
 
 #: ../../library/bisect.rst:129
+#, fuzzy
 msgid ""
-"`Sorted Collections <http://www.grantjenks.com/docs/sortedcollections/>`_"
-" is a high performance module that uses *bisect* to managed sorted "
+"`Sorted Collections <https://grantjenks.com/docs/sortedcollections/>`_ is"
+" a high performance module that uses *bisect* to managed sorted "
 "collections of data."
 msgstr ""
 "`Sorted Collections <http://www.grantjenks.com/docs/sortedcollections/>`_"
@@ -257,4 +271,10 @@ msgstr "一种避免重复调用键函数的技巧是搜索一个预先计算好
 #~ msgstr ""
 #~ "*key* 指定带有单个参数的 :term:`key "
 #~ "function`，用于从每个输入元素中提取比较键。 默认值为 ``None`` (直接比较元素)。"
+
+#~ msgid ""
+#~ "If *key* is ``None``, the elements "
+#~ "are compared directly with no "
+#~ "intervening function call."
+#~ msgstr ""
 

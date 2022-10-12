@@ -16,17 +16,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:34+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 01:11+0000\n"
 "Last-Translator: Freesand Leo <yuqinju@163.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../library/pathlib.rst:3
 msgid ":mod:`pathlib` --- Object-oriented filesystem paths"
@@ -643,7 +643,7 @@ msgstr ""
 "引发一个 :ref:`审计事件 <auditing>` ``pathlib.Path.glob`` 附带参数 ``self``, "
 "``pattern``。"
 
-#: ../../library/pathlib.rst:844 ../../library/pathlib.rst:1137
+#: ../../library/pathlib.rst:844 ../../library/pathlib.rst:1237
 msgid ""
 "Return only directories if *pattern* ends with a pathname components "
 "separator (:data:`~os.sep` or :data:`~os.altsep`)."
@@ -662,8 +662,8 @@ msgid ""
 msgstr "如果路径指向一个目录（或者一个指向目录的符号链接）则返回 ``True``，如果指向其他类型的文件则返回 ``False``。"
 
 #: ../../library/pathlib.rst:859 ../../library/pathlib.rst:868
-#: ../../library/pathlib.rst:897 ../../library/pathlib.rst:906
-#: ../../library/pathlib.rst:915 ../../library/pathlib.rst:924
+#: ../../library/pathlib.rst:902 ../../library/pathlib.rst:911
+#: ../../library/pathlib.rst:920 ../../library/pathlib.rst:929
 msgid ""
 "``False`` is also returned if the path doesn't exist or is a broken "
 "symlink; other errors (such as permission errors) are propagated."
@@ -677,31 +677,39 @@ msgid ""
 msgstr "如果路径指向一个正常的文件（或者一个指向正常文件的符号链接）则返回 ``True``，如果指向其他类型的文件则返回 ``False``。"
 
 #: ../../library/pathlib.rst:874
+#, fuzzy
 msgid ""
 "Return ``True`` if the path is a :dfn:`mount point`: a point in a file "
 "system where a different file system has been mounted.  On POSIX, the "
 "function checks whether *path*'s parent, :file:`path/..`, is on a "
 "different device than *path*, or whether :file:`path/..` and *path* point"
 " to the same i-node on the same device --- this should detect mount "
-"points for all Unix and POSIX variants.  Not implemented on Windows."
+"points for all Unix and POSIX variants.  On Windows, a mount point is "
+"considered to be a drive letter root (e.g. ``c:\\``), a UNC share (e.g. "
+"``\\\\server\\share``), or a mounted filesystem directory."
 msgstr ""
 "如果路径是一个 :dfn:`挂载点 <mount point>`：在文件系统中被其他不同的文件系统挂载的地点。在 POSIX 系统，此函数检查 "
 "*path* 的父级 —— :file:`path/..` 是否处于一个和 *path* 不同的设备中，或者 file:`path/..` 和 "
 "*path* 是否指向相同设备的相同 i-node —— 这能检测所有 Unix 以及 POSIX 变种上的挂载点。 Windows 上未实现。"
 
-#: ../../library/pathlib.rst:886
+#: ../../library/pathlib.rst:885
+#, fuzzy
+msgid "Windows support was added."
+msgstr "增加了 *newline* 形参。"
+
+#: ../../library/pathlib.rst:891
 msgid ""
 "Return ``True`` if the path points to a symbolic link, ``False`` "
 "otherwise."
 msgstr "如果路径指向符号链接则返回 ``True``， 否则 ``False``。"
 
-#: ../../library/pathlib.rst:888
+#: ../../library/pathlib.rst:893
 msgid ""
 "``False`` is also returned if the path doesn't exist; other errors (such "
 "as permission errors) are propagated."
 msgstr "如果路径不存在也返回 ``False``；其他错误（例如权限错误）被传播。"
 
-#: ../../library/pathlib.rst:894
+#: ../../library/pathlib.rst:899
 msgid ""
 "Return ``True`` if the path points to a Unix socket (or a symbolic link "
 "pointing to a Unix socket), ``False`` if it points to another kind of "
@@ -710,33 +718,33 @@ msgstr ""
 "如果路径指向一个 Unix socket 文件（或者指向 Unix socket 文件的符号链接）则返回 "
 "``True``，如果指向其他类型的文件则返回 ``False``。"
 
-#: ../../library/pathlib.rst:903
+#: ../../library/pathlib.rst:908
 msgid ""
 "Return ``True`` if the path points to a FIFO (or a symbolic link pointing"
 " to a FIFO), ``False`` if it points to another kind of file."
 msgstr "如果路径指向一个先进先出存储（或者指向先进先出存储的符号链接）则返回 ``True`` ，指向其他类型的文件则返回 ``False``。"
 
-#: ../../library/pathlib.rst:912
+#: ../../library/pathlib.rst:917
 msgid ""
 "Return ``True`` if the path points to a block device (or a symbolic link "
 "pointing to a block device), ``False`` if it points to another kind of "
 "file."
 msgstr "如果文件指向一个块设备（或者指向块设备的符号链接）则返回 ``True``，指向其他类型的文件则返回 ``False``。"
 
-#: ../../library/pathlib.rst:921
+#: ../../library/pathlib.rst:926
 msgid ""
 "Return ``True`` if the path points to a character device (or a symbolic "
 "link pointing to a character device), ``False`` if it points to another "
 "kind of file."
 msgstr "如果路径指向一个字符设备（或指向字符设备的符号链接）则返回 ``True``，指向其他类型的文件则返回 ``False``。"
 
-#: ../../library/pathlib.rst:930
+#: ../../library/pathlib.rst:935
 msgid ""
 "When the path points to a directory, yield path objects of the directory "
 "contents::"
 msgstr "当路径指向一个目录时，产生该路径下的对象的路径::"
 
-#: ../../library/pathlib.rst:944
+#: ../../library/pathlib.rst:949
 #, fuzzy
 msgid ""
 "The children are yielded in arbitrary order, and the special entries "
@@ -747,19 +755,123 @@ msgstr ""
 "子条目会以任意顺序生成，并且不包括特殊条目 ``'.'`` 和 ``'..'``。 "
 "如果有文件在迭代器创建之后在目录中被移除或添加，是否要包括该文件对应的路径对象并没有规定。"
 
-#: ../../library/pathlib.rst:951
+#: ../../library/pathlib.rst:956
+msgid ""
+"Generate the file names in a directory tree by walking the tree either "
+"top-down or bottom-up."
+msgstr ""
+
+#: ../../library/pathlib.rst:959
+msgid ""
+"For each directory in the directory tree rooted at *self* (including "
+"*self* but excluding '.' and '..'), the method yields a 3-tuple of "
+"``(dirpath, dirnames, filenames)``."
+msgstr ""
+
+#: ../../library/pathlib.rst:963
+msgid ""
+"*dirpath* is a :class:`Path` to the directory currently being walked, "
+"*dirnames* is a list of strings for the names of subdirectories in "
+"*dirpath* (excluding ``'.'`` and ``'..'``), and *filenames* is a list of "
+"strings for the names of the non-directory files in *dirpath*. To get a "
+"full path (which begins with *self*) to a file or directory in *dirpath*,"
+" do ``dirpath / name``. Whether or not the lists are sorted is file "
+"system-dependent."
+msgstr ""
+
+#: ../../library/pathlib.rst:971
+msgid ""
+"If the optional argument *top_down* is true (which is the default), the "
+"triple for a directory is generated before the triples for any of its "
+"subdirectories (directories are walked top-down).  If *top_down* is "
+"false, the triple for a directory is generated after the triples for all "
+"of its subdirectories (directories are walked bottom-up). No matter the "
+"value of *top_down*, the list of subdirectories is retrieved before the "
+"triples for the directory and its subdirectories are walked."
+msgstr ""
+
+#: ../../library/pathlib.rst:979
+msgid ""
+"When *top_down* is true, the caller can modify the *dirnames* list in-"
+"place (for example, using :keyword:`del` or slice assignment), and "
+":meth:`Path.walk` will only recurse into the subdirectories whose names "
+"remain in *dirnames*. This can be used to prune the search, or to impose "
+"a specific order of visiting, or even to inform :meth:`Path.walk` about "
+"directories the caller creates or renames before it resumes "
+":meth:`Path.walk` again. Modifying *dirnames* when *top_down* is false "
+"has no effect on the behavior of :meth:`Path.walk()` since the "
+"directories in *dirnames* have already been generated by the time "
+"*dirnames* is yielded to the caller."
+msgstr ""
+
+#: ../../library/pathlib.rst:989
+msgid ""
+"By default, errors from :func:`os.scandir` are ignored.  If the optional "
+"argument *on_error* is specified, it should be a callable; it will be "
+"called with one argument, an :exc:`OSError` instance. The callable can "
+"handle the error to continue the walk or re-raise it to stop the walk. "
+"Note that the filename is available as the ``filename`` attribute of the "
+"exception object."
+msgstr ""
+
+#: ../../library/pathlib.rst:995
+msgid ""
+"By default, :meth:`Path.walk` does not follow symbolic links, and instead"
+" adds them to the *filenames* list. Set *follow_symlinks* to true to "
+"resolve symlinks and place them in *dirnames* and *filenames* as "
+"appropriate for their targets, and consequently visit directories pointed"
+" to by symlinks (where supported)."
+msgstr ""
+
+#: ../../library/pathlib.rst:1002
+msgid ""
+"Be aware that setting *follow_symlinks* to true can lead to infinite "
+"recursion if a link points to a parent directory of itself. "
+":meth:`Path.walk` does not keep track of the directories it has already "
+"visited."
+msgstr ""
+
+#: ../../library/pathlib.rst:1007
+msgid ""
+":meth:`Path.walk` assumes the directories it walks are not modified "
+"during execution. For example, if a directory from *dirnames* has been "
+"replaced with a symlink and *follow_symlinks* is false, :meth:`Path.walk`"
+" will still try to descend into it. To prevent such behavior, remove "
+"directories from *dirnames* as appropriate."
+msgstr ""
+
+#: ../../library/pathlib.rst:1015
+msgid ""
+"Unlike :func:`os.walk`, :meth:`Path.walk` lists symlinks to directories "
+"in *filenames* if *follow_symlinks* is false."
+msgstr ""
+
+#: ../../library/pathlib.rst:1018
+msgid ""
+"This example displays the number of bytes used by all files in each "
+"directory, while ignoring ``__pycache__`` directories::"
+msgstr ""
+
+#: ../../library/pathlib.rst:1034
+msgid ""
+"This next example is a simple implementation of :func:`shutil.rmtree`. "
+"Walking the tree bottom-up is essential as :func:`rmdir` doesn't allow "
+"deleting a directory before it is empty::"
+msgstr ""
+
+#: ../../library/pathlib.rst:1051
 msgid ""
 "Like :meth:`Path.chmod` but, if the path points to a symbolic link, the "
 "symbolic link's mode is changed rather than its target's."
 msgstr "就像 :meth:`Path.chmod` 但是如果路径指向符号链接则是修改符号链接的模式，而不是修改符号链接的目标。"
 
-#: ../../library/pathlib.rst:957
+#: ../../library/pathlib.rst:1057
 msgid ""
 "Like :meth:`Path.stat` but, if the path points to a symbolic link, return"
 " the symbolic link's information rather than its target's."
 msgstr "就和 :meth:`Path.stat` 一样，但是如果路径指向符号链接，则是返回符号链接而不是目标的信息。"
 
-#: ../../library/pathlib.rst:963
+#: ../../library/pathlib.rst:1063
 msgid ""
 "Create a new directory at this given path.  If *mode* is given, it is "
 "combined with the process' ``umask`` value to determine the file mode and"
@@ -769,7 +881,7 @@ msgstr ""
 "新建给定路径的目录。如果给出了 *mode* ，它将与当前进程的 ``umask`` 值合并来决定文件模式和访问标志。如果路径已经存在，则抛出 "
 ":exc:`FileExistsError`。"
 
-#: ../../library/pathlib.rst:968
+#: ../../library/pathlib.rst:1068
 msgid ""
 "If *parents* is true, any missing parents of this path are created as "
 "needed; they are created with the default permissions without taking "
@@ -778,19 +890,19 @@ msgstr ""
 "如果 *parents* 为 true，任何找不到的父目录都会伴随着此路径被创建；它们会以默认权限被创建，而不考虑 *mode* 设置（模仿 "
 "POSIX 的 ``mkdir -p`` 命令）。"
 
-#: ../../library/pathlib.rst:972
+#: ../../library/pathlib.rst:1072
 msgid ""
 "If *parents* is false (the default), a missing parent raises "
 ":exc:`FileNotFoundError`."
 msgstr "如果 *parents* 为 false（默认），则找不到的父级目录会导致 :exc:`FileNotFoundError` 被抛出。"
 
-#: ../../library/pathlib.rst:975
+#: ../../library/pathlib.rst:1075
 msgid ""
 "If *exist_ok* is false (the default), :exc:`FileExistsError` is raised if"
 " the target directory already exists."
 msgstr "如果 *exist_ok* 为 false（默认），则在目标已存在的情况下抛出 :exc:`FileExistsError`。"
 
-#: ../../library/pathlib.rst:978
+#: ../../library/pathlib.rst:1078
 msgid ""
 "If *exist_ok* is true, :exc:`FileExistsError` exceptions will be ignored "
 "(same behavior as the POSIX ``mkdir -p`` command), but only if the last "
@@ -799,43 +911,43 @@ msgstr ""
 "如果 *exist_ok* 为 true， 则 :exc:`FileExistsError` 异常将被忽略（和 POSIX ``mkdir "
 "-p`` 命令行为相同），但是只有在最后一个路径组件不是现存的非目录文件时才生效。"
 
-#: ../../library/pathlib.rst:982
+#: ../../library/pathlib.rst:1082
 msgid "The *exist_ok* parameter was added."
 msgstr "*exist_ok* 形参被加入。"
 
-#: ../../library/pathlib.rst:988
+#: ../../library/pathlib.rst:1088
 msgid ""
 "Open the file pointed to by the path, like the built-in :func:`open` "
 "function does::"
 msgstr "打开路径指向的文件，就像内置的 :func:`open` 函数所做的一样::"
 
-#: ../../library/pathlib.rst:1000
+#: ../../library/pathlib.rst:1100
 msgid ""
 "Return the name of the user owning the file.  :exc:`KeyError` is raised "
 "if the file's uid isn't found in the system database."
 msgstr "返回拥有此文件的用户名。如果文件的 UID 无法在系统数据库中找到，则抛出 :exc:`KeyError`。"
 
-#: ../../library/pathlib.rst:1006
+#: ../../library/pathlib.rst:1106
 msgid "Return the binary contents of the pointed-to file as a bytes object::"
 msgstr "以字节对象的形式返回路径指向的文件的二进制内容::"
 
-#: ../../library/pathlib.rst:1019
+#: ../../library/pathlib.rst:1119
 msgid "Return the decoded contents of the pointed-to file as a string::"
 msgstr "以字符串形式返回路径指向的文件的解码后文本内容。"
 
-#: ../../library/pathlib.rst:1027
+#: ../../library/pathlib.rst:1127
 msgid ""
 "The file is opened and then closed. The optional parameters have the same"
 " meaning as in :func:`open`."
 msgstr "文件先被打开然后关闭。有和 :func:`open` 一样的可选形参。"
 
-#: ../../library/pathlib.rst:1035
+#: ../../library/pathlib.rst:1135
 msgid ""
 "Return the path to which the symbolic link points (as returned by "
 ":func:`os.readlink`)::"
 msgstr "返回符号链接所指向的路径（即 :func:`os.readlink` 的返回值）::"
 
-#: ../../library/pathlib.rst:1048
+#: ../../library/pathlib.rst:1148
 #, fuzzy
 msgid ""
 "Rename this file or directory to the given *target*, and return a new "
@@ -847,18 +959,18 @@ msgstr ""
 "将文件或目录重命名为给定的 *target*，并返回一个新的指向 *target* 的 Path 实例。 在 Unix 上，如果 *target*"
 " 存在且为一个文件，如果用户有足够权限，则它将被静默地替换。 *target* 可以是一个字符串或者另一个路径对象::"
 
-#: ../../library/pathlib.rst:1063 ../../library/pathlib.rst:1077
+#: ../../library/pathlib.rst:1163 ../../library/pathlib.rst:1177
 msgid ""
 "The target path may be absolute or relative. Relative paths are "
 "interpreted relative to the current working directory, *not* the "
 "directory of the Path object."
 msgstr "目标路径可能为绝对或相对路径。 相对路径将被解释为相对于当前工作目录，而 *不是* 相对于 Path 对象的目录。"
 
-#: ../../library/pathlib.rst:1067 ../../library/pathlib.rst:1081
+#: ../../library/pathlib.rst:1167 ../../library/pathlib.rst:1181
 msgid "Added return value, return the new Path instance."
 msgstr "添加了返回值，返回新的 Path 实例。"
 
-#: ../../library/pathlib.rst:1073
+#: ../../library/pathlib.rst:1173
 #, fuzzy
 msgid ""
 "Rename this file or directory to the given *target*, and return a new "
@@ -868,26 +980,26 @@ msgstr ""
 "将文件名目录重命名为给定的 *target*，并返回一个新的指向 *target* 的 Path 实例。 如果 *target* "
 "指向一个现有文件或目录，则它将被无条件地替换。"
 
-#: ../../library/pathlib.rst:1087
+#: ../../library/pathlib.rst:1187
 #, fuzzy
 msgid ""
 "Make the path absolute, without normalization or resolving symlinks. "
 "Returns a new path object::"
 msgstr "将路径绝对化，解析任何符号链接。返回新的路径对象::"
 
-#: ../../library/pathlib.rst:1099
+#: ../../library/pathlib.rst:1199
 msgid ""
 "Make the path absolute, resolving any symlinks.  A new path object is "
 "returned::"
 msgstr "将路径绝对化，解析任何符号链接。返回新的路径对象::"
 
-#: ../../library/pathlib.rst:1108
+#: ../../library/pathlib.rst:1208
 msgid ""
 "\"``..``\" components are also eliminated (this is the only method to do "
 "so)::"
 msgstr "\"``..``\" 组件也将被消除（只有这一种方法这么做）::"
 
-#: ../../library/pathlib.rst:1114
+#: ../../library/pathlib.rst:1214
 msgid ""
 "If the path doesn't exist and *strict* is ``True``, "
 ":exc:`FileNotFoundError` is raised.  If *strict* is ``False``, the path "
@@ -899,17 +1011,18 @@ msgstr ""
 " ``False``，则路径将被尽可能地解析并且任何剩余部分都会被不检查是否存在地追加。如果在解析路径上发生无限循环，则抛出 "
 ":exc:`RuntimeError`。"
 
-#: ../../library/pathlib.rst:1120
+#: ../../library/pathlib.rst:1220
 msgid "The *strict* argument (pre-3.6 behavior is strict)."
 msgstr "加入*strict* 参数（3.6之前的版本相当于strict值为True）"
 
-#: ../../library/pathlib.rst:1125
+#: ../../library/pathlib.rst:1225
+#, fuzzy
 msgid ""
-"This is like calling :func:`Path.glob` with \"``**/``\" added in front of"
-" the given relative *pattern*::"
+"Glob the given relative *pattern* recursively.  This is like calling "
+":func:`Path.glob` with \"``**/``\" added in front of the *pattern*::"
 msgstr "这就像调用 :func:`Path.glob`时在给定的相对 *pattern* 前面添加了\"``**/``\" ::"
 
-#: ../../library/pathlib.rst:1135
+#: ../../library/pathlib.rst:1235
 msgid ""
 "Raises an :ref:`auditing event <auditing>` ``pathlib.Path.rglob`` with "
 "arguments ``self``, ``pattern``."
@@ -917,11 +1030,11 @@ msgstr ""
 "引发一个 :ref:`审计事件 <auditing>` ``pathlib.Path.rglob`` 附带参数 ``self``, "
 "``pattern``。"
 
-#: ../../library/pathlib.rst:1143
+#: ../../library/pathlib.rst:1243
 msgid "Remove this directory.  The directory must be empty."
 msgstr "移除此目录。此目录必须为空的。"
 
-#: ../../library/pathlib.rst:1148
+#: ../../library/pathlib.rst:1248
 msgid ""
 "Return whether this path points to the same file as *other_path*, which "
 "can be either a Path object, or a string.  The semantics are similar to "
@@ -930,13 +1043,13 @@ msgstr ""
 "返回此目录是否指向与可能是字符串或者另一个路径对象的 *other_path* 相同的文件。语义类似于 "
 ":func:`os.path.samefile` 与 :func:`os.path.samestat`。"
 
-#: ../../library/pathlib.rst:1152
+#: ../../library/pathlib.rst:1252
 msgid ""
 "An :exc:`OSError` can be raised if either file cannot be accessed for "
 "some reason."
 msgstr "如果两者都以同一原因无法访问，则抛出 :exc:`OSError`。"
 
-#: ../../library/pathlib.rst:1169
+#: ../../library/pathlib.rst:1269
 msgid ""
 "Make this path a symbolic link to *target*.  Under Windows, "
 "*target_is_directory* must be true (default ``False``) if the link's "
@@ -946,21 +1059,21 @@ msgstr ""
 "将此路径创建为指向 *target* 的符号链接。在 Windows 下，如果链接的目标是一个目录则 *target_is_directory* "
 "必须为 true （默认为 ``False``）。在 POSIX 下， *target_is_directory* 的值将被忽略。"
 
-#: ../../library/pathlib.rst:1185
+#: ../../library/pathlib.rst:1285
 msgid ""
 "The order of arguments (link, target) is the reverse of "
 ":func:`os.symlink`'s."
 msgstr "参数的顺序（link, target) 和 :func:`os.symlink` 是相反的。"
 
-#: ../../library/pathlib.rst:1190
+#: ../../library/pathlib.rst:1290
 msgid "Make this path a hard link to the same file as *target*."
 msgstr "将此路径设为一个指向与 *target* 相同文件的硬链接。"
 
-#: ../../library/pathlib.rst:1193
+#: ../../library/pathlib.rst:1293
 msgid "The order of arguments (link, target) is the reverse of :func:`os.link`'s."
 msgstr "参数顺序 (link, target) 和 :func:`os.link` 是相反的。"
 
-#: ../../library/pathlib.rst:1201
+#: ../../library/pathlib.rst:1301
 msgid ""
 "Create a file at this given path.  If *mode* is given, it is combined "
 "with the process' ``umask`` value to determine the file mode and access "
@@ -971,19 +1084,19 @@ msgstr ""
 "将给定的路径创建为文件。如果给出了 *mode* 它将与当前进程的 ``umask`` 值合并以确定文件的模式和访问标志。如果文件已经存在，则当 "
 "*exist_ok* 为 true 则函数仍会成功（并且将它的修改事件更新为当前事件），否则抛出 :exc:`FileExistsError`。"
 
-#: ../../library/pathlib.rst:1210
+#: ../../library/pathlib.rst:1310
 msgid ""
 "Remove this file or symbolic link.  If the path points to a directory, "
 "use :func:`Path.rmdir` instead."
 msgstr "移除此文件或符号链接。如果路径指向目录，则用 :func:`Path.rmdir` 代替。"
 
-#: ../../library/pathlib.rst:1213
+#: ../../library/pathlib.rst:1313
 msgid ""
 "If *missing_ok* is false (the default), :exc:`FileNotFoundError` is "
 "raised if the path does not exist."
 msgstr "如果 *missing_ok* 为假值（默认），则如果路径不存在将会引发 :exc:`FileNotFoundError`。"
 
-#: ../../library/pathlib.rst:1216
+#: ../../library/pathlib.rst:1316
 msgid ""
 "If *missing_ok* is true, :exc:`FileNotFoundError` exceptions will be "
 "ignored (same behavior as the POSIX ``rm -f`` command)."
@@ -991,47 +1104,47 @@ msgstr ""
 "如果 *missing_ok* 为真值，则 :exc:`FileNotFoundError` 异常将被忽略（和 POSIX ``rm -f`` "
 "命令的行为相同）。"
 
-#: ../../library/pathlib.rst:1219
+#: ../../library/pathlib.rst:1319
 msgid "The *missing_ok* parameter was added."
 msgstr "增加了 *missing_ok* 形参。"
 
-#: ../../library/pathlib.rst:1225
+#: ../../library/pathlib.rst:1325
 msgid ""
 "Open the file pointed to in bytes mode, write *data* to it, and close the"
 " file::"
 msgstr "将文件以二进制模式打开，写入 *data* 并关闭::"
 
-#: ../../library/pathlib.rst:1234
+#: ../../library/pathlib.rst:1334
 msgid "An existing file of the same name is overwritten."
 msgstr "一个同名的现存文件将被覆盖。"
 
-#: ../../library/pathlib.rst:1241
+#: ../../library/pathlib.rst:1341
 msgid ""
 "Open the file pointed to in text mode, write *data* to it, and close the "
 "file::"
 msgstr "将文件以文本模式打开，写入 *data* 并关闭::"
 
-#: ../../library/pathlib.rst:1250
+#: ../../library/pathlib.rst:1350
 msgid ""
 "An existing file of the same name is overwritten. The optional parameters"
 " have the same meaning as in :func:`open`."
 msgstr "同名的现有文件会被覆盖。 可选形参的含义与 :func:`open` 的相同。"
 
-#: ../../library/pathlib.rst:1255
+#: ../../library/pathlib.rst:1355
 msgid "The *newline* parameter was added."
 msgstr "增加了 *newline* 形参。"
 
-#: ../../library/pathlib.rst:1259
+#: ../../library/pathlib.rst:1359
 msgid "Correspondence to tools in the :mod:`os` module"
 msgstr "对应的 :mod:`os` 模块的工具"
 
-#: ../../library/pathlib.rst:1261
+#: ../../library/pathlib.rst:1361
 msgid ""
 "Below is a table mapping various :mod:`os` functions to their "
 "corresponding :class:`PurePath`/:class:`Path` equivalent."
 msgstr "以下是一个映射了 :mod:`os` 与 :class:`PurePath`/:class:`Path` 对应相同的函数的表。"
 
-#: ../../library/pathlib.rst:1266
+#: ../../library/pathlib.rst:1366
 #, fuzzy
 msgid ""
 "Not all pairs of functions/methods below are equivalent. Some of them, "
@@ -1043,235 +1156,245 @@ msgstr ""
 " :meth:`Path.resolve`，以及 :func:`os.path.relpath` 和 "
 ":meth:`PurePath.relative_to`。"
 
-#: ../../library/pathlib.rst:1272
+#: ../../library/pathlib.rst:1372
 msgid ":mod:`os` and :mod:`os.path`"
 msgstr ":mod:`os` 和 :mod:`os.path`"
 
-#: ../../library/pathlib.rst:1272
+#: ../../library/pathlib.rst:1372
 msgid ":mod:`pathlib`"
 msgstr ":mod:`pathlib`"
 
-#: ../../library/pathlib.rst:1274
+#: ../../library/pathlib.rst:1374
 msgid ":func:`os.path.abspath`"
 msgstr ":func:`os.path.abspath`"
 
-#: ../../library/pathlib.rst:1274
+#: ../../library/pathlib.rst:1374
 #, fuzzy
 msgid ":meth:`Path.absolute` [#]_"
 msgstr ":meth:`Path.resolve` [#]_"
 
-#: ../../library/pathlib.rst:1275
+#: ../../library/pathlib.rst:1375
 #, fuzzy
 msgid ":func:`os.path.realpath`"
 msgstr ":func:`os.path.relpath`"
 
-#: ../../library/pathlib.rst:1275
+#: ../../library/pathlib.rst:1375
 #, fuzzy
 msgid ":meth:`Path.resolve`"
 msgstr ":meth:`Path.resolve` [#]_"
 
-#: ../../library/pathlib.rst:1276
+#: ../../library/pathlib.rst:1376
 msgid ":func:`os.chmod`"
 msgstr ":func:`os.chmod`"
 
-#: ../../library/pathlib.rst:1276
+#: ../../library/pathlib.rst:1376
 msgid ":meth:`Path.chmod`"
 msgstr ":meth:`Path.chmod`"
 
-#: ../../library/pathlib.rst:1277
+#: ../../library/pathlib.rst:1377
 msgid ":func:`os.mkdir`"
 msgstr ":func:`os.mkdir`"
 
-#: ../../library/pathlib.rst:1277 ../../library/pathlib.rst:1278
+#: ../../library/pathlib.rst:1377 ../../library/pathlib.rst:1378
 msgid ":meth:`Path.mkdir`"
 msgstr ":meth:`Path.mkdir`"
 
-#: ../../library/pathlib.rst:1278
+#: ../../library/pathlib.rst:1378
 msgid ":func:`os.makedirs`"
 msgstr ":func:`os.makedirs`"
 
-#: ../../library/pathlib.rst:1279
+#: ../../library/pathlib.rst:1379
 msgid ":func:`os.rename`"
 msgstr ":func:`os.rename`"
 
-#: ../../library/pathlib.rst:1279
+#: ../../library/pathlib.rst:1379
 msgid ":meth:`Path.rename`"
 msgstr ":meth:`Path.rename`"
 
-#: ../../library/pathlib.rst:1280
+#: ../../library/pathlib.rst:1380
 msgid ":func:`os.replace`"
 msgstr ":func:`os.replace`"
 
-#: ../../library/pathlib.rst:1280
+#: ../../library/pathlib.rst:1380
 msgid ":meth:`Path.replace`"
 msgstr ":meth:`Path.replace`"
 
-#: ../../library/pathlib.rst:1281
+#: ../../library/pathlib.rst:1381
 msgid ":func:`os.rmdir`"
 msgstr ":func:`os.rmdir`"
 
-#: ../../library/pathlib.rst:1281
+#: ../../library/pathlib.rst:1381
 msgid ":meth:`Path.rmdir`"
 msgstr ":meth:`Path.rmdir`"
 
-#: ../../library/pathlib.rst:1282
+#: ../../library/pathlib.rst:1382
 msgid ":func:`os.remove`, :func:`os.unlink`"
 msgstr ":func:`os.remove`, :func:`os.unlink`"
 
-#: ../../library/pathlib.rst:1282
+#: ../../library/pathlib.rst:1382
 msgid ":meth:`Path.unlink`"
 msgstr ":meth:`Path.unlink`"
 
-#: ../../library/pathlib.rst:1283
+#: ../../library/pathlib.rst:1383
 msgid ":func:`os.getcwd`"
 msgstr ":func:`os.getcwd`"
 
-#: ../../library/pathlib.rst:1283
+#: ../../library/pathlib.rst:1383
 msgid ":func:`Path.cwd`"
 msgstr ":func:`Path.cwd`"
 
-#: ../../library/pathlib.rst:1284
+#: ../../library/pathlib.rst:1384
 msgid ":func:`os.path.exists`"
 msgstr ":func:`os.path.exists`"
 
-#: ../../library/pathlib.rst:1284
+#: ../../library/pathlib.rst:1384
 msgid ":meth:`Path.exists`"
 msgstr ":meth:`Path.exists`"
 
-#: ../../library/pathlib.rst:1285
+#: ../../library/pathlib.rst:1385
 msgid ":func:`os.path.expanduser`"
 msgstr ":func:`os.path.expanduser`"
 
-#: ../../library/pathlib.rst:1285
+#: ../../library/pathlib.rst:1385
 msgid ":meth:`Path.expanduser` and :meth:`Path.home`"
 msgstr ":meth:`Path.expanduser` 和 :meth:`Path.home`"
 
-#: ../../library/pathlib.rst:1287
+#: ../../library/pathlib.rst:1387
 msgid ":func:`os.listdir`"
 msgstr ":func:`os.listdir`"
 
-#: ../../library/pathlib.rst:1287
+#: ../../library/pathlib.rst:1387
 msgid ":meth:`Path.iterdir`"
 msgstr ":meth:`Path.iterdir`"
 
-#: ../../library/pathlib.rst:1288
+#: ../../library/pathlib.rst:1388
+#, fuzzy
+msgid ":func:`os.walk`"
+msgstr ":func:`os.link`"
+
+#: ../../library/pathlib.rst:1388
+#, fuzzy
+msgid ":meth:`Path.walk`"
+msgstr ":meth:`Path.readlink`"
+
+#: ../../library/pathlib.rst:1389
 msgid ":func:`os.path.isdir`"
 msgstr ":func:`os.path.isdir`"
 
-#: ../../library/pathlib.rst:1288
+#: ../../library/pathlib.rst:1389
 msgid ":meth:`Path.is_dir`"
 msgstr ":meth:`Path.is_dir`"
 
-#: ../../library/pathlib.rst:1289
+#: ../../library/pathlib.rst:1390
 msgid ":func:`os.path.isfile`"
 msgstr ":func:`os.path.isfile`"
 
-#: ../../library/pathlib.rst:1289
+#: ../../library/pathlib.rst:1390
 msgid ":meth:`Path.is_file`"
 msgstr ":meth:`Path.is_file`"
 
-#: ../../library/pathlib.rst:1290
+#: ../../library/pathlib.rst:1391
 msgid ":func:`os.path.islink`"
 msgstr ":func:`os.path.islink`"
 
-#: ../../library/pathlib.rst:1290
+#: ../../library/pathlib.rst:1391
 msgid ":meth:`Path.is_symlink`"
 msgstr ":meth:`Path.is_symlink`"
 
-#: ../../library/pathlib.rst:1291
+#: ../../library/pathlib.rst:1392
 msgid ":func:`os.link`"
 msgstr ":func:`os.link`"
 
-#: ../../library/pathlib.rst:1291
+#: ../../library/pathlib.rst:1392
 msgid ":meth:`Path.hardlink_to`"
 msgstr ":meth:`Path.hardlink_to`"
 
-#: ../../library/pathlib.rst:1292
+#: ../../library/pathlib.rst:1393
 msgid ":func:`os.symlink`"
 msgstr ":func:`os.symlink`"
 
-#: ../../library/pathlib.rst:1292
+#: ../../library/pathlib.rst:1393
 msgid ":meth:`Path.symlink_to`"
 msgstr ":meth:`Path.symlink_to`"
 
-#: ../../library/pathlib.rst:1293
+#: ../../library/pathlib.rst:1394
 msgid ":func:`os.readlink`"
 msgstr ":func:`os.readlink`"
 
-#: ../../library/pathlib.rst:1293
+#: ../../library/pathlib.rst:1394
 msgid ":meth:`Path.readlink`"
 msgstr ":meth:`Path.readlink`"
 
-#: ../../library/pathlib.rst:1294
+#: ../../library/pathlib.rst:1395
 msgid ":func:`os.path.relpath`"
 msgstr ":func:`os.path.relpath`"
 
-#: ../../library/pathlib.rst:1294
+#: ../../library/pathlib.rst:1395
 #, fuzzy
 msgid ":meth:`PurePath.relative_to` [#]_"
 msgstr ":meth:`Path.relative_to` [#]_"
 
-#: ../../library/pathlib.rst:1295
+#: ../../library/pathlib.rst:1396
 msgid ":func:`os.stat`"
 msgstr ":func:`os.stat`"
 
-#: ../../library/pathlib.rst:1295
+#: ../../library/pathlib.rst:1396
 msgid ":meth:`Path.stat`, :meth:`Path.owner`, :meth:`Path.group`"
 msgstr ":meth:`Path.stat`, :meth:`Path.owner`, :meth:`Path.group`"
 
-#: ../../library/pathlib.rst:1298
+#: ../../library/pathlib.rst:1399
 msgid ":func:`os.path.isabs`"
 msgstr ":func:`os.path.isabs`"
 
-#: ../../library/pathlib.rst:1298
+#: ../../library/pathlib.rst:1399
 msgid ":meth:`PurePath.is_absolute`"
 msgstr ":meth:`PurePath.is_absolute`"
 
-#: ../../library/pathlib.rst:1299
+#: ../../library/pathlib.rst:1400
 msgid ":func:`os.path.join`"
 msgstr ":func:`os.path.join`"
 
-#: ../../library/pathlib.rst:1299
+#: ../../library/pathlib.rst:1400
 msgid ":func:`PurePath.joinpath`"
 msgstr ":func:`PurePath.joinpath`"
 
-#: ../../library/pathlib.rst:1300
+#: ../../library/pathlib.rst:1401
 msgid ":func:`os.path.basename`"
 msgstr ":func:`os.path.basename`"
 
-#: ../../library/pathlib.rst:1300
+#: ../../library/pathlib.rst:1401
 msgid ":data:`PurePath.name`"
 msgstr ":data:`PurePath.name`"
 
-#: ../../library/pathlib.rst:1301
+#: ../../library/pathlib.rst:1402
 msgid ":func:`os.path.dirname`"
 msgstr ":func:`os.path.dirname`"
 
-#: ../../library/pathlib.rst:1301
+#: ../../library/pathlib.rst:1402
 msgid ":data:`PurePath.parent`"
 msgstr ":data:`PurePath.parent`"
 
-#: ../../library/pathlib.rst:1302
+#: ../../library/pathlib.rst:1403
 msgid ":func:`os.path.samefile`"
 msgstr ":func:`os.path.samefile`"
 
-#: ../../library/pathlib.rst:1302
+#: ../../library/pathlib.rst:1403
 msgid ":meth:`Path.samefile`"
 msgstr ":meth:`Path.samefile`"
 
-#: ../../library/pathlib.rst:1303
+#: ../../library/pathlib.rst:1404
 msgid ":func:`os.path.splitext`"
 msgstr ":func:`os.path.splitext`"
 
-#: ../../library/pathlib.rst:1303
-msgid ":data:`PurePath.suffix`"
-msgstr ":data:`PurePath.suffix`"
+#: ../../library/pathlib.rst:1404
+msgid ":data:`PurePath.stem` and :data:`PurePath.suffix`"
+msgstr ""
 
-#: ../../library/pathlib.rst:1307
+#: ../../library/pathlib.rst:1409
 msgid "Footnotes"
 msgstr "备注"
 
-#: ../../library/pathlib.rst:1308
+#: ../../library/pathlib.rst:1410
 #, fuzzy
 msgid ""
 ":func:`os.path.abspath` normalizes the resulting path, which may change "
@@ -1279,7 +1402,7 @@ msgid ""
 " not."
 msgstr ":func:`os.path.abspath` 不会解析符号链接而 :meth:`Path.resolve` 则会解析。"
 
-#: ../../library/pathlib.rst:1309
+#: ../../library/pathlib.rst:1411
 #, fuzzy
 msgid ""
 ":meth:`PurePath.relative_to` requires ``self`` to be the subpath of the "
@@ -1314,4 +1437,7 @@ msgstr ""
 #~ "此方法已被弃用而建议改用 :meth:`Path.hardlink_to`，因为 "
 #~ ":meth:`Path.link_to` 的参数顺序与 :meth:`Path.symlink_to` "
 #~ "的不相匹配。"
+
+#~ msgid ":data:`PurePath.suffix`"
+#~ msgstr ":data:`PurePath.suffix`"
 

@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2001-2022, Python Software Foundation
+# This file is distributed under the same license as the Python package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Python 3.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../../howto/perf_profiling.rst:7
+msgid "Python support for the Linux ``perf`` profiler"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst
+msgid "author"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:9
+msgid "Pablo Galindo"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:11
+msgid ""
+"The Linux ``perf`` profiler is a very powerful tool that allows you to "
+"profile and obtain information about the performance of your application."
+" ``perf`` also has a very vibrant ecosystem of tools that aid with the "
+"analysis of the data that it produces."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:16
+msgid ""
+"The main problem with using the ``perf`` profiler with Python "
+"applications is that ``perf`` only allows to get information about native"
+" symbols, this is, the names of the functions and procedures written in "
+"C. This means that the names and file names of the Python functions in "
+"your code will not appear in the output of the ``perf``."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:21
+msgid ""
+"Since Python 3.12, the interpreter can run in a special mode that allows "
+"Python functions to appear in the output of the ``perf`` profiler. When "
+"this mode is enabled, the interpreter will interpose a small piece of "
+"code compiled on the fly before the execution of every Python function "
+"and it will teach ``perf`` the relationship between this piece of code "
+"and the associated Python function using `perf map files`_."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:30
+msgid ""
+"Support for the ``perf`` profiler is only currently available for Linux "
+"on selected architectures. Check the output of the configure build step "
+"or check the output of ``python -m sysconfig | grep "
+"HAVE_PERF_TRAMPOLINE`` to see if your system is supported."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:35
+msgid "For example, consider the following script:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:54
+msgid "We can run perf to sample CPU stack traces at 9999 Hertz:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:56
+msgid "$ perf record -F 9999 -g -o perf.data python my_script.py"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:58
+msgid "Then we can use perf report to analyze the data:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:99
+msgid ""
+"As you can see here, the Python functions are not shown in the output, "
+"only ``_Py_Eval_EvalFrameDefault`` appears (the function that evaluates "
+"the Python bytecode) shows up. Unfortunately that's not very useful "
+"because all Python functions use the same C function to evaluate bytecode"
+" so we cannot know which Python function corresponds to which bytecode-"
+"evaluating function."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:104
+msgid "Instead, if we run the same experiment with perf support activated we get:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:151
+msgid "Enabling perf profiling mode"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:153
+msgid ""
+"There are two main ways to activate the perf profiling mode. If you want "
+"it to be active since the start of the Python interpreter, you can use "
+"the ``-Xperf`` option:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:156
+msgid "$ python -Xperf my_script.py"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:158
+msgid ""
+"You can also set the :envvar:`PYTHONPERFSUPPORT` to a nonzero value to "
+"actiavate perf profiling mode globally."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:161
+msgid ""
+"There is also support for dynamically activating and deactivating the "
+"perf profiling mode by using the APIs in the :mod:`sys` module:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:175
+msgid ""
+"These APIs can be handy if you want to activate/deactivate profiling mode"
+" in response to a signal or other communication mechanism with your "
+"process."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:180
+msgid "Now we can analyze the data with ``perf report``:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:182
+msgid "$ perf report -g -i perf.data"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:186
+msgid "How to obtain the best results"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:188
+msgid ""
+"For the best results, Python should be compiled with ``CFLAGS=\"-fno-"
+"omit-frame-pointer -mno-omit-leaf-frame-pointer\"`` as this allows "
+"profilers to unwind using only the frame pointer and not on DWARF debug "
+"information. This is because as the code that is interposed to allow perf"
+" support is dynamically generated it doesn't have any DWARF debugging "
+"information available."
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:195
+msgid "You can check if you system has been compiled with this flag by running:"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:197
+msgid "$ python -m sysconfig | grep 'no-omit-frame-pointer'"
+msgstr ""
+
+#: ../../howto/perf_profiling.rst:199
+msgid ""
+"If you don't see any output it means that your interpreter has not been "
+"compiled with frame pointers and therefore it may not be able to show "
+"Python functions in the output of ``perf``."
+msgstr ""
+

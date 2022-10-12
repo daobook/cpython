@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-29 14:49+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 01:19+0000\n"
 "Last-Translator: xinetzone <735613050@qq.com>, 2021\n"
 "Language: zh_CN\n"
@@ -30,7 +30,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../reference/datamodel.rst:6
 msgid "Data model"
@@ -465,7 +465,7 @@ msgstr "字符串"
 msgid ""
 "A string is a sequence of values that represent Unicode code points. All "
 "the code points in the range ``U+0000 - U+10FFFF`` can be represented in "
-"a string.  Python doesn't have a :c:type:`char` type; instead, every code"
+"a string.  Python doesn't have a :c:expr:`char` type; instead, every code"
 " point in the string is represented as a string object with length ``1``."
 "  The built-in function :func:`ord` converts a code point from its string"
 " form to an integer in the range ``0 - 10FFFF``; :func:`chr` converts an "
@@ -474,11 +474,6 @@ msgid ""
 "to :class:`bytes` using the given text encoding, and :meth:`bytes.decode`"
 " can be used to achieve the opposite."
 msgstr ""
-"字符串是由 Unicode 码位值组成的序列。范围在 ``U+0000 - U+10FFFF`` 之内的所有码位值都可在字符串中使用。Python"
-" 没有 :c:type:`char` 类型；而是将字符串中的每个码位表示为一个长度为 ``1`` 的字符串对象。内置函数 :func:`ord` "
-"可将一个码位由字符串形式转换成一个范围在 ``0 - 10FFFF`` 之内的整型数；:func:`chr` 可将一个范围在 ``0 - "
-"10FFFF`` 之内的整型数转换为长度为 ``1`` 的对应字符串对象。:meth:`str.encode` 可以使用指定的文本编码将 "
-":class:`str` 转换为 :class:`bytes`，而 :meth:`bytes.decode` 则可以实现反向的解码。"
 
 #: ../../reference/datamodel.rst:340
 msgid "Tuples"
@@ -1831,10 +1826,11 @@ msgstr ""
 "(对类的调用)。:meth:`__new__` 的返回值应为新对象实例 (通常是 *cls* 的实例)。"
 
 #: ../../reference/datamodel.rst:1271
+#, fuzzy
 msgid ""
 "Typical implementations create a new instance of the class by invoking "
 "the superclass's :meth:`__new__` method using ``super().__new__(cls[, "
-"...])`` with appropriate arguments and then modifying the newly-created "
+"...])`` with appropriate arguments and then modifying the newly created "
 "instance as necessary before returning it."
 msgstr ""
 "典型的实现会附带适宜的参数使用 ``super().__new__(cls[, ...])``，通过超类的 :meth:`__new__` "
@@ -1932,6 +1928,17 @@ msgid ""
 msgstr ""
 "``del x`` 并不直接调用 ``x.__del__()`` --- 前者会将 ``x`` 的引用计数减一，而后者仅会在 ``x`` "
 "的引用计数变为零时被调用。"
+
+#: ../../reference/datamodel.rst:1336
+msgid ""
+"It is possible for a reference cycle to prevent the reference count of an"
+" object from going to zero.  In this case, the cycle will be later "
+"detected and deleted by the :term:`cyclic garbage collector <garbage "
+"collection>`.  A common cause of reference cycles is when an exception "
+"has been caught in a local variable.  The frame's locals then reference "
+"the exception, which references its own traceback, which references the "
+"locals of all frames caught in the traceback."
+msgstr ""
 
 #: ../../reference/datamodel.rst:1346
 msgid "Documentation for the :mod:`gc` module."
@@ -2242,7 +2249,7 @@ msgstr ""
 #, fuzzy
 msgid ""
 "This is intended to provide protection against a denial-of-service caused"
-" by carefully-chosen inputs that exploit the worst case performance of a "
+" by carefully chosen inputs that exploit the worst case performance of a "
 "dict insertion, O(n\\ :sup:`2`) complexity.  See "
 "http://www.ocert.org/advisories/ocert-2011-003.html for details."
 msgstr ""
@@ -4097,6 +4104,12 @@ msgstr ""
 
 #: ../../reference/datamodel.rst:3001
 msgid ""
+"The second signature \\(type\\[, value\\[, traceback\\]\\]\\) is "
+"deprecated and may be removed in a future version of Python."
+msgstr ""
+
+#: ../../reference/datamodel.rst:3006
+msgid ""
 "Causes the coroutine to clean itself up and exit.  If the coroutine is "
 "suspended, this method first delegates to the :meth:`~generator.close` "
 "method of the iterator that caused the coroutine to suspend, if it has "
@@ -4109,42 +4122,42 @@ msgstr ""
 "方法，如果存在该方法。 然后它会在挂起点引发 :exc:`GeneratorExit`，使得协程立即清理自身。 "
 "最后，协程会被标记为已结束执行，即使它根本未被启动。"
 
-#: ../../reference/datamodel.rst:3009
+#: ../../reference/datamodel.rst:3014
 msgid ""
 "Coroutine objects are automatically closed using the above process when "
 "they are about to be destroyed."
 msgstr "当协程对象将要被销毁时，会使用以上处理过程来自动关闭。"
 
-#: ../../reference/datamodel.rst:3015
+#: ../../reference/datamodel.rst:3020
 msgid "Asynchronous Iterators"
 msgstr "异步迭代器"
 
-#: ../../reference/datamodel.rst:3017
+#: ../../reference/datamodel.rst:3022
 msgid ""
 "An *asynchronous iterator* can call asynchronous code in its "
 "``__anext__`` method."
 msgstr "*异步迭代器* 可以在其 ``__anext__`` 方法中调用异步代码。"
 
-#: ../../reference/datamodel.rst:3020
+#: ../../reference/datamodel.rst:3025
 msgid "Asynchronous iterators can be used in an :keyword:`async for` statement."
 msgstr "异步迭代器可在 :keyword:`async for` 语句中使用。"
 
-#: ../../reference/datamodel.rst:3024
+#: ../../reference/datamodel.rst:3029
 msgid "Must return an *asynchronous iterator* object."
 msgstr "必须返回一个 *异步迭代器* 对象。"
 
-#: ../../reference/datamodel.rst:3028
+#: ../../reference/datamodel.rst:3033
 msgid ""
 "Must return an *awaitable* resulting in a next value of the iterator.  "
 "Should raise a :exc:`StopAsyncIteration` error when the iteration is "
 "over."
 msgstr "必须返回一个 *可迭代对象* 输出迭代器的下一结果值。 当迭代结束时应该引发 :exc:`StopAsyncIteration` 错误。"
 
-#: ../../reference/datamodel.rst:3031
+#: ../../reference/datamodel.rst:3036
 msgid "An example of an asynchronous iterable object::"
 msgstr "异步可迭代对象的一个示例::"
 
-#: ../../reference/datamodel.rst:3048
+#: ../../reference/datamodel.rst:3053
 #, fuzzy
 msgid ""
 "Prior to Python 3.7, :meth:`~object.__aiter__` could return an "
@@ -4154,7 +4167,7 @@ msgstr ""
 "在 Python 3.7 之前，``__aiter__`` 可以返回一个 *可迭代对象* 并解析为 :term:`异步迭代器 "
 "<asynchronous iterator>`。"
 
-#: ../../reference/datamodel.rst:3053
+#: ../../reference/datamodel.rst:3058
 #, fuzzy
 msgid ""
 "Starting with Python 3.7, :meth:`~object.__aiter__` must return an "
@@ -4164,50 +4177,50 @@ msgstr ""
 "从 Python 3.7 开始，``__aiter__`` 必须 返回一个异步迭代器对象。 返回任何其他对象都将导致 "
 ":exc:`TypeError` 错误。"
 
-#: ../../reference/datamodel.rst:3061
+#: ../../reference/datamodel.rst:3066
 msgid "Asynchronous Context Managers"
 msgstr "异步上下文管理器"
 
-#: ../../reference/datamodel.rst:3063
+#: ../../reference/datamodel.rst:3068
 msgid ""
 "An *asynchronous context manager* is a *context manager* that is able to "
 "suspend execution in its ``__aenter__`` and ``__aexit__`` methods."
 msgstr "*异步上下文管理器* 是 *上下文管理器* 的一种，它能够在其 ``__aenter__`` 和 ``__aexit__`` 方法中暂停执行。"
 
-#: ../../reference/datamodel.rst:3066
+#: ../../reference/datamodel.rst:3071
 msgid ""
 "Asynchronous context managers can be used in an :keyword:`async with` "
 "statement."
 msgstr "异步上下文管理器可在 :keyword:`async with` 语句中使用。"
 
-#: ../../reference/datamodel.rst:3070
+#: ../../reference/datamodel.rst:3075
 msgid ""
 "Semantically similar to :meth:`__enter__`, the only difference being that"
 " it must return an *awaitable*."
 msgstr "在语义上类似于 :meth:`__enter__`，仅有的区别是它必须返回一个 *可等待对象*。"
 
-#: ../../reference/datamodel.rst:3075
+#: ../../reference/datamodel.rst:3080
 msgid ""
 "Semantically similar to :meth:`__exit__`, the only difference being that "
 "it must return an *awaitable*."
 msgstr "在语义上类似于 :meth:`__exit__`，仅有的区别是它必须返回一个 *可等待对象*。"
 
-#: ../../reference/datamodel.rst:3078
+#: ../../reference/datamodel.rst:3083
 msgid "An example of an asynchronous context manager class::"
 msgstr "异步上下文管理器类的一个示例::"
 
-#: ../../reference/datamodel.rst:3091
+#: ../../reference/datamodel.rst:3096
 msgid "Footnotes"
 msgstr "备注"
 
-#: ../../reference/datamodel.rst:3092
+#: ../../reference/datamodel.rst:3097
 msgid ""
 "It *is* possible in some cases to change an object's type, under certain "
 "controlled conditions. It generally isn't a good idea though, since it "
 "can lead to some very strange behaviour if it is handled incorrectly."
 msgstr "在某些情况下 *有可能* 基于可控的条件改变一个对象的类型。 但这通常不是个好主意，因为如果处理不当会导致一些非常怪异的行为。"
 
-#: ../../reference/datamodel.rst:3096
+#: ../../reference/datamodel.rst:3101
 #, fuzzy
 msgid ""
 "The :meth:`~object.__hash__`, :meth:`~object.__iter__`, "
@@ -4220,7 +4233,7 @@ msgstr ""
 ":meth:`__contains__` 方法对此有特殊处理；其他方法仍会引发 :exc:`TypeError`，但可能依靠 ``None`` "
 "属于不可调用对象的行为来做到这一点。"
 
-#: ../../reference/datamodel.rst:3102
+#: ../../reference/datamodel.rst:3107
 msgid ""
 "\"Does not support\" here means that the class has no such method, or the"
 " method returns ``NotImplemented``.  Do not set the method to ``None`` if"
@@ -4231,7 +4244,7 @@ msgstr ""
 "这里的“不支持”是指该类无此方法，或方法返回 ``NotImplemented``。 如果你想强制回退到右操作数的反射方法，请不要设置方法为 "
 "``None`` — 那会造成显式地 *阻塞* 此种回退的相反效果。"
 
-#: ../../reference/datamodel.rst:3108
+#: ../../reference/datamodel.rst:3113
 #, fuzzy
 msgid ""
 "For operands of the same type, it is assumed that if the non-reflected "
@@ -4340,4 +4353,36 @@ msgstr ""
 #~ " to the values corresponding to each"
 #~ " key."
 #~ msgstr "任何非字符串可迭代对象都可以被赋值给 *__slots__*。映射也可以被使用；不过，未来可能会分别赋给每个键具有特殊含义的值。"
+
+#~ msgid ""
+#~ "A string is a sequence of values"
+#~ " that represent Unicode code points. "
+#~ "All the code points in the range"
+#~ " ``U+0000 - U+10FFFF`` can be "
+#~ "represented in a string.  Python doesn't"
+#~ " have a :c:type:`char` type; instead, "
+#~ "every code point in the string is"
+#~ " represented as a string object with"
+#~ " length ``1``.  The built-in function"
+#~ " :func:`ord` converts a code point "
+#~ "from its string form to an integer"
+#~ " in the range ``0 - 10FFFF``; "
+#~ ":func:`chr` converts an integer in the"
+#~ " range ``0 - 10FFFF`` to the "
+#~ "corresponding length ``1`` string object. "
+#~ ":meth:`str.encode` can be used to "
+#~ "convert a :class:`str` to :class:`bytes` "
+#~ "using the given text encoding, and "
+#~ ":meth:`bytes.decode` can be used to "
+#~ "achieve the opposite."
+#~ msgstr ""
+#~ "字符串是由 Unicode 码位值组成的序列。范围在 ``U+0000 - "
+#~ "U+10FFFF`` 之内的所有码位值都可在字符串中使用。Python 没有 "
+#~ ":c:type:`char` 类型；而是将字符串中的每个码位表示为一个长度为 ``1`` "
+#~ "的字符串对象。内置函数 :func:`ord` 可将一个码位由字符串形式转换成一个范围在 ``0 "
+#~ "- 10FFFF`` 之内的整型数；:func:`chr` 可将一个范围在 ``0 "
+#~ "- 10FFFF`` 之内的整型数转换为长度为 ``1`` "
+#~ "的对应字符串对象。:meth:`str.encode` 可以使用指定的文本编码将 :class:`str` "
+#~ "转换为 :class:`bytes`，而 :meth:`bytes.decode` "
+#~ "则可以实现反向的解码。"
 

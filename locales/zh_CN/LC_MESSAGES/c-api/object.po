@@ -12,17 +12,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-23 10:34+0800\n"
+"POT-Creation-Date: 2022-10-12 09:44+0800\n"
 "PO-Revision-Date: 2021-06-28 00:49+0000\n"
 "Last-Translator: Dai Xu <daixu61@hotmail.com>, 2021\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/python-"
 "doc/teams/5390/zh_CN/)\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: ../../c-api/object.rst:6
 msgid "Object Protocol"
@@ -169,13 +169,39 @@ msgid ""
 "creates the dictionary if necessary."
 msgstr "``__dict__`` 描述符的获取函数的一种通用实现。必要时会创建该字典。"
 
-#: ../../c-api/object.rst:134
+#: ../../c-api/object.rst:129
+msgid ""
+"This function may also be called to get the :py:attr:`~object.__dict__` "
+"of the object *o*. Pass ``NULL`` for *context* when calling it. Since "
+"this function may need to allocate memory for the dictionary, it may be "
+"more efficient to call :c:func:`PyObject_GetAttr` when accessing an "
+"attribute on the object."
+msgstr ""
+
+#: ../../c-api/object.rst:135
+msgid "On failure, returns ``NULL`` with an exception set."
+msgstr ""
+
+#: ../../c-api/object.rst:142
 msgid ""
 "A generic implementation for the setter of a ``__dict__`` descriptor. "
 "This implementation does not allow the dictionary to be deleted."
 msgstr "``__dict__`` 描述符设置函数的一种通用实现。这里不允许删除该字典。"
 
-#: ../../c-api/object.rst:142
+#: ../../c-api/object.rst:150
+msgid ""
+"Return a pointer to :py:attr:`~object.__dict__` of the object *obj*. If "
+"there is no ``__dict__``, return ``NULL`` without setting an exception."
+msgstr ""
+
+#: ../../c-api/object.rst:153
+msgid ""
+"This function may need to allocate memory for the dictionary, so it may "
+"be more efficient to call :c:func:`PyObject_GetAttr` when accessing an "
+"attribute on the object."
+msgstr ""
+
+#: ../../c-api/object.rst:160
 msgid ""
 "Compare the values of *o1* and *o2* using the operation specified by "
 "*opid*, which must be one of :const:`Py_LT`, :const:`Py_LE`, "
@@ -190,7 +216,7 @@ msgstr ""
 "之一，分别对应于``<=`` 、``==`` 、 ``!=`` 、``>`` 或 ``>=``。这相当于 Python 表达式 ``o1 op "
 "o2``，其中 ``op`` 是对应于 *opid* 的操作符。成功时返回比较值，失败时返回 ``NULL``。"
 
-#: ../../c-api/object.rst:152
+#: ../../c-api/object.rst:170
 msgid ""
 "Compare the values of *o1* and *o2* using the operation specified by "
 "*opid*, which must be one of :const:`Py_LT`, :const:`Py_LE`, "
@@ -206,7 +232,7 @@ msgstr ""
 "false 则返回 ``0``，否则返回 ``1``。这相当于 Python 表达式 ``o1 op o2``，其中 ``op`` 是对应于 "
 "*opid* 的操作符。"
 
-#: ../../c-api/object.rst:161
+#: ../../c-api/object.rst:179
 msgid ""
 "If *o1* and *o2* are the same object, :c:func:`PyObject_RichCompareBool` "
 "will always return ``1`` for :const:`Py_EQ` and ``0`` for :const:`Py_NE`."
@@ -214,7 +240,7 @@ msgstr ""
 "如果 *o1* 和 *o2* 是同一个对象，:c:func:`PyObject_RichCompareBool` 为 :const:`Py_EQ`"
 " 则返回 ``1`` ，为 :const:`Py_NE` 则返回 ``0``。"
 
-#: ../../c-api/object.rst:168
+#: ../../c-api/object.rst:186
 msgid ""
 "Compute a string representation of object *o*.  Returns the string "
 "representation on success, ``NULL`` on failure.  This is the equivalent "
@@ -224,13 +250,13 @@ msgstr ""
 "计算对象 *o* 的字符串形式。 成功时返回字符串，失败时返回 ``NULL``。 这相当于 Python 表达式 ``repr(o)``。 "
 "由内置函数 :func:`repr`  调用。"
 
-#: ../../c-api/object.rst:172 ../../c-api/object.rst:196
+#: ../../c-api/object.rst:190 ../../c-api/object.rst:214
 msgid ""
 "This function now includes a debug assertion to help ensure that it does "
 "not silently discard an active exception."
 msgstr "该函数现在包含一个调试断言，用以确保不会静默地丢弃活动的异常。"
 
-#: ../../c-api/object.rst:180
+#: ../../c-api/object.rst:198
 msgid ""
 "As :c:func:`PyObject_Repr`, compute a string representation of object "
 "*o*, but escape the non-ASCII characters in the string returned by "
@@ -242,7 +268,7 @@ msgstr ""
 "返回的字符串中用 ``\\x``、``\\u`` 或 ``\\U`` 转义非 ASCII 字符。这将生成一个类似于 Python 2 中由 "
 ":c:func:`PyObject_Repr` 返回的字符串。由内置函数 :func:`ascii` 调用。"
 
-#: ../../c-api/object.rst:191
+#: ../../c-api/object.rst:209
 msgid ""
 "Compute a string representation of object *o*.  Returns the string "
 "representation on success, ``NULL`` on failure.  This is the equivalent "
@@ -252,7 +278,7 @@ msgstr ""
 "计算对象 *o* 的字符串形式。 成功时返回字符串，失败时返回 ``NULL``。 这相当于 Python 表达式 "
 "``str(o)``。由内置函数 :func:`str` 调用，因此也由 :func:`print` 函数调用。"
 
-#: ../../c-api/object.rst:205
+#: ../../c-api/object.rst:223
 msgid ""
 "Compute a bytes representation of object *o*.  ``NULL`` is returned on "
 "failure and a bytes object on success.  This is equivalent to the Python "
@@ -264,20 +290,20 @@ msgstr ""
 "``bytes(o)`` 。与 ``bytes(o)`` 不同的是，当 *o* 是整数而不是初始为 0 的字节串对象时，会触发 "
 "TypeError。"
 
-#: ../../c-api/object.rst:214
+#: ../../c-api/object.rst:232
 msgid ""
 "Return ``1`` if the class *derived* is identical to or derived from the "
 "class *cls*, otherwise return ``0``.  In case of an error, return ``-1``."
 msgstr "如果 *derived* 类与 *cls* 类相同或为其派生类，则返回 ``1``，否则返回 ``0``。 如果出错则返回 ``-1``。"
 
-#: ../../c-api/object.rst:217 ../../c-api/object.rst:236
+#: ../../c-api/object.rst:235 ../../c-api/object.rst:254
 msgid ""
 "If *cls* is a tuple, the check will be done against every entry in *cls*."
 " The result will be ``1`` when at least one of the checks returns ``1``, "
 "otherwise it will be ``0``."
 msgstr "如果 *cls* 是元组，则会对 *cls* 进行逐项检测。如果至少有一次检测返回 ``1``，结果将为 ``1``，否则将是 ``0``。"
 
-#: ../../c-api/object.rst:221
+#: ../../c-api/object.rst:239
 msgid ""
 "If *cls* has a :meth:`~class.__subclasscheck__` method, it will be called"
 " to determine the subclass status as described in :pep:`3119`.  "
@@ -288,7 +314,7 @@ msgstr ""
 "方法，将会被调用以确定子类的状态。 否则，如果 *derived* 是个直接或间接子类，即包含在 ``cls.__mro__`` 中，那么它就是 "
 "*cls* 的一个子类。"
 
-#: ../../c-api/object.rst:226
+#: ../../c-api/object.rst:244
 msgid ""
 "Normally only class objects, i.e. instances of :class:`type` or a derived"
 " class, are considered classes.  However, objects can override this by "
@@ -298,13 +324,13 @@ msgstr ""
 "通常只有类对象才会被视为类，即 :class:`type` 或派生类的实例。然而，对象可以通过拥有 :attr:`__bases__` "
 "属性（必须是基类的元组）来覆盖这一点。"
 
-#: ../../c-api/object.rst:233
+#: ../../c-api/object.rst:251
 msgid ""
 "Return ``1`` if *inst* is an instance of the class *cls* or a subclass of"
 " *cls*, or ``0`` if not.  On error, returns ``-1`` and sets an exception."
 msgstr "如果 *inst* 是 *cls* 类或其子类的实例，则返回 ``1``，如果不是则返回``0``。 如果出错则返回 ``-1`` 并设置一个异常。"
 
-#: ../../c-api/object.rst:240
+#: ../../c-api/object.rst:258
 msgid ""
 "If *cls* has a :meth:`~class.__instancecheck__` method, it will be called"
 " to determine the subclass status as described in :pep:`3119`.  "
@@ -314,33 +340,33 @@ msgstr ""
 "正如 :pep:`3119` 所述，如果 *cls* 带有 :meth:`~class.__subclasscheck__` "
 "方法，将会被调用以确定子类的状态。 否则，如果 *derived* 是 *cls* 的子类，那么它就是 *cls* 的一个实例。"
 
-#: ../../c-api/object.rst:244
+#: ../../c-api/object.rst:262
 msgid ""
 "An instance *inst* can override what is considered its class by having a "
 ":attr:`__class__` attribute."
 msgstr "实例 *inst* 可以通过 :attr:`__class__` 属性来覆盖其所属类。"
 
-#: ../../c-api/object.rst:247
+#: ../../c-api/object.rst:265
 msgid ""
 "An object *cls* can override if it is considered a class, and what its "
 "base classes are, by having a :attr:`__bases__` attribute (which must be "
 "a tuple of base classes)."
 msgstr "对象 *cls* 是否被认作类，以及基类是什么，均可通过 :attr:`__bases__` 属性（必须是基类的元组）进行覆盖。"
 
-#: ../../c-api/object.rst:256
+#: ../../c-api/object.rst:274
 msgid ""
 "Compute and return the hash value of an object *o*.  On failure, return "
 "``-1``. This is the equivalent of the Python expression ``hash(o)``."
 msgstr "计算并返回对象的哈希值 *o*。 失败时返回 ``-1``。这相当于 Python 表达式 ``hash(o)``。"
 
-#: ../../c-api/object.rst:259
+#: ../../c-api/object.rst:277
 #, fuzzy
 msgid ""
 "The return type is now Py_hash_t.  This is a signed integer the same size"
 " as :c:type:`Py_ssize_t`."
 msgstr "现在的返回类型是 Py_hash_t。 这是一个带符号整数，与 Py_ssize_t 大小相同。"
 
-#: ../../c-api/object.rst:266
+#: ../../c-api/object.rst:284
 msgid ""
 "Set a :exc:`TypeError` indicating that ``type(o)`` is not hashable and "
 "return ``-1``. This function receives special treatment when stored in a "
@@ -350,7 +376,7 @@ msgstr ""
 "设置一个 :exc:`TypeError` 表示 ``type(o)`` 是不可哈希的，并返回 ``-1`` 。该函数保存在 "
 "``tp_hash`` 槽中时会受到特别对待，允许某个类型向解释器显式表明它不可散列。"
 
-#: ../../c-api/object.rst:274
+#: ../../c-api/object.rst:292
 msgid ""
 "Returns ``1`` if the object *o* is considered to be true, and ``0`` "
 "otherwise. This is equivalent to the Python expression ``not not o``.  On"
@@ -359,7 +385,7 @@ msgstr ""
 "如果对象 *o* 被认为是 true，则返回 ``1``，否则返回 ``0``。这相当于 Python 表达式 ``not not o``。 "
 "失败则返回 ``-1``。"
 
-#: ../../c-api/object.rst:281
+#: ../../c-api/object.rst:299
 msgid ""
 "Returns ``0`` if the object *o* is considered to be true, and ``1`` "
 "otherwise. This is equivalent to the Python expression ``not o``.  On "
@@ -368,7 +394,7 @@ msgstr ""
 "如果对象 *o* 被认为是 true，则返回 ``1``，否则返回 ``0``。这相当于 Python 表达式 ``not not o``。 "
 "失败则返回 ``-1``。"
 
-#: ../../c-api/object.rst:290
+#: ../../c-api/object.rst:308
 #, fuzzy
 msgid ""
 "When *o* is non-``NULL``, returns a type object corresponding to the "
@@ -377,20 +403,20 @@ msgid ""
 "``type(o)``. This function increments the reference count of the return "
 "value. There's really no reason to use this function instead of the "
 ":c:func:`Py_TYPE()` function, which returns a pointer of type "
-":c:type:`PyTypeObject*`, except when the incremented reference count is "
+":c:expr:`PyTypeObject*`, except when the incremented reference count is "
 "needed."
 msgstr ""
 "当 *o* 非 ``NULL`` 时，返回一个与对象 *o* 的类型相对应的类型对象。失败时，引发  :exc:`SystemError` 并返回"
 " ``NULL``。这等同于 Python 表达式 ``type(o)``。该函数会增加返回值的引用计数。实际上没有理由不去用普通的表达式 "
 "``o->ob_type`` 而使用该函数，表达式会返回一个类型指针 :c:type:`PyTypeObject*` ，除非需要增加引用计数。"
 
-#: ../../c-api/object.rst:301
+#: ../../c-api/object.rst:319
 msgid ""
 "Return non-zero if the object *o* is of type *type* or a subtype of "
 "*type*, and ``0`` otherwise.  Both parameters must be non-``NULL``."
 msgstr "如果对象 *o* 是 *type* 类型或其子类型，则返回非零，否则返回 ``0``。两个参数都必须非 ``NULL``。"
 
-#: ../../c-api/object.rst:310
+#: ../../c-api/object.rst:328
 msgid ""
 "Return the length of object *o*.  If the object *o* provides either the "
 "sequence and mapping protocols, the sequence length is returned.  On "
@@ -400,7 +426,7 @@ msgstr ""
 "返回对象 *o* 的长度。 如果对象 *o* 支持序列和映射协议，则返回序列长度。 出错时返回 ``-1``。这等同于 Python 表达式 "
 "``len(o)``。"
 
-#: ../../c-api/object.rst:317
+#: ../../c-api/object.rst:335
 msgid ""
 "Return an estimated length for the object *o*. First try to return its "
 "actual length, then an estimate using :meth:`~object.__length_hint__`, "
@@ -412,13 +438,13 @@ msgstr ""
 "进行估计，最后返回默认值。出错时返回``-1``。这等同于 Python 表达式 ``operator.length_hint(o, "
 "defaultvalue)``。"
 
-#: ../../c-api/object.rst:327
+#: ../../c-api/object.rst:345
 msgid ""
 "Return element of *o* corresponding to the object *key* or ``NULL`` on "
 "failure. This is the equivalent of the Python expression ``o[key]``."
 msgstr "返回对象 *key* 对应的 *o* 元素，或在失败时返回 ``NULL``。这等同于 Python 表达式 ``o[key]``。"
 
-#: ../../c-api/object.rst:333
+#: ../../c-api/object.rst:351
 msgid ""
 "Map the object *key* to the value *v*.  Raise an exception and return "
 "``-1`` on failure; return ``0`` on success.  This is the equivalent of "
@@ -428,14 +454,14 @@ msgstr ""
 "将对象 *key* 映射到值 *v*。 失败时引发异常并返回 ``-1``；成功时返回 ``0``。 这相当于 Python 语句 "
 "``o[key] = v``。该函数 *不会* 偷取 *v* 的引用计数。"
 
-#: ../../c-api/object.rst:341
+#: ../../c-api/object.rst:359
 msgid ""
 "Remove the mapping for the object *key* from the object *o*.  Return "
 "``-1`` on failure.  This is equivalent to the Python statement ``del "
 "o[key]``."
 msgstr "从对象 *o* 中移除对象 *key* 的映射。失败时返回 ``-1``。 这相当于 Python 语句 ``del o[key]``。"
 
-#: ../../c-api/object.rst:347
+#: ../../c-api/object.rst:365
 msgid ""
 "This is equivalent to the Python expression ``dir(o)``, returning a "
 "(possibly empty) list of strings appropriate for the object argument, or "
@@ -448,7 +474,7 @@ msgstr ""
 "``NULL``，类似 Python 的 ``dir()``，则返回当前 locals 的名字；这时如果没有活动的执行框架，则返回 "
 "``NULL``，但 :c:func:`PyErr_Occurred` 将返回 false。"
 
-#: ../../c-api/object.rst:356
+#: ../../c-api/object.rst:374
 msgid ""
 "This is equivalent to the Python expression ``iter(o)``. It returns a new"
 " iterator for the object argument, or the object  itself if the object is"
@@ -459,7 +485,7 @@ msgstr ""
 "``iter(o)``。为对象参数返回一个新的迭代器，如果该对象已经是一个迭代器，则返回对象本身。如果对象不能被迭代，会引发  "
 ":exc:`TypeError` ，并返回  ``NULL``。"
 
-#: ../../c-api/object.rst:364
+#: ../../c-api/object.rst:382
 msgid ""
 "This is the equivalent to the Python expression ``aiter(o)``. Takes an "
 ":class:`AsyncIterable` object and returns an :class:`AsyncIterator` for "
