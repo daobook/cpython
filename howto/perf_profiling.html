@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Python support for the Linux perf profiler &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 对 Linux 性能分析器 perf 的支持 &#8212; Python 3.12.0a0 文档</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pydoctheme.css?2022.1" />
@@ -73,7 +73,7 @@
   <div>
     <h3><a href="../contents.html">目录</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Python support for the Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler</a><ul>
+<li><a class="reference internal" href="#">Python 对 Linux 性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持</a><ul>
 <li><a class="reference internal" href="#enabling-perf-profiling-mode">Enabling perf profiling mode</a></li>
 <li><a class="reference internal" href="#how-to-obtain-the-best-results">How to obtain the best results</a></li>
 </ul>
@@ -137,7 +137,7 @@
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Python 常用指引</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Python support for the Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler</a></li>
+        <li class="nav-item nav-item-this"><a href="">Python 对 Linux 性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持</a></li>
                 <li class="right">
                     
 
@@ -161,34 +161,20 @@
           <div class="body" role="main">
             
   <section id="python-support-for-the-linux-perf-profiler">
-<span id="perf-profiling"></span><h1>Python support for the Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler<a class="headerlink" href="#python-support-for-the-linux-perf-profiler" title="永久链接至标题">¶</a></h1>
+<span id="perf-profiling"></span><h1>Python 对 Linux 性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持<a class="headerlink" href="#python-support-for-the-linux-perf-profiler" title="永久链接至标题">¶</a></h1>
 <dl class="field-list simple">
 <dt class="field-odd">author</dt>
 <dd class="field-odd"><p>Pablo Galindo</p>
 </dd>
 </dl>
-<p>The Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler is a very powerful tool that allows you to profile and
-obtain information about the performance of your application. <code class="docutils literal notranslate"><span class="pre">perf</span></code> also has
-a very vibrant ecosystem of tools that aid with the analysis of the data that it
-produces.</p>
-<p>The main problem with using the <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler with Python applications is that
-<code class="docutils literal notranslate"><span class="pre">perf</span></code> only allows to get information about native symbols, this is, the names of
-the functions and procedures written in C. This means that the names and file names
-of the Python functions in your code will not appear in the output of the <code class="docutils literal notranslate"><span class="pre">perf</span></code>.</p>
-<p>Since Python 3.12, the interpreter can run in a special mode that allows Python
-functions to appear in the output of the <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler. When this mode is
-enabled, the interpreter will interpose a small piece of code compiled on the
-fly before the execution of every Python function and it will teach <code class="docutils literal notranslate"><span class="pre">perf</span></code> the
-relationship between this piece of code and the associated Python function using
-<a class="reference external" href="https://github.com/torvalds/linux/blob/0513e464f9007b70b96740271a948ca5ab6e7dd7/tools/perf/Documentation/jit-interface.txt">perf map files</a>.</p>
+<p>Linux 的 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 分析器是一个非常强大的工具，它允许你分析和获取关于应用程序性能的信息。<code class="docutils literal notranslate"><span class="pre">perf</span></code> 也有一个非常活跃的工具生态系统，可以帮助分析它产生的数据。</p>
+<p>在 Python 应用程序中使用 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 分析器的主要问题是，<code class="docutils literal notranslate"><span class="pre">perf</span></code> 只允许获取有关本机符号的信息，即用 C 编写的函数和过程的名称。这意味着代码中的 Python 函数的名称和文件名不会出现在 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的输出中。</p>
+<p>从 Python 3.12 开始，解释器可以一种特殊的模式运行，该模式允许 Python 函数出现在性能分析器的输出中。当启用此模式时，解释器将在每个 Python 函数执行之前插入一小段动态编译的代码，并使用 <a class="reference external" href="https://github.com/torvalds/linux/blob/0513e464f9007b70b96740271a948ca5ab6e7dd7/tools/perf/Documentation/jit-interface.txt">perf map files</a> 将这段代码与相关的 Python 函数之间的关系教授给 <code class="docutils literal notranslate"><span class="pre">perf</span></code>。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
-<p>Support for the <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler is only currently available for Linux on
-selected architectures. Check the output of the configure build step or
-check the output of <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">sysconfig</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">HAVE_PERF_TRAMPOLINE</span></code>
-to see if your system is supported.</p>
+<p>对性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持目前只适用于选定架构上的 Linux。检查 configure build 步骤的输出，或者检查 <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">sysconfig</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">HAVE_PERF_TRAMPOLINE</span></code> 的输出，看看是否支持您的系统。</p>
 </div>
-<p>For example, consider the following script:</p>
+<p>例如，考虑以下脚本：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -205,11 +191,11 @@ to see if your system is supported.</p>
     <span class="n">baz</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We can run perf to sample CPU stack traces at 9999 Hertz:</p>
+<p>可以运行 perf 以 9999 赫兹的频率对 CPU 堆栈跟踪进行采样：</p>
 <blockquote>
 <div><p>$ perf record -F 9999 -g -o perf.data python my_script.py</p>
 </div></blockquote>
-<p>Then we can use perf report to analyze the data:</p>
+<p>然后可以使用 perf 报告来分析数据：</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>perf report --stdio -n -g
 
 <span class="gp"># </span>Children      Self       Samples  Command     Shared Object       Symbol
@@ -350,7 +336,7 @@ of <code class="docutils literal notranslate"><span class="pre">perf</span></cod
   <div>
     <h3><a href="../contents.html">目录</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Python support for the Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler</a><ul>
+<li><a class="reference internal" href="#">Python 对 Linux 性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持</a><ul>
 <li><a class="reference internal" href="#enabling-perf-profiling-mode">Enabling perf profiling mode</a></li>
 <li><a class="reference internal" href="#how-to-obtain-the-best-results">How to obtain the best results</a></li>
 </ul>
@@ -413,7 +399,7 @@ of <code class="docutils literal notranslate"><span class="pre">perf</span></cod
     </li>
 
           <li class="nav-item nav-item-1"><a href="index.html" >Python 常用指引</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Python support for the Linux <code class="docutils literal notranslate"><span class="pre">perf</span></code> profiler</a></li>
+        <li class="nav-item nav-item-this"><a href="">Python 对 Linux 性能分析器 <code class="docutils literal notranslate"><span class="pre">perf</span></code> 的支持</a></li>
                 <li class="right">
                     
 

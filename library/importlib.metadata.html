@@ -182,24 +182,10 @@
 </div>
 <p><strong>Source code:</strong> <a class="reference external" href="https://github.com/python/cpython/tree/main/Lib/importlib/metadata/__init__.py">Lib/importlib/metadata/__init__.py</a></p>
 <p><code class="docutils literal notranslate"><span class="pre">importlib_metadata</span></code> 是一个库，它提供对已安装 <a class="reference external" href="https://packaging.python.org/en/latest/glossary/#term-Distribution-Package">分发包</a> 的元数据的访问，例如它的入口点或它的顶级名称（<a class="reference external" href="https://packaging.python.org/en/latest/glossary/#term-Import-Package">导入包</a> 、模块，如果有的话）。这个库部分构建在 Python 的 import 系统上，它打算取代 <code class="docutils literal notranslate"><span class="pre">pkg_resources</span></code> 的 <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/pkg_resources.html#entry-points">entry point API</a> 和 <a class="reference external" href="https://setuptools.readthedocs.io/en/latest/pkg_resources.html#metadata-api">metadata API</a> 中的类似功能。连同 <a class="reference internal" href="importlib.resources.html#module-importlib.resources" title="importlib.resources: Package resource reading, opening, and access"><code class="xref py py-mod docutils literal notranslate"><span class="pre">importlib.resources</span></code></a>，这个包可以消除使用旧的和效率较低的 <code class="docutils literal notranslate"><span class="pre">pkg_resources</span></code> 包的需要。</p>
-<p><code class="docutils literal notranslate"><span class="pre">importlib_metadata</span></code> operates on third-party <em>distribution packages</em>
-installed into Python’s <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory via tools such as
-<a class="reference external" href="https://pypi.org/project/pip/">pip</a>.
-Specifically, it works with distributions with discoverable
-<code class="docutils literal notranslate"><span class="pre">dist-info</span></code> or <code class="docutils literal notranslate"><span class="pre">egg-info</span></code> directories,
-and metadata defined by the <a class="reference external" href="https://packaging.python.org/en/latest/specifications/core-metadata/#core-metadata">Core metadata specifications</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">importlib_metadata</span></code> 操作通过 <a class="reference external" href="https://pypi.org/project/pip/">pip</a> 等工具安装到 Python 的 <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> 目录中的第三方分发包。具体来说，它适用于具有可发现的 <code class="docutils literal notranslate"><span class="pre">dist-info</span></code> 或 <code class="docutils literal notranslate"><span class="pre">egg-info</span></code> 目录的发行版，以及由 <a class="reference external" href="https://packaging.python.org/en/latest/specifications/core-metadata/#core-metadata">Core 元数据规范定义的元数据</a>。</p>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
-<p>These are <em>not</em> necessarily equivalent to or correspond 1:1 with
-the top-level <em>import package</em> names
-that can be imported inside Python code.
-One <em>distribution package</em> can contain multiple <em>import packages</em>
-(and single modules),
-and one top-level <em>import package</em>
-may map to multiple <em>distribution packages</em>
-if it is a namespace package.
-You can use <a class="reference internal" href="#package-distributions"><span class="std std-ref">package_distributions()</span></a>
-to get a mapping between them.</p>
+<p>它们不一定等同于或与可在 Python 代码中导入的顶级导入包名 1:1 对应。一个发布包可以包含多个导入包(和单个模块)，如果是命名空间包，一个顶级导入包可以映射到多个发布包。您可以使用 <a class="reference internal" href="#package-distributions"><span class="std std-ref">package_distributions()</span></a> 来获取它们之间的映射。</p>
 </div>
 <p>By default, distribution metadata can live on the file system
 or in zip archives on
